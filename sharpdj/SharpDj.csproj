@@ -1,0 +1,317 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FCBAEEB4-C2A6-4A77-8C7B-FCEA06BDC518}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>SharpDj</RootNamespace>
+    <AssemblyName>SharpDj</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Communication">
+      <HintPath>..\..\..\Documents\Visual Studio 2017\Projects\SharpServer\Communication\bin\Debug\Communication.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Scs, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Scs.1.1.1\lib\net40-client\Scs.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Core\BaseViewModel.cs" />
+    <Compile Include="Core\RelayCommand.cs" />
+    <Compile Include="Enums\MainView.cs" />
+    <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\Helpers\Debug.cs" />
+    <Compile Include="Models\Helpers\Updater\FTPChecker.cs" />
+    <Compile Include="Models\Helpers\Updater\GetSourcePage.cs" />
+    <Compile Include="ViewModel\Model\FavoriteRoomsModel.cs" />
+    <Compile Include="ViewModel\Model\PlaylistModel.cs" />
+    <Compile Include="ViewModel\Model\PlaylistTrackModel.cs" />
+    <Compile Include="ViewModel\SdjBottomBarViewModel.cs" />
+    <Compile Include="ViewModel\SdjRoomViewModel.cs" />
+    <Compile Include="ViewModel\SdjLeftBarViewModel.cs" />
+    <Compile Include="ViewModel\SdjMainViewModel.cs" />
+    <Compile Include="ViewModel\SdjPlaylistViewModel.cs" />
+    <Compile Include="ViewModel\SdjStateButtonViewModel.cs" />
+    <Compile Include="View\SdjUpdaterView.xaml.cs">
+      <DependentUpon>SdjUpdaterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\BottomBar.xaml.cs">
+      <DependentUpon>BottomBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\SdjLeftBarView.xaml.cs">
+      <DependentUpon>SdjLeftBarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\SdjLoginView.xaml.cs">
+      <DependentUpon>SdjLoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\SdjMainUserControl.xaml.cs">
+      <DependentUpon>SdjMainUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\SdjPlaylistUserControl.xaml.cs">
+      <DependentUpon>SdjPlaylistUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\SdjRoomView.xaml.cs">
+      <DependentUpon>SdjRoomView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\Model\RoomSquareModel.cs" />
+    <Compile Include="View\UserControls\StateButtons.xaml.cs">
+      <DependentUpon>StateButtons.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Themes\Buttons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Colors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Images.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SdjLoggerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SdjMainView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Converters\BoolToStatusConverter.cs" />
+    <Compile Include="Converters\BoolVisibilityConverter.cs" />
+    <Compile Include="Converters\EnumToBoolConverter.cs" />
+    <Compile Include="Converters\EnumToVisibilityConverter.cs" />
+    <Compile Include="Converters\MarkuExtensionConverterBase.cs" />
+    <Compile Include="Converters\NotBoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\NotNullToBoolConverter.cs" />
+    <Compile Include="Converters\NullVisibilityConverter.cs" />
+    <Compile Include="Extensions\CommandBase.cs" />
+    <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="Extensions\NotifyObject.cs" />
+    <Compile Include="Extensions\RelayCommands.cs" />
+    <Compile Include="Models\Helpers\ExceptionLogger.cs" />
+    <Compile Include="View\SdjLoggerView.xaml.cs">
+      <DependentUpon>SdjLoggerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SdjMainView.xaml.cs">
+      <DependentUpon>SdjMainView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="View\SdjUpdaterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\UserControls\BottomBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\SdjLeftBarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\SdjLoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\SdjMainUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\SdjPlaylistUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\SdjRoomView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\StateButtons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Titlebar\close_24.png" />
+    <Resource Include="Images\Titlebar\maximize_24.png" />
+    <Resource Include="Images\Titlebar\minimalize_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Rooms\monstercat.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Rooms\peoples.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Rooms\admins.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Rooms\favorite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\MainMenu\background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Room\003-sad.png" />
+    <Resource Include="Images\Room\004-happy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Room\008-playlist.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Room\006-pause.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Room\001-volume-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Room\001-album.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Room\round.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Room\003-group.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Room\001-settings-cogwheel-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Room\002-playlist.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\LeftBar\001-rate-star-button.png" />
+    <Resource Include="Images\LeftBar\002-actors.png" />
+    <Resource Include="Images\LeftBar\002-playlist.png" />
+    <Resource Include="Images\LeftBar\032-do-not-disturb-rounded-sign.png" />
+    <Resource Include="Images\LeftBar\036-user-shape.png" />
+    <Resource Include="Images\LeftBar\041-extension.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\LeftBar\001-settings-cogwheel-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\LeftBar\001-white-album.png" />
+    <Resource Include="Images\LeftBar\003-white-group.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\avatar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Playlists\001-add.png" />
+    <Resource Include="Images\Playlists\003-check-symbol.png" />
+    <Resource Include="Images\Playlists\029-rubbish-bin-delete-button.png" />
+    <Resource Include="Images\Playlists\pencil-edit-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Playlists\011-searching-magnifying-glass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Room\038-cancel-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Playlists\009-down-chevron.png" />
+    <Resource Include="Images\Playlists\014-up-chevron.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Playlists\001-add-white.png" />
+    <Resource Include="Images\Playlists\029-rubbish-bin-delete-button-white.png" />
+    <Resource Include="Images\Playlists\pencil-edit-button-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Playlists\009-down-chevron-white.png" />
+    <Resource Include="Images\Playlists\014-up-chevron-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Playlists\003-check-symbol-white.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

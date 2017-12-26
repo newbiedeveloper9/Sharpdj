@@ -1,0 +1,161 @@
+﻿<UserControl x:Class="SharpDj.View.UserControls.SdjPlaylistUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SharpDj.View.UserControls"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:model="clr-namespace:SharpDj.ViewModel.Model"
+             xmlns:converters="clr-namespace:SharpDj.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1000">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="336"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Grid Background="{StaticResource MidBrush}" Grid.Row="1">
+            
+        </Grid>
+
+        <DockPanel Grid.Column="1" Grid.Row="1" Background="{StaticResource MidBrush}">
+
+            <!-- <Button Width="24" Height="24" VerticalAlignment="Center" HorizontalAlignment="Right" VerticalContentAlignment="Center" Style="{StaticResource IconButton}">
+                <Image Source="../../Images/Titlebar/close_24.png" VerticalAlignment="Center"/>
+            </Button>
+-->
+            <Grid>
+                <TextBox Text="" Foreground="White" Style="{StaticResource IconTextbox}" x:Name="SearchTermTextBox" FontSize="24" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                <Label Content="Search YouTube" VerticalAlignment="Center" IsHitTestVisible="False" HorizontalAlignment="Left" Margin="-2 0 0 0" Foreground="#bbbbbb" FontSize="24">
+                    <Label.Style>
+                        <Style TargetType="{x:Type Label}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=SearchTermTextBox}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Label.Style>
+                </Label>
+            </Grid>
+
+            <!--<Grid>
+                <TextBox  Width="250"  VerticalAlignment="Center" HorizontalAlignment="Left" x:Name="SearchTermTextBox" Margin="5"/>
+                <TextBlock IsHitTestVisible="False" Text="Enter Search Term Here" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" Foreground="DarkGray">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=SearchTermTextBox}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>-->
+
+        </DockPanel>
+
+        <Grid Grid.Row="0" Background="{StaticResource MidBrush}">
+            <StackPanel Height="48" Orientation="Horizontal" Background="Aquamarine" VerticalAlignment="Top">
+                <Grid>
+                    <Button Style="{StaticResource IconButtonMouseOver}" Width="112">
+                        <Image Source="../../Images/Playlists/001-add.png" Width="32"/>
+                    </Button>
+                </Grid>
+                <Grid>
+                    <Button Style="{StaticResource IconButtonMouseOver}" Width="112">
+                        <Image Source="../../Images/Playlists/029-rubbish-bin-delete-button.png" Width="32" Height="32"/>
+                    </Button>
+                </Grid>
+                <Grid>
+                    <Button Style="{StaticResource IconButtonMouseOver}" Width="112">
+                        <Image Source="../../Images/Playlists/pencil-edit-button.png" Width="32" Height="32"/>
+                    </Button>
+                </Grid>
+            </StackPanel>
+
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden" Margin="0 48 0 0">
+                <StackPanel Margin="0 10 0 0">
+                    
+                   
+
+                    <ItemsControl ItemsSource="{Binding PlaylistCollection}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type model:PlaylistModel}">
+                                <Button Style="{StaticResource IconButtonMouseOver}" Background="{Binding BackgroundBrush, UpdateSourceTrigger=PropertyChanged}" Command="{Binding SelectPlaylistCommand}">
+                                    <DockPanel Margin="10 0 10 0">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseEnter">
+                                                <i:InvokeCommandAction Command="{Binding PlaylistOnEnterCommand}"/>
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="MouseLeave">
+                                                <i:InvokeCommandAction Command="{Binding PlaylistOnLeaveCommand}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                        <Image Source="../../Images/Playlists/003-check-symbol.png" Width="32" HorizontalAlignment="Left"  
+                                               Visibility="{Binding IsActive,
+                                               Converter={converters:BoolVisibilityConverter}}"/>
+                                        <Label Content="{Binding PlaylistName}" FontSize="24" Foreground="White" Margin="10 0 0 0"/>
+                                        <Label HorizontalAlignment="Right" FontSize="24" Content="{Binding TracksInPlaylist}" Foreground="White" VerticalAlignment="Center"/>
+                                    </DockPanel>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                   
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
+        <StackPanel Grid.Column="1" Grid.Row="0"  Background="{StaticResource DarkBrush}" Opacity="0.97">
+
+
+            <ItemsControl ItemsSource="{Binding TrackCollection}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type model:PlaylistTrackModel}">
+                        <DockPanel Margin="0 0 0 5">
+                            <Grid Background="{Binding BackgroundBrush}" Style="{StaticResource IconStackPanelMouseOver}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseEnter">
+                                        <i:InvokeCommandAction Command="{Binding SongOptionsSetVisibleCommand}"/>
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="MouseLeave">
+                                        <i:InvokeCommandAction Command="{Binding SongOptionsSetHiddenCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+
+                                <Label Content="{Binding SongName}" Foreground="White" FontSize="24" HorizontalAlignment="Left"/>
+                                <Label Content="{Binding AuthorName}" Foreground="White" FontSize="24" HorizontalAlignment="Center"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Visibility="{Binding SongOptionsVisibility}">
+                                    <Button VerticalAlignment="Center" Style="{StaticResource IconButton}" Width="32" Height="32" Margin="3">
+                                        <Image Source="../../Images/Playlists/pencil-edit-button-white.png"/>
+                                    </Button>
+                                    <Button VerticalAlignment="Center" Style="{StaticResource IconButton}" Width="32" Height="32" Margin="3">
+                                        <Image Source="../../Images/Playlists/009-down-chevron-white.png"/>
+                                    </Button>
+                                    <Button VerticalAlignment="Center" Style="{StaticResource IconButton}" Width="32" Height="32" Margin="3">
+                                        <Image Source="../../Images/Playlists/014-up-chevron-white.png"/>
+                                    </Button>
+                                    <Button VerticalAlignment="Center" Style="{StaticResource IconButton}" Width="32" Height="32" Margin="3">
+                                        <Image Source="../../Images/Playlists/029-rubbish-bin-delete-button-white.png"/>
+                                    </Button>
+                                </StackPanel>
+                                <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Visibility="{Binding SongTimeVisibility}">
+                                    <Label Content="{Binding SongDuration}" Foreground="White" FontSize="24"/>
+                                </StackPanel>
+                            </Grid>
+                        </DockPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </Grid>
+</UserControl>
