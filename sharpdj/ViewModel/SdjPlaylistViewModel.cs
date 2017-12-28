@@ -29,7 +29,6 @@ namespace SharpDj.ViewModel
                 PlaylistCollection.Add(new PlaylistModel(main) { PlaylistName = "Chińska playlista", Tracks = tracks });
                 PlaylistCollection.Add(new PlaylistModel(main) { PlaylistName = "Zonkowate cos", Tracks = tracks });
             }
-            PlaylistCollection[0].IsActive = true;
 
         }
 
@@ -86,7 +85,6 @@ namespace SharpDj.ViewModel
 
         #region Commands
 
-
         #region ActivatePlaylistCommand
         private RelayCommand _activatePlaylistCommand;
         public RelayCommand ActivatePlaylistCommand
@@ -105,9 +103,81 @@ namespace SharpDj.ViewModel
 
         public void ActivatePlaylistCommandExecute()
         {
-            var firstOrDefault = PlaylistCollection.FirstOrDefault(x => x.IsSelected);
-            if (firstOrDefault != null)
-                firstOrDefault.IsActive = true;
+            var setActive = PlaylistCollection.FirstOrDefault(x => x.IsSelected);
+            if (setActive != null)
+            {
+                foreach (var playlist in PlaylistCollection)
+                {
+                    playlist.IsActive = false;
+                }
+                setActive.IsActive = true;
+            }
+        }
+        #endregion
+
+        #region PlaylistAddModel
+        private RelayCommand _playlistAddModel;
+        public RelayCommand PlaylistAddModel
+        {
+            get
+            {
+                return _playlistAddModel
+                       ?? (_playlistAddModel = new RelayCommand(PlaylistAddModelExecute, PlaylistAddModelCanExecute));
+            }
+        }
+
+        public bool PlaylistAddModelCanExecute()
+        {
+            return true;
+        }
+
+        public void PlaylistAddModelExecute()
+        {
+
+        }
+        #endregion
+
+        #region PlaylistDeleteModel
+        private RelayCommand _playlistDeleteModel;
+        public RelayCommand PlaylistDeleteModel
+        {
+            get
+            {
+                return _playlistDeleteModel
+                       ?? (_playlistDeleteModel = new RelayCommand(PlaylistDeleteModelExecute, PlaylistDeleteModelCanExecute));
+            }
+        }
+
+        public bool PlaylistDeleteModelCanExecute()
+        {
+            return true;
+        }
+
+        public void PlaylistDeleteModelExecute()
+        {
+
+        }
+        #endregion
+
+        #region PlaylistEditModel
+        private RelayCommand _playlistEditModel;
+        public RelayCommand PlaylistEditModel
+        {
+            get
+            {
+                return _playlistEditModel
+                       ?? (_playlistEditModel = new RelayCommand(PlaylistEditModelExecute, PlaylistEditModelCanExecute));
+            }
+        }
+
+        public bool PlaylistEditModelCanExecute()
+        {
+            return true;
+        }
+
+        public void PlaylistEditModelExecute()
+        {
+
         }
         #endregion
 

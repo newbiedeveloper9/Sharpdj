@@ -51,17 +51,17 @@
         <Grid Grid.Row="0" Background="{StaticResource MidBrush}">
             <StackPanel Height="48" Orientation="Horizontal" Background="Aquamarine" VerticalAlignment="Top">
                 <Grid>
-                    <Button Style="{StaticResource IconButtonMouseOver}" Width="112">
+                    <Button Style="{StaticResource IconButtonMouseOver}" Width="112" Command="{Binding PlaylistAddModel}">
                         <Image Source="../../Images/Playlists/001-add.png" Width="32"/>
                     </Button>
                 </Grid>
                 <Grid>
-                    <Button Style="{StaticResource IconButtonMouseOver}" Width="112">
+                    <Button Style="{StaticResource IconButtonMouseOver}" Width="112" Command="{Binding PlaylistDeleteModel}">
                         <Image Source="../../Images/Playlists/029-rubbish-bin-delete-button.png" Width="32" Height="32"/>
                     </Button>
                 </Grid>
                 <Grid>
-                    <Button Style="{StaticResource IconButtonMouseOver}" Width="112">
+                    <Button Style="{StaticResource IconButtonMouseOver}" Width="112" Command="{Binding PlaylistEditModel}">
                         <Image Source="../../Images/Playlists/pencil-edit-button.png" Width="32" Height="32"/>
                     </Button>
                 </Grid>
