@@ -15,9 +15,9 @@ namespace Updater
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
-        private Debug _debug;
+        private readonly Debug _debug;
 
         public MainWindow()
         {
@@ -26,7 +26,7 @@ namespace Updater
             Topmost = true;
             InitializeComponent();
             MediaElement.MediaEnded += MediaElement_MediaEnded;
-            var task = Task.Factory.StartNew(Init);
+            Task.Factory.StartNew(Init);
         }
 
         private async Task Init()
@@ -34,7 +34,14 @@ namespace Updater
             _debug.Log("Local json");
             if (!File.Exists("config.json"))
             {
-              _debug.Log("config.json doesn't exists");
+                _debug.Log("config.json doesn't exists");
+                var defaultConfig = @"{
+                          ""Version"": ""1.0.0"",
+                          ""UpdateToken"": ""0"",
+                          ""UpdateUrl"": ""http://sharpdj.cba.pl/updater.txt""
+                        }";
+                File.WriteAllText("config.json", defaultConfig);
+                _debug.Log("Created new config.json");
             }
 
             var localJson = File.ReadAllText("config.json");
@@ -51,7 +58,7 @@ namespace Updater
             if (ftp.UpdateToken != local.UpdateToken)
             {
                 _debug.Log("localToken: " + local.UpdateToken);
-                _debug.Log("ftpToken: " +  ftp.UpdateToken);
+                _debug.Log("ftpToken: " + ftp.UpdateToken);
                 _debug.Log("Updating");
                 Directory.CreateDirectory("tmp");
                 _debug.Log("Download");
@@ -63,7 +70,7 @@ namespace Updater
                 Directory.CreateDirectory("backup/backup " + local.Version);
                 _debug.Log("Replace");
                 foreach (var file in Directory.GetFiles("tmp/"))
-                {   
+                {
                     var fileName = Path.GetFileName(file);
 
                     if (File.Exists(fileName))
@@ -73,7 +80,7 @@ namespace Updater
                 }
                 Directory.Delete("tmp", true);
                 _debug.Log("Restarting");
-                
+
                 await Dispatcher.BeginInvoke((Action)delegate ()
                 {
                     App.Current.Shutdown();
@@ -83,7 +90,7 @@ namespace Updater
             }
             _debug.Log("Closing updater");
             await Dispatcher.BeginInvoke((Action)delegate ()
-            {                
+            {
                 SdjMainView view = new SdjMainView();
                 view.Show();
                 Close();

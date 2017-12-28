@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,9 +57,15 @@ namespace SharpDj.ViewModel.Model
 
 
                 if (value)
+                {
                     BackgroundBrush = new SolidColorBrush(Color.FromArgb(255, 0, 56, 77));
+                    SdjMainViewModel.SdjPlaylistViewModel.TrackCollection = Tracks;
+                }
                 else
+                {
                     BackgroundBrush = Brushes.Transparent;
+                }
+
             }
         }
 
@@ -70,8 +77,11 @@ namespace SharpDj.ViewModel.Model
             set
             {
                 if (_isActive == value) return;
-                _isActive = value;
+
+                    _isActive = value;
+                
                 OnPropertyChanged("IsActive");
+
             }
         }
 
@@ -97,6 +107,20 @@ namespace SharpDj.ViewModel.Model
                 if (_tracksInPlaylist == value) return;
                 _tracksInPlaylist = value;
                 OnPropertyChanged("TracksInPlaylist");
+            }
+        }
+
+        private ObservableCollection<PlaylistTrackModel> _tracks;
+
+        public ObservableCollection<PlaylistTrackModel> Tracks
+        {
+            get => _tracks;
+            set
+            {
+                if (_tracks == value) return;
+                _tracks = value;
+                TracksInPlaylist = _tracks.Count;
+
             }
         }
 
@@ -129,11 +153,20 @@ namespace SharpDj.ViewModel.Model
 
         public void SelectPlaylistCommandExecute()
         {
-            foreach (var playlist in SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection)
+
+            if (IsSelected)
+                IsActive = true;
+            else
             {
-                playlist.IsSelected = false;
+                foreach (var playlist in SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection)
+                {
+                    playlist.IsSelected = false;
+                }
+
+
+                IsSelected = true;
             }
-            IsSelected = true;
+
         }
         #endregion
 
@@ -158,13 +191,14 @@ namespace SharpDj.ViewModel.Model
         {
             if (!IsSelected)
             {
-                BackgroundBrush = new SolidColorBrush(Color.FromArgb(255,0,174,239));
+                BackgroundBrush = new SolidColorBrush(Color.FromArgb(255, 0, 174, 239));
             }
         }
         #endregion
 
         #region PlaylistOnLeaveCommand
         private RelayCommand _playlistOnLeaveCommand;
+
         public RelayCommand PlaylistOnLeaveCommand
         {
             get
