@@ -23,6 +23,7 @@
 
         </Grid>
 
+
         <Grid Grid.Column="1" Grid.Row="1" Background="{StaticResource DarkBrush}" Opacity="0.97" >
 
             <Grid VerticalAlignment="Center">
@@ -49,6 +50,54 @@
         </Grid>
 
         <Grid Grid.Row="0" Background="{StaticResource MidBrush}">
+            <StackPanel Height="48" Orientation="Horizontal" Background="Aquamarine" VerticalAlignment="Top">
+                <Grid>
+                    <Button Style="{StaticResource IconButtonMouseOver}" Width="112" Command="{Binding PlaylistAddModel}">
+                        <Image Source="../../Images/Playlists/001-add.png" Width="32"/>
+                    </Button>
+                </Grid>
+                <Grid>
+                    <Button Style="{StaticResource IconButtonMouseOver}" Width="112" Command="{Binding PlaylistDeleteModel}">
+                        <Image Source="../../Images/Playlists/029-rubbish-bin-delete-button.png" Width="32" Height="32"/>
+                    </Button>
+                </Grid>
+                <Grid>
+                    <Button Style="{StaticResource IconButtonMouseOver}" Width="112" Command="{Binding PlaylistEditModel}">
+                        <Image Source="../../Images/Playlists/pencil-edit-button.png" Width="32" Height="32"/>
+                    </Button>
+                </Grid>
+            </StackPanel>
+
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden" Margin="0 48 0 0">
+                <StackPanel Margin="0 10 0 0">
+                    <ItemsControl ItemsSource="{Binding PlaylistCollection}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type model:PlaylistModel}">
+                                <Button Style="{StaticResource IconButton}" Background="{Binding BackgroundBrush, UpdateSourceTrigger=PropertyChanged}" Command="{Binding SelectPlaylistCommand}">
+                                    <DockPanel Margin="10 0 10 0" Background="Transparent">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseEnter">
+                                                <i:InvokeCommandAction Command="{Binding PlaylistOnEnterCommand}"/>
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="MouseLeave">
+                                                <i:InvokeCommandAction Command="{Binding PlaylistOnLeaveCommand}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                        <Image Source="../../Images/Playlists/003-check-symbol.png" Width="32" HorizontalAlignment="Left"  
+                                               Visibility="{Binding IsActive,
+                                               Converter={converters:BoolVisibilityConverter}}"/>
+                                        <TextBlock Text="{Binding PlaylistName}" TextTrimming="CharacterEllipsis" MaxWidth="250" FontSize="24" Foreground="White" Margin="10 0 0 0"/>
+                                        <Label HorizontalAlignment="Right" FontSize="24" Content="{Binding TracksInPlaylist}" Foreground="White" VerticalAlignment="Center"/>
+                                    </DockPanel>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+        <!--<Grid Grid.Row="0" Background="{StaticResource MidBrush}">
             <StackPanel Height="48" Orientation="Horizontal" Background="Aquamarine" VerticalAlignment="Top">
                 <Grid>
                     <Button Style="{StaticResource IconButtonMouseOver}" Width="112" Command="{Binding PlaylistAddModel}">
@@ -98,7 +147,7 @@
 
                 </StackPanel>
             </ScrollViewer>
-        </Grid>
+        </Grid>-->
 
         <StackPanel Grid.Column="1" Grid.Row="0"  Background="{StaticResource DarkBrush}" Opacity="0.97">
 
