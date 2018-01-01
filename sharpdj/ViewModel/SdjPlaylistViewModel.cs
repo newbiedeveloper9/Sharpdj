@@ -18,7 +18,7 @@ namespace SharpDj.ViewModel
         {
             SdjMainViewModel = main;
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 2; i++)
             {
                 var tracks = new ObservableCollection<PlaylistTrackModel>();
                 for (int j = 0; j < i; j++)
@@ -80,6 +80,13 @@ namespace SharpDj.ViewModel
 
         #region Methods
 
+        public void SetLastPlaylistSelected()
+        {
+            foreach (var playlistModel in PlaylistCollection)
+            {
+                playlistModel.IsSelected = false;
+            }
+        }
 
         #endregion Methods
 
@@ -133,7 +140,8 @@ namespace SharpDj.ViewModel
 
         public void PlaylistAddModelExecute()
         {
-
+         SdjMainViewModel.SdjAddPlaylistCollectionViewModel.AddPlaylistCollectionVisibility = AddPlaylist.Visible;
+            
         }
         #endregion
 

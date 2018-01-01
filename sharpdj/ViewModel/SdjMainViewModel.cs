@@ -22,12 +22,12 @@ namespace SharpDj.ViewModel
 
         public SdjMainViewModel()
         {
-
             SdjRoomViewModel = new SdjRoomViewModel(this);
             SdjBottomBarViewModel = new SdjBottomBarViewModel(this);
             SdjLeftBarViewModel = new SdjLeftBarViewModel(this);
             SdjPlaylistViewModel = new SdjPlaylistViewModel(this);
             SdjStateButtonViewModel = new SdjStateButtonViewModel(this);
+            SdjAddPlaylistCollectionViewModel = new SdjAddPlaylistCollectionView(this);
 
             for (int i = 0; i < 5; i++)
             {
@@ -60,7 +60,6 @@ namespace SharpDj.ViewModel
                 OnPropertyChanged("MainViewVisibility");
             }
         }
-
 
         #endregion
 
@@ -123,6 +122,19 @@ namespace SharpDj.ViewModel
                 if (_sdjStateButtonViewModel == value) return;
                 _sdjStateButtonViewModel = value;
                 OnPropertyChanged("SdjStateButtonViewModel");
+            }
+        }
+
+
+        private SdjAddPlaylistCollectionView _sdjAddPlaylistCollectionViewModel;
+        public SdjAddPlaylistCollectionView SdjAddPlaylistCollectionViewModel
+        {
+            get => _sdjAddPlaylistCollectionViewModel;
+            set
+            {
+                if (_sdjAddPlaylistCollectionViewModel == value) return;
+                _sdjAddPlaylistCollectionViewModel = value;
+                OnPropertyChanged("SdjAddPlaylistCollectionViewModel");
             }
         }
 

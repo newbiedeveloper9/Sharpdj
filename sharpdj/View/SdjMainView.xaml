@@ -101,6 +101,17 @@
             <Button Height="64" Width="64" Margin="20 -22 0 0" DataContext="{Binding SdjBottomBarViewModel}" Command="{Binding AvatarOnClick}" Style="{StaticResource RoundButton}" Content="../Images/avatar.png"/>
         </DockPanel>
 
-      
+        <Grid RowSpan="3" ColumnSpan="2" Visibility="{Binding AddPlaylistCollectionVisibility,
+            Converter={converters:EnumToVisibilityConverter},
+            ConverterParameter={x:Static enum:AddPlaylist.Visible}, Mode=TwoWay}" DataContext="{Binding SdjAddPlaylistCollectionViewModel}">
+            <Grid Background="Black" Opacity="0.7">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseUp" >
+                        <i:InvokeCommandAction Command="{Binding MouseUpAwayFromAddPlaylistCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Grid>
+            <local:SdjAddPlaylistCollectionView Width="420" Height="110"></local:SdjAddPlaylistCollectionView>
+        </Grid>
     </Grid>
 </Window>

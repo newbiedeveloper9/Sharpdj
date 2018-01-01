@@ -92,7 +92,7 @@ namespace SharpDj.ViewModel.Model
             {
                 if (_playlistName == value) return;
                 _playlistName = value;
-                OnPropertyChanged("PlaylistName");
+                OnPropertyChanged("SdjMainViewModel");
             }
         }
 

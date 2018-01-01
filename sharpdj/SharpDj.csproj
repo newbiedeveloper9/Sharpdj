@@ -73,6 +73,7 @@
     <Compile Include="Core\BaseViewModel.cs" />
     <Compile Include="Core\RelayCommand.cs" />
     <Compile Include="Enums\MainView.cs" />
+    <Compile Include="Enums\PlaylistEnum.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Helpers\Debug.cs" />
     <Compile Include="Models\Helpers\Updater\FTPChecker.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="ViewModel\Model\FavoriteRoomsModel.cs" />
     <Compile Include="ViewModel\Model\PlaylistModel.cs" />
     <Compile Include="ViewModel\Model\PlaylistTrackModel.cs" />
+    <Compile Include="ViewModel\SdjAddPlaylistCollectionView.cs" />
     <Compile Include="ViewModel\SdjBottomBarViewModel.cs" />
     <Compile Include="ViewModel\SdjRoomViewModel.cs" />
     <Compile Include="ViewModel\SdjLeftBarViewModel.cs" />
@@ -91,6 +93,9 @@
     </Compile>
     <Compile Include="View\UserControls\BottomBar.xaml.cs">
       <DependentUpon>BottomBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\SdjAddPlaylistCollectionView.xaml.cs">
+      <DependentUpon>SdjAddPlaylistCollectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\SdjLeftBarView.xaml.cs">
       <DependentUpon>SdjLeftBarView.xaml</DependentUpon>
@@ -160,6 +165,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\UserControls\BottomBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\SdjAddPlaylistCollectionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

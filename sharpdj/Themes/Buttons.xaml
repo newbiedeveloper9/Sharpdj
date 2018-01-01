@@ -46,15 +46,14 @@
     </Style>
 
     <Style x:Key="IconButtonMouseOver" TargetType="Button">
-        <!--  <Setter Property="BorderBrush" Value="Transparent"/>
-        -->
+        
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid >
-                        <Grid Background="{TemplateBinding Background}"></Grid>
-                        <Border Background="{TemplateBinding Background}">
+                        <Grid Background="{TemplateBinding Background}"> </Grid>
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                             <ContentPresenter/>
                         </Border>
                     </Grid>
