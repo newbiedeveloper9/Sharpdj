@@ -17,6 +17,7 @@ namespace SharpDj.ViewModel
         public SdjPlaylistViewModel(SdjMainViewModel main)
         {
             SdjMainViewModel = main;
+            PlaylistCollection = new ObservableCollection<PlaylistModel>();
 
             for (int i = 0; i < 2; i++)
             {
@@ -48,7 +49,19 @@ namespace SharpDj.ViewModel
                 OnPropertyChanged("TrackCollection");
             }
         }
-        public ObservableCollection<PlaylistModel> PlaylistCollection { get; set; } = new ObservableCollection<PlaylistModel>();
+        private ObservableCollection<PlaylistModel> _playlistCollection;
+
+        public ObservableCollection<PlaylistModel> PlaylistCollection
+        {
+            get => _playlistCollection;
+            set
+            {
+                if (_playlistCollection == value) return;
+                _playlistCollection = value;
+                OnPropertyChanged("PlaylistCollection");
+            }
+        }
+
 
 
         private SdjMainViewModel _sdjMainViewModel;
@@ -140,8 +153,8 @@ namespace SharpDj.ViewModel
 
         public void PlaylistAddModelExecute()
         {
-         SdjMainViewModel.SdjAddPlaylistCollectionViewModel.AddPlaylistCollectionVisibility = AddPlaylist.Visible;
-            
+            SdjMainViewModel.PlaylistStateCollectionVisibility = PlaylistState.Add;
+
         }
         #endregion
 
@@ -185,7 +198,8 @@ namespace SharpDj.ViewModel
 
         public void PlaylistEditModelExecute()
         {
-
+            if (PlaylistCollection.FirstOrDefault(x => x.IsSelected) != null)
+                SdjMainViewModel.PlaylistStateCollectionVisibility = PlaylistState.Rename;
         }
         #endregion
 

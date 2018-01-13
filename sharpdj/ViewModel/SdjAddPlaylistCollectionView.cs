@@ -22,6 +22,8 @@ namespace SharpDj.ViewModel
 
         #region Properties
 
+
+
         private SdjMainViewModel _sdjMainViewModel;
         public SdjMainViewModel SdjMainViewModel
         {
@@ -43,18 +45,6 @@ namespace SharpDj.ViewModel
                 if (_playlistName == value) return;
                 _playlistName = value;
                 OnPropertyChanged("PlaylistName");
-            }
-        }
-
-        private AddPlaylist _addPlaylistCollectionVisibility = AddPlaylist.Collapsed;
-        public AddPlaylist AddPlaylistCollectionVisibility
-        {
-            get => _addPlaylistCollectionVisibility;
-            set
-            {
-                if (_addPlaylistCollectionVisibility == value) return;
-                _addPlaylistCollectionVisibility = value;
-                OnPropertyChanged("AddPlaylistCollectionVisibility");
             }
         }
 
@@ -114,7 +104,7 @@ namespace SharpDj.ViewModel
         public void CloseAddPlaylistCommandExecute()
         {
             PlaylistName = string.Empty;
-            AddPlaylistCollectionVisibility = AddPlaylist.Collapsed;
+            SdjMainViewModel.PlaylistStateCollectionVisibility = PlaylistState.Collapsed;
         }
         #endregion
 

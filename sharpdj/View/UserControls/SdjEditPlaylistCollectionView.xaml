@@ -13,7 +13,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Background="{StaticResource MidBrush}">
-            <Label Content="Edit playlist" FontSize="24" Foreground="White" HorizontalAlignment="Center"/>
+            <Label Content="Rename playlist" FontSize="24" Foreground="White" HorizontalAlignment="Center"/>
             <Grid HorizontalAlignment="Right" Background="DarkRed">
                 <Button Style="{StaticResource IconButtonMouseOver}" Command="{Binding CloseEditPlaylistCommand}">
                     <!-- Style="{StaticResource IconButton}"-->
@@ -23,7 +23,7 @@
 
         </Grid>
         <Grid Grid.Row="1" Background="{StaticResource DarkBrush}">
-            <Grid VerticalAlignment="Center" Margin="0 0 100 0">
+            <Grid VerticalAlignment="Center" Margin="0 0 120 0">
                 <TextBox Text="{Binding PlaylistName, UpdateSourceTrigger=PropertyChanged}" Foreground="White" Style="{StaticResource IconTextbox}" BorderThickness="0" x:Name="SearchTermTextBox" FontSize="24" VerticalAlignment="Center" Margin="20 0 0 0"/>
                 <Label Content="Name your playlist" VerticalAlignment="Center" IsHitTestVisible="False" HorizontalAlignment="Left" Margin="18 0 0 0" Foreground="#bbbbbb" FontSize="24">
                     <Label.Style>
@@ -39,8 +39,8 @@
                 </Label>
             </Grid>
             <Grid Background="{StaticResource DarkBrush}" HorizontalAlignment="Right" >
-                <Button Command="{Binding CreatePlaylistCommand}" Width="75" HorizontalAlignment="Center" BorderThickness="2"  BorderBrush="White" Style="{StaticResource IconButtonMouseOver}" VerticalAlignment="Center" Margin="0 0 10 0">
-                    <Label Content="Create" Foreground="White" FontSize="18" HorizontalContentAlignment="Center"/>
+                <Button Command="{Binding CreatePlaylistCommand}" Width="90" HorizontalAlignment="Center" BorderThickness="2"  BorderBrush="White" Style="{StaticResource IconButtonMouseOver}" VerticalAlignment="Center" Margin="0 0 10 0">
+                    <Label Content="Rename" Foreground="White" FontSize="18" HorizontalContentAlignment="Center"/>
                 </Button>
             </Grid>
 

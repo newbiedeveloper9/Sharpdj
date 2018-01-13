@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="SharpDj.View.UserControls.SdjRemovePlaylistCollectionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SharpDj.View.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="110" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="{StaticResource MidBrush}">
+            <Label Content="Remove playlist" FontSize="24" Foreground="White" HorizontalAlignment="Center"/>
+            <Grid HorizontalAlignment="Right" Background="DarkRed">
+                <Button Style="{StaticResource IconButtonMouseOver}" Command="{Binding CloseAddPlaylistCommand}">
+                    <!-- Style="{StaticResource IconButton}"-->
+                    <Image Source="../../Images/Titlebar/close_24.png" Height="24" Width="40"/>
+                </Button>
+            </Grid>
+
+        </Grid>
+        <Grid Grid.Row="1" Background="{StaticResource DarkBrush}">
+            <StackPanel Background="{StaticResource DarkBrush}" HorizontalAlignment="Center" Orientation="Horizontal">
+                <Button Command="{Binding CreatePlaylistCommand}" Width="75" HorizontalAlignment="Center" BorderThickness="2" BorderBrush="White" Style="{StaticResource IconButtonMouseOver}" VerticalAlignment="Center" Margin="0 0 15 0">
+                    <Label Content="Back" Foreground="White" FontSize="18" HorizontalContentAlignment="Center"/>
+                </Button>
+                <Button Command="{Binding CreatePlaylistCommand}" Width="90" HorizontalAlignment="Center" BorderThickness="2"  BorderBrush="White" Style="{StaticResource IconButtonMouseOver}" VerticalAlignment="Center" Margin="0 0 0 0">
+                    <Label Content="Remove" Foreground="White" FontSize="18" HorizontalContentAlignment="Center"/>
+                </Button>
+            </StackPanel>
+
+        </Grid>
+    </Grid>
+</UserControl>

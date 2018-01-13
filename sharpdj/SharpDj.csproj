@@ -83,6 +83,7 @@
     <Compile Include="ViewModel\Model\PlaylistTrackModel.cs" />
     <Compile Include="ViewModel\SdjAddPlaylistCollectionView.cs" />
     <Compile Include="ViewModel\SdjBottomBarViewModel.cs" />
+    <Compile Include="ViewModel\SdjEditPlaylistCollectionViewModel.cs" />
     <Compile Include="ViewModel\SdjRoomViewModel.cs" />
     <Compile Include="ViewModel\SdjLeftBarViewModel.cs" />
     <Compile Include="ViewModel\SdjMainViewModel.cs" />
@@ -97,6 +98,9 @@
     <Compile Include="View\UserControls\SdjAddPlaylistCollectionView.xaml.cs">
       <DependentUpon>SdjAddPlaylistCollectionView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControls\SdjEditPlaylistCollectionView.xaml.cs">
+      <DependentUpon>SdjEditPlaylistCollectionView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserControls\SdjLeftBarView.xaml.cs">
       <DependentUpon>SdjLeftBarView.xaml</DependentUpon>
     </Compile>
@@ -108,6 +112,9 @@
     </Compile>
     <Compile Include="View\UserControls\SdjPlaylistUserControl.xaml.cs">
       <DependentUpon>SdjPlaylistUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\SdjRemovePlaylistCollectionView.xaml.cs">
+      <DependentUpon>SdjRemovePlaylistCollectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\SdjRoomView.xaml.cs">
       <DependentUpon>SdjRoomView.xaml</DependentUpon>
@@ -172,6 +179,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UserControls\SdjEditPlaylistCollectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\UserControls\SdjLeftBarView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -185,6 +196,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserControls\SdjPlaylistUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\SdjRemovePlaylistCollectionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

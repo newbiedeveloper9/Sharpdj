@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace SharpDj.View.UserControls
 {
     /// <summary>
-    /// Interaction logic for SdjEditPlaylistCollectionViewModel.xaml
+    /// Interaction logic for SdjRemovePlaylistCollectionView.xaml
     /// </summary>
-    public partial class SdjEditPlaylistCollectionView : UserControl
+    public partial class SdjRemovePlaylistCollectionView : UserControl
     {
-        public SdjEditPlaylistCollectionView()
+        public SdjRemovePlaylistCollectionView()
         {
             InitializeComponent();
         }

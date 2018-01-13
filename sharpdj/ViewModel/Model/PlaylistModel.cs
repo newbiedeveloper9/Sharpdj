@@ -92,7 +92,7 @@ namespace SharpDj.ViewModel.Model
             {
                 if (_playlistName == value) return;
                 _playlistName = value;
-                OnPropertyChanged("SdjMainViewModel");
+                OnPropertyChanged("PlaylistName");
             }
         }
 
@@ -117,8 +117,8 @@ namespace SharpDj.ViewModel.Model
             {
                 if (_tracks == value) return;
                 _tracks = value;
+                OnPropertyChanged("Tracks");
                 TracksInPlaylist = _tracks.Count;
-
             }
         }
 

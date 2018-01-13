@@ -28,6 +28,8 @@ namespace SharpDj.ViewModel
             SdjPlaylistViewModel = new SdjPlaylistViewModel(this);
             SdjStateButtonViewModel = new SdjStateButtonViewModel(this);
             SdjAddPlaylistCollectionViewModel = new SdjAddPlaylistCollectionView(this);
+            SdjEditPlaylistCollectionViewModel = new SdjEditPlaylistCollectionViewModel(this);
+
 
             for (int i = 0; i < 5; i++)
             {
@@ -61,6 +63,17 @@ namespace SharpDj.ViewModel
             }
         }
 
+        private PlaylistState _playlistStateCollectionVisibility = PlaylistState.Collapsed;
+        public PlaylistState PlaylistStateCollectionVisibility
+        {
+            get => _playlistStateCollectionVisibility;
+            set
+            {
+                if (_playlistStateCollectionVisibility == value) return;
+                _playlistStateCollectionVisibility = value;
+                OnPropertyChanged("PlaylistStateCollectionVisibility");
+            }
+        }
         #endregion
 
         #region ViewModels
@@ -135,6 +148,19 @@ namespace SharpDj.ViewModel
                 if (_sdjAddPlaylistCollectionViewModel == value) return;
                 _sdjAddPlaylistCollectionViewModel = value;
                 OnPropertyChanged("SdjAddPlaylistCollectionViewModel");
+            }
+        }
+
+
+        private SdjEditPlaylistCollectionViewModel _sdjEditPlaylistCollectionViewModelModel;
+        public SdjEditPlaylistCollectionViewModel SdjEditPlaylistCollectionViewModel
+        {
+            get => _sdjEditPlaylistCollectionViewModelModel;
+            set
+            {
+                if (_sdjEditPlaylistCollectionViewModelModel == value) return;
+                _sdjEditPlaylistCollectionViewModelModel = value;
+                OnPropertyChanged("SdjEditPlaylistCollectionViewModel");
             }
         }
 

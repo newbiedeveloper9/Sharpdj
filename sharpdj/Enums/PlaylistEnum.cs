@@ -1,8 +1,9 @@
 ﻿namespace SharpDj.Enums
 {
-    public enum AddPlaylist : ushort
+    public enum PlaylistState : ushort
     {
-        Visible,
-        Collapsed
+        Add,
+        Collapsed,
+        Rename
     }
 }

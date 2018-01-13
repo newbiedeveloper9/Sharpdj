@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,12 +9,12 @@ using SharpDj.ViewModel.Model;
 
 namespace SharpDj.ViewModel
 {
-    public class SdjEditPlaylistCollectionView : BaseViewModel
+    public class SdjEditPlaylistCollectionViewModel : BaseViewModel
     {
 
         #region .ctor
 
-        public SdjEditPlaylistCollectionView(SdjMainViewModel main)
+        public SdjEditPlaylistCollectionViewModel(SdjMainViewModel main)
         {
             SdjMainViewModel = main;
         }
@@ -21,6 +22,8 @@ namespace SharpDj.ViewModel
         #endregion .ctor
 
         #region Properties
+
+
 
         private SdjMainViewModel _sdjMainViewModel;
         public SdjMainViewModel SdjMainViewModel
@@ -46,17 +49,6 @@ namespace SharpDj.ViewModel
             }
         }
 
-        private PlaylistCollectionView _EditPlaylistCollectionVisibility = PlaylistCollectionView.Collapsed;
-        public PlaylistCollectionView EditPlaylistCollectionVisibility
-        {
-            get => _EditPlaylistCollectionVisibility;
-            set
-            {
-                if (_EditPlaylistCollectionVisibility == value) return;
-                _EditPlaylistCollectionVisibility = value;
-                OnPropertyChanged("EditPlaylistCollectionVisibility");
-            }
-        }
 
         #endregion Properties
 
@@ -85,13 +77,11 @@ namespace SharpDj.ViewModel
 
         public void CreatePlaylistCommandExecute()
         {
-           /* SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection.(new PlaylistModel(SdjMainViewModel) { PlaylistName = PlaylistName });
-
-            SdjMainViewModel.SdjPlaylistViewModel.SetLastPlaylistSelected();
-            SdjMainViewModel.SdjPlaylistViewModel
-                .PlaylistCollection[SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection.Count - 1].IsSelected = true;
-
-            CloseEditPlaylistCommandExecute();*/
+            var firstOrDefault = SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection.FirstOrDefault(x => x.IsSelected);
+            if (firstOrDefault != null)
+                firstOrDefault
+                    .PlaylistName = PlaylistName;
+            CloseEditPlaylistCommandExecute();
         }
         #endregion
 
@@ -114,7 +104,7 @@ namespace SharpDj.ViewModel
         public void CloseEditPlaylistCommandExecute()
         {
             PlaylistName = string.Empty;
-            EditPlaylistCollectionVisibility = PlaylistCollectionView.Collapsed;
+            SdjMainViewModel.PlaylistStateCollectionVisibility = PlaylistState.Collapsed;
         }
         #endregion
 
