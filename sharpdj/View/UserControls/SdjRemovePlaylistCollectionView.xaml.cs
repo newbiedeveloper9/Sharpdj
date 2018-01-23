@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace SharpDj.View.UserControls
 {
     /// <summary>
-    /// Interaction logic for SdjRemovePlaylistCollectionView.xaml
+    /// Interaction logic for SdjRemovePlaylistCollectionViewModel.xaml
     /// </summary>
     public partial class SdjRemovePlaylistCollectionView : UserControl
     {

@@ -168,5 +168,39 @@
             </Grid>
         </Grid>
 
+        
+
+        <!--RemovePlaylist-->
+        <Grid RowSpan="3" ColumnSpan="2" Visibility="{Binding PlaylistStateCollectionVisibility,
+            Converter={converters:EnumToVisibilityConverter},
+            ConverterParameter={x:Static enum:PlaylistState.Rename}, Mode=TwoWay}">
+            <Grid DataContext="{Binding SdjEditPlaylistCollectionViewModel}">
+                <Grid Background="Black" Opacity="0.7">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseUp" >
+                            <i:InvokeCommandAction Command="{Binding MouseUpAwayFromEditPlaylistCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Grid>
+                <local:SdjEditPlaylistCollectionView Width="420" Height="110"/>
+            </Grid>
+        </Grid>
+
+        <Grid RowSpan="3" ColumnSpan="2" Visibility="{Binding PlaylistStateCollectionVisibility,
+            Converter={converters:EnumToVisibilityConverter},
+            ConverterParameter={x:Static enum:PlaylistState.Rename}, Mode=TwoWay}">
+            <Grid DataContext="{Binding SdjEditPlaylistCollectionViewModel}">
+                <Grid Background="Black" Opacity="0.7">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseUp" >
+                            <i:InvokeCommandAction Command="{Binding MouseUpAwayFromEditPlaylistCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Grid>
+                <local:SdjEditPlaylistCollectionView Width="420" Height="110"/>
+            </Grid>
+        </Grid>
+
+
     </Grid>
 </Window>

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Newtonsoft.Json;
 using System.IO.Compression;
+using System.Threading;
 using SharpDj;
 using SharpDj.View;
 using Debug = SharpDj.Models.Helpers.Debug;
@@ -18,6 +19,45 @@ namespace Updater
     public partial class MainWindow
     {
         private readonly Debug _debug;
+        private bool _updated = false;
+        private bool _canShow;
+
+        public bool CanShow
+        {
+            get { return _canShow; }
+            set
+            {
+                if (value == _canShow) return;
+                _canShow = value;
+                if (value)
+                    Show();
+
+            }
+        }
+
+        public bool Updated
+        {
+            get { return _updated; }
+            set
+            {
+                if (value == _updated) return;
+                _updated = value;
+                if (value)
+                    Show();
+            }
+        }
+
+        private void Show()
+        {
+            if (Updated)
+                if (CanShow)
+                {
+                    SdjMainView view = new SdjMainView();
+                    view.Show();
+                    Close();
+                }
+        }
+
 
         public MainWindow()
         {
@@ -29,7 +69,7 @@ namespace Updater
             Task.Factory.StartNew(Init);
         }
 
-        private async Task Init()
+        private void Init()
         {
             _debug.Log("Local json");
             if (!File.Exists("config.json"))
@@ -62,7 +102,7 @@ namespace Updater
                 _debug.Log("Updating");
                 Directory.CreateDirectory("tmp");
                 _debug.Log("Download");
-                await DownloadAsync(ftp.ZipToUpdate, "tmp/update.zip");
+                DownloadAsync(ftp.ZipToUpdate, "tmp/update.zip");
                 ZipFile.ExtractToDirectory("tmp/update.zip", "tmp/");
                 _debug.Log("Extract");
                 File.Delete("tmp/update.zip");
@@ -81,7 +121,7 @@ namespace Updater
                 Directory.Delete("tmp", true);
                 _debug.Log("Restarting");
 
-                await Dispatcher.BeginInvoke((Action)delegate ()
+                Dispatcher.BeginInvoke((Action)delegate ()
                 {
                     App.Current.Shutdown();
                     Process.Start("SharpDj.exe");
@@ -89,11 +129,9 @@ namespace Updater
                 });
             }
             _debug.Log("Closing updater");
-            await Dispatcher.BeginInvoke((Action)delegate ()
+            Dispatcher.BeginInvoke((Action)delegate ()
             {
-                SdjMainView view = new SdjMainView();
-                view.Show();
-                Close();
+                Updated = true;
             });
         }
 
@@ -107,8 +145,12 @@ namespace Updater
 
         private void MediaElement_MediaEnded(object sender, RoutedEventArgs e)
         {
-            MediaElement.Position = TimeSpan.Zero;
-            MediaElement.Play();
+            if (!CanShow)
+            {
+                MediaElement.Position = TimeSpan.Zero;
+                MediaElement.Play();
+                CanShow = true;
+            }
         }
     }
 }

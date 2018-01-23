@@ -13,7 +13,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Background="{StaticResource MidBrush}">
-            <Label Content="Rename playlist" FontSize="24" Foreground="White" HorizontalAlignment="Center"/>
+            <Label Content="Rename playlist" FontSize="24" Foreground="White" HorizontalAlignment="Center" Margin="0 0 40 0"/>
             <Grid HorizontalAlignment="Right" Background="DarkRed">
                 <Button Style="{StaticResource IconButtonMouseOver}" Command="{Binding CloseEditPlaylistCommand}">
                     <!-- Style="{StaticResource IconButton}"-->

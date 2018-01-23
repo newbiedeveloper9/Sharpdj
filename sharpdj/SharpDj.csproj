@@ -84,6 +84,7 @@
     <Compile Include="ViewModel\SdjAddPlaylistCollectionView.cs" />
     <Compile Include="ViewModel\SdjBottomBarViewModel.cs" />
     <Compile Include="ViewModel\SdjEditPlaylistCollectionViewModel.cs" />
+    <Compile Include="ViewModel\SdjRemovePlaylistCollectionViewModel.cs" />
     <Compile Include="ViewModel\SdjRoomViewModel.cs" />
     <Compile Include="ViewModel\SdjLeftBarViewModel.cs" />
     <Compile Include="ViewModel\SdjMainViewModel.cs" />
