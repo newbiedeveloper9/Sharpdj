@@ -29,6 +29,7 @@ namespace SharpDj.ViewModel
             SdjStateButtonViewModel = new SdjStateButtonViewModel(this);
             SdjAddPlaylistCollectionViewModel = new SdjAddPlaylistCollectionView(this);
             SdjEditPlaylistCollectionViewModel = new SdjEditPlaylistCollectionViewModel(this);
+            SdjRemovePlaylistCollectionViewModel = new SdjRemovePlaylistCollectionViewModel(this);
 
 
             for (int i = 0; i < 5; i++)
@@ -163,6 +164,20 @@ namespace SharpDj.ViewModel
                 OnPropertyChanged("SdjEditPlaylistCollectionViewModel");
             }
         }
+
+
+        private SdjRemovePlaylistCollectionViewModel _sdjRemovePlaylistCollectionViewModel;
+        public SdjRemovePlaylistCollectionViewModel SdjRemovePlaylistCollectionViewModel
+        {
+            get => _sdjRemovePlaylistCollectionViewModel;
+            set
+            {
+                if (_sdjRemovePlaylistCollectionViewModel == value) return;
+                _sdjRemovePlaylistCollectionViewModel = value;
+                OnPropertyChanged("SdjRemovePlaylistCollectionViewModel");
+            }
+        }
+
 
         #endregion ViewModels
 

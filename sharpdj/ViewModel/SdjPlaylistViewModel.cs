@@ -30,7 +30,6 @@ namespace SharpDj.ViewModel
                 PlaylistCollection.Add(new PlaylistModel(main) { PlaylistName = "Chińska playlista", Tracks = tracks });
                 PlaylistCollection.Add(new PlaylistModel(main) { PlaylistName = "Zonkowate cos", Tracks = tracks });
             }
-
         }
 
         #endregion .ctor
@@ -176,7 +175,8 @@ namespace SharpDj.ViewModel
 
         public void PlaylistDeleteModelExecute()
         {
-
+            if (PlaylistCollection.FirstOrDefault(x => x.IsSelected) != null)
+                SdjMainViewModel.PlaylistStateCollectionVisibility = PlaylistState.Remove;
         }
         #endregion
 

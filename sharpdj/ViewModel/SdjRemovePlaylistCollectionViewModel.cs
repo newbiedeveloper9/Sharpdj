@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SharpDj.Enums;
 
 namespace SharpDj.ViewModel
 {
-    class SdjRemovePlaylistCollectionViewModel : BaseViewModel
+    public class SdjRemovePlaylistCollectionViewModel : BaseViewModel
     {
 
         #region .ctor
 
         public SdjRemovePlaylistCollectionViewModel(SdjMainViewModel main)
         {
-            
+            SdjMainViewModel = main;
         }
         #endregion .ctor
 
@@ -59,7 +60,7 @@ namespace SharpDj.ViewModel
 
         public void CloseRemovePlaylistCommandExecute()
         {
-
+            SdjMainViewModel.PlaylistStateCollectionVisibility = PlaylistState.Collapsed;
         }
         #endregion
 
@@ -84,8 +85,32 @@ namespace SharpDj.ViewModel
             var item = SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection.FirstOrDefault(x => x.IsSelected);
             if (item != null)
                 SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection.Remove(item);
+            CloseRemovePlaylistCommandExecute();
         }
         #endregion
+
+        #region MouseUpAwayFromRemovePlaylistCommand
+        private RelayCommand _mouseUpAwayFromRemovePlaylistCommand;
+        public RelayCommand MouseUpAwayFromRemovePlaylistCommand
+        {
+            get
+            {
+                return _mouseUpAwayFromRemovePlaylistCommand
+                       ?? (_mouseUpAwayFromRemovePlaylistCommand = new RelayCommand(MouseUpAwayFromRemovePlaylistCommandExecute, MouseUpAwayFromRemovePlaylistCommandCanExecute));
+            }
+        }
+
+        public bool MouseUpAwayFromRemovePlaylistCommandCanExecute()
+        {
+            return true;
+        }
+
+        public void MouseUpAwayFromRemovePlaylistCommandExecute()
+        {
+            CloseRemovePlaylistCommandExecute();
+        }
+        #endregion
+
 
         #endregion Commands
 

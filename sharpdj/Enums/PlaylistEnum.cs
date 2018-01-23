@@ -4,6 +4,7 @@
     {
         Add,
         Collapsed,
-        Rename
+        Rename,
+        Remove
     }
 }

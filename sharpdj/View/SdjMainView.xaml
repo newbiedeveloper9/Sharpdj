@@ -119,23 +119,6 @@
             </Grid>
         </Grid>
 
-        <Grid RowSpan="3" ColumnSpan="2" Visibility="{Binding PlaylistStateCollectionVisibility,
-            Converter={converters:EnumToVisibilityConverter},
-            ConverterParameter={x:Static enum:PlaylistState.Add}, Mode=TwoWay}">
-            <Grid DataContext="{Binding SdjAddPlaylistCollectionViewModel}">
-                <Grid Background="Black" Opacity="0.7">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseUp" >
-                            <i:InvokeCommandAction Command="{Binding MouseUpAwayFromAddPlaylistCommand}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Grid>
-                <local:SdjAddPlaylistCollectionView Width="420" Height="110"></local:SdjAddPlaylistCollectionView>
-            </Grid>
-        </Grid>
-
-
-
 
         <!--EditPlaylist -->
         <Grid RowSpan="3" ColumnSpan="2" Visibility="{Binding PlaylistStateCollectionVisibility,
@@ -153,51 +136,21 @@
             </Grid>
         </Grid>
 
-        <Grid RowSpan="3" ColumnSpan="2" Visibility="{Binding PlaylistStateCollectionVisibility,
-            Converter={converters:EnumToVisibilityConverter},
-            ConverterParameter={x:Static enum:PlaylistState.Rename}, Mode=TwoWay}">
-            <Grid DataContext="{Binding SdjEditPlaylistCollectionViewModel}">
-                <Grid Background="Black" Opacity="0.7">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseUp" >
-                            <i:InvokeCommandAction Command="{Binding MouseUpAwayFromEditPlaylistCommand}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Grid>
-                <local:SdjEditPlaylistCollectionView Width="420" Height="110"/>
-            </Grid>
-        </Grid>
-
-        
 
         <!--RemovePlaylist-->
-        <Grid RowSpan="3" ColumnSpan="2" Visibility="{Binding PlaylistStateCollectionVisibility,
-            Converter={converters:EnumToVisibilityConverter},
-            ConverterParameter={x:Static enum:PlaylistState.Rename}, Mode=TwoWay}">
-            <Grid DataContext="{Binding SdjEditPlaylistCollectionViewModel}">
-                <Grid Background="Black" Opacity="0.7">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseUp" >
-                            <i:InvokeCommandAction Command="{Binding MouseUpAwayFromEditPlaylistCommand}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Grid>
-                <local:SdjEditPlaylistCollectionView Width="420" Height="110"/>
-            </Grid>
-        </Grid>
 
         <Grid RowSpan="3" ColumnSpan="2" Visibility="{Binding PlaylistStateCollectionVisibility,
             Converter={converters:EnumToVisibilityConverter},
-            ConverterParameter={x:Static enum:PlaylistState.Rename}, Mode=TwoWay}">
-            <Grid DataContext="{Binding SdjEditPlaylistCollectionViewModel}">
+            ConverterParameter={x:Static enum:PlaylistState.Remove}, Mode=TwoWay}">
+            <Grid DataContext="{Binding SdjRemovePlaylistCollectionViewModel}">
                 <Grid Background="Black" Opacity="0.7">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseUp" >
-                            <i:InvokeCommandAction Command="{Binding MouseUpAwayFromEditPlaylistCommand}" />
+                            <i:InvokeCommandAction Command="{Binding MouseUpAwayFromRemovePlaylistCommand}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Grid>
-                <local:SdjEditPlaylistCollectionView Width="420" Height="110"/>
+                <local:SdjRemovePlaylistCollectionView Width="270" Height="110"/>
             </Grid>
         </Grid>
 
