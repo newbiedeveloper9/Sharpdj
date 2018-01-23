@@ -63,8 +63,6 @@ namespace SharpDj.ViewModel
         #region Commands
 
 
-        #region TitleBar
-
         #region LeftButtonDownOnTitleBarCommand
         private RelayCommand _leftButtonDownOnTitleBarCommand;
         public RelayCommand LeftButtonDownOnTitleBarCommand
@@ -189,7 +187,6 @@ namespace SharpDj.ViewModel
         }
         #endregion
 
-        #endregion
 
         #endregion Commands
     }

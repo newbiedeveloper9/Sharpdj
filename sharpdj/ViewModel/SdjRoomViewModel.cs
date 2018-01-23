@@ -101,9 +101,92 @@ namespace SharpDj.ViewModel
 
         #region Commands
 
+        #region LikeTrackCommand
+        private RelayCommand _likeTrackCommand;
+        public RelayCommand LikeTrackCommand
+        {
+            get
+            {
+                return _likeTrackCommand
+                       ?? (_likeTrackCommand = new RelayCommand(LikeTrackCommandExecute, LikeTrackCommandCanExecute));
+            }
+        }
 
-        #region dwa
-     
+        public bool LikeTrackCommandCanExecute()
+        {
+            return true;
+        }
+
+        public void LikeTrackCommandExecute()
+        {
+
+        }
+        #endregion
+
+        #region DislikeTrackCommand
+        private RelayCommand _dislikeTrackCommand;
+        public RelayCommand DislikeTrackCommand
+        {
+            get
+            {
+                return _dislikeTrackCommand
+                       ?? (_dislikeTrackCommand = new RelayCommand(DislikeTrackCommandExecute, DislikeTrackCommandCanExecute));
+            }
+        }
+
+        public bool DislikeTrackCommandCanExecute()
+        {
+            return true;
+        }
+
+        public void DislikeTrackCommandExecute()
+        {
+
+        }
+        #endregion
+
+        #region AddTrackToPlaylistCommand
+        private RelayCommand _addTrackToPlaylistCommand;
+        public RelayCommand AddTrackToPlaylistCommand
+        {
+            get
+            {
+                return _addTrackToPlaylistCommand
+                       ?? (_addTrackToPlaylistCommand = new RelayCommand(AddTrackToPlaylistCommandExecute, AddTrackToPlaylistCommandCanExecute));
+            }
+        }
+
+        public bool AddTrackToPlaylistCommandCanExecute()
+        {
+            return true;
+        }
+
+        public void AddTrackToPlaylistCommandExecute()
+        {
+
+        }
+        #endregion
+
+        #region StopPlayTrackCommand
+        private RelayCommand _stopPlayTrackCommand;
+        public RelayCommand StopPlayTrackCommand
+        {
+            get
+            {
+                return _stopPlayTrackCommand
+                       ?? (_stopPlayTrackCommand = new RelayCommand(StopPlayTrackCommandExecute, StopPlayTrackCommandCanExecute));
+            }
+        }
+
+        public bool StopPlayTrackCommandCanExecute()
+        {
+            return true;
+        }
+
+        public void StopPlayTrackCommandExecute()
+        {
+
+        }
         #endregion
 
         #endregion Commands

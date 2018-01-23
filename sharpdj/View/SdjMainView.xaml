@@ -73,6 +73,9 @@
                     <i:EventTrigger EventName="MouseLeftButtonDown" >
                         <i:InvokeCommandAction Command="{Binding LeftButtonDownOnTitleBarCommand}"/>
                     </i:EventTrigger>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <i:InvokeCommandAction Command="{Binding StateButtonMaximizeCommand}"/>
+                    </i:EventTrigger>
                 </i:Interaction.Triggers>
             </local:StateButtons>
         </Grid>

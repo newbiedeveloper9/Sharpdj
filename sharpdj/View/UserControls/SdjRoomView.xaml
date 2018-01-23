@@ -41,14 +41,14 @@
 
 
 
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="CHAT NIEDOSTĘPNY"  FontSize="48" Margin="10" TextWrapping="Wrap"/>
-                        </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="CHAT NIEDOSTĘPNY"  FontSize="48" Margin="10" TextWrapping="Wrap"/>
+            </StackPanel>
 
         </DockPanel>
 
         <!--Menu-->
-        <DockPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Background="{StaticResource LightBrush}">
+        <DockPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Background="#0098d1">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25"/>
@@ -59,41 +59,34 @@
                     <ColumnDefinition Width="48"/>
                     <ColumnDefinition Width="48"/>
                     <ColumnDefinition Width="48"/>
-                    <ColumnDefinition Width="23"/>
-                    <ColumnDefinition Width="25"/>
+
                 </Grid.ColumnDefinitions>
 
-
-                <Button Grid.Column="0" Height="48" Width="48" Grid.Row="1" Style="{StaticResource IconButton}">
+                <Button Grid.Column="0" Height="48" Width="48" Grid.Row="1" Style="{StaticResource IconButtonMouseOver}" Command="{Binding LikeTrackCommand}" BorderThickness="0">
                     <Image Source="../../Images/Room/004-happy.png" Height="32" Width="32"/>
                 </Button>
-                <Button Grid.Column="1" Height="48" Width="48" Grid.Row="1" Style="{StaticResource IconButton}">
+                <Button Grid.Column="1" Height="48" Width="48" Grid.Row="1" Style="{StaticResource IconButtonMouseOver}" Command="{Binding DislikeTrackCommand}" BorderThickness="0">
                     <Image Source="../../Images/Room/003-sad.png" Height="32" Width="32"/>
                 </Button>
-                <Button Grid.Column="2" Height="48" Width="48" Grid.Row="1" Style="{StaticResource IconButton}">
+                <Button Grid.Column="2" Height="48" Width="48" Grid.Row="1" Style="{StaticResource IconButtonMouseOver}" Command="{Binding AddTrackToPlaylistCommand}" BorderThickness="0">
                     <Image Source="../../Images/Room/008-playlist.png" Height="32" Width="32"/>
                 </Button>
-                <Button Grid.Column="3" Height="48" Width="48" Grid.Row="1" Style="{StaticResource IconButton}">
+                <Button Grid.Column="3" Height="48" Width="48" Grid.Row="1" Style="{StaticResource IconButtonMouseOver}" Command="{Binding StopPlayTrackCommand}" BorderThickness="0">
                     <Image Source="../../Images/Room/006-pause.png" Height="32" Width="32"/>
                 </Button>
-                <Button Grid.Column="4" Height="48" Width="48" Grid.Row="1" Style="{StaticResource IconButton}" Grid.ColumnSpan="2">
-                    <Image Source="../../Images/Room/001-volume-1.png" Height="32" Width="32"/>
-                </Button>
 
-                <StackPanel Background="{StaticResource MidBrush}" Grid.Column="0" Grid.Row="0" Margin="0,0,47,0" Grid.ColumnSpan="2">
-                    <Label Content="{Binding Likes}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <StackPanel Background="{StaticResource MidBrush}" Grid.Column="0" Grid.Row="0" Margin="0 0 -1 0">
+                    <Label Content="{Binding Likes}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
                 </StackPanel>
-                <StackPanel Background="{StaticResource MidBrush}" Grid.Column="1" Grid.Row="0" Margin="0,0,47,0" Grid.ColumnSpan="2">
-                    <Label Content="{Binding Dislikes}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <StackPanel Background="{StaticResource MidBrush}" Grid.Column="1" Grid.Row="0" Margin="0 0 -1 0">
+                    <Label Content="{Binding Dislikes}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
                 </StackPanel>
-                <StackPanel Background="{StaticResource MidBrush}" Grid.Column="2" Grid.Row="0" Margin="0,0,47,0" Grid.ColumnSpan="2">
-                    <Label Content="{Binding SongsQueue}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <StackPanel Background="{StaticResource MidBrush}" Grid.Column="2" Grid.Row="0" Margin="0 0 -1 0">
+                    <Label Content="{Binding SongsQueue}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
                 </StackPanel>
-                <StackPanel Background="{StaticResource MidBrush}" Grid.Column="3" Grid.Row="0" Margin="0,0,22,0" Grid.ColumnSpan="2">
-                    <Label Content="{Binding TimeLeft}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </StackPanel>
-                <StackPanel Background="{StaticResource MidBrush}" Grid.Column="4" Grid.Row="0" Margin="0 0 0 0" Grid.ColumnSpan="2">
-                    <Label Content="{Binding Volume}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <StackPanel Background="{StaticResource MidBrush}" Grid.Column="3" Grid.Row="0">
+                    <Label Content="{Binding TimeLeft}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
                 </StackPanel>
             </Grid>
         </DockPanel>
