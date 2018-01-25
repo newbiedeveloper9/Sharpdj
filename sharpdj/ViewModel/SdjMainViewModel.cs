@@ -34,10 +34,12 @@ namespace SharpDj.ViewModel
 
             for (int i = 0; i < 5; i++)
             {
-                RoomCollection.Add(new RoomSquareModel(this) { AdminsInRoom = 10, RoomName = "nazwa pokoju", PeopleInRoom = 2137, RoomDescription = "description", HostName = "Yhvsak" });
-                RoomCollection.Add(new RoomSquareModel(this) { AdminsInRoom = 10, RoomName = "jakas nazwa XDDDD", PeopleInRoom = 99, RoomDescription = "dddsadasdawd", HostName = "Jeff Diggins" });
-                FavoriteCollection.Add(new FavoriteRoomsModel(this) { HostName = "Crisey", PeopleInRoom = 12, RoomName = "Jakis Pokój", SongsInQueue = 9 });
-                FavoriteCollection.Add(new FavoriteRoomsModel(this) { HostName = "Zonk", PeopleInRoom = 91, RoomName = "Monstercat", SongsInQueue = 16 });
+                RoomCollection.Add(new RoomSquareModel(this) { AdminsInRoom = 10, RoomName = "nazwa pokoju", PeopleInRoom = 2137, RoomDescription = "description", HostName = "Yhvsak", RoomId = i});
+                FavoriteCollection.Add(new FavoriteRoomsModel(this){});
+            }
+            for (int i = 5; i < 10; i++)
+            {
+                RoomCollection.Add(new RoomSquareModel(this) { AdminsInRoom = 10, RoomName = "jakas nazwa XDDDD", PeopleInRoom = 99, RoomDescription = "dddsadasdawd", HostName = "Jeff Diggins", RoomId = i });
             }
         }
 

@@ -119,7 +119,7 @@ namespace SharpDj.ViewModel
 
         public void LikeTrackCommandExecute()
         {
-
+            Likes++;
         }
         #endregion
 

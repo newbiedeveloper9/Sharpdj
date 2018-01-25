@@ -5,7 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SharpDj.View.UserControls"
              xmlns:vm="clr-namespace:SharpDj.ViewModel"
+             xmlns:converter="clr-namespace:SharpDj.Converters"
              xmlns:model="clr-namespace:SharpDj.ViewModel.Model"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
 
              d:DesignHeight="500" d:DesignWidth="1000">
@@ -55,8 +57,14 @@
 
                                             <DockPanel Width="40" Background="DarkSlateBlue" Height="35" Margin="0 -5 -10 0"  HorizontalAlignment="Right" VerticalAlignment="Center">
 
-                                                <Button Style="{StaticResource IconButton}">
-                                                    <Image Source="../../Images/Rooms/favorite.png" Width="16" Height="16" VerticalAlignment="Center"/>
+                                                <Button Style="{StaticResource IconButton}" Command="{Binding SetRoomAsFavoriteCommand}">
+                                                    <Grid>
+
+                                                        <Image Source="../../Images/Rooms/favorite.png" Width="16" Height="16" VerticalAlignment="Center"  
+                                                               Visibility="{Binding IsFavorite, Converter={converter:NotBoolToVisibilityConverter}}"/>
+                                                        <Image Source="../../Images/Rooms/favorite_full.png" Width="16" Height="16" VerticalAlignment="Center"  
+                                                               Visibility="{Binding IsFavorite, Converter={converter:BoolVisibilityConverter}}"/>
+                                                    </Grid>
                                                 </Button>
                                             </DockPanel>
                                         </DockPanel>
@@ -69,15 +77,18 @@
                                         <StackPanel Margin="10 0 10 0">
                                             <Label FontSize="18" Foreground="DarkGray" Content="{Binding RoomName}" Margin="0 0 0 -2"/>
                                             <Label FontSize="20" FontWeight="Bold" Foreground="White" Content="{Binding RoomDescription}" Margin="0 -10 0 -10" />
-                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                                <Label FontSize="12" Foreground="DarkGray" Content="Hosted by "/>
-                                                <Label FontSize="12" Foreground="DarkGray" Content="{Binding HostName}" Margin="-10 0 0 0"/>
-                                            </StackPanel>
-
+                                            <Grid>
+                                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                                    <Label Content="#" Foreground="White"/>
+                                                    <Label Content="{Binding RoomId}" Foreground="White" Margin="-10 0 0 0"/>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                    <Label FontSize="12" Foreground="DarkGray" Content="Hosted by "/>
+                                                    <Label FontSize="12" Foreground="DarkGray" Content="{Binding HostName}" Margin="-10 0 0 0"/>
+                                                </StackPanel>
+                                            </Grid>
                                         </StackPanel>
-
                                     </StackPanel>
-
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
@@ -93,42 +104,65 @@
             <ScrollViewer VerticalScrollBarVisibility="Hidden">
 
                 <StackPanel Orientation="Vertical">
-                <StackPanel Orientation="Horizontal" Margin="5 0 0 15">
-                    <Image Source="../../Images/LeftBar/001-rate-star-button.png" Width="32" Height="32"/>
-                    <Label Content="Ulubione" Margin="15 0 0 0" FontSize="24"/>
-                </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5 0 0 15">
+                        <Image Source="../../Images/LeftBar/001-rate-star-button.png" Width="32" Height="32"/>
+                        <Label Content="Ulubione" Margin="15 0 0 0" FontSize="24"/>
+                    </StackPanel>
 
 
                     <ItemsControl ItemsSource="{Binding FavoriteCollection}">
                         <ItemsControl.ItemTemplate>
-                        <DataTemplate DataType="{x:Type model:FavoriteRoomsModel}">
-                            <Button Margin="1 1 1 0" Command="{Binding EnterFavoriteRoomCommand}">
-                                <Grid Height="70" Margin="0 0 0 0">
-                                    <Grid.Background>
+                            <DataTemplate DataType="{x:Type model:FavoriteRoomsModel}">
+                                <Button Margin="1 1 1 0" Command="{Binding EnterFavoriteRoomCommand}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseEnter" >
+                                            <i:InvokeCommandAction Command="{Binding OnMouseEnterCommand }" />
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="MouseLeave" >
+                                            <i:InvokeCommandAction Command="{Binding OnMouseLeaveCommand }" />
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                    <Button.Background>
                                         <ImageBrush ImageSource="../../Images/MainMenu/background.png" />
-                                    </Grid.Background>
-                                    <Rectangle Width="250" Fill="Black" Opacity="0.8"/>
+                                    </Button.Background>
+                                    <Grid Height="70" Margin="0 0 0 0">
+                                      
+                                      
 
-                                    <StackPanel>
-                                        <StackPanel Orientation="Horizontal" Margin="5 0 0 0">
-                                            <Label Content="{Binding RoomName}" Foreground="White" FontSize="14"/>
-                                            <Label Content="by" Foreground="{StaticResource LightBrush}" Margin="-5 0 -5 0" FontSize="14"/>
-                                            <Label Content="{Binding HostName}" Foreground="White" FontSize="14"/>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal" Margin="5 0 0 0">
-                                            <Label Content="{Binding PeopleInRoom}" Foreground="White" FontSize="16"/>
-                                            <Image Source="../../Images/LeftBar/003-white-group.png" Width="16" Margin="0 0 15 0"/>
-                                            <Label Content="{Binding SongsInQueue}" Foreground="White" FontSize="16"/>
-                                            <Image Source="../../Images/LeftBar/001-white-album.png" Width="16" />
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Grid>
-                            </Button>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                                        <Grid Visibility="{Binding IsMouseOver, Converter={converter:BoolVisibilityConverter}}">
+                                            <Grid.Background>
+                                                <ImageBrush ImageSource="../../Images/MainMenu/background.png" />
+                                            </Grid.Background>
+                                            <Rectangle Width="250" Fill="Black" Opacity="0.8"/>
+                                            
+                                            
+                                            <StackPanel>
+                                                <StackPanel Orientation="Horizontal" Margin="5 0 0 0">
+                                                    <Label Content="{Binding RoomName}" Foreground="White" FontSize="14"/>
+                                                    <Label Content="by" Foreground="{StaticResource LightBrush}" Margin="-5 0 -5 0" FontSize="14"/>
+                                                    <Label Content="{Binding HostName}" Foreground="White" FontSize="14"/>
+                                                </StackPanel>
+                                                <Grid>
+                                                    <StackPanel Orientation="Horizontal" Margin="5 0 0 0">
+                                                        <Label Content="{Binding PeopleInRoom}" Foreground="White" FontSize="16"/>
+                                                        <Image Source="../../Images/LeftBar/003-white-group.png" Width="16" Margin="0 0 15 0"/>
+                                                        <Label Content="{Binding SongsInQueue}" Foreground="White" FontSize="16"/>
+                                                        <Image Source="../../Images/LeftBar/001-white-album.png" Width="16" />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right">
+                                                        <Label Content="#" Foreground="White" FontSize="16"/>
+                                                        <Label Content="{Binding RoomId}" Foreground="White" Margin="-10 0 0 0" FontSize="16"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Grid>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
 
-            </StackPanel>
+                </StackPanel>
             </ScrollViewer>
 
         </DockPanel>

@@ -25,6 +25,17 @@ namespace SharpDj.ViewModel.Model
             }
         }
 
+        private bool _isFavorite;
+        public bool IsFavorite
+        {
+            get => _isFavorite;
+            set
+            {
+                if (_isFavorite == value) return;
+                _isFavorite = value;
+                OnPropertyChanged("IsFavorite");
+            }
+        }
 
         private int _peopleInRoom;
         public int PeopleInRoom
@@ -86,10 +97,25 @@ namespace SharpDj.ViewModel.Model
             }
         }
 
+
+        private int _roomId;
+        public int RoomId
+        {
+            get => _roomId;
+            set
+            {
+                if (_roomId == value) return;
+                _roomId = value;
+                OnPropertyChanged("RoomId");
+            }
+        }
+
+
         #endregion Properties
 
-
         #region Commands
+
+        #region MainOnRoomClickCommand
         private RelayCommand _mainOnRoomClickCommand;
         public RelayCommand MainOnRoomClickCommand
         {
@@ -109,6 +135,30 @@ namespace SharpDj.ViewModel.Model
         {
             SdjMainViewModel.MainViewVisibility = MainView.Room;
         }
+        #endregion
+
+        #region SetRoomAsFavoriteCommand
+        private RelayCommand _setRoomAsFavoriteCommand;
+        public RelayCommand SetRoomAsFavoriteCommand
+        {
+            get
+            {
+                return _setRoomAsFavoriteCommand
+                       ?? (_setRoomAsFavoriteCommand = new RelayCommand(SetRoomAsFavoriteCommandExecute, SetRoomAsFavoriteCommandCanExecute));
+            }
+        }
+
+        public bool SetRoomAsFavoriteCommandCanExecute()
+        {
+            return true;
+        }
+
+        public void SetRoomAsFavoriteCommandExecute()
+        {
+            IsFavorite = !IsFavorite;
+        }
+        #endregion
+
         #endregion Commands
     }
 }
