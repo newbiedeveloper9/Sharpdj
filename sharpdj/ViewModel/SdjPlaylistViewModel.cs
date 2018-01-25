@@ -190,7 +190,7 @@ namespace SharpDj.ViewModel
                        ?? (_playlistEditModel = new RelayCommand(PlaylistEditModelExecute, PlaylistEditModelCanExecute));
             }
         }
-
+        
         public bool PlaylistEditModelCanExecute()
         {
             return true;
@@ -199,7 +199,10 @@ namespace SharpDj.ViewModel
         public void PlaylistEditModelExecute()
         {
             if (PlaylistCollection.FirstOrDefault(x => x.IsSelected) != null)
+            {
                 SdjMainViewModel.PlaylistStateCollectionVisibility = PlaylistState.Rename;
+                SdjMainViewModel.SdjEditPlaylistCollectionViewModel.PlaylistName = SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection.FirstOrDefault(x => x.IsSelected).PlaylistName;
+            }
         }
         #endregion
 

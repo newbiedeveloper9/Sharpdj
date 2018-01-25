@@ -337,6 +337,8 @@
   <ItemGroup>
     <Resource Include="Images\Playlists\003-check-symbol-white.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\Rooms\favorite_full.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
