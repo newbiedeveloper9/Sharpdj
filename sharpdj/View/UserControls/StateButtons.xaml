@@ -7,16 +7,18 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 3 0 3" >
-            <Button Width="24" Height="24" HorizontalAlignment="Right" Style="{StaticResource IconButton}" Command="{Binding StateButtonMinimalizeCommand}">
-                <Image Source="../../Images/Titlebar/minimalize_24.png"/>
+             d:DesignHeight="30" d:DesignWidth="300">
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 0 0" >
+        <Button HorizontalAlignment="Right" Style="{StaticResource IconButton}" Command="{Binding StateButtonMinimalizeCommand}">
+            <Image Source="../../Images/Titlebar/minimalize_24.png" Width="24" Height="24"/>
+        </Button>
+        <Button HorizontalAlignment="Right" Style="{StaticResource IconButton}" Command="{Binding StateButtonMaximizeCommand}">
+            <Image Source="../../Images/Titlebar/maximize_24.png" Width="24" Height="24"/>
+        </Button>
+        <Grid Background="DarkRed">
+            <Button HorizontalAlignment="Right" Style="{StaticResource IconButtonMouseOver}" BorderThickness="0" Command="{Binding StateButtonCloseCommand}">
+                <Image Source="../../Images/Titlebar/close_24.png" Width="24" Height="24"/>
             </Button>
-            <Button Width="24" Height="24" HorizontalAlignment="Right" Style="{StaticResource IconButton}" Command="{Binding StateButtonMaximizeCommand}">
-                <Image Source="../../Images/Titlebar/maximize_24.png"/>
-            </Button>
-            <Button Width="24" Height="24" HorizontalAlignment="Right" Style="{StaticResource IconButton}" Command="{Binding StateButtonCloseCommand}">
-                <Image Source="../../Images/Titlebar/close_24.png"/>
-            </Button>
-        </StackPanel>
+        </Grid>
+    </StackPanel>
 </UserControl>

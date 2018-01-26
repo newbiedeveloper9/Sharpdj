@@ -176,8 +176,6 @@ namespace SharpDj.ViewModel.Model
         }
         #endregion
 
-
-
         #endregion Commands
     }
 }

@@ -115,8 +115,10 @@
                                 </i:Interaction.Triggers>
 
                                 <Label Content="{Binding SongName}" Foreground="White" FontSize="24" HorizontalAlignment="Left"/>
-                                <Label Content="{Binding AuthorName}" Foreground="White" FontSize="24" HorizontalAlignment="Center"/>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Visibility="{Binding SongOptionsVisibility}">
+
+                                <Label Content="{Binding AuthorName}" Foreground="White" FontSize="24" HorizontalAlignment="Center" Background="{Binding BackgroundBrush}"/>
+                                
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Visibility="{Binding SongOptionsVisibility}" Background="{Binding BackgroundBrush}">
                                     <Button VerticalAlignment="Center" Style="{StaticResource IconButton}" Width="32" Height="32" Margin="3">
                                         <Image Source="../../Images/Playlists/pencil-edit-button-white.png"/>
                                     </Button>

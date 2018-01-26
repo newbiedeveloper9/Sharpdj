@@ -92,6 +92,31 @@ namespace SharpDj.ViewModel
             }
         }
 
+        private string _roomName = "RoomName";
+        public string RoomName
+        {
+            get => _roomName;
+            set
+            {
+                if (_roomName == value) return;
+                _roomName = value;
+                OnPropertyChanged("RoomName");
+            }
+        }
+
+        private string _hostName = "HostName";
+        public string HostName
+        {
+            get => _hostName;
+            set
+            {
+                if (_hostName == value) return;
+                _hostName = value;
+                OnPropertyChanged("HostName");
+            }
+        }
+
+
         #endregion Properties
 
         #region Methods
@@ -190,7 +215,6 @@ namespace SharpDj.ViewModel
         #endregion
 
         #endregion Commands
-
 
     }
 }

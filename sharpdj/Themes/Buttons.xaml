@@ -8,9 +8,9 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid>
-                        <Ellipse Fill="{StaticResource LightBrush}" Width="72" Height="72" Margin="-10 0 0 0"/>
+                        <Ellipse Fill="{TemplateBinding Background}" x:Name="dsa" Width="72" Height="72" Margin="0 0 0 0"/>
 
-                        <Ellipse Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Margin="-10 0 0 -6">
+                        <Ellipse Width="64" Height="64" Margin="0 0 0 0">
                             <Ellipse.Fill >
                                 <ImageBrush ImageSource="{Binding RelativeSource={RelativeSource AncestorType={x:Type Button}},
                                                           Path=Content}"/>
@@ -20,6 +20,7 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="dsa" Property="Fill" Value="{StaticResource MidBrush}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                         </Trigger>

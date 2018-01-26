@@ -21,9 +21,9 @@
         <DockPanel Grid.Row="0" Grid.Column="0">
             <StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="10">
-                    <Label Content="Nazwa pokoju" FontSize="32"/>
+                    <Label Content="{Binding RoomName}" FontSize="32"/>
                     <Label Content="od" Margin="-5 0 -5 0" Foreground="{StaticResource LightBrush}" FontSize="32"/>
-                    <Label Content="Nazwa użytkownika" FontSize="32"/>
+                    <Label Content="{Binding HostName}" FontSize="32"/>
                 </StackPanel>
 
             </StackPanel>
@@ -91,12 +91,18 @@
             </Grid>
         </DockPanel>
 
+        <!--Volume Slider-->
+        <DockPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Background="{StaticResource MidBrush}" Margin="50 0 0 48" Height="25">
+            <Slider Maximum="100" Minimum="0" Width="200" VerticalAlignment="Center" Margin="10 0 10 0"/>
+        </DockPanel>
+
+
         <!--Leave Queue-->
         <DockPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 50 21" Background="{StaticResource MidBrush}">
             <Button Style="{StaticResource IconButton}" Margin="5">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../../Images/Room/round.png" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <Label Content="Wyjdź z kolejki" FontSize="24"/>
+                    <Label Content="Wyjdź z kolejki" FontSize="24" Foreground="White"/>
                 </StackPanel>
             </Button>
         </DockPanel>

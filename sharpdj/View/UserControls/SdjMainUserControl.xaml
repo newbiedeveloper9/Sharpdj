@@ -56,10 +56,8 @@
                                             </StackPanel>
 
                                             <DockPanel Width="40" Background="DarkSlateBlue" Height="35" Margin="0 -5 -10 0"  HorizontalAlignment="Right" VerticalAlignment="Center">
-
-                                                <Button Style="{StaticResource IconButton}" Command="{Binding SetRoomAsFavoriteCommand}">
+                                                <Button Style="{StaticResource IconButtonMouseOver}" Command="{Binding SetRoomAsFavoriteCommand}" BorderThickness="0">
                                                     <Grid>
-
                                                         <Image Source="../../Images/Rooms/favorite.png" Width="16" Height="16" VerticalAlignment="Center"  
                                                                Visibility="{Binding IsFavorite, Converter={converter:NotBoolToVisibilityConverter}}"/>
                                                         <Image Source="../../Images/Rooms/favorite_full.png" Width="16" Height="16" VerticalAlignment="Center"  

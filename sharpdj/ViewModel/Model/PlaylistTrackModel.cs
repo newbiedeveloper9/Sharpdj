@@ -32,7 +32,6 @@ namespace SharpDj.ViewModel.Model
             }
         }
 
-
         private string _songName;
         public string SongName
         {
@@ -69,7 +68,7 @@ namespace SharpDj.ViewModel.Model
             }
         }
 
-        private Brush _backgroundBrush;
+        private Brush _backgroundBrush = new SolidColorBrush(Color.FromArgb(247, 0, 56, 77));
         public Brush BackgroundBrush
         {
             get => _backgroundBrush;
@@ -160,7 +159,7 @@ namespace SharpDj.ViewModel.Model
 
         public void SongOptionsSetHiddenCommandExecute()
         {
-            BackgroundBrush = Brushes.Transparent;
+            BackgroundBrush = new SolidColorBrush(Color.FromArgb(247, 0, 56, 77));
             SongOptionsVisibility = Visibility.Collapsed;
         }
 
