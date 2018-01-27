@@ -4,6 +4,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpDj", "SharpDj\SharpDj.csproj", "{FCBAEEB4-C2A6-4A77-8C7B-FCEA06BDC518}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E8790B81-831E-458B-800D-BCAE0017CFCB} = {E8790B81-831E-458B-800D-BCAE0017CFCB}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpServer", "SharpServer\SharpServer.csproj", "{C918B243-A4BD-4803-81E0-4AA77E11FA6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Communication", "Communication\Communication.csproj", "{E8790B81-831E-458B-800D-BCAE0017CFCB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +22,14 @@ Global
 		{FCBAEEB4-C2A6-4A77-8C7B-FCEA06BDC518}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCBAEEB4-C2A6-4A77-8C7B-FCEA06BDC518}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCBAEEB4-C2A6-4A77-8C7B-FCEA06BDC518}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C918B243-A4BD-4803-81E0-4AA77E11FA6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C918B243-A4BD-4803-81E0-4AA77E11FA6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C918B243-A4BD-4803-81E0-4AA77E11FA6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C918B243-A4BD-4803-81E0-4AA77E11FA6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8790B81-831E-458B-800D-BCAE0017CFCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8790B81-831E-458B-800D-BCAE0017CFCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8790B81-831E-458B-800D-BCAE0017CFCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8790B81-831E-458B-800D-BCAE0017CFCB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
