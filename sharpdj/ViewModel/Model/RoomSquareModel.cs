@@ -110,6 +110,17 @@ namespace SharpDj.ViewModel.Model
             }
         }
 
+        private bool _isMouseOver;
+        public bool IsMouseOver
+        {
+            get => _isMouseOver;
+            set
+            {
+                if (_isMouseOver == value) return;
+                _isMouseOver = value;
+                OnPropertyChanged("IsMouseOver");
+            }
+        }
 
         #endregion Properties
 
@@ -156,6 +167,50 @@ namespace SharpDj.ViewModel.Model
         public void SetRoomAsFavoriteCommandExecute()
         {
             IsFavorite = !IsFavorite;
+        }
+        #endregion
+
+        #region OnMouseEnterCommand
+        private RelayCommand _onMouseEnterCommand;
+        public RelayCommand OnMouseEnterCommand
+        {
+            get
+            {
+                return _onMouseEnterCommand
+                       ?? (_onMouseEnterCommand = new RelayCommand(OnMouseEnterCommandExecute, OnMouseEnterCommandCanExecute));
+            }
+        }
+
+        public bool OnMouseEnterCommandCanExecute()
+        {
+            return true;
+        }
+
+        public void OnMouseEnterCommandExecute()
+        {
+            IsMouseOver = true;
+        }
+        #endregion
+
+        #region OnMouseLeaveCommand
+        private RelayCommand _onMouseLeaveCommand;
+        public RelayCommand OnMouseLeaveCommand
+        {
+            get
+            {
+                return _onMouseLeaveCommand
+                       ?? (_onMouseLeaveCommand = new RelayCommand(OnMouseLeaveCommandExecute, OnMouseLeaveCommandCanExecute));
+            }
+        }
+
+        public bool OnMouseLeaveCommandCanExecute()
+        {
+            return true;
+        }
+
+        public void OnMouseLeaveCommandExecute()
+        {
+            IsMouseOver = false;
         }
         #endregion
 

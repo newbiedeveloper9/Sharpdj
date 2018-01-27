@@ -32,8 +32,8 @@ namespace SharpDj.ViewModel
             }
         }
 
-        private int _likes = 10;
-        public int Likes
+        private ushort _likes = 10;
+        public ushort Likes
         {
             get => _likes;
             set
@@ -44,8 +44,8 @@ namespace SharpDj.ViewModel
             }
         }
 
-        private int _dislikes = 20;
-        public int Dislikes
+        private ushort _dislikes = 20;
+        public ushort Dislikes
         {
             get => _dislikes;
             set
@@ -56,8 +56,8 @@ namespace SharpDj.ViewModel
             }
         }
 
-        private int _songsQueue = 30;
-        public int SongsQueue
+        private sbyte _songsQueue = 30;
+        public sbyte SongsQueue
         {
             get => _songsQueue;
             set
@@ -80,8 +80,8 @@ namespace SharpDj.ViewModel
             }
         }
 
-        private int _volume = 50;
-        public int Volume
+        private sbyte _volume = 100;
+        public sbyte Volume
         {
             get => _volume;
             set

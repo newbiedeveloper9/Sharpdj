@@ -16,7 +16,6 @@
                                                           Path=Content}"/>
                             </Ellipse.Fill>
                         </Ellipse>
-
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">

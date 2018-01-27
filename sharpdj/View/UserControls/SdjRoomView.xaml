@@ -93,7 +93,7 @@
 
         <!--Volume Slider-->
         <DockPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Background="{StaticResource MidBrush}" Margin="50 0 0 48" Height="25">
-            <Slider Maximum="100" Minimum="0" Width="200" VerticalAlignment="Center" Margin="10 0 10 0"/>
+            <Slider Maximum="100" Minimum="0" Value="{Binding Volume}" Width="200" VerticalAlignment="Center" Margin="10 0 10 0"/>
         </DockPanel>
 
 

@@ -69,7 +69,23 @@
 
                                         <DockPanel Background="DarkSlateGray">
                                             <Button Style="{StaticResource IconButton}" Command="{Binding MainOnRoomClickCommand}">
-                                                <Image Source="../../Images/Rooms/monstercat.jpg" RenderOptions.BitmapScalingMode="NearestNeighbor" Stretch="Fill" Height="150" Width="256"/>
+                                                <Grid>
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="MouseEnter" >
+                                                            <i:InvokeCommandAction Command="{Binding OnMouseEnterCommand }" />
+                                                        </i:EventTrigger>
+                                                        <i:EventTrigger EventName="MouseLeave" >
+                                                            <i:InvokeCommandAction Command="{Binding OnMouseLeaveCommand }" />
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                    
+                                                    <Image Source="../../Images/Rooms/monstercat.jpg" RenderOptions.BitmapScalingMode="NearestNeighbor" Stretch="Fill" Height="150" Width="256"/>
+                                                    
+                                                    <Grid Visibility="{Binding IsMouseOver, Converter={converter:BoolVisibilityConverter}}">
+                                                        <Rectangle Width="256" Fill="Black" Opacity="0.9"/>
+                                                        <Label Content="JOIN COMMUNITY" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" Foreground="White"/>
+                                                    </Grid>
+                                                </Grid>
                                             </Button>
                                         </DockPanel>
                                         <StackPanel Margin="10 0 10 0">
@@ -124,16 +140,14 @@
                                         <ImageBrush ImageSource="../../Images/MainMenu/background.png" />
                                     </Button.Background>
                                     <Grid Height="70" Margin="0 0 0 0">
-                                      
-                                      
 
                                         <Grid Visibility="{Binding IsMouseOver, Converter={converter:BoolVisibilityConverter}}">
                                             <Grid.Background>
                                                 <ImageBrush ImageSource="../../Images/MainMenu/background.png" />
                                             </Grid.Background>
                                             <Rectangle Width="250" Fill="Black" Opacity="0.8"/>
-                                            
-                                            
+
+
                                             <StackPanel>
                                                 <StackPanel Orientation="Horizontal" Margin="5 0 0 0">
                                                     <Label Content="{Binding RoomName}" Foreground="White" FontSize="14"/>
