@@ -8,7 +8,7 @@ using Hik.Communication.Scs.Server;
 
 namespace Communication.Server
 {
-    public static class Utils
+   public static class Utils
     {
         public static void SendMessageToAllClients(IScsServer server, string message)
         {
@@ -16,12 +16,6 @@ namespace Communication.Server
             {
                 clients.SendMessage(new ScsTextMessage(message));
             }
-        }
-
-        public static void SendMessage(IScsServerClient client, string message)
-        {
-            client.SendMessage(new ScsTextMessage(
-                String.Format(message)));
         }
 
         public static string GetIpOfClient(IScsServerClient client)

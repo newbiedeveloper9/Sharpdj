@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1D656320-7362-45CE-8DEA-C0CD82559A26}</ProjectGuid>
+    <ProjectGuid>{A2BF3BB4-59F9-4415-AAB0-543F5365D946}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Communication</RootNamespace>
-    <AssemblyName>Communication</AssemblyName>
+    <RootNamespace>ServerLibrary</RootNamespace>
+    <AssemblyName>ServerLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -20,7 +20,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,9 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Scs, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Scs.1.1.1\lib\net40-client\Scs.dll</HintPath>
       <Private>True</Private>
@@ -48,24 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client\UserClient.cs" />
-    <Compile Include="Client\ClientReceiver.cs" />
-    <Compile Include="Client\ClientSender.cs" />
+    <Compile Include="Communication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Server\ServerClient.cs" />
-    <Compile Include="Server\ServerReceiver.cs" />
-    <Compile Include="Server\ServerSender.cs" />
-    <Compile Include="Server\Utils.cs" />
-    <Compile Include="Shared\Commands.cs" />
-    <Compile Include="Shared\Rank.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Changes.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
