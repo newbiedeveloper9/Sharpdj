@@ -103,6 +103,13 @@
             <local:SdjLoginView DataContext="{Binding SdjLoginViewModel}"/>
         </DockPanel>
 
+        <!--Register-->
+        <DockPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="{Binding MainViewVisibility,
+            Converter={converters:EnumToVisibilityConverter},
+            ConverterParameter={x:Static enum:MainView.Register}}" Background="{StaticResource MidBrush}">
+            <local:SdjRegisterView DataContext="{Binding SdjRegisterViewModel}"/>
+        </DockPanel>
+
         <!--Add Playlist-->
         <Grid RowSpan="3" ColumnSpan="2" Visibility="{Binding PlaylistStateCollectionVisibility,
             Converter={converters:EnumToVisibilityConverter},

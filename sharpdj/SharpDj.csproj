@@ -75,8 +75,10 @@
     <Compile Include="Core\RelayCommand.cs" />
     <Compile Include="Enums\MainView.cs" />
     <Compile Include="Enums\PlaylistEnum.cs" />
+    <Compile Include="Enums\UserState.cs" />
     <Compile Include="Models\Client\Client.cs" />
     <Compile Include="Models\Client\ClientLogic.cs" />
+    <Compile Include="Models\Client\ErrorMessages.cs" />
     <Compile Include="Models\Helpers\Debug.cs" />
     <Compile Include="Models\Helpers\Updater\FTPChecker.cs" />
     <Compile Include="Models\Helpers\Updater\GetSourcePage.cs" />
@@ -84,6 +86,7 @@
     <Compile Include="ViewModel\Model\PlaylistModel.cs" />
     <Compile Include="ViewModel\Model\PlaylistTrackModel.cs" />
     <Compile Include="ViewModel\Model\SdjLoginViewModel.cs" />
+    <Compile Include="ViewModel\SdjRegisterViewModel.cs" />
     <Compile Include="ViewModel\SdjAddPlaylistCollectionView.cs" />
     <Compile Include="ViewModel\SdjBottomBarViewModel.cs" />
     <Compile Include="ViewModel\SdjEditPlaylistCollectionViewModel.cs" />
@@ -116,6 +119,9 @@
     </Compile>
     <Compile Include="View\UserControls\SdjPlaylistUserControl.xaml.cs">
       <DependentUpon>SdjPlaylistUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\SdjRegisterView.xaml.cs">
+      <DependentUpon>SdjRegisterView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\SdjRemovePlaylistCollectionView.xaml.cs">
       <DependentUpon>SdjRemovePlaylistCollectionView.xaml</DependentUpon>
@@ -200,6 +206,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserControls\SdjPlaylistUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\SdjRegisterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

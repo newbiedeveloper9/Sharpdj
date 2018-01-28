@@ -43,6 +43,7 @@ namespace SharpDj.Models.Client
 
     public static class ClientInfo
     {
-        public static IScsClient Client;
+        public static IScsClient Client { get; set; }
+        
     }
 }

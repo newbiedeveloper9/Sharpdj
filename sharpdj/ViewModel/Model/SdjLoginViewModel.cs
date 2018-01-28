@@ -84,9 +84,53 @@ namespace SharpDj.ViewModel.Model
 
         public void LoginAsGuestCommandExecute()
         {
-            SdjMainViewModel.Client.Sender.Login(Login, Password);
+
+        }
+        #endregion
+
+        #region LoginCommand
+        private RelayCommand _loginCommand;
+        public RelayCommand LoginCommand
+        {
+            get
+            {
+                return _loginCommand
+                       ?? (_loginCommand = new RelayCommand(LoginCommandExecute, LoginCommandCanExecute));
+            }
         }
 
+        public bool LoginCommandCanExecute()
+        {
+            return true;
+        }
+
+        public void LoginCommandExecute()
+        {
+            SdjMainViewModel.Client.Sender.Login(Login, Password);
+        }
+        #endregion
+
+        #region RegisterCommand
+        private RelayCommand _registerCommand;
+        public RelayCommand RegisterCommand
+        {
+            get
+            {
+                return _registerCommand
+                       ?? (_registerCommand = new RelayCommand(RegisterCommandExecute, RegisterCommandCanExecute));
+            }
+        }
+
+        public bool RegisterCommandCanExecute()
+        {
+            return true;
+        }
+
+        public void RegisterCommandExecute()
+        {
+            SdjMainViewModel.MainViewVisibility = MainView.Register;
+            Console.WriteLine("register");
+        }
         #endregion
 
         #endregion Commands

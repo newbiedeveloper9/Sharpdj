@@ -87,7 +87,7 @@
                 </StackPanel>
 
                 <!--O programie-->
-                <StackPanel VerticalAlignment="Bottom" Margin="85 0 0 5">
+                <StackPanel VerticalAlignment="Bottom" Margin="95 0 0 5">
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Wersja" FontSize="14"/>
                         <Label Content="{Binding LeftBarProgramVersion}" FontSize="14"/>

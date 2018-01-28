@@ -19,8 +19,10 @@
                     <Label Content="Password"/>
                     <TextBox Text="{Binding Password}"/>
                 </StackPanel>
-                <Button Content="Login As Guest" HorizontalAlignment="Center" Command="{Binding LoginAsGuestCommand}" VerticalAlignment="Top" FontSize="24"/>
-
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="Register" HorizontalAlignment="Center" Command="{Binding RegisterCommand}" VerticalAlignment="Top" FontSize="16" Margin="10 0 0 0"/>
+                    <Button Content="Login" HorizontalAlignment="Center" Command="{Binding LoginCommand}" VerticalAlignment="Top" FontSize="16" Margin="10 0 20 0"/>
+                </StackPanel>
             </StackPanel>
         </DockPanel>
     </Grid>

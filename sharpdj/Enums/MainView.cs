@@ -5,6 +5,7 @@
         Main,
         Room,
         Login,
+        Register,
         About,
     }
 

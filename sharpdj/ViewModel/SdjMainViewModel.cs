@@ -18,6 +18,7 @@ namespace SharpDj.ViewModel
     {
         public Client Client { get; set; }
         public ClientLogic ClientLogic { get; set; }
+        
 
         #region .ctor
 
@@ -32,6 +33,7 @@ namespace SharpDj.ViewModel
             SdjEditPlaylistCollectionViewModel = new SdjEditPlaylistCollectionViewModel(this);
             SdjRemovePlaylistCollectionViewModel = new SdjRemovePlaylistCollectionViewModel(this);
             SdjLoginViewModel = new SdjLoginViewModel(this);
+            SdjRegisterViewModel = new SdjRegisterViewModel(this);
 
             MainViewVisibility = MainView.Login;
 
@@ -161,7 +163,6 @@ namespace SharpDj.ViewModel
             }
         }
 
-
         private SdjEditPlaylistCollectionViewModel _sdjEditPlaylistCollectionViewModelModel;
         public SdjEditPlaylistCollectionViewModel SdjEditPlaylistCollectionViewModel
         {
@@ -173,7 +174,6 @@ namespace SharpDj.ViewModel
                 OnPropertyChanged("SdjEditPlaylistCollectionViewModel");
             }
         }
-
 
         private SdjRemovePlaylistCollectionViewModel _sdjRemovePlaylistCollectionViewModel;
         public SdjRemovePlaylistCollectionViewModel SdjRemovePlaylistCollectionViewModel
@@ -187,7 +187,6 @@ namespace SharpDj.ViewModel
             }
         }
 
-
         private SdjLoginViewModel _sdjLoginViewModel;
         public SdjLoginViewModel SdjLoginViewModel
         {
@@ -197,6 +196,18 @@ namespace SharpDj.ViewModel
                 if (_sdjLoginViewModel == value) return;
                 _sdjLoginViewModel = value;
                 OnPropertyChanged("SdjLoginViewModel");
+            }
+        }
+
+        private SdjRegisterViewModel _sdjRegisterViewModel;
+        public SdjRegisterViewModel SdjRegisterViewModel
+        {
+            get => _sdjRegisterViewModel;
+            set
+            {
+                if (_sdjRegisterViewModel == value) return;
+                _sdjRegisterViewModel = value;
+                OnPropertyChanged("SdjRegisterViewModel");
             }
         }
 

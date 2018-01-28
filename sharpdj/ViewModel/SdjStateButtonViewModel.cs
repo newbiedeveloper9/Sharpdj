@@ -108,6 +108,7 @@ namespace SharpDj.ViewModel
                 SdjMainViewModel.SdjLeftBarViewModel.LeftBarVisibility = LeftBar.Collapsed;
             else if (SdjMainViewModel.SdjPlaylistViewModel.PlaylistVisibility == Playlist.Visible)
                 SdjMainViewModel.SdjPlaylistViewModel.PlaylistVisibility = Playlist.Collapsed;
+            
             else if (SdjMainViewModel.MainViewVisibility != MainView.Main)
                 SdjMainViewModel.MainViewVisibility = MainView.Main;
             else
