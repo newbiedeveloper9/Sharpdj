@@ -6,7 +6,22 @@
              xmlns:local="clr-namespace:SharpDj.View.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <DockPanel>
-        <Button Content="Login As Guest" VerticalAlignment="Center" HorizontalAlignment="Center" Command="{Binding LoginAsGuestCommand}" Style="{StaticResource IconButton}" FontSize="24"/>
-    </DockPanel>
+    <Grid>
+
+        <DockPanel>
+
+            <StackPanel VerticalAlignment="Center">
+                <StackPanel Margin="20 20 20 0">
+                    <Label Content="Login"/>
+                    <TextBox Text="{Binding Login}"/>
+                </StackPanel>
+                <StackPanel Margin="20 0 20 20">
+                    <Label Content="Password"/>
+                    <TextBox Text="{Binding Password}"/>
+                </StackPanel>
+                <Button Content="Login As Guest" HorizontalAlignment="Center" Command="{Binding LoginAsGuestCommand}" VerticalAlignment="Top" FontSize="24"/>
+
+            </StackPanel>
+        </DockPanel>
+    </Grid>
 </UserControl>

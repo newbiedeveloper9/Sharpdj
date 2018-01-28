@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Hik.Communication.Scs.Client;
 using Hik.Communication.Scs.Communication.EndPoints.Tcp;
 using Hik.Communication.Scs.Communication.Messages;
+using Communication.Client;
 
-namespace SharpDj.Models
+
+namespace SharpDj.Models.Client
 {
     public class Client
     {
+        public ClientReceiver Receiver { get; set; } = new ClientReceiver();
+        public ClientSender Sender { get; set; }
 
         public string Ip { get; set; } = "78.88.84.56";
         public int Port { get; set; } = 21007;
@@ -22,6 +22,7 @@ namespace SharpDj.Models
             ClientInfo.Client.MessageReceived += Client_MessageReceived;
             ClientInfo.Client.Disconnected += Client_Disconnected;
             ClientInfo.Client.Connect();
+            Sender = new ClientSender(ClientInfo.Client);
         }
 
         private void Client_Disconnected(object sender, EventArgs e)
@@ -36,9 +37,7 @@ namespace SharpDj.Models
             if (message == null)
                 return;
 
-        /*    _receiver = new ClientReceiver();
-            _receiver.ParseMessage(client, message.Text);*/
-            //TODO: disconnected player
+            Receiver.ParseMessage(ClientInfo.Client, message.Text);
         }
     }
 

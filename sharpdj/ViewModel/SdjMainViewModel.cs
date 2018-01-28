@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using SharpDj.Enums;
 using SharpDj.Models;
+using SharpDj.Models.Client;
 using SharpDj.View.UserControls;
 using SharpDj.ViewModel.Model;
 
@@ -15,8 +16,8 @@ namespace SharpDj.ViewModel
 {
     public class SdjMainViewModel : BaseViewModel
     {
-        private Client _client;
-
+        public Client Client { get; set; }
+        public ClientLogic ClientLogic { get; set; }
 
         #region .ctor
 
@@ -30,7 +31,9 @@ namespace SharpDj.ViewModel
             SdjAddPlaylistCollectionViewModel = new SdjAddPlaylistCollectionView(this);
             SdjEditPlaylistCollectionViewModel = new SdjEditPlaylistCollectionViewModel(this);
             SdjRemovePlaylistCollectionViewModel = new SdjRemovePlaylistCollectionViewModel(this);
+            SdjLoginViewModel = new SdjLoginViewModel(this);
 
+            MainViewVisibility = MainView.Login;
 
             for (int i = 0; i < 5; i++)
             {
@@ -41,6 +44,10 @@ namespace SharpDj.ViewModel
             {
                 RoomCollection.Add(new RoomSquareModel(this) { AdminsInRoom = 10, RoomName = "jakas nazwa XDDDD", PeopleInRoom = 99, RoomDescription = "dddsadasdawd", HostName = "Jeff Diggins", RoomId = i });
             }
+
+            Client = new Client();
+            Client.Start();
+            ClientLogic = new ClientLogic(this);
         }
 
         #endregion .ctor
@@ -181,6 +188,19 @@ namespace SharpDj.ViewModel
         }
 
 
+        private SdjLoginViewModel _sdjLoginViewModel;
+        public SdjLoginViewModel SdjLoginViewModel
+        {
+            get => _sdjLoginViewModel;
+            set
+            {
+                if (_sdjLoginViewModel == value) return;
+                _sdjLoginViewModel = value;
+                OnPropertyChanged("SdjLoginViewModel");
+            }
+        }
+
+
         #endregion ViewModels
 
         #endregion Properties
@@ -191,49 +211,6 @@ namespace SharpDj.ViewModel
 
         #region Commands
 
-        #region MainView
-
-        #region Main
-
-
-        #region MainOnRoomClickCommand
-
-        #endregion
-
-        #endregion Main
-
-        #endregion
-
-        #region LoginView
-
-        #region LoginAsGuestCommand
-        private RelayCommand _loginAsGuestCommand;
-        public RelayCommand LoginAsGuestCommand
-        {
-            get
-            {
-                return _loginAsGuestCommand
-                       ?? (_loginAsGuestCommand = new RelayCommand(LoginAsGuestCommandExecute, LoginAsGuestCommandCanExecute));
-            }
-        }
-
-        public bool LoginAsGuestCommandCanExecute()
-        {
-
-            return true;
-
-        }
-
-        public void LoginAsGuestCommandExecute()
-        {
-            _client = new Client();
-            _client.Start();
-
-            MainViewVisibility = MainView.Main;
-        }
-        #endregion
-
-        #endregion LoginView
 
         #endregion Commands
 

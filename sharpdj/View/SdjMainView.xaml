@@ -42,14 +42,6 @@
             ConverterParameter={x:Static enum:Playlist.Visible}}">
             <local:SdjPlaylistUserControl DataContext="{Binding SdjPlaylistViewModel}"/>
         </Grid>
-        
-
-        <!--Login-->
-        <!--        <DockPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="{Binding MainViewVisibility,
-            Converter={converters:EnumToVisibilityConverter},
-            ConverterParameter={x:Static enum:MainView.Login}}" Background="{StaticResource MidBrush}">
-            <local:SdjLoginView/>
-        </DockPanel>-->
 
 
         <!--About-->
@@ -102,6 +94,13 @@
         <!-- Avatar -->
         <DockPanel Grid.Row="2" Margin="20 -25 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding AvatarIsVisible, Mode=TwoWay}">
             <Button Margin="0 0 0 0" Background="{StaticResource LightBrush}" DataContext="{Binding SdjBottomBarViewModel}" Command="{Binding AvatarOnClick}" Style="{StaticResource RoundButton}" Content="../Images/avatar.png"/>
+        </DockPanel>
+
+        <!--Login-->
+        <DockPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="{Binding MainViewVisibility,
+            Converter={converters:EnumToVisibilityConverter},
+            ConverterParameter={x:Static enum:MainView.Login}}" Background="{StaticResource MidBrush}">
+            <local:SdjLoginView DataContext="{Binding SdjLoginViewModel}"/>
         </DockPanel>
 
         <!--Add Playlist-->

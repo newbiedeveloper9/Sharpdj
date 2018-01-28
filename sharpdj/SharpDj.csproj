@@ -38,8 +38,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Communication">
-      <HintPath>..\..\..\Documents\Visual Studio 2017\Projects\SharpServer\Communication\bin\Debug\Communication.dll</HintPath>
+    <Reference Include="Communication, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Communication\bin\Debug\Communication.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -74,13 +75,15 @@
     <Compile Include="Core\RelayCommand.cs" />
     <Compile Include="Enums\MainView.cs" />
     <Compile Include="Enums\PlaylistEnum.cs" />
-    <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\Client\Client.cs" />
+    <Compile Include="Models\Client\ClientLogic.cs" />
     <Compile Include="Models\Helpers\Debug.cs" />
     <Compile Include="Models\Helpers\Updater\FTPChecker.cs" />
     <Compile Include="Models\Helpers\Updater\GetSourcePage.cs" />
     <Compile Include="ViewModel\Model\FavoriteRoomsModel.cs" />
     <Compile Include="ViewModel\Model\PlaylistModel.cs" />
     <Compile Include="ViewModel\Model\PlaylistTrackModel.cs" />
+    <Compile Include="ViewModel\Model\SdjLoginViewModel.cs" />
     <Compile Include="ViewModel\SdjAddPlaylistCollectionView.cs" />
     <Compile Include="ViewModel\SdjBottomBarViewModel.cs" />
     <Compile Include="ViewModel\SdjEditPlaylistCollectionViewModel.cs" />

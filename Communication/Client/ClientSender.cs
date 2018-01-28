@@ -7,49 +7,61 @@ namespace Communication.Client
 {
     public class ClientSender
     {
-        public void Register(IScsClient client, string login, string password, string email)
+        private IScsClient Client { get; set; }
+
+        public ClientSender(IScsClient client)
         {
-            client.SendMessage(new ScsTextMessage(
+            Client = client;
+        }
+
+        public void Register(string login, string password, string email)
+        {
+            Client.SendMessage(new ScsTextMessage(
                 String.Format(Commands.Register + "{0} {1} {2}", login, password, email)));
         }
 
-        public void Login(IScsClient client, string login, string password)
+        public void Login(string login, string password)
         {
-            client.SendMessage(new ScsTextMessage(
+            Client.SendMessage(new ScsTextMessage(
                 String.Format(Commands.Login + "{0} {1}", login, password)));
         }
 
-        public void GetPeoples(IScsClient client)
+        public void GetPeoples()
         {
-            client.SendMessage(new ScsTextMessage(
+            Client.SendMessage(new ScsTextMessage(
                 String.Format(Commands.GetPeoples)));
         }
 
         #region UserAccount
-        public void ChangePassword(IScsClient client, string password, string newPassword)
+        public void ChangePassword(string password, string newPassword)
         {
-            client.SendMessage(new ScsTextMessage(
+            Client.SendMessage(new ScsTextMessage(
                 String.Format(Commands.UserAccount.ChangePassword + "{0} {1}", password, newPassword)));
         }
-        public void ChangeUsername(IScsClient client, string password, string newUsername)
+
+        public void ChangeUsername(string password, string newUsername)
         {
-            client.SendMessage(new ScsTextMessage(
+            Client.SendMessage(new ScsTextMessage(
                 String.Format(Commands.UserAccount.ChangeUsername + "{0} {1}", password, newUsername)));
         }
-        public void ChangeLogin(IScsClient client, string password, string newLogin)
+
+        public void ChangeLogin(string password, string newLogin)
         {
-            client.SendMessage(new ScsTextMessage(
+            Client.SendMessage(new ScsTextMessage(
                 String.Format(Commands.UserAccount.ChangeLogin + "{0} {1}", password, newLogin)));
         }
-        public void ChangeRank(IScsClient client, string password, Rank newRank)
+
+        public void ChangeRank(string password, Rank newRank)
         {
-            client.SendMessage(new ScsTextMessage(
+            Client.SendMessage(new ScsTextMessage(
                 String.Format(Commands.UserAccount.ChangeRank + "{0} {1}", password, newRank)));
         }
+
         #endregion
-        public void Disconnect(IScsClient client)
+
+        public void Disconnect()
         {
-            client.SendMessage(new ScsTextMessage(
+            Client.SendMessage(new ScsTextMessage(
                 String.Format(Commands.Disconnect)));
         }
     }

@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using clienttcp;
-using clienttcp.Properties;
 using Communication.Client;
 using Communication.Shared;
 using Hik.Communication.Scs.Client;
@@ -27,12 +21,23 @@ namespace clienttcp
         public void Start()
         {
 
-            _sender = new ClientSender();
+            while (client.CommunicationState == CommunicationStates.Disconnected)
+            {
 
-            client = ScsClientFactory.CreateClient(new ScsTcpEndPoint(Ip, Port));
-            client.MessageReceived += Client_MessageReceived;
-            client.Disconnected += Client_Disconnected;
-            client.Connect();
+                client = ScsClientFactory.CreateClient(new ScsTcpEndPoint(Ip, Port));
+                client.ConnectTimeout = 10;
+                client.MessageReceived += Client_MessageReceived;
+                client.Disconnected += Client_Disconnected;
+                _sender = new ClientSender(client);
+                try
+                {
+                    client.Connect();
+                }
+                catch (TimeoutException timeoutException)
+                {
+                    Console.WriteLine("timeout");
+                }
+            }
             Console.WriteLine("Connected with server!");
             while (true)
             {
@@ -40,92 +45,106 @@ namespace clienttcp
                 Console.WriteLine();
                 Console.WriteLine();
                 var command = Console.ReadLine();
-                if (client.CommunicationState == CommunicationStates.Disconnected)
-                    client.Connect();
-
-                if (command.Equals("register"))
+                try
                 {
-                    Console.WriteLine("Login: ");
-                    var login = Console.ReadLine();
-                    Console.Write("Password: ");
-                    var password = Console.ReadLine();
-                    Console.Write("Email: ");
-                    var email = Console.ReadLine();
-                    _sender.Register(client, login, password, email);
-                }
-                else if (command.Equals("login"))
-                {
-                    Console.WriteLine("Login: ");
-                    var login = Console.ReadLine();
-                    Console.Write("Password: ");
-                    var password = Console.ReadLine();
-                    _sender.Login(client, login, password);
-                }
-                else if (command.Equals("disconnect"))
-                {
-                    _sender.Disconnect(client);
-                }
-                else if (command.Equals("connect"))
-                {
-                    client.Connect();
-                }
-                else if (command.Equals("changepassword"))
-                {
-                    Console.Write("Password: ");
-                    var password = Console.ReadLine();
-                    Console.Write("New Password: ");
-                    var newPassword = Console.ReadLine();
-
-                    _sender.ChangePassword(client, password, newPassword);
-                }
-                else if (command.Equals("changerank"))
-                {
-                    Console.Write("Password: ");
-                    var password = Console.ReadLine();
-                    foreach (var rank in Enum.GetNames(typeof(Rank)))
+                    if (client.CommunicationState == CommunicationStates.Disconnected)
                     {
-                        Console.WriteLine(rank);
+                        client.Connect();
+                        Console.WriteLine("reconnected");
                     }
-                    Console.Write("Rank: ");
-                    var newRank = Console.ReadLine();
 
-                    _sender.ChangeRank(client, password, (Rank)Enum.Parse(typeof(Rank), newRank, true));
-                }
-                else if (command.Equals("changeusername"))
-                {
-                    Console.Write("Password: ");
-                    var password = Console.ReadLine();
-                    Console.Write("New username: ");
-                    var newUsername = Console.ReadLine();
+                    if (command.Equals("register"))
+                    {
+                        Console.WriteLine("Login: ");
+                        var login = Console.ReadLine();
+                        Console.Write("Password: ");
+                        var password = Console.ReadLine();
+                        Console.Write("Email: ");
+                        var email = Console.ReadLine();
+                        _sender.Register(login, password, email);
+                    }
+                    else if (command.Equals("login"))
+                    {
+                        Console.WriteLine("Login: ");
+                        var login = Console.ReadLine();
+                        Console.Write("Password: ");
+                        var password = Console.ReadLine();
+                        _sender.Login(login, password);
+                    }
+                    else if (command.Equals("disconnect"))
+                    {
+                        _sender.Disconnect();
+                    }
+                    else if (command.Equals("connect"))
+                    {
+                        client.Connect();
+                    }
+                    else if (command.Equals("changepassword"))
+                    {
+                        Console.Write("Password: ");
+                        var password = Console.ReadLine();
+                        Console.Write("New Password: ");
+                        var newPassword = Console.ReadLine();
 
-                    _sender.ChangeUsername(client, password, newUsername);
-                }
-                else if (command.Equals("changelogin"))
-                {
-                    Console.Write("Password: ");
-                    var password = Console.ReadLine();
-                    Console.Write("New login: ");
-                    var newLogin = Console.ReadLine();
+                        _sender.ChangePassword(password, newPassword);
+                    }
+                    else if (command.Equals("changerank"))
+                    {
+                        Console.Write("Password: ");
+                        var password = Console.ReadLine();
+                        foreach (var rank in Enum.GetNames(typeof(Rank)))
+                        {
+                            Console.WriteLine(rank);
+                        }
+                        Console.Write("Rank: ");
+                        var newRank = Console.ReadLine();
 
-                    _sender.ChangeLogin(client, password, newLogin);
-                }
-                else if (command.Equals("getpeoples"))
-                {
-                    _sender.GetPeoples(client);
-                }
-                else if (command.Equals(""))
-                {
-                    
-                }
-                else
-                {
-                    if (client.CommunicationState == CommunicationStates.Connected)
-                        client.SendMessage(new ScsTextMessage(command));
+                        _sender.ChangeRank(password, (Rank)Enum.Parse(typeof(Rank), newRank, true));
+                    }
+                    else if (command.Equals("changeusername"))
+                    {
+                        Console.Write("Password: ");
+                        var password = Console.ReadLine();
+                        Console.Write("New username: ");
+                        var newUsername = Console.ReadLine();
+
+                        _sender.ChangeUsername(password, newUsername);
+                    }
+                    else if (command.Equals("changelogin"))
+                    {
+                        Console.Write("Password: ");
+                        var password = Console.ReadLine();
+                        Console.Write("New login: ");
+                        var newLogin = Console.ReadLine();
+
+                        _sender.ChangeLogin(password, newLogin);
+                    }
+                    else if (command.Equals("getpeoples"))
+                    {
+                        _sender.GetPeoples();
+                    }
+                    else if (command.Equals(""))
+                    {
+
+                    }
                     else
                     {
-                        Console.WriteLine("Press enter to reconnect");
+                        if (client.CommunicationState == CommunicationStates.Connected)
+                            client.SendMessage(new ScsTextMessage(command));
+                        else
+                        {
+                            Console.WriteLine("Press enter to reconnect");
+                        }
                     }
                 }
+                catch (TimeoutException ex)
+                {
+                    Console.WriteLine(ex.Source);
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.GetType());
+                    Console.WriteLine(ex.GetBaseException());
+                }
+
                 //  Console.Clear();
             }
 
