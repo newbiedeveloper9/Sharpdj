@@ -30,7 +30,7 @@ namespace servertcp
             _server.Start();
 
 
-            Console.WriteLine("Enter something to close _server");
+            Console.WriteLine("Enter something to close server");
             Console.ReadLine();
             _server.Stop();
         }

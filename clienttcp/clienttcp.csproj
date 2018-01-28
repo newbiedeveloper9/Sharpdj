@@ -74,9 +74,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Changes.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Communication\Communication.csproj">
       <Project>{1d656320-7362-45ce-8dea-c0cd82559a26}</Project>
       <Name>Communication</Name>

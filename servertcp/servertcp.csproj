@@ -60,17 +60,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Changes.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Communication\Communication.csproj">
       <Project>{1d656320-7362-45ce-8dea-c0cd82559a26}</Project>
       <Name>Communication</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Rooms\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
