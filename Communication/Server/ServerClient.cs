@@ -27,6 +27,7 @@ namespace Communication.Server
         public string Password { get; set; }
         public string Email { get; set; }
         public string Ip { get; set; }
+        public string Salt { get; set; }
         public Rank Rank { get; set; } = Rank.User;
 
         public string Username

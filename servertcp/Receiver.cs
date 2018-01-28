@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Communication.Client;
 using Communication.Server;
+using CryptSharp.Utility;
 using Hik.Collections;
 using Hik.Communication.Scs.Server;
 using Newtonsoft.Json;
@@ -68,7 +69,8 @@ namespace servertcp
 
                 var clientJson = JsonConvert.DeserializeObject<ServerClient>(jsonSource);
 
-                if (e.Password.Equals(clientJson.Password))
+                var pass = Scrypt.Hash(e.Password, client.Salt);
+                if (pass.Equals(client.Password))
                 {
                     client.Login = e.NewLogin;
                     clientJson.Login = client.Login;
@@ -106,7 +108,9 @@ namespace servertcp
                     var jsonSource = File.ReadAllText(accPath);
 
                     var clientJson = JsonConvert.DeserializeObject<ServerClient>(jsonSource);
-                    if (e.Password.Equals(clientJson.Password))
+
+                    var pass = Scrypt.Hash(e.Password, client.Salt);
+                    if (pass.Equals(client.Password))
                     {
                         client.Rank = e.Rank;
                         clientJson.Rank = client.Rank;
@@ -142,7 +146,8 @@ namespace servertcp
 
                 var clientJson = JsonConvert.DeserializeObject<ServerClient>(jsonSource);
 
-                if (e.Password.Equals(clientJson.Password))
+                var pass = Scrypt.Hash(e.Password, client.Salt);
+                if (pass.Equals(client.Password))
                 {
                     client.Username = e.NewUsername;
                     clientJson.Username = client.Username;
@@ -178,9 +183,11 @@ namespace servertcp
 
                 var clientJson = JsonConvert.DeserializeObject<ServerClient>(jsonSource);
 
-                if (e.Password.Equals(clientJson.Password))
+                var pass = Scrypt.Hash(e.Password, client.Salt);
+                if (pass.Equals(client.Password))
                 {
-                    client.Password = e.NewPassword;
+                    client.Password = Scrypt.Hash(e.NewPassword, client.Salt);
+
                     clientJson.Password = client.Password;
                     var json = JsonConvert.SerializeObject(clientJson, Formatting.Indented);
 
@@ -212,7 +219,9 @@ namespace servertcp
 
                 var client = JsonConvert.DeserializeObject<ServerClient>(json);
 
-                if (e.Password.Equals(client.Password))
+                var pass = Scrypt.Hash(e.Password, client.Salt);
+
+                if (pass.Equals(client.Password))
                 {
                     client.Client = e.Client;
                     client.Ip = Utils.GetIpOfClient(e.Client);
@@ -242,11 +251,14 @@ namespace servertcp
             {
                 if (!File.Exists(accPath))
                 {
+                    string salt = Scrypt.GenerateSalt();
+
                     ServerClient serverClient = new ServerClient(e.Client)
                     {
                         Login = e.Login,
                         Email = e.Email,
-                        Password = e.Password,
+                        Password = Scrypt.Hash(e.Password, salt),
+                        Salt = salt,
                         Ip = Utils.GetIpOfClient(e.Client)
                     };
 
@@ -262,6 +274,7 @@ namespace servertcp
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 ServerSender.Error.RegisterError(e.Client);
             }
 

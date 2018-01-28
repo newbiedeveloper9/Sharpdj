@@ -13,7 +13,22 @@ namespace Communication.Server
     {
         public class MessagesPattern
         {
+            /// <summary>
+            /// <para>
+            /// 1 - Login
+            /// 2 - Password
+            /// 3 - Email
+            /// </para>
+            /// </summary>
             public const string RegisterRgx = Commands.Register + "(.*) (.*) (.*)";
+
+            /// <summary>
+            /// LoginRgx
+            /// <para>
+            /// 1 - Login
+            /// 2 - Password
+            /// </para>
+            /// </summary>
             public const string LoginRgx = Commands.Login + "(.*) (.*)";
 
             /// <summary>

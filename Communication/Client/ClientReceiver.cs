@@ -13,9 +13,29 @@ namespace Communication.Client
     {
         public class MessagesPattern
         {
-            public const string UserDisconnectRgx = Commands.Disconnect + " (.*)"; //1 - username
-            public const string SuccesfulLoginRgx = Commands.SuccessfulLogin + "(.*) (.*)"; //1 - username, 2 - rank
-            public const string GetPeopleRgx = "(.*) (.*)"; //1 - username, 2 - rank;
+            /// <summary>
+            /// <para>
+            /// 1- Username
+            /// </para>
+            /// </summary>
+            public const string UserDisconnectRgx = Commands.Disconnect + " (.*)";
+
+            /// <summary>
+            /// <para>
+            /// 1 - Username
+            /// 2- Rank
+            /// </para>
+            /// </summary>
+            public const string SuccesfulLoginRgx = Commands.SuccessfulLogin + "(.*) (.*)";
+
+
+            /// <summary>
+            /// <para>
+            /// 1 - Username
+            /// 2 - Rank
+            /// </para>
+            /// </summary>
+            public const string GetPeopleRgx = "(.*) (.*)";
         }
 
         public void ParseMessage(IScsClient client, string message)
@@ -157,17 +177,17 @@ namespace Communication.Client
 
 
                 var userClients = (from tab in tabs
-                    let rgx = new Regex(MessagesPattern.GetPeopleRgx)
-                    select rgx.Match(tab)
+                                   let rgx = new Regex(MessagesPattern.GetPeopleRgx)
+                                   select rgx.Match(tab)
                     into match
-                    where match.Success
-                    let username = match.Groups[1].Value
-                    let rank = match.Groups[2].Value
-                    select new UserClient
-                    {
-                        Username = username,
-                        Rank = (Rank) Enum.Parse(typeof(Rank), rank, true)
-                    }).ToList();
+                                   where match.Success
+                                   let username = match.Groups[1].Value
+                                   let rank = match.Groups[2].Value
+                                   select new UserClient
+                                   {
+                                       Username = username,
+                                       Rank = (Rank)Enum.Parse(typeof(Rank), rank, true)
+                                   }).ToList();
 
                 foreach (var userClient in userClients)
                 {
@@ -188,7 +208,7 @@ namespace Communication.Client
             }
 
             #endregion
-                }
+        }
 
         #region Events
         public event EventHandler<UserDisconnectEventArgs> UserDisconnect;
