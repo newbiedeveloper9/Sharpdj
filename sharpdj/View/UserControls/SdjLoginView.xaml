@@ -25,5 +25,6 @@
                 </StackPanel>
             </StackPanel>
         </DockPanel>
+        <Label Foreground="Red" Content="{Binding ErrorNotify}" VerticalAlignment="Bottom" FontSize="16" Margin="10"/>
     </Grid>
 </UserControl>

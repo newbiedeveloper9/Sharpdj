@@ -53,7 +53,7 @@ namespace SharpDj.ViewModel
             {
                 if (_nickname == value) return;
                 _nickname = value;
-                OnPropertyChanged("Nickname");
+                OnPropertyChanged("Username");
             }
         }
 

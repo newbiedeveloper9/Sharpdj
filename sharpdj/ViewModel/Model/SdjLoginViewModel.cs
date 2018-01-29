@@ -57,6 +57,18 @@ namespace SharpDj.ViewModel.Model
             }
         }
 
+        private string _errorNotify;
+        public string ErrorNotify
+        {
+            get => _errorNotify;
+            set
+            {
+                if (_errorNotify == value) return;
+                _errorNotify = value;
+                OnPropertyChanged("ErrorNotify");
+            }
+        }
+
         #endregion Properties
 
         #region Methods
@@ -129,7 +141,6 @@ namespace SharpDj.ViewModel.Model
         public void RegisterCommandExecute()
         {
             SdjMainViewModel.MainViewVisibility = MainView.Register;
-            Console.WriteLine("register");
         }
         #endregion
 

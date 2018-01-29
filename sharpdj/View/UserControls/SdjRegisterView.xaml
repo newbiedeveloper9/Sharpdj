@@ -11,7 +11,7 @@
             <Label Content="Login"/>
             <TextBox Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <Label Content="Nickname"/>
+            <Label Content="Username"/>
             <TextBox Text="{Binding Nickname, UpdateSourceTrigger=PropertyChanged}"/>
 
             <Label Content="Password"/>

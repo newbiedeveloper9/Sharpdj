@@ -32,7 +32,6 @@ namespace SharpDj.ViewModel
             }
         }
 
-
         private LeftBar _leftBarVisibility = LeftBar.Collapsed;
         public LeftBar LeftBarVisibility
         {
@@ -44,6 +43,19 @@ namespace SharpDj.ViewModel
                 OnPropertyChanged("LeftBarVisibility");
             }
         }
+
+        private string _username;
+        public string Username
+        {
+            get => _username;
+            set
+            {
+                if (_username == value) return;
+                _username = value;
+                OnPropertyChanged("Username");
+            }
+        }
+
         #endregion Properties
 
         #region Methods

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Communication.Client;
 using SharpDj.Enums;
 using SharpDj.Models.Helpers;
 using SharpDj.ViewModel;
 
 namespace SharpDj.Models.Client
 {
-    public class ClientLogic
+    public class ClientLogic : BaseViewModel
     {
         private UserState _userState = UserState.NotLoggedIn;
         public UserState UserState
@@ -18,7 +19,7 @@ namespace SharpDj.Models.Client
             set
             {
                 _userState = value;
-                SdjMainViewModel.MainViewVisibility = value == UserState.Logged ? MainView.Main : MainView.Register;
+                SdjMainViewModel.MainViewVisibility = value == UserState.Logged ? MainView.Main : MainView.Login;
             }
         }
 
@@ -26,15 +27,21 @@ namespace SharpDj.Models.Client
         {
             SdjMainViewModel = main;
 
+            main.Client.Receiver.LoginErr += Receiver_LoginErr;
             main.Client.Receiver.RegisterAccExistErr += Receiver_RegisterAccExistErr;
             main.Client.Receiver.RegisterErr += Receiver_RegisterErr;
             main.Client.Receiver.SuccesfulRegister += Receiver_SuccesfulRegister;
             main.Client.Receiver.SuccessfulLogin += Receiver_SuccessfulLogin;
         }
 
+        private void Receiver_LoginErr(object sender, EventArgs e)
+        {
+            SdjMainViewModel.SdjLoginViewModel.ErrorNotify = ErrorMessages.LoginErrorMessage;
+        }
+
         private void Receiver_RegisterAccExistErr(object sender, EventArgs e)
         {
-            SdjMainViewModel.SdjRegisterViewModel.ErrorNotify = ErrorMessages.RegisterAccountExists;
+            SdjMainViewModel.SdjRegisterViewModel.ErrorNotify = ErrorMessages.RegisterAccountExistsMessage;
         }
 
         private void Receiver_RegisterErr(object sender, EventArgs e)
@@ -48,9 +55,12 @@ namespace SharpDj.Models.Client
             Debug.Log("Register", "Succesful register");
         }
 
-        private void Receiver_SuccessfulLogin(object sender, EventArgs e)
+        private void Receiver_SuccessfulLogin(object sender, ClientReceiver.SuccesfulLoginEventArgs e)
         {
+            SdjMainViewModel.Profile = new UserClient(){Rank = e.Rank, Username = e.Username};
+
             UserState = UserState.Logged;
+
             Debug.Log("Login", "Succesful login");
         }
 
@@ -64,8 +74,8 @@ namespace SharpDj.Models.Client
             {
                 if (_sdjMainViewModel == value) return;
                 _sdjMainViewModel = value;
+                OnPropertyChanged("SdjMainViewModel");
             }
         }
-
     }
 }

@@ -78,6 +78,7 @@ namespace Communication.Client
                 OnRegisterAccExistErr(EventArgs.Empty);
             }
             #endregion
+
             #region Successful login
             else if (message.StartsWith(Commands.SuccessfulLogin))
             {
@@ -95,7 +96,7 @@ namespace Communication.Client
                     };
 
                     Console.WriteLine("Succesful login, {0}!\n Your rank: {1}", username, clientServer.Rank);
-                    OnSuccessfulLogin(EventArgs.Empty);
+                    OnSuccessfulLogin(new SuccesfulLoginEventArgs(username, clientServer.Rank));
                 }
                 else
                 {
@@ -220,26 +221,25 @@ namespace Communication.Client
         }
 
         #region Succesful
-        public event EventHandler SuccessfulLogin;
         public event EventHandler SuccesfulRegister;
+        public event EventHandler<SuccesfulLoginEventArgs> SuccessfulLogin;
         public event EventHandler<GetPeopleEventArgs> GetPeople;
 
-        protected virtual void OnSuccessfulLogin(EventArgs e)
+        protected virtual void OnSuccessfulLogin(SuccesfulLoginEventArgs e)
         {
-            EventHandler eh = SuccessfulLogin;
-            eh?.Invoke(this, e);
+            var handler = SuccessfulLogin;
+            handler?.Invoke(this, e);
         }
         protected virtual void OnSuccesfulRegister(EventArgs e)
         {
-            EventHandler eh = SuccesfulRegister;
-            eh?.Invoke(this, e);
+            var handler = SuccesfulRegister;
+            handler?.Invoke(this, e);
         }
         protected virtual void OnGetPeople(GetPeopleEventArgs e)
         {
             var handler = GetPeople;
             handler?.Invoke(this, e);
         }
-
 
         public class GetPeopleEventArgs : System.EventArgs
         {
@@ -249,6 +249,19 @@ namespace Communication.Client
             }
 
             public List<UserClient> UserClients { get; private set; }
+        }
+
+        public class SuccesfulLoginEventArgs : System.EventArgs
+        {
+            public SuccesfulLoginEventArgs(string username, Rank rank)
+            {
+                Username = username;
+                Rank = rank;
+            }
+
+            public string Username { get; private set; }
+            public Rank Rank { get; private set; }
+
         }
         #endregion
         #region Errors

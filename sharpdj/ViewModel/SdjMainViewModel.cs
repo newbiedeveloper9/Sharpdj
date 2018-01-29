@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Communication.Client;
 using SharpDj.Enums;
 using SharpDj.Models;
 using SharpDj.Models.Client;
@@ -17,9 +18,7 @@ namespace SharpDj.ViewModel
     public class SdjMainViewModel : BaseViewModel
     {
         public Client Client { get; set; }
-        public ClientLogic ClientLogic { get; set; }
         
-
         #region .ctor
 
         public SdjMainViewModel()
@@ -36,6 +35,7 @@ namespace SharpDj.ViewModel
             SdjRegisterViewModel = new SdjRegisterViewModel(this);
 
             MainViewVisibility = MainView.Login;
+            Profile = new UserClient();
 
             for (int i = 0; i < 5; i++)
             {
@@ -59,7 +59,34 @@ namespace SharpDj.ViewModel
         #region ObservableCollection
         public ObservableCollection<RoomSquareModel> RoomCollection { get; set; } = new ObservableCollection<RoomSquareModel>();
         public ObservableCollection<FavoriteRoomsModel> FavoriteCollection { get; set; } = new ObservableCollection<FavoriteRoomsModel>();
-    
+
+        private UserClient _profile;
+        public UserClient Profile
+        {
+            get => _profile;
+            set
+            {
+                if (_profile == value) return;
+                _profile = value;
+                OnPropertyChanged("Profile");
+
+                SdjLeftBarViewModel.Username = value.Username;
+            }
+        }
+
+        private ClientLogic _clientLogic;
+        public ClientLogic ClientLogic
+        {
+            get => _clientLogic;
+            set
+            {
+                if (_clientLogic == value) return;
+                _clientLogic = value;
+                OnPropertyChanged("ClientLogic");
+            }
+        }
+
+
         #endregion
 
         #region Visibility
