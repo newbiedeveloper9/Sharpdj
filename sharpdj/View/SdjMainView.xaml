@@ -13,7 +13,7 @@
         AllowsTransparency="True"
         WindowStyle="None"
         MinWidth="768"
-        MinHeight="500"
+        MinHeight="535"
         Title="Main" Height="700" Width="1090">
 
     <Grid>

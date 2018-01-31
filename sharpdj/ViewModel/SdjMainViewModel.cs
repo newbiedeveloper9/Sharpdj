@@ -10,6 +10,7 @@ using Communication.Client;
 using SharpDj.Enums;
 using SharpDj.Models;
 using SharpDj.Models.Client;
+using SharpDj.Models.Helpers;
 using SharpDj.View.UserControls;
 using SharpDj.ViewModel.Model;
 

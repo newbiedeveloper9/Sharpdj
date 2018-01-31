@@ -80,6 +80,7 @@
     <Compile Include="Models\Client\ClientLogic.cs" />
     <Compile Include="Models\Client\ErrorMessages.cs" />
     <Compile Include="Models\Helpers\Debug.cs" />
+    <Compile Include="Models\Helpers\Imgur.cs" />
     <Compile Include="Models\Helpers\Updater\FTPChecker.cs" />
     <Compile Include="Models\Helpers\Updater\GetSourcePage.cs" />
     <Compile Include="ViewModel\Model\FavoriteRoomsModel.cs" />
