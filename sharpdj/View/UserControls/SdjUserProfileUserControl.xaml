@@ -54,12 +54,12 @@
                         <StackPanel Orientation="Horizontal">
                             <StackPanel Margin="10">
                                 <Label Content="Registration" Foreground="White"  Padding="0"/>
-                                <Label Content="01.02.2018" Foreground="White"  Padding="0"/>
+                                <Label Content="{Binding RegistrationDate}" Foreground="White"  Padding="0"/>
                             </StackPanel>
 
                             <StackPanel Margin="10">
                                 <Label Content="Last seen" Foreground="White" Padding="0"/>
-                                <Label Content="1 hour ago" Foreground="White"  Padding="0"/>
+                                <Label Content="{Binding LastSeen}" Foreground="White"  Padding="0"/>
                             </StackPanel>
                         </StackPanel>
                     </StackPanel>
@@ -75,7 +75,7 @@
                                 <Grid Width="64" Height="64">
                                     <Image Source="../../Images/avatar.png"/>
                                 </Grid>
-                                <Label Content="ZonK256" Foreground="White" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+                                <Label Content="{Binding Username}" Foreground="White" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
                             </StackPanel>
                         </WrapPanel>
                     </ScrollViewer>
@@ -84,7 +84,7 @@
                 <TabItem Header="Coments">
                     <Grid HorizontalAlignment="Right">
                         <RichTextBox Margin="10 10 10 35" Background="{StaticResource LightBrush}"/>
-                        <TextBox Margin="10" FontSize="18" Height="25" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Background="{StaticResource MidBrush}"/>
+                        <TextBox Margin="10" Text="{Binding CommentText}" FontSize="18" Height="25" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Background="{StaticResource MidBrush}"/>
                     </Grid>
                 </TabItem>
             </TabControl>

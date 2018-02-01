@@ -15,7 +15,7 @@
             <TextBox Text="{Binding Nickname, UpdateSourceTrigger=PropertyChanged}"/>
 
             <Label Content="Password"/>
-            <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"/>
+            <PasswordBox PasswordChar="*" PasswordChanged="PasswordBox_PasswordChanged"/>
 
             <Label Content="E-mail"/>
             <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>

@@ -54,6 +54,13 @@
         </DockPanel>-->
 
         <!-- Bottom Bar -->
+      
+      <Grid Grid.Row="1" Grid.ColumnSpan="2" Visibility="{Binding UserProfileVisibility,
+            Converter={converters:EnumToVisibilityConverter},
+            ConverterParameter={x:Static enum:UserProfile.Visible}}">
+        <local:SdjPlaylistUserControl DataContext="{Binding SdjUserProfileViewModel}"/>
+      </Grid>
+      
         <DockPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
             <local:BottomBar DataContext="{Binding SdjBottomBarViewModel}"/>
         </DockPanel>

@@ -74,6 +74,7 @@
     <Compile Include="Core\BaseViewModel.cs" />
     <Compile Include="Core\RelayCommand.cs" />
     <Compile Include="Enums\MainView.cs" />
+    <Compile Include="Enums\UserProfile.cs" />
     <Compile Include="Enums\PlaylistEnum.cs" />
     <Compile Include="Enums\UserState.cs" />
     <Compile Include="Models\Client\Client.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="ViewModel\SdjBottomBarViewModel.cs" />
     <Compile Include="ViewModel\SdjEditPlaylistCollectionViewModel.cs" />
     <Compile Include="ViewModel\SdjRemovePlaylistCollectionViewModel.cs" />
+    <Compile Include="ViewModel\SdjUserProfileViewModel.cs" />
     <Compile Include="ViewModel\SdjRoomViewModel.cs" />
     <Compile Include="ViewModel\SdjLeftBarViewModel.cs" />
     <Compile Include="ViewModel\SdjMainViewModel.cs" />

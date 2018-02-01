@@ -12,7 +12,7 @@ namespace SharpDj.Models.Client
         public ClientReceiver Receiver { get; set; } = new ClientReceiver();
         public ClientSender Sender { get; set; }
 
-        public string Ip { get; set; } = "78.88.84.56";
+        public string Ip { get; set; } = "localhost";
         public int Port { get; set; } = 21007;
 
 

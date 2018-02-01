@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace SharpDj.ViewModel
 {
@@ -57,8 +59,8 @@ namespace SharpDj.ViewModel
             }
         }
 
-        private string _password;
-        public string Password
+        private SecureString _password;
+        public SecureString Password
         {
             get => _password;
             set
@@ -123,8 +125,11 @@ namespace SharpDj.ViewModel
 
         public void RegisterMeCommandExecute()
         {
-            SdjMainViewModel.Client.Sender.Register(Login, Password, Email);
+            string password = new System.Net.NetworkCredential(string.Empty, Password).Password;
+
+            SdjMainViewModel.Client.Sender.Register(Login, password, Email);
         }
+
 
         #endregion
 

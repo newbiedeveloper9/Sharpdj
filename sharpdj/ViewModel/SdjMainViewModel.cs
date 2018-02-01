@@ -34,6 +34,7 @@ namespace SharpDj.ViewModel
             SdjRemovePlaylistCollectionViewModel = new SdjRemovePlaylistCollectionViewModel(this);
             SdjLoginViewModel = new SdjLoginViewModel(this);
             SdjRegisterViewModel = new SdjRegisterViewModel(this);
+            SdjUserProfileViewModel = new SdjUserProfileViewModel(this);
 
             MainViewVisibility = MainView.Login;
             Profile = new UserClient();
@@ -114,6 +115,21 @@ namespace SharpDj.ViewModel
                 OnPropertyChanged("PlaylistStateCollectionVisibility");
             }
         }
+
+
+        private UserProfile _userProfileVisibility = UserProfile.Visible;
+        public UserProfile UserProfileVisibility
+        {
+            get => _userProfileVisibility;
+            set
+            {
+                if (_userProfileVisibility == value) return;
+                _userProfileVisibility = value;
+                OnPropertyChanged("UserProfileVisibility");
+            }
+        }
+
+
         #endregion
 
         #region ViewModels
@@ -236,6 +252,18 @@ namespace SharpDj.ViewModel
                 if (_sdjRegisterViewModel == value) return;
                 _sdjRegisterViewModel = value;
                 OnPropertyChanged("SdjRegisterViewModel");
+            }
+        }
+
+        private SdjUserProfileViewModel _sdjUserProfileViewModel;
+        public SdjUserProfileViewModel SdjUserProfileViewModel
+        {
+            get => _sdjUserProfileViewModel;
+            set
+            {
+                if (_sdjUserProfileViewModel == value) return;
+                _sdjUserProfileViewModel = value;
+                OnPropertyChanged("SdjUserProfileViewModel");
             }
         }
 
