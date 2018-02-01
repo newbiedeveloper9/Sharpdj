@@ -37,10 +37,7 @@
         <!-- Chat -->
         <DockPanel Grid.Row="0" Grid.Column="1" Background="{StaticResource LightBrush}">
             <Rectangle Width="1" Fill="{StaticResource MidBrush}" HorizontalAlignment="Left"/>
-
-
-
-
+                
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="CHAT NIEDOSTĘPNY"  FontSize="48" Margin="10" TextWrapping="Wrap"/>
             </StackPanel>

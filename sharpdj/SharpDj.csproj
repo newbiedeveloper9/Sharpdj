@@ -131,6 +131,9 @@
       <DependentUpon>SdjRoomView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\Model\RoomSquareModel.cs" />
+    <Compile Include="View\UserControls\SdjUserProfileUserControl.xaml.cs">
+      <DependentUpon>SdjUserProfileUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserControls\StateButtons.xaml.cs">
       <DependentUpon>StateButtons.xaml</DependentUpon>
     </Compile>
@@ -219,6 +222,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserControls\SdjRoomView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\SdjUserProfileUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
