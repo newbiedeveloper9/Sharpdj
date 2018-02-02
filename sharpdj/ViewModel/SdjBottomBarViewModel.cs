@@ -3,7 +3,7 @@ using SharpDj.Enums;
 
 namespace SharpDj.ViewModel
 {
-    public class SdjBottomBarViewModel:BaseViewModel
+    public class SdjBottomBarViewModel : BaseViewModel
     {
         #region .ctor
 
@@ -102,8 +102,6 @@ namespace SharpDj.ViewModel
 
         #region Commands
 
-        #region BottomBar
-
         #region AvatarOnClick
         private RelayCommand _avatarOnClickCommand;
         public RelayCommand AvatarOnClick
@@ -156,9 +154,6 @@ namespace SharpDj.ViewModel
             }
             Console.WriteLine(SdjMainViewModel.SdjPlaylistViewModel.PlaylistVisibility);
         }
-        #endregion
-
-
         #endregion
 
         #endregion Commands

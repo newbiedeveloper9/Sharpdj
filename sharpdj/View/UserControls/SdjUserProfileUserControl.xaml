@@ -4,25 +4,33 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SharpDj.View.UserControls"
+             xmlns:converters="clr-namespace:SharpDj.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="425">
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid Background="{StaticResource MidBrush}">
+        <Grid Background="{StaticResource MidBrush}" Height="40" Visibility="{Binding IsMaximized, Converter={converters:NotBoolToVisibilityConverter}}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Center"  Margin="0 0 40 0">
                 <Label Content="Profile - " FontSize="24" Foreground="White" Padding="0"/>
                 <Label Content="{Binding Username}" FontSize="24" Foreground="White" Padding="0"/>
             </StackPanel>
-            <Grid HorizontalAlignment="Right" Background="DarkRed" Width="40">
-                <Button Style="{StaticResource IconButtonMouseOver}" Command="{Binding CloseProfile}">
+            <DockPanel HorizontalAlignment="Right" Width="80">
+                <Button Style="{StaticResource IconButton}" Command="{Binding MaximizeProfile}">
                     <!-- Style="{StaticResource IconButton}"-->
-                    <Image Source="../../Images/Titlebar/close_24.png" Height="24" Width="40"/>
+                    <Image Source="../../Images/Titlebar/maximize_24.png" Height="24" Width="40"/>
                 </Button>
-            </Grid>
+                <Grid Background="DarkRed">
+                    <Button Style="{StaticResource IconButtonMouseOver}" Command="{Binding CloseProfile}">
+                        <!-- Style="{StaticResource IconButton}"-->
+                        <Image Source="../../Images/Titlebar/close_24.png" Height="24" Width="40"/>
+                    </Button>
+                </Grid>
+            </DockPanel>
         </Grid>
 
         <DockPanel Grid.Row="1" Background="{StaticResource DarkBrush}">
@@ -47,9 +55,9 @@
                 </StackPanel>
             </StackPanel>
 
-            <TabControl Background="{StaticResource MidBrush}">
 
-                <TabItem Header="About">
+            <TabControl Background="{StaticResource MidBrush}" Margin="5 5 0 0"  Style="{StaticResource TabControlStyle}">
+                <TabItem Header="About" Style="{StaticResource TabItemStyle}">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <StackPanel Margin="10">
@@ -65,10 +73,10 @@
                     </StackPanel>
                 </TabItem>
 
-                <TabItem Header="Biography">
+                <TabItem Header="Biography" Style="{StaticResource TabItemStyle}">
                 </TabItem>
 
-                <TabItem Header="Friends">
+                <TabItem Header="Friends" Style="{StaticResource TabItemStyle}">
                     <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Disabled">
                         <WrapPanel>
                             <StackPanel Orientation="Vertical" Margin="5">
@@ -81,7 +89,7 @@
                     </ScrollViewer>
                 </TabItem>
 
-                <TabItem Header="Coments">
+                <TabItem Header="Coments" Style="{StaticResource TabItemStyle}">
                     <Grid HorizontalAlignment="Right">
                         <RichTextBox Margin="10 10 10 35" Background="{StaticResource LightBrush}"/>
                         <TextBox Margin="10" Text="{Binding CommentText}" FontSize="18" Height="25" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Background="{StaticResource MidBrush}"/>

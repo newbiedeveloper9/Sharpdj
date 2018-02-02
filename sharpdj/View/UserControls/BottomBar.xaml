@@ -42,6 +42,12 @@
 
                     <!-- Right Bar -->
                     <DockPanel HorizontalAlignment="Right">
+                        <Button Style="{StaticResource IconButton}" Command="{Binding SdjMainViewModel.SdjUserProfileViewModel.MaximizeProfile}" 
+                                Visibility="{Binding SdjMainViewModel.SdjUserProfileViewModel.IsMaximized, Converter={converters:BoolVisibilityConverter}}">
+                            <!-- Style="{StaticResource IconButton}"-->
+                            <Image Source="../../Images/Titlebar/maximize_24.png" Height="24" Width="40"/>
+                        </Button>
+                        
                         <StackPanel Orientation="Horizontal" Margin="10 0 0 0">
                             <Image Source="../../Images/Room/003-group.png" Width="32" Height="32" Margin="0 0 10 0" />
                             <Label Content="{Binding BottomBarNumberOfPeopleInRoom, Mode=TwoWay}" FontSize="24" Foreground="White"/>

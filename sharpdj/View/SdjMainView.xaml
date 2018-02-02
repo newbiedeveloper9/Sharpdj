@@ -13,7 +13,7 @@
         AllowsTransparency="True"
         WindowStyle="None"
         MinWidth="768"
-        MinHeight="535"
+        MinHeight="580"
         Title="Main" Height="700" Width="1090">
 
     <Grid>
@@ -43,7 +43,6 @@
             <local:SdjPlaylistUserControl DataContext="{Binding SdjPlaylistViewModel}"/>
         </Grid>
 
-
         <!--About-->
         <!--  <DockPanel Visibility="{Binding MainViewVisibility,
             Converter={converters:EnumToVisibilityConverter},
@@ -53,14 +52,21 @@
             </DockPanel>
         </DockPanel>-->
 
-        <!-- Bottom Bar -->
-      
-      <Grid Grid.Row="1" Grid.ColumnSpan="2" Visibility="{Binding UserProfileVisibility,
+        <!-- Profile -->
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" Visibility="{Binding UserProfileVisibility,
             Converter={converters:EnumToVisibilityConverter},
             ConverterParameter={x:Static enum:UserProfile.Visible}}">
-        <local:SdjPlaylistUserControl DataContext="{Binding SdjUserProfileViewModel}"/>
-      </Grid>
-      
+            <Grid Background="Black" Opacity="0.7">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseUp" >
+                        <i:InvokeCommandAction Command="{Binding SdjUserProfileViewModel.CloseProfile}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Grid>
+            <local:SdjUserProfileUserControl DataContext="{Binding SdjUserProfileViewModel}" Width="600" Height="500" Visibility="{Binding IsMaximized, Converter={converters:NotBoolToVisibilityConverter}}"/>
+            <local:SdjUserProfileUserControl DataContext="{Binding SdjUserProfileViewModel}" Visibility="{Binding IsMaximized, Converter={converters:BoolVisibilityConverter}}"/>
+        </Grid>
+
         <DockPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
             <local:BottomBar DataContext="{Binding SdjBottomBarViewModel}"/>
         </DockPanel>

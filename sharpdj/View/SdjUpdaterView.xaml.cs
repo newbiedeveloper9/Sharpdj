@@ -52,7 +52,7 @@ namespace Updater
             if (Updated)
                 if (CanShow)
                 {
-                    SdjMainView view = new SdjMainView();
+                    var view = new SdjMainView();
                     view.Show();
                     Close();
                 }
@@ -66,10 +66,10 @@ namespace Updater
             Topmost = true;
             InitializeComponent();
             MediaElement.MediaEnded += MediaElement_MediaEnded;
-            Task.Factory.StartNew(Init);
+            Task.Factory.StartNew(InitAsync);
         }
 
-        private void Init()
+        private async Task InitAsync()
         {
             _debug.Log("Local json");
             if (!File.Exists("config.json"))
@@ -102,7 +102,7 @@ namespace Updater
                 _debug.Log("Updating");
                 Directory.CreateDirectory("tmp");
                 _debug.Log("Download");
-                DownloadAsync(ftp.ZipToUpdate, "tmp/update.zip");
+                await DownloadAsync(ftp.ZipToUpdate, "tmp/update.zip");
                 ZipFile.ExtractToDirectory("tmp/update.zip", "tmp/");
                 _debug.Log("Extract");
                 File.Delete("tmp/update.zip");
@@ -121,18 +121,18 @@ namespace Updater
                 Directory.Delete("tmp", true);
                 _debug.Log("Restarting");
 
-                Dispatcher.BeginInvoke((Action)delegate ()
-                {
-                    App.Current.Shutdown();
-                    Process.Start("SharpDj.exe");
-                    Close();
-                });
+                await Dispatcher.BeginInvoke((Action)delegate ()
+                 {
+                     App.Current.Shutdown();
+                     Process.Start("SharpDj.exe");
+                     Close();
+                 });
             }
             _debug.Log("Closing updater");
-            Dispatcher.BeginInvoke((Action)delegate ()
-            {
-                Updated = true;
-            });
+            await Dispatcher.BeginInvoke((Action)delegate ()
+             {
+                 Updated = true;
+             });
         }
 
 

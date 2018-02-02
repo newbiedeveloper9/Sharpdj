@@ -126,6 +126,7 @@ namespace SharpDj.ViewModel
                 if (_userProfileVisibility == value) return;
                 _userProfileVisibility = value;
                 OnPropertyChanged("UserProfileVisibility");
+                SdjLeftBarViewModel.LeftBarVisibility = LeftBar.Collapsed;
             }
         }
 
@@ -271,7 +272,7 @@ namespace SharpDj.ViewModel
         #endregion ViewModels
 
         #endregion Properties
-
+            
         #region Methods
 
         #endregion Methods

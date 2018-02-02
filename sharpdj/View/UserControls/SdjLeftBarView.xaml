@@ -17,6 +17,14 @@
                 <Label Foreground="Black" Content="{Binding Username}" FontSize="32" Margin="10"/>
 
                 <StackPanel Margin="15 50 0 0">
+                    <!--Profil-->
+                    <Button Style="{StaticResource IconButton}" Margin="0 15 0 0" Command="{Binding LeftBarOnProfileCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../../Images/avatar.png" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 45 0"/>
+                            <Label Content="Profil" FontSize="20"/>
+                        </StackPanel>
+                    </Button>
+
                     <!--Ulubione-->
                     <Button Style="{StaticResource IconButton}" Margin="0 15 0 0" Command="{Binding LeftBarOnFavoritesCommand}">
                         <StackPanel Orientation="Horizontal">

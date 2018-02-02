@@ -11,6 +11,7 @@
                     <ResourceDictionary.MergedDictionaries>
                         <ResourceDictionary Source="/Themes/Colors.xaml"/>
                         <ResourceDictionary Source="/Themes/Buttons.xaml"/>
+                        <ResourceDictionary Source="/Themes/TabStyles.xaml"/>
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>

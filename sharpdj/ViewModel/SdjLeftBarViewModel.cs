@@ -7,7 +7,7 @@ using SharpDj.Enums;
 
 namespace SharpDj.ViewModel
 {
-    public class SdjLeftBarViewModel:BaseViewModel
+    public class SdjLeftBarViewModel : BaseViewModel
     {
         #region .ctor
 
@@ -60,12 +60,38 @@ namespace SharpDj.ViewModel
 
         #region Methods
 
+        void DoOnAnyAction()
+        {
+            SdjMainViewModel.UserProfileVisibility = UserProfile.Collapsed;
+            LeftBarVisibility = LeftBar.Collapsed;
+        }
 
         #endregion Methods
 
         #region Commands
 
-        #region LeftBar
+        #region LeftBarOnProfileCommand
+        private RelayCommand _leftBarOnProfileCommand;
+        public RelayCommand LeftBarOnProfileCommand
+        {
+            get
+            {
+                return _leftBarOnProfileCommand
+                       ?? (_leftBarOnProfileCommand = new RelayCommand(LeftBarOnProfileCommandExecute, LeftBarOnProfileCommandCanExecute));
+            }
+        }
+
+        public bool LeftBarOnProfileCommandCanExecute()
+        {
+            return true;
+        }
+
+        public void LeftBarOnProfileCommandExecute()
+        {
+            SdjMainViewModel.UserProfileVisibility = UserProfile.Visible;
+            LeftBarVisibility = LeftBar.Collapsed;
+        }
+        #endregion
 
         #region LeftBarOnFavoritesCommand
         private RelayCommand _leftBarOnFavoritesCommand;
@@ -85,6 +111,7 @@ namespace SharpDj.ViewModel
 
         public void LeftBarOnFavoritesCommandExecute()
         {
+            DoOnAnyAction();
 
         }
         #endregion
@@ -108,7 +135,7 @@ namespace SharpDj.ViewModel
         public void LeftBarOnPlaylistCommandExecute()
         {
             SdjMainViewModel.SdjBottomBarViewModel.BottomBarAddToPlaylistCommandExecute();
-            SdjMainViewModel.SdjLeftBarViewModel.LeftBarVisibility = LeftBar.Collapsed;
+            DoOnAnyAction();
         }
         #endregion
 
@@ -133,8 +160,8 @@ namespace SharpDj.ViewModel
 
         public void LeftBarOnRoomsCommandExecute()
         {
-            SdjMainViewModel.SdjLeftBarViewModel.LeftBarVisibility = LeftBar.Collapsed;
             SdjMainViewModel.MainViewVisibility = MainView.Main;
+            DoOnAnyAction();
         }
         #endregion
 
@@ -156,7 +183,7 @@ namespace SharpDj.ViewModel
 
         public void LeftBarOnFriendsCommandExecute()
         {
-
+            DoOnAnyAction();
         }
         #endregion
 
@@ -178,7 +205,7 @@ namespace SharpDj.ViewModel
 
         public void LeftBarOnPluginsCommandExecute()
         {
-
+            DoOnAnyAction();
         }
         #endregion
 
@@ -200,7 +227,7 @@ namespace SharpDj.ViewModel
 
         public void LeftBarOnOptionsCommandExecute()
         {
-
+            DoOnAnyAction();
         }
         #endregion
 
@@ -222,7 +249,7 @@ namespace SharpDj.ViewModel
 
         public void LeftBarOnReportBugCommandExecute()
         {
-
+            DoOnAnyAction();
         }
         #endregion
 
@@ -247,8 +274,9 @@ namespace SharpDj.ViewModel
 
         public void LeftBarAboutCommandExecute()
         {
-            SdjMainViewModel.SdjLeftBarViewModel.LeftBarVisibility = LeftBar.Collapsed;
             SdjMainViewModel.MainViewVisibility = MainView.About;
+            DoOnAnyAction();
+
         }
         #endregion
 
@@ -274,8 +302,6 @@ namespace SharpDj.ViewModel
         {
             SdjMainViewModel.SdjLeftBarViewModel.LeftBarVisibility = LeftBar.Collapsed;
         }
-        #endregion
-
         #endregion
 
         #endregion Commands

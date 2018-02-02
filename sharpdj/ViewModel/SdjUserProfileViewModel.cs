@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SharpDj.Enums;
 
 namespace SharpDj.ViewModel
 {
@@ -41,7 +42,7 @@ namespace SharpDj.ViewModel
             }
         }
 
-        private uint _totalLikes;
+        private uint _totalLikes = 10;
         public uint TotalLikes
         {
             get => _totalLikes;
@@ -53,7 +54,7 @@ namespace SharpDj.ViewModel
             }
         }
 
-        private uint _totalDislikes;
+        private uint _totalDislikes = 20;
         public uint TotalDislikes
         {
             get => _totalDislikes;
@@ -65,7 +66,7 @@ namespace SharpDj.ViewModel
             }
         }
 
-        private uint _totalPlayedTracks;
+        private uint _totalPlayedTracks = 30;
         public uint TotalPlayedTracks
         {
             get => _totalPlayedTracks;
@@ -77,7 +78,7 @@ namespace SharpDj.ViewModel
             }
         }
 
-        private DateTime _registrationDate;
+        private DateTime _registrationDate = new DateTime(2017,10,17,13,12,11);
         public DateTime RegistrationDate
         {
             get => _registrationDate;
@@ -89,7 +90,7 @@ namespace SharpDj.ViewModel
             }
         }
 
-        private DateTime _lastSeen;
+        private DateTime _lastSeen = new DateTime(2018, 01, 29, 17, 31, 59);
         public DateTime LastSeen
         {
             get => _lastSeen;
@@ -113,12 +114,69 @@ namespace SharpDj.ViewModel
             }
         }
 
+        private bool _isMaximized = false;
+        public bool IsMaximized
+        {
+            get => _isMaximized;
+            set
+            {
+                if (_isMaximized == value) return;
+                _isMaximized = value;
+                OnPropertyChanged("IsMaximized");
+            }
+        }
+
         #endregion
 
         #region Methods
         #endregion
 
         #region Commands
+
+        #region CloseProfile
+        private RelayCommand _closeProfile;
+        public RelayCommand CloseProfile
+        {
+            get
+            {
+                return _closeProfile
+                       ?? (_closeProfile = new RelayCommand(CloseProfileExecute, CloseProfileCanExecute));
+            }
+        }
+
+        public bool CloseProfileCanExecute()
+        {
+            return true;
+        }
+
+        public void CloseProfileExecute()
+        {
+            SdjMainViewModel.UserProfileVisibility = UserProfile.Collapsed;
+        }
+        #endregion
+
+        #region MaximizeProfile
+        private RelayCommand _maximizeProfile;
+        public RelayCommand MaximizeProfile
+        {
+            get
+            {
+                return _maximizeProfile
+                       ?? (_maximizeProfile = new RelayCommand(MaximizeProfileExecute, MaximizeProfileCanExecute));
+            }
+        }
+
+        public bool MaximizeProfileCanExecute()
+        {
+            return true;
+        }
+
+        public void MaximizeProfileExecute()
+        {
+            IsMaximized = !IsMaximized;
+        }
+        #endregion
+
         #endregion
     }
 }
