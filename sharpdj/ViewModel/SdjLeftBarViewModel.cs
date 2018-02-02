@@ -90,6 +90,9 @@ namespace SharpDj.ViewModel
         {
             SdjMainViewModel.UserProfileVisibility = UserProfile.Visible;
             LeftBarVisibility = LeftBar.Collapsed;
+
+            SdjMainViewModel.SdjUserProfileViewModel.Username = Username;
+
         }
         #endregion
 

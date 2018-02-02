@@ -58,10 +58,6 @@ namespace SharpDj.ViewModel
 
         #region Properties
 
-        #region ObservableCollection
-        public ObservableCollection<RoomSquareModel> RoomCollection { get; set; } = new ObservableCollection<RoomSquareModel>();
-        public ObservableCollection<FavoriteRoomsModel> FavoriteCollection { get; set; } = new ObservableCollection<FavoriteRoomsModel>();
-
         private UserClient _profile;
         public UserClient Profile
         {
@@ -88,7 +84,9 @@ namespace SharpDj.ViewModel
             }
         }
 
-
+        #region ObservableCollection
+        public ObservableCollection<RoomSquareModel> RoomCollection { get; set; } = new ObservableCollection<RoomSquareModel>();
+        public ObservableCollection<FavoriteRoomsModel> FavoriteCollection { get; set; } = new ObservableCollection<FavoriteRoomsModel>();
         #endregion
 
         #region Visibility
@@ -117,7 +115,7 @@ namespace SharpDj.ViewModel
         }
 
 
-        private UserProfile _userProfileVisibility = UserProfile.Visible;
+        private UserProfile _userProfileVisibility = UserProfile.Collapsed;
         public UserProfile UserProfileVisibility
         {
             get => _userProfileVisibility;

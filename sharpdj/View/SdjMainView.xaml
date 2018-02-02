@@ -12,8 +12,8 @@
         ResizeMode="CanResizeWithGrip"
         AllowsTransparency="True"
         WindowStyle="None"
-        MinWidth="768"
-        MinHeight="580"
+        MinWidth="840"
+        MinHeight="630"
         Title="Main" Height="700" Width="1090">
 
     <Grid>
@@ -63,7 +63,7 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Grid>
-            <local:SdjUserProfileUserControl DataContext="{Binding SdjUserProfileViewModel}" Width="600" Height="500" Visibility="{Binding IsMaximized, Converter={converters:NotBoolToVisibilityConverter}}"/>
+            <local:SdjUserProfileUserControl DataContext="{Binding SdjUserProfileViewModel}" Width="600" Height="520" Visibility="{Binding IsMaximized, Converter={converters:NotBoolToVisibilityConverter}}"/>
             <local:SdjUserProfileUserControl DataContext="{Binding SdjUserProfileViewModel}" Visibility="{Binding IsMaximized, Converter={converters:BoolVisibilityConverter}}"/>
         </Grid>
 

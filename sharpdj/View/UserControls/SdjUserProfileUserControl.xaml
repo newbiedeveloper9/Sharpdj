@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:SharpDj.View.UserControls"
              xmlns:converters="clr-namespace:SharpDj.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="425">
+             d:DesignHeight="520" d:DesignWidth="425">
 
     <Grid>
         <Grid.RowDefinitions>

@@ -7,13 +7,14 @@
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0 2 0 1"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Border Height="38">
+                    <Border Height="{TemplateBinding Height}" Margin="0">
                         <Grid>
                             <Grid >
-                                <Border CornerRadius="0,0,1,20" Margin="1" 
+                                <Border CornerRadius="0,0,0, 0"
                                         BorderBrush="{TemplateBinding BorderBrush}" 
                                         BorderThickness="{TemplateBinding BorderThickness}"
                                         x:Name="dsa" Background="{StaticResource MidBrush}"/>
@@ -24,6 +25,7 @@
                                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                             </Border>
+                            <Polygon Points="0 40, 0 70, 80 90" Fill="{StaticResource DarkBrush}"/>
                         </Grid>
                     </Border>
                         <ControlTemplate.Triggers>
@@ -62,8 +64,9 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <TabPanel Grid.Row="2" IsItemsHost="true" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-140 0 0 0" Width="140"/>
+                            <TabPanel Grid.Row="2" Height="55" IsItemsHost="true" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-175 0 0 0" Width="175"/>
                         </Grid>
                     </Grid>
                 </ControlTemplate>
