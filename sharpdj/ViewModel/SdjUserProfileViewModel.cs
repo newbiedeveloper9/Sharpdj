@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SharpDj.Enums;
+using SharpDj.ViewModel.Helpers;
 
 namespace SharpDj.ViewModel
 {
@@ -13,7 +14,8 @@ namespace SharpDj.ViewModel
         public SdjUserProfileViewModel(SdjMainViewModel main)
         {
             SdjMainViewModel = main;
-            SdjTitleBarForUserControls = new SdjTitleBarForUserControls(main, closeForm);
+            SdjTitleBarForUserControlsViewModel = new SdjTitleBarForUserControlsViewModel(main, CloseForm);
+            SdjBackgroundForFormsViewModel = new SdjBackgroundForFormsViewModel(main, CloseForm);
         }
         #endregion
 
@@ -30,15 +32,27 @@ namespace SharpDj.ViewModel
             }
         }
 
-        private SdjTitleBarForUserControls _sdjTitleBarForUserControls;
-        public SdjTitleBarForUserControls SdjTitleBarForUserControls
+        private SdjTitleBarForUserControlsViewModel _sdjTitleBarForUserControlsViewModel;
+        public SdjTitleBarForUserControlsViewModel SdjTitleBarForUserControlsViewModel
         {
-            get => _sdjTitleBarForUserControls;
+            get => _sdjTitleBarForUserControlsViewModel;
             set
             {
-                if (_sdjTitleBarForUserControls == value) return;
-                _sdjTitleBarForUserControls = value;
-                OnPropertyChanged("SdjTitleBarForUserControls");
+                if (_sdjTitleBarForUserControlsViewModel == value) return;
+                _sdjTitleBarForUserControlsViewModel = value;
+                OnPropertyChanged("SdjTitleBarForUserControlsViewModel");
+            }
+        }
+
+        private SdjBackgroundForFormsViewModel _sdjBackgroundForFormsViewModel;
+        public SdjBackgroundForFormsViewModel SdjBackgroundForFormsViewModel
+        {
+            get => _sdjBackgroundForFormsViewModel;
+            set
+            {
+                if (_sdjBackgroundForFormsViewModel == value) return;
+                _sdjBackgroundForFormsViewModel = value;
+                OnPropertyChanged("SdjBackgroundForFormsViewModel");
             }
         }
 
@@ -52,7 +66,7 @@ namespace SharpDj.ViewModel
                 if (_username == value) return;
                 _username = value;
                 OnPropertyChanged("Username");
-                SdjTitleBarForUserControls.FormName = "Profile - " + Username;
+                SdjTitleBarForUserControlsViewModel.FormName = "Profile - " + Username;
             }
         }
 
@@ -140,13 +154,24 @@ namespace SharpDj.ViewModel
             }
         }
 
+        private bool _isVisible;
+        public bool IsVisible
+        {
+            get => _isVisible;
+            set
+            {
+                if (_isVisible == value) return;
+                _isVisible = value;
+                OnPropertyChanged("IsVisible");
+            }
+        }
+
         #endregion
 
         #region Methods
-
-        private void closeForm()
+        private void CloseForm()
         {
-            SdjMainViewModel.UserProfileVisibility = UserProfile.Collapsed;
+            SdjMainViewModel.SdjUserProfileViewModel.IsVisible = false;
         }
         #endregion
 
@@ -174,7 +199,6 @@ namespace SharpDj.ViewModel
         }
         #endregion
 
-
         #region MinimalizeFormCommand
         private RelayCommand _minimalizeFormCommand;
         public RelayCommand MinimalizeFormCommand
@@ -193,10 +217,9 @@ namespace SharpDj.ViewModel
 
         public void MinimalizeFormCommandExecute()
         {
-            SdjMainViewModel.UserProfileVisibility = SdjMainViewModel.UserProfileVisibility == UserProfile.Collapsed ? UserProfile.Visible : UserProfile.Collapsed;
+            SdjMainViewModel.SdjUserProfileViewModel.IsVisible = !SdjMainViewModel.SdjUserProfileViewModel.IsVisible;
         }
         #endregion
-
 
         #endregion
     }

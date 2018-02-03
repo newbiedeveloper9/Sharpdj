@@ -1,11 +1,11 @@
-﻿<UserControl x:Class="SharpDj.View.UserControls.SdjTitleBarForUserControls"
+﻿<UserControl x:Class="SharpDj.View.UserControls.Helpers.SdjTitleBarForUserControls"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SharpDj.View.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="40" Height="40" d:DesignWidth="300" DataContext="{Binding SdjTitleBarForUserControls}">
+             d:DesignHeight="40" Height="40" d:DesignWidth="300" DataContext="{Binding SdjTitleBarForUserControlsViewModel}">
     <UserControl.Template>
         <ControlTemplate TargetType="UserControl">
             <Grid>
@@ -15,7 +15,7 @@
                         <ContentPresenter/>
                         <Grid Background="DarkRed">
                             <Button Style="{StaticResource IconButtonMouseOver}" Command="{Binding CloseForm}">
-                                <Image Source="../../Images/Titlebar/close_24.png" Height="24" Width="40"/>
+                                <Image Source="../../../Images/Titlebar/close_24.png" Height="24" Width="40"/>
                             </Button>
                         </Grid>
                     </DockPanel>

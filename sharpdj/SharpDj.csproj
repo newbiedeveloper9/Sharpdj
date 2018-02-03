@@ -84,16 +84,18 @@
     <Compile Include="Models\Helpers\Imgur.cs" />
     <Compile Include="Models\Helpers\Updater\FTPChecker.cs" />
     <Compile Include="Models\Helpers\Updater\GetSourcePage.cs" />
+    <Compile Include="ViewModel\Helpers\SdjBackgroundForFormsViewModel.cs" />
     <Compile Include="ViewModel\Model\FavoriteRoomsModel.cs" />
     <Compile Include="ViewModel\Model\PlaylistModel.cs" />
     <Compile Include="ViewModel\Model\PlaylistTrackModel.cs" />
-    <Compile Include="ViewModel\Model\SdjLoginViewModel.cs" />
+    <Compile Include="ViewModel\SdjFeedbackViewModel.cs" />
+    <Compile Include="ViewModel\SdjLoginViewModel.cs" />
     <Compile Include="ViewModel\SdjRegisterViewModel.cs" />
     <Compile Include="ViewModel\SdjAddPlaylistCollectionViewModel.cs" />
     <Compile Include="ViewModel\SdjBottomBarViewModel.cs" />
     <Compile Include="ViewModel\SdjEditPlaylistCollectionViewModel.cs" />
     <Compile Include="ViewModel\SdjRemovePlaylistCollectionViewModel.cs" />
-    <Compile Include="ViewModel\SdjTitleBarForUserControls.cs" />
+    <Compile Include="ViewModel\Helpers\SdjTitleBarForUserControlsViewModel.cs" />
     <Compile Include="ViewModel\SdjUserProfileViewModel.cs" />
     <Compile Include="ViewModel\SdjRoomViewModel.cs" />
     <Compile Include="ViewModel\SdjLeftBarViewModel.cs" />
@@ -105,6 +107,9 @@
     </Compile>
     <Compile Include="View\UserControls\BottomBar.xaml.cs">
       <DependentUpon>BottomBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\Helpers\SdjBackgroundForForms.xaml.cs">
+      <DependentUpon>SdjBackgroundForForms.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\SdjAddPlaylistCollectionView.xaml.cs">
       <DependentUpon>SdjAddPlaylistCollectionView.xaml</DependentUpon>
@@ -137,7 +142,7 @@
       <DependentUpon>SdjRoomView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\Model\RoomSquareModel.cs" />
-    <Compile Include="View\UserControls\SdjTitleBarForUserControls.xaml.cs">
+    <Compile Include="View\UserControls\Helpers\SdjTitleBarForUserControls.xaml.cs">
       <DependentUpon>SdjTitleBarForUserControls.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\SdjUserProfileUserControl.xaml.cs">
@@ -198,6 +203,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UserControls\Helpers\SdjBackgroundForForms.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\UserControls\SdjAddPlaylistCollectionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -238,7 +247,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControls\SdjTitleBarForUserControls.xaml">
+    <Page Include="View\UserControls\Helpers\SdjTitleBarForUserControls.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -378,5 +387,6 @@
   <ItemGroup>
     <Resource Include="Images\Rooms\favorite_full.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SharpDj.Enums;
+using SharpDj.ViewModel.Helpers;
 
 namespace SharpDj.ViewModel
 {
@@ -14,6 +15,7 @@ namespace SharpDj.ViewModel
         public SdjLeftBarViewModel(SdjMainViewModel main)
         {
             SdjMainViewModel = main;
+            SdjBackgroundForFormsViewModel = new SdjBackgroundForFormsViewModel(main, DoOnAnyAction);
         }
 
         #endregion .ctor
@@ -31,6 +33,19 @@ namespace SharpDj.ViewModel
                 OnPropertyChanged("SdjMainViewModel");
             }
         }
+
+        private SdjBackgroundForFormsViewModel _sdjBackgroundForFormsViewModel;
+        public SdjBackgroundForFormsViewModel SdjBackgroundForFormsViewModel
+        {
+            get => _sdjBackgroundForFormsViewModel;
+            set
+            {
+                if (_sdjBackgroundForFormsViewModel == value) return;
+                _sdjBackgroundForFormsViewModel = value;
+                OnPropertyChanged("SdjBackgroundForFormsViewModel");
+            }
+        }
+
 
         private LeftBar _leftBarVisibility = LeftBar.Collapsed;
         public LeftBar LeftBarVisibility
@@ -62,7 +77,7 @@ namespace SharpDj.ViewModel
 
         void DoOnAnyAction()
         {
-            SdjMainViewModel.UserProfileVisibility = UserProfile.Collapsed;
+            SdjMainViewModel.SdjUserProfileViewModel.IsVisible = false;
             LeftBarVisibility = LeftBar.Collapsed;
         }
 
@@ -88,7 +103,7 @@ namespace SharpDj.ViewModel
 
         public void LeftBarOnProfileCommandExecute()
         {
-            SdjMainViewModel.UserProfileVisibility = UserProfile.Visible;
+            SdjMainViewModel.SdjUserProfileViewModel.IsVisible = true;
             LeftBarVisibility = LeftBar.Collapsed;
 
             SdjMainViewModel.SdjUserProfileViewModel.Username = Username;
@@ -252,6 +267,7 @@ namespace SharpDj.ViewModel
 
         public void LeftBarOnReportBugCommandExecute()
         {
+            SdjMainViewModel.SdjFeedbackViewModel.IsVisible = true;
             DoOnAnyAction();
         }
         #endregion
@@ -280,30 +296,6 @@ namespace SharpDj.ViewModel
             SdjMainViewModel.MainViewVisibility = MainView.About;
             DoOnAnyAction();
 
-        }
-        #endregion
-
-        #region MouseUpAwayFromLeftBarCommand
-        private RelayCommand _mouseUpAwayFromLeftBarCommandCommand;
-        public RelayCommand MouseUpAwayFromLeftBarCommand
-        {
-            get
-            {
-                return _mouseUpAwayFromLeftBarCommandCommand
-                       ?? (_mouseUpAwayFromLeftBarCommandCommand = new RelayCommand(MouseUpAwayFromLeftBarCommandExecute, MouseUpAwayFromLeftBarCommandCanExecute));
-            }
-        }
-
-        public bool MouseUpAwayFromLeftBarCommandCanExecute()
-        {
-            if (SdjMainViewModel.SdjLeftBarViewModel.LeftBarVisibility == LeftBar.Visible)
-                return true;
-            return false;
-        }
-
-        public void MouseUpAwayFromLeftBarCommandExecute()
-        {
-            SdjMainViewModel.SdjLeftBarViewModel.LeftBarVisibility = LeftBar.Collapsed;
         }
         #endregion
 

@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SharpDj.ViewModel
+namespace SharpDj.ViewModel.Helpers
 {
-    public class SdjTitleBarForUserControls : BaseViewModel
+    public class SdjTitleBarForUserControlsViewModel : BaseViewModel
     {
         #region .ctor
-
-        public SdjTitleBarForUserControls(SdjMainViewModel main, Action onCloseForm)
+        public SdjTitleBarForUserControlsViewModel(SdjMainViewModel main, Action onCloseForm)
         {
             SdjMainViewModel = main;
             CloseFormExecute = onCloseForm;
@@ -72,7 +67,5 @@ namespace SharpDj.ViewModel
         #endregion
 
         #endregion Commands
-
-
     }
 }

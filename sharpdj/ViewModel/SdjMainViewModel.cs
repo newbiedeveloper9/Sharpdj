@@ -35,6 +35,7 @@ namespace SharpDj.ViewModel
             SdjLoginViewModel = new SdjLoginViewModel(this);
             SdjRegisterViewModel = new SdjRegisterViewModel(this);
             SdjUserProfileViewModel = new SdjUserProfileViewModel(this);
+            SdjFeedbackViewModel = new SdjFeedbackViewModel(this);
 
             MainViewVisibility = MainView.Login;
             Profile = new UserClient();
@@ -113,21 +114,6 @@ namespace SharpDj.ViewModel
                 OnPropertyChanged("PlaylistStateCollectionVisibility");
             }
         }
-
-
-        private UserProfile _userProfileVisibility = UserProfile.Collapsed;
-        public UserProfile UserProfileVisibility
-        {
-            get => _userProfileVisibility;
-            set
-            {
-                if (_userProfileVisibility == value) return;
-                _userProfileVisibility = value;
-                OnPropertyChanged("UserProfileVisibility");
-                SdjLeftBarViewModel.LeftBarVisibility = LeftBar.Collapsed;
-            }
-        }
-
 
         #endregion
 
@@ -267,10 +253,22 @@ namespace SharpDj.ViewModel
         }
 
 
+        private SdjFeedbackViewModel _sdjFeedbackViewModel;
+        public SdjFeedbackViewModel SdjFeedbackViewModel
+        {
+            get => _sdjFeedbackViewModel;
+            set
+            {
+                if (_sdjFeedbackViewModel == value) return;
+                _sdjFeedbackViewModel = value;
+                OnPropertyChanged("SdjFeedbackViewModel");
+            }
+        }
+
         #endregion ViewModels
 
         #endregion Properties
-            
+
         #region Methods
 
         #endregion Methods

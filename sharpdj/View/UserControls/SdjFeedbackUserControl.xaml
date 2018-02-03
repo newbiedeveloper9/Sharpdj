@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SharpDj.View.UserControls"
+             xmlns:helpers="clr-namespace:SharpDj.View.UserControls.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="550">
 
@@ -14,7 +15,7 @@
         </Grid.RowDefinitions>
 
         <Grid>
-            <local:SdjTitleBarForUserControls/>
+            <helpers:SdjTitleBarForUserControls/>
         </Grid>
 
         <DockPanel Grid.Row="1" Margin="10 5 10 45">
@@ -33,7 +34,7 @@
 
                 <DockPanel FlowDirection="RightToLeft" Margin="5">
                     <Button Content="Choose file"/>
-                    <TextBox Margin="10 0 0 0"/>
+                    <TextBox Margin="10 0 0 0" FlowDirection="RightToLeft"/>
                 </DockPanel>
             </StackPanel>
 

@@ -7,6 +7,7 @@
         xmlns:local="clr-namespace:SharpDj.View.UserControls"
         xmlns:converters="clr-namespace:SharpDj.Converters"
         xmlns:enum="clr-namespace:SharpDj.Enums"
+        xmlns:helpers="clr-namespace:SharpDj.View.UserControls.Helpers"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip"
@@ -15,7 +16,7 @@
         MinWidth="840"
         MinHeight="630"
         Title="Main" Height="700" Width="1090">
-
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -27,46 +28,33 @@
             <ColumnDefinition Width="250"/>
         </Grid.ColumnDefinitions>
 
+        <!--Main-->
         <local:SdjMainUserControl Grid.Row="1"  Grid.ColumnSpan="2" Visibility="{Binding MainViewVisibility,
             Converter={converters:EnumToVisibilityConverter},
             ConverterParameter={x:Static enum:MainView.Main}}"/>
 
+        <!--Room-->
         <Grid  Grid.Row="1"  Grid.ColumnSpan="2" Visibility="{Binding MainViewVisibility,
             Converter={converters:EnumToVisibilityConverter},
             ConverterParameter={x:Static enum:MainView.Room}}">
             <local:SdjRoomView DataContext="{Binding SdjRoomViewModel}"/>
         </Grid>
 
+        <!--Playlist-->
         <Grid Grid.Row="1" Grid.ColumnSpan="2" Visibility="{Binding SdjPlaylistViewModel.PlaylistVisibility,
             Converter={converters:EnumToVisibilityConverter},
             ConverterParameter={x:Static enum:Playlist.Visible}}">
             <local:SdjPlaylistUserControl DataContext="{Binding SdjPlaylistViewModel}"/>
         </Grid>
 
-        <!--About-->
-        <!--  <DockPanel Visibility="{Binding MainViewVisibility,
-            Converter={converters:EnumToVisibilityConverter},
-            ConverterParameter={x:Static enum:MainView.About}}" Grid.ColumnSpan="2">
-            <DockPanel>
-                <TextBlock Background="BurlyWood" TextWrapping="Wrap" Text="dashaskjfhkjasfhkasjfhkajshfkjashfasfsfasfasf" FontSize="32"/>
-            </DockPanel>
-        </DockPanel>-->
-
         <!-- Profile -->
-        <Grid Grid.Row="1" Grid.ColumnSpan="2" Visibility="{Binding UserProfileVisibility,
-            Converter={converters:EnumToVisibilityConverter},
-            ConverterParameter={x:Static enum:UserProfile.Visible}}">
-            <Grid Background="Black" Opacity="0.7">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseUp" >
-                        <i:InvokeCommandAction Command="{Binding SdjUserProfileViewModel.CloseProfile}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </Grid>
-            <local:SdjUserProfileUserControl DataContext="{Binding SdjUserProfileViewModel}" Width="600" Height="520" Visibility="{Binding IsMaximized, Converter={converters:NotBoolToVisibilityConverter}}"/>
-            <local:SdjUserProfileUserControl DataContext="{Binding SdjUserProfileViewModel}" Visibility="{Binding IsMaximized, Converter={converters:BoolVisibilityConverter}}"/>
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" DataContext="{Binding SdjUserProfileViewModel}" Visibility="{Binding IsVisible, Converter={converters:BoolVisibilityConverter}}">
+            <helpers:SdjBackgroundForForms/>
+            <local:SdjUserProfileUserControl Width="600" Height="520" Visibility="{Binding IsMaximized, Converter={converters:NotBoolToVisibilityConverter}}"/>
+            <local:SdjUserProfileUserControl Visibility="{Binding IsMaximized, Converter={converters:BoolVisibilityConverter}}"/>
         </Grid>
 
+        <!--BottomBar-->
         <DockPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
             <local:BottomBar DataContext="{Binding SdjBottomBarViewModel}"/>
         </DockPanel>
@@ -85,15 +73,11 @@
             </local:StateButtons>
         </Grid>
 
-        <!--LeftBarDarkScreen--> 
-        <Grid Row="1" RowSpan="2" Column="0" ColumnSpan="2" Background="Black" Opacity="0.7" Visibility="{Binding LeftBarVisibility,
+        <!--LeftBarDarkScreen-->
+        <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2" Background="Black" Opacity="0.7" Visibility="{Binding LeftBarVisibility,
             Converter={converters:EnumToVisibilityConverter},
             ConverterParameter={x:Static enum:LeftBar.Visible}, Mode=TwoWay}" DataContext="{Binding SdjLeftBarViewModel}">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="MouseUp" >
-                    <i:InvokeCommandAction Command="{Binding MouseUpAwayFromLeftBarCommand}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
+            <helpers:SdjBackgroundForForms/>
         </Grid>
 
         <!--LeftBar-->
@@ -102,7 +86,6 @@
             ConverterParameter={x:Static enum:LeftBar.Visible}, Mode=TwoWay}" DataContext="{Binding SdjLeftBarViewModel}">
             <local:SdjLeftBarView/>
         </Grid>
-
 
         <!-- Avatar -->
         <DockPanel Grid.Row="2" Margin="20 -25 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding AvatarIsVisible, Mode=TwoWay}">
@@ -128,14 +111,8 @@
             Converter={converters:EnumToVisibilityConverter},
             ConverterParameter={x:Static enum:PlaylistState.Add}, Mode=TwoWay}">
             <Grid DataContext="{Binding SdjAddPlaylistCollectionViewModel}">
-                <Grid Background="Black" Opacity="0.7">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseUp" >
-                            <i:InvokeCommandAction Command="{Binding MouseUpAwayFromAddPlaylistCommand}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Grid>
-                <local:SdjAddPlaylistCollectionView Width="420" Height="110"></local:SdjAddPlaylistCollectionView>
+                <helpers:SdjBackgroundForForms/>
+                <local:SdjAddPlaylistCollectionView Width="420" Height="110"/>
             </Grid>
         </Grid>
 
@@ -144,13 +121,7 @@
             Converter={converters:EnumToVisibilityConverter},
             ConverterParameter={x:Static enum:PlaylistState.Rename}, Mode=TwoWay}">
             <Grid DataContext="{Binding SdjEditPlaylistCollectionViewModel}">
-                <Grid Background="Black" Opacity="0.7">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseUp" >
-                            <i:InvokeCommandAction Command="{Binding MouseUpAwayFromEditPlaylistCommand}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Grid>
+                <helpers:SdjBackgroundForForms/>
                 <local:SdjEditPlaylistCollectionView Width="420" Height="110"/>
             </Grid>
         </Grid>
@@ -160,16 +131,9 @@
             Converter={converters:EnumToVisibilityConverter},
             ConverterParameter={x:Static enum:PlaylistState.Remove}, Mode=TwoWay}">
             <Grid DataContext="{Binding SdjRemovePlaylistCollectionViewModel}">
-                <Grid Background="Black" Opacity="0.7">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseUp" >
-                            <i:InvokeCommandAction Command="{Binding MouseUpAwayFromRemovePlaylistCommand}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Grid>
+                <helpers:SdjBackgroundForForms/>
                 <local:SdjRemovePlaylistCollectionView Width="270" Height="110"/>
             </Grid>
         </Grid>
-
     </Grid>
 </Window>

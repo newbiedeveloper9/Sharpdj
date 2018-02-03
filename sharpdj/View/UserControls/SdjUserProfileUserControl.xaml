@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SharpDj.View.UserControls"
              xmlns:converters="clr-namespace:SharpDj.Converters"
+             xmlns:helpers="clr-namespace:SharpDj.View.UserControls.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="520" d:DesignWidth="425">
 
@@ -15,13 +16,13 @@
         </Grid.RowDefinitions>
 
         <Grid Visibility="{Binding IsMaximized, Converter={converters:NotBoolToVisibilityConverter}}">
-            <local:SdjTitleBarForUserControls>
+            <helpers:SdjTitleBarForUserControls>
                 <!--SdjUserProfileViewModel-->
                 <Button Style="{StaticResource IconButton}" Command="{Binding SdjMainViewModel.SdjUserProfileViewModel.MaximizeProfile}">
                     <!-- Style="{StaticResource IconButton}"-->
                     <Image Source="../../Images/Titlebar/maximize_24.png" Height="24" Width="40"/>
                 </Button>
-            </local:SdjTitleBarForUserControls>
+            </helpers:SdjTitleBarForUserControls>
         </Grid>
 
 

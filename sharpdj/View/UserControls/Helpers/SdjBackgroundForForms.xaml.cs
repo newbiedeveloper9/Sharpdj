@@ -13,15 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SharpDj.View.UserControls
+namespace SharpDj.View.UserControls.Helpers
 {
     /// <summary>
-    /// Interaction logic for SdjTitleBarForUserControls.xaml
+    /// Interaction logic for SdjBackgroundForForms.xaml
     /// </summary>
-    public partial class SdjTitleBarForUserControls : UserControl
+    public partial class SdjBackgroundForForms : UserControl
     {
-
-        public SdjTitleBarForUserControls()
+        public SdjBackgroundForForms()
         {
             InitializeComponent();
         }

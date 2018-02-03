@@ -7,7 +7,7 @@ using Communication.Client;
 using SharpDj.Enums;
 using SharpDj.Models.Client;
 
-namespace SharpDj.ViewModel.Model
+namespace SharpDj.ViewModel
 {
     public class SdjLoginViewModel : BaseViewModel
     {
@@ -145,8 +145,6 @@ namespace SharpDj.ViewModel.Model
         #endregion
 
         #endregion Commands
-
-
 
     }
 }

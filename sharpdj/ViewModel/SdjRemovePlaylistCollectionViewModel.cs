@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SharpDj.Enums;
+using SharpDj.ViewModel.Helpers;
 
 namespace SharpDj.ViewModel
 {
@@ -15,8 +16,9 @@ namespace SharpDj.ViewModel
         public SdjRemovePlaylistCollectionViewModel(SdjMainViewModel main)
         {
             SdjMainViewModel = main;
-            SdjTitleBarForUserControls = new SdjTitleBarForUserControls(main, closeForm);
-            SdjTitleBarForUserControls.FormName = "Remove Playlist";
+            SdjTitleBarForUserControlsViewModel = new SdjTitleBarForUserControlsViewModel(main, closeForm);
+            SdjTitleBarForUserControlsViewModel.FormName = "Remove Playlist";
+            SdjBackgroundForFormsViewModel = new SdjBackgroundForFormsViewModel(main, closeForm);
         }
         #endregion .ctor
 
@@ -34,15 +36,27 @@ namespace SharpDj.ViewModel
             }
         }
 
-        private SdjTitleBarForUserControls _sdjTitleBarForUserControls;
-        public SdjTitleBarForUserControls SdjTitleBarForUserControls
+        private SdjTitleBarForUserControlsViewModel _sdjTitleBarForUserControlsViewModel;
+        public SdjTitleBarForUserControlsViewModel SdjTitleBarForUserControlsViewModel
         {
-            get => _sdjTitleBarForUserControls;
+            get => _sdjTitleBarForUserControlsViewModel;
             set
             {
-                if (_sdjTitleBarForUserControls == value) return;
-                _sdjTitleBarForUserControls = value;
-                OnPropertyChanged("SdjTitleBarForUserControls");
+                if (_sdjTitleBarForUserControlsViewModel == value) return;
+                _sdjTitleBarForUserControlsViewModel = value;
+                OnPropertyChanged("SdjTitleBarForUserControlsViewModel");
+            }
+        }
+
+        private SdjBackgroundForFormsViewModel _sdjBackgroundForFormsViewModel;
+        public SdjBackgroundForFormsViewModel SdjBackgroundForFormsViewModel
+        {
+            get => _sdjBackgroundForFormsViewModel;
+            set
+            {
+                if (_sdjBackgroundForFormsViewModel == value) return;
+                _sdjBackgroundForFormsViewModel = value;
+                OnPropertyChanged("SdjBackgroundForFormsViewModel");
             }
         }
 
@@ -83,29 +97,6 @@ namespace SharpDj.ViewModel
             closeForm();
         }
         #endregion
-
-        #region MouseUpAwayFromRemovePlaylistCommand
-        private RelayCommand _mouseUpAwayFromRemovePlaylistCommand;
-        public RelayCommand MouseUpAwayFromRemovePlaylistCommand
-        {
-            get
-            {
-                return _mouseUpAwayFromRemovePlaylistCommand
-                       ?? (_mouseUpAwayFromRemovePlaylistCommand = new RelayCommand(MouseUpAwayFromRemovePlaylistCommandExecute, MouseUpAwayFromRemovePlaylistCommandCanExecute));
-            }
-        }
-
-        public bool MouseUpAwayFromRemovePlaylistCommandCanExecute()
-        {
-            return true;
-        }
-
-        public void MouseUpAwayFromRemovePlaylistCommandExecute()
-        {
-            closeForm();
-        }
-        #endregion
-
 
         #endregion Commands
 

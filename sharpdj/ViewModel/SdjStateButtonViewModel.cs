@@ -106,8 +106,8 @@ namespace SharpDj.ViewModel
         {
             if (SdjMainViewModel.SdjLeftBarViewModel.LeftBarVisibility == LeftBar.Visible)
                 SdjMainViewModel.SdjLeftBarViewModel.LeftBarVisibility = LeftBar.Collapsed;
-            else if (SdjMainViewModel.UserProfileVisibility == UserProfile.Visible)
-                SdjMainViewModel.UserProfileVisibility = UserProfile.Collapsed;
+            else if (SdjMainViewModel.SdjUserProfileViewModel.IsVisible)
+                SdjMainViewModel.SdjUserProfileViewModel.IsVisible = false;
             else if (SdjMainViewModel.SdjPlaylistViewModel.PlaylistVisibility == Playlist.Visible)
                 SdjMainViewModel.SdjPlaylistViewModel.PlaylistVisibility = Playlist.Collapsed;
             else if (SdjMainViewModel.MainViewVisibility != MainView.Main)
