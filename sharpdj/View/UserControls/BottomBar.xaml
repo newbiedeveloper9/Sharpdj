@@ -42,6 +42,11 @@
 
                     <!-- Right Bar -->
                     <DockPanel HorizontalAlignment="Right">
+                        <Button Style="{StaticResource IconButton}" Command="{Binding SdjMainViewModel.SdjUserProfileViewModel.MinimalizeFormCommand}" 
+                                Visibility="{Binding SdjMainViewModel.SdjUserProfileViewModel.IsMaximized, Converter={converters:BoolVisibilityConverter}}">
+                            <!-- Style="{StaticResource IconButton}"-->
+                            <Image Source="../../Images/Titlebar/minimalize_24.png" Height="24" Width="40"/>
+                        </Button>
                         <Button Style="{StaticResource IconButton}" Command="{Binding SdjMainViewModel.SdjUserProfileViewModel.MaximizeProfile}" 
                                 Visibility="{Binding SdjMainViewModel.SdjUserProfileViewModel.IsMaximized, Converter={converters:BoolVisibilityConverter}}">
                             <!-- Style="{StaticResource IconButton}"-->

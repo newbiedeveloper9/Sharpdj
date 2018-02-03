@@ -47,7 +47,6 @@ namespace SharpDj.ViewModel
             }
         }
 
-
         private string _playlistName;
         public string PlaylistName
         {

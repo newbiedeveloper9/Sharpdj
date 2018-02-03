@@ -13,6 +13,7 @@ namespace SharpDj.ViewModel
         public SdjUserProfileViewModel(SdjMainViewModel main)
         {
             SdjMainViewModel = main;
+            SdjTitleBarForUserControls = new SdjTitleBarForUserControls(main, closeForm);
         }
         #endregion
 
@@ -29,6 +30,18 @@ namespace SharpDj.ViewModel
             }
         }
 
+        private SdjTitleBarForUserControls _sdjTitleBarForUserControls;
+        public SdjTitleBarForUserControls SdjTitleBarForUserControls
+        {
+            get => _sdjTitleBarForUserControls;
+            set
+            {
+                if (_sdjTitleBarForUserControls == value) return;
+                _sdjTitleBarForUserControls = value;
+                OnPropertyChanged("SdjTitleBarForUserControls");
+            }
+        }
+
 
         private string _username;
         public string Username
@@ -39,6 +52,7 @@ namespace SharpDj.ViewModel
                 if (_username == value) return;
                 _username = value;
                 OnPropertyChanged("Username");
+                SdjTitleBarForUserControls.FormName = "Profile - " + Username;
             }
         }
 
@@ -129,31 +143,14 @@ namespace SharpDj.ViewModel
         #endregion
 
         #region Methods
-        #endregion
 
-        #region Commands
-
-        #region CloseProfile
-        private RelayCommand _closeProfile;
-        public RelayCommand CloseProfile
-        {
-            get
-            {
-                return _closeProfile
-                       ?? (_closeProfile = new RelayCommand(CloseProfileExecute, CloseProfileCanExecute));
-            }
-        }
-
-        public bool CloseProfileCanExecute()
-        {
-            return true;
-        }
-
-        public void CloseProfileExecute()
+        private void closeForm()
         {
             SdjMainViewModel.UserProfileVisibility = UserProfile.Collapsed;
         }
         #endregion
+
+        #region Commands
 
         #region MaximizeProfile
         private RelayCommand _maximizeProfile;
@@ -176,6 +173,30 @@ namespace SharpDj.ViewModel
             IsMaximized = !IsMaximized;
         }
         #endregion
+
+
+        #region MinimalizeFormCommand
+        private RelayCommand _minimalizeFormCommand;
+        public RelayCommand MinimalizeFormCommand
+        {
+            get
+            {
+                return _minimalizeFormCommand
+                       ?? (_minimalizeFormCommand = new RelayCommand(MinimalizeFormCommandExecute, MinimalizeFormCommandCanExecute));
+            }
+        }
+
+        public bool MinimalizeFormCommandCanExecute()
+        {
+            return true;
+        }
+
+        public void MinimalizeFormCommandExecute()
+        {
+            SdjMainViewModel.UserProfileVisibility = SdjMainViewModel.UserProfileVisibility == UserProfile.Collapsed ? UserProfile.Visible : UserProfile.Collapsed;
+        }
+        #endregion
+
 
         #endregion
     }

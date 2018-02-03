@@ -14,24 +14,17 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid Background="{StaticResource MidBrush}" Height="40" Visibility="{Binding IsMaximized, Converter={converters:NotBoolToVisibilityConverter}}">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Center"  Margin="0 0 40 0">
-                <Label Content="Profile - " FontSize="24" Foreground="White" Padding="0"/>
-                <Label Content="{Binding Username}" FontSize="24" Foreground="White" Padding="0"/>
-            </StackPanel>
-            <DockPanel HorizontalAlignment="Right" Width="80">
-                <Button Style="{StaticResource IconButton}" Command="{Binding MaximizeProfile}">
+        <Grid Visibility="{Binding IsMaximized, Converter={converters:NotBoolToVisibilityConverter}}">
+            <local:SdjTitleBarForUserControls>
+                <!--SdjUserProfileViewModel-->
+                <Button Style="{StaticResource IconButton}" Command="{Binding SdjMainViewModel.SdjUserProfileViewModel.MaximizeProfile}">
                     <!-- Style="{StaticResource IconButton}"-->
                     <Image Source="../../Images/Titlebar/maximize_24.png" Height="24" Width="40"/>
                 </Button>
-                <Grid Background="DarkRed">
-                    <Button Style="{StaticResource IconButtonMouseOver}" Command="{Binding CloseProfile}">
-                        <!-- Style="{StaticResource IconButton}"-->
-                        <Image Source="../../Images/Titlebar/close_24.png" Height="24" Width="40"/>
-                    </Button>
-                </Grid>
-            </DockPanel>
+            </local:SdjTitleBarForUserControls>
         </Grid>
+
+
 
         <DockPanel Grid.Row="1" Background="{StaticResource DarkBrush}">
             <StackPanel Margin="10 20 10 20">
