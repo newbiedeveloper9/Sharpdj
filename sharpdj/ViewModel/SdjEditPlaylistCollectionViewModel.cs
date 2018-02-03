@@ -11,19 +11,18 @@ namespace SharpDj.ViewModel
 {
     public class SdjEditPlaylistCollectionViewModel : BaseViewModel
     {
-
         #region .ctor
 
         public SdjEditPlaylistCollectionViewModel(SdjMainViewModel main)
         {
             SdjMainViewModel = main;
+            SdjTitleBarForUserControls = new SdjTitleBarForUserControls(main, closeForm);
+            SdjTitleBarForUserControls.FormName = "Rename Playlist";
         }
 
         #endregion .ctor
 
         #region Properties
-
-
 
         private SdjMainViewModel _sdjMainViewModel;
         public SdjMainViewModel SdjMainViewModel
@@ -34,6 +33,18 @@ namespace SharpDj.ViewModel
                 if (_sdjMainViewModel == value) return;
                 _sdjMainViewModel = value;
                 OnPropertyChanged("SdjMainViewModel");
+            }
+        }
+
+        private SdjTitleBarForUserControls _sdjTitleBarForUserControls;
+        public SdjTitleBarForUserControls SdjTitleBarForUserControls
+        {
+            get => _sdjTitleBarForUserControls;
+            set
+            {
+                if (_sdjTitleBarForUserControls == value) return;
+                _sdjTitleBarForUserControls = value;
+                OnPropertyChanged("SdjTitleBarForUserControls");
             }
         }
 
@@ -54,6 +65,11 @@ namespace SharpDj.ViewModel
 
         #region Methods
 
+        private void closeForm()
+        {
+            PlaylistName = string.Empty;
+            SdjMainViewModel.PlaylistStateCollectionVisibility = PlaylistState.Collapsed;
+        }
 
         #endregion Methods
 
@@ -81,33 +97,9 @@ namespace SharpDj.ViewModel
             if (firstOrDefault != null)
                 firstOrDefault
                     .PlaylistName = PlaylistName;
-            CloseEditPlaylistCommandExecute();
+            closeForm();
         }
         #endregion
-
-        #region CloseEditPlaylistCommand
-        private RelayCommand _closeEditPlaylistCommand;
-        public RelayCommand CloseEditPlaylistCommand
-        {
-            get
-            {
-                return _closeEditPlaylistCommand
-                       ?? (_closeEditPlaylistCommand = new RelayCommand(CloseEditPlaylistCommandExecute, CloseEditPlaylistCommandCanExecute));
-            }
-        }
-
-        public bool CloseEditPlaylistCommandCanExecute()
-        {
-            return true;
-        }
-
-        public void CloseEditPlaylistCommandExecute()
-        {
-            PlaylistName = string.Empty;
-            SdjMainViewModel.PlaylistStateCollectionVisibility = PlaylistState.Collapsed;
-        }
-        #endregion
-
 
         #region MouseUpAwayFromEditPlaylistCommand
         private RelayCommand _mouseUpAwayFromEditPlaylistCommand;
@@ -127,7 +119,7 @@ namespace SharpDj.ViewModel
 
         public void MouseUpAwayFromEditPlaylistCommandExecute()
         {
-            CloseEditPlaylistCommandExecute();
+            closeForm();
         }
         #endregion
 

@@ -16,11 +16,12 @@ using System.Windows.Shapes;
 namespace SharpDj.View.UserControls
 {
     /// <summary>
-    /// Interaction logic for SdjAddPlaylistCollectionViewModel.xaml
+    /// Interaction logic for SdjTitleBarForUserControls.xaml
     /// </summary>
-    public partial class SdjAddPlaylistCollectionView : UserControl
+    public partial class SdjTitleBarForUserControls : UserControl
     {
-        public SdjAddPlaylistCollectionView()
+
+        public SdjTitleBarForUserControls()
         {
             InitializeComponent();
         }

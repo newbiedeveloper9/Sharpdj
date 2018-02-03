@@ -89,10 +89,11 @@
     <Compile Include="ViewModel\Model\PlaylistTrackModel.cs" />
     <Compile Include="ViewModel\Model\SdjLoginViewModel.cs" />
     <Compile Include="ViewModel\SdjRegisterViewModel.cs" />
-    <Compile Include="ViewModel\SdjAddPlaylistCollectionView.cs" />
+    <Compile Include="ViewModel\SdjAddPlaylistCollectionViewModel.cs" />
     <Compile Include="ViewModel\SdjBottomBarViewModel.cs" />
     <Compile Include="ViewModel\SdjEditPlaylistCollectionViewModel.cs" />
     <Compile Include="ViewModel\SdjRemovePlaylistCollectionViewModel.cs" />
+    <Compile Include="ViewModel\SdjTitleBarForUserControls.cs" />
     <Compile Include="ViewModel\SdjUserProfileViewModel.cs" />
     <Compile Include="ViewModel\SdjRoomViewModel.cs" />
     <Compile Include="ViewModel\SdjLeftBarViewModel.cs" />
@@ -110,6 +111,9 @@
     </Compile>
     <Compile Include="View\UserControls\SdjEditPlaylistCollectionView.xaml.cs">
       <DependentUpon>SdjEditPlaylistCollectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\SdjFeedbackUserControl.xaml.cs">
+      <DependentUpon>SdjFeedbackUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\SdjLeftBarView.xaml.cs">
       <DependentUpon>SdjLeftBarView.xaml</DependentUpon>
@@ -133,6 +137,9 @@
       <DependentUpon>SdjRoomView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\Model\RoomSquareModel.cs" />
+    <Compile Include="View\UserControls\SdjTitleBarForUserControls.xaml.cs">
+      <DependentUpon>SdjTitleBarForUserControls.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserControls\SdjUserProfileUserControl.xaml.cs">
       <DependentUpon>SdjUserProfileUserControl.xaml</DependentUpon>
     </Compile>
@@ -199,6 +206,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UserControls\SdjFeedbackUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\UserControls\SdjLeftBarView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -224,6 +235,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserControls\SdjRoomView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\SdjTitleBarForUserControls.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

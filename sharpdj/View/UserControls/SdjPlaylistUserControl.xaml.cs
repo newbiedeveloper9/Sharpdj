@@ -24,10 +24,5 @@ namespace SharpDj.View.UserControls
         {
             InitializeComponent();
         }
-
-        private void StackPanel_IsMouseCaptureWithinChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            Console.WriteLine("a");
-        }
     }
 }

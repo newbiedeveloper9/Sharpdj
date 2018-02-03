@@ -8,22 +8,21 @@ using SharpDj.ViewModel.Model;
 
 namespace SharpDj.ViewModel
 {
-    public class SdjAddPlaylistCollectionView : BaseViewModel
+    public class SdjAddPlaylistCollectionViewModel : BaseViewModel
     {
 
         #region .ctor
 
-        public SdjAddPlaylistCollectionView(SdjMainViewModel main)
+        public SdjAddPlaylistCollectionViewModel(SdjMainViewModel main)
         {
             SdjMainViewModel = main;
+            SdjTitleBarForUserControls = new SdjTitleBarForUserControls(main, closeForm);
+            SdjTitleBarForUserControls.FormName = "Add Playlist";
         }
 
         #endregion .ctor
 
         #region Properties
-
-
-
         private SdjMainViewModel _sdjMainViewModel;
         public SdjMainViewModel SdjMainViewModel
         {
@@ -35,6 +34,19 @@ namespace SharpDj.ViewModel
                 OnPropertyChanged("SdjMainViewModel");
             }
         }
+
+        private SdjTitleBarForUserControls _sdjTitleBarForUserControls;
+        public SdjTitleBarForUserControls SdjTitleBarForUserControls
+        {
+            get => _sdjTitleBarForUserControls;
+            set
+            {
+                if (_sdjTitleBarForUserControls == value) return;
+                _sdjTitleBarForUserControls = value;
+                OnPropertyChanged("SdjTitleBarForUserControls");
+            }
+        }
+
 
         private string _playlistName;
         public string PlaylistName
@@ -52,6 +64,11 @@ namespace SharpDj.ViewModel
 
         #region Methods
 
+        private void closeForm()
+        {
+            PlaylistName = string.Empty;
+            SdjMainViewModel.PlaylistStateCollectionVisibility = PlaylistState.Collapsed;
+        }
 
         #endregion Methods
 
@@ -81,33 +98,9 @@ namespace SharpDj.ViewModel
             SdjMainViewModel.SdjPlaylistViewModel
                 .PlaylistCollection[SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection.Count-1].IsSelected = true;
 
-            CloseAddPlaylistCommandExecute();
+            closeForm();
         }
         #endregion
-
-        #region CloseAddPlaylistCommand
-        private RelayCommand _closeAddPlaylistCommand;
-        public RelayCommand CloseAddPlaylistCommand
-        {
-            get
-            {
-                return _closeAddPlaylistCommand
-                       ?? (_closeAddPlaylistCommand = new RelayCommand(CloseAddPlaylistCommandExecute, CloseAddPlaylistCommandCanExecute));
-            }
-        }
-
-        public bool CloseAddPlaylistCommandCanExecute()
-        {
-            return true;
-        }
-
-        public void CloseAddPlaylistCommandExecute()
-        {
-            PlaylistName = string.Empty;
-            SdjMainViewModel.PlaylistStateCollectionVisibility = PlaylistState.Collapsed;
-        }
-        #endregion
-
 
         #region MouseUpAwayFromAddPlaylistCommand
         private RelayCommand _mouseUpAwayFromAddPlaylistCommand;
@@ -127,7 +120,7 @@ namespace SharpDj.ViewModel
 
         public void MouseUpAwayFromAddPlaylistCommandExecute()
         {
-            CloseAddPlaylistCommandExecute();
+          closeForm();
         }
         #endregion
 

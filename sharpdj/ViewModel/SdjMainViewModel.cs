@@ -29,7 +29,7 @@ namespace SharpDj.ViewModel
             SdjLeftBarViewModel = new SdjLeftBarViewModel(this);
             SdjPlaylistViewModel = new SdjPlaylistViewModel(this);
             SdjStateButtonViewModel = new SdjStateButtonViewModel(this);
-            SdjAddPlaylistCollectionViewModel = new SdjAddPlaylistCollectionView(this);
+            SdjAddPlaylistCollectionViewModel = new SdjAddPlaylistCollectionViewModel(this);
             SdjEditPlaylistCollectionViewModel = new SdjEditPlaylistCollectionViewModel(this);
             SdjRemovePlaylistCollectionViewModel = new SdjRemovePlaylistCollectionViewModel(this);
             SdjLoginViewModel = new SdjLoginViewModel(this);
@@ -194,14 +194,14 @@ namespace SharpDj.ViewModel
         }
 
 
-        private SdjAddPlaylistCollectionView _sdjAddPlaylistCollectionViewModel;
-        public SdjAddPlaylistCollectionView SdjAddPlaylistCollectionViewModel
+        private SdjAddPlaylistCollectionViewModel _sdjAddPlaylistCollectionViewModelModel;
+        public SdjAddPlaylistCollectionViewModel SdjAddPlaylistCollectionViewModel
         {
-            get => _sdjAddPlaylistCollectionViewModel;
+            get => _sdjAddPlaylistCollectionViewModelModel;
             set
             {
-                if (_sdjAddPlaylistCollectionViewModel == value) return;
-                _sdjAddPlaylistCollectionViewModel = value;
+                if (_sdjAddPlaylistCollectionViewModelModel == value) return;
+                _sdjAddPlaylistCollectionViewModelModel = value;
                 OnPropertyChanged("SdjAddPlaylistCollectionViewModel");
             }
         }

@@ -15,6 +15,8 @@ namespace SharpDj.ViewModel
         public SdjRemovePlaylistCollectionViewModel(SdjMainViewModel main)
         {
             SdjMainViewModel = main;
+            SdjTitleBarForUserControls = new SdjTitleBarForUserControls(main, closeForm);
+            SdjTitleBarForUserControls.FormName = "Remove Playlist";
         }
         #endregion .ctor
 
@@ -32,37 +34,30 @@ namespace SharpDj.ViewModel
             }
         }
 
+        private SdjTitleBarForUserControls _sdjTitleBarForUserControls;
+        public SdjTitleBarForUserControls SdjTitleBarForUserControls
+        {
+            get => _sdjTitleBarForUserControls;
+            set
+            {
+                if (_sdjTitleBarForUserControls == value) return;
+                _sdjTitleBarForUserControls = value;
+                OnPropertyChanged("SdjTitleBarForUserControls");
+            }
+        }
 
         #endregion Properties
 
         #region Methods
 
+        private void closeForm()
+        {
+            SdjMainViewModel.PlaylistStateCollectionVisibility = PlaylistState.Collapsed;
+        }
 
         #endregion Methods
 
         #region Commands
-
-        #region CloseRemovePlaylistCommand
-        private RelayCommand _closeRemovePlaylistCommand;
-        public RelayCommand CloseRemovePlaylistCommand
-        {
-            get
-            {
-                return _closeRemovePlaylistCommand
-                       ?? (_closeRemovePlaylistCommand = new RelayCommand(CloseRemovePlaylistCommandExecute, CloseRemovePlaylistCommandCanExecute));
-            }
-        }
-
-        public bool CloseRemovePlaylistCommandCanExecute()
-        {
-            return true;
-        }
-
-        public void CloseRemovePlaylistCommandExecute()
-        {
-            SdjMainViewModel.PlaylistStateCollectionVisibility = PlaylistState.Collapsed;
-        }
-        #endregion
 
         #region RemovePlaylistCommand
         private RelayCommand _removePlaylistCommand;
@@ -85,7 +80,7 @@ namespace SharpDj.ViewModel
             var item = SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection.FirstOrDefault(x => x.IsSelected);
             if (item != null)
                 SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection.Remove(item);
-            CloseRemovePlaylistCommandExecute();
+            closeForm();
         }
         #endregion
 
@@ -107,7 +102,7 @@ namespace SharpDj.ViewModel
 
         public void MouseUpAwayFromRemovePlaylistCommandExecute()
         {
-            CloseRemovePlaylistCommandExecute();
+            closeForm();
         }
         #endregion
 

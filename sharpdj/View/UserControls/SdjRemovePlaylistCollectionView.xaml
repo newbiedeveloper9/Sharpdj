@@ -11,16 +11,11 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="{StaticResource MidBrush}">
-            <Label Content="Remove playlist" FontSize="24" Foreground="White" HorizontalAlignment="Center" Margin="0 0 40 0"/>
-            <Grid HorizontalAlignment="Right" Background="DarkRed">
-                <Button Style="{StaticResource IconButtonMouseOver}" Command="{Binding CloseRemovePlaylistCommand}">
-                    <!-- Style="{StaticResource IconButton}"-->
-                    <Image Source="../../Images/Titlebar/close_24.png" Height="24" Width="40"/>
-                </Button>
-            </Grid>
-
+        
+        <Grid>
+            <local:SdjTitleBarForUserControls/>
         </Grid>
+        
         <Grid Grid.Row="1" Background="{StaticResource DarkBrush}">
             <StackPanel Background="{StaticResource DarkBrush}" HorizontalAlignment="Center" Orientation="Horizontal">
                 <Button Command="{Binding RemovePlaylistCommand}" Width="90" HorizontalAlignment="Center" BorderThickness="2"  BorderBrush="White" Style="{StaticResource IconButtonMouseOver}" VerticalAlignment="Center" Margin="0 0 0 0">

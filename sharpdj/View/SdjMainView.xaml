@@ -85,7 +85,7 @@
             </local:StateButtons>
         </Grid>
 
-        <!--LeftBarDarkScreen-->
+        <!--LeftBarDarkScreen--> 
         <Grid Row="1" RowSpan="2" Column="0" ColumnSpan="2" Background="Black" Opacity="0.7" Visibility="{Binding LeftBarVisibility,
             Converter={converters:EnumToVisibilityConverter},
             ConverterParameter={x:Static enum:LeftBar.Visible}, Mode=TwoWay}" DataContext="{Binding SdjLeftBarViewModel}">
