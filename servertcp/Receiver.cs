@@ -22,7 +22,6 @@ namespace servertcp
         public List<ServerClient> Clients => (from client in _clients.GetAllItems() select client).ToList();
         public List<UserClient> UserClients => (from client in _clients.GetAllItems() select client.ToUserClient()).ToList();
 
-
         public Receiver(ServerReceiver receiver, IScsServer server)
         {
             receiver.Disconnect += _communication_Disconnect;

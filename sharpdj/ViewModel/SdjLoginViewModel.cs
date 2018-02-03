@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Communication.Client;
+using SharpDj.Core;
 using SharpDj.Enums;
 using SharpDj.Models.Client;
 

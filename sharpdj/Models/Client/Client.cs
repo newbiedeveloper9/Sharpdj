@@ -40,10 +40,4 @@ namespace SharpDj.Models.Client
             Receiver.ParseMessage(ClientInfo.Client, message.Text);
         }
     }
-
-    public static class ClientInfo
-    {
-        public static IScsClient Client { get; set; }
-        
-    }
 }

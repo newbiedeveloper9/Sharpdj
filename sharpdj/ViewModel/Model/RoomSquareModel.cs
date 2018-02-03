@@ -1,4 +1,5 @@
-﻿using SharpDj.Enums;
+﻿using SharpDj.Core;
+using SharpDj.Enums;
 
 namespace SharpDj.ViewModel.Model
 {

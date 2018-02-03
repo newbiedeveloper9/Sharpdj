@@ -1,23 +1,25 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows;
 
-public class BaseViewModel : INotifyPropertyChanged
+namespace SharpDj.Core
 {
-    protected bool IsInDesignMode
+    public class BaseViewModel : INotifyPropertyChanged
     {
-        get
+        protected bool IsInDesignMode
         {
-            return (bool)DesignerProperties.IsInDesignModeProperty
-                .GetMetadata(typeof(DependencyObject)).DefaultValue;
+            get
+            {
+                return (bool)DesignerProperties.IsInDesignModeProperty
+                    .GetMetadata(typeof(DependencyObject)).DefaultValue;
+            }
         }
-    }
 
-    public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-    protected virtual void OnPropertyChanged(string a_propertyName)
-    {
-        PropertyChangedEventHandler handler = PropertyChanged;
-        handler?.Invoke(this, new PropertyChangedEventArgs(a_propertyName));
+        protected virtual void OnPropertyChanged(string a_propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            handler?.Invoke(this, new PropertyChangedEventArgs(a_propertyName));
+        }
     }
 }

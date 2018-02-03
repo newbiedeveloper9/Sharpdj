@@ -50,14 +50,10 @@
       <HintPath>..\packages\Scs.1.1.1\lib\net40-client\Scs.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
@@ -73,11 +69,14 @@
     </ApplicationDefinition>
     <Compile Include="Core\BaseViewModel.cs" />
     <Compile Include="Core\RelayCommand.cs" />
+    <Compile Include="Enums\LeftBar.cs" />
     <Compile Include="Enums\MainView.cs" />
+    <Compile Include="Enums\Playlist.cs" />
     <Compile Include="Enums\UserProfile.cs" />
-    <Compile Include="Enums\PlaylistEnum.cs" />
+    <Compile Include="Enums\PlaylistState.cs" />
     <Compile Include="Enums\UserState.cs" />
     <Compile Include="Models\Client\Client.cs" />
+    <Compile Include="Models\Client\ClientInfo.cs" />
     <Compile Include="Models\Client\ClientLogic.cs" />
     <Compile Include="Models\Client\ErrorMessages.cs" />
     <Compile Include="Models\Helpers\Debug.cs" />
@@ -102,7 +101,7 @@
     <Compile Include="ViewModel\SdjMainViewModel.cs" />
     <Compile Include="ViewModel\SdjPlaylistViewModel.cs" />
     <Compile Include="ViewModel\SdjStateButtonViewModel.cs" />
-    <Compile Include="View\SdjUpdaterView.xaml.cs">
+    <Compile Include="View\MainWindow.cs">
       <DependentUpon>SdjUpdaterView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\BottomBar.xaml.cs">
@@ -186,7 +185,7 @@
     <Compile Include="Extensions\CommandBase.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Extensions\NotifyObject.cs" />
-    <Compile Include="Extensions\RelayCommands.cs" />
+    <Compile Include="Extensions\RelayCommand.cs" />
     <Compile Include="Models\Helpers\ExceptionLogger.cs" />
     <Compile Include="View\SdjLoggerView.xaml.cs">
       <DependentUpon>SdjLoggerView.xaml</DependentUpon>

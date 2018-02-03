@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SharpDj.Core;
 using SharpDj.Enums;
 using SharpDj.ViewModel.Helpers;
 using SharpDj.ViewModel.Model;

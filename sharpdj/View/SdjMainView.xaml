@@ -54,6 +54,12 @@
             <local:SdjUserProfileUserControl Visibility="{Binding IsMaximized, Converter={converters:BoolVisibilityConverter}}"/>
         </Grid>
 
+        <!--Feedback-->
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" DataContext="{Binding SdjFeedbackViewModel}" Visibility="{Binding IsVisible, Converter={converters:BoolVisibilityConverter}}">
+            <helpers:SdjBackgroundForForms/>
+            <local:SdjFeedbackUserControl Width="550" Height="400"/>
+        </Grid>
+        
         <!--BottomBar-->
         <DockPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
             <local:BottomBar DataContext="{Binding SdjBottomBarViewModel}"/>

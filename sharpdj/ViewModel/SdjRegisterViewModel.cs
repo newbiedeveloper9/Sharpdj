@@ -5,6 +5,7 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using SharpDj.Core;
 
 namespace SharpDj.ViewModel
 {

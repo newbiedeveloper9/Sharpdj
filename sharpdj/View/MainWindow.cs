@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
 using Newtonsoft.Json;
-using System.IO.Compression;
-using System.Threading;
-using SharpDj;
-using SharpDj.View;
+using SharpDj.Models.Helpers.Updater;
 using Debug = SharpDj.Models.Helpers.Debug;
 
-namespace Updater
+namespace SharpDj.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

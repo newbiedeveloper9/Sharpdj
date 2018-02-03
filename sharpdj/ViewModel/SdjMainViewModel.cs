@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Communication.Client;
+using SharpDj.Core;
 using SharpDj.Enums;
 using SharpDj.Models;
 using SharpDj.Models.Client;

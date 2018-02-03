@@ -14,35 +14,35 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid>
-            <helpers:SdjTitleBarForUserControls/>
-        </Grid>
+        <helpers:SdjTitleBarForUserControls/>
 
         <DockPanel Grid.Row="1" Margin="10 5 10 45">
             <StackPanel>
                 <DockPanel Margin="5 15 5 5" >
-                    <ComboBox IsEditable="False" HorizontalAlignment="Left">
+                    <ComboBox IsEditable="False" HorizontalAlignment="Left" SelectedItem="{Binding FeedbackType, UpdateSourceTrigger=PropertyChanged}">
                         <ComboBoxItem Content="Bug" IsSelected="True"/>
                         <ComboBoxItem Content="Enhancement"/>
                         <ComboBoxItem Content="Question"/>
                         <ComboBoxItem Content="Just message"/>
                     </ComboBox>
-                    <DatePicker IsTodayHighlighted="True" IsEnabled="False" HorizontalAlignment="Right"/>
                 </DockPanel>
-                <TextBox Margin="5" Width="250" HorizontalAlignment="Left"/>
-                <TextBox Height="200" VerticalAlignment="Top" Margin="5" AcceptsReturn="True" AcceptsTab="True" TextWrapping="Wrap"/>
+                <DockPanel Margin="5">
+                    <TextBox Width="250" Text="{Binding FeedbackTopic, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"/>
+                    <TextBox Text="{Binding FeedbackDate, UpdateSourceTrigger=PropertyChanged, StringFormat='dd/MM/yyyy HH:mm'}" FlowDirection="RightToLeft" IsEnabled="False" HorizontalAlignment="Right"/>
+                </DockPanel>
+                <TextBox Height="200" VerticalAlignment="Top" Margin="5" Text="{Binding FeedbackText, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" AcceptsTab="True" TextWrapping="Wrap"/>
 
                 <DockPanel FlowDirection="RightToLeft" Margin="5">
-                    <Button Content="Choose file"/>
-                    <TextBox Margin="10 0 0 0" FlowDirection="RightToLeft"/>
+                    <Button Content="Choose file" Command="{Binding ChooseAttachmentCommand}"/>
+                    <TextBox Margin="10 0 0 0" Text="{Binding AttachmentPath, UpdateSourceTrigger=PropertyChanged}" FlowDirection="LeftToRight"/>
                 </DockPanel>
             </StackPanel>
 
         </DockPanel>
-        
+
         <Grid VerticalAlignment="Bottom" Margin="5" Grid.RowSpan="2">
-            <Button Content="Send ticket" Grid.RowSpan="2"  HorizontalAlignment="Right"/>
-            <Label Content="Error Error Error Error Error Error Error Error Error " Foreground="Red" HorizontalAlignment="Left"/>
+            <Button Content="Send ticket" Grid.RowSpan="2" Command="{Binding SendFeedbackCommand}" HorizontalAlignment="Right"/>
+            <Label Content="{Binding ErrorNotify, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" HorizontalAlignment="Left"/>
         </Grid>
 
 
