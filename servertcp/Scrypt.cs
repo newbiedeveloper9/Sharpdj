@@ -14,7 +14,14 @@ namespace servertcp
         {
             var keyBytes = Encoding.UTF8.GetBytes(secret);
             var saltBytes = Encoding.UTF8.GetBytes(salt);
-            const int cost = 8192; // 4096, 8192, 16_384, 32_768, 65_536, 131_072, 262_144
+            int cost = 8192;
+#if DEBUG
+             cost = 2;
+            Console.WriteLine("debug");
+            // 4096, 8192, 16_384, 32_768, 65_536, 131_072, 262_144
+#endif
+            Console.WriteLine(cost);
+
             const int blockSize = 8;
             const int parallel = 1;
             var maxThreads = (int?)null;
