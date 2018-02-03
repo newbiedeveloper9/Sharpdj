@@ -5,9 +5,45 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SharpDj.View.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="600">
+             d:DesignHeight="400" d:DesignWidth="550">
 
-    <Grid>
+    <Grid Background="{StaticResource DarkBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <local:SdjTitleBarForUserControls/>
+        </Grid>
+
+        <DockPanel Grid.Row="1" Margin="10 5 10 45">
+            <StackPanel>
+                <DockPanel Margin="5 15 5 5" >
+                    <ComboBox IsEditable="False" HorizontalAlignment="Left">
+                        <ComboBoxItem Content="Bug" IsSelected="True"/>
+                        <ComboBoxItem Content="Enhancement"/>
+                        <ComboBoxItem Content="Question"/>
+                        <ComboBoxItem Content="Just message"/>
+                    </ComboBox>
+                    <DatePicker IsTodayHighlighted="True" IsEnabled="False" HorizontalAlignment="Right"/>
+                </DockPanel>
+                <TextBox Margin="5" Width="250" HorizontalAlignment="Left"/>
+                <TextBox Height="200" VerticalAlignment="Top" Margin="5" AcceptsReturn="True" AcceptsTab="True" TextWrapping="Wrap"/>
+
+                <DockPanel FlowDirection="RightToLeft" Margin="5">
+                    <Button Content="Choose file"/>
+                    <TextBox Margin="10 0 0 0"/>
+                </DockPanel>
+            </StackPanel>
+
+        </DockPanel>
         
+        <Grid VerticalAlignment="Bottom" Margin="5" Grid.RowSpan="2">
+            <Button Content="Send ticket" Grid.RowSpan="2"  HorizontalAlignment="Right"/>
+            <Label Content="Error Error Error Error Error Error Error Error Error " Foreground="Red" HorizontalAlignment="Left"/>
+        </Grid>
+
+
     </Grid>
 </UserControl>
