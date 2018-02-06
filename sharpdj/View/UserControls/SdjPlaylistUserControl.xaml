@@ -22,7 +22,6 @@
 
         </Grid>
 
-
         <Grid Grid.Column="1" Grid.Row="1" Background="{StaticResource DarkBrush}" Opacity="0.97" >
 
             <Grid VerticalAlignment="Center">
@@ -92,54 +91,54 @@
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
-
                 </StackPanel>
             </ScrollViewer>
         </Grid>
 
         <StackPanel Grid.Column="1" Grid.Row="0"  Background="{StaticResource DarkBrush}" Opacity="0.97">
+            <Grid Margin="0 7 0 0">
+                <ItemsControl ItemsSource="{Binding TrackCollection}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type model:PlaylistTrackModel}">
+                            <DockPanel>
+                                <Grid Style="{StaticResource IconStackPanelMouseOver}" Background="{Binding BackgroundBrush}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseEnter">
+                                            <i:InvokeCommandAction Command="{Binding SongOptionsSetVisibleCommand}"/>
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="MouseLeave">
+                                            <i:InvokeCommandAction Command="{Binding SongOptionsSetHiddenCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                    <Grid Margin="15 0 15 0">
+                                        <Label Content="{Binding SongName}" Foreground="White" FontSize="24" HorizontalAlignment="Left"/>
 
+                                        <Label Content="{Binding AuthorName}" Foreground="White" FontSize="24" HorizontalAlignment="Center" Background="{Binding BackgroundBrush}"/>
 
-            <ItemsControl ItemsSource="{Binding TrackCollection}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="{x:Type model:PlaylistTrackModel}">
-                        <DockPanel Margin="0 0 0 5">
-                            <Grid Background="{Binding BackgroundBrush}" Style="{StaticResource IconStackPanelMouseOver}">
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="MouseEnter">
-                                        <i:InvokeCommandAction Command="{Binding SongOptionsSetVisibleCommand}"/>
-                                    </i:EventTrigger>
-                                    <i:EventTrigger EventName="MouseLeave">
-                                        <i:InvokeCommandAction Command="{Binding SongOptionsSetHiddenCommand}"/>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-
-                                <Label Content="{Binding SongName}" Foreground="White" FontSize="24" HorizontalAlignment="Left"/>
-
-                                <Label Content="{Binding AuthorName}" Foreground="White" FontSize="24" HorizontalAlignment="Center" Background="{Binding BackgroundBrush}"/>
-                                
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Visibility="{Binding SongOptionsVisibility}" Background="{Binding BackgroundBrush}">
-                                    <Button VerticalAlignment="Center" Style="{StaticResource IconButton}" Width="32" Height="32" Margin="3">
-                                        <Image Source="../../Images/Playlists/pencil-edit-button-white.png"/>
-                                    </Button>
-                                    <Button VerticalAlignment="Center" Style="{StaticResource IconButton}" Width="32" Height="32" Margin="3">
-                                        <Image Source="../../Images/Playlists/009-down-chevron-white.png"/>
-                                    </Button>
-                                    <Button VerticalAlignment="Center" Style="{StaticResource IconButton}" Width="32" Height="32" Margin="3">
-                                        <Image Source="../../Images/Playlists/014-up-chevron-white.png"/>
-                                    </Button>
-                                    <Button VerticalAlignment="Center" Style="{StaticResource IconButton}" Width="32" Height="32" Margin="3">
-                                        <Image Source="../../Images/Playlists/029-rubbish-bin-delete-button-white.png"/>
-                                    </Button>
-                                </StackPanel>
-                                <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Visibility="{Binding SongTimeVisibility}">
-                                    <Label Content="{Binding SongDuration}" Foreground="White" FontSize="24"/>
-                                </StackPanel>
-                            </Grid>
-                        </DockPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Visibility="{Binding SongOptionsVisibility}" Background="{Binding BackgroundBrush}">
+                                            <Button VerticalAlignment="Center" Style="{StaticResource IconButtonMouseOver}" BorderThickness="0" Width="44" Height="42" >
+                                                <Image Source="../../Images/Playlists/pencil-edit-button-white.png" Width="24" Height="24"/>
+                                            </Button>
+                                            <Button VerticalAlignment="Center" Style="{StaticResource IconButtonMouseOver}" BorderThickness="0" Width="44" Height="42">
+                                                <Image Source="../../Images/Playlists/009-down-chevron-white.png" Width="24" Height="24"/>
+                                            </Button>
+                                            <Button VerticalAlignment="Center" Style="{StaticResource IconButtonMouseOver}" BorderThickness="0" Width="44" Height="42" >
+                                                <Image Source="../../Images/Playlists/014-up-chevron-white.png" Width="24" Height="24"/>
+                                            </Button>
+                                            <Button VerticalAlignment="Center" Style="{StaticResource IconButtonMouseOver}" BorderThickness="0" Width="44" Height="42">
+                                                <Image Source="../../Images/Playlists/029-rubbish-bin-delete-button-white.png" Width="24" Height="24"/>
+                                            </Button>
+                                        </StackPanel>
+                                        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Visibility="{Binding SongTimeVisibility}">
+                                            <Label Content="{Binding SongDuration}" Foreground="White" FontSize="24"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Grid>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
         </StackPanel>
     </Grid>
 </UserControl>
