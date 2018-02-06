@@ -12,12 +12,13 @@
 
             <StackPanel VerticalAlignment="Center">
                 <StackPanel Margin="20 20 20 0" >
-                    <Label Content="Login"/>
+                    <Label Content="Login" Foreground="White"/>
                     <TextBox Text="{Binding Login}"/>
                 </StackPanel>
-                <StackPanel Margin="20 0 20 20">
-                    <Label Content="Password"/>
+                <StackPanel Margin="20 0 20 10">
+                    <Label Content="Password" Foreground="White"/>
                     <PasswordBox PasswordChar="*" PasswordChanged="PasswordBox_OnPasswordChanged"/>
+                    <CheckBox Content="Remember me" HorizontalAlignment="Right" FlowDirection="RightToLeft" Foreground="White" Margin="0 10 0 0" IsChecked="{Binding RememberMe}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Content="Register" HorizontalAlignment="Center" Command="{Binding RegisterCommand}" VerticalAlignment="Top" FontSize="16" Margin="10 0 0 0"/>

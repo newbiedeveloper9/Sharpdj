@@ -46,6 +46,18 @@ namespace SharpDj.ViewModel
             }
         }
 
+        private bool _rememberMe;
+        public bool RememberMe
+        {
+            get => _rememberMe;
+            set
+            {
+                if (_rememberMe == value) return;
+                _rememberMe = value;
+                OnPropertyChanged("RememberMe");
+            }
+        }
+
         private SecureString _password;
         public SecureString Password
         {

@@ -4,6 +4,7 @@
 
     <!--Round Buttons-->
     <Style x:Key="RoundButton" TargetType="Button">
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -33,6 +34,7 @@
     <Style x:Key="IconButton" TargetType="Button">
         <!--  <Setter Property="BorderBrush" Value="Transparent"/>
         -->
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -48,6 +50,7 @@
     <Style x:Key="IconButtonMouseOver" TargetType="Button">
         
         <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -68,8 +71,8 @@
     </Style>
 
     <Style x:Key="IconStackPanelMouseOver" TargetType="Grid">
-        <!--  <Setter Property="BorderBrush" Value="Transparent"/>
-        -->
+        <Setter Property="Cursor" Value="Hand"/>
+
         <Setter Property="Background" Value="Transparent"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">

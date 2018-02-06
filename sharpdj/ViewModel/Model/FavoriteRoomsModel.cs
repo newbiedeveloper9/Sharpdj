@@ -29,7 +29,6 @@ namespace SharpDj.ViewModel.Model
             }
         }
 
-
         private string _roomName;
         public string RoomName
         {

@@ -8,6 +8,7 @@
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Margin" Value="0 2 0 1"/>
         <Setter Property="Template">
             <Setter.Value>

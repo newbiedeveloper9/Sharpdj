@@ -67,6 +67,7 @@ namespace SharpDj.ViewModel.Helpers
 
         #endregion
 
+
         #endregion Commands
     }
 }

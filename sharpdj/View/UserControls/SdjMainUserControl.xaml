@@ -55,7 +55,8 @@
                                                 <Label Content="{Binding AdminsInRoom}" Foreground="White" VerticalAlignment="Center" FontSize="16" VerticalContentAlignment="Center"/>
                                             </StackPanel>
 
-                                            <DockPanel Width="40" Background="DarkSlateBlue" Height="35" Margin="0 -5 -10 0"  HorizontalAlignment="Right" VerticalAlignment="Center">
+                                            <DockPanel Width="40" Background="DarkSlateBlue" Height="35" Margin="0 -5 -10 0"  HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand">
+                                              
                                                 <Button Style="{StaticResource IconButtonMouseOver}" Command="{Binding SetRoomAsFavoriteCommand}" BorderThickness="0">
                                                     <Grid>
                                                         <Image Source="../../Images/Rooms/favorite.png" Width="16" Height="16" VerticalAlignment="Center"  
@@ -67,7 +68,7 @@
                                             </DockPanel>
                                         </DockPanel>
 
-                                        <DockPanel Background="DarkSlateGray">
+                                        <DockPanel Background="DarkSlateGray" Cursor="Hand">
                                             <Button Style="{StaticResource IconButton}" Command="{Binding MainOnRoomClickCommand}">
                                                 <Grid>
                                                     <i:Interaction.Triggers>
@@ -127,7 +128,7 @@
                     <ItemsControl ItemsSource="{Binding FavoriteCollection}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="{x:Type model:FavoriteRoomsModel}">
-                                <Button Margin="1 1 1 0" Command="{Binding EnterFavoriteRoomCommand}">
+                                <Button Margin="1 1 1 0" Command="{Binding EnterFavoriteRoomCommand}" Cursor="Hand">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="MouseEnter" >
                                             <i:InvokeCommandAction Command="{Binding OnMouseEnterCommand }" />
@@ -146,7 +147,6 @@
                                                 <ImageBrush ImageSource="../../Images/MainMenu/background.png" />
                                             </Grid.Background>
                                             <Rectangle Width="250" Fill="Black" Opacity="0.8"/>
-
 
                                             <StackPanel>
                                                 <StackPanel Orientation="Horizontal" Margin="5 0 0 0">
