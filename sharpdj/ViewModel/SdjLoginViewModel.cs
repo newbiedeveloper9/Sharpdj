@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using Communication.Client;
@@ -12,7 +13,6 @@ namespace SharpDj.ViewModel
 {
     public class SdjLoginViewModel : BaseViewModel
     {
-
         #region .ctor
         public SdjLoginViewModel(SdjMainViewModel main)
         {
@@ -46,8 +46,8 @@ namespace SharpDj.ViewModel
             }
         }
 
-        private string _password;
-        public string Password
+        private SecureString _password;
+        public SecureString Password
         {
             get => _password;
             set
@@ -119,7 +119,8 @@ namespace SharpDj.ViewModel
 
         public void LoginCommandExecute()
         {
-            SdjMainViewModel.Client.Sender.Login(Login, Password);
+            var password = new System.Net.NetworkCredential(string.Empty, Password).Password;
+            SdjMainViewModel.Client.Sender.Login(Login, password);
         }
         #endregion
 
@@ -146,6 +147,5 @@ namespace SharpDj.ViewModel
         #endregion
 
         #endregion Commands
-
     }
 }

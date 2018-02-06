@@ -17,7 +17,7 @@
                 </StackPanel>
                 <StackPanel Margin="20 0 20 20">
                     <Label Content="Password"/>
-                    <TextBox Text="{Binding Password}"/>
+                    <PasswordBox PasswordChar="*" PasswordChanged="PasswordBox_OnPasswordChanged"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Content="Register" HorizontalAlignment="Center" Command="{Binding RegisterCommand}" VerticalAlignment="Top" FontSize="16" Margin="10 0 0 0"/>
