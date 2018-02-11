@@ -11,6 +11,7 @@ using CryptSharp.Utility;
 using Hik.Collections;
 using Hik.Communication.Scs.Server;
 using Newtonsoft.Json;
+using servertcp.Sql;
 
 namespace servertcp
 {
@@ -203,80 +204,56 @@ namespace servertcp
 
         private void _communication_Login(object sender, ServerReceiver.LoginEventArgs e)
         {
-            var startPath = Environment.CurrentDirectory;
-            var usersPath = startPath + "/Users/";
-            if (!Directory.Exists(usersPath))
+            try
             {
-                Directory.CreateDirectory(usersPath);
-            }
-
-            var accPath = usersPath + e.Login + ".json";
-
-            if (File.Exists(accPath))
-            {
-                var json = File.ReadAllText(accPath);
-
-                var client = JsonConvert.DeserializeObject<ServerClient>(json);
-
-                var pass = Scrypt.Hash(e.Password, client.Salt);
-
-                if (pass.Equals(client.Password))
+                if (SqlUserCommands.LoginExists(e.Login))
                 {
-                    client.Client = e.Client;
-                    client.Ip = Utils.GetIpOfClient(e.Client);
-                    Console.WriteLine(client.Client.RemoteEndPoint);
-                    ServerSender.Succesful.SuccessfulLogin(e.Client, client);
-                    _clients[e.Client.ClientId] = client;
+                    var salt = SqlUserCommands.GetSalt(e.Login);
+                    var pass = Scrypt.Hash(e.Password, salt);
+
+                    if (SqlUserCommands.CheckPassword(pass, e.Login))
+                    {
+                        var client = new ServerClient(e.Client);
+                        client.Username = e.Login;
+                        _clients[e.Client.ClientId] = client;
+                        ServerSender.Succesful.SuccessfulLogin(e.Client, client);
+                        SqlUserCommands.AddLoginInfo(e.Login, Utils.GetIpOfClient(e.Client));
+                    }
+                    else
+                    {
+                        ServerSender.Error.LoginError(e.Client);
+                    }
                 }
                 else
                     ServerSender.Error.LoginError(e.Client);
             }
-            else
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
                 ServerSender.Error.LoginError(e.Client);
+            }
         }
 
         private void _communication_Register(object sender, ServerReceiver.RegisterEventArgs e)
         {
-            var startPath = Environment.CurrentDirectory;
-            var usersPath = startPath + "/Users/";
-            if (!Directory.Exists(usersPath))
-            {
-                Directory.CreateDirectory(usersPath);
-            }
-
-            var accPath = usersPath + e.Login + ".json";
-
             try
             {
-                if (!File.Exists(accPath))
+                if (!SqlUserCommands.LoginExists(e.Login))
                 {
-                    string salt = Scrypt.GenerateSalt();
-
-                    ServerClient serverClient = new ServerClient(e.Client)
-                    {
-                        Login = e.Login,
-                        Email = e.Email,
-                        Password = Scrypt.Hash(e.Password, salt),
-                        Salt = salt,
-                        Ip = Utils.GetIpOfClient(e.Client)
-                    };
-
-                    string json = JsonConvert.SerializeObject(serverClient, Formatting.Indented);
-                    File.WriteAllText(accPath, json);
-
-                    ServerSender.Succesful.SuccessfulRegister(e.Client);
+                    var salt = Scrypt.GenerateSalt();
+                    if (SqlUserCommands.CreateUser(e.Login, Scrypt.Hash(e.Password, salt), salt, e.Login))
+                        ServerSender.Succesful.SuccessfulRegister(e.Client);
+                    else
+                        ServerSender.Error.RegisterError(e.Client);
                 }
                 else
-                {
                     ServerSender.Error.RegisterAccExistError(e.Client);
-                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 ServerSender.Error.RegisterError(e.Client);
             }
-
         }
 
         private void _communication_Disconnect(object sender, ServerReceiver.DisconnectEventArgs e)

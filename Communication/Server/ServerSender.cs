@@ -25,7 +25,7 @@ namespace Communication.Server
                 client.SendMessage(new ScsTextMessage(
                     String.Format(Commands.SuccessfulRegister)));
             }
-                
+
             public static void SuccessfulChangedPassword(IScsServerClient client)
             {
                 client.SendMessage(new ScsTextMessage(

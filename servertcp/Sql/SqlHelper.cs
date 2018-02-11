@@ -10,9 +10,13 @@ namespace servertcp.Sql
 {
     public class SqlHelper
     {
-        public static int ExecuteNonQuery(string stringConnection, string command, params SqlParameter[] parameters)
+        private static string ConnectionString =
+            "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Michal\\Desktop\\SharpDj\\servertcp\\SdjDB.mdf;Integrated Security=True";
+
+
+        public static int SqlNonQueryCommand(string command, params SqlParameter[] parameters)
         {
-            using (SqlConnection conn = new SqlConnection(stringConnection))
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
                 using (SqlCommand cmd = new SqlCommand(command, conn))
                 {
@@ -23,14 +27,31 @@ namespace servertcp.Sql
             }
         }
 
-        public static SqlDataReader ExecuteDataReader(string stringConnection, string command, params SqlParameter[] parameters)
+        public static object ExecuteScalar(string command, params SqlParameter[] parameters)
         {
-            SqlConnection conn = new SqlConnection(stringConnection);
-            using (SqlCommand cmd = new SqlCommand(command, conn))
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
-                conn.Open();
-                cmd.Parameters.AddRange(parameters);
-                return cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                using (SqlCommand cmd = new SqlCommand(command, conn))
+                {
+                    conn.Open();
+                    cmd.Parameters.AddRange(parameters);
+                    return cmd.ExecuteScalar();
+                }
+            }
+        }
+
+        public static SqlDataReader ExecuteDataReader(string command, params SqlParameter[] parameters)
+        {
+            var conn = new SqlConnection(ConnectionString);
+            {
+                using (SqlCommand cmd = new SqlCommand(command, conn))
+                {
+                    conn.Open();
+                    cmd.Parameters.AddRange(parameters);
+                    var reader = cmd.ExecuteReader();
+                    return reader;
+                }
+
             }
         }
     }
