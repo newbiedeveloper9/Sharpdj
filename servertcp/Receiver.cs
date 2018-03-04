@@ -9,6 +9,7 @@ using Communication.Client;
 using Communication.Server;
 using CryptSharp.Utility;
 using Hik.Collections;
+using Hik.Communication.Scs.Client;
 using Hik.Communication.Scs.Server;
 using Newtonsoft.Json;
 using servertcp.Sql;
@@ -50,44 +51,57 @@ namespace servertcp
             }
         }
 
-        private void Receiver_ChangeLogin(object sender, ServerReceiver.ChangeLoginEventArgs e)
+        private void _communication_Login(object sender, ServerReceiver.LoginEventArgs e)
         {
-            var client = _clients[e.Client.ClientId];
-
-            var startPath = Environment.CurrentDirectory;
-            var usersPath = startPath + "/Users/";
-            if (!Directory.Exists(usersPath))
+            try
             {
-                Directory.CreateDirectory(usersPath);
-            }
-
-            var accPath = usersPath + client.Login + ".json";
-
-            if (File.Exists(accPath))
-            {
-                var jsonSource = File.ReadAllText(accPath);
-
-                var clientJson = JsonConvert.DeserializeObject<ServerClient>(jsonSource);
-
-                var pass = Scrypt.Hash(e.Password, client.Salt);
-                if (pass.Equals(client.Password))
+                if (SqlUserCommands.LoginExists(e.Login))
                 {
-                    client.Login = e.NewLogin;
-                    clientJson.Login = client.Login;
-                    var json = JsonConvert.SerializeObject(clientJson, Formatting.Indented);
+                    var pass = Scrypt.Hash(e.Password, SqlUserCommands.GetSalt(e.Login));
 
-                    File.Delete(accPath);
-                    var newAccPath = usersPath + client.Login + ".json";
-
-                    File.WriteAllText(newAccPath, json);
-
-                    ServerSender.Succesful.SuccessfulChangedRank(client.Client);
+                    if (SqlUserCommands.CheckPassword(pass, e.Login))
+                    {
+                        var getUserID = SqlUserCommands.GetUserId(e.Login);
+                        var client = new ServerClient(e.Client);
+                        client.Username = e.Login;
+                        client.Login = e.Login;
+                        _clients[client.Client.ClientId] = client;
+                        ServerSender.Succesful.SuccessfulLogin(e.Client, client);
+                        SqlUserCommands.AddActionInfo(getUserID, Utils.GetIpOfClient(e.Client),
+                            SqlUserCommands.Actions.Login);
+                    }
+                    else
+                        ServerSender.Error.LoginError(e.Client);
                 }
                 else
-                    ServerSender.Error.ChangeLoginError(client.Client);
+                    ServerSender.Error.LoginError(e.Client);
             }
-            else
-                ServerSender.Error.ChangeLoginError(client.Client);
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                ServerSender.Error.LoginError(e.Client);
+            }
+        }
+
+        private void Receiver_ChangeLogin(object sender, ServerReceiver.ChangeLoginEventArgs e)
+        {
+            var login = _clients[e.Client.ClientId].Login;
+            var userId = SqlUserCommands.GetUserId(login);
+             
+             if (IsActiveLogin(e.Client))
+             {
+                var pass = Scrypt.Hash(e.Password, SqlUserCommands.GetSalt(login));
+                 if (Sql.SqlUserCommands.CheckPassword(pass, login))
+                 {
+                     Sql.SqlUserCommands.DataChange.ChangeLogin(userId, e.NewLogin);
+                     ServerSender.Succesful.SuccessfulChangedRank(e.Client);
+
+                     Sql.SqlUserCommands.AddActionInfo(userId, Utils.GetIpOfClient(e.Client),
+                         SqlUserCommands.Actions.ChangeLogin);
+                 }
+                 else
+                     ServerSender.Error.ChangeLoginError(e.Client);
+             }
         }
 
         private void Receiver_ChangeRank(object sender, ServerReceiver.ChangeRankEventArgs e)
@@ -202,38 +216,6 @@ namespace servertcp
                 ServerSender.Error.ChangePasswordError(client.Client);
         }
 
-        private void _communication_Login(object sender, ServerReceiver.LoginEventArgs e)
-        {
-            try
-            {
-                if (SqlUserCommands.LoginExists(e.Login))
-                {
-                    var salt = SqlUserCommands.GetSalt(e.Login);
-                    var pass = Scrypt.Hash(e.Password, salt);
-
-                    if (SqlUserCommands.CheckPassword(pass, e.Login))
-                    {
-                        var client = new ServerClient(e.Client);
-                        client.Username = e.Login;
-                        _clients[e.Client.ClientId] = client;
-                        ServerSender.Succesful.SuccessfulLogin(e.Client, client);
-                        SqlUserCommands.AddLoginInfo(e.Login, Utils.GetIpOfClient(e.Client));
-                    }
-                    else
-                    {
-                        ServerSender.Error.LoginError(e.Client);
-                    }
-                }
-                else
-                    ServerSender.Error.LoginError(e.Client);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                ServerSender.Error.LoginError(e.Client);
-            }
-        }
-
         private void _communication_Register(object sender, ServerReceiver.RegisterEventArgs e)
         {
             try
@@ -267,6 +249,11 @@ namespace servertcp
         private bool IsActiveLogin(IScsServerClient client)
         {
             return _clients[client.ClientId] != null;
+        }
+
+        private long GetId(IScsServerClient client)
+        {
+            return client.ClientId;
         }
     }
 }

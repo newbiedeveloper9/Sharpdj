@@ -100,9 +100,7 @@ namespace Communication.Server
             {
                 var message = Commands.GetPeoples;
                 foreach (var userClient in clientsList)
-                {
                     message += $"\n{userClient.Username} {userClient.Rank}";
-                }
                 client.SendMessage(new ScsTextMessage(message));
             }
 

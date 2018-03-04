@@ -16,17 +16,14 @@ namespace servertcp.Sql
             {
                 if (!LoginExists(login))
                 {
-                    DateTime dt = DateTime.Now;
-                    var sqlDt = dt.ToString("s");
-
                     var parameters = new[] { new SqlParameter("@Login", login),
                         new SqlParameter("@Password", password),
                         new SqlParameter("@Username", username),
                         new SqlParameter("@Salt", salt),
-                        new SqlParameter("@Date", sqlDt), 
+                        new SqlParameter("@Date", GetSqlDateTime()),
                     };
 
-
+                        
                     SqlHelper.SqlNonQueryCommand("INSERT INTO Users (Login, Username, Password, Salt, AccountCreationTime) " +
                                                              "VALUES(@Login, @Username, @Password, @Salt, @Date)", parameters);
                     return true;
@@ -40,12 +37,12 @@ namespace servertcp.Sql
             }
         }
 
-        public static int GetUserId(string login)
+        public static long GetUserId(string login)
         {
             var parameter = new SqlParameter("@Login", login);
             using (SqlDataReader reader = SqlHelper.ExecuteDataReader("SELECT Users.Id FROM Users WHERE Users.Login LIKE @Login", parameter))
                 while (reader.Read())
-                    return (int)reader["Id"];
+                    return (long)reader["Id"];
             return -1;
         }
 
@@ -65,22 +62,19 @@ namespace servertcp.Sql
             return false;
         }
 
-        public static bool AddLoginInfo(string login, string ip)
+        public static bool AddActionInfo(long id, string ip, Actions action)
         {
             try
             {
-                DateTime dt = DateTime.Now;
-                string sqlDt = dt.ToString("s");
-                var userId = GetUserId(login);
-
                 var parameters = new[]
                 {
-                    new SqlParameter("@UserId",userId),
+                    new SqlParameter("@UserId",id),
                     new SqlParameter("@Ip", ip),
-                    new SqlParameter("@Date", sqlDt), 
+                    new SqlParameter("@Date", GetSqlDateTime()),
+                    new SqlParameter("@Action", action)
                 };
 
-                SqlHelper.SqlNonQueryCommand("INSERT INTO LoginInfo (UserId, Ip, Time) VALUES (@UserId, @Ip, @Date)", parameters);
+                SqlHelper.SqlNonQueryCommand("INSERT INTO ActionInfo (UserId, Ip, Time, Action) VALUES (@UserId, @Ip, @Date, @Action)", parameters);
             }
             catch (Exception ex)
             {
@@ -95,11 +89,128 @@ namespace servertcp.Sql
             var parameter = new SqlParameter("@Login", login);
             using (var reader = SqlHelper.ExecuteDataReader("SELECT Users.Salt FROM Users WHERE Users.Login LIKE @Login", parameter))
                 while (reader.Read())
-                {
                     return reader["Salt"].ToString();
-                }
             return string.Empty;
+        }
 
+        public class DataChange
+        {
+            public static bool ChangeLogin(long id, string newLogin)
+            {
+                try
+                {
+                    var parameters = new[]
+                    {
+                        new SqlParameter("@Id", id),
+                        new SqlParameter("@NewLogin", newLogin),
+                    };
+
+                    SqlHelper.SqlNonQueryCommand("UPDATE Users SET Users.Login=@NewLogin WHERE Id = @Id", parameters);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+                return true;
+            }
+
+            public static bool ChangeUsername(long id, string newUsername)
+            {
+                try
+                {
+                    var parameters = new[]
+                    {
+                        new SqlParameter("@Id", id),
+                        new SqlParameter("@NewUsername", newUsername),
+                    };
+
+                    SqlHelper.SqlNonQueryCommand("UPDATE Users SET Users.Username=@NewUsername WHERE Id = @Id", parameters);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+                return true;
+            }
+
+            public static bool ChangePassword(long id, string newPassword)
+            {
+                try
+                {
+                    var parameters = new[]
+                    {
+                        new SqlParameter("@Id", id),
+                        new SqlParameter("@NewPassword", newPassword),
+                    };
+
+                    SqlHelper.SqlNonQueryCommand("UPDATE Users SET Users.Password=@NewPassword WHERE Id = @Id", parameters);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+                return true;
+            }
+
+            public static bool ChangeEmail(long id , string newEmail)
+            {
+                try
+                {
+                    var parameters = new[]
+                    {
+                        new SqlParameter("@Id", id),
+                        new SqlParameter("@NewEmail", newEmail),
+                    };
+
+                    SqlHelper.SqlNonQueryCommand("UPDATE Users SET Users.Password=@NewEmail WHERE Id = @Id", parameters);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+                return true;
+            }
+
+            public static bool ChangeAvatar(long id, string newAvatarUrl)
+            {
+                try
+                {
+                    var parameters = new[]
+                    {
+                        new SqlParameter("@Id", id),
+                        new SqlParameter("@NewAvatarUrl", newAvatarUrl),
+                    };
+
+                    SqlHelper.SqlNonQueryCommand("UPDATE Users SET Users.Password=@NewAvatarUrl WHERE Id = @Id", parameters);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+                return true;
+            }
+        }
+
+        private static string GetSqlDateTime()
+        {
+            return DateTime.Now.ToString("s");
+        }
+
+        public enum Actions : int
+        {
+            Login,
+            Logout,
+            Register,
+            ChangeLogin,
+            ChangeUsername,
+            ChangePassword,
+            ChangeEmail,
+            ChangeAvatar
         }
     }
 }
