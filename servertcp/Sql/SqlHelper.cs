@@ -11,7 +11,7 @@ namespace servertcp.Sql
     public class SqlHelper
     {
         private static string ConnectionString =
-            "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Michal\\Desktop\\SharpDj\\servertcp\\SdjDB.mdf;Integrated Security=True";
+            "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\SdjDB.mdf;Integrated Security=True";
 
 
         public static int SqlNonQueryCommand(string command, params SqlParameter[] parameters)

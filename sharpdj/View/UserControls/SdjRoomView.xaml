@@ -8,7 +8,7 @@
              MinWidth="1150"
              MinHeight="500"
              d:DesignHeight="768" d:DesignWidth="1150">
-    <Grid Background="Transparent">
+    <Grid Background="{StaticResource LightBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
