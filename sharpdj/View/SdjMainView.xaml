@@ -141,5 +141,7 @@
                 <local:SdjRemovePlaylistCollectionView Width="270" Height="110"/>
             </Grid>
         </Grid>
+        
+        
     </Grid>
 </Window>

@@ -11,89 +11,104 @@
              d:DesignHeight="500" d:DesignWidth="1000">
     <Grid>
         <!--Left Bar COLLAPSED-->
-        
+
         <DockPanel HorizontalAlignment="Left" Width="336" Background="{StaticResource LightBrush}" Visibility="Visible">
             <Grid>
                 <Label Foreground="Black" Content="{Binding Username}" FontSize="32" Margin="10"/>
 
-                <StackPanel Margin="15 50 0 0">
+                <StackPanel Margin="0 50 0 0">
                     <!--Profil-->
-                    <Button Style="{StaticResource IconButton}" Margin="0 15 0 0" Command="{Binding LeftBarOnProfileCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="../../Images/avatar.png" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 45 0"/>
-                            <Label Content="Profil" FontSize="20"/>
-                        </StackPanel>
-                    </Button>
+                    <StackPanel Background="{StaticResource LightBrush}" Margin="0 15 0 0">
+                        <Button BorderThickness="0"  Style="{StaticResource IconButtonMouseOverMid}" Command="{Binding LeftBarOnProfileCommand}">
+                            <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
+                                <Image Source="../../Images/avatar.png" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 45 0"/>
+                                <Label Content="Profil" FontSize="20"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
 
                     <!--Ulubione-->
-                    <Button Style="{StaticResource IconButton}" Margin="0 15 0 0" Command="{Binding LeftBarOnFavoritesCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="../../Images/LeftBar/001-rate-star-button.png" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 45 0"/>
-                            <Label Content="Ulubione" FontSize="20"/>
-                        </StackPanel>
-                    </Button>
+                    <StackPanel Background="{StaticResource LightBrush}" Margin="0 15 0 0">
+                        <Button BorderThickness="0"  Style="{StaticResource IconButtonMouseOverMid}" Command="{Binding LeftBarOnFavoritesCommand}">
+                            <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
+                                <Image Source="../../Images/LeftBar/001-rate-star-button.png" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 45 0"/>
+                                <Label Content="Ulubione" FontSize="20"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
 
                     <!--Playlisty-->
-                    <Button Style="{StaticResource IconButton}" Margin="0 15 0 0" Command="{Binding LeftBarOnPlaylistCommand}"
+                    <StackPanel Background="{StaticResource LightBrush}" Margin="0 15 0 0">
+                        <Button BorderThickness="0"  Style="{StaticResource IconButtonMouseOverMid}" Command="{Binding LeftBarOnPlaylistCommand}"
                                         Visibility="{Binding  SdjMainViewModel.SdjPlaylistViewModel.PlaylistVisibility,
                                         Converter={converters:EnumToVisibilityConverter},
                                         ConverterParameter={x:Static enum:Playlist.Collapsed}}">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="../../Images/Room/002-playlist.png" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 45 0"/>
-                            <Label Content="Playlisty" FontSize="20"/>
-                        </StackPanel>
-                    </Button>
+                            <StackPanel Orientation="Horizontal"  Margin="15 0 0 0">
+                                <Image Source="../../Images/Room/002-playlist.png" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 45 0"/>
+                                <Label Content="Playlisty" FontSize="20"/>
+                            </StackPanel>
+                        </Button>
 
-                    <Button Style="{StaticResource IconButton}" Margin="0 15 0 0" Command="{Binding LeftBarOnPlaylistCommand}"  
+                        <Button BorderThickness="0"  Style="{StaticResource IconButtonMouseOverMid}" Command="{Binding LeftBarOnPlaylistCommand}"  
                                         Visibility="{Binding  SdjMainViewModel.SdjPlaylistViewModel.PlaylistVisibility,
                                         Converter={converters:EnumToVisibilityConverter},
                                         ConverterParameter={x:Static enum:Playlist.Visible}}">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="../../Images/Room/038-cancel-button.png" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 45 0"/>
-                            <Label Content="Zamknij playliste" FontSize="20"/>
-                        </StackPanel>
-                    </Button>
+                            <StackPanel Orientation="Horizontal"  Margin="15 0 0 0">
+                                <Image Source="../../Images/Room/038-cancel-button.png" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 45 0"/>
+                                <Label Content="Zamknij playliste" FontSize="20"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
 
                     <!--Pokoje-->
-                    <Button Style="{StaticResource IconButton}" Margin="0 15 0 0" Command="{Binding LeftBarOnRoomsCommand}">
-                        <DockPanel>
-                            <Image Source="../../Images/LeftBar/002-actors.png" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 45 0"/>
-                            <Label Content="Pokoje" FontSize="20"/>
-                          
-                        </DockPanel>
-                    </Button>
+                    <StackPanel Background="{StaticResource LightBrush}" Margin="0 15 0 0">
+                        <Button BorderThickness="0"  Style="{StaticResource IconButtonMouseOverMid}" Command="{Binding LeftBarOnRoomsCommand}">
+                            <DockPanel Margin="15 0 0 0">
+                                <Image Source="../../Images/LeftBar/002-actors.png" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 45 0"/>
+                                <Label Content="Pokoje" FontSize="20"/>
+                            </DockPanel>
+                        </Button>
+                    </StackPanel>
 
                     <!--Znajomi-->
-                    <Button Style="{StaticResource IconButton}" Margin="0 15 0 0" Command="{Binding LeftBarOnFriendsCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="../../Images/LeftBar/036-user-shape.png" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 45 0"/>
-                            <Label Content="Znajomi" FontSize="20"/>
-                        </StackPanel>
-                    </Button>
+                    <StackPanel Background="{StaticResource LightBrush}" Margin="0 15 0 0">
+                        <Button BorderThickness="0"  Style="{StaticResource IconButtonMouseOverMid}" Command="{Binding LeftBarOnFriendsCommand}">
+                            <StackPanel Orientation="Horizontal"  Margin="15 0 0 0">
+                                <Image Source="../../Images/LeftBar/036-user-shape.png" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 45 0"/>
+                                <Label Content="Znajomi" FontSize="20"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
 
                     <!--Rozszerzenia-->
-                    <Button Style="{StaticResource IconButton}" Margin="0 15 0 0" Command="{Binding LeftBarOnPluginsCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="../../Images/LeftBar/041-extension.png" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 45 0"/>
-                            <Label Content="Rozszerzenia" FontSize="20"/>
-                        </StackPanel>
-                    </Button>
+                    <StackPanel Background="{StaticResource LightBrush}" Margin="0 15 0 0">
+                        <Button BorderThickness="0"  Style="{StaticResource IconButtonMouseOverMid}" Command="{Binding LeftBarOnPluginsCommand}">
+                            <StackPanel Orientation="Horizontal"  Margin="15 0 0 0">
+                                <Image Source="../../Images/LeftBar/041-extension.png" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 45 0"/>
+                                <Label Content="Rozszerzenia" FontSize="20"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
 
                     <!--Ustawienia-->
-                    <Button Style="{StaticResource IconButton}" Margin="0 15 0 0" Command="{Binding LeftBarOnOptionsCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="../../Images/LeftBar/001-settings-cogwheel-button.png" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 45 0"/>
-                            <Label Content="Ustawienia" FontSize="20"/>
-                        </StackPanel>
-                    </Button>
+                    <StackPanel Background="{StaticResource LightBrush}" Margin="0 15 0 0">
+                        <Button BorderThickness="0"  Style="{StaticResource IconButtonMouseOverMid}" Command="{Binding LeftBarOnOptionsCommand}">
+                            <StackPanel  Orientation="Horizontal"  Margin="15 0 0 0">
+                                <Image Source="../../Images/LeftBar/001-settings-cogwheel-button.png" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 45 0"/>
+                                <Label Content="Ustawienia" FontSize="20"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
 
                     <!--Zgłoś błąd-->
-                    <Button Style="{StaticResource IconButton}" Margin="0 15 0 0" Command="{Binding LeftBarOnReportBugCommand}">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="../../Images/LeftBar/032-do-not-disturb-rounded-sign.png" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 45 0"/>
-                            <Label Content="Zgłoś błąd" FontSize="20"/>
-                        </StackPanel>
-                    </Button>
+                    <StackPanel Background="{StaticResource LightBrush}" Margin="0 15 0 0">
+                        <Button BorderThickness="0" Style="{StaticResource IconButtonMouseOverMid}" Command="{Binding LeftBarOnReportBugCommand}">
+                            <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
+                                <Image Source="../../Images/LeftBar/032-do-not-disturb-rounded-sign.png" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 45 0"/>
+                                <Label Content="Zgłoś błąd" FontSize="20"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
                 </StackPanel>
 
                 <!--O programie-->
@@ -102,7 +117,7 @@
                         <Label Content="Wersja" FontSize="14"/>
                         <Label Content="{Binding LeftBarProgramVersion}" FontSize="14"/>
                     </StackPanel>
-                    
+
                     <Button Style="{StaticResource IconButton}" Margin="0 -12 0 0" Command="{Binding LeftBarAboutCommand}">
                         <Label Content="O programie" FontSize="12"/>
                     </Button>
