@@ -62,9 +62,11 @@ namespace servertcp
                     if (SqlUserCommands.CheckPassword(pass, e.Login))
                     {
                         var getUserID = SqlUserCommands.GetUserId(e.Login);
-                        var client = new ServerClient(e.Client);
-                        client.Username = e.Login;
-                        client.Login = e.Login;
+                        var client = new ServerClient(e.Client)
+                        {
+                            Username = e.Login,
+                            Login = e.Login
+                        };
                         _clients[client.Client.ClientId] = client;
                         ServerSender.Succesful.SuccessfulLogin(e.Client, client);
                         SqlUserCommands.AddActionInfo(getUserID, Utils.GetIpOfClient(e.Client),
@@ -106,44 +108,25 @@ namespace servertcp
 
         private void Receiver_ChangeRank(object sender, ServerReceiver.ChangeRankEventArgs e)
         {
-            {
-                var client = _clients[e.Client.ClientId];
-                var startPath = Environment.CurrentDirectory;
-                var usersPath = startPath + "/Users/";
-                if (!Directory.Exists(usersPath))
+            var login = _clients[e.Client.ClientId].Login;
+            var userId = SqlUserCommands.GetUserId(login);
+
+                var pass = Scrypt.Hash(e.Password, SqlUserCommands.GetSalt(login));
+                if (Sql.SqlUserCommands.CheckPassword(pass, login))
                 {
-                    Directory.CreateDirectory(usersPath);
-                }
+                    Sql.SqlUserCommands.DataChange.ChangeRank(userId, e.Rank);
+                    ServerSender.Succesful.SuccessfulChangedRank(e.Client);
 
-                var accPath = usersPath + client.Login + ".json";
-
-                if (File.Exists(accPath))
-                {
-                    var jsonSource = File.ReadAllText(accPath);
-
-                    var clientJson = JsonConvert.DeserializeObject<ServerClient>(jsonSource);
-
-                    var pass = Scrypt.Hash(e.Password, client.Salt);
-                    if (pass.Equals(client.Password))
-                    {
-                        client.Rank = e.Rank;
-                        clientJson.Rank = client.Rank;
-                        var json = JsonConvert.SerializeObject(clientJson, Formatting.Indented);
-
-                        File.WriteAllText(accPath, json);
-                        ServerSender.Succesful.SuccessfulChangedRank(client.Client);
-                    }
-                    else
-                        ServerSender.Error.ChangeRankError(client.Client);
+                    Sql.SqlUserCommands.AddActionInfo(userId, Utils.GetIpOfClient(e.Client),
+                        SqlUserCommands.Actions.ChangeRank);
                 }
                 else
-                    ServerSender.Error.ChangeRankError(client.Client);
-            }
+                    ServerSender.Error.ChangeLoginError(e.Client);
         }
 
         private void Receiver_ChangeUsername(object sender, ServerReceiver.ChangeUsernameEventArgs e)
         {
-            var client = _clients[e.Client.ClientId];
+         /*   var client = _clients[e.Client.ClientId];
 
             var startPath = Environment.CurrentDirectory;
             var usersPath = startPath + "/Users/";
@@ -175,12 +158,12 @@ namespace servertcp
                     ServerSender.Error.ChangeUsernameError(client.Client);
             }
             else
-                ServerSender.Error.ChangeUsernameError(client.Client);
+                ServerSender.Error.ChangeUsernameError(client.Client);*/
         }
 
         private void Receiver_ChangePassword(object sender, ServerReceiver.ChangePasswordEventArgs e)
         {
-            var client = _clients[e.Client.ClientId];
+         /*   var client = _clients[e.Client.ClientId];
 
             var startPath = Environment.CurrentDirectory;
             var usersPath = startPath + "/Users/";
@@ -213,7 +196,7 @@ namespace servertcp
                     ServerSender.Error.ChangePasswordError(client.Client);
             }
             else
-                ServerSender.Error.ChangePasswordError(client.Client);
+                ServerSender.Error.ChangePasswordError(client.Client);*/
         }
 
         private void _communication_Register(object sender, ServerReceiver.RegisterEventArgs e)
@@ -249,11 +232,6 @@ namespace servertcp
         private bool IsActiveLogin(IScsServerClient client)
         {
             return _clients[client.ClientId] != null;
-        }
-
-        private long GetId(IScsServerClient client)
-        {
-            return client.ClientId;
         }
     }
 }

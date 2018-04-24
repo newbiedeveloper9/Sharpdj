@@ -5,6 +5,8 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Communication.Server;
+using Communication.Shared;
 
 namespace servertcp.Sql
 {
@@ -21,11 +23,12 @@ namespace servertcp.Sql
                         new SqlParameter("@Username", username),
                         new SqlParameter("@Salt", salt),
                         new SqlParameter("@Date", GetSqlDateTime()),
+                        new SqlParameter("@Rank", Rank.User), 
                     };
 
                         
-                    SqlHelper.SqlNonQueryCommand("INSERT INTO Users (Login, Username, Password, Salt, AccountCreationTime) " +
-                                                             "VALUES(@Login, @Username, @Password, @Salt, @Date)", parameters);
+                    SqlHelper.SqlNonQueryCommand("INSERT INTO Users (Login, Username, Password, Salt, AccountCreationTime, Rank) " +
+                                                             "VALUES(@Login, @Username, @Password, @Salt, @Date, @Rank)", parameters);
                     return true;
                 }
                 return false;
@@ -194,6 +197,26 @@ namespace servertcp.Sql
                 }
                 return true;
             }
+
+            public static bool ChangeRank(long id, Rank rank)
+            {
+                try
+                {
+                    var parameters = new[]
+                    {
+                        new SqlParameter("@Id", id),
+                        new SqlParameter("@Rank", rank),
+                    };
+
+                    SqlHelper.SqlNonQueryCommand("UPDATE Users SET Users.Rank=@Rank WHERE Id = @Id", parameters);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+                return true;
+            }
         }
 
         private static string GetSqlDateTime()
@@ -201,7 +224,7 @@ namespace servertcp.Sql
             return DateTime.Now.ToString("s");
         }
 
-        public enum Actions : int
+        public enum Actions
         {
             Login,
             Logout,
@@ -210,7 +233,8 @@ namespace servertcp.Sql
             ChangeUsername,
             ChangePassword,
             ChangeEmail,
-            ChangeAvatar
+            ChangeAvatar,
+            ChangeRank
         }
     }
 }

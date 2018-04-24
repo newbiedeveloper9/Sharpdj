@@ -1,6 +1,6 @@
 ﻿namespace Communication.Shared
 {
-    public enum Rank : ushort
+    public enum Rank
     {
         User,
         Moderator,

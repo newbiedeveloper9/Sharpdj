@@ -18,7 +18,7 @@
         </Grid.ColumnDefinitions>
 
         <!-- Main -->
-        <DockPanel Grid.Row="0" Grid.Column="0">
+        <DockPanel Grid.Row="0" Grid.Column="0" Background="{StaticResource LightBrush}">
             <StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="10">
                     <Label Content="{Binding RoomName}" FontSize="32"/>
