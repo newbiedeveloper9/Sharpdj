@@ -10,11 +10,13 @@ namespace SharpDj.ViewModel.Model
     public class PlaylistToAddTrack : BaseViewModel
     {
         #region .ctor
-        public PlaylistToAddTrack(SdjMainViewModel main, string playlistName, int trackcount)
+        public PlaylistToAddTrack(SdjMainViewModel main, string playlistName, int trackcount, PlaylistModel playlist, PlaylistTrackModel track)
         {
             SdjMainViewModel = main;
             PlaylistName = playlistName;
             TrackCount = trackcount;
+            MainPlaylistModel = playlist;
+            Track = track;
         }
         #endregion .ctor
 
@@ -57,6 +59,32 @@ namespace SharpDj.ViewModel.Model
         }
 
 
+        private PlaylistModel _mainPlaylistModel;
+        public PlaylistModel MainPlaylistModel
+        {
+            get => _mainPlaylistModel;
+            set
+            {
+                if (_mainPlaylistModel == value) return;
+                _mainPlaylistModel = value;
+                OnPropertyChanged("MainPlaylistModel");
+            }
+        }
+
+
+        private PlaylistTrackModel _track;
+        public PlaylistTrackModel Track
+        {
+            get => _track;
+            set
+            {
+                if (_track == value) return;
+                _track = value;
+                OnPropertyChanged("Track");
+            }
+        }
+
+
 
         #endregion Properties
 
@@ -66,6 +94,33 @@ namespace SharpDj.ViewModel.Model
         #endregion Methods
 
         #region Commands
+
+        #region SelectPlaylistCommand
+        private RelayCommand _selectPlaylistCommand;
+        public RelayCommand SelectPlaylistCommand
+        {
+            get
+            {
+                return _selectPlaylistCommand
+                       ?? (_selectPlaylistCommand = new RelayCommand(SelectPlaylistCommandExecute, SelectPlaylistCommandCanExecute));
+            }
+        }
+
+        public bool SelectPlaylistCommandCanExecute()
+        {
+            return true;
+        }
+
+        public void SelectPlaylistCommandExecute()
+        {
+            SdjMainViewModel.SdjAddTrackToPlaylistCollectionViewModel.SdjTitleBarForUserControlsViewModel
+                .CloseFormExecute();
+            //SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection.FirstOrDefault(x=>x.Equals(main))
+            if (!MainPlaylistModel.Tracks.Contains(Track))
+                MainPlaylistModel.AddTrack(Track);
+            //  Console.WriteLine(MainPlaylistModel.TracksInPlaylist);
+        }
+        #endregion
 
 
         #endregion Commands

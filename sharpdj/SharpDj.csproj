@@ -396,9 +396,6 @@
     <Resource Include="Images\Rooms\favorite_full.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\avatar.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\avatar.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

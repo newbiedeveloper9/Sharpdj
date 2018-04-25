@@ -18,6 +18,7 @@ namespace SharpDj.ViewModel.Model
         public PlaylistModel(SdjMainViewModel main)
         {
             SdjMainViewModel = main;
+            Tracks = new ObservableCollection<PlaylistTrackModel>();
         }
         #endregion .ctor
 
@@ -129,6 +130,11 @@ namespace SharpDj.ViewModel.Model
 
         #region Methods
 
+        public void AddTrack(PlaylistTrackModel track)
+        {
+            Tracks.Add(track);
+            TracksInPlaylist++;
+        }
 
         #endregion Methods
 

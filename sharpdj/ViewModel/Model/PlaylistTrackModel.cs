@@ -33,6 +33,18 @@ namespace SharpDj.ViewModel.Model
             }
         }
 
+        private string _songId;
+        public string SongId
+        {
+            get => _songId;
+            set
+            {
+                if (_songId == value) return;
+                _songId = value;
+                OnPropertyChanged("SongId");
+            }
+        }
+
         private string _songName;
         public string SongName
         {
@@ -164,10 +176,6 @@ namespace SharpDj.ViewModel.Model
         #endregion
 
 
-
         #endregion Commands
-
-
-
     }
 }

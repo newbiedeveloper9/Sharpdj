@@ -74,6 +74,17 @@ namespace SharpDj.ViewModel
             }
         }
 
+        private PlaylistTrackModel _trackToAdd;
+        public PlaylistTrackModel TrackToAdd
+        {
+            get => _trackToAdd;
+            set
+            {
+                if (_trackToAdd == value) return;
+                _trackToAdd = value;
+                OnPropertyChanged("TrackToAdd");
+            }
+        }
 
         #endregion Properties
 

@@ -26,14 +26,14 @@ namespace SharpDj.ViewModel
 
             for (int i = 0; i < 2; i++)
             {
-                var tracks = new ObservableCollection<PlaylistTrackModel>();
-                for (int j = 0; j < i; j++)
+              //  var tracks = new ObservableCollection<PlaylistTrackModel>();
+             /*   for (int j = 0; j < i; j++)
                 {
                     tracks.Add(new PlaylistTrackModel(main) { AuthorName = "Łrisey " + i + j, SongDuration = "3:20", SongName = "Monstercat jakis tam" });
                     tracks.Add(new PlaylistTrackModel(main) { AuthorName = "ąonk " + j + i + 2, SongDuration = "2:13", SongName = "Tylko chińskie xD" });
-                }
-                PlaylistCollection.Add(new PlaylistModel(main) { PlaylistName = "Chińska playlista", Tracks = tracks });
-                PlaylistCollection.Add(new PlaylistModel(main) { PlaylistName = "Zonkowate cos", Tracks = tracks });
+                }*/
+                PlaylistCollection.Add(new PlaylistModel(main) { PlaylistName = "Chińska playlista" });
+                PlaylistCollection.Add(new PlaylistModel(main) { PlaylistName = "Zonkowate cos"});
             }
         }
 
@@ -260,9 +260,11 @@ namespace SharpDj.ViewModel
 
         public void AddTrackToPlaylistCommandExecute()
         {
+            SdjMainViewModel.SdjAddTrackToPlaylistCollectionViewModel.PlaylistCollection = new ObservableCollection<PlaylistToAddTrack>();
+            var track = TrackCollection.FirstOrDefault(x => x.SongTimeVisibility == Visibility.Collapsed);
             foreach (var playlistModel in PlaylistCollection)
             {
-                SdjMainViewModel.SdjAddTrackToPlaylistCollectionViewModel.PlaylistCollection.Add(new PlaylistToAddTrack(SdjMainViewModel, playlistModel.PlaylistName, playlistModel.TracksInPlaylist));
+                SdjMainViewModel.SdjAddTrackToPlaylistCollectionViewModel.PlaylistCollection.Add(new PlaylistToAddTrack(SdjMainViewModel, playlistModel.PlaylistName, playlistModel.TracksInPlaylist, playlistModel, track));
             }
             SdjMainViewModel.PlaylistStateCollectionVisibility = PlaylistState.AddTrack;
         }
