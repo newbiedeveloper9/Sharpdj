@@ -6,10 +6,11 @@ namespace SharpDj.ViewModel.Helpers
     public class SdjTitleBarForUserControlsViewModel : BaseViewModel
     {
         #region .ctor
-        public SdjTitleBarForUserControlsViewModel(SdjMainViewModel main, Action onCloseForm)
+        public SdjTitleBarForUserControlsViewModel(SdjMainViewModel main, Action onCloseForm, string formname)
         {
             SdjMainViewModel = main;
             CloseFormExecute = onCloseForm;
+            FormName = formname;
         }
         #endregion .ctor
 
@@ -26,7 +27,7 @@ namespace SharpDj.ViewModel.Helpers
             }
         }
 
-        private string _formName;
+        private string _formName = "";
         public string FormName
         {
             get => _formName;

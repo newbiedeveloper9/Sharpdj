@@ -15,7 +15,7 @@ namespace SharpDj.ViewModel
         public SdjUserProfileViewModel(SdjMainViewModel main)
         {
             SdjMainViewModel = main;
-            SdjTitleBarForUserControlsViewModel = new SdjTitleBarForUserControlsViewModel(main, CloseForm);
+            SdjTitleBarForUserControlsViewModel = new SdjTitleBarForUserControlsViewModel(main, CloseForm, "Profile - Unknown");
             SdjBackgroundForFormsViewModel = new SdjBackgroundForFormsViewModel(main, CloseForm);
         }
         #endregion

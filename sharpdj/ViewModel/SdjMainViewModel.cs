@@ -33,12 +33,13 @@ namespace SharpDj.ViewModel
             SdjAddPlaylistCollectionViewModel = new SdjAddPlaylistCollectionViewModel(this);
             SdjEditPlaylistCollectionViewModel = new SdjEditPlaylistCollectionViewModel(this);
             SdjRemovePlaylistCollectionViewModel = new SdjRemovePlaylistCollectionViewModel(this);
+            SdjAddTrackToPlaylistCollectionViewModel = new SdjAddTrackToPlaylistCollectionViewModel(this);
             SdjLoginViewModel = new SdjLoginViewModel(this);
             SdjRegisterViewModel = new SdjRegisterViewModel(this);
             SdjUserProfileViewModel = new SdjUserProfileViewModel(this);
             SdjFeedbackViewModel = new SdjFeedbackViewModel(this);
 
-            MainViewVisibility = MainView.Login;
+            MainViewVisibility = MainView.Main;
             Profile = new UserClient();
 
             for (int i = 0; i < 5; i++)
@@ -265,6 +266,20 @@ namespace SharpDj.ViewModel
                 OnPropertyChanged("SdjFeedbackViewModel");
             }
         }
+
+
+        private SdjAddTrackToPlaylistCollectionViewModel _sdjAddTrackToPlaylistCollectionViewModel;
+        public SdjAddTrackToPlaylistCollectionViewModel SdjAddTrackToPlaylistCollectionViewModel
+        {
+            get => _sdjAddTrackToPlaylistCollectionViewModel;
+            set
+            {
+                if (_sdjAddTrackToPlaylistCollectionViewModel == value) return;
+                _sdjAddTrackToPlaylistCollectionViewModel = value;
+                OnPropertyChanged("SdjAddTrackToPlaylistCollectionViewModel");
+            }
+        }
+
 
         #endregion ViewModels
 

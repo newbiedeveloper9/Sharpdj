@@ -91,10 +91,7 @@ namespace SharpDj.ViewModel.Model
                 _songOptionsVisibility = value;
                 OnPropertyChanged("SongOptionsVisibility");
 
-                if (value == Visibility.Visible)
-                    SongTimeVisibility = Visibility.Collapsed;
-                else
-                    SongTimeVisibility = Visibility.Visible;
+                SongTimeVisibility = value == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
             }
         }
 

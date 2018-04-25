@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using SharpDj.Core;
 using SharpDj.Enums;
 using SharpDj.ViewModel.Model;
+using Playlist = SharpDj.Enums.Playlist;
+using System.Net;
+using YoutubeSearch;
 
 namespace SharpDj.ViewModel
 {
@@ -25,8 +29,8 @@ namespace SharpDj.ViewModel
                 var tracks = new ObservableCollection<PlaylistTrackModel>();
                 for (int j = 0; j < i; j++)
                 {
-                    tracks.Add(new PlaylistTrackModel(main) { AuthorName = "Crisey " + i + j, SongDuration = "3:20", SongName = "Monstercat jakis tam" });
-                    tracks.Add(new PlaylistTrackModel(main) { AuthorName = "Zonk " + j + i + 2, SongDuration = "2:13", SongName = "Tylko chińskie xD" });
+                    tracks.Add(new PlaylistTrackModel(main) { AuthorName = "Łrisey " + i + j, SongDuration = "3:20", SongName = "Monstercat jakis tam" });
+                    tracks.Add(new PlaylistTrackModel(main) { AuthorName = "ąonk " + j + i + 2, SongDuration = "2:13", SongName = "Tylko chińskie xD" });
                 }
                 PlaylistCollection.Add(new PlaylistModel(main) { PlaylistName = "Chińska playlista", Tracks = tracks });
                 PlaylistCollection.Add(new PlaylistModel(main) { PlaylistName = "Zonkowate cos", Tracks = tracks });
@@ -88,6 +92,36 @@ namespace SharpDj.ViewModel
                 OnPropertyChanged("PlaylistVisibility");
             }
         }
+
+        /* Visibility="{Binding  SdjMainViewModel.SdjPlaylistViewModel.PlaylistVisibility,
+                                                Converter={converters:EnumToVisibilityConverter},
+                                                ConverterParameter={x:Static enum:Playlist.Collapsed}}"*/
+
+        private PlaylistMode _playlistMode = PlaylistMode.Playlist;
+        public PlaylistMode PlaylistMode
+        {
+            get => _playlistMode;
+            set
+            {
+                if (_playlistMode == value) return;
+                _playlistMode = value;
+                OnPropertyChanged("PlaylistMode");
+            }
+        }
+
+
+        private string _searchText = "dasdasd";
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                if (_searchText == value) return;
+                _searchText = value;
+                OnPropertyChanged("SearchText");
+            }
+        }
+
 
         #endregion Properties
 
@@ -191,7 +225,7 @@ namespace SharpDj.ViewModel
                        ?? (_playlistEditModel = new RelayCommand(PlaylistEditModelExecute, PlaylistEditModelCanExecute));
             }
         }
-        
+
         public bool PlaylistEditModelCanExecute()
         {
             return true;
@@ -207,6 +241,70 @@ namespace SharpDj.ViewModel
         }
         #endregion
 
-        #endregion Commands
+
+        #region AddTrackToPlaylistCommand
+        private RelayCommand _addTrackToPlaylistCommand;
+        public RelayCommand AddTrackToPlaylistCommand
+        {
+            get
+            {
+                return _addTrackToPlaylistCommand
+                       ?? (_addTrackToPlaylistCommand = new RelayCommand(AddTrackToPlaylistCommandExecute, AddTrackToPlaylistCommandCanExecute));
+            }
+        }
+
+        public bool AddTrackToPlaylistCommandCanExecute()
+        {
+            return true;
+        }
+
+        public void AddTrackToPlaylistCommandExecute()
+        {
+            foreach (var playlistModel in PlaylistCollection)
+            {
+                SdjMainViewModel.SdjAddTrackToPlaylistCollectionViewModel.PlaylistCollection.Add(new PlaylistToAddTrack(SdjMainViewModel, playlistModel.PlaylistName, playlistModel.TracksInPlaylist));
+            }
+            SdjMainViewModel.PlaylistStateCollectionVisibility = PlaylistState.AddTrack;
+        }
+        #endregion
+
+
+        #region OnEnterSearchVideoCommand
+        private RelayCommand _onEnterSearchVideoCommand;
+        public RelayCommand OnEnterSearchVideoCommand
+        {
+            get
+            {
+                return _onEnterSearchVideoCommand
+                       ?? (_onEnterSearchVideoCommand = new RelayCommand(OnEnterSearchVideoCommandExecute, OnEnterSearchVideoCommandCanExecute));
+            }
+        }
+
+        public bool OnEnterSearchVideoCommandCanExecute()
+        {
+            return true;
+        }
+
+        public void OnEnterSearchVideoCommandExecute()
+        {
+            PlaylistMode = PlaylistMode.Search;
+
+            var items = new VideoSearch();
+
+            TrackCollection = new ObservableCollection<PlaylistTrackModel>();
+            foreach (var item in items.SearchQuery(SearchText, 1))
+            {
+                var track = new PlaylistTrackModel(SdjMainViewModel);
+                track.SongName = item.Title;
+                track.AuthorName = item.Author;
+                track.SongDuration = item.Duration;
+                TrackCollection.Add(track);
+            }
+        }
     }
+
+    #endregion
+
+
+    #endregion Commands
 }

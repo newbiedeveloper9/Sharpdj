@@ -43,8 +43,8 @@
       <HintPath>..\Communication\bin\Debug\Communication.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Scs, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Scs.1.1.1\lib\net40-client\Scs.dll</HintPath>
@@ -61,6 +61,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="YoutubeSearch">
+      <HintPath>..\..\YoutubeSearch-master\YoutubeSearch\YoutubeSearch\bin\Release\YoutubeSearch.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -86,7 +89,9 @@
     <Compile Include="ViewModel\Helpers\SdjBackgroundForFormsViewModel.cs" />
     <Compile Include="ViewModel\Model\FavoriteRoomsModel.cs" />
     <Compile Include="ViewModel\Model\PlaylistModel.cs" />
+    <Compile Include="ViewModel\Model\PlaylistToAddTrack.cs" />
     <Compile Include="ViewModel\Model\PlaylistTrackModel.cs" />
+    <Compile Include="ViewModel\SdjAddTrackToPlaylistCollectionViewModel.cs" />
     <Compile Include="ViewModel\SdjFeedbackViewModel.cs" />
     <Compile Include="ViewModel\SdjLoginViewModel.cs" />
     <Compile Include="ViewModel\SdjRegisterViewModel.cs" />
@@ -112,6 +117,9 @@
     </Compile>
     <Compile Include="View\UserControls\SdjAddPlaylistCollectionView.xaml.cs">
       <DependentUpon>SdjAddPlaylistCollectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\SdjAddTrackToPlaylistCollectionUserControl.xaml.cs">
+      <DependentUpon>SdjAddTrackToPlaylistCollectionUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\SdjEditPlaylistCollectionView.xaml.cs">
       <DependentUpon>SdjEditPlaylistCollectionView.xaml</DependentUpon>
@@ -207,6 +215,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserControls\SdjAddPlaylistCollectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\SdjAddTrackToPlaylistCollectionUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -353,9 +365,6 @@
     <Resource Include="Images\LeftBar\003-white-group.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\avatar.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Playlists\001-add.png" />
     <Resource Include="Images\Playlists\003-check-symbol.png" />
     <Resource Include="Images\Playlists\029-rubbish-bin-delete-button.png" />
@@ -386,6 +395,11 @@
   <ItemGroup>
     <Resource Include="Images\Rooms\favorite_full.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\avatar.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\avatar.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

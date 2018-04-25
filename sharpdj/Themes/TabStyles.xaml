@@ -32,7 +32,7 @@
                     </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="dsa" Property="Background" Value="{StaticResource LightBrush}" />
+                                <Setter TargetName="dsa" Property="Background" Value="{StaticResource LightBrush}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                 </ControlTemplate>

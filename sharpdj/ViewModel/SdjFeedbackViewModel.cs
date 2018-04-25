@@ -18,8 +18,7 @@ namespace SharpDj.ViewModel
             SdjMainViewModel = main;
 
             SdjBackgroundForFormsViewModel = new SdjBackgroundForFormsViewModel(main, CloseForm);
-            SdjTitleBarForUserControlsViewModel = new SdjTitleBarForUserControlsViewModel(main, CloseForm);
-            SdjTitleBarForUserControlsViewModel.FormName = "Feedback";
+            SdjTitleBarForUserControlsViewModel = new SdjTitleBarForUserControlsViewModel(main, CloseForm, "Feedback");
         }
 
         #endregion .ctor

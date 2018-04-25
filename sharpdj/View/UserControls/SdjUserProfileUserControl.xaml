@@ -29,7 +29,7 @@
 
         <DockPanel Grid.Row="1" Background="{StaticResource DarkBrush}">
             <StackPanel Margin="10 20 10 20">
-                <Image Source="../../Images/avatar.png" Height="150"/>
+                <Image Source="../../Images/avatar.png" Height="150" Width="150"/>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 10">
                     <StackPanel Orientation="Vertical" Margin="5">
@@ -50,7 +50,7 @@
             </StackPanel>
 
 
-            <TabControl Background="{StaticResource MidBrush}" Margin="5 5 0 0"  Style="{StaticResource TabControlStyle}">
+            <TabControl Background="{StaticResource LightBrush}" Margin="5 5 0 0"  Style="{StaticResource TabControlStyle}">
                 <TabItem Header="About" Style="{StaticResource TabItemStyle}">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
@@ -85,8 +85,8 @@
 
                 <TabItem Header="Coments" Style="{StaticResource TabItemStyle}">
                     <Grid HorizontalAlignment="Right">
-                        <RichTextBox Margin="10 10 10 35" Background="{StaticResource LightBrush}"/>
-                        <TextBox Margin="10" Text="{Binding CommentText}" FontSize="18" Height="25" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Background="{StaticResource MidBrush}"/>
+                        <RichTextBox Margin="10 10 10 35" Background="{StaticResource MidBrush}"/>
+                        <TextBox Margin="10" Text="{Binding CommentText}" FontSize="18" Height="25" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Background="{StaticResource DarkBrush}"/>
                     </Grid>
                 </TabItem>
             </TabControl>

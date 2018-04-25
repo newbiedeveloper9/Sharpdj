@@ -63,7 +63,7 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource DarkBrush}"/>
+                <Setter Property="Background" Value="{StaticResource LightBrush}"/>
             </Trigger>
         </Style.Triggers>
     </Style>

@@ -5,4 +5,10 @@ namespace SharpDj.Enums
         Visible,
         Collapsed
     }
+
+    public enum PlaylistMode : ushort
+    {
+        Search,
+        Playlist
+    }
 }

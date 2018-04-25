@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using SharpDj.Core;
+using SharpDj.Enums;
 
 namespace SharpDj.ViewModel.Model
 {
@@ -60,6 +61,7 @@ namespace SharpDj.ViewModel.Model
                 {
                     BackgroundBrush = new SolidColorBrush(Color.FromArgb(255, 0, 56, 77));
                     SdjMainViewModel.SdjPlaylistViewModel.TrackCollection = Tracks;
+                    SdjMainViewModel.SdjPlaylistViewModel.PlaylistMode = PlaylistMode.Playlist;
                 }
                 else
                 {
@@ -163,7 +165,6 @@ namespace SharpDj.ViewModel.Model
                 {
                     playlist.IsSelected = false;
                 }
-
 
                 IsSelected = true;
             }

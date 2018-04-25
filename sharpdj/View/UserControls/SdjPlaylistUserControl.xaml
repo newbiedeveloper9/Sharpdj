@@ -6,6 +6,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:model="clr-namespace:SharpDj.ViewModel.Model"
              xmlns:converters="clr-namespace:SharpDj.Converters"
+             xmlns:enum="clr-namespace:SharpDj.Enums"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="1000">
     <Grid>
@@ -25,7 +26,11 @@
         <Grid Grid.Column="1" Grid.Row="1" Background="{StaticResource DarkBrush}" Opacity="0.97" >
 
             <Grid VerticalAlignment="Center">
-                <TextBox Text="" Foreground="White" Style="{StaticResource IconTextbox}" BorderThickness="0" x:Name="SearchTermTextBox" FontSize="24" VerticalAlignment="Center" Margin="20 0 160 0"/>
+                <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"  Foreground="White" Style="{StaticResource IconTextbox}" BorderThickness="0" x:Name="SearchTermTextBox" FontSize="24" VerticalAlignment="Center" Margin="20 0 160 0">
+                    <TextBox.InputBindings>
+                        <KeyBinding Command="{Binding Path=OnEnterSearchVideoCommand}" Key="Enter" />
+                    </TextBox.InputBindings>
+                </TextBox>
                 <Label Content="Search YouTube" VerticalAlignment="Center" IsHitTestVisible="False" HorizontalAlignment="Left" Margin="18 0 0 0" Foreground="#bbbbbb" FontSize="24">
                     <Label.Style>
                         <Style TargetType="{x:Type Label}">
@@ -111,25 +116,46 @@
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                     <Grid Margin="15 0 15 0">
-                                        <Label Content="{Binding SongName}" Foreground="White" FontSize="24" HorizontalAlignment="Left"/>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="5*"/>
+                                            <ColumnDefinition Width="2.35*"/>
+                                            <ColumnDefinition Width="180"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Content="{Binding SongName}" Foreground="White" FontSize="24" HorizontalAlignment="Left" Grid.Column="0"/>
 
-                                        <Label Content="{Binding AuthorName}" Foreground="White" FontSize="24" HorizontalAlignment="Center" Background="{Binding BackgroundBrush}"/>
+                                        <Label Content="{Binding AuthorName}" Foreground="White" FontSize="24" Grid.Column="1" Background="{Binding BackgroundBrush}" Margin="20 0 20 0"/>
 
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Visibility="{Binding SongOptionsVisibility}" Background="{Binding BackgroundBrush}">
-                                            <Button VerticalAlignment="Center" Style="{StaticResource IconButtonMouseOver}" BorderThickness="0" Width="44" Height="42" >
-                                                <Image Source="../../Images/Playlists/pencil-edit-button-white.png" Width="24" Height="24"/>
+                                        <Grid  Visibility="{Binding SdjMainViewModel.SdjPlaylistViewModel.PlaylistMode,
+                                                Converter={converters:EnumToVisibilityConverter},
+                                                ConverterParameter={x:Static enum:PlaylistMode.Playlist}}" Grid.Column="2">
+                                            <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" Visibility="{Binding SongOptionsVisibility}" Background="{Binding BackgroundBrush}">
+                                                <Button VerticalAlignment="Center" Style="{StaticResource IconButtonMouseOver}" BorderThickness="0" Width="44" Height="42" >
+                                                    <Image Source="../../Images/Playlists/pencil-edit-button-white.png" Width="24" Height="24"/>
+                                                </Button>
+                                                <Button VerticalAlignment="Center" Style="{StaticResource IconButtonMouseOver}" BorderThickness="0" Width="44" Height="42">
+                                                    <Image Source="../../Images/Playlists/009-down-chevron-white.png" Width="24" Height="24"/>
+                                                </Button>
+                                                <Button VerticalAlignment="Center" Style="{StaticResource IconButtonMouseOver}" BorderThickness="0" Width="44" Height="42" >
+                                                    <Image Source="../../Images/Playlists/014-up-chevron-white.png" Width="24" Height="24"/>
+                                                </Button>
+                                                <Button VerticalAlignment="Center" Style="{StaticResource IconButtonMouseOver}" BorderThickness="0" Width="44" Height="42">
+                                                    <Image Source="../../Images/Playlists/029-rubbish-bin-delete-button-white.png" Width="24" Height="24"/>
+                                                </Button>
+                                            </StackPanel>
+                                        </Grid>
+                                        <Grid  Visibility="{Binding SdjMainViewModel.SdjPlaylistViewModel.PlaylistMode,
+                                                Converter={converters:EnumToVisibilityConverter},
+                                                ConverterParameter={x:Static enum:PlaylistMode.Search}}" Grid.Column="2">
+                                            <StackPanel  Grid.Column="2" VerticalAlignment="Center">
+                                                <Label Content="{Binding SongDuration}" Foreground="White" FontSize="24"/>
+                                            </StackPanel>
+                                            <Button VerticalAlignment="Center" Style="{StaticResource IconButtonMouseOver}" HorizontalAlignment="Right" Visibility="{Binding SongOptionsVisibility}" BorderThickness="0" Width="44" Height="42" 
+                                                    Command="{Binding SdjMainViewModel.SdjPlaylistViewModel.AddTrackToPlaylistCommand}" >
+                                                <Image Source="../../Images/Playlists/001-add.png" Width="24" Height="24"/>
                                             </Button>
-                                            <Button VerticalAlignment="Center" Style="{StaticResource IconButtonMouseOver}" BorderThickness="0" Width="44" Height="42">
-                                                <Image Source="../../Images/Playlists/009-down-chevron-white.png" Width="24" Height="24"/>
-                                            </Button>
-                                            <Button VerticalAlignment="Center" Style="{StaticResource IconButtonMouseOver}" BorderThickness="0" Width="44" Height="42" >
-                                                <Image Source="../../Images/Playlists/014-up-chevron-white.png" Width="24" Height="24"/>
-                                            </Button>
-                                            <Button VerticalAlignment="Center" Style="{StaticResource IconButtonMouseOver}" BorderThickness="0" Width="44" Height="42">
-                                                <Image Source="../../Images/Playlists/029-rubbish-bin-delete-button-white.png" Width="24" Height="24"/>
-                                            </Button>
-                                        </StackPanel>
-                                        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Visibility="{Binding SongTimeVisibility}">
+                                            
+                                        </Grid>
+                                        <StackPanel  Grid.Column="2" VerticalAlignment="Center" Visibility="{Binding SongTimeVisibility}">
                                             <Label Content="{Binding SongDuration}" Foreground="White" FontSize="24"/>
                                         </StackPanel>
                                     </Grid>

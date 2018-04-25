@@ -18,8 +18,7 @@ namespace SharpDj.ViewModel
         public SdjAddPlaylistCollectionViewModel(SdjMainViewModel main)
         {
             SdjMainViewModel = main;
-            SdjTitleBarForUserControlsViewModel = new SdjTitleBarForUserControlsViewModel(main, closeForm);
-            SdjTitleBarForUserControlsViewModel.FormName = "Add Playlist";
+            SdjTitleBarForUserControlsViewModel = new SdjTitleBarForUserControlsViewModel(main, closeForm, "Add Playlist");
             SdjBackgroundForFormsViewModel = new SdjBackgroundForFormsViewModel(main, closeForm);
         }
 

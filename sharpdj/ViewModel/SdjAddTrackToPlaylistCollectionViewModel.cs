@@ -1,29 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SharpDj.Core;
 using SharpDj.Enums;
 using SharpDj.ViewModel.Helpers;
+using SharpDj.ViewModel.Model;
 
 namespace SharpDj.ViewModel
 {
-    public class SdjRemovePlaylistCollectionViewModel : BaseViewModel
+    public class SdjAddTrackToPlaylistCollectionViewModel : BaseViewModel
     {
-
         #region .ctor
 
-        public SdjRemovePlaylistCollectionViewModel(SdjMainViewModel main)
+        public SdjAddTrackToPlaylistCollectionViewModel(SdjMainViewModel main)
         {
+            PlaylistCollection = new ObservableCollection<PlaylistToAddTrack>();
             SdjMainViewModel = main;
-            SdjTitleBarForUserControlsViewModel = new SdjTitleBarForUserControlsViewModel(main, closeForm, "Remove playlist");
+            SdjTitleBarForUserControlsViewModel = new SdjTitleBarForUserControlsViewModel(main, closeForm, "Add Track to Playlist");
             SdjBackgroundForFormsViewModel = new SdjBackgroundForFormsViewModel(main, closeForm);
         }
+
         #endregion .ctor
 
         #region Properties
-
         private SdjMainViewModel _sdjMainViewModel;
         public SdjMainViewModel SdjMainViewModel
         {
@@ -60,6 +62,19 @@ namespace SharpDj.ViewModel
             }
         }
 
+        private ObservableCollection<PlaylistToAddTrack> _playlistCollection;
+        public ObservableCollection<PlaylistToAddTrack> PlaylistCollection
+        {
+            get => _playlistCollection;
+            set
+            {
+                if (_playlistCollection == value) return;
+                _playlistCollection = value;
+                OnPropertyChanged("PlaylistCollection");
+            }
+        }
+
+
         #endregion Properties
 
         #region Methods
@@ -73,33 +88,6 @@ namespace SharpDj.ViewModel
 
         #region Commands
 
-        #region RemovePlaylistCommand
-        private RelayCommand _removePlaylistCommand;
-        public RelayCommand RemovePlaylistCommand
-        {
-            get
-            {
-                return _removePlaylistCommand
-                       ?? (_removePlaylistCommand = new RelayCommand(RemovePlaylistCommandExecute, RemovePlaylistCommandCanExecute));
-            }
-        }
-
-        public bool RemovePlaylistCommandCanExecute()
-        {
-            return true;
-        }
-
-        public void RemovePlaylistCommandExecute()
-        {
-            var item = SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection.FirstOrDefault(x => x.IsSelected);
-            if (item != null)
-                SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection.Remove(item);
-            closeForm();
-        }
-        #endregion
-
         #endregion Commands
-
-
     }
 }

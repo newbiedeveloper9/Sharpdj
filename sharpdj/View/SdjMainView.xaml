@@ -142,6 +142,15 @@
             </Grid>
         </Grid>
         
-        
+        <!--Add Track to Playlist-->
+        <Grid Row="0" RowSpan="3"  ColumnSpan="2"  Visibility="{Binding PlaylistStateCollectionVisibility,
+            Converter={converters:EnumToVisibilityConverter},
+            ConverterParameter={x:Static enum:PlaylistState.AddTrack}, Mode=TwoWay}">
+            <Grid DataContext="{Binding SdjAddTrackToPlaylistCollectionViewModel}">
+                <helpers:SdjBackgroundForForms/>
+                <local:SdjAddTrackToPlaylistCollectionUserControl Width="300" Height="500"/>
+            </Grid>
+        </Grid>
+
     </Grid>
 </Window>

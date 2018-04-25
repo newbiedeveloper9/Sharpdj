@@ -5,6 +5,9 @@
         Add,
         Collapsed,
         Rename,
-        Remove
+        Remove,
+        AddTrack
     }
+
+    
 }
