@@ -4,8 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SharpDj.View.UserControls"
+             xmlns:model="clr-namespace:SharpDj.ViewModel.Model"
              mc:Ignorable="d" 
-             MinWidth="1150"
+             MinWidth="1215"
              MinHeight="500"
              d:DesignHeight="768" d:DesignWidth="1150">
     <Grid Background="{StaticResource LightBrush}">
@@ -37,11 +38,23 @@
         <!-- Chat -->
         <DockPanel Grid.Row="0" Grid.Column="1" Background="{StaticResource LightBrush}">
             <Rectangle Width="1" Fill="{StaticResource MidBrush}" HorizontalAlignment="Left"/>
-                
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="CHAT NIEDOSTĘPNY"  FontSize="48" Margin="10" TextWrapping="Wrap"/>
-            </StackPanel>
 
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Orientation="Vertical" Margin="0 10 0 0">
+                    <!--  <ItemsControl ItemsSource="{Binding RoomMessageCollection}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type model:RoomMessageModel}">-->
+                    <DockPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="Crisey" Margin="0"/>
+                            <TextBlock Text="Crisey" TextWrapping="Wrap" Margin="5"/>
+                        </StackPanel>
+                    </DockPanel>
+                    <!--   </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>-->
+                </StackPanel>
+            </ScrollViewer>
         </DockPanel>
 
         <!--Menu-->
@@ -59,16 +72,16 @@
 
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Height="48" Width="48" Grid.Row="1" Style="{StaticResource IconButtonMouseOver}" Command="{Binding LikeTrackCommand}" BorderThickness="0">
+                <Button Grid.Column="0" Height="48" Width="48" Grid.Row="1" Style="{StaticResource IconButtonMouseOverMid}" Command="{Binding LikeTrackCommand}" BorderThickness="0">
                     <Image Source="../../Images/Room/004-happy.png" Height="32" Width="32"/>
                 </Button>
-                <Button Grid.Column="1" Height="48" Width="48" Grid.Row="1" Style="{StaticResource IconButtonMouseOver}" Command="{Binding DislikeTrackCommand}" BorderThickness="0">
+                <Button Grid.Column="1" Height="48" Width="48" Grid.Row="1" Style="{StaticResource IconButtonMouseOverMid}" Command="{Binding DislikeTrackCommand}" BorderThickness="0">
                     <Image Source="../../Images/Room/003-sad.png" Height="32" Width="32"/>
                 </Button>
-                <Button Grid.Column="2" Height="48" Width="48" Grid.Row="1" Style="{StaticResource IconButtonMouseOver}" Command="{Binding AddTrackToPlaylistCommand}" BorderThickness="0">
+                <Button Grid.Column="2" Height="48" Width="48" Grid.Row="1" Style="{StaticResource IconButtonMouseOverMid}" Command="{Binding AddTrackToPlaylistCommand}" BorderThickness="0">
                     <Image Source="../../Images/Room/008-playlist.png" Height="32" Width="32"/>
                 </Button>
-                <Button Grid.Column="3" Height="48" Width="48" Grid.Row="1" Style="{StaticResource IconButtonMouseOver}" Command="{Binding StopPlayTrackCommand}" BorderThickness="0">
+                <Button Grid.Column="3" Height="48" Width="48" Grid.Row="1" Style="{StaticResource IconButtonMouseOverMid}" Command="{Binding StopPlayTrackCommand}" BorderThickness="0">
                     <Image Source="../../Images/Room/006-pause.png" Height="32" Width="32"/>
                 </Button>
 
@@ -95,8 +108,8 @@
 
 
         <!--Leave Queue-->
-        <DockPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 50 21" Background="{StaticResource MidBrush}">
-            <Button Style="{StaticResource IconButton}" Margin="5">
+        <DockPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 50 21" Background="#0098d1">
+            <Button Style="{StaticResource IconButtonMouseOverMid}" Margin="5">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../../Images/Room/round.png" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <Label Content="Wyjdź z kolejki" FontSize="24" Foreground="White"/>

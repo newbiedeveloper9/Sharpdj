@@ -52,25 +52,33 @@
                             <!-- Style="{StaticResource IconButton}"-->
                             <Image Source="../../Images/Titlebar/maximize_24.png" Height="24" Width="40"/>
                         </Button>
-                        
-                        <StackPanel Orientation="Horizontal" Margin="10 0 0 0">
-                            <Image Source="../../Images/Room/003-group.png" Width="32" Height="32" Margin="0 0 10 0" />
-                            <Label Content="{Binding BottomBarNumberOfPeopleInRoom, Mode=TwoWay}" FontSize="24" Foreground="White"/>
-                            <Label Content="{Binding BottomBarNumberOfAdministrationInRoom, Mode=TwoWay}" FontSize="18" VerticalContentAlignment="Bottom" Foreground="White" Margin="-5 0 0 7"/>
-                        </StackPanel>
 
-                        <StackPanel Orientation="Horizontal" Margin="20 0 50 0">
-                            <Image Source="../../Images/Room/001-album.png" Width="32" Height="32" Margin="0 0 10 0"/>
-                            <Label Content="{Binding BottomBarSizeOfPlaylistInRoom, Mode=TwoWay}" FontSize="24" Foreground="White"/>
-                            <Label Content="/" Foreground="White" FontSize="24" Margin="-7 0 -7 0"/>
-                            <Label Content="{Binding BottomBarMaxSizeOfPlaylistInRoom, Mode=TwoWay}" FontSize="24" Foreground="White"/>
-                        </StackPanel>
+                        <!--People in room-->
+                        <Button Style="{StaticResource IconButtonMouseOverMid}" BorderThickness="0">
+                            <StackPanel Orientation="Horizontal" Margin="10 0 10 0">
+                                <Image Source="../../Images/Room/003-group.png" Width="32" Height="32" Margin="0 0 10 0" />
+                                <Label Content="{Binding BottomBarNumberOfPeopleInRoom, Mode=TwoWay}" FontSize="24" Foreground="White"/>
+                                <Label Content="{Binding BottomBarNumberOfAdministrationInRoom, Mode=TwoWay}" FontSize="18" VerticalContentAlignment="Bottom" Foreground="White" Margin="-5 0 0 7"/>
+                            </StackPanel>
+                        </Button>
 
-                        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 10 0">
-                            <Button Style="{StaticResource IconButton}">
-                                <Image Source="../../Images/Room/001-settings-cogwheel-button.png" Height="32" Width="32"/>
-                            </Button>
-                        </StackPanel>
+
+                        <!--Playlists in room-->
+                        <Button Style="{StaticResource IconButtonMouseOverMid}" BorderThickness="0">
+                            <StackPanel Orientation="Horizontal" Margin="10 0 10 0">
+                                <Image Source="../../Images/Room/001-album.png" Width="32" Height="32" Margin="0 0 10 0"/>
+                                <Label Content="{Binding BottomBarSizeOfPlaylistInRoom, Mode=TwoWay}" FontSize="24" Foreground="White"/>
+                                <Label Content="/" Foreground="White" FontSize="24" Margin="-7 0 -7 0"/>
+                                <Label Content="{Binding BottomBarMaxSizeOfPlaylistInRoom, Mode=TwoWay}" FontSize="24" Foreground="White"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!--Settings-->
+                        <Button Style="{StaticResource IconButtonMouseOverMid}" BorderThickness="0">
+                            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10 0 10 0">
+                                    <Image Source="../../Images/Room/001-settings-cogwheel-button.png" Height="32" Width="32"/>
+                            </StackPanel>
+                        </Button>
                     </DockPanel>
                 </Grid>
             </Border>

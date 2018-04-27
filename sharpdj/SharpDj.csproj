@@ -61,8 +61,8 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="YoutubeSearch">
-      <HintPath>..\..\YoutubeSearch-master\YoutubeSearch\YoutubeSearch\bin\Release\YoutubeSearch.dll</HintPath>
+    <Reference Include="YoutubeSearch, Version=0.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YoutubeSearch.dll.1.1\lib\YoutubeSearch.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +91,7 @@
     <Compile Include="ViewModel\Model\PlaylistModel.cs" />
     <Compile Include="ViewModel\Model\PlaylistToAddTrack.cs" />
     <Compile Include="ViewModel\Model\PlaylistTrackModel.cs" />
+    <Compile Include="ViewModel\Model\RoomMessageModel.cs" />
     <Compile Include="ViewModel\SdjAddTrackToPlaylistCollectionViewModel.cs" />
     <Compile Include="ViewModel\SdjFeedbackViewModel.cs" />
     <Compile Include="ViewModel\SdjLoginViewModel.cs" />

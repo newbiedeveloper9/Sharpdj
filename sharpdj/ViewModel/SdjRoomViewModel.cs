@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SharpDj.Core;
+using SharpDj.ViewModel.Model;
 
 namespace SharpDj.ViewModel
 {
@@ -15,6 +17,15 @@ namespace SharpDj.ViewModel
         public SdjRoomViewModel(SdjMainViewModel main)
         {
             SdjMainViewModel = main;
+            RoomMessageCollection = new ObservableCollection<RoomMessageModel>();
+            var mess = new RoomMessageModel(main);
+            mess.Message = "Testowa wiadomośćTestowa wiadomośćTestowa wiadomośćTestowa wiadomośćTestowa wiadomośćTestowa wiadomośćTestowa wiadomośćTestowa wiadomośćTestowa wiadomość";
+            mess.Time = "13:03";
+            mess.Username = "Crisey";
+            for (int i = 0; i < 50; i++)
+            {
+                RoomMessageCollection.Add(mess);
+            }
         }
 
         #endregion .ctor
@@ -114,6 +125,19 @@ namespace SharpDj.ViewModel
                 if (_hostName == value) return;
                 _hostName = value;
                 OnPropertyChanged("HostName");
+            }
+        }
+
+
+        private ObservableCollection<RoomMessageModel> _roomMessageCollection;
+        public ObservableCollection<RoomMessageModel> RoomMessageCollection
+        {
+            get => _roomMessageCollection;
+            set
+            {
+                if (_roomMessageCollection == value) return;
+                _roomMessageCollection = value;
+                OnPropertyChanged("RoomMessageCollection");
             }
         }
 
