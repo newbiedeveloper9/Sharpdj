@@ -23,10 +23,10 @@ namespace servertcp.Sql
                         new SqlParameter("@Username", username),
                         new SqlParameter("@Salt", salt),
                         new SqlParameter("@Date", GetSqlDateTime()),
-                        new SqlParameter("@Rank", Rank.User), 
+                        new SqlParameter("@Rank", Rank.User),
                     };
 
-                        
+
                     SqlHelper.SqlNonQueryCommand("INSERT INTO Users (Login, Username, Password, Salt, AccountCreationTime, Rank) " +
                                                              "VALUES(@Login, @Username, @Password, @Salt, @Date, @Rank)", parameters);
                     return true;
@@ -86,6 +86,16 @@ namespace servertcp.Sql
             }
             return true;
         }
+
+        public static int GetUserRank(long id)
+        {
+            var parameter = new SqlParameter("@Id", id);
+            using (var reader = SqlHelper.ExecuteDataReader("SELECT Rank FROM Users WHERE Id = @Id", parameter))
+                while (reader.Read())
+                    return Convert.ToInt32(reader["Rank"].ToString());
+            return 0;
+        }
+
 
         public static string GetSalt(string login)
         {
@@ -158,7 +168,7 @@ namespace servertcp.Sql
                 return true;
             }
 
-            public static bool ChangeEmail(long id , string newEmail)
+            public static bool ChangeEmail(long id, string newEmail)
             {
                 try
                 {
@@ -219,6 +229,37 @@ namespace servertcp.Sql
             }
         }
 
+        public class Room
+        {
+            public static bool Create(string name, string host, string image, string description)
+            {
+                try
+                {
+                    var parameters = new[]
+                    {
+                        new SqlParameter("@Name", name),
+                        new SqlParameter("@Host", host),
+                        new SqlParameter("@Image", image),
+                        new SqlParameter("@Description", description)
+                    };
+                    SqlHelper.SqlNonQueryCommand(
+                        "INSERT INTO Room (Name, Host, ImageUrl, Description) VALUES (@Name, @Host, @Image, @Description)",
+                        parameters);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+                return true;
+            }
+
+            public static bool GetRooms()
+            {
+                return true;
+            }
+        }
+
         private static string GetSqlDateTime()
         {
             return DateTime.Now.ToString("s");
@@ -234,7 +275,9 @@ namespace servertcp.Sql
             ChangePassword,
             ChangeEmail,
             ChangeAvatar,
-            ChangeRank
+            ChangeRank,
+            JoinRoom,
+            CreateRoom
         }
     }
 }

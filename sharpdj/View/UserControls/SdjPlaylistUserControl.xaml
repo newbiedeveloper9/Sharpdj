@@ -16,7 +16,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="55"/>
         </Grid.RowDefinitions>
 
         <Grid Background="{StaticResource MidBrush}" Grid.Row="1">

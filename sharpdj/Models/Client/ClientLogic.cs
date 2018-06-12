@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Communication.Client;
+using Communication.Shared;
+using Newtonsoft.Json;
 using SharpDj.Core;
 using SharpDj.Enums;
 using SharpDj.Models.Helpers;
 using SharpDj.ViewModel;
+using SharpDj.ViewModel.Model;
 
 namespace SharpDj.Models.Client
 {
@@ -58,9 +62,33 @@ namespace SharpDj.Models.Client
 
         private void Receiver_SuccessfulLogin(object sender, ClientReceiver.SuccesfulLoginEventArgs e)
         {
-            SdjMainViewModel.Profile = new UserClient(){Rank = e.Rank, Username = e.Username};
 
-            UserState = UserState.Logged;
+            Task.Factory.StartNew(() =>
+            {
+                var reply = SdjMainViewModel.Client.Sender.AfterLogin(ClientInfo.ReplyMessenger);
+                if (reply == null) return;
+                List<Room> source = JsonConvert.DeserializeObject<List<Room>>(reply);
+
+                SdjMainViewModel.RoomCollection = new ObservableCollection<RoomSquareModel>();
+
+                for (int i = 0; i < source.Count; i++)
+                {
+                    SdjMainViewModel.RoomCollection.Add(new RoomSquareModel(SdjMainViewModel)
+                    {
+                        HostName = source[i].Host,
+                        RoomName = source[i].Name,
+                        AdminsInRoom = source[i].AmountOfAdministration,
+                        PeopleInRoom = source[i].AmountOfPeople,
+                        RoomDescription = source[i].Description,
+                        RoomId = source[i].Id
+                    });
+                }
+                
+                
+                SdjMainViewModel.Profile = new UserClient() { Rank = e.Rank, Username = e.Username };
+                UserState = UserState.Logged;
+            });
+
 
             Debug.Log("Login", "Succesful login");
         }

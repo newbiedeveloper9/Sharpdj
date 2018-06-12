@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using Communication.Client;
+using Communication.Shared;
+using Newtonsoft.Json;
 using SharpDj.Core;
 using SharpDj.Enums;
 using SharpDj.Models.Client;
+using SharpDj.ViewModel.Model;
 
 namespace SharpDj.ViewModel
 {
@@ -133,6 +137,7 @@ namespace SharpDj.ViewModel
         {
             var password = new System.Net.NetworkCredential(string.Empty, Password).Password;
             SdjMainViewModel.Client.Sender.Login(Login, password);
+          
         }
         #endregion
 

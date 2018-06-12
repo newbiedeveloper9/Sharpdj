@@ -50,13 +50,14 @@ namespace servertcp
                 return;
 
 
-            _receiver.ParseMessage(client, message.Text);
+            _receiver.ParseMessage(client, message.Text, message.MessageId);
             Console.WriteLine("[{0}:{1}] Message: {2}", Utils.GetIpOfClient(client), Utils.GetPortOfClient(client), message.Text);
         }
 
         void Server_ClientDisconnected(object sender, ServerClientEventArgs e)
         {
             var client = e.Client;
+            Console.WriteLine("disconnect");
             Utils.SendMessageToAllClients(_server, Commands.Disconnect + " " + Utils.GetIpOfClient(client));
         }
     }

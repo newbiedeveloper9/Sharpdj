@@ -50,5 +50,14 @@ namespace Communication.Shared
             public const string LoginErr = "faillogin";
             public const string GetPeoplesErr = "failgetpeoples";
         }
+
+        public class Client
+        {
+            public const string JoinRoom = "joinroom ";
+
+            public const string CreateRoom = "createroom ";
+
+            public const string AfterLogin = "afterlogin";
+        }
     }
 }

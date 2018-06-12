@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 using SharpDj.Core;
 using SharpDj.ViewModel.Model;
 
@@ -19,10 +20,11 @@ namespace SharpDj.ViewModel
             SdjMainViewModel = main;
             RoomMessageCollection = new ObservableCollection<RoomMessageModel>();
             var mess = new RoomMessageModel(main);
-            mess.Message = "Testowa wiadomośćTestowa wiadomośćTestowa wiadomośćTestowa wiadomośćTestowa wiadomośćTestowa wiadomośćTestowa wiadomośćTestowa wiadomośćTestowa wiadomość";
+            mess.Message = "Testowa wiadomość Testowa wiadomość Testowa wiadomość Testowa wiadomość Te xdd xdd dstowa wiadomość Testowa wiadomość Testowa wiadomość Testowa wiadomość Testowa wiadomość";
             mess.Time = "13:03";
             mess.Username = "Crisey";
-            for (int i = 0; i < 50; i++)
+           
+            for (int i = 0; i < 10; i++)
             {
                 RoomMessageCollection.Add(mess);
             }
@@ -41,6 +43,19 @@ namespace SharpDj.ViewModel
                 if (_sdjMainViewModel == value) return;
                 _sdjMainViewModel = value;
                 OnPropertyChanged("SdjMainViewModel");
+            }
+        }
+
+
+        private string _songTitle;
+        public string SongTitle
+        {
+            get => _songTitle;
+            set
+            {
+                if (_songTitle == value) return;
+                _songTitle = value;
+                OnPropertyChanged("SongTitle");
             }
         }
 

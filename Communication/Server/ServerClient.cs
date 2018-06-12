@@ -20,12 +20,10 @@ namespace Communication.Server
         {
             Client = client;
         }
-         
+
+        public long Id { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
-        public string Email { get; set; }
-        public string Ip { get; set; }
-        public string Salt { get; set; }
         public Rank Rank { get; set; } = Rank.User;
 
         public string Username
@@ -38,6 +36,7 @@ namespace Communication.Server
         {
             return new UserClient
             {
+                Id = Id,
                 Rank = Rank,
                 Username = Username
             };

@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Communication.Client;
+using Communication.Shared;
+using Hik.Communication.Scs.Client;
+using Hik.Communication.Scs.Communication.Messages;
+using Hik.Communication.Scs.Communication.Messengers;
 using SharpDj.Core;
 using SharpDj.Enums;
 using SharpDj.Models;
@@ -20,7 +24,8 @@ namespace SharpDj.ViewModel
     public class SdjMainViewModel : BaseViewModel
     {
         public Client Client { get; set; }
-        
+        private readonly ClientLogic _clientLogic;
+
         #region .ctor
 
         public SdjMainViewModel()
@@ -39,22 +44,39 @@ namespace SharpDj.ViewModel
             SdjUserProfileViewModel = new SdjUserProfileViewModel(this);
             SdjFeedbackViewModel = new SdjFeedbackViewModel(this);
 
-            MainViewVisibility = MainView.Main;
+            MainViewVisibility = MainView.Login;
             Profile = new UserClient();
 
             for (int i = 0; i < 5; i++)
             {
-                RoomCollection.Add(new RoomSquareModel(this) { AdminsInRoom = 10, RoomName = "nazwa pokoju", PeopleInRoom = 2137, RoomDescription = "description", HostName = "Yhvsak", RoomId = i});
+               // RoomCollection.Add(new RoomSquareModel(this) { AdminsInRoom = 10, RoomName = "nazwa pokoju", PeopleInRoom = 2137, RoomDescription = "description", HostName = "Yhvsak", RoomId = i});
                 FavoriteCollection.Add(new FavoriteRoomsModel(this){});
             }
             for (int i = 5; i < 10; i++)
             {
-                RoomCollection.Add(new RoomSquareModel(this) { AdminsInRoom = 10, RoomName = "jakas nazwa XDDDD", PeopleInRoom = 99, RoomDescription = "dddsadasdawd", HostName = "Jeff Diggins", RoomId = i });
+                //RoomCollection.Add(new RoomSquareModel(this) { AdminsInRoom = 10, RoomName = "jakas nazwa XDDDD", PeopleInRoom = 99, RoomDescription = "dddsadasdawd", HostName = "Jeff Diggins", RoomId = i });
             }
 
             Client = new Client();
-            Client.Start();
-            ClientLogic = new ClientLogic(this);
+            Client.Start(this);
+            _clientLogic = new ClientLogic(this);
+
+            Task.Factory.StartNew(() => {
+                while (true)
+                {
+                    var cmd = Console.ReadLine();
+                    if (cmd.Contains("joinroom"))
+                    {
+                        var resp = ClientInfo.ReplyMessenger.SendMessageAndWaitForResponse(new ScsTextMessage(cmd));
+                        Console.WriteLine("resp: " + ((ScsTextMessage)resp).Text);
+                    }
+                    else
+                    {
+                        ClientInfo.Client.SendMessage(new ScsTextMessage(cmd));
+                    }
+                }
+            });
+
         }
 
         #endregion .ctor
@@ -75,20 +97,20 @@ namespace SharpDj.ViewModel
             }
         }
 
-        private ClientLogic _clientLogic;
-        public ClientLogic ClientLogic
+        #region ObservableCollection
+
+        private ObservableCollection<RoomSquareModel> _roomCollection = new ObservableCollection<RoomSquareModel>();
+        public ObservableCollection<RoomSquareModel> RoomCollection
         {
-            get => _clientLogic;
+            get => _roomCollection;
             set
             {
-                if (_clientLogic == value) return;
-                _clientLogic = value;
-                OnPropertyChanged("ClientLogic");
+                if (_roomCollection == value) return;
+                _roomCollection = value;
+                OnPropertyChanged("RoomCollection");
             }
         }
 
-        #region ObservableCollection
-        public ObservableCollection<RoomSquareModel> RoomCollection { get; set; } = new ObservableCollection<RoomSquareModel>();
         public ObservableCollection<FavoriteRoomsModel> FavoriteCollection { get; set; } = new ObservableCollection<FavoriteRoomsModel>();
         #endregion
 

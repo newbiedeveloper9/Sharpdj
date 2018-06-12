@@ -26,7 +26,7 @@ namespace Communication.Client
             /// 2- Rank
             /// </para>
             /// </summary>
-            public const string SuccesfulLoginRgx = Commands.SuccessfulLogin + "(.*) (.*)";
+            public const string SuccesfulLoginRgx = Commands.SuccessfulLogin + @"(.*)\$(.*)";
 
 
             /// <summary>
@@ -35,7 +35,7 @@ namespace Communication.Client
             /// 2 - Rank
             /// </para>
             /// </summary>
-            public const string GetPeopleRgx = "(.*) (.*)";
+            public const string GetPeopleRgx = @"(.*)\$(.*)";
         }
 
         public void ParseMessage(IScsClient client, string message)

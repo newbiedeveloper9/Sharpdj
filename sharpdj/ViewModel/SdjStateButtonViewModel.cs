@@ -82,7 +82,6 @@ namespace SharpDj.ViewModel
 
         public void LeftButtonDownOnTitleBarCommandExecute()
         {
-            Console.WriteLine("dragmove");
             App.Current.Windows[_indexWindow].DragMove();
         }
         #endregion

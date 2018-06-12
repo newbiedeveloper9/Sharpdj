@@ -1,5 +1,13 @@
-﻿using SharpDj.Core;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Communication.Shared;
+using Hik.Communication.Scs.Communication.Messages;
+using Newtonsoft.Json;
+using SharpDj.Core;
 using SharpDj.Enums;
+using SharpDj.Models.Client;
+using YoutubeExplode;
 
 namespace SharpDj.ViewModel.Model
 {
@@ -23,6 +31,7 @@ namespace SharpDj.ViewModel.Model
             {
                 if (_sdjMainViewModel == value) return;
                 _sdjMainViewModel = value;
+                OnPropertyChanged("SdjMainViewModel");
             }
         }
 
@@ -38,8 +47,8 @@ namespace SharpDj.ViewModel.Model
             }
         }
 
-        private int _peopleInRoom;
-        public int PeopleInRoom
+        private int? _peopleInRoom;
+        public int? PeopleInRoom
         {
             get => _peopleInRoom;
             set
@@ -50,8 +59,8 @@ namespace SharpDj.ViewModel.Model
             }
         }
 
-        private int _adminsInRoom;
-        public int AdminsInRoom
+        private int? _adminsInRoom;
+        public int? AdminsInRoom
         {
             get => _adminsInRoom;
             set
@@ -145,7 +154,33 @@ namespace SharpDj.ViewModel.Model
 
         public void MainOnRoomClickCommandExecute()
         {
-            SdjMainViewModel.MainViewVisibility = MainView.Room;
+            //TODO Join Room
+            Room.InsindeInfo inside;
+            Task.Factory.StartNew(() =>
+            {
+                var resp = ClientInfo.ReplyMessenger.SendMessageAndWaitForResponse(new ScsTextMessage(Commands.Client.JoinRoom + RoomId));
+                if (resp == null) return;
+
+                inside = JsonConvert.DeserializeObject<Room.InsindeInfo>(((ScsTextMessage)resp).Text);
+                SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfPeopleInRoom = inside.Clients.Count;
+
+                YoutubeClient client = new YoutubeClient();
+                var tmp = client.GetVideoAsync(inside.Djs[0].Video[0].Id).Result;
+                SdjMainViewModel.SdjRoomViewModel.SongTitle = tmp.Title;
+                SdjMainViewModel.SdjRoomViewModel.RoomName = RoomName;
+                SdjMainViewModel.SdjRoomViewModel.HostName = HostName;
+
+                SdjMainViewModel.SdjBottomBarViewModel.BottomBarTitleOfActuallySong = tmp.Title;
+                SdjMainViewModel.SdjBottomBarViewModel.BottomBarSizeOfPlaylistInRoom = inside.Djs.Count;
+                SdjMainViewModel.SdjBottomBarViewModel.BottomBarMaxSizeOfPlaylistInRoom = 30;
+                SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfPeopleInRoom = inside.Clients.Count;
+                SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfAdministrationInRoom =
+                    inside.Clients.Count(x => x.Rank > 0);
+                SdjMainViewModel.SdjRoomViewModel.SongsQueue = (sbyte)inside.Djs.SelectMany(dj => dj.Video).Count();
+               
+
+                SdjMainViewModel.MainViewVisibility = MainView.Room;
+            });
         }
         #endregion
 

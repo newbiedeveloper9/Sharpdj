@@ -15,62 +15,81 @@ namespace Communication.Server
         {
             /// <summary>
             /// <para>
-            /// 1 - Login
-            /// 2 - Password
-            /// 3 - Email
+            /// 1 - Login <br/>
+            /// 2 - Password <br/>
+            /// 3 - Email <br/>
             /// </para>
             /// </summary>
-            public const string RegisterRgx = Commands.Register + "(.*) (.*) (.*)";
+            public const string RegisterRgx = Commands.Register + @"(.*)\$(.*)\$(.*)";
 
             /// <summary>
             /// LoginRgx
             /// <para>
-            /// 1 - Login
-            /// 2 - Password
+            /// 1 - Login <br/>
+            /// 2 - Password <br/>
             /// </para>
             /// </summary>
-            public const string LoginRgx = Commands.Login + "(.*) (.*)";
+            public const string LoginRgx = Commands.Login + @"(.*)\$(.*)";
 
             /// <summary>
             /// GroupsRgx:
             /// <para>
-            /// 1 - Login <br />
-            /// 2 - Password <br />
-            /// 3 - New password <br />
+            /// 1 - Login <br/>
+            /// 2 - Password <br/>
+            /// 3 - New password <br/>
             /// </para>
             /// </summary>
-            public const string ChangePasswordRgx = Commands.UserAccount.ChangePassword + "(.*) (.*)";
+            public const string ChangePasswordRgx = Commands.UserAccount.ChangePassword + @"(.*)\$(.*)";
 
             /// <summary>
             /// GroupsRgx:
             /// <para>
-            /// 1 - Password <br />
-            /// 2 - New username <br />
+            /// 1 - Password <br/>
+            /// 2 - New username <br/>
             /// </para>
             /// </summary>
-            public const string ChangeUsernameRgx = Commands.UserAccount.ChangeUsername + "(.*) (.*)";
+            public const string ChangeUsernameRgx = Commands.UserAccount.ChangeUsername + @"(.*)\$(.*)";
 
             /// <summary>
             /// GroupsRgx:
             /// <para>
-            /// 1 - Password <br />
-            /// 2 - New login <br />
+            /// 1 - Password <br/>
+            /// 2 - New login <br/>
             /// </para>
             /// </summary>
-            public const string ChangeLoginRgx = Commands.UserAccount.ChangeLogin + "(.*) (.*)";
+            public const string ChangeLoginRgx = Commands.UserAccount.ChangeLogin + @"(.*)\$(.*)";
 
             /// <summary>
             /// GroupsRgx:
             /// <para>
-            /// 1 - Password <br />
-            /// 2 - New rank <br />
+            /// 1 - Password <br/>
+            /// 2 - New rank <br/>
             /// </para>
             /// </summary>
-            public const string ChangeRankRgx = Commands.UserAccount.ChangeRank + "(.*) (.*)";
+            public const string ChangeRankRgx = Commands.UserAccount.ChangeRank + @"(.*)\$(.*)";
 
+
+            /// <summary>
+            /// JoinRoomRgx:
+            /// <para>
+            /// 1 - Room Id <br/>
+            /// </para>
+            /// </summary>
+            public const string JoinRoomRgx = Commands.Client.JoinRoom + "([0-9]+)";
+
+
+            /// <summary>
+            /// JoinRoomRgx:
+            /// <para>
+            /// 1 - Name <br/>
+            /// 2 - Image <br/>
+            /// 3 - Description <br/>
+            /// </para>
+            /// </summary>
+            public const string CreateRoomRgx = Commands.Client.CreateRoom + @"(.*)\$(.*)\$(.*)";
         }
 
-        public void ParseMessage(IScsServerClient client, string message)
+        public void ParseMessage(IScsServerClient client, string message, string messageId)
         {
             #region Disconnect
 
@@ -201,6 +220,40 @@ namespace Communication.Server
                 OnGetPeople(new GetPeopleEventArgs(client));
             }
             #endregion
+            #region JoinRoom
+            else if (message.StartsWith(Commands.Client.JoinRoom))
+            {
+                Regex rgx = new Regex(MessagesPattern.JoinRoomRgx);
+                Match match = rgx.Match(message);
+                if (match.Success)
+                {
+                    var roomId = match.Groups[1].Value;
+
+                    OnJoinRoom(new JoinRoomEventArgs(Convert.ToInt32(roomId), client, messageId));
+                }
+            }
+            #endregion JoinRoom
+            #region CreateRoom
+            else if (message.StartsWith(Commands.Client.CreateRoom))
+            {
+                Regex rgx = new Regex(MessagesPattern.CreateRoomRgx);
+                Match match = rgx.Match(message);
+                if (match.Success)
+                {
+                    var name = match.Groups[1].Value;
+                    var image = match.Groups[2].Value;
+                    var description = match.Groups[3].Value;
+                    
+                    OnCreateRoom(new CreateRoomEventArgs(client, name, image, description));
+                }
+            }
+            #endregion
+            #region AfterLogin
+            else if (message.StartsWith(Commands.Client.AfterLogin))
+            {
+                OnAfterLogin(new AfterLoginEventArgs(client, messageId));
+            }
+            #endregion
         }
         #region Methods
 
@@ -209,9 +262,138 @@ namespace Communication.Server
         #region Events
         public event EventHandler<DisconnectEventArgs> Disconnect;
         public event EventHandler<LoginEventArgs> Login;
-            public event EventHandler<RegisterEventArgs> Register;
+        public event EventHandler<RegisterEventArgs> Register;
         public event EventHandler<GetPeopleEventArgs> GetPeople;
-      
+        public event EventHandler<JoinRoomEventArgs> JoinRoom;
+        public event EventHandler<CreateRoomEventArgs> CreateRoom;
+        public event EventHandler<AfterLoginEventArgs> AfterLogin;
+
+
+        protected virtual void OnAfterLogin(AfterLoginEventArgs e)
+        {
+            var handler = AfterLogin;
+            handler?.Invoke(this, e);
+        }
+
+        protected virtual void OnCreateRoom(CreateRoomEventArgs e)
+        {
+            var handler = CreateRoom;
+            handler?.Invoke(this, e);
+        }
+
+        protected virtual void OnJoinRoom(JoinRoomEventArgs e)
+        {
+            var handler = JoinRoom;
+            handler?.Invoke(this, e);
+        }
+
+        protected virtual void OnGetPeople(GetPeopleEventArgs e)
+        {
+            EventHandler<GetPeopleEventArgs> eh = GetPeople;
+            eh?.Invoke(this, e);
+        }
+        internal virtual void OnDisconnect(DisconnectEventArgs e)
+        {
+            EventHandler<DisconnectEventArgs> eh = Disconnect;
+            eh?.Invoke(this, e);
+        }
+        internal virtual void OnLogin(LoginEventArgs e)
+        {
+            EventHandler<LoginEventArgs> eh = Login;
+            eh?.Invoke(this, e);
+        }
+        internal virtual void OnRegister(RegisterEventArgs e)
+        {
+            var handler = Register;
+            handler?.Invoke(this, e);
+        }
+
+
+        public class AfterLoginEventArgs : System.EventArgs
+        {
+            public AfterLoginEventArgs(IScsServerClient client, string messageId)
+            {
+                this.Client = client;
+                this.MessageId = messageId;
+            }
+
+            public IScsServerClient Client { get; private set; }
+            public string MessageId { get; private set; }
+        }
+        public class JoinRoomEventArgs : System.EventArgs
+        {
+            public JoinRoomEventArgs(int roomId, IScsServerClient client, string messageId)
+            {
+                this.RoomId = roomId;
+                this.Client = client;
+                this.MessageId = messageId;
+            }
+
+            public int RoomId { get; private set; }
+            public IScsServerClient Client { get; private set; }
+            public string MessageId { get; private set; }
+        }
+        public class CreateRoomEventArgs : System.EventArgs
+        {
+            public CreateRoomEventArgs(IScsServerClient client, string name, string image, string description)
+            {
+                this.Client = client;
+                this.Name = name;
+                this.Image = image;
+                this.Description = description;
+            }
+
+            public IScsServerClient Client { get; private set; }
+            public string Name { get; private set; }
+            public string Image { get; private set; }
+            public string Description { get; private set; }
+        }
+        public class RegisterEventArgs : System.EventArgs
+        {
+            public RegisterEventArgs(string login, string password, string email, IScsServerClient client)
+            {
+                this.Login = login;
+                this.Password = password;
+                this.Email = email;
+                this.Client = client;
+            }
+
+            public string Login { get; private set; }
+            public string Password { get; private set; }
+            public string Email { get; private set; }
+            public IScsServerClient Client { get; private set; }
+        }
+        public class LoginEventArgs : System.EventArgs
+        {
+            public LoginEventArgs(string login, string password, IScsServerClient client)
+            {
+                this.Login = login;
+                this.Password = password;
+                this.Client = client;
+            }
+
+            public string Login { get; private set; }
+            public string Password { get; private set; }
+            public IScsServerClient Client { get; private set; }
+        }
+        public class DisconnectEventArgs : System.EventArgs
+        {
+            public DisconnectEventArgs(IScsServerClient client)
+            {
+                this.Client = client;
+            }
+
+            public IScsServerClient Client { get; private set; }
+        }
+        public class GetPeopleEventArgs : System.EventArgs
+        {
+            public GetPeopleEventArgs(IScsServerClient client)
+            {
+                this.Client = client;
+            }
+
+            public IScsServerClient Client { get; private set; }
+        }
 
         #region UserAccount
         public event EventHandler<ChangePasswordEventArgs> ChangePassword;
@@ -295,74 +477,6 @@ namespace Communication.Server
             public string NewPassword { get; private set; }
         }
         #endregion
-
-        protected virtual void OnGetPeople(GetPeopleEventArgs e)
-        {
-            EventHandler<GetPeopleEventArgs> eh = GetPeople;
-            eh?.Invoke(this, e);
-        }
-        internal virtual void OnDisconnect(DisconnectEventArgs e)
-        {
-            EventHandler<DisconnectEventArgs> eh = Disconnect;
-            eh?.Invoke(this, e);
-        }
-        internal virtual void OnLogin(LoginEventArgs e)
-        {
-            EventHandler<LoginEventArgs> eh = Login;
-            eh?.Invoke(this, e);
-        }
-        internal virtual void OnRegister(RegisterEventArgs e)
-        {
-            var handler = Register;
-            handler?.Invoke(this, e);
-        }
-
-        public class RegisterEventArgs : System.EventArgs
-        {
-            public RegisterEventArgs(string login, string password, string email, IScsServerClient client)
-            {
-                this.Login = login;
-                this.Password = password;
-                this.Email = email;
-                this.Client = client;
-            }
-
-            public string Login { get; private set; }
-            public string Password { get; private set; }
-            public string Email { get; private set; }
-            public IScsServerClient Client { get; private set; }
-        }
-        public class LoginEventArgs : System.EventArgs
-        {
-            public LoginEventArgs(string login, string password, IScsServerClient client)
-            {
-                this.Login = login;
-                this.Password = password;
-                this.Client = client;
-            }
-
-            public string Login { get; private set; }
-            public string Password { get; private set; }
-            public IScsServerClient Client { get; private set; }
-        }
-        public class DisconnectEventArgs : System.EventArgs
-        {
-            public DisconnectEventArgs(IScsServerClient client)
-            {
-                this.Client = client;
-            }
-
-            public IScsServerClient Client { get; private set; }
-        }
-        public class GetPeopleEventArgs : System.EventArgs
-        {
-            public GetPeopleEventArgs(IScsServerClient client)
-            {
-                this.Client = client;
-            }
-
-            public IScsServerClient Client { get; private set; }
-        }
         #endregion
     }
 }

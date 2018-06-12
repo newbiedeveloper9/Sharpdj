@@ -6,9 +6,10 @@
              xmlns:local="clr-namespace:SharpDj.View.UserControls"
              xmlns:model="clr-namespace:SharpDj.ViewModel.Model"
              mc:Ignorable="d" 
-             MinWidth="1215"
-             MinHeight="500"
-             d:DesignHeight="768" d:DesignWidth="1150">
+             MinWidth="1125"
+               MinHeight="500"
+              d:DesignHeight="768" d:DesignWidth="1150">
+    <!--1215-->
     <Grid Background="{StaticResource LightBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -22,37 +23,38 @@
         <DockPanel Grid.Row="0" Grid.Column="0" Background="{StaticResource LightBrush}">
             <StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="10">
-                    <Label Content="{Binding RoomName}" FontSize="32"/>
-                    <Label Content="od" Margin="-5 0 -5 0" Foreground="{StaticResource LightBrush}" FontSize="32"/>
-                    <Label Content="{Binding HostName}" FontSize="32"/>
+                    <Label Content="{Binding RoomName}" Foreground="White" FontSize="32"/>
                 </StackPanel>
-
+                <Label HorizontalAlignment="Center" Foreground="White" FontSize="24" Content="{Binding SongTitle, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
         </DockPanel>
 
         <!--Youtube-->
-        <DockPanel Grid.Row="0" Grid.Column="0" Margin="50 75 50 105" >
-            <Button/>
+        <DockPanel Grid.Row="0" Grid.Column="0" Margin="50 120 50 105" >
+            <Image Source="../../Images/avatar.png"/>
         </DockPanel>
 
         <!-- Chat -->
         <DockPanel Grid.Row="0" Grid.Column="1" Background="{StaticResource LightBrush}">
             <Rectangle Width="1" Fill="{StaticResource MidBrush}" HorizontalAlignment="Left"/>
 
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
                 <StackPanel Orientation="Vertical" Margin="0 10 0 0">
-                    <!--  <ItemsControl ItemsSource="{Binding RoomMessageCollection}">
+                    <ItemsControl ItemsSource="{Binding RoomMessageCollection}">
                         <ItemsControl.ItemTemplate>
-                            <DataTemplate DataType="{x:Type model:RoomMessageModel}">-->
-                    <DockPanel>
-                        <StackPanel Orientation="Vertical">
-                            <Label Content="Crisey" Margin="0"/>
-                            <TextBlock Text="Crisey" TextWrapping="Wrap" Margin="5"/>
-                        </StackPanel>
-                    </DockPanel>
-                    <!--   </DataTemplate>
+                            <DataTemplate DataType="{x:Type model:RoomMessageModel}">
+                                <DockPanel Margin="0 0 0 10">
+                                    <StackPanel Orientation="Vertical">
+                                        <DockPanel Margin="5 0 5 -7">
+                                            <Label Content="{Binding Username, UpdateSourceTrigger= PropertyChanged}" Foreground="{StaticResource MidBrush}"/>
+                                            <Label Content="{Binding Time, UpdateSourceTrigger= PropertyChanged}" Foreground="{StaticResource MidBrush}" HorizontalAlignment="Right"/>
+                                        </DockPanel>
+                                        <TextBlock Foreground="{StaticResource DarkBrush}" Text="{Binding Message, UpdateSourceTrigger= PropertyChanged}" TextWrapping="Wrap" Margin="5"/>
+                                    </StackPanel>
+                                </DockPanel>
+                            </DataTemplate>
                         </ItemsControl.ItemTemplate>
-                    </ItemsControl>-->
+                    </ItemsControl>
                 </StackPanel>
             </ScrollViewer>
         </DockPanel>

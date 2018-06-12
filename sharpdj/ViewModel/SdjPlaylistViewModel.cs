@@ -10,8 +10,7 @@ using SharpDj.Core;
 using SharpDj.Enums;
 using SharpDj.ViewModel.Model;
 using Playlist = SharpDj.Enums.Playlist;
-using System.Net;
-using YoutubeSearch;
+using YoutubeExplode;
 
 namespace SharpDj.ViewModel
 {
@@ -26,14 +25,14 @@ namespace SharpDj.ViewModel
 
             for (int i = 0; i < 2; i++)
             {
-              //  var tracks = new ObservableCollection<PlaylistTrackModel>();
-             /*   for (int j = 0; j < i; j++)
-                {
-                    tracks.Add(new PlaylistTrackModel(main) { AuthorName = "Łrisey " + i + j, SongDuration = "3:20", SongName = "Monstercat jakis tam" });
-                    tracks.Add(new PlaylistTrackModel(main) { AuthorName = "ąonk " + j + i + 2, SongDuration = "2:13", SongName = "Tylko chińskie xD" });
-                }*/
+                //  var tracks = new ObservableCollection<PlaylistTrackModel>();
+                /*   for (int j = 0; j < i; j++)
+                   {
+                       tracks.Add(new PlaylistTrackModel(main) { AuthorName = "Łrisey " + i + j, SongDuration = "3:20", SongName = "Monstercat jakis tam" });
+                       tracks.Add(new PlaylistTrackModel(main) { AuthorName = "ąonk " + j + i + 2, SongDuration = "2:13", SongName = "Tylko chińskie xD" });
+                   }*/
                 PlaylistCollection.Add(new PlaylistModel(main) { PlaylistName = "Chińska playlista" });
-                PlaylistCollection.Add(new PlaylistModel(main) { PlaylistName = "Zonkowate cos"});
+                PlaylistCollection.Add(new PlaylistModel(main) { PlaylistName = "Zonkowate cos" });
             }
         }
 
@@ -93,10 +92,6 @@ namespace SharpDj.ViewModel
             }
         }
 
-        /* Visibility="{Binding  SdjMainViewModel.SdjPlaylistViewModel.PlaylistVisibility,
-                                                Converter={converters:EnumToVisibilityConverter},
-                                                ConverterParameter={x:Static enum:Playlist.Collapsed}}"*/
-
         private PlaylistMode _playlistMode = PlaylistMode.Playlist;
         public PlaylistMode PlaylistMode
         {
@@ -110,7 +105,7 @@ namespace SharpDj.ViewModel
         }
 
 
-        private string _searchText = "dasdasd";
+        private string _searchText;
         public string SearchText
         {
             get => _searchText;
@@ -141,14 +136,8 @@ namespace SharpDj.ViewModel
 
         #region ActivatePlaylistCommand
         private RelayCommand _activatePlaylistCommand;
-        public RelayCommand ActivatePlaylistCommand
-        {
-            get
-            {
-                return _activatePlaylistCommand
-                       ?? (_activatePlaylistCommand = new RelayCommand(ActivatePlaylistCommandExecute, ActivatePlaylistCommandCanExecute));
-            }
-        }
+        public RelayCommand ActivatePlaylistCommand => _activatePlaylistCommand
+                                                       ?? (_activatePlaylistCommand = new RelayCommand(ActivatePlaylistCommandExecute, ActivatePlaylistCommandCanExecute));
 
         public bool ActivatePlaylistCommandCanExecute()
         {
@@ -171,14 +160,8 @@ namespace SharpDj.ViewModel
 
         #region PlaylistAddModel
         private RelayCommand _playlistAddModel;
-        public RelayCommand PlaylistAddModel
-        {
-            get
-            {
-                return _playlistAddModel
-                       ?? (_playlistAddModel = new RelayCommand(PlaylistAddModelExecute, PlaylistAddModelCanExecute));
-            }
-        }
+        public RelayCommand PlaylistAddModel => _playlistAddModel
+                                                ?? (_playlistAddModel = new RelayCommand(PlaylistAddModelExecute, PlaylistAddModelCanExecute));
 
         public bool PlaylistAddModelCanExecute()
         {
@@ -194,14 +177,8 @@ namespace SharpDj.ViewModel
 
         #region PlaylistDeleteModel
         private RelayCommand _playlistDeleteModel;
-        public RelayCommand PlaylistDeleteModel
-        {
-            get
-            {
-                return _playlistDeleteModel
-                       ?? (_playlistDeleteModel = new RelayCommand(PlaylistDeleteModelExecute, PlaylistDeleteModelCanExecute));
-            }
-        }
+        public RelayCommand PlaylistDeleteModel => _playlistDeleteModel
+                                                   ?? (_playlistDeleteModel = new RelayCommand(PlaylistDeleteModelExecute, PlaylistDeleteModelCanExecute));
 
         public bool PlaylistDeleteModelCanExecute()
         {
@@ -217,14 +194,8 @@ namespace SharpDj.ViewModel
 
         #region PlaylistEditModel
         private RelayCommand _playlistEditModel;
-        public RelayCommand PlaylistEditModel
-        {
-            get
-            {
-                return _playlistEditModel
-                       ?? (_playlistEditModel = new RelayCommand(PlaylistEditModelExecute, PlaylistEditModelCanExecute));
-            }
-        }
+        public RelayCommand PlaylistEditModel => _playlistEditModel
+                                                 ?? (_playlistEditModel = new RelayCommand(PlaylistEditModelExecute, PlaylistEditModelCanExecute));
 
         public bool PlaylistEditModelCanExecute()
         {
@@ -236,22 +207,15 @@ namespace SharpDj.ViewModel
             if (PlaylistCollection.FirstOrDefault(x => x.IsSelected) != null)
             {
                 SdjMainViewModel.PlaylistStateCollectionVisibility = PlaylistState.Rename;
-                SdjMainViewModel.SdjEditPlaylistCollectionViewModel.PlaylistName = SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection.FirstOrDefault(x => x.IsSelected).PlaylistName;
+                SdjMainViewModel.SdjEditPlaylistCollectionViewModel.PlaylistName = SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection.FirstOrDefault(x => x.IsSelected)?.PlaylistName;
             }
         }
         #endregion
 
-
         #region AddTrackToPlaylistCommand
         private RelayCommand _addTrackToPlaylistCommand;
-        public RelayCommand AddTrackToPlaylistCommand
-        {
-            get
-            {
-                return _addTrackToPlaylistCommand
-                       ?? (_addTrackToPlaylistCommand = new RelayCommand(AddTrackToPlaylistCommandExecute, AddTrackToPlaylistCommandCanExecute));
-            }
-        }
+        public RelayCommand AddTrackToPlaylistCommand => _addTrackToPlaylistCommand
+                                                         ?? (_addTrackToPlaylistCommand = new RelayCommand(AddTrackToPlaylistCommandExecute, AddTrackToPlaylistCommandCanExecute));
 
         public bool AddTrackToPlaylistCommandCanExecute()
         {
@@ -270,43 +234,42 @@ namespace SharpDj.ViewModel
         }
         #endregion
 
-
         #region OnEnterSearchVideoCommand
         private RelayCommand _onEnterSearchVideoCommand;
-        public RelayCommand OnEnterSearchVideoCommand
-        {
-            get
-            {
-                return _onEnterSearchVideoCommand
-                       ?? (_onEnterSearchVideoCommand = new RelayCommand(OnEnterSearchVideoCommandExecute, OnEnterSearchVideoCommandCanExecute));
-            }
-        }
+        public RelayCommand OnEnterSearchVideoCommand => _onEnterSearchVideoCommand
+                                                         ?? (_onEnterSearchVideoCommand = new RelayCommand(OnEnterSearchVideoCommandExecute, OnEnterSearchVideoCommandCanExecute));
 
         public bool OnEnterSearchVideoCommandCanExecute()
         {
             return true;
         }
 
-        public void OnEnterSearchVideoCommandExecute()
+        public async void OnEnterSearchVideoCommandExecute()
         {
             PlaylistMode = PlaylistMode.Search;
+            await QueryVideos();
+        }
 
-            var items = new VideoSearch();
-
+        private async Task QueryVideos()
+        {
+            var client = new YoutubeClient();
+            var query = await client.SearchVideosAsync(SearchText, 1);
             TrackCollection = new ObservableCollection<PlaylistTrackModel>();
-            foreach (var item in items.SearchQuery(SearchText, 1))
+
+            foreach (var item in query)
             {
-                var track = new PlaylistTrackModel(SdjMainViewModel);
-                track.SongName = item.Title;
-                track.AuthorName = item.Author;
-                track.SongDuration = item.Duration;
-                TrackCollection.Add(track);
+                TrackCollection.Add(new PlaylistTrackModel(SdjMainViewModel)
+                {
+                    SongName = item.Title,
+                    AuthorName = item.Author,
+                    SongDuration = item.Duration.ToString(),
+                    SongId = item.Id  
+                });
             }
         }
+        #endregion
+
+        #endregion Commands
+
     }
-
-    #endregion
-
-
-    #endregion Commands
 }

@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Communication.Shared;
 using Hik.Communication.Scs.Communication.Messages;
 using Hik.Communication.Scs.Server;
+using Hik.Communication.ScsServices.Communication.Messages;
+using Newtonsoft.Json;
 
 namespace Communication.Server
 {
@@ -17,7 +19,7 @@ namespace Communication.Server
             public static void SuccessfulLogin(IScsServerClient client, ServerClient serverClient)
             {
                 client.SendMessage(new ScsTextMessage(
-                    String.Format(Commands.SuccessfulLogin + "{0} {1}", serverClient.Username, serverClient.Rank)));
+                    String.Format(Commands.SuccessfulLogin + "{0}${1}", serverClient.Username, serverClient.Rank)));
             }
 
             public static void SuccessfulRegister(IScsServerClient client)
@@ -100,8 +102,21 @@ namespace Communication.Server
             {
                 var message = Commands.GetPeoples;
                 foreach (var userClient in clientsList)
-                    message += $"\n{userClient.Username} {userClient.Rank}";
+                    message += $"\n{userClient.Username}${userClient.Rank}";
                 client.SendMessage(new ScsTextMessage(message));
+            }
+
+            public static void JoinRoom(IScsServerClient client, Room.InsindeInfo room, string messId)
+            {
+                string output = JsonConvert.SerializeObject(room);
+                client.SendMessage(new ScsTextMessage(output, messId));
+            }
+
+            public static void GetRooms(IScsServerClient client, List<Room> room, string messId)
+            {
+                var output = JsonConvert.SerializeObject(room);
+
+                client.SendMessage(new ScsTextMessage(output, messId));
             }
 
             public static class Error
