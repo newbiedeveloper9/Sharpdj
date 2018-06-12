@@ -12,6 +12,7 @@ using Communication.Shared;
 using CryptSharp.Utility;
 using Hik.Collections;
 using Hik.Communication.Scs.Client;
+using Hik.Communication.Scs.Communication.Messages;
 using Hik.Communication.Scs.Server;
 using Newtonsoft.Json;
 using servertcp.Sql;
@@ -23,6 +24,7 @@ namespace servertcp
         private IScsServer _server;
         private readonly ThreadSafeSortedList<long, ServerClient> _clients;
         private readonly ThreadSafeSortedList<long, Room> _rooms;
+        private int roomCount = 0;
 
         public List<ServerClient> ServerClients => (from client in _clients.GetAllItems() select client).ToList();
         public List<UserClient> UserClients => (from client in _clients.GetAllItems() select client.ToUserClient()).ToList();
@@ -34,10 +36,17 @@ namespace servertcp
             _clients = new ThreadSafeSortedList<long, ServerClient>();
             _rooms = new ThreadSafeSortedList<long, Room>();
 
-            _rooms[0] = new Room(0, "test0", "host0", "image0", "description0", new Room.InsindeInfo(new List<UserClient>(), new List<Songs>()));
-            _rooms[1] = new Room(1, "test1", "host1", "image1", "description1", new Room.InsindeInfo(new List<UserClient>(), new List<Songs>()));
-            _rooms[2] = new Room(2, "test2", "host2", "image2", "description2", new Room.InsindeInfo(new List<UserClient>(), new List<Songs>()));
-            _rooms[3] = new Room(3, "test3", "host3", "image3", "description3", new Room.InsindeInfo(new List<UserClient>(), new List<Songs>()));
+            using (var reader = SqlHelper.ExecuteDataReader("SELECT * FROM Room"))
+                while (reader.Read())
+                {
+                    var id = Convert.ToInt32(reader["Id"].ToString());
+                    var name = reader["Name"].ToString();
+                    var host = reader["Host"].ToString();
+                    var image = reader["ImageUrl"].ToString();
+                    var description = reader["Description"].ToString();
+                    _rooms[roomCount] = new Room(id, name, host, image, description, new Room.InsindeInfo(new List<UserClient>(), new List<Songs>()));
+                    roomCount++;
+                }
 
             _rooms[0].InsideInfo.Djs.Add(new Songs("host", new List<Songs.Song>()));
             _rooms[0].InsideInfo.Djs.Add(new Songs("test", new List<Songs.Song>()));
@@ -67,6 +76,7 @@ namespace servertcp
             receiver.JoinRoom += Receiver_JoinRoom;
             receiver.CreateRoom += Receiver_CreateRoom;
             receiver.AfterLogin += Receiver_AfterLogin;
+            receiver.JoinQueue += Receiver_JoinQueue;
 
             Task.Factory.StartNew(() =>
             {
@@ -80,9 +90,35 @@ namespace servertcp
                         if (room.InsideInfo.TimeLeft <= 0)
                         {
                             room.InsideInfo.NextDj();
-                            Console.WriteLine(room.InsideInfo.Djs[0].Video[0].Id + "   /" + room.InsideInfo.TimeLeft);
+                            Console.WriteLine(room.InsideInfo.Djs[0].Video[0].Id + "new" + room.InsideInfo.TimeLeft);
                         }
                     }
+                }
+            });
+        }
+
+
+
+        private void Receiver_JoinQueue(object sender, ServerReceiver.JoinQueueEventArgs e)
+        {
+            Task.Factory.StartNew(() =>
+            {
+                if (!IsActiveLogin(e.Client)) return;
+
+                var source = JsonConvert.DeserializeObject<Songs>(e.Json);
+
+                var userclient = _clients[e.Client.ClientId].ToUserClient();
+                source.Host = userclient.Username;
+
+                var tmp = _rooms.GetAllItems()
+                    .FirstOrDefault(x => x.InsideInfo.Clients.Exists(y => y.Id == userclient.Id));
+                tmp?.InsideInfo.Djs.Add(source);
+
+                var json = JsonConvert.SerializeObject(tmp?.InsideInfo);
+
+                foreach (var client in tmp.InsideInfo?.Clients)
+                {
+                    ServerClients.FirstOrDefault(x => x.Id == client.Id)?.Client.SendMessage(new ScsTextMessage("updatedj$" + json));
                 }
             });
         }
@@ -103,8 +139,10 @@ namespace servertcp
 
             if (SqlUserCommands.Room.Create(e.Name, login, e.Image, e.Description))
             {
-                //room is created propelly
                 SqlUserCommands.AddActionInfo(userId, Utils.GetIpOfClient(e.Client), SqlUserCommands.Actions.CreateRoom);
+
+                _rooms[roomCount] = new Room(_rooms.Count, e.Name, login, e.Image, e.Description, new Room.InsindeInfo(new List<UserClient>(), new List<Songs>()));
+                roomCount++;
             }
             else
             {
@@ -193,6 +231,9 @@ namespace servertcp
                             Username = e.Login,
                             Login = e.Login
                         };
+
+                        if (IsActiveLogin(e.Client))
+                            _communication_Disconnect(null, new ServerReceiver.DisconnectEventArgs(e.Client));
 
                         _clients[client.Client.ClientId] = client;
                         ServerSender.Succesful.SuccessfulLogin(e.Client, client);
@@ -330,6 +371,21 @@ namespace servertcp
         {
             var login = _clients[e.Client.ClientId].Login;
             var userId = SqlUserCommands.GetUserId(login);
+
+         
+
+            var tmp = _rooms.GetAllItems().Where(x => x.InsideInfo.Clients.Exists(y => y.Id == userId));
+            foreach (var roomActive in tmp)
+            {
+                var index = roomActive.InsideInfo.Clients.FindIndex(x => x.Id == userId);
+                roomActive.InsideInfo.Clients.RemoveAt(index);
+                var json = JsonConvert.SerializeObject(roomActive?.InsideInfo);
+
+                foreach (var c in roomActive.InsideInfo?.Clients)
+                {
+                    ServerClients.FirstOrDefault(x => x.Id == c.Id)?.Client.SendMessage(new ScsTextMessage("updatedj$" + json));
+                }
+            }
 
             SqlUserCommands.AddActionInfo(userId, Utils.GetIpOfClient(e.Client), SqlUserCommands.Actions.Logout);
 

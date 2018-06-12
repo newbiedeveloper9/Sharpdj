@@ -5,7 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using Communication.Shared;
+using Hik.Communication.Scs.Communication.Messages;
+using Newtonsoft.Json;
 using SharpDj.Core;
+using SharpDj.Models.Client;
 using SharpDj.ViewModel.Model;
 
 namespace SharpDj.ViewModel
@@ -33,6 +37,8 @@ namespace SharpDj.ViewModel
         #endregion .ctor
 
         #region Properties
+
+        public int RoomId { get; set; }
 
         private SdjMainViewModel _sdjMainViewModel;
         public SdjMainViewModel SdjMainViewModel
@@ -140,6 +146,18 @@ namespace SharpDj.ViewModel
                 if (_hostName == value) return;
                 _hostName = value;
                 OnPropertyChanged("HostName");
+            }
+        }
+
+        private bool _inQueue = false;
+        public bool InQueue
+        {
+            get => _inQueue;
+            set
+            {
+                if (_inQueue == value) return;
+                _inQueue = value;
+                OnPropertyChanged("InQueue");
             }
         }
 
@@ -253,6 +271,66 @@ namespace SharpDj.ViewModel
 
         }
         #endregion
+
+
+        #region LeftQueueCommand
+        private RelayCommand _leftQueueCommand;
+        public RelayCommand LeftQueueCommand
+        {
+            get
+            {
+                return _leftQueueCommand
+                       ?? (_leftQueueCommand = new RelayCommand(LeftQueueCommandExecute, LeftQueueCommandCanExecute));
+            }
+        }
+
+        public bool LeftQueueCommandCanExecute()
+        {
+            return true;
+        }
+
+        public void LeftQueueCommandExecute()
+        {
+            InQueue = false;
+        }
+        #endregion
+
+
+
+        #region JoinQueueCommand
+        private RelayCommand _joinQueueCommand;
+        public RelayCommand JoinQueueCommand
+        {
+            get
+            {
+                return _joinQueueCommand
+                       ?? (_joinQueueCommand = new RelayCommand(JoinQueueCommandExecute, JoinQueueCommandCanExecute));
+            }
+        }
+
+        public bool JoinQueueCommandCanExecute()
+        {
+            return true;
+        }
+
+        public void JoinQueueCommandExecute()
+        {
+            InQueue = true;
+            Task.Factory.StartNew(() =>
+            {
+                var tracks = SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection.FirstOrDefault(x => x.IsActive)?.Tracks;
+                Songs dj = new Songs();
+                foreach (var track in tracks)
+                {
+                    int seconds = (int)TimeSpan.Parse(track.SongDuration).TotalSeconds;
+                    dj.Video.Add(new Songs.Song(seconds, track.SongId));
+                }
+                var source = JsonConvert.SerializeObject(dj);
+                ClientInfo.Client.SendMessage(new ScsTextMessage("joinqueue$"+source));
+            });
+        }
+        #endregion
+
 
         #endregion Commands
 

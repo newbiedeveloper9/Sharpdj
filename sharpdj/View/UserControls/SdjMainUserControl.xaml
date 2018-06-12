@@ -56,7 +56,7 @@
                                             </StackPanel>
 
                                             <DockPanel Width="40" Background="DarkSlateBlue" Height="35" Margin="0 -5 -10 0"  HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand">
-                                              
+
                                                 <Button Style="{StaticResource IconButtonMouseOver}" Command="{Binding SetRoomAsFavoriteCommand}" BorderThickness="0">
                                                     <Grid>
                                                         <Image Source="../../Images/Rooms/favorite.png" Width="16" Height="16" VerticalAlignment="Center"  
@@ -79,9 +79,9 @@
                                                             <i:InvokeCommandAction Command="{Binding OnMouseLeaveCommand }" />
                                                         </i:EventTrigger>
                                                     </i:Interaction.Triggers>
-                                                    
+
                                                     <Image Source="../../Images/Rooms/monstercat.jpg" RenderOptions.BitmapScalingMode="NearestNeighbor" Stretch="Fill" Height="150" Width="256"/>
-                                                    
+
                                                     <Grid Visibility="{Binding IsMouseOver, Converter={converter:BoolVisibilityConverter}}">
                                                         <Rectangle Width="256" Fill="Black" Opacity="0.9"/>
                                                         <Label Content="JOIN COMMUNITY" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" Foreground="White"/>
@@ -108,7 +108,11 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                     </ScrollViewer>
-
+                    <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="{StaticResource LightBrush}">
+                        <Button Style="{StaticResource IconButtonMouseOverMid}" Command="{Binding RefreshCommand}">
+                            <Label Content="Refresh" Foreground="White" Margin="1" FontSize="18"/>
+                        </Button>
+                    </Grid>
                 </Grid>
             </Border>
         </DockPanel>

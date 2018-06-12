@@ -87,6 +87,8 @@ namespace Communication.Server
             /// </para>
             /// </summary>
             public const string CreateRoomRgx = Commands.Client.CreateRoom + @"(.*)\$(.*)\$(.*)";
+
+            public const string JoinQueueRgx = @"joinqueue\$(.*)";
         }
 
         public void ParseMessage(IScsServerClient client, string message, string messageId)
@@ -254,6 +256,20 @@ namespace Communication.Server
                 OnAfterLogin(new AfterLoginEventArgs(client, messageId));
             }
             #endregion
+            #region JoinQueue
+            else if (message.StartsWith("joinqueue$"))
+            {
+                Regex rgx = new Regex(MessagesPattern.JoinQueueRgx);
+                Match match = rgx.Match(message);
+                if (match.Success)
+                {
+                    var json = match.Groups[1].Value;
+       
+                    OnJoinQueue(new JoinQueueEventArgs(client, json));
+                }
+            }
+
+            #endregion
         }
         #region Methods
 
@@ -267,7 +283,15 @@ namespace Communication.Server
         public event EventHandler<JoinRoomEventArgs> JoinRoom;
         public event EventHandler<CreateRoomEventArgs> CreateRoom;
         public event EventHandler<AfterLoginEventArgs> AfterLogin;
+        public event EventHandler<JoinQueueEventArgs> JoinQueue;
 
+
+      
+        protected virtual void OnJoinQueue(JoinQueueEventArgs e)
+        {
+            var handler = JoinQueue;
+            handler?.Invoke(this, e);
+        }
 
         protected virtual void OnAfterLogin(AfterLoginEventArgs e)
         {
@@ -308,7 +332,17 @@ namespace Communication.Server
             handler?.Invoke(this, e);
         }
 
+        public class JoinQueueEventArgs : System.EventArgs
+        {
+            public JoinQueueEventArgs(IScsServerClient client, string json)
+            {
+                this.Client = client;
+                this.Json = json;
+            }
 
+            public IScsServerClient Client { get; private set; }
+            public string Json { get; private set; }
+        }
         public class AfterLoginEventArgs : System.EventArgs
         {
             public AfterLoginEventArgs(IScsServerClient client, string messageId)

@@ -36,6 +36,8 @@ namespace Communication.Client
             /// </para>
             /// </summary>
             public const string GetPeopleRgx = @"(.*)\$(.*)";
+
+            public const string UpdateDjRgx = @"updatedj\$(.*)";
         }
 
         public void ParseMessage(IScsClient client, string message)
@@ -209,10 +211,34 @@ namespace Communication.Client
             }
 
             #endregion
+
+            #region UpdateDj
+            else if (message.StartsWith("updatedj"))
+            {
+                Regex rgx = new Regex(MessagesPattern.UpdateDjRgx);
+                Match match = rgx.Match(message);
+                if (match.Success)
+                {
+                    var json = match.Groups[1].Value;
+
+                    OnUpdateDj(new UpdateDjEventArgs(json));
+                }
+            }
+
+            #endregion
         }
 
         #region Events
         public event EventHandler<UserDisconnectEventArgs> UserDisconnect;
+        public event EventHandler<UpdateDjEventArgs> UpdateDj;
+
+
+      
+        protected virtual void OnUpdateDj(UpdateDjEventArgs e)
+        {
+            var handler = UpdateDj;
+            handler?.Invoke(this, e);
+        }
 
         protected virtual void OnUserDisconnect(UserDisconnectEventArgs e)
         {
@@ -349,6 +375,16 @@ namespace Communication.Client
             eh?.Invoke(this, e);
         }
         #endregion
+
+        public class UpdateDjEventArgs : System.EventArgs
+        {
+            public UpdateDjEventArgs(string json)
+            {
+                this.Json = json;
+            }
+
+            public string Json { get; private set; }
+        }
 
         public class UserDisconnectEventArgs : System.EventArgs
         {

@@ -8,8 +8,8 @@
              mc:Ignorable="d" 
              MinWidth="1125"
                MinHeight="500"
+             xmlns:converters="clr-namespace:SharpDj.Converters"
               d:DesignHeight="768" d:DesignWidth="1150">
-    <!--1215-->
     <Grid Background="{StaticResource LightBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -111,10 +111,16 @@
 
         <!--Leave Queue-->
         <DockPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 50 21" Background="#0098d1">
-            <Button Style="{StaticResource IconButtonMouseOverMid}" Margin="5">
+            <Button Style="{StaticResource IconButtonMouseOverMid}" Margin="5" Command="{Binding LeftQueueCommand}" Visibility="{Binding InQueue, Converter={converters:BoolVisibilityConverter}}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../../Images/Room/round.png" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <Label Content="Wyjdź z kolejki" FontSize="24" Foreground="White"/>
+                </StackPanel>
+            </Button>
+            <Button Style="{StaticResource IconButtonMouseOverMid}" Margin="5" Command="{Binding JoinQueueCommand}" Visibility="{Binding InQueue, Converter={converters:NotBoolToVisibilityConverter}}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../../Images/Room/003-playlist-1.png" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Label Content="Dołącz do kolejki" FontSize="24" Foreground="White"/>
                 </StackPanel>
             </Button>
         </DockPanel>

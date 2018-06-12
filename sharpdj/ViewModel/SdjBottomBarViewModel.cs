@@ -1,6 +1,7 @@
 ﻿using System;
 using SharpDj.Core;
 using SharpDj.Enums;
+using Visibility = System.Windows.Visibility;
 
 namespace SharpDj.ViewModel
 {
@@ -90,6 +91,45 @@ namespace SharpDj.ViewModel
                 OnPropertyChanged("BottomBarTitleOfActuallySong");
             }
         }
+
+        private string _bottomBarRoomName;
+        public string BottomBarRoomName
+        {
+            get => _bottomBarRoomName;
+            set
+            {
+                if (_bottomBarRoomName == value) return;
+                _bottomBarRoomName = value;
+                OnPropertyChanged("BottomBarRoomName");
+            }
+        }
+
+
+        private int _bottomBarRoomId = 0;
+        public int BottomBarRoomId
+        {
+            get => _bottomBarRoomId;
+            set
+            {
+                if (_bottomBarRoomId == value) return;
+                _bottomBarRoomId = value;
+                IdVisibility = value > 0 ? Visibility.Visible : Visibility.Hidden;
+                OnPropertyChanged("BottomBarRoomId");
+            }
+        }
+
+        private Visibility _idVisibility = Visibility.Hidden;
+        public Visibility IdVisibility
+        {
+            get => _idVisibility;
+            set
+            {
+                if (_idVisibility == value) return;
+                _idVisibility = value;
+                OnPropertyChanged("IdVisibility");
+            }
+        }
+
 
         #endregion
 

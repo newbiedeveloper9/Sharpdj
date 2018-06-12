@@ -47,14 +47,9 @@ namespace SharpDj.ViewModel
             MainViewVisibility = MainView.Login;
             Profile = new UserClient();
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 7; i++)
             {
-               // RoomCollection.Add(new RoomSquareModel(this) { AdminsInRoom = 10, RoomName = "nazwa pokoju", PeopleInRoom = 2137, RoomDescription = "description", HostName = "Yhvsak", RoomId = i});
                 FavoriteCollection.Add(new FavoriteRoomsModel(this){});
-            }
-            for (int i = 5; i < 10; i++)
-            {
-                //RoomCollection.Add(new RoomSquareModel(this) { AdminsInRoom = 10, RoomName = "jakas nazwa XDDDD", PeopleInRoom = 99, RoomDescription = "dddsadasdawd", HostName = "Jeff Diggins", RoomId = i });
             }
 
             Client = new Client();
@@ -123,7 +118,24 @@ namespace SharpDj.ViewModel
             {
                 if (_mainViewVisibility == value) return;
                 _mainViewVisibility = value;
+              
                 OnPropertyChanged("MainViewVisibility");
+
+                if (value == MainView.Room && SdjRoomViewModel.RoomId != SdjBottomBarViewModel.BottomBarRoomId)
+                {
+                    SdjBottomBarViewModel.BottomBarRoomName = string.Empty;
+                    SdjBottomBarViewModel.BottomBarNumberOfPeopleInRoom = 0;
+                    SdjRoomViewModel.RoomName = string.Empty;
+                    SdjRoomViewModel.HostName = string.Empty;
+                    SdjBottomBarViewModel.BottomBarSizeOfPlaylistInRoom = 0;
+                    SdjBottomBarViewModel.BottomBarMaxSizeOfPlaylistInRoom = 30;
+                    SdjBottomBarViewModel.BottomBarNumberOfPeopleInRoom = 0;
+                    SdjBottomBarViewModel.BottomBarNumberOfAdministrationInRoom =
+                        0;
+                    SdjRoomViewModel.SongsQueue = 0;
+                    SdjRoomViewModel.SongTitle = string.Empty;
+                    SdjBottomBarViewModel.BottomBarTitleOfActuallySong = string.Empty;
+                }
             }
         }
 
@@ -312,6 +324,28 @@ namespace SharpDj.ViewModel
         #endregion Methods
 
         #region Commands
+
+        #region RefreshCommand
+        private RelayCommand _refreshCommand;
+        public RelayCommand RefreshCommand
+        {
+            get
+            {
+                return _refreshCommand
+                       ?? (_refreshCommand = new RelayCommand(RefreshCommandExecute, RefreshCommandCanExecute));
+            }
+        }
+
+        public bool RefreshCommandCanExecute()
+        {
+            return true;
+        }
+
+        public void RefreshCommandExecute()
+        {
+            _clientLogic.RefreshInfo();
+        }
+        #endregion
 
 
         #endregion Commands

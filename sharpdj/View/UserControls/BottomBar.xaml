@@ -7,7 +7,7 @@
              xmlns:converters="clr-namespace:SharpDj.Converters"
              xmlns:enum="clr-namespace:SharpDj.Enums"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="650">
+             d:DesignHeight="50" d:DesignWidth="650">
     <Grid>
         <!-- Informations-->
         <DockPanel Background="{StaticResource LightBrush}">
@@ -36,7 +36,15 @@
                                         ConverterParameter={x:Static enum:Playlist.Visible}}"/>
                             </Grid>
                         </Button>
-                        <Label Content="{Binding BottomBarTitleOfActuallySong}" FontSize="28" Margin="0 0 0 0"/>
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal"  Visibility="{Binding IdVisibility}">
+                                <Label Content="{Binding BottomBarRoomName}" Foreground="White" FontSize="14" Margin="0 0 0 -18"/>
+                                <Label Content="#" Foreground="White" FontSize="14" Margin="0 0 -10 -18"/>
+                                <Label Content="{Binding BottomBarRoomId}" Foreground="White" FontSize="14" Margin="0 0 0 -18"/>
+                            </StackPanel>
+                            <Label Content="{Binding BottomBarTitleOfActuallySong}" Foreground="White" FontSize="24" Margin="0 0 0 0"/>
+                            <!--{Binding BottomBarTitleOfActuallySong}-->
+                        </StackPanel>
                     </StackPanel>
 
 
@@ -76,7 +84,7 @@
                         <!--Settings-->
                         <Button Style="{StaticResource IconButtonMouseOverMid}" BorderThickness="0">
                             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10 0 10 0">
-                                    <Image Source="../../Images/Room/001-settings-cogwheel-button.png" Height="32" Width="32"/>
+                                <Image Source="../../Images/Room/001-settings-cogwheel-button.png" Height="32" Width="32"/>
                             </StackPanel>
                         </Button>
                     </DockPanel>

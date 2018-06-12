@@ -10,7 +10,7 @@ namespace Communication.Shared
     {
         public Songs()
         {
-            
+            Video = new List<Song>();
         }
 
         public Songs(string host, List<Song> video)

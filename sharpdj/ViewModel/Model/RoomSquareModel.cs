@@ -162,24 +162,25 @@ namespace SharpDj.ViewModel.Model
                 if (resp == null) return;
 
                 inside = JsonConvert.DeserializeObject<Room.InsindeInfo>(((ScsTextMessage)resp).Text);
-                SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfPeopleInRoom = inside.Clients.Count;
-
-                YoutubeClient client = new YoutubeClient();
-                var tmp = client.GetVideoAsync(inside.Djs[0].Video[0].Id).Result;
-                SdjMainViewModel.SdjRoomViewModel.SongTitle = tmp.Title;
+                SdjMainViewModel.SdjBottomBarViewModel.BottomBarRoomId = RoomId;
+                SdjMainViewModel.MainViewVisibility = MainView.Room;
+                SdjMainViewModel.SdjRoomViewModel.RoomId = RoomId;
+                SdjMainViewModel.SdjBottomBarViewModel.BottomBarRoomName = RoomName;
                 SdjMainViewModel.SdjRoomViewModel.RoomName = RoomName;
                 SdjMainViewModel.SdjRoomViewModel.HostName = HostName;
 
-                SdjMainViewModel.SdjBottomBarViewModel.BottomBarTitleOfActuallySong = tmp.Title;
+                SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfPeopleInRoom = inside.Clients.Count;
                 SdjMainViewModel.SdjBottomBarViewModel.BottomBarSizeOfPlaylistInRoom = inside.Djs.Count;
                 SdjMainViewModel.SdjBottomBarViewModel.BottomBarMaxSizeOfPlaylistInRoom = 30;
                 SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfPeopleInRoom = inside.Clients.Count;
                 SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfAdministrationInRoom =
                     inside.Clients.Count(x => x.Rank > 0);
                 SdjMainViewModel.SdjRoomViewModel.SongsQueue = (sbyte)inside.Djs.SelectMany(dj => dj.Video).Count();
-               
 
-                SdjMainViewModel.MainViewVisibility = MainView.Room;
+                YoutubeClient client = new YoutubeClient();
+                var tmp = client.GetVideoAsync(inside.Djs[0].Video[0].Id).Result;
+                SdjMainViewModel.SdjRoomViewModel.SongTitle = tmp.Title;
+                SdjMainViewModel.SdjBottomBarViewModel.BottomBarTitleOfActuallySong = tmp.Title;
             });
         }
         #endregion
