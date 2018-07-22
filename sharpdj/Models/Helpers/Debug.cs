@@ -37,7 +37,7 @@ namespace SharpDj.Models.Helpers
         private static void log(string content)
         {
             Console.WriteLine(content);
-            File.AppendAllText("LOG", content+Environment.NewLine);
+            File.AppendAllText("log", content+Environment.NewLine);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace SharpDj.Models.Client
         private UserState _userState = UserState.NotLoggedIn;
         public UserState UserState
         {
-            get { return _userState; }
+            get => _userState;
             set
             {
                 _userState = value;
@@ -40,7 +40,7 @@ namespace SharpDj.Models.Client
             main.Client.Receiver.SuccesfulRegister += Receiver_SuccesfulRegister;
             main.Client.Receiver.SuccessfulLogin += Receiver_SuccessfulLogin;
             main.Client.Receiver.UpdateDj += Receiver_UpdateDj;
-
+            
             Task.Factory.StartNew(() =>
             {
                 while (true)
@@ -75,7 +75,7 @@ namespace SharpDj.Models.Client
 
         public void RefreshInfo()
         {
-            var reply = SdjMainViewModel.Client.Sender.AfterLogin(ClientInfo.ReplyMessenger);
+            var reply = SdjMainViewModel.Client.Sender.AfterLogin(ClientInfo.Instance.ReplyMessenger);
             if (reply == null) return;
             List<Room> source = JsonConvert.DeserializeObject<List<Room>>(reply);
 

@@ -326,7 +326,7 @@ namespace SharpDj.ViewModel
                     dj.Video.Add(new Songs.Song(seconds, track.SongId));
                 }
                 var source = JsonConvert.SerializeObject(dj);
-                ClientInfo.Client.SendMessage(new ScsTextMessage("joinqueue$"+source));
+                ClientInfo.Instance.Client.SendMessage(new ScsTextMessage("joinqueue$"+source));
             });
         }
         #endregion

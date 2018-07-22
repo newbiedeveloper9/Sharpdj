@@ -133,13 +133,13 @@
                                                     <Button VerticalAlignment="Center" Style="{StaticResource IconButtonMouseOver}" BorderThickness="0" Width="44" Height="42" >
                                                         <Image Source="../../Images/Playlists/pencil-edit-button-white.png" Width="24" Height="24"/>
                                                     </Button>
-                                                    <Button VerticalAlignment="Center" Style="{StaticResource IconButtonMouseOver}" BorderThickness="0" Width="44" Height="42">
+                                                    <Button VerticalAlignment="Center" Command="{Binding TrackMoveDownCommand}" Style="{StaticResource IconButtonMouseOver}" BorderThickness="0" Width="44" Height="42">
                                                         <Image Source="../../Images/Playlists/009-down-chevron-white.png" Width="24" Height="24"/>
                                                     </Button>
-                                                    <Button VerticalAlignment="Center" Style="{StaticResource IconButtonMouseOver}" BorderThickness="0" Width="44" Height="42" >
+                                                    <Button VerticalAlignment="Center" Command="{Binding TrackMoveUpCommand}" Style="{StaticResource IconButtonMouseOver}" BorderThickness="0" Width="44" Height="42" >
                                                         <Image Source="../../Images/Playlists/014-up-chevron-white.png" Width="24" Height="24"/>
                                                     </Button>
-                                                    <Button VerticalAlignment="Center" Style="{StaticResource IconButtonMouseOver}" BorderThickness="0" Width="44" Height="42">
+                                                    <Button VerticalAlignment="Center" Command="{Binding TrackDeleteCommand}" Style="{StaticResource IconButtonMouseOver}" BorderThickness="0" Width="44" Height="42">
                                                         <Image Source="../../Images/Playlists/029-rubbish-bin-delete-button-white.png" Width="24" Height="24"/>
                                                     </Button>
                                                 </StackPanel>

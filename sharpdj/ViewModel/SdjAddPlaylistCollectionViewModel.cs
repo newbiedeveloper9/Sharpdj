@@ -107,7 +107,7 @@ namespace SharpDj.ViewModel
         {
             SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection.Add(new PlaylistModel(SdjMainViewModel) { PlaylistName = PlaylistName });
 
-            SdjMainViewModel.SdjPlaylistViewModel.SetLastPlaylistSelected();
+            SdjMainViewModel.SdjPlaylistViewModel.RemoveSelectionFromPlaylists();
             SdjMainViewModel.SdjPlaylistViewModel
                 .PlaylistCollection[SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection.Count-1].IsSelected = true;
 

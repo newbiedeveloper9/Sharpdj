@@ -134,6 +134,33 @@ namespace SharpDj.ViewModel.Model
 
         #endregion Properties
 
+        #region Methods
+
+        private void GetInfoAboutRoom(Room.InsindeInfo inside)
+        {
+            SdjMainViewModel.SdjBottomBarViewModel.BottomBarRoomId = RoomId;
+            SdjMainViewModel.MainViewVisibility = MainView.Room;
+            SdjMainViewModel.SdjRoomViewModel.RoomId = RoomId;
+            SdjMainViewModel.SdjBottomBarViewModel.BottomBarRoomName = RoomName;
+            SdjMainViewModel.SdjRoomViewModel.RoomName = RoomName;
+            SdjMainViewModel.SdjRoomViewModel.HostName = HostName;
+
+            SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfPeopleInRoom = inside.Clients.Count;
+            SdjMainViewModel.SdjBottomBarViewModel.BottomBarSizeOfPlaylistInRoom = inside.Djs.Count;
+            SdjMainViewModel.SdjBottomBarViewModel.BottomBarMaxSizeOfPlaylistInRoom = 30;
+            SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfPeopleInRoom = inside.Clients.Count;
+            SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfAdministrationInRoom =
+                inside.Clients.Count(x => x.Rank > 0);
+            SdjMainViewModel.SdjRoomViewModel.SongsQueue = (sbyte)inside.Djs.SelectMany(dj => dj.Video).Count();
+
+            var client = new YoutubeClient();
+            var tmp = client.GetVideoAsync(inside.Djs[0].Video[0].Id).Result;
+            SdjMainViewModel.SdjRoomViewModel.SongTitle = tmp.Title;
+            SdjMainViewModel.SdjBottomBarViewModel.BottomBarTitleOfActuallySong = tmp.Title;
+        }
+
+        #endregion Methods
+
         #region Commands
 
         #region MainOnRoomClickCommand
@@ -158,29 +185,11 @@ namespace SharpDj.ViewModel.Model
             Room.InsindeInfo inside;
             Task.Factory.StartNew(() =>
             {
-                var resp = ClientInfo.ReplyMessenger.SendMessageAndWaitForResponse(new ScsTextMessage(Commands.Client.JoinRoom + RoomId));
+                var resp = ClientInfo.Instance.ReplyMessenger.SendMessageAndWaitForResponse(new ScsTextMessage(Commands.Client.JoinRoom + RoomId));
                 if (resp == null) return;
 
                 inside = JsonConvert.DeserializeObject<Room.InsindeInfo>(((ScsTextMessage)resp).Text);
-                SdjMainViewModel.SdjBottomBarViewModel.BottomBarRoomId = RoomId;
-                SdjMainViewModel.MainViewVisibility = MainView.Room;
-                SdjMainViewModel.SdjRoomViewModel.RoomId = RoomId;
-                SdjMainViewModel.SdjBottomBarViewModel.BottomBarRoomName = RoomName;
-                SdjMainViewModel.SdjRoomViewModel.RoomName = RoomName;
-                SdjMainViewModel.SdjRoomViewModel.HostName = HostName;
-
-                SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfPeopleInRoom = inside.Clients.Count;
-                SdjMainViewModel.SdjBottomBarViewModel.BottomBarSizeOfPlaylistInRoom = inside.Djs.Count;
-                SdjMainViewModel.SdjBottomBarViewModel.BottomBarMaxSizeOfPlaylistInRoom = 30;
-                SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfPeopleInRoom = inside.Clients.Count;
-                SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfAdministrationInRoom =
-                    inside.Clients.Count(x => x.Rank > 0);
-                SdjMainViewModel.SdjRoomViewModel.SongsQueue = (sbyte)inside.Djs.SelectMany(dj => dj.Video).Count();
-
-                YoutubeClient client = new YoutubeClient();
-                var tmp = client.GetVideoAsync(inside.Djs[0].Video[0].Id).Result;
-                SdjMainViewModel.SdjRoomViewModel.SongTitle = tmp.Title;
-                SdjMainViewModel.SdjBottomBarViewModel.BottomBarTitleOfActuallySong = tmp.Title;
+                GetInfoAboutRoom(inside);
             });
         }
         #endregion

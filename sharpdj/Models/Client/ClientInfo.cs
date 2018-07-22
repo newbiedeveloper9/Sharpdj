@@ -1,12 +1,23 @@
+using System;
+using System.ComponentModel;
 using Hik.Communication.Scs.Client;
 using Hik.Communication.Scs.Communication.Messengers;
 
 namespace SharpDj.Models.Client
 {
-    public static class ClientInfo
+    public sealed class ClientInfo
     {
-        public static RequestReplyMessenger<IScsClient> ReplyMessenger { get; set; }
-        public static IScsClient Client { get; set; }
-        
+        private static readonly Lazy<ClientInfo> lazy =
+             new Lazy<ClientInfo>(() => new ClientInfo());
+
+        public static ClientInfo Instance => lazy.Value;
+
+        private ClientInfo()
+        {
+
+        }
+
+        public RequestReplyMessenger<IScsClient> ReplyMessenger { get; set; }
+        public IScsClient Client { get; set; }
     }
 }

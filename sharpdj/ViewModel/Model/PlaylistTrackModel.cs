@@ -175,6 +175,81 @@ namespace SharpDj.ViewModel.Model
 
         #endregion
 
+        #region TrackMoveDownCommand
+        private RelayCommand _trackMoveDownCommand;
+        public RelayCommand TrackMoveDownCommand
+        {
+            get
+            {
+                return _trackMoveDownCommand
+                       ?? (_trackMoveDownCommand = new RelayCommand(TrackMoveDownCommandExecute, TrackMoveDownCommandCanExecute));
+            }
+        }
+
+        public bool TrackMoveDownCommandCanExecute()
+        {
+            return true;
+        }
+
+        public void TrackMoveDownCommandExecute()
+        {
+            var index = SdjMainViewModel.SdjPlaylistViewModel.TrackCollection.IndexOf(this);
+            if (index >= SdjMainViewModel.SdjPlaylistViewModel.TrackCollection.Count-1) return;
+            SdjMainViewModel.SdjPlaylistViewModel.TrackCollection.Move(index, index + 1);
+        }
+        #endregion
+
+        #region TrackMoveUpCommand
+        private RelayCommand _trackMoveUpCommand;
+        public RelayCommand TrackMoveUpCommand
+        {
+            get
+            {
+                return _trackMoveUpCommand
+                       ?? (_trackMoveUpCommand = new RelayCommand(TrackMoveUpCommandExecute, TrackMoveUpCommandCanExecute));
+            }
+        }
+
+        public bool TrackMoveUpCommandCanExecute()
+        {
+            return true;
+        }
+
+        public void TrackMoveUpCommandExecute()
+        {
+            var index = SdjMainViewModel.SdjPlaylistViewModel.TrackCollection.IndexOf(this);
+            if (index <= 0) return;
+            SdjMainViewModel.SdjPlaylistViewModel.TrackCollection.Move(index, index - 1);
+        }
+        #endregion
+
+        #region TrackDeleteCommand
+        private RelayCommand _trackDeleteCommand;
+        public RelayCommand TrackDeleteCommand
+        {
+            get
+            {
+                return _trackDeleteCommand
+                       ?? (_trackDeleteCommand = new RelayCommand(TrackDeleteCommandExecute, TrackDeleteCommandCanExecute));
+            }
+        }
+
+        public bool TrackDeleteCommandCanExecute()
+        {
+            return true;
+        }
+
+        public void TrackDeleteCommandExecute()
+        {
+            SdjMainViewModel.SdjPlaylistViewModel.TrackCollection.Remove(this);
+            var firstOrDefault = SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection.FirstOrDefault(x => x.IsSelected);
+            if (firstOrDefault != null)
+                firstOrDefault
+                    .TracksInPlaylist--;
+        }
+        #endregion
+
+
 
         #endregion Commands
     }

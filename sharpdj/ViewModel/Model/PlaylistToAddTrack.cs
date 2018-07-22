@@ -10,11 +10,11 @@ namespace SharpDj.ViewModel.Model
     public class PlaylistToAddTrack : BaseViewModel
     {
         #region .ctor
-        public PlaylistToAddTrack(SdjMainViewModel main, string playlistName, int trackcount, PlaylistModel playlist, PlaylistTrackModel track)
+        public PlaylistToAddTrack(SdjMainViewModel main, PlaylistModel playlist, PlaylistTrackModel track)
         {
             SdjMainViewModel = main;
-            PlaylistName = playlistName;
-            TrackCount = trackcount;
+            PlaylistName = playlist.PlaylistName;
+            TrackCount = playlist.TracksInPlaylist;
             MainPlaylistModel = playlist;
             Track = track;
         }
@@ -113,12 +113,14 @@ namespace SharpDj.ViewModel.Model
 
         public void SelectPlaylistCommandExecute()
         {
+            var tmp = MainPlaylistModel.Tracks.FirstOrDefault(x => x.SongId.Equals(Track.SongId));
+            if (tmp == null)
+            {
+                MainPlaylistModel.AddTrack(Track);
+            }
+
             SdjMainViewModel.SdjAddTrackToPlaylistCollectionViewModel.SdjTitleBarForUserControlsViewModel
                 .CloseFormExecute();
-            //SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection.FirstOrDefault(x=>x.Equals(main))
-            if (!MainPlaylistModel.Tracks.Contains(Track))
-                MainPlaylistModel.AddTrack(Track);
-            //  Console.WriteLine(MainPlaylistModel.TracksInPlaylist);
         }
         #endregion
 

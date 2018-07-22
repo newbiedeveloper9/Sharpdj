@@ -122,7 +122,7 @@ namespace SharpDj.ViewModel
 
         #region Methods
 
-        public void SetLastPlaylistSelected()
+        public void RemoveSelectionFromPlaylists()
         {
             foreach (var playlistModel in PlaylistCollection)
             {
@@ -215,7 +215,8 @@ namespace SharpDj.ViewModel
         #region AddTrackToPlaylistCommand
         private RelayCommand _addTrackToPlaylistCommand;
         public RelayCommand AddTrackToPlaylistCommand => _addTrackToPlaylistCommand
-                                                         ?? (_addTrackToPlaylistCommand = new RelayCommand(AddTrackToPlaylistCommandExecute, AddTrackToPlaylistCommandCanExecute));
+                                                         ?? (_addTrackToPlaylistCommand =
+            new RelayCommand(AddTrackToPlaylistCommandExecute, AddTrackToPlaylistCommandCanExecute));
 
         public bool AddTrackToPlaylistCommandCanExecute()
         {
@@ -228,7 +229,8 @@ namespace SharpDj.ViewModel
             var track = TrackCollection.FirstOrDefault(x => x.SongTimeVisibility == Visibility.Collapsed);
             foreach (var playlistModel in PlaylistCollection)
             {
-                SdjMainViewModel.SdjAddTrackToPlaylistCollectionViewModel.PlaylistCollection.Add(new PlaylistToAddTrack(SdjMainViewModel, playlistModel.PlaylistName, playlistModel.TracksInPlaylist, playlistModel, track));
+                SdjMainViewModel.SdjAddTrackToPlaylistCollectionViewModel.PlaylistCollection.Add(
+                    new PlaylistToAddTrack(SdjMainViewModel, playlistModel, track));
             }
             SdjMainViewModel.PlaylistStateCollectionVisibility = PlaylistState.AddTrack;
         }
@@ -246,6 +248,7 @@ namespace SharpDj.ViewModel
 
         public async void OnEnterSearchVideoCommandExecute()
         {
+            RemoveSelectionFromPlaylists();
             PlaylistMode = PlaylistMode.Search;
             await QueryVideos();
         }

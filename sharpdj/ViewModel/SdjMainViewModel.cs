@@ -55,23 +55,6 @@ namespace SharpDj.ViewModel
             Client = new Client();
             Client.Start(this);
             _clientLogic = new ClientLogic(this);
-
-            Task.Factory.StartNew(() => {
-                while (true)
-                {
-                    var cmd = Console.ReadLine();
-                    if (cmd.Contains("joinroom"))
-                    {
-                        var resp = ClientInfo.ReplyMessenger.SendMessageAndWaitForResponse(new ScsTextMessage(cmd));
-                        Console.WriteLine("resp: " + ((ScsTextMessage)resp).Text);
-                    }
-                    else
-                    {
-                        ClientInfo.Client.SendMessage(new ScsTextMessage(cmd));
-                    }
-                }
-            });
-
         }
 
         #endregion .ctor

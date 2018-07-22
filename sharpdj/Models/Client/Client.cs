@@ -6,6 +6,7 @@ using Hik.Communication.Scs.Communication.EndPoints.Tcp;
 using Hik.Communication.Scs.Communication.Messages;
 using Communication.Client;
 using Communication.Shared;
+using Hik.Communication.Scs.Communication;
 using Hik.Communication.Scs.Communication.Messengers;
 using SharpDj.Core;
 using SharpDj.Enums;
@@ -20,22 +21,33 @@ namespace SharpDj.Models.Client
         public ClientReceiver Receiver { get; set; } = new ClientReceiver();
         public ClientSender Sender { get; set; }
 
-        public string Ip { get; set; } = "localhost";
-        public int Port { get; set; } = 21007;
+        public string Ip { get; set; } = "192.168.0.103";
+        public int Port { get; set; } = 1433;
 
 
         public void Start(SdjMainViewModel main)
         {
+            
             SdjMainViewModel = main;
-            ClientInfo.Client = ScsClientFactory.CreateClient(new ScsTcpEndPoint(Ip, Port));
-            ClientInfo.Client.MessageReceived += Client_MessageReceived;
-            ClientInfo.Client.Disconnected += Client_Disconnected;
-            ClientInfo.ReplyMessenger = new RequestReplyMessenger<IScsClient>(ClientInfo.Client);
-            ClientInfo.ReplyMessenger.Start();
-            ClientInfo.Client.Connect();
-            ClientInfo.Client.SendMessage(new ScsTextMessage("login $"));
+            ClientInfo.Instance.Client = ScsClientFactory.CreateClient(new ScsTcpEndPoint(Ip, Port));
+            ClientInfo.Instance.Client.MessageReceived += Client_MessageReceived;
+            ClientInfo.Instance.Client.Disconnected += Client_Disconnected;
+            ClientInfo.Instance.ReplyMessenger = new RequestReplyMessenger<IScsClient>(ClientInfo.Instance.Client);
+            ClientInfo.Instance.ReplyMessenger.Start();
+            while (ClientInfo.Instance.Client.CommunicationState == CommunicationStates.Disconnected)
+            {
+                try
+                {
+                    ClientInfo.Instance.Client.Connect();
+                }
+                catch (TimeoutException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+            ClientInfo.Instance.Client.SendMessage(new ScsTextMessage("login $"));
 
-            Sender = new ClientSender(ClientInfo.Client);
+            Sender = new ClientSender(ClientInfo.Instance.Client);
         }
 
         private void Client_Disconnected(object sender, EventArgs e)
@@ -52,7 +64,7 @@ namespace SharpDj.Models.Client
                 return;
 
             Console.WriteLine(message.Text + "\n");
-            Receiver.ParseMessage(ClientInfo.Client, message.Text);
+            Receiver.ParseMessage(ClientInfo.Instance.Client, message.Text);
         }
     }
 }

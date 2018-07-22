@@ -9,19 +9,20 @@ namespace servertcp
 {
     public class Server
     {
-        public int Port { get; set; } = 21007;
+        public int Port { get; set; } = 1433;
         public IScsServer _server { get; set; }
         private ServerReceiver _receiver;
 
         public void Start()
         {
             _receiver = new ServerReceiver();
-            _server = ScsServerFactory.CreateServer(new ScsTcpEndPoint(Port));
+            _server = ScsServerFactory.CreateServer(new ScsTcpEndPoint("192.168.0.103",Port));
 
             new Receiver(_receiver, _server);
 
             _server.ClientConnected += Server_ClientConnected;
             _server.ClientDisconnected += Server_ClientDisconnected;
+          
             _server.Start();
 
 

@@ -372,19 +372,11 @@ namespace servertcp
             var login = _clients[e.Client.ClientId].Login;
             var userId = SqlUserCommands.GetUserId(login);
 
-         
-
             var tmp = _rooms.GetAllItems().Where(x => x.InsideInfo.Clients.Exists(y => y.Id == userId));
             foreach (var roomActive in tmp)
             {
                 var index = roomActive.InsideInfo.Clients.FindIndex(x => x.Id == userId);
                 roomActive.InsideInfo.Clients.RemoveAt(index);
-                var json = JsonConvert.SerializeObject(roomActive?.InsideInfo);
-
-                foreach (var c in roomActive.InsideInfo?.Clients)
-                {
-                    ServerClients.FirstOrDefault(x => x.Id == c.Id)?.Client.SendMessage(new ScsTextMessage("updatedj$" + json));
-                }
             }
 
             SqlUserCommands.AddActionInfo(userId, Utils.GetIpOfClient(e.Client), SqlUserCommands.Actions.Logout);
