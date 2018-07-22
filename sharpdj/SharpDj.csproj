@@ -104,6 +104,7 @@
     <Compile Include="ViewModel\SdjEditPlaylistCollectionViewModel.cs" />
     <Compile Include="ViewModel\SdjRemovePlaylistCollectionViewModel.cs" />
     <Compile Include="ViewModel\Helpers\SdjTitleBarForUserControlsViewModel.cs" />
+    <Compile Include="ViewModel\SdjRenameTrackNameInPlaylistViewModel.cs" />
     <Compile Include="ViewModel\SdjUserProfileViewModel.cs" />
     <Compile Include="ViewModel\SdjRoomViewModel.cs" />
     <Compile Include="ViewModel\SdjLeftBarViewModel.cs" />
@@ -148,6 +149,9 @@
     </Compile>
     <Compile Include="View\UserControls\SdjRemovePlaylistCollectionView.xaml.cs">
       <DependentUpon>SdjRemovePlaylistCollectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\SdjRenameTrackNameInPlaylist.xaml.cs">
+      <DependentUpon>SdjRenameTrackNameInPlaylist.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\SdjRoomView.xaml.cs">
       <DependentUpon>SdjRoomView.xaml</DependentUpon>
@@ -255,6 +259,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserControls\SdjRemovePlaylistCollectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\SdjRenameTrackNameInPlaylist.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

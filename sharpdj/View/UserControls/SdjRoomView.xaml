@@ -46,10 +46,10 @@
                                 <DockPanel Margin="0 0 0 10">
                                     <StackPanel Orientation="Vertical">
                                         <DockPanel Margin="5 0 5 -7">
-                                            <Label Content="{Binding Username, UpdateSourceTrigger= PropertyChanged}" Foreground="{StaticResource MidBrush}"/>
-                                            <Label Content="{Binding Time, UpdateSourceTrigger= PropertyChanged}" Foreground="{StaticResource MidBrush}" HorizontalAlignment="Right"/>
+                                            <TextBox Text="{Binding Username, UpdateSourceTrigger= PropertyChanged}" IsReadOnly="True" Foreground="{StaticResource MidBrush}"/>
+                                            <TextBox Text="{Binding Time, UpdateSourceTrigger= PropertyChanged}" IsReadOnly="True" Foreground="{StaticResource MidBrush}" HorizontalAlignment="Right"/>
                                         </DockPanel>
-                                        <TextBlock Foreground="{StaticResource DarkBrush}" Text="{Binding Message, UpdateSourceTrigger= PropertyChanged}" TextWrapping="Wrap" Margin="5"/>
+                                        <TextBox Foreground="{StaticResource DarkBrush}" Text="{Binding Message, UpdateSourceTrigger= PropertyChanged}" TextWrapping="Wrap" Margin="5"/>
                                     </StackPanel>
                                 </DockPanel>
                             </DataTemplate>

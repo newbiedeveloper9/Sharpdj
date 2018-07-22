@@ -39,6 +39,7 @@ namespace SharpDj.ViewModel
             SdjEditPlaylistCollectionViewModel = new SdjEditPlaylistCollectionViewModel(this);
             SdjRemovePlaylistCollectionViewModel = new SdjRemovePlaylistCollectionViewModel(this);
             SdjAddTrackToPlaylistCollectionViewModel = new SdjAddTrackToPlaylistCollectionViewModel(this);
+            SdjRenameTrackNameInPlaylistViewModel = new SdjRenameTrackNameInPlaylistViewModel(this);
             SdjLoginViewModel = new SdjLoginViewModel(this);
             SdjRegisterViewModel = new SdjRegisterViewModel(this);
             SdjUserProfileViewModel = new SdjUserProfileViewModel(this);
@@ -297,6 +298,17 @@ namespace SharpDj.ViewModel
             }
         }
 
+        private SdjRenameTrackNameInPlaylistViewModel _sdjRenameTrackNameInPlaylistViewModel;
+        public SdjRenameTrackNameInPlaylistViewModel SdjRenameTrackNameInPlaylistViewModel
+        {
+            get => _sdjRenameTrackNameInPlaylistViewModel;
+            set
+            {
+                if (_sdjRenameTrackNameInPlaylistViewModel == value) return;
+                _sdjRenameTrackNameInPlaylistViewModel = value;
+                OnPropertyChanged("SdjRenameTrackNameInPlaylistViewModel");
+            }
+        }
 
         #endregion ViewModels
 

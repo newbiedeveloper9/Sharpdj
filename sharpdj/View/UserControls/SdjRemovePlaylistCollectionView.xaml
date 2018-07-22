@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:SharpDj.View.UserControls"
              xmlns:helpers="clr-namespace:SharpDj.View.UserControls.Helpers"
              mc:Ignorable="d" 
-             d:DesignHeight="110" d:DesignWidth="270">
+             d:DesignHeight="135" d:DesignWidth="270">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -18,12 +18,17 @@
         </Grid>
         
         <Grid Grid.Row="1" Background="{StaticResource DarkBrush}">
-            <StackPanel Background="{StaticResource DarkBrush}" HorizontalAlignment="Center" Orientation="Horizontal">
-                <Button Command="{Binding RemovePlaylistCommand}" Width="90" HorizontalAlignment="Center" BorderThickness="2"  BorderBrush="White" Style="{StaticResource IconButtonMouseOver}" VerticalAlignment="Center" Margin="0 0 0 0">
-                    <Label Content="Remove" Foreground="White" FontSize="18" HorizontalContentAlignment="Center"/>
+            <StackPanel Background="{StaticResource DarkBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+                <Label Content="Are you sure about it?" Foreground="White" FontSize="16"/>
+                <Button Command="{Binding RemovePlaylistCommand}" Width="90" HorizontalAlignment="Center" BorderThickness="2"  BorderBrush="White" Style="{StaticResource IconButtonMouseOver}" VerticalAlignment="Center" Margin="0 5 0 0">
+                    <Label Content="Do it" Foreground="White" FontSize="18" HorizontalContentAlignment="Center"/>
+                    <Button.ToolTip>
+                        <ToolTip>
+                            You did well, Anakin
+                        </ToolTip>
+                    </Button.ToolTip>
                 </Button>
             </StackPanel>
-
         </Grid>
     </Grid>
 </UserControl>

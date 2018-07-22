@@ -27,17 +27,21 @@ namespace SharpDj.Models.Client
 
         public void Start(SdjMainViewModel main)
         {
-            
+
             SdjMainViewModel = main;
             ClientInfo.Instance.Client = ScsClientFactory.CreateClient(new ScsTcpEndPoint(Ip, Port));
             ClientInfo.Instance.Client.MessageReceived += Client_MessageReceived;
             ClientInfo.Instance.Client.Disconnected += Client_Disconnected;
             ClientInfo.Instance.ReplyMessenger = new RequestReplyMessenger<IScsClient>(ClientInfo.Instance.Client);
             ClientInfo.Instance.ReplyMessenger.Start();
+            ClientInfo.Instance.Client.ConnectTimeout = 5;
             while (ClientInfo.Instance.Client.CommunicationState == CommunicationStates.Disconnected)
             {
                 try
                 {
+#if  DEBUG
+                    Thread.Sleep(1000);
+#endif
                     ClientInfo.Instance.Client.Connect();
                 }
                 catch (TimeoutException e)

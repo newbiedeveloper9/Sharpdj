@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,20 +10,34 @@ using SharpDj.ViewModel.Model;
 
 namespace SharpDj.ViewModel
 {
-    public class SdjEditPlaylistCollectionViewModel : BaseViewModel
+    public class SdjRenameTrackNameInPlaylistViewModel : BaseViewModel
     {
         #region .ctor
 
-        public SdjEditPlaylistCollectionViewModel(SdjMainViewModel main)
+        public SdjRenameTrackNameInPlaylistViewModel(SdjMainViewModel main)
         {
             SdjMainViewModel = main;
-            SdjTitleBarForUserControlsViewModel = new SdjTitleBarForUserControlsViewModel(main, closeForm, "Rename playlist");
+            SdjTitleBarForUserControlsViewModel = new SdjTitleBarForUserControlsViewModel(main, closeForm, "Rename track");
             SdjBackgroundForFormsViewModel = new SdjBackgroundForFormsViewModel(main, closeForm);
         }
 
         #endregion .ctor
 
         #region Properties
+
+        private PlaylistTrackModel _track;
+        public PlaylistTrackModel Track
+        {
+            get => _track;
+            set
+            {
+                AuthorName = value.AuthorName;
+                TrackName = value.SongName;
+                if (_track == value) return;
+                _track = value;
+                OnPropertyChanged("Track");
+            }
+        }
 
         private SdjMainViewModel _sdjMainViewModel;
         public SdjMainViewModel SdjMainViewModel
@@ -62,24 +75,39 @@ namespace SharpDj.ViewModel
             }
         }
 
-        private string _playlistName;
-        public string PlaylistName
+
+        private string _authorName;
+        public string AuthorName
         {
-            get => _playlistName;
+            get => _authorName;
             set
             {
-                if (_playlistName == value) return;
-                _playlistName = value;
-                OnPropertyChanged("PlaylistName");
+                if (_authorName == value) return;
+                _authorName = value;
+                OnPropertyChanged("AuthorName");
             }
         }
+
+        private string _trackName;
+        public string TrackName
+        {
+            get => _trackName;
+            set
+            {
+                if (_trackName == value) return;
+                _trackName = value;
+                OnPropertyChanged("TrackName");
+            }
+        }
+
         #endregion Properties
 
         #region Methods
 
         private void closeForm()
         {
-            PlaylistName = string.Empty;
+            TrackName = string.Empty;
+            AuthorName = string.Empty;
             SdjMainViewModel.PlaylistStateCollectionVisibility = PlaylistState.Collapsed;
         }
 
@@ -87,33 +115,31 @@ namespace SharpDj.ViewModel
 
         #region Commands
 
-        #region RenamePlaylistCommand
-        private RelayCommand _renamePlaylistCommand;
-        public RelayCommand RenamePlaylistCommand
+        #region RenameTrackCommand
+        private RelayCommand _renameTrackCommand;
+        public RelayCommand RenameTrackCommand
         {
             get
             {
-                return _renamePlaylistCommand
-                       ?? (_renamePlaylistCommand = new RelayCommand(RenamePlaylistCommandExecute, RenamePlaylistCommandCanExecute));
+                return _renameTrackCommand
+                       ?? (_renameTrackCommand = new RelayCommand(RenameTrackCommandExecute, RenameTrackCommandCanExecute));
             }
         }
 
-        public bool RenamePlaylistCommandCanExecute()
+        public bool RenameTrackCommandCanExecute()
         {
             return true;
         }
 
-        public void RenamePlaylistCommandExecute()
+        public void RenameTrackCommandExecute()
         {
-            var firstOrDefault = SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection.FirstOrDefault(x => x.IsSelected);
-            if (firstOrDefault != null)
-                firstOrDefault
-                    .PlaylistName = PlaylistName;
+            Track.AuthorName = AuthorName;
+            Track.SongName = TrackName;
+
             closeForm();
         }
+        #endregion RenameTrackCommand
+
         #endregion
-
-        #endregion Commands
-
     }
 }

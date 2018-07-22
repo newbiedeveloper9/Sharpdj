@@ -7,7 +7,7 @@
              xmlns:helpers="clr-namespace:SharpDj.View.UserControls.Helpers"
              xmlns:model="clr-namespace:SharpDj.ViewModel.Model"
              mc:Ignorable="d" 
-             d:DesignHeight="110" d:DesignWidth="450">
+             d:DesignHeight="180" d:DesignWidth="500">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -19,27 +19,48 @@
         </Grid>
 
         <Grid Grid.Row="1" Background="{StaticResource DarkBrush}">
-            <Grid VerticalAlignment="Center" Margin="0 0 120 0">
-                <TextBox Text="{Binding TrackName, UpdateSourceTrigger=PropertyChanged}" Foreground="White" Style="{StaticResource IconTextbox}" BorderThickness="0" x:Name="SearchTermTextBox" FontSize="24" VerticalAlignment="Center" Margin="20 0 0 0"/>
-                <Label Content="New title for track" VerticalAlignment="Center" IsHitTestVisible="False" HorizontalAlignment="Left" Margin="18 0 0 0" Foreground="#bbbbbb" FontSize="24">
-                    <Label.Style>
-                        <Style TargetType="{x:Type Label}">
-                            <Setter Property="Visibility" Value="Collapsed"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Text, ElementName=SearchTermTextBox}" Value="">
-                                    <Setter Property="Visibility" Value="Visible"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Label.Style>
-                </Label>
+            <Grid Margin="10 20 120 10" VerticalAlignment="Center">
+
+                <StackPanel Orientation="Vertical">
+                    <Grid Margin="5">
+                        <TextBox Text="{Binding TrackName, UpdateSourceTrigger=PropertyChanged}" Foreground="White" Style="{StaticResource IconTextbox}" BorderThickness="0" x:Name="TrackSearchTerm" FontSize="24" VerticalAlignment="Center" Margin="20 5 0 5"/>
+                        <Label Content="New title for track" VerticalAlignment="Center" IsHitTestVisible="False" HorizontalAlignment="Left" Margin="18 0 0 0" Foreground="#bbbbbb" FontSize="24">
+                            <Label.Style>
+                                <Style TargetType="{x:Type Label}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=TrackSearchTerm}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Label.Style>
+                        </Label>
+                    </Grid>
+                    
+                    <Grid Margin="5">
+                        <TextBox Text="{Binding AuthorName, UpdateSourceTrigger=PropertyChanged}"  Foreground="White" Style="{StaticResource IconTextbox}" BorderThickness="0" x:Name="AuthorSearchTerm" FontSize="24" VerticalAlignment="Center" Margin="20 5 0 5"/>
+                        <Label Content="New author for track" VerticalAlignment="Center" IsHitTestVisible="False" HorizontalAlignment="Left" Margin="18 0 0 0" Foreground="#bbbbbb" FontSize="24">
+                            <Label.Style>
+                                <Style TargetType="{x:Type Label}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=AuthorSearchTerm}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Label.Style>
+                        </Label>
+                    </Grid>
+                </StackPanel>
             </Grid>
-            <Grid Background="{StaticResource DarkBrush}" HorizontalAlignment="Right" >
-                <Button Command="{Binding RenameTrackCommand}" Width="90" HorizontalAlignment="Center" BorderThickness="2"  BorderBrush="White" Style="{StaticResource IconButtonMouseOver}" VerticalAlignment="Center" Margin="0 0 10 0">
+
+            <Grid Background="{StaticResource DarkBrush}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10">
+                <Button Command="{Binding RenameTrackCommand}" Width="90" HorizontalAlignment="Center" BorderThickness="2"  BorderBrush="White" Style="{StaticResource IconButtonMouseOver}" VerticalAlignment="Center">
                     <Label Content="Rename" Foreground="White" FontSize="18" HorizontalContentAlignment="Center"/>
                 </Button>
             </Grid>
-
         </Grid>
     </Grid>
 </UserControl>

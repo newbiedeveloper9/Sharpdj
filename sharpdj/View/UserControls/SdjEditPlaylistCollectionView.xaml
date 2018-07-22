@@ -34,7 +34,7 @@
                 </Label>
             </Grid>
             <Grid Background="{StaticResource DarkBrush}" HorizontalAlignment="Right" >
-                <Button Command="{Binding CreatePlaylistCommand}" Width="90" HorizontalAlignment="Center" BorderThickness="2"  BorderBrush="White" Style="{StaticResource IconButtonMouseOver}" VerticalAlignment="Center" Margin="0 0 10 0">
+                <Button Command="{Binding RenamePlaylistCommand}" Width="90" HorizontalAlignment="Center" BorderThickness="2"  BorderBrush="White" Style="{StaticResource IconButtonMouseOver}" VerticalAlignment="Center" Margin="0 0 10 0">
                     <Label Content="Rename" Foreground="White" FontSize="18" HorizontalContentAlignment="Center"/>
                 </Button>
             </Grid>

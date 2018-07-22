@@ -15,7 +15,7 @@
         WindowStyle="None"
         MinWidth="750"
         MinHeight="630"
-        Title="Main" Height="700" Width="1150">
+        Title="Main" Height="705" Width="1150">
     
     <Grid>
         <Grid.RowDefinitions>
@@ -132,13 +132,23 @@
             </Grid>
         </Grid>
 
+        <!--Rename Track-->
+        <Grid  RowSpan="3" ColumnSpan="2"  Visibility="{Binding PlaylistStateCollectionVisibility,
+            Converter={converters:EnumToVisibilityConverter},
+            ConverterParameter={x:Static enum:PlaylistState.RenameTrack}, Mode=TwoWay}">
+            <Grid DataContext="{Binding SdjRenameTrackNameInPlaylistViewModel}">
+                <helpers:SdjBackgroundForForms/>
+                <local:SdjRenameTrackNameInPlaylist Width="500" Height="180"/>
+            </Grid>
+        </Grid>
+
         <!--RemovePlaylist-->
         <Grid RowSpan="3" ColumnSpan="2" Visibility="{Binding PlaylistStateCollectionVisibility,
             Converter={converters:EnumToVisibilityConverter},
             ConverterParameter={x:Static enum:PlaylistState.Remove}, Mode=TwoWay}">
             <Grid DataContext="{Binding SdjRemovePlaylistCollectionViewModel}">
                 <helpers:SdjBackgroundForForms/>
-                <local:SdjRemovePlaylistCollectionView Width="270" Height="110"/>
+                <local:SdjRemovePlaylistCollectionView Width="270" Height="135"/>
             </Grid>
         </Grid>
         
@@ -151,6 +161,5 @@
                 <local:SdjAddTrackToPlaylistCollectionUserControl Width="300" Height="500"/>
             </Grid>
         </Grid>
-
     </Grid>
 </Window>

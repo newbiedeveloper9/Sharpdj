@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using SharpDj.Core;
+using SharpDj.Enums;
 
 namespace SharpDj.ViewModel.Model
 {
@@ -249,7 +250,28 @@ namespace SharpDj.ViewModel.Model
         }
         #endregion
 
+        #region TrackRenameCommand
+        private RelayCommand _trackRenameCommand;
+        public RelayCommand TrackRenameCommand
+        {
+            get
+            {
+                return _trackRenameCommand
+                       ?? (_trackRenameCommand = new RelayCommand(TrackRenameCommandExecute, TrackRenameCommandCanExecute));
+            }
+        }
 
+        public bool TrackRenameCommandCanExecute()
+        {
+            return true;
+        }
+
+        public void TrackRenameCommandExecute()
+        {
+            SdjMainViewModel.SdjRenameTrackNameInPlaylistViewModel.Track = this;
+            SdjMainViewModel.PlaylistStateCollectionVisibility = PlaylistState.RenameTrack;
+        }
+        #endregion
 
         #endregion Commands
     }

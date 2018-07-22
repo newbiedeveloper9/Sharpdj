@@ -86,11 +86,11 @@
                                                 <i:InvokeCommandAction Command="{Binding PlaylistOnLeaveCommand}"/>
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
-                                        <Image Source="../../Images/Playlists/003-check-symbol.png" Width="32" HorizontalAlignment="Left"  
+                                        <Image Source="../../Images/Playlists/003-check-symbol.png" Width="24" HorizontalAlignment="Left"  
                                                Visibility="{Binding IsActive,
                                                Converter={converters:BoolVisibilityConverter}}"/>
-                                        <TextBlock Text="{Binding PlaylistName}" TextTrimming="CharacterEllipsis" MaxWidth="250" FontSize="24" Foreground="White" Margin="10 5 -10 0"/>
-                                        <Label HorizontalAlignment="Right" FontSize="24" Content="{Binding TracksInPlaylist}" Foreground="White" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding PlaylistName}" TextTrimming="CharacterEllipsis" MaxWidth="250" FontSize="18" Foreground="White" Margin="10 5 -10 5"/>
+                                        <Label HorizontalAlignment="Right" FontSize="18" Content="{Binding TracksInPlaylist}" Foreground="White" VerticalAlignment="Center"/>
                                     </DockPanel>
                                 </Button>
                             </DataTemplate>
@@ -122,15 +122,15 @@
                                                 <ColumnDefinition Width="2.35*"/>
                                                 <ColumnDefinition Width="180"/>
                                             </Grid.ColumnDefinitions>
-                                            <Label Content="{Binding SongName}" Foreground="White" FontSize="24" HorizontalAlignment="Left" Grid.Column="0"/>
+                                            <Label Content="{Binding SongName}" Foreground="White" VerticalAlignment="Center" FontSize="16" HorizontalAlignment="Left" Grid.Column="0"/>
 
-                                            <Label Content="{Binding AuthorName}" Foreground="White" FontSize="24" Grid.Column="1" Background="{Binding BackgroundBrush}" Margin="20 0 20 0"/>
+                                            <Label Content="{Binding AuthorName}" Foreground="White" VerticalAlignment="Center" FontSize="16" Grid.Column="1" Background="{Binding BackgroundBrush}" Margin="20 0 20 0"/>
 
                                             <Grid  Visibility="{Binding SdjMainViewModel.SdjPlaylistViewModel.PlaylistMode,
                                                 Converter={converters:EnumToVisibilityConverter},
                                                 ConverterParameter={x:Static enum:PlaylistMode.Playlist}}" Grid.Column="2">
                                                 <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" Visibility="{Binding SongOptionsVisibility}" Background="{Binding BackgroundBrush}">
-                                                    <Button VerticalAlignment="Center" Style="{StaticResource IconButtonMouseOver}" BorderThickness="0" Width="44" Height="42" >
+                                                    <Button VerticalAlignment="Center" Command="{Binding TrackRenameCommand}" Style="{StaticResource IconButtonMouseOver}" BorderThickness="0" Width="44" Height="42" >
                                                         <Image Source="../../Images/Playlists/pencil-edit-button-white.png" Width="24" Height="24"/>
                                                     </Button>
                                                     <Button VerticalAlignment="Center" Command="{Binding TrackMoveDownCommand}" Style="{StaticResource IconButtonMouseOver}" BorderThickness="0" Width="44" Height="42">
@@ -146,9 +146,9 @@
                                             </Grid>
                                             <Grid  Visibility="{Binding SdjMainViewModel.SdjPlaylistViewModel.PlaylistMode,
                                                 Converter={converters:EnumToVisibilityConverter},
-                                                ConverterParameter={x:Static enum:PlaylistMode.Search}}" Grid.Column="2">
+                                                ConverterParameter={x:Static enum:PlaylistMode.Search}}" Grid.Column="2"  VerticalAlignment="Center">
                                                 <StackPanel  Grid.Column="2" VerticalAlignment="Center">
-                                                    <Label Content="{Binding SongDuration}" Foreground="White" FontSize="24"/>
+                                                    <Label Content="{Binding SongDuration}" Foreground="White" FontSize="16"/>
                                                 </StackPanel>
                                                 <Button VerticalAlignment="Center" Style="{StaticResource IconButtonMouseOver}" HorizontalAlignment="Right" Visibility="{Binding SongOptionsVisibility}" BorderThickness="0" Width="44" Height="42" 
                                                     Command="{Binding SdjMainViewModel.SdjPlaylistViewModel.AddTrackToPlaylistCommand}" >
@@ -157,7 +157,7 @@
 
                                             </Grid>
                                             <StackPanel  Grid.Column="2" VerticalAlignment="Center" Visibility="{Binding SongTimeVisibility}">
-                                                <Label Content="{Binding SongDuration}" Foreground="White" FontSize="24"/>
+                                                <Label Content="{Binding SongDuration}" Foreground="White" FontSize="16"  VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </Grid>
                                     </Grid>
