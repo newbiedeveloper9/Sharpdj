@@ -56,6 +56,8 @@ namespace SharpDj.ViewModel
             Client = new Client();
             Client.Start(this);
             _clientLogic = new ClientLogic(this);
+
+ 
         }
 
         #endregion .ctor

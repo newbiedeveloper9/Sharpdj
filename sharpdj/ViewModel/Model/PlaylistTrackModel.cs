@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using Newtonsoft.Json;
 using SharpDj.Core;
 using SharpDj.Enums;
 
@@ -12,9 +15,7 @@ namespace SharpDj.ViewModel.Model
 {
     public class PlaylistTrackModel :BaseViewModel
     {
-
         #region .ctor
-
         public PlaylistTrackModel(SdjMainViewModel main)
         {
             SdjMainViewModel = main;
@@ -23,7 +24,10 @@ namespace SharpDj.ViewModel.Model
         #endregion .ctor
 
         #region Properties
+
+        [JsonIgnore]
         private SdjMainViewModel _sdjMainViewModel;
+        [JsonIgnore]
         public SdjMainViewModel SdjMainViewModel
         {
             get => _sdjMainViewModel;
@@ -82,7 +86,9 @@ namespace SharpDj.ViewModel.Model
             }
         }
 
+        [JsonIgnore]
         private Brush _backgroundBrush = new SolidColorBrush(Color.FromArgb(247, 0, 56, 77));
+        [JsonIgnore]
         public Brush BackgroundBrush
         {
             get => _backgroundBrush;
@@ -123,13 +129,19 @@ namespace SharpDj.ViewModel.Model
 
         #region Methods
 
+        public bool EqualsSequel(PlaylistTrackModel tmp)
+        {
+            return SongId.Equals(tmp.SongId) && SongName.Equals(tmp.SongName) && AuthorName.Equals(tmp.AuthorName) && SongDuration.Equals(tmp.SongDuration);
+        }
 
         #endregion Methods
 
         #region Commands
 
         #region SongOptionsSetVisibleCommand
+        [JsonIgnore]
         private RelayCommand _songOptionsSetVisibleCommand;
+        [JsonIgnore]
         public RelayCommand SongOptionsSetVisibleCommand
         {
             get
@@ -153,7 +165,9 @@ namespace SharpDj.ViewModel.Model
         #endregion
 
         #region SongOptionsSetHiddenCommand
+        [JsonIgnore]
         private RelayCommand _songOptionsSetHiddenCommand;
+        [JsonIgnore]
         public RelayCommand SongOptionsSetHiddenCommand
         {
             get
@@ -177,7 +191,9 @@ namespace SharpDj.ViewModel.Model
         #endregion
 
         #region TrackMoveDownCommand
+        [JsonIgnore]
         private RelayCommand _trackMoveDownCommand;
+        [JsonIgnore]
         public RelayCommand TrackMoveDownCommand
         {
             get
@@ -197,11 +213,15 @@ namespace SharpDj.ViewModel.Model
             var index = SdjMainViewModel.SdjPlaylistViewModel.TrackCollection.IndexOf(this);
             if (index >= SdjMainViewModel.SdjPlaylistViewModel.TrackCollection.Count-1) return;
             SdjMainViewModel.SdjPlaylistViewModel.TrackCollection.Move(index, index + 1);
+
+           //HasChanges = true;
         }
         #endregion
 
         #region TrackMoveUpCommand
+        [JsonIgnore]
         private RelayCommand _trackMoveUpCommand;
+        [JsonIgnore]
         public RelayCommand TrackMoveUpCommand
         {
             get
@@ -221,11 +241,15 @@ namespace SharpDj.ViewModel.Model
             var index = SdjMainViewModel.SdjPlaylistViewModel.TrackCollection.IndexOf(this);
             if (index <= 0) return;
             SdjMainViewModel.SdjPlaylistViewModel.TrackCollection.Move(index, index - 1);
+
+            //                HasChanges = true;
         }
         #endregion
 
         #region TrackDeleteCommand
+        [JsonIgnore]
         private RelayCommand _trackDeleteCommand;
+        [JsonIgnore]
         public RelayCommand TrackDeleteCommand
         {
             get
@@ -251,7 +275,9 @@ namespace SharpDj.ViewModel.Model
         #endregion
 
         #region TrackRenameCommand
+        [JsonIgnore]
         private RelayCommand _trackRenameCommand;
+        [JsonIgnore]
         public RelayCommand TrackRenameCommand
         {
             get

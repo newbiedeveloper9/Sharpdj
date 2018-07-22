@@ -182,13 +182,12 @@ namespace SharpDj.ViewModel.Model
         public void MainOnRoomClickCommandExecute()
         {
             //TODO Join Room
-            Room.InsindeInfo inside;
             Task.Factory.StartNew(() =>
             {
                 var resp = ClientInfo.Instance.ReplyMessenger.SendMessageAndWaitForResponse(new ScsTextMessage(Commands.Client.JoinRoom + RoomId));
                 if (resp == null) return;
 
-                inside = JsonConvert.DeserializeObject<Room.InsindeInfo>(((ScsTextMessage)resp).Text);
+                var inside = JsonConvert.DeserializeObject<Room.InsindeInfo>(((ScsTextMessage)resp).Text);
                 GetInfoAboutRoom(inside);
             });
         }

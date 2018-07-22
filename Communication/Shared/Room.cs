@@ -9,28 +9,50 @@ namespace Communication.Shared
 {
     public class Room
     {
-        public Room(int id, string name, string host, string image, string description, InsindeInfo insideInfo)
+        public Room()
+        {
+
+        }
+
+        public Room(int id, string name, string host, string image, string description)
         {
             Id = id;
             Name = name;
             Host = host;
             Image = image;
             Description = description;
-            InsideInfo = insideInfo;
         }
 
-        public int Id;
-        public string Name;
-        public string Host;
-        public string Image;
-        public string Description;
-        public int AmountOfPeople => InsideInfo.Clients.Count;
-        public int AmountOfAdministration => InsideInfo.Clients.Count(x => x.Rank > 0);
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Host { get; set; }
+        public string Image { get; set; }
+        public string Description { get; set; }
+        public int AmountOfPeople { get; set; }
+        public int AmountOfAdministration { get; set; }
 
-        public InsindeInfo InsideInfo;
+        [JsonIgnore]
+        public InsindeInfo InsideInfo { get; set; }
+
 
         public class InsindeInfo
         {
+            private readonly Room _room;
+            private List<UserClient> _clients;
+
+            public InsindeInfo()
+            {
+                
+            }
+
+            public InsindeInfo(List<UserClient> clients, List<Songs> djs, Room room, int timeLeft = 0)
+            {
+                _room = room;
+                Clients = clients;
+                Djs = djs;
+                TimeLeft = timeLeft;
+            }
+
             public InsindeInfo(List<UserClient> clients, List<Songs> djs, int timeLeft = 0)
             {
                 Clients = clients;
@@ -38,8 +60,21 @@ namespace Communication.Shared
                 TimeLeft = timeLeft;
             }
 
-            public List<UserClient> Clients { get; set; }
+            public List<UserClient> Clients
+            {
+                get => _clients;
+                set
+                {
+                    if (value == _clients) return;
+                    _clients = value;
+                    if(_room == null) return;
+                    _room.AmountOfPeople = value.Count;
+                    _room.AmountOfAdministration = value.Count(x => x.Rank > 0);
+                }
+            }
+
             public List<Songs> Djs { get; set; }
+
             public int TimeLeft { get; set; }
 
             public void NextDj()

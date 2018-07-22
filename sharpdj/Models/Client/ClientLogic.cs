@@ -67,7 +67,7 @@ namespace SharpDj.Models.Client
                 inside.Clients.Count(x => x.Rank > 0);
             SdjMainViewModel.SdjRoomViewModel.SongsQueue = (sbyte)inside.Djs.SelectMany(dj => dj.Video).Count();
 
-            YoutubeClient client = new YoutubeClient();
+            var client = new YoutubeClient();
             var tmp = client.GetVideoAsync(inside.Djs[0].Video[0].Id).Result;
             SdjMainViewModel.SdjRoomViewModel.SongTitle = tmp.Title;
             SdjMainViewModel.SdjBottomBarViewModel.BottomBarTitleOfActuallySong = tmp.Title;
@@ -75,11 +75,11 @@ namespace SharpDj.Models.Client
 
         public void RefreshInfo()
         {
-            var reply = SdjMainViewModel.Client.Sender.AfterLogin(ClientInfo.Instance.ReplyMessenger);
+            string reply = SdjMainViewModel.Client.Sender.AfterLogin(ClientInfo.Instance.ReplyMessenger);
             if (reply == null) return;
-            List<Room> source = JsonConvert.DeserializeObject<List<Room>>(reply);
 
-            ObservableCollection<RoomSquareModel> roomstmp = new ObservableCollection<RoomSquareModel>();
+            var source = JsonConvert.DeserializeObject<List<Room>>(reply);
+            var roomstmp = new ObservableCollection<RoomSquareModel>();
             for (int i = 0; i < source.Count; i++)
             {
                 roomstmp.Add(new RoomSquareModel(SdjMainViewModel)
@@ -91,12 +91,6 @@ namespace SharpDj.Models.Client
                     RoomDescription = source[i].Description,
                     RoomId = source[i].Id,
                 });
-                if (source[i].InsideInfo.Clients
-                    .Exists(x => x.Username.Equals(SdjMainViewModel.Profile.Username)))
-                {
-                    SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfPeopleInRoom = source[i].AmountOfPeople;
-                  
-                }
             }
             SdjMainViewModel.RoomCollection = roomstmp;
         }
@@ -129,8 +123,6 @@ namespace SharpDj.Models.Client
             
             Debug.Log("Login", "Succesful login");
         }
-
-
 
         private SdjMainViewModel _sdjMainViewModel;
         public SdjMainViewModel SdjMainViewModel

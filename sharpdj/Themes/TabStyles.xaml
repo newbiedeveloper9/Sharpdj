@@ -40,6 +40,10 @@
         </Setter>
     </Style>
 
+        <Style TargetType="Image">
+            <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality" />
+        </Style>
+
     <Style TargetType="{x:Type TabControl}" x:Key="TabControlStyle">
         <Setter Property="Background" Value="LightBlue"/>
         <Setter Property="TabStripPlacement" Value="Left"/>

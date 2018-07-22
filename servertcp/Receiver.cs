@@ -44,7 +44,8 @@ namespace servertcp
                     var host = reader["Host"].ToString();
                     var image = reader["ImageUrl"].ToString();
                     var description = reader["Description"].ToString();
-                    _rooms[roomCount] = new Room(id, name, host, image, description, new Room.InsindeInfo(new List<UserClient>(), new List<Songs>()));
+                    _rooms[roomCount] = new Room(id, name, host, image, description);
+                    _rooms[roomCount].InsideInfo = new Room.InsindeInfo(new List<UserClient>(), new List<Songs>(), _rooms[roomCount]);
                     roomCount++;
                 }
 
@@ -141,7 +142,8 @@ namespace servertcp
             {
                 SqlUserCommands.AddActionInfo(userId, Utils.GetIpOfClient(e.Client), SqlUserCommands.Actions.CreateRoom);
 
-                _rooms[roomCount] = new Room(_rooms.Count, e.Name, login, e.Image, e.Description, new Room.InsindeInfo(new List<UserClient>(), new List<Songs>()));
+                _rooms[roomCount] = new Room(_rooms.Count, e.Name, login, e.Image, e.Description);
+                _rooms[roomCount].InsideInfo = new Room.InsindeInfo(new List<UserClient>(), new List<Songs>(), _rooms[roomCount]);
                 roomCount++;
             }
             else
@@ -160,7 +162,7 @@ namespace servertcp
             //select room to join
             var room = _rooms.GetAllItems().FirstOrDefault(x => x.Id == e.RoomId);
 
-            //Set user to max 1 room, remove from others
+            //Set user to max 1 room, remove from other instances
             var tmp = _rooms.GetAllItems().Where(x => x.InsideInfo.Clients.Exists(y => y.Id == userclient.Id));
             foreach (var roomActive in tmp)
             {

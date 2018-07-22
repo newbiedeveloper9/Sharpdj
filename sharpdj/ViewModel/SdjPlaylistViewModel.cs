@@ -1,13 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Newtonsoft.Json;
 using SharpDj.Core;
 using SharpDj.Enums;
+using SharpDj.Models.Helpers;
+using SharpDj.Models.Helpers.Updater;
 using SharpDj.ViewModel.Model;
 using Playlist = SharpDj.Enums.Playlist;
 using YoutubeExplode;
@@ -21,27 +27,28 @@ namespace SharpDj.ViewModel
         public SdjPlaylistViewModel(SdjMainViewModel main)
         {
             SdjMainViewModel = main;
-            PlaylistCollection = new ObservableCollection<PlaylistModel>();
+            var src = File.ReadAllText(@"config\playlist.json");
+            PlaylistCollection = JsonConvert.DeserializeObject<ObservableCollection<PlaylistModel>>(src);
+            PlaylistCollectionSavedState = JsonConvert.DeserializeObject<ObservableCollection<PlaylistModel>>(src);
 
-            for (int i = 0; i < 2; i++)
+            for (var index = 0; index < PlaylistCollection.Count; index++)
             {
-                //  var tracks = new ObservableCollection<PlaylistTrackModel>();
-                /*   for (int j = 0; j < i; j++)
-                   {
-                       tracks.Add(new PlaylistTrackModel(main) { AuthorName = "Łrisey " + i + j, SongDuration = "3:20", SongName = "Monstercat jakis tam" });
-                       tracks.Add(new PlaylistTrackModel(main) { AuthorName = "ąonk " + j + i + 2, SongDuration = "2:13", SongName = "Tylko chińskie xD" });
-                   }*/
-                PlaylistCollection.Add(new PlaylistModel(main) { PlaylistName = "Chińska playlista" });
-                PlaylistCollection.Add(new PlaylistModel(main) { PlaylistName = "Zonkowate cos" });
+                PlaylistCollection[index].SdjMainViewModel = SdjMainViewModel;
+                PlaylistCollectionSavedState[index].SdjMainViewModel = SdjMainViewModel;
+
+                for (var i = 0; i < PlaylistCollection[index].Tracks.Count; i++)
+                {
+                    PlaylistCollection[index].Tracks[i].SdjMainViewModel = SdjMainViewModel;
+                    PlaylistCollectionSavedState[index].Tracks[i].SdjMainViewModel = SdjMainViewModel;
+                }
             }
         }
 
         #endregion .ctor
 
-        #region Properties
+        #region Properties 
 
         private ObservableCollection<PlaylistTrackModel> _trackCollection;
-
         public ObservableCollection<PlaylistTrackModel> TrackCollection
         {
             get => _trackCollection;
@@ -52,8 +59,8 @@ namespace SharpDj.ViewModel
                 OnPropertyChanged("TrackCollection");
             }
         }
-        private ObservableCollection<PlaylistModel> _playlistCollection;
 
+        private ObservableCollection<PlaylistModel> _playlistCollection;
         public ObservableCollection<PlaylistModel> PlaylistCollection
         {
             get => _playlistCollection;
@@ -65,7 +72,17 @@ namespace SharpDj.ViewModel
             }
         }
 
-
+        private ObservableCollection<PlaylistModel> _playlistCollectionSavedState;
+        public ObservableCollection<PlaylistModel> PlaylistCollectionSavedState
+        {
+            get => _playlistCollectionSavedState;
+            set
+            {
+                if (_playlistCollectionSavedState == value) return;
+                _playlistCollectionSavedState = value;
+                OnPropertyChanged("PlaylistCollectionSavedState");
+            }
+        }
 
         private SdjMainViewModel _sdjMainViewModel;
         public SdjMainViewModel SdjMainViewModel
@@ -79,7 +96,6 @@ namespace SharpDj.ViewModel
             }
         }
 
-
         private Playlist _playlistVisibility = Playlist.Collapsed;
         public Playlist PlaylistVisibility
         {
@@ -89,6 +105,21 @@ namespace SharpDj.ViewModel
                 if (_playlistVisibility == value) return;
                 _playlistVisibility = value;
                 OnPropertyChanged("PlaylistVisibility");
+
+                if (value == Playlist.Collapsed)
+                {
+                    string serialized = JsonConvert.SerializeObject(PlaylistCollection);
+                    string serializedSavedState = JsonConvert.SerializeObject(PlaylistCollectionSavedState);
+
+                    if (!serializedSavedState.Equals(serialized))
+                    {
+                        if (!Directory.Exists("config"))
+                            Directory.CreateDirectory("config");
+                        File.WriteAllText("config/playlist.json", serialized);
+                        PlaylistCollectionSavedState = Clone.ClonWithJson(PlaylistCollection);
+                    }
+                    //DO NOT SAY ANYTHGING, PLEASE, IM JUST DONE WITH IT. NEVER TOUCH IT AGAIN.
+                }
             }
         }
 
@@ -128,6 +159,11 @@ namespace SharpDj.ViewModel
             {
                 playlistModel.IsSelected = false;
             }
+        }
+
+        private void SaveApply()
+        {
+
         }
 
         #endregion Methods
@@ -266,7 +302,7 @@ namespace SharpDj.ViewModel
                     SongName = item.Title,
                     AuthorName = item.Author,
                     SongDuration = item.Duration.ToString(),
-                    SongId = item.Id  
+                    SongId = item.Id
                 });
             }
         }

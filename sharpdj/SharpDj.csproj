@@ -24,6 +24,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>bin\Debug\SharpDj.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -54,6 +56,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -85,6 +88,7 @@
     <Compile Include="Models\Client\ClientInfo.cs" />
     <Compile Include="Models\Client\ClientLogic.cs" />
     <Compile Include="Models\Client\ErrorMessages.cs" />
+    <Compile Include="Models\Helpers\Clone.cs" />
     <Compile Include="Models\Helpers\Debug.cs" />
     <Compile Include="Models\Helpers\Imgur.cs" />
     <Compile Include="Models\Helpers\Updater\FTPChecker.cs" />

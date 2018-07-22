@@ -21,18 +21,20 @@
         </Grid>
 
         <Grid Grid.Row="1" Background="{StaticResource DarkBrush}">
-            <ItemsControl ItemsSource="{Binding PlaylistCollection}" Margin="0 15 0 0">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="{x:Type model:PlaylistToAddTrack}">
-                        <Button Style="{StaticResource IconButtonMouseOver}" Command="{Binding SelectPlaylistCommand}" BorderThickness="0" Margin="0 5 0 5">
-                            <DockPanel Margin="10 0 10 0" Background="Transparent">
-                                <TextBlock Text="{Binding PlaylistName}" TextTrimming="CharacterEllipsis" MaxWidth="250" FontSize="24" Foreground="White" Margin="10 5 -10 0"/>
-                                <Label HorizontalAlignment="Right" FontSize="24" Content="{Binding TrackCount}" Foreground="White" VerticalAlignment="Center"/>
-                            </DockPanel>
-                        </Button>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
+                <ItemsControl ItemsSource="{Binding PlaylistCollection}" Margin="0 15 0 0">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type model:PlaylistToAddTrack}">
+                            <Button Style="{StaticResource IconButtonMouseOver}" Command="{Binding SelectPlaylistCommand}" BorderThickness="0" Margin="0 5 0 5">
+                                <DockPanel Margin="10 0 10 0" Background="Transparent">
+                                    <TextBlock Text="{Binding PlaylistName}" TextTrimming="CharacterEllipsis" MaxWidth="215" FontSize="24" Foreground="White" Margin="10 5 -25 0"/>
+                                    <Label HorizontalAlignment="Right" FontSize="24" Content="123" Foreground="White" VerticalAlignment="Center"/>
+                                </DockPanel>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </UserControl>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hik.Communication.Scs.Communication;
 using Hik.Communication.Scs.Communication.Messages;
 using Hik.Communication.Scs.Server;
 
@@ -14,6 +15,7 @@ namespace Communication.Server
         {
             foreach (var clients in server.Clients.GetAllItems())
             {
+                if(clients!=null && clients.CommunicationState==CommunicationStates.Connected)
                 clients.SendMessage(new ScsTextMessage(message));
             }
         }

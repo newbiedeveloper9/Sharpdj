@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using Newtonsoft.Json;
 using SharpDj.Core;
 using SharpDj.Enums;
 
@@ -23,7 +25,9 @@ namespace SharpDj.ViewModel.Model
         #endregion .ctor
 
         #region Properties
+        [JsonIgnore]
         private SdjMainViewModel _sdjMainViewModel;
+        [JsonIgnore]
         public SdjMainViewModel SdjMainViewModel
         {
             get => _sdjMainViewModel;
@@ -34,9 +38,9 @@ namespace SharpDj.ViewModel.Model
             }
         }
 
-
-
+        [JsonIgnore]
         private Brush _backgroundBrush;
+        [JsonIgnore]
         public Brush BackgroundBrush
         {
             get => _backgroundBrush;
@@ -48,7 +52,9 @@ namespace SharpDj.ViewModel.Model
             }
         }
 
+        [JsonIgnore]
         private bool _isSelected;
+        [JsonIgnore]
         public bool IsSelected
         {
             get => _isSelected;
@@ -80,10 +86,9 @@ namespace SharpDj.ViewModel.Model
             {
                 if (_isActive == value) return;
 
-                    _isActive = value;
+                _isActive = value;
                 
                 OnPropertyChanged("IsActive");
-             
             }
         }
 
@@ -113,7 +118,6 @@ namespace SharpDj.ViewModel.Model
         }
 
         private ObservableCollection<PlaylistTrackModel> _tracks;
-
         public ObservableCollection<PlaylistTrackModel> Tracks
         {
             get => _tracks;
@@ -129,11 +133,17 @@ namespace SharpDj.ViewModel.Model
         #endregion Properties
 
         #region Methods
-
         public void AddTrack(PlaylistTrackModel track)
         {
             Tracks.Add(track);
             TracksInPlaylist++;
+        }
+
+        public bool EqualsSequel(PlaylistModel tmp)
+        {
+            if (!PlaylistName.Equals(tmp.PlaylistName) || IsActive != tmp.IsActive 
+                || TracksInPlaylist != tmp.TracksInPlaylist) return false;
+            return Tracks.All(x => x.EqualsSequel(x));
         }
 
         #endregion Methods
@@ -142,8 +152,9 @@ namespace SharpDj.ViewModel.Model
 
 
         #region SelectPlaylistCommand
-
+        [JsonIgnore]
         private RelayCommand _selectPlaylistCommand;
+        [JsonIgnore]
         public RelayCommand SelectPlaylistCommand
         {
             get
@@ -152,7 +163,6 @@ namespace SharpDj.ViewModel.Model
                        ?? (_selectPlaylistCommand = new RelayCommand(SelectPlaylistCommandExecute, SelectPlaylistCommandCanExecute));
             }
         }
-
         public bool SelectPlaylistCommandCanExecute()
         {
             return true;
@@ -180,7 +190,9 @@ namespace SharpDj.ViewModel.Model
 
 
         #region PlaylistOnEnterCommand
+        [JsonIgnore]
         private RelayCommand _playlistOnEnterCommand;
+        [JsonIgnore]
         public RelayCommand PlaylistOnEnterCommand
         {
             get
@@ -198,15 +210,14 @@ namespace SharpDj.ViewModel.Model
         public void PlaylistOnEnterCommandExecute()
         {
             if (!IsSelected)
-            {
                 BackgroundBrush = new SolidColorBrush(Color.FromArgb(255, 0, 174, 239));
-            }
         }
         #endregion
 
         #region PlaylistOnLeaveCommand
+        [JsonIgnore]
         private RelayCommand _playlistOnLeaveCommand;
-
+        [JsonIgnore]
         public RelayCommand PlaylistOnLeaveCommand
         {
             get

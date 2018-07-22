@@ -33,7 +33,7 @@
                                 <Image Source="../../Images/Room/038-cancel-button.png"
                                         Visibility="{Binding  SdjMainViewModel.SdjPlaylistViewModel.PlaylistVisibility,
                                         Converter={converters:EnumToVisibilityConverter},
-                                        ConverterParameter={x:Static enum:Playlist.Visible}}"/>
+                                        ConverterParameter={x:Static enum:Playlist.Visible}}" />
                             </Grid>
                         </Button>
                         <StackPanel>
