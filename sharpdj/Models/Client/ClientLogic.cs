@@ -10,6 +10,8 @@ using Communication.Shared;
 using Newtonsoft.Json;
 using SharpDj.Core;
 using SharpDj.Enums;
+using SharpDj.Enums.Menu;
+using SharpDj.Enums.User;
 using SharpDj.Models.Helpers;
 using SharpDj.ViewModel;
 using SharpDj.ViewModel.Model;

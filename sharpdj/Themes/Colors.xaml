@@ -12,15 +12,4 @@
 
     <Color x:Key="Black">#202225</Color>
     <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource Black}"/>
-<!--    <Color x:Key="Dark">#242424</Color>
-    <SolidColorBrush x:Key="DarkBrush" Color="{StaticResource Dark}"/>
-
-    <Color x:Key="Light">#606060</Color>
-    <SolidColorBrush x:Key="LightBrush" Color="{StaticResource Light}"/>
-
-    <Color x:Key="Mid">#016e97</Color>
-    <SolidColorBrush x:Key="MidBrush" Color="{StaticResource Mid}"/>
-
-    <Color x:Key="Black">#202225</Color>
-    <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource Black}"/>-->
 </ResourceDictionary>

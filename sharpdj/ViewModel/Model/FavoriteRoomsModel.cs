@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SharpDj.Core;
 using SharpDj.Enums;
+using SharpDj.Enums.Menu;
 
 namespace SharpDj.ViewModel.Model
 {

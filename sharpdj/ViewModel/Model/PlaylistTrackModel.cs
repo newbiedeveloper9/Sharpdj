@@ -10,6 +10,7 @@ using System.Windows.Media;
 using Newtonsoft.Json;
 using SharpDj.Core;
 using SharpDj.Enums;
+using SharpDj.Enums.Playlist;
 
 namespace SharpDj.ViewModel.Model
 {

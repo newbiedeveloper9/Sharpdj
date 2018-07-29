@@ -3,15 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:SharpDj"
                 ShutdownMode="OnLastWindowClose"
-             StartupUri="View/SdjMainView.xaml">
+             StartupUri="View/Views/SdjMainView.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary x:Name="ThemeDictionary">
                     <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="Themes/GlobalStyles.xaml" />
                         <ResourceDictionary Source="/Themes/Colors.xaml"/>
                         <ResourceDictionary Source="/Themes/Buttons.xaml"/>
-                        <ResourceDictionary Source="/Themes/TabStyles.xaml"/>
+                        <ResourceDictionary Source="/Themes/UserTabStyles.xaml"/>
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>

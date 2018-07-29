@@ -10,6 +10,7 @@ using Hik.Communication.Scs.Communication;
 using Hik.Communication.Scs.Communication.Messengers;
 using SharpDj.Core;
 using SharpDj.Enums;
+using SharpDj.Enums.Menu;
 using SharpDj.ViewModel;
 
 
