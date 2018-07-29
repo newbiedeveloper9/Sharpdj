@@ -1,16 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Threading;
 using Communication.Shared;
 using Hik.Communication.Scs.Communication.Messages;
 using Newtonsoft.Json;
@@ -25,7 +17,8 @@ namespace SharpDj.ViewModel
 {
     public class SdjRoomViewModel : BaseViewModel
     {
-        public SdjVlcPlayer vlcPlayer { get; set; }
+        public SdjVlcPlayer VlcPlayer { get; set; }
+        
         #region .ctor
 
         public SdjRoomViewModel(SdjMainViewModel main)
@@ -44,7 +37,7 @@ namespace SharpDj.ViewModel
             MyVlcPlayer.Add(test);
             var vlcLibDirectory = new DirectoryInfo(System.IO.Path.Combine(Environment.CurrentDirectory, "libvlc", IntPtr.Size == 4 ? "win-x86" : "win-x64"));
             test.VlcPlayer.SourceProvider.CreatePlayer(vlcLibDirectory);
-            test.VlcPlayer.SourceProvider.MediaPlayer.Play("https://www.netflix.com/watch/70283264?trackId=15035895&tctx=2%2C3%2Cc33edd86-3d37-4160-be7e-1f9a5bd44cad-22057218%2C13e261a7-c022-489e-9692-b3fa45914fd4_30653726X54XX1532815221647%2C13e261a7-c022-489e-9692-b3fa45914fd4_ROOT");
+            test.VlcPlayer.SourceProvider.MediaPlayer.Play("https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_5mb.mp4");
 
             for (int i = 0; i < 10; i++)
             {

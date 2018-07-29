@@ -25,7 +25,7 @@ namespace SharpDj.ViewModel
 {
     public class SdjMainViewModel : BaseViewModel
     {
-        public Client Client { get; set; }
+        public readonly Client Client;
         private readonly ClientLogic _clientLogic;
 
         #region .ctor
@@ -47,8 +47,6 @@ namespace SharpDj.ViewModel
             SdjUserProfileViewModel = new SdjUserProfileViewModel(this);
             SdjFeedbackViewModel = new SdjFeedbackViewModel(this);
 
-            
-
             MainViewVisibility = MainView.Login;
             Profile = new UserClient();
 
@@ -60,8 +58,6 @@ namespace SharpDj.ViewModel
             Client = new Client();
             Client.Start(this);
             _clientLogic = new ClientLogic(this);
-
- 
         }
 
         #endregion .ctor

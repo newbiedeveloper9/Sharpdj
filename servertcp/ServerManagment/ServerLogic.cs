@@ -17,11 +17,11 @@ using Hik.Communication.Scs.Server;
 using Newtonsoft.Json;
 using servertcp.Sql;
 
-namespace servertcp
+namespace servertcp.ServerManagment
 {
-    class Receiver
+    class ServerLogic
     {
-        private IScsServer _server;
+        private readonly IScsServer _server;
         private readonly ThreadSafeSortedList<long, ServerClient> _clients;
         private readonly ThreadSafeSortedList<long, Room> _rooms;
         private int roomCount = 0;
@@ -29,12 +29,11 @@ namespace servertcp
         public List<ServerClient> ServerClients => (from client in _clients.GetAllItems() select client).ToList();
         public List<UserClient> UserClients => (from client in _clients.GetAllItems() select client.ToUserClient()).ToList();
 
-        public Receiver(ServerReceiver receiver, IScsServer server)
+        public ServerLogic(ServerReceiver receiver, IScsServer server)
         {
-            this._server = server;
-
             _clients = new ThreadSafeSortedList<long, ServerClient>();
             _rooms = new ThreadSafeSortedList<long, Room>();
+            _server = server;
 
             using (var reader = SqlHelper.ExecuteDataReader("SELECT * FROM Room"))
                 while (reader.Read())
@@ -66,9 +65,15 @@ namespace servertcp
             _rooms[0].InsideInfo.Djs[1].Video.Add(new Songs.Song(3, "JSQsIMgj1OM"));
             _rooms[0].InsideInfo.TimeLeft = _rooms[0].InsideInfo.Djs[0].Video[0].Time;
 
-            receiver.Disconnect += _communication_Disconnect;
-            receiver.Register += _communication_Register;
-            receiver.Login += _communication_Login;
+            SetEvents(receiver);
+        }
+
+        private void SetEvents(ServerReceiverEvents receiver)
+        {
+            _server.ClientDisconnected += Client_Disconnected;
+            receiver.Disconnect += Receiver_Disconnect;
+            receiver.Register += Receiver_Register;
+            receiver.Login += Receiver_Login;
             receiver.ChangePassword += Receiver_ChangePassword;
             receiver.ChangeUsername += Receiver_ChangeUsername;
             receiver.ChangeRank += Receiver_ChangeRank;
@@ -78,29 +83,31 @@ namespace servertcp
             receiver.CreateRoom += Receiver_CreateRoom;
             receiver.AfterLogin += Receiver_AfterLogin;
             receiver.JoinQueue += Receiver_JoinQueue;
+            
+            PeriodicTask.StartNew(1000, TrackRefresh);
+        }
 
-            Task.Factory.StartNew(() =>
+        private void TrackRefresh()
+        {
+            foreach (var room in _rooms.GetAllItems())
             {
-                while (true)
+                if (room.InsideInfo.Djs.Count == 0) continue;
+                room.InsideInfo.TimeLeft--;
+                if (room.InsideInfo.TimeLeft <= 0)
                 {
-                    Thread.Sleep(1000);
-                    foreach (var room in _rooms.GetAllItems())
-                    {
-                        if (room.InsideInfo.Djs.Count == 0) continue;
-                        room.InsideInfo.TimeLeft--;
-                        if (room.InsideInfo.TimeLeft <= 0)
-                        {
-                            room.InsideInfo.NextDj();
-                            Console.WriteLine(room.InsideInfo.Djs[0].Video[0].Id + "new" + room.InsideInfo.TimeLeft);
-                        }
-                    }
+                    room.InsideInfo.NextDj();
+                    Console.WriteLine(room.InsideInfo.Djs[0].Video[0].Id + " new " + room.InsideInfo.TimeLeft);
                 }
-            });
+            }
+        }
+
+        private void Client_Disconnected(object sender, ServerClientEventArgs e)
+        {
+            //TODO
         }
 
 
-
-        private void Receiver_JoinQueue(object sender, ServerReceiver.JoinQueueEventArgs e)
+        private void Receiver_JoinQueue(object sender, ServerReceiverEvents.JoinQueueEventArgs e)
         {
             Task.Factory.StartNew(() =>
             {
@@ -124,14 +131,14 @@ namespace servertcp
             });
         }
 
-        private void Receiver_AfterLogin(object sender, ServerReceiver.AfterLoginEventArgs e)
+        private void Receiver_AfterLogin(object sender, ServerReceiverEvents.AfterLoginEventArgs e)
         {
             if (!IsActiveLogin(e.Client)) return;
 
             ServerSender.ServerCoreMethods.GetRooms(e.Client, _rooms.GetAllItems(), e.MessageId);
         }
 
-        private void Receiver_CreateRoom(object sender, ServerReceiver.CreateRoomEventArgs e)
+        private void Receiver_CreateRoom(object sender, ServerReceiverEvents.CreateRoomEventArgs e)
         {
             if (!IsActiveLogin(e.Client)) return;
 
@@ -152,7 +159,7 @@ namespace servertcp
             }
         }
 
-        private void Receiver_JoinRoom(object sender, ServerReceiver.JoinRoomEventArgs e)
+        private void Receiver_JoinRoom(object sender, ServerReceiverEvents.JoinRoomEventArgs e)
         {
             if (!IsActiveLogin(e.Client)) return;
 
@@ -177,14 +184,14 @@ namespace servertcp
             ServerSender.ServerCoreMethods.JoinRoom(e.Client, room?.InsideInfo, e.MessageId);
         }
 
-        private void Receiver_GetPeople(object sender, ServerReceiver.GetPeopleEventArgs e)
+        private void Receiver_GetPeople(object sender, ServerReceiverEvents.GetPeopleEventArgs e)
         {
             if (!IsActiveLogin(e.Client)) return;
 
             ServerSender.ServerCoreMethods.GetPeopleList(e.Client, UserClients);
         }
 
-        private void _communication_Register(object sender, ServerReceiver.RegisterEventArgs e)
+        private void Receiver_Register(object sender, ServerReceiverEvents.RegisterEventArgs e)
         {
             try
             {
@@ -213,7 +220,7 @@ namespace servertcp
             }
         }
 
-        private void _communication_Login(object sender, ServerReceiver.LoginEventArgs e)
+        private void Receiver_Login(object sender, ServerReceiverEvents.LoginEventArgs e)
         {
             try
             {
@@ -235,7 +242,7 @@ namespace servertcp
                         };
 
                         if (IsActiveLogin(e.Client))
-                            _communication_Disconnect(null, new ServerReceiver.DisconnectEventArgs(e.Client));
+                            Receiver_Disconnect(null, new ServerReceiverEvents.DisconnectEventArgs(e.Client));
 
                         _clients[client.Client.ClientId] = client;
                         ServerSender.Succesful.SuccessfulLogin(e.Client, client);
@@ -255,7 +262,7 @@ namespace servertcp
             }
         }
 
-        private void Receiver_ChangeLogin(object sender, ServerReceiver.ChangeLoginEventArgs e)
+        private void Receiver_ChangeLogin(object sender, ServerReceiverEvents.ChangeLoginEventArgs e)
         {
             var login = _clients[e.Client.ClientId].Login;
             var userId = SqlUserCommands.GetUserId(login);
@@ -276,7 +283,7 @@ namespace servertcp
             }
         }
 
-        private void Receiver_ChangeRank(object sender, ServerReceiver.ChangeRankEventArgs e)
+        private void Receiver_ChangeRank(object sender, ServerReceiverEvents.ChangeRankEventArgs e)
         {
             var login = _clients[e.Client.ClientId].Login;
             var userId = SqlUserCommands.GetUserId(login);
@@ -294,7 +301,7 @@ namespace servertcp
                 ServerSender.Error.ChangeLoginError(e.Client);
         }
 
-        private void Receiver_ChangeUsername(object sender, ServerReceiver.ChangeUsernameEventArgs e)
+        private void Receiver_ChangeUsername(object sender, ServerReceiverEvents.ChangeUsernameEventArgs e)
         {
             /*   var client = _clients[e.Client.ClientId];
 
@@ -331,7 +338,7 @@ namespace servertcp
                    ServerSender.Error.ChangeUsernameError(client.Client);*/
         }
 
-        private void Receiver_ChangePassword(object sender, ServerReceiver.ChangePasswordEventArgs e)
+        private void Receiver_ChangePassword(object sender, ServerReceiverEvents.ChangePasswordEventArgs e)
         {
             /*   var client = _clients[e.Client.ClientId];
 
@@ -369,7 +376,7 @@ namespace servertcp
                    ServerSender.Error.ChangePasswordError(client.Client);*/
         }
 
-        private void _communication_Disconnect(object sender, ServerReceiver.DisconnectEventArgs e)
+        private void Receiver_Disconnect(object sender, ServerReceiverEvents.DisconnectEventArgs e)
         {
             var login = _clients[e.Client.ClientId].Login;
             var userId = SqlUserCommands.GetUserId(login);

@@ -94,6 +94,8 @@ namespace SharpDj.Models.Client
                     RoomId = source[i].Id,
                 });
             }
+            roomstmp = new ObservableCollection<RoomSquareModel>
+                (roomstmp.OrderByDescending(i=>i.PeopleInRoom));
             SdjMainViewModel.RoomCollection = roomstmp;
         }
 

@@ -7,36 +7,15 @@ using System.Threading.Tasks;
 using Communication.Shared;
 using Hik.Communication.Scs.Client;
 
-namespace Communication.Client
+namespace Communication.Client.Logic
 {
     public class ClientReceiver
     {
         public class MessagesPattern
         {
-            /// <summary>
-            /// <para>
-            /// 1- Username
-            /// </para>
-            /// </summary>
             public const string UserDisconnectRgx = Commands.Disconnect + " (.*)";
-
-            /// <summary>
-            /// <para>
-            /// 1 - Username
-            /// 2- Rank
-            /// </para>
-            /// </summary>
             public const string SuccesfulLoginRgx = Commands.SuccessfulLogin + @"(.*)\$(.*)";
-
-
-            /// <summary>
-            /// <para>
-            /// 1 - Username
-            /// 2 - Rank
-            /// </para>
-            /// </summary>
             public const string GetPeopleRgx = @"(.*)\$(.*)";
-
             public const string UpdateDjRgx = @"updatedj\$(.*)";
         }
 
