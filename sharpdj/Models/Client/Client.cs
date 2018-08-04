@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Threading;
-using System.Threading.Tasks;
+using Communication.Client.Logic;
 using Hik.Communication.Scs.Client;
 using Hik.Communication.Scs.Communication.EndPoints.Tcp;
 using Hik.Communication.Scs.Communication.Messages;
-using Communication.Client;
-using Communication.Shared;
 using Hik.Communication.Scs.Communication;
 using Hik.Communication.Scs.Communication.Messengers;
-using SharpDj.Core;
-using SharpDj.Enums;
 using SharpDj.Enums.Menu;
 using SharpDj.ViewModel;
 
@@ -52,7 +48,7 @@ namespace SharpDj.Models.Client
             }
             ClientInfo.Instance.Client.SendMessage(new ScsTextMessage("login $"));
 
-            Sender = new ClientSender(ClientInfo.Instance.Client);
+            Sender = new ClientSender(ClientInfo.Instance.Client, ClientInfo.Instance.ReplyMessenger);
         }
 
         private void Client_Disconnected(object sender, EventArgs e)

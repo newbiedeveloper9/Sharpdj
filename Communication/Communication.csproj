@@ -69,7 +69,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client\Logic\ClientReceiver.cs" />
+    <Compile Include="Client\Logic\ClientReceiverEvents.cs" />
     <Compile Include="Client\Logic\ClientSender.cs" />
+    <Compile Include="Client\Logic\ResponseActions\IResponseActions.cs" />
+    <Compile Include="Client\Logic\ResponseActions\UpdateDjResponse.cs" />
     <Compile Include="Client\User\UserClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server\ServerClient.cs" />

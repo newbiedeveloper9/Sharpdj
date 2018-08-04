@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Communication.Client;
+using Communication.Client.Logic.ResponseActions;
 using Communication.Shared;
 using Newtonsoft.Json;
 using SharpDj.Core;
@@ -40,8 +41,9 @@ namespace SharpDj.Models.Client
             main.Client.Receiver.RegisterAccExistErr += Receiver_RegisterAccExistErr;
             main.Client.Receiver.RegisterErr += Receiver_RegisterErr;
             main.Client.Receiver.SuccesfulRegister += Receiver_SuccesfulRegister;
-            main.Client.Receiver.SuccessfulLogin += Receiver_SuccessfulLogin;
-            main.Client.Receiver.UpdateDj += Receiver_UpdateDj;
+            Communication.Client.Logic.ResponseActions.UpdateDjResponse.UpdateDj += UpdateDjResponseOnUpdateDj;
+          //  main.Client.Receiver.SuccessfulLogin += Receiver_SuccessfulLogin;
+         //  main.Client.Receiver.UpdateDj += Receiver_UpdateDj;
             
             Task.Factory.StartNew(() =>
             {
@@ -57,7 +59,12 @@ namespace SharpDj.Models.Client
             });
         }
 
-        private void Receiver_UpdateDj(object sender, ClientReceiver.UpdateDjEventArgs e)
+        private void UpdateDjResponseOnUpdateDj(object sender, UpdateDjResponse.UpdateDjEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+/*        private void Receiver_UpdateDj(object sender, ClientReceiver.UpdateDjEventArgs e)
         {
             var inside = JsonConvert.DeserializeObject<Room.InsindeInfo>(e.Json);
 
@@ -73,11 +80,11 @@ namespace SharpDj.Models.Client
             var tmp = client.GetVideoAsync(inside.Djs[0].Video[0].Id).Result;
             SdjMainViewModel.SdjRoomViewModel.SongTitle = tmp.Title;
             SdjMainViewModel.SdjBottomBarViewModel.BottomBarTitleOfActuallySong = tmp.Title;
-        }
+        }*/
 
         public void RefreshInfo()
         {
-            string reply = SdjMainViewModel.Client.Sender.AfterLogin(ClientInfo.Instance.ReplyMessenger);
+            string reply = SdjMainViewModel.Client.Sender.AfterLogin();
             if (reply == null) return;
 
             var source = JsonConvert.DeserializeObject<List<Room>>(reply);
@@ -120,13 +127,13 @@ namespace SharpDj.Models.Client
             Debug.Log("Register", "Succesful register");
         }
 
-        private void Receiver_SuccessfulLogin(object sender, ClientReceiver.SuccesfulLoginEventArgs e)
+        /*private void Receiver_SuccessfulLogin(object sender, ClientReceiver.SuccesfulLoginEventArgs e)
         {
             SdjMainViewModel.Profile = new UserClient() { Rank = e.Rank, Username = e.Username };
             UserState = UserState.Logged;
             
             Debug.Log("Login", "Succesful login");
-        }
+        }*/
 
         private SdjMainViewModel _sdjMainViewModel;
         public SdjMainViewModel SdjMainViewModel
