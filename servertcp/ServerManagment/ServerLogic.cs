@@ -257,7 +257,7 @@ namespace servertcp.ServerManagment
                             Receiver_Disconnect(null, new ServerReceiverEvents.DisconnectEventArgs(e.Client));
 
                         _clients[client.Client.ClientId] = client;
-                        ServerSender.Success(e.Client, e.MessageId);
+                        ServerSender.Success(e.Client, e.MessageId, client.Username);
                         SqlUserCommands.AddActionInfo(getUserID, Utils.GetIpOfClient(e.Client),
                             SqlUserCommands.Actions.Login);
                     }

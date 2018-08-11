@@ -1,32 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Security;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Security;
+using System.Text.RegularExpressions;
 using Communication.Client;
 using Communication.Shared;
-using Newtonsoft.Json;
+using Hik.Communication.Scs.Communication.Messages;
 using SharpDj.Core;
-using SharpDj.Enums;
 using SharpDj.Enums.Menu;
-using SharpDj.ViewModel.Model;
+using SharpDj.Enums.User;
+using SharpDj.Logic.Client;
+using SharpDj.Models.Helpers;
 
-namespace SharpDj.ViewModel
+namespace SharpDj.ViewModel.Unique
 {
     public class SdjLoginViewModel : BaseViewModel
     {
         #region .ctor
+
         public SdjLoginViewModel(SdjMainViewModel main)
         {
             SdjMainViewModel = main;
         }
+
         #endregion .ctor
 
         #region Properties
 
         private SdjMainViewModel _sdjMainViewModel;
+
         public SdjMainViewModel SdjMainViewModel
         {
             get => _sdjMainViewModel;
@@ -39,6 +38,7 @@ namespace SharpDj.ViewModel
         }
 
         private string _login;
+
         public string Login
         {
             get => _login;
@@ -51,6 +51,7 @@ namespace SharpDj.ViewModel
         }
 
         private bool _rememberMe;
+
         public bool RememberMe
         {
             get => _rememberMe;
@@ -63,6 +64,7 @@ namespace SharpDj.ViewModel
         }
 
         private SecureString _password;
+
         public SecureString Password
         {
             get => _password;
@@ -75,6 +77,7 @@ namespace SharpDj.ViewModel
         }
 
         private string _errorNotify;
+
         public string ErrorNotify
         {
             get => _errorNotify;
@@ -83,6 +86,9 @@ namespace SharpDj.ViewModel
                 if (_errorNotify == value) return;
                 _errorNotify = value;
                 OnPropertyChanged("ErrorNotify");
+
+                if (!string.IsNullOrEmpty(value))
+                    Debug.Log("Login", "Error");
             }
         }
 
@@ -90,19 +96,21 @@ namespace SharpDj.ViewModel
 
         #region Methods
 
-
         #endregion Methods
 
         #region Commands
 
         #region LoginAsGuestCommand
+
         private RelayCommand _loginAsGuestCommand;
+
         public RelayCommand LoginAsGuestCommand
         {
             get
             {
                 return _loginAsGuestCommand
-                       ?? (_loginAsGuestCommand = new RelayCommand(LoginAsGuestCommandExecute, LoginAsGuestCommandCanExecute));
+                       ?? (_loginAsGuestCommand =
+                           new RelayCommand(LoginAsGuestCommandExecute, LoginAsGuestCommandCanExecute));
             }
         }
 
@@ -113,12 +121,14 @@ namespace SharpDj.ViewModel
 
         public void LoginAsGuestCommandExecute()
         {
-
         }
+
         #endregion
 
         #region LoginCommand
+
         private RelayCommand _loginCommand;
+
         public RelayCommand LoginCommand
         {
             get
@@ -135,14 +145,41 @@ namespace SharpDj.ViewModel
 
         public void LoginCommandExecute()
         {
-            var password = new System.Net.NetworkCredential(string.Empty, Password).Password;
-            SdjMainViewModel.Client.Sender.Login(Login, password);
-          
+            var resp = SdjMainViewModel.Client.Sender.Login(Login,
+                new System.Net.NetworkCredential(string.Empty, Password).Password);
+            if (string.IsNullOrEmpty(resp))
+                return;
+
+            if (resp.Equals(Commands.Error))
+            {
+                ErrorNotify = "Login error";
+            }
+            else
+            {
+                var rgx = new Regex(Commands.Success + "(.*)");
+                var match = rgx.Match(resp);
+                if (match.Success)
+                {
+                    var username = match.Groups[1].Value;
+                    SdjMainViewModel.Profile = new UserClient() {Username = username};
+                    ClientInfo.Instance.UserState = UserState.Logged;
+                    SdjMainViewModel.MainViewVisibility = MainView.Main;
+
+                    Debug.Log("Login", "Success");
+                }
+                else
+                {
+                    ErrorNotify = "Login error";
+                }
+            }
         }
+
         #endregion
 
         #region RegisterCommand
+
         private RelayCommand _registerCommand;
+
         public RelayCommand RegisterCommand
         {
             get
@@ -161,6 +198,7 @@ namespace SharpDj.ViewModel
         {
             SdjMainViewModel.MainViewVisibility = MainView.Register;
         }
+
         #endregion
 
         #endregion Commands

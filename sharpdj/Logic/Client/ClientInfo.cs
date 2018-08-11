@@ -1,6 +1,7 @@
 using System;
 using Hik.Communication.Scs.Client;
 using Hik.Communication.Scs.Communication.Messengers;
+using SharpDj.Enums.User;
 
 namespace SharpDj.Logic.Client
 {
@@ -18,5 +19,6 @@ namespace SharpDj.Logic.Client
 
         public RequestReplyMessenger<IScsClient> ReplyMessenger { get; set; }
         public IScsClient Client { get; set; }
+        public UserState UserState = UserState.NotLoggedIn;
     }
 }

@@ -14,17 +14,15 @@ namespace Communication.Client.Logic
             _clientUtility = new ConnectionUtility(client, clientRequestReply);
         }
 
-        public void Register(string login, string password, string email) =>
-            _clientUtility.SendMessage(
+        public string Register(string login, string password, string email) =>
+            _clientUtility.SendMessageAndWaitForResponse(
                 Commands.Register,
                 login, password, email);
 
-        public void Login(string login, string password)
-        {
-            _clientUtility.SendMessage(
+        public string Login(string login, string password) =>
+            _clientUtility.SendMessageAndWaitForResponse(
                 Commands.Login,
                 login, password);
-        }
 
         public void GetPeoples() =>
             _clientUtility.SendMessage(
@@ -36,23 +34,23 @@ namespace Communication.Client.Logic
         
         #region UserAccount
 
-        public void ChangePassword(string password, string newPassword) =>
-            _clientUtility.SendMessage(
+        public string ChangePassword(string password, string newPassword) =>
+            _clientUtility.SendMessageAndWaitForResponse(
                 Commands.UserAccount.ChangePassword,
                 password, newPassword);
 
-        public void ChangeUsername(string password, string newUsername) =>
-            _clientUtility.SendMessage(
+        public string ChangeUsername(string password, string newUsername) =>
+            _clientUtility.SendMessageAndWaitForResponse(
                 Commands.UserAccount.ChangeUsername,
                 password, newUsername);
 
-        public void ChangeLogin(string password, string newLogin) =>
-            _clientUtility.SendMessage(
+        public string ChangeLogin(string password, string newLogin) =>
+            _clientUtility.SendMessageAndWaitForResponse(
                 Commands.UserAccount.ChangeLogin,
                 password, newLogin);
 
-        public void ChangeRank(string password, Rank newRank) =>
-            _clientUtility.SendMessage(
+        public string ChangeRank(string password, Rank newRank) =>
+            _clientUtility.SendMessageAndWaitForResponse(
                 Commands.UserAccount.ChangeRank,
                 password, newRank.ToString());
 

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Security;
+using Communication.Shared;
 using SharpDj.Core;
+using SharpDj.Enums.Menu;
+using SharpDj.Models.Helpers;
 
-namespace SharpDj.ViewModel
+namespace SharpDj.ViewModel.Unique
 {
     public class SdjRegisterViewModel : BaseViewModel
     {
@@ -93,6 +90,9 @@ namespace SharpDj.ViewModel
                 if (_errorNotify == value) return;
                 _errorNotify = value;
                 OnPropertyChanged("ErrorNotify");
+                
+                if (!string.IsNullOrEmpty(value))
+                    Debug.Log("Register", "Error");
             }
         }
 
@@ -126,9 +126,19 @@ namespace SharpDj.ViewModel
 
         public void RegisterMeCommandExecute()
         {
-            string password = new System.Net.NetworkCredential(string.Empty, Password).Password;
-
-            SdjMainViewModel.Client.Sender.Register(Login, password, Email);
+            var resp = SdjMainViewModel.Client.Sender.Register(Login,
+                new System.Net.NetworkCredential(string.Empty, Password).Password,
+                Email);
+            
+            if (resp.Equals(Commands.Error))
+            {
+                ErrorNotify = "Register error";
+            }
+            else
+            {
+                SdjMainViewModel.MainViewVisibility = MainView.Login;
+                Debug.Log("Register", "Success");
+            }
         }
 
 

@@ -21,33 +21,18 @@ namespace SharpDj.Logic.Client
 {
     public class ClientLogic : BaseViewModel
     {
-        private UserState _userState = UserState.NotLoggedIn;
-        public UserState UserState
-        {
-            get => _userState;
-            set
-            {
-                _userState = value;
-                SdjMainViewModel.MainViewVisibility = value == UserState.Logged ? MainView.Main : MainView.Login;
-            }
-        }
+       
 
         public ClientLogic(SdjMainViewModel main)
         {
             SdjMainViewModel = main;
-
-            main.Client.Receiver.LoginErr += Receiver_LoginErr;
-            main.Client.Receiver.RegisterAccExistErr += Receiver_RegisterAccExistErr;
-            main.Client.Receiver.RegisterErr += Receiver_RegisterErr;
-            main.Client.Receiver.SuccesfulRegister += Receiver_SuccesfulRegister;
             Communication.Client.Logic.ResponseActions.UpdateDjResponse.UpdateDj += UpdateDjResponseOnUpdateDj;
-            main.Client.Receiver.SuccessfulLogin += Receiver_SuccessfulLogin;
             
             Task.Factory.StartNew(() =>
             {
                 while (true)
                 {
-                    if (UserState == UserState.Logged)
+                    if (ClientInfo.Instance.UserState == UserState.Logged)
                     {
                         RefreshInfo();
                         Thread.Sleep(20000);
@@ -72,7 +57,8 @@ namespace SharpDj.Logic.Client
             var client = new YoutubeClient();
             var tmp = client.GetVideoAsync(inside.Djs[0].Video[0].Id).Result;
             SdjMainViewModel.SdjRoomViewModel.SongTitle = tmp.Title;
-            SdjMainViewModel.SdjBottomBarViewModel.BottomBarTitleOfActuallySong = tmp.Title;        }
+            SdjMainViewModel.SdjBottomBarViewModel.BottomBarTitleOfActuallySong = tmp.Title;        
+        }
 
         public void RefreshInfo()
         {
@@ -98,11 +84,6 @@ namespace SharpDj.Logic.Client
             SdjMainViewModel.RoomCollection = roomstmp;
         }
 
-        private void Receiver_LoginErr(object sender, EventArgs e)
-        {
-            SdjMainViewModel.SdjLoginViewModel.ErrorNotify = ErrorMessages.LoginErrorMessage;
-        }
-
         private void Receiver_RegisterAccExistErr(object sender, EventArgs e)
         {
             SdjMainViewModel.SdjRegisterViewModel.ErrorNotify = ErrorMessages.RegisterAccountExistsMessage;
@@ -117,14 +98,6 @@ namespace SharpDj.Logic.Client
         {
             SdjMainViewModel.MainViewVisibility = MainView.Login;
             Debug.Log("Register", "Succesful register");
-        }
-
-        private void Receiver_SuccessfulLogin(object sender, ClientReceiver.SuccesfulLoginEventArgs e)
-        {
-            SdjMainViewModel.Profile = new UserClient() { Rank = e.Rank, Username = e.Username };
-            UserState = UserState.Logged;
-            
-            Debug.Log("Login", "Succesful login");
         }
 
         private SdjMainViewModel _sdjMainViewModel;

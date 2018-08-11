@@ -12,14 +12,22 @@ namespace Communication.Server.Logic
     {
         public static void Success(IScsServerClient client, string messageId, params string[] param)
         {
-            client.SendMessage(new ScsTextMessage(
-                string.Format(Commands.Success, messageId)));
+            if (param.Length > 0)
+            {
+                client.SendMessage(new ScsTextMessage(
+                    string.Format(Commands.Success + param[0]), messageId));
+            }
+            else
+            {
+                client.SendMessage(new ScsTextMessage(
+                    string.Format(Commands.Success), messageId));
+            }
         }
 
         public static void Error(IScsServerClient client, string messageId, params string[] param)
         {
             client.SendMessage(new ScsTextMessage(
-                string.Format(Commands.Error, messageId)));
+                string.Format(Commands.Error), messageId));
         }
 
         public static class ServerCoreMethods

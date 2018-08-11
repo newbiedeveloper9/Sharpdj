@@ -44,34 +44,6 @@ namespace Communication.Client.Logic
 
             #endregion
 
-            #region Successful login
-
-            else if (message.StartsWith(Commands.SuccessfulLogin))
-            {
-                Regex rgx = new Regex(MessagesPattern.SuccesfulLoginRgx);
-                Match match = rgx.Match(message);
-                if (match.Success)
-                {
-                    var username = match.Groups[1].Value;
-                    var rank = match.Groups[2].Value;
-
-                    var clientServer = new UserClient
-                    {
-                        Rank = (Rank) Enum.Parse(typeof(Rank), rank, true),
-                        Username = username
-                    };
-
-                    Console.WriteLine("Succesful login, {0}!\n Your rank: {1}", username, clientServer.Rank);
-                    OnSuccessfulLogin(new SuccesfulLoginEventArgs(username, clientServer.Rank));
-                }
-                else
-                {
-                    Console.WriteLine("Problem with matching succes login.");
-                }
-            }
-
-            #endregion
-
             #region Get People
 
             else if (message.StartsWith(Commands.GetPeoples))
@@ -109,7 +81,6 @@ namespace Communication.Client.Logic
             {
                 responseActions = new UpdateDjResponse();
                 ParserResponse(message, MessagesPattern.UpdateDjRgx, responseActions);
-/*             ;*/
             }
 
             #endregion

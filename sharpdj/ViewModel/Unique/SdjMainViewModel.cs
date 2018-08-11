@@ -20,6 +20,7 @@ using SharpDj.Models;
 using SharpDj.Models.Helpers;
 using SharpDj.View.UserControls;
 using SharpDj.ViewModel.Model;
+using SharpDj.ViewModel.Unique;
 
 namespace SharpDj.ViewModel
 {

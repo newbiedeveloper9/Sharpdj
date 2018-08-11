@@ -13,7 +13,6 @@ namespace SharpDj.ViewModel.Model
 {
     public class RoomSquareModel : BaseViewModel
     {
-        private Video tmp;
         #region .ctor
         public RoomSquareModel(SdjMainViewModel main)
         {
@@ -154,7 +153,7 @@ namespace SharpDj.ViewModel.Model
                 inside.Clients.Count(x => x.Rank > 0);
             SdjMainViewModel.SdjRoomViewModel.SongsQueue = (sbyte)inside.Djs.SelectMany(dj => dj.Video).Count();
 
-            tmp = YoutubeSingleton.Instance.YtClient.GetVideoAsync(inside.Djs[0].Video[0].Id).Result;
+            var tmp = YoutubeSingleton.Instance.YtClient.GetVideoAsync(inside.Djs[0].Video[0].Id).Result;
             SdjMainViewModel.SdjRoomViewModel.SongTitle = tmp.Title;
             SdjMainViewModel.SdjBottomBarViewModel.BottomBarTitleOfActuallySong = tmp.Title;
         }

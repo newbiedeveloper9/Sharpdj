@@ -30,7 +30,6 @@ namespace SharpDj.Logic.Client
             ClientInfo.Instance.Client.Disconnected += Client_Disconnected;
             ClientInfo.Instance.ReplyMessenger = new RequestReplyMessenger<IScsClient>(ClientInfo.Instance.Client);
             ClientInfo.Instance.ReplyMessenger.Start();
-            ClientInfo.Instance.Client.ConnectTimeout = 2000;
             while (ClientInfo.Instance.Client.CommunicationState == CommunicationStates.Disconnected)
             {
                 try
