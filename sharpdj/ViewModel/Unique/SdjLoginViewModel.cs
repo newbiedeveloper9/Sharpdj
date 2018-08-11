@@ -67,7 +67,7 @@ namespace SharpDj.ViewModel.Unique
 
         public SecureString Password
         {
-            get => _password;
+            private get => _password;
             set
             {
                 if (_password == value) return;
@@ -88,7 +88,10 @@ namespace SharpDj.ViewModel.Unique
                 OnPropertyChanged("ErrorNotify");
 
                 if (!string.IsNullOrEmpty(value))
+                {
+                    Password = null;
                     Debug.Log("Login", "Error");
+                }
             }
         }
 
@@ -145,8 +148,8 @@ namespace SharpDj.ViewModel.Unique
 
         public void LoginCommandExecute()
         {
-            var resp = SdjMainViewModel.Client.Sender.Login(Login,
-                new System.Net.NetworkCredential(string.Empty, Password).Password);
+            var resp = SdjMainViewModel.Client.Sender.Login(Login, Password);
+
             if (string.IsNullOrEmpty(resp))
                 return;
 

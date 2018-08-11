@@ -43,53 +43,8 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AngleSharp, Version=0.9.9.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
-      <HintPath>..\packages\AngleSharp.0.9.10\lib\net45\AngleSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Scs, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Scs.1.1.1\lib\net40-client\Scs.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.IO.Compression.FileSystem" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="Vlc.DotNet.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=84529da31f4eb963, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vlc.DotNet.Core.3.0.0-develop296\lib\net45\Vlc.DotNet.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Vlc.DotNet.Core.Interops, Version=3.0.0.0, Culture=neutral, PublicKeyToken=84529da31f4eb963, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vlc.DotNet.Core.Interops.3.0.0-develop296\lib\net45\Vlc.DotNet.Core.Interops.dll</HintPath>
-    </Reference>
-    <Reference Include="Vlc.DotNet.Wpf, Version=3.0.0.0, Culture=neutral, PublicKeyToken=84529da31f4eb963, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vlc.DotNet.Wpf.3.0.0-develop296\lib\net45\Vlc.DotNet.Wpf.dll</HintPath>
-    </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="YoutubeExplode, Version=4.2.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\YoutubeExplode.4.2.3\lib\net45\YoutubeExplode.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
     <Compile Include="Converters\NameToContentConverter.cs" />
     <Compile Include="Core\BaseViewModel.cs" />
     <Compile Include="Core\Extensions\CommandBase.cs" />
@@ -202,19 +157,6 @@
       <DependentUpon>SdjMainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Themes\Buttons.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Colors.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\GlobalStyles.xaml" />
-    <Page Include="Themes\UserTabStyles.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -228,90 +170,6 @@
     <Compile Include="Converters\NotNullToBoolConverter.cs" />
     <Compile Include="Converters\NullVisibilityConverter.cs" />
     <Compile Include="Logic\Helpers\ExceptionLogger.cs" />
-    <Page Include="View\UserControls\Global\SdjBottomBarUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\UserControls\Global\SdjLeftBarUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\UserControls\Global\SdjStateButtonsUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\UserControls\Global\SdjUserProfileUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\UserControls\Helpers\SdjBackgroundForForms.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\UserControls\Playlist\SdjAddPlaylistCollectionView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\UserControls\Playlist\SdjAddTrackToPlaylistCollectionUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\UserControls\Playlist\SdjEditPlaylistCollectionView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\UserControls\Playlist\SdjPlaylistUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\UserControls\Playlist\SdjRemovePlaylistCollectionView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\UserControls\Playlist\SdjRenameTrackNameInPlaylist.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\UserControls\Room\SdjRoomView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\UserControls\Room\SdjVlcPlayer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\UserControls\Helpers\SdjTitleBarForUserControls.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\UserControls\UniqueViews\SdjFeedbackUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\UserControls\UniqueViews\SdjLoginUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\UserControls\UniqueViews\SdjMainUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\UserControls\UniqueViews\SdjRegisterUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Views\SdjLoggerView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Views\SdjMainView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Views\SdjUpdaterView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -341,107 +199,62 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Titlebar\close_24.png" />
-    <Resource Include="Images\Titlebar\maximize_24.png" />
-    <Resource Include="Images\Titlebar\minimalize_24.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Rooms\monstercat.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Rooms\peoples.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Rooms\admins.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Rooms\favorite.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\MainMenu\background.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Room\003-sad.png" />
-    <Resource Include="Images\Room\004-happy.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Room\008-playlist.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Room\006-pause.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Room\001-volume-1.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Room\001-album.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Room\round.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Room\003-group.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Room\001-settings-cogwheel-button.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Room\002-playlist.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\LeftBar\001-rate-star-button.png" />
-    <Resource Include="Images\LeftBar\002-actors.png" />
-    <Resource Include="Images\LeftBar\002-playlist.png" />
-    <Resource Include="Images\LeftBar\032-do-not-disturb-rounded-sign.png" />
-    <Resource Include="Images\LeftBar\036-user-shape.png" />
-    <Resource Include="Images\LeftBar\041-extension.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\LeftBar\001-settings-cogwheel-button.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\LeftBar\001-white-album.png" />
-    <Resource Include="Images\LeftBar\003-white-group.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Playlists\001-add.png" />
-    <Resource Include="Images\Playlists\003-check-symbol.png" />
-    <Resource Include="Images\Playlists\029-rubbish-bin-delete-button.png" />
-    <Resource Include="Images\Playlists\pencil-edit-button.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Playlists\011-searching-magnifying-glass.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Room\038-cancel-button.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Playlists\009-down-chevron.png" />
-    <Resource Include="Images\Playlists\014-up-chevron.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Playlists\001-add-white.png" />
-    <Resource Include="Images\Playlists\029-rubbish-bin-delete-button-white.png" />
-    <Resource Include="Images\Playlists\pencil-edit-button-white.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Playlists\009-down-chevron-white.png" />
-    <Resource Include="Images\Playlists\014-up-chevron-white.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Playlists\003-check-symbol-white.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Rooms\favorite_full.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\avatar.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Room\003-playlist-1.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Communication\Communication.csproj">
@@ -457,4 +270,53 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\VideoLAN.LibVLC.Windows.3.0.0-alpha3\build\VideoLAN.LibVLC.Windows.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\VideoLAN.LibVLC.Windows.3.0.0-alpha3\build\VideoLAN.LibVLC.Windows.targets'))" />
   </Target>
+  <ItemGroup>
+    <ReferencePath Include="C:\Users\Michal\Desktop\C#\sharpdj\packages\AngleSharp.0.9.10\lib\net45\AngleSharp.dll" />
+    <ReferencePath Include="C:\Users\Michal\Desktop\C#\sharpdj\Communication\bin\Debug\Communication.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\Microsoft.CSharp.dll" />
+    <ReferencePath Include="C:\Users\Michal\Desktop\C#\sharpdj\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\mscorlib.dll" />
+    <ReferencePath Include="C:\Users\Michal\Desktop\C#\sharpdj\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\PresentationCore.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\PresentationFramework.dll" />
+    <ReferencePath Include="C:\Users\Michal\Desktop\C#\sharpdj\packages\Scs.1.1.1\lib\net40-client\Scs.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Core.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.IO.Compression.FileSystem.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Net.Http.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Runtime.Serialization.dll" />
+    <ReferencePath Include="C:\Users\Michal\Desktop\C#\sharpdj\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Xaml.dll" />
+    <ReferencePath Include="C:\Users\Michal\Desktop\C#\sharpdj\packages\Vlc.DotNet.Core.3.0.0-develop296\lib\net45\Vlc.DotNet.Core.dll" />
+    <ReferencePath Include="C:\Users\Michal\Desktop\C#\sharpdj\packages\Vlc.DotNet.Core.Interops.3.0.0-develop296\lib\net45\Vlc.DotNet.Core.Interops.dll" />
+    <ReferencePath Include="C:\Users\Michal\Desktop\C#\sharpdj\packages\Vlc.DotNet.Wpf.3.0.0-develop296\lib\net45\Vlc.DotNet.Wpf.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\WindowsBase.dll" />
+    <ReferencePath Include="C:\Users\Michal\Desktop\C#\sharpdj\packages\YoutubeExplode.4.2.3\lib\net45\YoutubeExplode.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\Global\SdjBottomBarUserControl.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\Global\SdjLeftBarUserControl.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\Global\SdjStateButtonsUserControl.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\Global\SdjUserProfileUserControl.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\Helpers\SdjBackgroundForForms.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\Playlist\SdjAddPlaylistCollectionView.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\Playlist\SdjAddTrackToPlaylistCollectionUserControl.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\Playlist\SdjEditPlaylistCollectionView.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\Playlist\SdjPlaylistUserControl.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\Playlist\SdjRemovePlaylistCollectionView.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\Playlist\SdjRenameTrackNameInPlaylist.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\Room\SdjRoomView.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\Room\SdjVlcPlayer.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\Helpers\SdjTitleBarForUserControls.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\UniqueViews\SdjFeedbackUserControl.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\UniqueViews\SdjLoginUserControl.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\UniqueViews\SdjMainUserControl.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\UniqueViews\SdjRegisterUserControl.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\Views\SdjLoggerView.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\Views\SdjMainView.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\Views\SdjUpdaterView.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\App.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\SharpDj_Content.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\GeneratedInternalTypeHelper.g.cs" />
+  </ItemGroup>
 </Project>

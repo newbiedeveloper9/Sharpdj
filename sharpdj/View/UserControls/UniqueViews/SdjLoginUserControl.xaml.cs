@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,7 +29,9 @@ namespace SharpDj.View.UserControls
         private void PasswordBox_OnPasswordChanged(object sender, RoutedEventArgs e)
         {
             if (this.DataContext != null)
-            { ((dynamic)this.DataContext).Password = ((PasswordBox)sender).SecurePassword; }
+            {
+                ((dynamic) this.DataContext).Password = ((PasswordBox) sender).SecurePassword;
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security;
 using Communication.Shared;
 using Hik.Communication.Scs.Client;
 using Hik.Communication.Scs.Communication.Messengers;
@@ -14,16 +15,19 @@ namespace Communication.Client.Logic
             _clientUtility = new ConnectionUtility(client, clientRequestReply);
         }
 
-        public string Register(string login, string password, string email) =>
+        public string Register(string login, SecureString password, string email) =>
             _clientUtility.SendMessageAndWaitForResponse(
                 Commands.Register,
-                login, password, email);
+                login,
+                new System.Net.NetworkCredential(string.Empty, password).Password,
+                email);
 
-        public string Login(string login, string password) =>
+        public string Login(string login, SecureString password) =>
             _clientUtility.SendMessageAndWaitForResponse(
                 Commands.Login,
-                login, password);
-
+                login,
+                new System.Net.NetworkCredential(string.Empty, password).Password);
+ 
         public void GetPeoples() =>
             _clientUtility.SendMessage(
                 Commands.GetPeoples);

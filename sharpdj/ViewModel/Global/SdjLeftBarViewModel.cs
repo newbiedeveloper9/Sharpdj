@@ -301,6 +301,30 @@ namespace SharpDj.ViewModel
         }
         #endregion
 
+        
+        #region LeftBarOnLogoutCommand
+        private RelayCommand _leftBarOnLogoutCommand;
+        public RelayCommand LeftBarOnLogoutCommand
+        {
+            get
+            {
+                return _leftBarOnLogoutCommand
+                       ?? (_leftBarOnLogoutCommand = new RelayCommand(LeftBarOnLogoutCommandExecute, LeftBarOnLogoutCommandCanExecute));
+            }
+        }
+
+        public bool LeftBarOnLogoutCommandCanExecute()
+        {
+            return true;
+        }
+
+        public void LeftBarOnLogoutCommandExecute()
+        {
+            SdjMainViewModel.Client.Sender.Disconnect();
+            SdjMainViewModel.MainViewVisibility = MainView.Login;
+        }
+        #endregion
+        
         #endregion Commands
     }
 }

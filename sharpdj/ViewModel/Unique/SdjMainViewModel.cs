@@ -104,6 +104,21 @@ namespace SharpDj.ViewModel
             set
             {
                 if (_mainViewVisibility == value) return;
+                if (_mainViewVisibility == MainView.Login)
+                {
+                    SdjLoginViewModel.ErrorNotify = string.Empty;
+                    SdjLoginViewModel.Login = string.Empty;
+                    SdjLoginViewModel.Password = null;
+                    SdjLoginViewModel.RememberMe = false;
+                }
+                else if (_mainViewVisibility == MainView.Register)
+                {
+                    SdjRegisterViewModel.ErrorNotify = string.Empty;
+                    SdjRegisterViewModel.Login = string.Empty;
+                    SdjRegisterViewModel.Nickname = string.Empty;
+                    SdjRegisterViewModel.Email = string.Empty;
+                    SdjRegisterViewModel.Password = null;
+                }
                 _mainViewVisibility = value;
               
                 OnPropertyChanged("MainViewVisibility");
@@ -123,6 +138,7 @@ namespace SharpDj.ViewModel
                     SdjRoomViewModel.SongTitle = string.Empty;
                     SdjBottomBarViewModel.BottomBarTitleOfActuallySong = string.Empty;
                 }
+                
             }
         }
 
