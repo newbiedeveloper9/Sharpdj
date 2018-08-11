@@ -11,7 +11,6 @@ using Newtonsoft.Json;
 using SharpDj.Core;
 using SharpDj.Enums;
 using SharpDj.Enums.Menu;
-using SharpDj.Models.Client;
 using SharpDj.ViewModel.Model;
 
 namespace SharpDj.ViewModel

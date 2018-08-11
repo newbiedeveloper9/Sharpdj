@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Communication.Client;
 using Communication.Server;
+using Communication.Server.Logic;
 using Communication.Shared;
 using CryptSharp.Utility;
 using Hik.Collections;
@@ -93,6 +94,7 @@ namespace servertcp.ServerManagment
             {
                 if (room.InsideInfo.Djs.Count == 0) continue;
                 room.InsideInfo.TimeLeft--;
+                
                 if (room.InsideInfo.TimeLeft <= 0)
                 {
                     room.InsideInfo.NextDj();
@@ -120,13 +122,17 @@ namespace servertcp.ServerManagment
 
                 var tmp = _rooms.GetAllItems()
                     .FirstOrDefault(x => x.InsideInfo.Clients.Exists(y => y.Id == userclient.Id));
+                if (tmp == null) return;
+                
                 tmp?.InsideInfo.Djs.Add(source);
-
                 var json = JsonConvert.SerializeObject(tmp?.InsideInfo);
-
-                foreach (var client in tmp.InsideInfo?.Clients)
+                
                 {
-                    ServerClients.FirstOrDefault(x => x.Id == client.Id)?.Client.SendMessage(new ScsTextMessage("updatedj$" + json));
+                    foreach (var client in tmp.InsideInfo?.Clients)
+                    {
+                        ServerClients.FirstOrDefault(x => x.Id == client.Id)?.Client
+                            .SendMessage(new ScsTextMessage("updatedj$" + json));
+                    }
                 }
             });
         }
@@ -140,7 +146,11 @@ namespace servertcp.ServerManagment
 
         private void Receiver_CreateRoom(object sender, ServerReceiverEvents.CreateRoomEventArgs e)
         {
-            if (!IsActiveLogin(e.Client)) return;
+            if (!IsActiveLogin(e.Client))
+            {
+                ServerSender.Error(e.Client, e.MessageId);
+                return;
+            }
 
             var login = _clients[e.Client.ClientId].Login;
             var userId = SqlUserCommands.GetUserId(login);
@@ -152,16 +162,18 @@ namespace servertcp.ServerManagment
                 _rooms[roomCount] = new Room(_rooms.Count, e.Name, login, e.Image, e.Description);
                 _rooms[roomCount].InsideInfo = new Room.InsindeInfo(new List<UserClient>(), new List<Songs>(), _rooms[roomCount]);
                 roomCount++;
+                ServerSender.Success(e.Client, e.MessageId);
             }
             else
-            {
-                Console.WriteLine("create room fail");
-            }
+                ServerSender.Error(e.Client, e.MessageId);
         }
 
         private void Receiver_JoinRoom(object sender, ServerReceiverEvents.JoinRoomEventArgs e)
         {
-            if (!IsActiveLogin(e.Client)) return;
+            if (!IsActiveLogin(e.Client))
+            {
+                ServerSender.Error(e.Client, e.MessageId);
+            };
 
             //select client class object wchich refer to user
             var userclient = _clients[e.Client.ClientId].ToUserClient();
@@ -170,8 +182,8 @@ namespace servertcp.ServerManagment
             var room = _rooms.GetAllItems().FirstOrDefault(x => x.Id == e.RoomId);
 
             //Set user to max 1 room, remove from other instances
-            var tmp = _rooms.GetAllItems().Where(x => x.InsideInfo.Clients.Exists(y => y.Id == userclient.Id));
-            foreach (var roomActive in tmp)
+            var getRoomsWithSpecificUser = _rooms.GetAllItems().Where(x => x.InsideInfo.Clients.Exists(y => y.Id == userclient.Id));
+            foreach (var roomActive in getRoomsWithSpecificUser)
             {
                 var index = roomActive.InsideInfo.Clients.FindIndex(x => x.Id == userclient.Id);
                 roomActive.InsideInfo.Clients.RemoveAt(index);
@@ -201,22 +213,22 @@ namespace servertcp.ServerManagment
 
                     if (SqlUserCommands.CreateUser(e.Login, Scrypt.Hash(e.Password, salt), salt, e.Login))
                     {
-                        ServerSender.Succesful.SuccessfulRegister(e.Client);
+                        ServerSender.Success(e.Client, e.MessageId);
                         var getUserID = SqlUserCommands.GetUserId(e.Login);
 
                         SqlUserCommands.AddActionInfo(getUserID, Utils.GetIpOfClient(e.Client),
                             SqlUserCommands.Actions.Register);
                     }
                     else
-                        ServerSender.Error.RegisterError(e.Client);
+                        ServerSender.Error(e.Client, e.MessageId);
                 }
                 else
-                    ServerSender.Error.RegisterAccExistError(e.Client);
+                    ServerSender.Error(e.Client, e.MessageId); //TODO acc exist param
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                ServerSender.Error.RegisterError(e.Client);
+                ServerSender.Error(e.Client, e.MessageId);
             }
         }
 
@@ -245,20 +257,20 @@ namespace servertcp.ServerManagment
                             Receiver_Disconnect(null, new ServerReceiverEvents.DisconnectEventArgs(e.Client));
 
                         _clients[client.Client.ClientId] = client;
-                        ServerSender.Succesful.SuccessfulLogin(e.Client, client);
+                        ServerSender.Success(e.Client, e.MessageId);
                         SqlUserCommands.AddActionInfo(getUserID, Utils.GetIpOfClient(e.Client),
                             SqlUserCommands.Actions.Login);
                     }
                     else
-                        ServerSender.Error.LoginError(e.Client);
+                        ServerSender.Error(e.Client, e.MessageId);
                 }
                 else
-                    ServerSender.Error.LoginError(e.Client);
+                    ServerSender.Error(e.Client, e.MessageId);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                ServerSender.Error.LoginError(e.Client);
+                ServerSender.Error(e.Client, e.MessageId);
             }
         }
 
@@ -273,13 +285,13 @@ namespace servertcp.ServerManagment
                 if (Sql.SqlUserCommands.CheckPassword(pass, login))
                 {
                     Sql.SqlUserCommands.DataChange.ChangeLogin(userId, e.NewLogin);
-                    ServerSender.Succesful.SuccessfulChangedRank(e.Client);
+                    ServerSender.Success(e.Client, e.MessageId);
 
                     Sql.SqlUserCommands.AddActionInfo(userId, Utils.GetIpOfClient(e.Client),
                         SqlUserCommands.Actions.ChangeLogin);
                 }
                 else
-                    ServerSender.Error.ChangeLoginError(e.Client);
+                    ServerSender.Error(e.Client, e.MessageId);
             }
         }
 
@@ -292,13 +304,13 @@ namespace servertcp.ServerManagment
             if (Sql.SqlUserCommands.CheckPassword(pass, login))
             {
                 Sql.SqlUserCommands.DataChange.ChangeRank(userId, e.Rank);
-                ServerSender.Succesful.SuccessfulChangedRank(e.Client);
+                ServerSender.Success(e.Client, e.MessageId);
 
                 Sql.SqlUserCommands.AddActionInfo(userId, Utils.GetIpOfClient(e.Client),
                     SqlUserCommands.Actions.ChangeRank);
             }
             else
-                ServerSender.Error.ChangeLoginError(e.Client);
+                ServerSender.Error(e.Client, e.MessageId);
         }
 
         private void Receiver_ChangeUsername(object sender, ServerReceiverEvents.ChangeUsernameEventArgs e)

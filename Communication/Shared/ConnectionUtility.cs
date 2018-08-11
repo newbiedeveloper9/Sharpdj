@@ -29,8 +29,9 @@ namespace Communication.Shared
         {
             SetConnectionIfDisconnected();
 
-            return ((ScsTextMessage) _clientRequestReply.SendMessageAndWaitForResponse(
-                new ScsTextMessage(MessageText(command, parameters)))).Text;
+            var resp = (ScsTextMessage) _clientRequestReply.SendMessageAndWaitForResponse(
+                new ScsTextMessage(MessageText(command, parameters)));
+            return resp == null ? string.Empty : resp.Text;
         }
 
         private string MessageText(string command, params string[] parameters)
@@ -39,7 +40,7 @@ namespace Communication.Shared
 
             text.Append(command);
             if (parameters.Length > 0)
-                text.Append(text[0]);
+                text.Append(parameters[0]);
             for (int i = 1; i < parameters.Length; i++)
                 text.Append("$" + parameters[i]);
             

@@ -68,14 +68,16 @@ namespace servertcp.ServerManagment
 
         public class JoinQueueEventArgs : System.EventArgs
         {
-            public JoinQueueEventArgs(IScsServerClient client, string json)
+            public JoinQueueEventArgs(IScsServerClient client, string json, string messageId)
             {
                 this.Client = client;
                 this.Json = json;
+                this.MessageId = messageId;
             }
 
             public IScsServerClient Client { get; private set; }
             public string Json { get; private set; }
+            public string MessageId { get; private set; }
         }
 
         public class AfterLoginEventArgs : System.EventArgs
@@ -106,48 +108,54 @@ namespace servertcp.ServerManagment
 
         public class CreateRoomEventArgs : System.EventArgs
         {
-            public CreateRoomEventArgs(IScsServerClient client, string name, string image, string description)
+            public CreateRoomEventArgs(IScsServerClient client, string name, string image, string description, string messageId)
             {
                 this.Client = client;
                 this.Name = name;
                 this.Image = image;
                 this.Description = description;
+                this.MessageId = messageId;
             }
 
             public IScsServerClient Client { get; private set; }
             public string Name { get; private set; }
             public string Image { get; private set; }
             public string Description { get; private set; }
+            public string MessageId { get; private set; }
         }
 
         public class RegisterEventArgs : System.EventArgs
         {
-            public RegisterEventArgs(string login, string password, string email, IScsServerClient client)
+            public RegisterEventArgs(string login, string password, string email, IScsServerClient client, string messageId)
             {
                 this.Login = login;
                 this.Password = password;
                 this.Email = email;
                 this.Client = client;
+                this.MessageId = messageId;
             }
 
             public string Login { get; private set; }
             public string Password { get; private set; }
             public string Email { get; private set; }
             public IScsServerClient Client { get; private set; }
+            public string MessageId { get; private set; }
         }
 
         public class LoginEventArgs : System.EventArgs
         {
-            public LoginEventArgs(string login, string password, IScsServerClient client)
+            public LoginEventArgs(string login, string password, IScsServerClient client, string messageId)
             {
                 this.Login = login;
                 this.Password = password;
                 this.Client = client;
+                this.MessageId = messageId;
             }
 
             public string Login { get; private set; }
             public string Password { get; private set; }
             public IScsServerClient Client { get; private set; }
+            public string MessageId { get; private set; }
         }
 
         public class DisconnectEventArgs : System.EventArgs
@@ -205,58 +213,66 @@ namespace servertcp.ServerManagment
 
         public class ChangeRankEventArgs : System.EventArgs
         {
-            public ChangeRankEventArgs(IScsServerClient client, string password, Rank rank)
+            public ChangeRankEventArgs(IScsServerClient client, string password, Rank rank, string messageId)
             {
                 this.Client = client;
                 this.Password = password;
                 this.Rank = rank;
+                this.MessageId = messageId;
             }
 
             public IScsServerClient Client { get; private set; }
             public string Password { get; private set; }
             public Rank Rank { get; private set; }
+            public string MessageId { get; private set; }
         }
 
         public class ChangeLoginEventArgs : System.EventArgs
         {
-            public ChangeLoginEventArgs(IScsServerClient client, string password, string newLogin)
+            public ChangeLoginEventArgs(IScsServerClient client, string password, string newLogin, string messageId)
             {
                 this.Client = client;
                 this.Password = password;
                 this.NewLogin = newLogin;
+                this.MessageId = messageId;
             }
 
             public IScsServerClient Client { get; private set; }
             public string Password { get; private set; }
             public string NewLogin { get; private set; }
+            public string MessageId { get; private set; }
         }
 
         public class ChangeUsernameEventArgs : System.EventArgs
         {
-            public ChangeUsernameEventArgs(IScsServerClient client, string password, string newUsername)
+            public ChangeUsernameEventArgs(IScsServerClient client, string password, string newUsername, string messageId)
             {
                 this.Client = client;
                 this.Password = password;
                 this.NewUsername = newUsername;
+                this.MessageId = messageId;
             }
 
             public IScsServerClient Client { get; private set; }
             public string Password { get; private set; }
             public string NewUsername { get; private set; }
+            public string MessageId { get; private set; }
         }
 
         public class ChangePasswordEventArgs : System.EventArgs
         {
-            public ChangePasswordEventArgs(IScsServerClient client, string password, string newPassword)
+            public ChangePasswordEventArgs(IScsServerClient client, string password, string newPassword, string messageId)
             {
                 this.Client = client;
                 this.Password = password;
                 this.NewPassword = newPassword;
+                this.MessageId = messageId;
             }
 
             public IScsServerClient Client { get; private set; }
             public string Password { get; private set; }
             public string NewPassword { get; private set; }
+            public string MessageId { get; private set; }
         }
 
         #endregion

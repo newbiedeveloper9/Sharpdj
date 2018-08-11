@@ -5,13 +5,15 @@ using Hik.Communication.Scs.Communication.Messages;
 using Newtonsoft.Json;
 using SharpDj.Core;
 using SharpDj.Enums.Menu;
-using SharpDj.Models.Client;
+using SharpDj.Logic.Helpers;
 using YoutubeExplode;
+using YoutubeExplode.Models;
 
 namespace SharpDj.ViewModel.Model
 {
     public class RoomSquareModel : BaseViewModel
     {
+        private Video tmp;
         #region .ctor
         public RoomSquareModel(SdjMainViewModel main)
         {
@@ -135,7 +137,7 @@ namespace SharpDj.ViewModel.Model
 
         #region Methods
 
-        private void GetInfoAboutRoom(Room.InsindeInfo inside)
+        private  void GetInfoAboutRoom(Room.InsindeInfo inside)
         {
             SdjMainViewModel.SdjBottomBarViewModel.BottomBarRoomId = RoomId;
             SdjMainViewModel.MainViewVisibility = MainView.Room;
@@ -152,8 +154,7 @@ namespace SharpDj.ViewModel.Model
                 inside.Clients.Count(x => x.Rank > 0);
             SdjMainViewModel.SdjRoomViewModel.SongsQueue = (sbyte)inside.Djs.SelectMany(dj => dj.Video).Count();
 
-            var client = new YoutubeClient();
-            var tmp = client.GetVideoAsync(inside.Djs[0].Video[0].Id).Result;
+            tmp = YoutubeSingleton.Instance.YtClient.GetVideoAsync(inside.Djs[0].Video[0].Id).Result;
             SdjMainViewModel.SdjRoomViewModel.SongTitle = tmp.Title;
             SdjMainViewModel.SdjBottomBarViewModel.BottomBarTitleOfActuallySong = tmp.Title;
         }
@@ -183,10 +184,10 @@ namespace SharpDj.ViewModel.Model
             //TODO Join Room
             Task.Factory.StartNew(() =>
             {
-                var resp = ClientInfo.Instance.ReplyMessenger.SendMessageAndWaitForResponse(new ScsTextMessage(Commands.Client.JoinRoom + RoomId));
-                if (resp == null) return;
+                var resp = SdjMainViewModel.Client.Sender.RoomJoin(RoomId);
+                if (string.IsNullOrEmpty(resp)) return;
 
-                var inside = JsonConvert.DeserializeObject<Room.InsindeInfo>(((ScsTextMessage)resp).Text);
+                var inside = JsonConvert.DeserializeObject<Room.InsindeInfo>(resp);
                 GetInfoAboutRoom(inside);
             });
         }

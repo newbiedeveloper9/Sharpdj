@@ -1,4 +1,5 @@
-﻿using Communication.Shared;
+﻿using System;
+using Communication.Shared;
 using Hik.Communication.Scs.Client;
 using Hik.Communication.Scs.Communication.Messengers;
 
@@ -18,10 +19,12 @@ namespace Communication.Client.Logic
                 Commands.Register,
                 login, password, email);
 
-        public void Login(string login, string password) =>
+        public void Login(string login, string password)
+        {
             _clientUtility.SendMessage(
                 Commands.Login,
                 login, password);
+        }
 
         public void GetPeoples() =>
             _clientUtility.SendMessage(
@@ -57,13 +60,13 @@ namespace Communication.Client.Logic
 
         #region ClientActions
 
-        public void RoomJoin(int roomId) =>
-            _clientUtility.SendMessage(
+        public string RoomJoin(int roomId) =>
+            _clientUtility.SendMessageAndWaitForResponse(
                 Commands.Client.JoinRoom,
                 roomId.ToString());
 
-        public void CreateRoom(string name, string image, string description) =>
-            _clientUtility.SendMessage(
+        public string CreateRoom(string name, string image, string description) =>
+            _clientUtility.SendMessageAndWaitForResponse(
                 Commands.Client.CreateRoom,
                 name, image, description);
 

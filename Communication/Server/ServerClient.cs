@@ -14,7 +14,7 @@ namespace Communication.Server
     {
         private string _username;
 
-        public IScsServerClient Client;
+        public readonly IScsServerClient Client;
 
         public ServerClient(IScsServerClient client)
         {
@@ -23,7 +23,6 @@ namespace Communication.Server
 
         public long Id { get; set; }
         public string Login { get; set; }
-        public string Password { get; set; }
         public Rank Rank { get; set; } = Rank.User;
 
         public string Username

@@ -46,7 +46,10 @@
     <Reference Include="AngleSharp, Version=0.9.9.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
       <HintPath>..\packages\AngleSharp.0.9.10\lib\net45\AngleSharp.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -56,10 +59,13 @@
     <Reference Include="System" />
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -98,15 +104,16 @@
     <Compile Include="Enums\User\UserProfile.cs" />
     <Compile Include="Enums\Playlist\PlaylistState.cs" />
     <Compile Include="Enums\User\UserState.cs" />
-    <Compile Include="Models\Client\Client.cs" />
-    <Compile Include="Models\Client\ClientInfo.cs" />
-    <Compile Include="Models\Client\ClientLogic.cs" />
-    <Compile Include="Models\Client\ErrorMessages.cs" />
-    <Compile Include="Models\Helpers\Clone.cs" />
-    <Compile Include="Models\Helpers\Debug.cs" />
-    <Compile Include="Models\Helpers\Imgur.cs" />
-    <Compile Include="Models\Helpers\Updater\FTPChecker.cs" />
-    <Compile Include="Models\Helpers\Updater\GetSourcePage.cs" />
+    <Compile Include="Logic\Client\Client.cs" />
+    <Compile Include="Logic\Client\ClientInfo.cs" />
+    <Compile Include="Logic\Client\ClientLogic.cs" />
+    <Compile Include="Logic\Client\ErrorMessages.cs" />
+    <Compile Include="Logic\Helpers\Clone.cs" />
+    <Compile Include="Logic\Helpers\Debug.cs" />
+    <Compile Include="Logic\Helpers\Imgur.cs" />
+    <Compile Include="Logic\Helpers\Updater\FTPChecker.cs" />
+    <Compile Include="Logic\Helpers\Updater\GetSourcePage.cs" />
+    <Compile Include="Logic\Helpers\YoutubeSingleton.cs" />
     <Compile Include="ViewModel\Global\SdjBottomBarViewModel.cs" />
     <Compile Include="ViewModel\Global\SdjLeftBarViewModel.cs" />
     <Compile Include="ViewModel\Global\SdjStateButtonViewModel.cs" />
@@ -219,7 +226,7 @@
     <Compile Include="Converters\NotBoolToVisibilityConverter.cs" />
     <Compile Include="Converters\NotNullToBoolConverter.cs" />
     <Compile Include="Converters\NullVisibilityConverter.cs" />
-    <Compile Include="Models\Helpers\ExceptionLogger.cs" />
+    <Compile Include="Logic\Helpers\ExceptionLogger.cs" />
     <Page Include="View\UserControls\Global\SdjBottomBarUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -12,20 +12,18 @@ namespace Communication.Client.Logic
 {
     public class ClientReceiver : ClientReceiverEvents
     {
-        public class MessagesPattern
+        private class MessagesPattern
         {
             public const string UserDisconnectRgx = Commands.Disconnect + " (.*)";
             public const string SuccesfulLoginRgx = Commands.SuccessfulLogin + @"(.*)\$(.*)";
             public const string GetPeopleRgx = @"(.*)\$(.*)";
-            public const string UpdateDjRgx = @"updatedj\$(.*)";
+            public const string UpdateDjRgx = Commands.Client.Room.UpdateDj + @"\$(.*)";
         }
 
         public void ParseMessage(IScsClient client, string message)
         {
             IResponseActions responseActions;
 
-            
-            
             #region User Disconnected
 
             if (message.StartsWith(Commands.Disconnect))
@@ -42,36 +40,6 @@ namespace Communication.Client.Logic
                 {
                     Console.WriteLine("Problem with matching disconnected user.");
                 }
-            }
-
-            #endregion
-
-            #region Login Error
-
-            else if (message.Equals(Commands.Errors.LoginErr))
-            {
-                Console.WriteLine("Error with login");
-                OnLoginErr(EventArgs.Empty);
-            }
-
-            #endregion
-
-            #region Register Error
-
-            else if (message.Equals(Commands.Errors.RegisterErr))
-            {
-                Console.WriteLine("Error with register");
-                OnRegisterErr(EventArgs.Empty);
-            }
-
-            #endregion
-
-            #region Register Account Exist Error
-
-            else if (message.Equals(Commands.Errors.RegisterAccExistErr))
-            {
-                Console.WriteLine("Username exist!");
-                OnRegisterAccExistErr(EventArgs.Empty);
             }
 
             #endregion
@@ -104,96 +72,6 @@ namespace Communication.Client.Logic
 
             #endregion
 
-            #region Succesful register
-
-            else if (message.Equals(Commands.SuccessfulRegister))
-            {
-                Console.WriteLine("Succesful register!");
-                OnSuccesfulRegister(EventArgs.Empty);
-            }
-
-            #endregion
-
-            #region Change Password Error
-
-            else if (message.Equals(Commands.UserAccount.Errors.ChangePasswordErr))
-            {
-                Console.WriteLine("Error with changing password");
-                OnChangePasswordError(EventArgs.Empty);
-            }
-
-            #endregion
-
-            #region Change Username Error
-
-            else if (message.Equals(Commands.UserAccount.Errors.ChangeUsernameErr))
-            {
-                Console.WriteLine("Error with changing username");
-                OnChangeUsernameError(EventArgs.Empty);
-            }
-
-            #endregion
-
-            #region Change Login Error
-
-            else if (message.Equals(Commands.UserAccount.Errors.ChangeLoginErr))
-            {
-                Console.WriteLine("Error with changing login");
-                OnChangeLoginError(EventArgs.Empty);
-            }
-
-            #endregion
-
-            #region Change Rank Error
-
-            else if (message.Equals(Commands.UserAccount.Errors.ChangeRankErr))
-            {
-                Console.WriteLine("Error with changing rank");
-                OnChangeRankError(EventArgs.Empty);
-            }
-
-            #endregion
-
-            #region Succesfull Change Password
-
-            else if (message.Equals(Commands.UserAccount.Succesful.SuccesfulChangePassword))
-            {
-                OnChangePasswordSuccessful(EventArgs.Empty);
-                Console.WriteLine("Password changed!");
-            }
-
-            #endregion
-
-            #region Succesfull Change Username
-
-            else if (message.Equals(Commands.UserAccount.Succesful.SuccesfulChangeUsername))
-            {
-                OnChangeUsernameSuccessful(EventArgs.Empty);
-                Console.WriteLine("Username changed!");
-            }
-
-            #endregion
-
-            #region Succesfull Change Login
-
-            else if (message.Equals(Commands.UserAccount.Succesful.SuccesfulChangeLogin))
-            {
-                OnChangeLoginSuccessful(EventArgs.Empty);
-                Console.WriteLine("Login changed!");
-            }
-
-            #endregion
-
-            #region Succesfull Change Rank
-
-            else if (message.Equals(Commands.UserAccount.Succesful.SuccesfulChangeRank))
-            {
-                OnChangeRankSuccessful(EventArgs.Empty);
-                Console.WriteLine("Rank changed!");
-            }
-
-            #endregion
-
             #region Get People
 
             else if (message.StartsWith(Commands.GetPeoples))
@@ -221,16 +99,6 @@ namespace Communication.Client.Logic
                 }
 
                 OnGetPeople(new GetPeopleEventArgs(userClients));
-            }
-
-            #endregion
-
-            #region Get People Error
-
-            else if (message.Equals(Commands.Errors.GetPeoplesErr))
-            {
-                Console.WriteLine("Denied to get peoples list");
-                OnGetPeopleErr(EventArgs.Empty);
             }
 
             #endregion

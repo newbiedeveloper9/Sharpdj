@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using Communication.Server;
+using Communication.Server.Logic;
 using Communication.Shared;
 using Hik.Communication.Scs.Communication.Messages;
 using Hik.Communication.Scs.Server;
@@ -21,7 +22,7 @@ namespace servertcp.ServerManagment
             public const string ChangeRankRgx = Commands.UserAccount.ChangeRank + @"(.*)\$(.*)";
             public const string JoinRoomRgx = Commands.Client.JoinRoom + "([0-9]+)";
             public const string CreateRoomRgx = Commands.Client.CreateRoom + @"(.*)\$(.*)\$(.*)";
-            public const string JoinQueueRgx = @"joinqueue\$(.*)";
+            public const string JoinQueueRgx = Commands.Client.Room.JoinQueue + @" \$(.*)";
         }
 
         public void ParseMessage(IScsServerClient client, string message, string messageId)
@@ -39,19 +40,19 @@ namespace servertcp.ServerManagment
 
             else if (message.StartsWith(Commands.Login))
             {
-                Regex rgx = new Regex(ServerReceiver.MessagesPattern.LoginRgx);
-                Match match = rgx.Match(message);
+                var rgx = new Regex(ServerReceiver.MessagesPattern.LoginRgx);
+                var match = rgx.Match(message);
+                
                 if (match.Success)
                 {
                     var login = match.Groups[1].Value;
                     var password = match.Groups[2].Value;
 
-                    OnLogin(new LoginEventArgs(login, password, client));
+                    OnLogin(new LoginEventArgs(login, password, client, messageId));
                 }
                 else
                 {
-                    Console.WriteLine(Commands.Errors.LoginErr);
-                    ServerSender.Error.LoginError(client);
+                    ServerSender.Error(client, messageId);
                 }
             }
 
@@ -61,20 +62,20 @@ namespace servertcp.ServerManagment
 
             else if (message.StartsWith(Commands.Register))
             {
-                Regex rgx = new Regex(MessagesPattern.RegisterRgx);
-                Match match = rgx.Match(message);
+                var rgx = new Regex(MessagesPattern.RegisterRgx);
+                var match = rgx.Match(message);
+                
                 if (match.Success)
                 {
                     var login = match.Groups[1].Value;
                     var password = match.Groups[2].Value;
                     var email = match.Groups[3].Value;
 
-                    OnRegister(new RegisterEventArgs(login, password, email, client));
+                    OnRegister(new RegisterEventArgs(login, password, email, client, messageId));
                 }
                 else
                 {
-                    Console.WriteLine("Fail in register");
-                    ServerSender.Error.RegisterError(client);
+                    ServerSender.Error(client, messageId);
                 }
             }
 
@@ -84,19 +85,19 @@ namespace servertcp.ServerManagment
 
             else if (message.StartsWith(Commands.UserAccount.ChangePassword))
             {
-                Regex rgx = new Regex(MessagesPattern.ChangePasswordRgx);
-                Match match = rgx.Match(message);
+                var rgx = new Regex(MessagesPattern.ChangePasswordRgx);
+                var match = rgx.Match(message);
+                
                 if (match.Success)
                 {
                     var password = match.Groups[1].Value;
                     var newPassword = match.Groups[2].Value;
 
-                    OnChangePassword(new ChangePasswordEventArgs(client, password, newPassword));
+                    OnChangePassword(new ChangePasswordEventArgs(client, password, newPassword, messageId));
                 }
                 else
                 {
-                    Console.WriteLine("Fail with changing password");
-                    ServerSender.Error.ChangePasswordError(client);
+                    ServerSender.Error(client, messageId);
                 }
             }
 
@@ -106,19 +107,18 @@ namespace servertcp.ServerManagment
 
             else if (message.StartsWith(Commands.UserAccount.ChangeUsername))
             {
-                Regex rgx = new Regex(MessagesPattern.ChangeUsernameRgx);
-                Match match = rgx.Match(message);
+                var rgx = new Regex(MessagesPattern.ChangeUsernameRgx);
+                var match = rgx.Match(message);
                 if (match.Success)
                 {
                     var password = match.Groups[1].Value;
                     var newUsername = match.Groups[2].Value;
 
-                    OnChangeUsername(new ChangeUsernameEventArgs(client, password, newUsername));
+                    OnChangeUsername(new ChangeUsernameEventArgs(client, password, newUsername, messageId));
                 }
                 else
                 {
-                    Console.WriteLine("Fail with changing username");
-                    ServerSender.Error.ChangeUsernameError(client);
+                    ServerSender.Error(client, messageId);
                 }
             }
 
@@ -128,19 +128,19 @@ namespace servertcp.ServerManagment
 
             else if (message.StartsWith(Commands.UserAccount.ChangeLogin))
             {
-                Regex rgx = new Regex(MessagesPattern.ChangeLoginRgx);
-                Match match = rgx.Match(message);
+                var rgx = new Regex(MessagesPattern.ChangeLoginRgx);
+                var match = rgx.Match(message);
+                
                 if (match.Success)
                 {
                     var password = match.Groups[1].Value;
                     var newLogin = match.Groups[2].Value;
 
-                    OnChangeLogin(new ChangeLoginEventArgs(client, password, newLogin));
+                    OnChangeLogin(new ChangeLoginEventArgs(client, password, newLogin, messageId));
                 }
                 else
                 {
-                    Console.WriteLine("Fail with changing login");
-                    ServerSender.Error.ChangeLoginError(client);
+                    ServerSender.Error(client, messageId);
                 }
             }
 
@@ -150,20 +150,20 @@ namespace servertcp.ServerManagment
 
             else if (message.StartsWith(Commands.UserAccount.ChangeRank))
             {
-                Regex rgx = new Regex(MessagesPattern.ChangeRankRgx);
-                Match match = rgx.Match(message);
+                var rgx = new Regex(MessagesPattern.ChangeRankRgx);
+                var match = rgx.Match(message);
+                
                 if (match.Success)
                 {
                     var password = match.Groups[1].Value;
                     var newRank = match.Groups[2].Value;
 
                     OnChangeRank(new ChangeRankEventArgs(client, password,
-                        (Rank) Enum.Parse(typeof(Rank), newRank, true)));
+                        (Rank) Enum.Parse(typeof(Rank), newRank, true), messageId));
                 }
                 else
                 {
-                    Console.WriteLine("Fail with changing rank");
-                    ServerSender.Error.ChangeRankError(client);
+                    ServerSender.Error(client, messageId);
                 }
             }
 
@@ -182,14 +182,17 @@ namespace servertcp.ServerManagment
 
             else if (message.StartsWith(Commands.Client.JoinRoom))
             {
-                Regex rgx = new Regex(MessagesPattern.JoinRoomRgx);
-                Match match = rgx.Match(message);
+                var rgx = new Regex(MessagesPattern.JoinRoomRgx);
+                var match = rgx.Match(message);
+                
                 if (match.Success)
                 {
                     var roomId = match.Groups[1].Value;
 
                     OnJoinRoom(new JoinRoomEventArgs(Convert.ToInt32(roomId), client, messageId));
                 }
+                else
+                    ServerSender.Error(client, messageId);
             }
 
             #endregion JoinRoom 
@@ -198,16 +201,19 @@ namespace servertcp.ServerManagment
 
             else if (message.StartsWith(Commands.Client.CreateRoom))
             {
-                Regex rgx = new Regex(MessagesPattern.CreateRoomRgx);
-                Match match = rgx.Match(message);
+                var rgx = new Regex(MessagesPattern.CreateRoomRgx);
+                var match = rgx.Match(message);
+                
                 if (match.Success)
                 {
                     var name = match.Groups[1].Value;
                     var image = match.Groups[2].Value;
                     var description = match.Groups[3].Value;
 
-                    OnCreateRoom(new CreateRoomEventArgs(client, name, image, description));
+                    OnCreateRoom(new CreateRoomEventArgs(client, name, image, description, messageId));
                 }
+                else
+                    ServerSender.Error(client, messageId);
             }
 
             #endregion CreateRoom
@@ -223,15 +229,20 @@ namespace servertcp.ServerManagment
 
             #region JoinQueue
 
-            else if (message.StartsWith("joinqueue$"))
+            else if (message.StartsWith(Commands.Client.Room.JoinQueue))
             {
-                Regex rgx = new Regex(MessagesPattern.JoinQueueRgx);
-                Match match = rgx.Match(message);
+                var rgx = new Regex(MessagesPattern.JoinQueueRgx);
+                var match = rgx.Match(message);
+                
                 if (match.Success)
                 {
                     var json = match.Groups[1].Value;
 
-                    OnJoinQueue(new JoinQueueEventArgs(client, json));
+                    OnJoinQueue(new JoinQueueEventArgs(client, json, messageId));
+                }
+                else
+                {
+                    ServerSender.Error(client, messageId);
                 }
             }
 

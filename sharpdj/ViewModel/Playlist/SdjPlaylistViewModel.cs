@@ -32,16 +32,22 @@ namespace SharpDj.ViewModel
             PlaylistCollection = JsonConvert.DeserializeObject<ObservableCollection<PlaylistModel>>(src);
             PlaylistCollectionSavedState = JsonConvert.DeserializeObject<ObservableCollection<PlaylistModel>>(src);
 
-            for (var index = 0; index < PlaylistCollection.Count; index++)
-            {
-                PlaylistCollection[index].SdjMainViewModel = SdjMainViewModel;
-                PlaylistCollectionSavedState[index].SdjMainViewModel = SdjMainViewModel;
-
-                for (var i = 0; i < PlaylistCollection[index].Tracks.Count; i++)
+            if (PlaylistCollection != null && PlaylistCollectionSavedState != null)
+                for (var index = 0; index < PlaylistCollection.Count; index++)
                 {
-                    PlaylistCollection[index].Tracks[i].SdjMainViewModel = SdjMainViewModel;
-                    PlaylistCollectionSavedState[index].Tracks[i].SdjMainViewModel = SdjMainViewModel;
+                    PlaylistCollection[index].SdjMainViewModel = SdjMainViewModel;
+                    PlaylistCollectionSavedState[index].SdjMainViewModel = SdjMainViewModel;
+
+                    for (var i = 0; i < PlaylistCollection[index].Tracks.Count; i++)
+                    {
+                        PlaylistCollection[index].Tracks[i].SdjMainViewModel = SdjMainViewModel;
+                        PlaylistCollectionSavedState[index].Tracks[i].SdjMainViewModel = SdjMainViewModel;
+                    }
                 }
+            else
+            {
+                PlaylistCollection = new ObservableCollection<PlaylistModel>();
+                PlaylistCollectionSavedState = new ObservableCollection<PlaylistModel>();
             }
         }
 

@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Communication.Client;
+using Communication.Client.Logic;
 using Communication.Client.Logic.ResponseActions;
 using Communication.Shared;
 using Newtonsoft.Json;
 using SharpDj.Core;
-using SharpDj.Enums;
 using SharpDj.Enums.Menu;
 using SharpDj.Enums.User;
 using SharpDj.Models.Helpers;
@@ -18,7 +17,7 @@ using SharpDj.ViewModel;
 using SharpDj.ViewModel.Model;
 using YoutubeExplode;
 
-namespace SharpDj.Models.Client
+namespace SharpDj.Logic.Client
 {
     public class ClientLogic : BaseViewModel
     {
@@ -42,8 +41,7 @@ namespace SharpDj.Models.Client
             main.Client.Receiver.RegisterErr += Receiver_RegisterErr;
             main.Client.Receiver.SuccesfulRegister += Receiver_SuccesfulRegister;
             Communication.Client.Logic.ResponseActions.UpdateDjResponse.UpdateDj += UpdateDjResponseOnUpdateDj;
-          //  main.Client.Receiver.SuccessfulLogin += Receiver_SuccessfulLogin;
-         //  main.Client.Receiver.UpdateDj += Receiver_UpdateDj;
+            main.Client.Receiver.SuccessfulLogin += Receiver_SuccessfulLogin;
             
             Task.Factory.StartNew(() =>
             {
@@ -61,11 +59,6 @@ namespace SharpDj.Models.Client
 
         private void UpdateDjResponseOnUpdateDj(object sender, UpdateDjResponse.UpdateDjEventArgs e)
         {
-            throw new NotImplementedException();
-        }
-
-/*        private void Receiver_UpdateDj(object sender, ClientReceiver.UpdateDjEventArgs e)
-        {
             var inside = JsonConvert.DeserializeObject<Room.InsindeInfo>(e.Json);
 
             SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfPeopleInRoom = inside.Clients.Count;
@@ -79,8 +72,7 @@ namespace SharpDj.Models.Client
             var client = new YoutubeClient();
             var tmp = client.GetVideoAsync(inside.Djs[0].Video[0].Id).Result;
             SdjMainViewModel.SdjRoomViewModel.SongTitle = tmp.Title;
-            SdjMainViewModel.SdjBottomBarViewModel.BottomBarTitleOfActuallySong = tmp.Title;
-        }*/
+            SdjMainViewModel.SdjBottomBarViewModel.BottomBarTitleOfActuallySong = tmp.Title;        }
 
         public void RefreshInfo()
         {
@@ -127,13 +119,13 @@ namespace SharpDj.Models.Client
             Debug.Log("Register", "Succesful register");
         }
 
-        /*private void Receiver_SuccessfulLogin(object sender, ClientReceiver.SuccesfulLoginEventArgs e)
+        private void Receiver_SuccessfulLogin(object sender, ClientReceiver.SuccesfulLoginEventArgs e)
         {
             SdjMainViewModel.Profile = new UserClient() { Rank = e.Rank, Username = e.Username };
             UserState = UserState.Logged;
             
             Debug.Log("Login", "Succesful login");
-        }*/
+        }
 
         private SdjMainViewModel _sdjMainViewModel;
         public SdjMainViewModel SdjMainViewModel

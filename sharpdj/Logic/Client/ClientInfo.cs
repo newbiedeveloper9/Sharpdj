@@ -1,9 +1,8 @@
 using System;
-using System.ComponentModel;
 using Hik.Communication.Scs.Client;
 using Hik.Communication.Scs.Communication.Messengers;
 
-namespace SharpDj.Models.Client
+namespace SharpDj.Logic.Client
 {
     public sealed class ClientInfo
     {
