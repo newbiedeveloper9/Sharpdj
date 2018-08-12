@@ -1,9 +1,9 @@
 using System;
-using System.ComponentModel;
 using Hik.Communication.Scs.Client;
 using Hik.Communication.Scs.Communication.Messengers;
+using SharpDj.Enums.User;
 
-namespace SharpDj.Models.Client
+namespace SharpDj.Logic.Client
 {
     public sealed class ClientInfo
     {
@@ -19,5 +19,6 @@ namespace SharpDj.Models.Client
 
         public RequestReplyMessenger<IScsClient> ReplyMessenger { get; set; }
         public IScsClient Client { get; set; }
+        public UserState UserState = UserState.NotLoggedIn;
     }
 }

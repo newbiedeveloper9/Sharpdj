@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SharpDj.View.UserControls"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:helpers="clr-namespace:SharpDj.ViewModel.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
@@ -15,7 +17,11 @@
             <TextBox Text="{Binding Nickname, UpdateSourceTrigger=PropertyChanged}"/>
 
             <Label Content="Password"/>
-            <PasswordBox PasswordChar="*" PasswordChanged="PasswordBox_PasswordChanged"/>
+            <PasswordBox>
+                <i:Interaction.Behaviors>
+                    <helpers:PasswordBoxBindingBehavior Password="{Binding Password}"/>
+                </i:Interaction.Behaviors>
+            </PasswordBox>
 
             <Label Content="E-mail"/>
             <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>

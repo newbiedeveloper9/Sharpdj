@@ -1,20 +1,15 @@
 ﻿using System;
 using System.Threading;
-using System.Threading.Tasks;
+using Communication.Client.Logic;
 using Hik.Communication.Scs.Client;
+using Hik.Communication.Scs.Communication;
 using Hik.Communication.Scs.Communication.EndPoints.Tcp;
 using Hik.Communication.Scs.Communication.Messages;
-using Communication.Client;
-using Communication.Shared;
-using Hik.Communication.Scs.Communication;
 using Hik.Communication.Scs.Communication.Messengers;
-using SharpDj.Core;
-using SharpDj.Enums;
 using SharpDj.Enums.Menu;
 using SharpDj.ViewModel;
 
-
-namespace SharpDj.Models.Client
+namespace SharpDj.Logic.Client
 {
     public class Client
     {
@@ -35,7 +30,6 @@ namespace SharpDj.Models.Client
             ClientInfo.Instance.Client.Disconnected += Client_Disconnected;
             ClientInfo.Instance.ReplyMessenger = new RequestReplyMessenger<IScsClient>(ClientInfo.Instance.Client);
             ClientInfo.Instance.ReplyMessenger.Start();
-            ClientInfo.Instance.Client.ConnectTimeout = 5;
             while (ClientInfo.Instance.Client.CommunicationState == CommunicationStates.Disconnected)
             {
                 try
@@ -50,9 +44,9 @@ namespace SharpDj.Models.Client
                     Console.WriteLine(e.Message);
                 }
             }
-            ClientInfo.Instance.Client.SendMessage(new ScsTextMessage("login $"));
+           // ClientInfo.Instance.Client.SendMessage(new ScsTextMessage("login $"));
 
-            Sender = new ClientSender(ClientInfo.Instance.Client);
+            Sender = new ClientSender(ClientInfo.Instance.Client, ClientInfo.Instance.ReplyMessenger);
         }
 
         private void Client_Disconnected(object sender, EventArgs e)

@@ -1,0 +1,1 @@
+<Presets><Preset Name="test" FormatVersion="1"><Configuration Name="Debug|Any CPU"><Project Name="SharpDj" RelativePath="SharpDj\SharpDj.csproj" MSBuildName="SharpDj"/><Project Name="servertcp" RelativePath="servertcp\servertcp.csproj" MSBuildName="servertcp"/></Configuration></Preset></Presets>

@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>servertcp</RootNamespace>
     <AssemblyName>servertcp</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
@@ -73,9 +73,11 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Receiver.cs" />
-    <Compile Include="Scrypt.cs" />
-    <Compile Include="Server.cs" />
+    <Compile Include="Security\Scrypt.cs" />
+    <Compile Include="ServerManagment\ServerLogic.cs" />
+    <Compile Include="ServerManagment\Server.cs" />
+    <Compile Include="ServerManagment\ServerReceiver.cs" />
+    <Compile Include="ServerManagment\ServerReceiverEvents.cs" />
     <Compile Include="Sql\SqlHelper.cs" />
     <Compile Include="Sql\SqlUserCommands.cs" />
   </ItemGroup>
@@ -89,6 +91,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Communication\Communication.csproj">
+      <Project>{e8790b81-831e-458b-800d-bcae0017cfcb}</Project>
+      <Name>Communication</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

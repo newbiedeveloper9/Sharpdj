@@ -1,21 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Threading;
 using Communication.Shared;
 using Hik.Communication.Scs.Communication.Messages;
 using Newtonsoft.Json;
 using SharpDj.Core;
-using SharpDj.Models.Client;
+using SharpDj.Logic.Client;
 using SharpDj.View.UserControls;
 using SharpDj.ViewModel.Model;
 using Vlc.DotNet.Core;
@@ -25,32 +17,33 @@ namespace SharpDj.ViewModel
 {
     public class SdjRoomViewModel : BaseViewModel
     {
-        public SdjVlcPlayer vlcPlayer { get; set; }
+        public SdjVlcPlayer VlcPlayer { get; set; }
+        
         #region .ctor
 
         public SdjRoomViewModel(SdjMainViewModel main)
         {
             SdjMainViewModel = main;
+
+/*          var vlcPlayer = new SdjVlcPlayer();
+            var vlcLibDirectory = new DirectoryInfo(System.IO.Path.Combine(Environment.CurrentDirectory, "libvlc", IntPtr.Size == 4 ? "win-x86" : "win-x64"));
+            vlcPlayer.VlcPlayer.SourceProvider.CreatePlayer(vlcLibDirectory);
+            vlcPlayer.VlcPlayer.SourceProvider.MediaPlayer.Play("https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_5mb.mp4");
+            MyVlcPlayer.Add(vlcPlayer);*/
+
             RoomMessageCollection = new ObservableCollection<RoomMessageModel>();
             var mess = new RoomMessageModel(main)
             {
                 Message =
-                    "Testowa wiadomość Testowa wiadomość Testowa wiadomość Testowa wiadomość Te xdd xdd dstowa wiadomość Testowa wiadomość Testowa wiadomość Testowa wiadomość Testowa wiadomość",
+                    "Testowa wiadomość Testowa wiadomość Testowa wiadomość Testowa wiadomość Te xdd xdd" +
+                    " dstowa wiadomość Testowa wiadomość Testowa wiadomość Testowa wiadomość Testowa wiadomość",
                 Time = "13:03",
                 Username = "Crisey"
             };
 
-            var test = new SdjVlcPlayer();
-            MyVlcPlayer.Add(test);
-            var vlcLibDirectory = new DirectoryInfo(System.IO.Path.Combine(Environment.CurrentDirectory, "libvlc", IntPtr.Size == 4 ? "win-x86" : "win-x64"));
-            test.VlcPlayer.SourceProvider.CreatePlayer(vlcLibDirectory);
-            test.VlcPlayer.SourceProvider.MediaPlayer.Play("https://www.netflix.com/watch/70283264?trackId=15035895&tctx=2%2C3%2Cc33edd86-3d37-4160-be7e-1f9a5bd44cad-22057218%2C13e261a7-c022-489e-9692-b3fa45914fd4_30653726X54XX1532815221647%2C13e261a7-c022-489e-9692-b3fa45914fd4_ROOT");
 
             for (int i = 0; i < 10; i++)
-            {
                 RoomMessageCollection.Add(mess);
-            }
-
         }
 
         #endregion .ctor
@@ -330,7 +323,7 @@ namespace SharpDj.ViewModel
             }
         }
 
-        public bool JoinQueueCommandCanExecute()
+        private bool JoinQueueCommandCanExecute()
         {
             return true;
         }
@@ -341,13 +334,17 @@ namespace SharpDj.ViewModel
             Task.Factory.StartNew(() =>
             {
                 var tracks = SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection.FirstOrDefault(x => x.IsActive)?.Tracks;
-                Songs dj = new Songs();
-                foreach (var track in tracks)
-                {
-                    int seconds = (int)TimeSpan.Parse(track.SongDuration).TotalSeconds;
-                    dj.Video.Add(new Songs.Song(seconds, track.SongId));
-                }
+                var dj = new Songs();
+                if (tracks != null)
+                    foreach (var track in tracks)
+                    {
+                        int seconds = (int) TimeSpan.Parse(track.SongDuration).TotalSeconds;
+                        dj.Video.Add(new Songs.Song(seconds, track.SongId));
+                    }
+
                 var source = JsonConvert.SerializeObject(dj);
+                
+                
                 ClientInfo.Instance.Client.SendMessage(new ScsTextMessage("joinqueue$"+source));
             });
         }

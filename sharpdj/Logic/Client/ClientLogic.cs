@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Communication.Client;
+using Communication.Client.Logic;
+using Communication.Client.Logic.ResponseActions;
 using Communication.Shared;
 using Newtonsoft.Json;
 using SharpDj.Core;
-using SharpDj.Enums;
 using SharpDj.Enums.Menu;
 using SharpDj.Enums.User;
 using SharpDj.Models.Helpers;
@@ -17,37 +17,22 @@ using SharpDj.ViewModel;
 using SharpDj.ViewModel.Model;
 using YoutubeExplode;
 
-namespace SharpDj.Models.Client
+namespace SharpDj.Logic.Client
 {
     public class ClientLogic : BaseViewModel
     {
-        private UserState _userState = UserState.NotLoggedIn;
-        public UserState UserState
-        {
-            get => _userState;
-            set
-            {
-                _userState = value;
-                SdjMainViewModel.MainViewVisibility = value == UserState.Logged ? MainView.Main : MainView.Login;
-            }
-        }
+       
 
         public ClientLogic(SdjMainViewModel main)
         {
             SdjMainViewModel = main;
-
-            main.Client.Receiver.LoginErr += Receiver_LoginErr;
-            main.Client.Receiver.RegisterAccExistErr += Receiver_RegisterAccExistErr;
-            main.Client.Receiver.RegisterErr += Receiver_RegisterErr;
-            main.Client.Receiver.SuccesfulRegister += Receiver_SuccesfulRegister;
-            main.Client.Receiver.SuccessfulLogin += Receiver_SuccessfulLogin;
-            main.Client.Receiver.UpdateDj += Receiver_UpdateDj;
+            Communication.Client.Logic.ResponseActions.UpdateDjResponse.UpdateDj += UpdateDjResponseOnUpdateDj;
             
             Task.Factory.StartNew(() =>
             {
                 while (true)
                 {
-                    if (UserState == UserState.Logged)
+                    if (ClientInfo.Instance.UserState == UserState.Logged)
                     {
                         RefreshInfo();
                         Thread.Sleep(20000);
@@ -57,7 +42,7 @@ namespace SharpDj.Models.Client
             });
         }
 
-        private void Receiver_UpdateDj(object sender, ClientReceiver.UpdateDjEventArgs e)
+        private void UpdateDjResponseOnUpdateDj(object sender, UpdateDjResponse.UpdateDjEventArgs e)
         {
             var inside = JsonConvert.DeserializeObject<Room.InsindeInfo>(e.Json);
 
@@ -72,12 +57,12 @@ namespace SharpDj.Models.Client
             var client = new YoutubeClient();
             var tmp = client.GetVideoAsync(inside.Djs[0].Video[0].Id).Result;
             SdjMainViewModel.SdjRoomViewModel.SongTitle = tmp.Title;
-            SdjMainViewModel.SdjBottomBarViewModel.BottomBarTitleOfActuallySong = tmp.Title;
+            SdjMainViewModel.SdjBottomBarViewModel.BottomBarTitleOfActuallySong = tmp.Title;        
         }
 
         public void RefreshInfo()
         {
-            string reply = SdjMainViewModel.Client.Sender.AfterLogin(ClientInfo.Instance.ReplyMessenger);
+            string reply = SdjMainViewModel.Client.Sender.AfterLogin();
             if (reply == null) return;
 
             var source = JsonConvert.DeserializeObject<List<Room>>(reply);
@@ -94,12 +79,9 @@ namespace SharpDj.Models.Client
                     RoomId = source[i].Id,
                 });
             }
+            roomstmp = new ObservableCollection<RoomSquareModel>
+                (roomstmp.OrderByDescending(i=>i.PeopleInRoom));
             SdjMainViewModel.RoomCollection = roomstmp;
-        }
-
-        private void Receiver_LoginErr(object sender, EventArgs e)
-        {
-            SdjMainViewModel.SdjLoginViewModel.ErrorNotify = ErrorMessages.LoginErrorMessage;
         }
 
         private void Receiver_RegisterAccExistErr(object sender, EventArgs e)
@@ -116,14 +98,6 @@ namespace SharpDj.Models.Client
         {
             SdjMainViewModel.MainViewVisibility = MainView.Login;
             Debug.Log("Register", "Succesful register");
-        }
-
-        private void Receiver_SuccessfulLogin(object sender, ClientReceiver.SuccesfulLoginEventArgs e)
-        {
-            SdjMainViewModel.Profile = new UserClient() { Rank = e.Rank, Username = e.Username };
-            UserState = UserState.Logged;
-            
-            Debug.Log("Login", "Succesful login");
         }
 
         private SdjMainViewModel _sdjMainViewModel;

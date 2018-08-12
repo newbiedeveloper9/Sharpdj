@@ -9,12 +9,12 @@ namespace Communication.Shared
 {
     public class Commands
     {
-        public const string Login = "login ";
-        public const string SuccessfulLogin = "successlogin ";
-
+       //TODO create dictionary with commands. Actually i have 2much refactoring to do.
+        
         public const string Register = "reg ";
         public const string SuccessfulRegister = "successreg";
-
+        public const string Login = "login ";
+        public const string SuccessfulLogin = "successlogin ";
         public const string Disconnect = "disconnect";
 
         public const string GetPeoples = "getpeoples";
@@ -43,6 +43,9 @@ namespace Communication.Shared
             }
         }
 
+        public const string Success = "success ";
+        public const string Error = "error ";
+
         public class Errors
         {
             public const string RegisterErr = "failreg";
@@ -54,10 +57,15 @@ namespace Communication.Shared
         public class Client
         {
             public const string JoinRoom = "joinroom ";
-
             public const string CreateRoom = "createroom ";
-
             public const string AfterLogin = "afterlogin";
+
+            public class Room
+            {
+                public const string JoinQueue = "joinqueue $";
+                public const string UpdateDj = "updatedj";
+
+            }  
         }
     }
 }

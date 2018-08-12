@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+using Communication.Shared;
 using SharpDj.Core;
+using SharpDj.Enums.Menu;
+using SharpDj.Models.Helpers;
 
-namespace SharpDj.ViewModel
+namespace SharpDj.ViewModel.Unique
 {
     public class SdjRegisterViewModel : BaseViewModel
     {
-
         #region .ctor
 
         public SdjRegisterViewModel(SdjMainViewModel main)
@@ -24,6 +21,7 @@ namespace SharpDj.ViewModel
         #region Properties
 
         private SdjMainViewModel _sdjMainViewModel;
+
         public SdjMainViewModel SdjMainViewModel
         {
             get => _sdjMainViewModel;
@@ -37,6 +35,7 @@ namespace SharpDj.ViewModel
 
 
         private string _login;
+
         public string Login
         {
             get => _login;
@@ -49,6 +48,7 @@ namespace SharpDj.ViewModel
         }
 
         private string _nickname;
+
         public string Nickname
         {
             get => _nickname;
@@ -56,11 +56,12 @@ namespace SharpDj.ViewModel
             {
                 if (_nickname == value) return;
                 _nickname = value;
-                OnPropertyChanged("Username");
+                OnPropertyChanged("Nickname");
             }
         }
 
         private SecureString _password;
+
         public SecureString Password
         {
             get => _password;
@@ -73,6 +74,7 @@ namespace SharpDj.ViewModel
         }
 
         private string _email;
+
         public string Email
         {
             get => _email;
@@ -85,6 +87,7 @@ namespace SharpDj.ViewModel
         }
 
         private string _errorNotify;
+
         public string ErrorNotify
         {
             get => _errorNotify;
@@ -93,29 +96,34 @@ namespace SharpDj.ViewModel
                 if (_errorNotify == value) return;
                 _errorNotify = value;
                 OnPropertyChanged("ErrorNotify");
+
+                if (!string.IsNullOrEmpty(value))
+                {
+                    Password = null;
+                    Debug.Log("Register", "Error");
+                }
             }
         }
-
 
         #endregion Properties
 
         #region Methods
 
-
         #endregion Methods
 
         #region Commands
 
-
         #region RegisterMeCommand
 
         private RelayCommand _registerMeCommand;
+
         public RelayCommand RegisterMeCommand
         {
             get
             {
                 return _registerMeCommand
-                       ?? (_registerMeCommand = new RelayCommand(RegisterMeCommandExecute, RegisterMeCommandCanExecute));
+                       ?? (_registerMeCommand =
+                           new RelayCommand(RegisterMeCommandExecute, RegisterMeCommandCanExecute));
             }
         }
 
@@ -126,11 +134,19 @@ namespace SharpDj.ViewModel
 
         public void RegisterMeCommandExecute()
         {
-            string password = new System.Net.NetworkCredential(string.Empty, Password).Password;
+            var resp = SdjMainViewModel.Client.Sender.Register(Login, Password, Email);
 
-            SdjMainViewModel.Client.Sender.Register(Login, password, Email);
+            if (resp.Equals(Commands.Error))
+            {
+                ErrorNotify = "Register error";
+            }
+            else
+            {
+                SdjMainViewModel.MainViewVisibility = MainView.Login;
+
+                Debug.Log("Register", "Success");
+            }
         }
-
 
         #endregion
 

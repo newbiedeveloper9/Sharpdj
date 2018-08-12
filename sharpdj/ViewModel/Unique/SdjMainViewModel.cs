@@ -15,17 +15,18 @@ using SharpDj.Core;
 using SharpDj.Enums;
 using SharpDj.Enums.Menu;
 using SharpDj.Enums.Playlist;
+using SharpDj.Logic.Client;
 using SharpDj.Models;
-using SharpDj.Models.Client;
 using SharpDj.Models.Helpers;
 using SharpDj.View.UserControls;
 using SharpDj.ViewModel.Model;
+using SharpDj.ViewModel.Unique;
 
 namespace SharpDj.ViewModel
 {
     public class SdjMainViewModel : BaseViewModel
     {
-        public Client Client { get; set; }
+        public readonly Client Client;
         private readonly ClientLogic _clientLogic;
 
         #region .ctor
@@ -47,8 +48,6 @@ namespace SharpDj.ViewModel
             SdjUserProfileViewModel = new SdjUserProfileViewModel(this);
             SdjFeedbackViewModel = new SdjFeedbackViewModel(this);
 
-            
-
             MainViewVisibility = MainView.Login;
             Profile = new UserClient();
 
@@ -60,8 +59,6 @@ namespace SharpDj.ViewModel
             Client = new Client();
             Client.Start(this);
             _clientLogic = new ClientLogic(this);
-
- 
         }
 
         #endregion .ctor
@@ -107,6 +104,21 @@ namespace SharpDj.ViewModel
             set
             {
                 if (_mainViewVisibility == value) return;
+                if (_mainViewVisibility == MainView.Login)
+                {
+                    SdjLoginViewModel.ErrorNotify = string.Empty;
+                    SdjLoginViewModel.Login = string.Empty;
+                    SdjLoginViewModel.Password = null;
+                    SdjLoginViewModel.RememberMe = false;
+                }
+                else if (_mainViewVisibility == MainView.Register)
+                {
+                    SdjRegisterViewModel.ErrorNotify = string.Empty;
+                    SdjRegisterViewModel.Login = string.Empty;
+                    SdjRegisterViewModel.Nickname = string.Empty;
+                    SdjRegisterViewModel.Email = string.Empty;
+                    SdjRegisterViewModel.Password = null;
+                }
                 _mainViewVisibility = value;
               
                 OnPropertyChanged("MainViewVisibility");
@@ -126,6 +138,7 @@ namespace SharpDj.ViewModel
                     SdjRoomViewModel.SongTitle = string.Empty;
                     SdjBottomBarViewModel.BottomBarTitleOfActuallySong = string.Empty;
                 }
+                
             }
         }
 

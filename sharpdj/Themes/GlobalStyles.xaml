@@ -3,8 +3,4 @@
     <Style TargetType="Image">
         <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality" />
     </Style>
-    <Style TargetType="{x:Type Window}">
-        <Setter Property="FontFamily"
-                Value="Roboto" />
-    </Style>
 </ResourceDictionary>

@@ -5,12 +5,12 @@ using Hik.Communication.Scs.Communication.EndPoints.Tcp;
 using Hik.Communication.Scs.Communication.Messages;
 using Hik.Communication.Scs.Server;
 
-namespace servertcp
+namespace servertcp.ServerManagment
 {
     public class Server
     {
-        public int Port { get; set; } = 1433;
-        public IScsServer _server { get; set; }
+        private const int Port = 1433;
+        private IScsServer _server;
         private ServerReceiver _receiver;
 
         public void Start()
@@ -18,10 +18,9 @@ namespace servertcp
             _receiver = new ServerReceiver();
             _server = ScsServerFactory.CreateServer(new ScsTcpEndPoint("192.168.0.103",Port));
 
-            new Receiver(_receiver, _server);
+            new ServerLogic(_receiver, _server);
 
-            _server.ClientConnected += Server_ClientConnected;
-            _server.ClientDisconnected += Server_ClientDisconnected;
+            _server.ClientConnected += Client_Connected;
           
             _server.Start();
 
@@ -31,10 +30,9 @@ namespace servertcp
             _server.Stop();
         }
 
-        void Server_ClientConnected(object sender, ServerClientEventArgs e)
+        private void Client_Connected(object sender, ServerClientEventArgs e)
         {
             var client = e.Client;
-            Utils.SendMessageToAllClients(_server, Utils.GetIpOfClient(client) + " connected with port " + Utils.GetPortOfClient(client));
             Console.WriteLine(Utils.GetIpOfClient(client) + " connected with port " + Utils.GetPortOfClient(client));
 
             client.MessageReceived += Client_MessageReceived;
@@ -53,13 +51,6 @@ namespace servertcp
 
             _receiver.ParseMessage(client, message.Text, message.MessageId);
             Console.WriteLine("[{0}:{1}] Message: {2}", Utils.GetIpOfClient(client), Utils.GetPortOfClient(client), message.Text);
-        }
-
-        void Server_ClientDisconnected(object sender, ServerClientEventArgs e)
-        {
-            var client = e.Client;
-            Console.WriteLine("disconnect");
-            Utils.SendMessageToAllClients(_server, Commands.Disconnect + " " + Utils.GetIpOfClient(client));
         }
     }
 }

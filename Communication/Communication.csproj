@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Communication</RootNamespace>
     <AssemblyName>Communication</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -68,18 +69,22 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client\UserClient.cs" />
-    <Compile Include="Client\ClientReceiver.cs" />
-    <Compile Include="Client\ClientSender.cs" />
+    <Compile Include="Client\Logic\ClientReceiver.cs" />
+    <Compile Include="Client\Logic\ClientReceiverEvents.cs" />
+    <Compile Include="Client\Logic\ClientSender.cs" />
+    <Compile Include="Client\Logic\ResponseActions\IResponseActions.cs" />
+    <Compile Include="Client\Logic\ResponseActions\UpdateDjResponse.cs" />
+    <Compile Include="Client\User\UserClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server\ServerClient.cs" />
-    <Compile Include="Server\ServerReceiver.cs" />
-    <Compile Include="Server\ServerSender.cs" />
+    <Compile Include="Server\Logic\ServerSender.cs" />
     <Compile Include="Server\Utils.cs" />
     <Compile Include="Shared\Commands.cs" />
-    <Compile Include="Shared\Rank.cs" />
-    <Compile Include="Shared\Room.cs" />
-    <Compile Include="Shared\Songs.cs" />
+    <Compile Include="Shared\ConnectionUtility.cs" />
+    <Compile Include="Shared\Data\Rank.cs" />
+    <Compile Include="Shared\Data\Room.cs" />
+    <Compile Include="Shared\Data\Songs.cs" />
+    <Compile Include="Shared\PeriodicTask.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Changes.txt" />
@@ -88,7 +93,6 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -10,7 +10,7 @@ namespace servertcp
     {
         static void Main(string[] args)
         {
-            var server = new Server();
+            var server = new ServerManagment.Server();
 
             server.Start();
 
