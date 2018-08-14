@@ -12,22 +12,9 @@ namespace servertcp.ServerManagment
 {
     public sealed class ServerReceiver : ServerReceiverEvents
     {
-        private class MessagesPattern
-        {
-            public const string RegisterRgx = Commands.Register + @"(.*)\$(.*)\$(.*)";
-            public const string LoginRgx = Commands.Login + @"(.*)\$(.*)";
-            public const string ChangePasswordRgx = Commands.UserAccount.ChangePassword + @"(.*)\$(.*)";
-            public const string ChangeUsernameRgx = Commands.UserAccount.ChangeUsername + @"(.*)\$(.*)";
-            public const string ChangeLoginRgx = Commands.UserAccount.ChangeLogin + @"(.*)\$(.*)";
-            public const string ChangeRankRgx = Commands.UserAccount.ChangeRank + @"(.*)\$(.*)";
-            public const string JoinRoomRgx = Commands.Client.JoinRoom + "([0-9]+)";
-            public const string CreateRoomRgx = Commands.Client.CreateRoom + @"(.*)\$(.*)\$(.*)";
-            public const string JoinQueueRgx = Commands.Client.Room.JoinQueue + @" \$(.*)";
-        }
-
         public void ParseMessage(IScsServerClient client, string message, string messageId)
         {
-            #region Disconnect
+            /*#region Disconnect
 
             if (message.Equals(Commands.Disconnect))
             {
@@ -246,7 +233,7 @@ namespace servertcp.ServerManagment
                 }
             }
 
-            #endregion
+            #endregion*/
         }
 
         #region Methods

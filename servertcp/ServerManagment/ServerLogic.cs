@@ -157,7 +157,7 @@ namespace servertcp.ServerManagment
 
             if (SqlUserCommands.Room.Create(e.Name, login, e.Image, e.Description))
             {
-                SqlUserCommands.AddActionInfo(userId, Utils.GetIpOfClient(e.Client), SqlUserCommands.Actions.CreateRoom);
+                SqlUserCommands.AddActionInfo(userId, Utils.Instance.GetIpOfClient(e.Client), SqlUserCommands.Actions.CreateRoom);
 
                 _rooms[roomCount] = new Room(_rooms.Count, e.Name, login, e.Image, e.Description);
                 _rooms[roomCount].InsideInfo = new Room.InsindeInfo(new List<UserClient>(), new List<Songs>(), _rooms[roomCount]);
@@ -216,7 +216,7 @@ namespace servertcp.ServerManagment
                         ServerSender.Success(e.Client, e.MessageId);
                         var getUserID = SqlUserCommands.GetUserId(e.Login);
 
-                        SqlUserCommands.AddActionInfo(getUserID, Utils.GetIpOfClient(e.Client),
+                        SqlUserCommands.AddActionInfo(getUserID, Utils.Instance.GetIpOfClient(e.Client),
                             SqlUserCommands.Actions.Register);
                     }
                     else
@@ -258,7 +258,7 @@ namespace servertcp.ServerManagment
 
                         _clients[client.Client.ClientId] = client;
                         ServerSender.Success(e.Client, e.MessageId, client.Username);
-                        SqlUserCommands.AddActionInfo(getUserID, Utils.GetIpOfClient(e.Client),
+                        SqlUserCommands.AddActionInfo(getUserID, Utils.Instance.GetIpOfClient(e.Client),
                             SqlUserCommands.Actions.Login);
                     }
                     else
@@ -287,7 +287,7 @@ namespace servertcp.ServerManagment
                     Sql.SqlUserCommands.DataChange.ChangeLogin(userId, e.NewLogin);
                     ServerSender.Success(e.Client, e.MessageId);
 
-                    Sql.SqlUserCommands.AddActionInfo(userId, Utils.GetIpOfClient(e.Client),
+                    Sql.SqlUserCommands.AddActionInfo(userId, Utils.Instance.GetIpOfClient(e.Client),
                         SqlUserCommands.Actions.ChangeLogin);
                 }
                 else
@@ -306,7 +306,7 @@ namespace servertcp.ServerManagment
                 Sql.SqlUserCommands.DataChange.ChangeRank(userId, e.Rank);
                 ServerSender.Success(e.Client, e.MessageId);
 
-                Sql.SqlUserCommands.AddActionInfo(userId, Utils.GetIpOfClient(e.Client),
+                Sql.SqlUserCommands.AddActionInfo(userId, Utils.Instance.GetIpOfClient(e.Client),
                     SqlUserCommands.Actions.ChangeRank);
             }
             else
@@ -400,7 +400,7 @@ namespace servertcp.ServerManagment
                 roomActive.InsideInfo.Clients.RemoveAt(index);
             }
 
-            SqlUserCommands.AddActionInfo(userId, Utils.GetIpOfClient(e.Client), SqlUserCommands.Actions.Logout);
+            SqlUserCommands.AddActionInfo(userId, Utils.Instance.GetIpOfClient(e.Client), SqlUserCommands.Actions.Logout);
 
             var client = _clients[e.Client.ClientId];
 

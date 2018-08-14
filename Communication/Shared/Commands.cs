@@ -2,70 +2,41 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Communication.Shared
 {
-    public class Commands
+    public sealed class Commands
     {
-       //TODO create dictionary with commands. Actually i have 2much refactoring to do.
-        
-        public const string Register = "reg ";
-        public const string SuccessfulRegister = "successreg";
-        public const string Login = "login ";
-        public const string SuccessfulLogin = "successlogin ";
-        public const string Disconnect = "disconnect";
+        private static readonly Lazy<Commands> lazy =
+            new Lazy<Commands>(() => new Commands());
 
-        public const string GetPeoples = "getpeoples";
+        public static Commands Instance => lazy.Value;
 
-        public class UserAccount
-        {                                                         
-            public const string ChangePassword = "chgpass ";      
-            public const string ChangeUsername = "chgusername ";  
-            public const string ChangeLogin = "chglogin ";        
-            public const string ChangeRank = "chgrank ";          
-
-            public class Errors
-            {                                                               
-                public const string ChangePasswordErr = "chgpasserr";       
-                public const string ChangeUsernameErr = "chgusernameerr";   
-                public const string ChangeLoginErr = "chgloginerr";         
-                public const string ChangeRankErr = "chgrankerr";           
-            }
-
-            public class Succesful
-            {
-                public const string SuccesfulChangePassword = "successchgpass";
-                public const string SuccesfulChangeUsername = "successchgusername";
-                public const string SuccesfulChangeLogin = "successchglogin";
-                public const string SuccesfulChangeRank = "successchgrank";
-            }
-        }
-
-        public const string Success = "success ";
-        public const string Error = "error ";
-
-        public class Errors
+        private Commands()
         {
-            public const string RegisterErr = "failreg";
-            public const string RegisterAccExistErr = "failaccexist";
-            public const string LoginErr = "faillogin";
-            public const string GetPeoplesErr = "failgetpeoples";
         }
 
-        public class Client
+        public readonly Dictionary<string, string> CommandsDictionary = new Dictionary<string, string>()
         {
-            public const string JoinRoom = "joinroom ";
-            public const string CreateRoom = "createroom ";
-            public const string AfterLogin = "afterlogin";
+            {"Success", "0xF"},
+            {"Error", "0xE"},
 
-            public class Room
-            {
-                public const string JoinQueue = "joinqueue $";
-                public const string UpdateDj = "updatedj";
-
-            }  
-        }
+            {"Register", "0x1"},
+            {"Login", "0x2"},
+            {"Disconnect", "0x4"},
+            {"GetPeoples", "0x5"},
+            {"ChangePassword", "0x6"},
+            {"ChangeUsername", "0x7"},
+            {"ChangeLogin", "0x8"},
+            {"ChangeRank", "0x9"},
+            {"JoinRoom", "0xA"},
+            {"CreateRoom", "0xB"},
+            {"AfterLogin", "0xC"},
+            {"JoinQueue", "0x10"},
+            {"UpdateDj", "0x11"},
+        };
     }
 }

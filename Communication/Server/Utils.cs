@@ -9,9 +9,19 @@ using Hik.Communication.Scs.Server;
 
 namespace Communication.Server
 {
-   public static class Utils
+   public sealed class Utils
     {
-        public static void SendMessageToAllClients(IScsServer server, string message)
+        private static readonly Lazy<Utils> lazy = 
+            new Lazy<Utils>(() => new Utils());
+
+        public static Utils Instance => lazy.Value;
+        
+        private Utils()
+        {
+            
+        }
+        
+        public void SendMessageToAllClients(IScsServer server, string message)
         {
             foreach (var clients in server.Clients.GetAllItems())
             {
@@ -20,7 +30,7 @@ namespace Communication.Server
             }
         }
 
-        public static string GetIpOfClient(IScsServerClient client)
+        public string GetIpOfClient(IScsServerClient client)
         {
             var all = client.RemoteEndPoint.ToString();
             var ipStart = all.IndexOf("//");
@@ -31,13 +41,23 @@ namespace Communication.Server
             return ip;
         }
 
-        public static int GetPortOfClient(IScsServerClient client)
+        public int GetPortOfClient(IScsServerClient client)
         {
             var all = client.RemoteEndPoint.ToString();
             var portStart = all.LastIndexOf(":");
             var port = all.Substring(portStart + 1);
 
             return Convert.ToInt32(port);
+        }
+
+        public string GetCommandFromMessage(string message)
+        {
+            return string.Empty;
+        }
+
+        public List<String> GetParametersFromMessagE(string message)
+        {
+         return new List<string>();   
         }
     }
 }
