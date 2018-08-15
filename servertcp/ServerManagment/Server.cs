@@ -1,5 +1,6 @@
 using System;
 using Communication.Server;
+using Communication.Server.Logic;
 using Communication.Shared;
 using Hik.Communication.Scs.Communication.EndPoints.Tcp;
 using Hik.Communication.Scs.Communication.Messages;

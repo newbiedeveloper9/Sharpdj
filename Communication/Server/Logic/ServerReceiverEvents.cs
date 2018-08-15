@@ -2,14 +2,13 @@
 using Communication.Shared;
 using Hik.Communication.Scs.Server;
 
-namespace servertcp.ServerManagment
+namespace Communication.Server.Logic
 {
     public class ServerReceiverEvents
     {
        #region Events
 
         public event EventHandler<DisconnectEventArgs> Disconnect;
-        public event EventHandler<LoginEventArgs> Login;
         public event EventHandler<RegisterEventArgs> Register;
         public event EventHandler<GetPeopleEventArgs> GetPeople;
         public event EventHandler<JoinRoomEventArgs> JoinRoom;
@@ -54,11 +53,7 @@ namespace servertcp.ServerManagment
             eh?.Invoke(this, e);
         }
 
-        public void OnLogin(LoginEventArgs e)
-        {
-            EventHandler<LoginEventArgs> eh = Login;
-            eh?.Invoke(this, e);
-        }
+
 
         public void OnRegister(RegisterEventArgs e)
         {
@@ -142,21 +137,7 @@ namespace servertcp.ServerManagment
             public string MessageId { get; private set; }
         }
 
-        public class LoginEventArgs : System.EventArgs
-        {
-            public LoginEventArgs(string login, string password, IScsServerClient client, string messageId)
-            {
-                this.Login = login;
-                this.Password = password;
-                this.Client = client;
-                this.MessageId = messageId;
-            }
-
-            public string Login { get; private set; }
-            public string Password { get; private set; }
-            public IScsServerClient Client { get; private set; }
-            public string MessageId { get; private set; }
-        }
+      
 
         public class DisconnectEventArgs : System.EventArgs
         {

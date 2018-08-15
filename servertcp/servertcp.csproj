@@ -76,8 +76,6 @@
     <Compile Include="Security\Scrypt.cs" />
     <Compile Include="ServerManagment\ServerLogic.cs" />
     <Compile Include="ServerManagment\Server.cs" />
-    <Compile Include="ServerManagment\ServerReceiver.cs" />
-    <Compile Include="ServerManagment\ServerReceiverEvents.cs" />
     <Compile Include="Sql\SqlHelper.cs" />
     <Compile Include="Sql\SqlUserCommands.cs" />
   </ItemGroup>

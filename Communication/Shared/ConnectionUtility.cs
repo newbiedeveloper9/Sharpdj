@@ -38,12 +38,12 @@ namespace Communication.Shared
         {
             var text = new StringBuilder();
 
-            text.Append(command);
+            text.Append($"{command} ");
             if (parameters.Length > 0)
                 text.Append(parameters[0]);
             for (int i = 1; i < parameters.Length; i++)
                 text.Append("$" + parameters[i]);
-            
+
             return text.ToString();
         }
 

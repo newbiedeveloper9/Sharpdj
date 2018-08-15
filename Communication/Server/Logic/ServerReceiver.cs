@@ -1,19 +1,32 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
-using Communication.Server;
-using Communication.Server.Logic;
-using Communication.Shared;
-using Hik.Communication.Scs.Communication.Messages;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using Communication.Server.Logic.Commands;
 using Hik.Communication.Scs.Server;
 
-namespace servertcp.ServerManagment
+namespace Communication.Server.Logic
 {
-    public sealed class ServerReceiver : ServerReceiverEvents
+    public  class ServerReceiver : ServerReceiverEvents
     {
+        readonly List<ICommand> Commands;
+
+        public ServerReceiver()
+        {
+            Commands = new List<ICommand>
+            {
+                new LoginCommand(),
+                new Register(),
+                
+            };
+        }
+
         public void ParseMessage(IScsServerClient client, string message, string messageId)
         {
+            var list = Utils.Instance.GetMessageParameters(message);
+            var command = Commands.FirstOrDefault(x=>x.CommandText.Equals(list[0]));
+            command?.Run();
+
             /*#region Disconnect
 
             if (message.Equals(Commands.Disconnect))

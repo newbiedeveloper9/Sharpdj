@@ -9,24 +9,23 @@ using Hik.Communication.Scs.Server;
 
 namespace Communication.Server
 {
-   public sealed class Utils
+    public sealed class Utils
     {
-        private static readonly Lazy<Utils> lazy = 
+        private static readonly Lazy<Utils> lazy =
             new Lazy<Utils>(() => new Utils());
 
         public static Utils Instance => lazy.Value;
-        
+
         private Utils()
         {
-            
         }
-        
+
         public void SendMessageToAllClients(IScsServer server, string message)
         {
             foreach (var clients in server.Clients.GetAllItems())
             {
-                if(clients!=null && clients.CommunicationState==CommunicationStates.Connected)
-                clients.SendMessage(new ScsTextMessage(message));
+                if (clients != null && clients.CommunicationState == CommunicationStates.Connected)
+                    clients.SendMessage(new ScsTextMessage(message));
             }
         }
 
@@ -50,14 +49,22 @@ namespace Communication.Server
             return Convert.ToInt32(port);
         }
 
-        public string GetCommandFromMessage(string message)
-        {
-            return string.Empty;
-        }
 
-        public List<String> GetParametersFromMessagE(string message)
+        /// <summary>
+        /// Returns command in index 0 and parameters in index 1+
+        /// </summary>
+        /// <param name="message">text from receiver</param>
+        /// <returns></returns>
+        public List<string> GetMessageParameters(string message)
         {
-         return new List<string>();   
+            var list = new List<string>();
+            var commandEnd = message.IndexOf(' ');
+            
+            list.Add(message.Remove(commandEnd));
+            message = message.Substring(commandEnd);
+            list.AddRange(message.Split('$'));
+            
+            return list;
         }
     }
 }
