@@ -15,26 +15,26 @@ namespace Communication.Server.Logic
             if (param.Length > 0)
             {
                 client.SendMessage(new ScsTextMessage(
-                    string.Format(Commands.Instance.CommandsDictionary["Success"] + param[0]), messageId));
+                    string.Format(Shared.Commands.Instance.CommandsDictionary["Success"] + param[0]), messageId));
             }
             else
             {
                 client.SendMessage(new ScsTextMessage(
-                    string.Format(Commands.Instance.CommandsDictionary["Success"]), messageId));
+                    string.Format(Shared.Commands.Instance.CommandsDictionary["Success"]), messageId));
             }
-        }
+        }    
 
         public static void Error(IScsServerClient client, string messageId, params string[] param)
         {
             client.SendMessage(new ScsTextMessage(
-                string.Format(Commands.Instance.CommandsDictionary["Error"]), messageId));
+                string.Format(Shared.Commands.Instance.CommandsDictionary["Error"]), messageId));
         }
 
         public static class ServerCoreMethods
         {
             public static void GetPeopleList(IScsServerClient client, IEnumerable<UserClient> clientsList)
             {
-                var message = Commands.Instance.CommandsDictionary["GetPeoples"];
+                var message = Shared.Commands.Instance.CommandsDictionary["GetPeoples"];
                 foreach (var userClient in clientsList)
                     message += $"\n{userClient.Username}${userClient.Rank}";
                 client.SendMessage(new ScsTextMessage(message));

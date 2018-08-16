@@ -76,14 +76,8 @@
     <Compile Include="Client\Logic\ResponseActions\UpdateDjResponse.cs" />
     <Compile Include="Client\User\UserClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Server\Logic\Commands\ICommand.cs" />
-    <Compile Include="Server\Logic\Commands\Login.cs" />
-    <Compile Include="Server\Logic\Commands\Register.cs" />
-    <Compile Include="Server\Logic\ServerReceiver.cs" />
-    <Compile Include="Server\Logic\ServerReceiverEvents.cs" />
     <Compile Include="Server\ServerClient.cs" />
     <Compile Include="Server\Logic\ServerSender.cs" />
-    <Compile Include="Server\Utils.cs" />
     <Compile Include="Shared\Commands.cs" />
     <Compile Include="Shared\ConnectionUtility.cs" />
     <Compile Include="Shared\Data\Rank.cs" />

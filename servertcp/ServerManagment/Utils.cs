@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Hik.Communication.Scs.Communication;
 using Hik.Communication.Scs.Communication.Messages;
 using Hik.Communication.Scs.Server;
+using servertcp;
 
 namespace Communication.Server
 {
@@ -61,10 +62,15 @@ namespace Communication.Server
             var commandEnd = message.IndexOf(' ');
             
             list.Add(message.Remove(commandEnd));
-            message = message.Substring(commandEnd);
+            message = message.Substring(commandEnd+1);
             list.AddRange(message.Split('$'));
             
             return list;
+        }
+
+        public bool IsActiveLogin(IScsServerClient client)
+        {
+             return DataSingleton.Instance.ServerClients[(int)client.ClientId] != null;
         }
     }
 }

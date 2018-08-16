@@ -9,23 +9,25 @@ namespace Communication.Server.Logic
 {
     public  class ServerReceiver : ServerReceiverEvents
     {
-        readonly List<ICommand> Commands;
-
+        private readonly List<ICommand> _commands;
+        public LoginCommand LoginComm = new LoginCommand();
+        
+        
         public ServerReceiver()
         {
-            Commands = new List<ICommand>
+            _commands = new List<ICommand>
             {
-                new LoginCommand(),
-                new Register(),
+                LoginComm,
+                new RegisterCommand(),
                 
             };
         }
 
         public void ParseMessage(IScsServerClient client, string message, string messageId)
         {
-            var list = Utils.Instance.GetMessageParameters(message);
-            var command = Commands.FirstOrDefault(x=>x.CommandText.Equals(list[0]));
-            command?.Run();
+            var parameters = Utils.Instance.GetMessageParameters(message);
+            var command = _commands.FirstOrDefault(x=>x.CommandText.Equals(parameters[0]));
+            command?.Run(client, parameters, messageId);
 
             /*#region Disconnect
 
