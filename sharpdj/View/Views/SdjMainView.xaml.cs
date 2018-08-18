@@ -10,6 +10,7 @@ namespace SharpDj.View.Views
     {
         public SdjMainView()
         {
+            
             DataContext = new SdjMainViewModel();
             InitializeComponent();
             Style = (Style)FindResource(typeof(Window));

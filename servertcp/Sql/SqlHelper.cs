@@ -31,6 +31,7 @@ namespace servertcp.Sql
         {
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
+                
                 using (SqlCommand cmd = new SqlCommand(command, conn))
                 {
                     conn.Open();

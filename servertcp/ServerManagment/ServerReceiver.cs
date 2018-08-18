@@ -4,22 +4,22 @@ using System.Linq;
 using System.Reflection;
 using Communication.Server.Logic.Commands;
 using Hik.Communication.Scs.Server;
+using servertcp.ServerManagment.Commands;
 
 namespace Communication.Server.Logic
 {
     public  class ServerReceiver : ServerReceiverEvents
     {
         private readonly List<ICommand> _commands;
-        public LoginCommand LoginComm = new LoginCommand();
         
         
         public ServerReceiver()
         {
             _commands = new List<ICommand>
             {
-                LoginComm,
+                new LoginCommand(),
                 new RegisterCommand(),
-                
+                new DisconnectCommand(),
             };
         }
 

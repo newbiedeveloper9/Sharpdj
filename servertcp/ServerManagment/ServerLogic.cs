@@ -66,9 +66,6 @@ namespace servertcp.ServerManagment
 
         private void SetEvents(ServerReceiver receiver)
         {
-            _server.ClientDisconnected += Client_Disconnected;
-            receiver.Disconnect += Receiver_Disconnect;
-            receiver.Register += Receiver_Register;
             receiver.ChangePassword += Receiver_ChangePassword;
             receiver.ChangeUsername += Receiver_ChangeUsername;
             receiver.ChangeRank += Receiver_ChangeRank;
@@ -197,35 +194,6 @@ namespace servertcp.ServerManagment
             ServerSender.ServerCoreMethods.GetPeopleList(e.Client, DataSingleton.Instance.UserClients);
         }
 
-        private void Receiver_Register(object sender, ServerReceiverEvents.RegisterEventArgs e)
-        {
-            try
-            {
-                if (!SqlUserCommands.LoginExists(e.Login))
-                {
-                    var salt = Scrypt.GenerateSalt();
-
-                    if (SqlUserCommands.CreateUser(e.Login, Scrypt.Hash(e.Password, salt), salt, e.Login))
-                    {
-                        ServerSender.Success(e.Client, e.MessageId);
-                        var getUserID = SqlUserCommands.GetUserId(e.Login);
-
-                        SqlUserCommands.AddActionInfo(getUserID, Utils.Instance.GetIpOfClient(e.Client),
-                            SqlUserCommands.Actions.Register);
-                    }
-                    else
-                        ServerSender.Error(e.Client, e.MessageId);
-                }
-                else
-                    ServerSender.Error(e.Client, e.MessageId); //TODO acc exist param
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                ServerSender.Error(e.Client, e.MessageId);
-            }
-        }
-
         private void Receiver_ChangeLogin(object sender, ServerReceiverEvents.ChangeLoginEventArgs e)
         {
             var login = DataSingleton.Instance.ServerClients[(int)e.Client.ClientId].Login;
@@ -342,6 +310,7 @@ namespace servertcp.ServerManagment
 
         private void Receiver_Disconnect(object sender, ServerReceiverEvents.DisconnectEventArgs e)
         {
+            
             var login = DataSingleton.Instance.ServerClients[(int)e.Client.ClientId].Login;
             var userId = SqlUserCommands.GetUserId(login);
 

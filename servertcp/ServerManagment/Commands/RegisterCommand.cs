@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using Communication.Server;
+using Communication.Server.Logic;
+using Communication.Server.Logic.Commands;
 using Hik.Communication.Scs.Server;
-using servertcp;
 using servertcp.Sql;
 
-namespace Communication.Server.Logic.Commands
+namespace servertcp.ServerManagment.Commands
 {
     public class RegisterCommand : ICommand
     {
-        public string CommandText { get; } = Shared.Commands.Instance.CommandsDictionary["Register"];
+        public string CommandText { get; } = Communication.Shared.Commands.Instance.CommandsDictionary["Register"];
         
         public void Run(IScsServerClient client, List<string> parameters, string messageId)
         {

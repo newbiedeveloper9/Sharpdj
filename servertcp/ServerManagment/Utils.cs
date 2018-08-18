@@ -10,6 +10,9 @@ using servertcp;
 
 namespace Communication.Server
 {
+    /// <summary>
+    /// Utils class is singleton.
+    /// </summary>
     public sealed class Utils
     {
         private static readonly Lazy<Utils> lazy =
@@ -68,6 +71,12 @@ namespace Communication.Server
             return list;
         }
 
+        
+        /// <summary>
+        /// Returns true if given client is already signed in.
+        /// </summary>
+        /// <param name="client"></param>
+        /// <returns></returns>
         public bool IsActiveLogin(IScsServerClient client)
         {
              return DataSingleton.Instance.ServerClients[(int)client.ClientId] != null;

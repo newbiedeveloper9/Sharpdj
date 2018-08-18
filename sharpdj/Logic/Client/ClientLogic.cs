@@ -21,8 +21,6 @@ namespace SharpDj.Logic.Client
 {
     public class ClientLogic : BaseViewModel
     {
-       
-
         public ClientLogic(SdjMainViewModel main)
         {
             SdjMainViewModel = main;

@@ -1,4 +1,6 @@
 using System;
+using System.Diagnostics;
+using Communication;
 using Communication.Server;
 using Communication.Server.Logic;
 using Communication.Shared;
@@ -10,14 +12,15 @@ namespace servertcp.ServerManagment
 {
     public class Server
     {
-        private const int Port = 1433;
+        private ServerConfig _config;
         private IScsServer _server;
         private ServerReceiver _receiver;
 
         public void Start()
         {
+            _config = ServerConfig.LoadConfig();            
             _receiver = new ServerReceiver();
-            _server = ScsServerFactory.CreateServer(new ScsTcpEndPoint("192.168.0.103",Port));
+            _server = ScsServerFactory.CreateServer(new ScsTcpEndPoint(_config.Ip, _config.Port));
 
             new ServerLogic(_receiver, _server);
             

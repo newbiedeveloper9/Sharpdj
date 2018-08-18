@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 using SharpDj.Core;
 using SharpDj.Enums;
 using SharpDj.Enums.Playlist;
+using SharpDj.Logic.Helpers;
 using SharpDj.Models.Helpers;
 using SharpDj.Models.Helpers.Updater;
 using SharpDj.ViewModel.Model;
@@ -28,7 +29,7 @@ namespace SharpDj.ViewModel
         public SdjPlaylistViewModel(SdjMainViewModel main)
         {
             SdjMainViewModel = main;
-            var src = File.ReadAllText(@"config\playlist.json");
+            var src = File.ReadAllText(FilesPath.Instance.PlaylistConfig);
             PlaylistCollection = JsonConvert.DeserializeObject<ObservableCollection<PlaylistModel>>(src);
             PlaylistCollectionSavedState = JsonConvert.DeserializeObject<ObservableCollection<PlaylistModel>>(src);
 

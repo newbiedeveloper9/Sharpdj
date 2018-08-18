@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using Communication.Server;
+using Communication.Server.Logic;
+using Communication.Server.Logic.Commands;
 using Communication.Shared;
 using Hik.Communication.Scs.Server;
-using servertcp;
 using servertcp.Sql;
 
-namespace Communication.Server.Logic.Commands
+namespace servertcp.ServerManagment.Commands
 {
     public class LoginCommand : ICommand
     {
-        public string CommandText { get; } = Shared.Commands.Instance.CommandsDictionary["Login"]; 
+        public string CommandText { get; } = Communication.Shared.Commands.Instance.CommandsDictionary["Login"]; 
 
         public void Run(IScsServerClient client, List<string> parameters, string messageId)
         {
@@ -35,8 +37,8 @@ namespace Communication.Server.Logic.Commands
                             Login = login
                         };
 
-                       if (Utils.Instance.IsActiveLogin(client))
-                           //Receiver_Disconnect(null, new ServerReceiverEvents.DisconnectEventArgs(e.Client));
+                       // if (Utils.Instance.IsActiveLogin(client))
+                           //Receiver_Disconnect(null, new ServerReceiverEvents.DisconnectEventArgs(e.Client)); ///TODO
         
                         DataSingleton.Instance.ServerClients[(int)tmpClient.Client.ClientId] = tmpClient;
                         ServerSender.Success(client, messageId, tmpClient.Username);

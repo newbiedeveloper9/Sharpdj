@@ -32,8 +32,8 @@ namespace Communication.Client.Logic
             _clientUtility.SendMessage(
                 Commands.Instance.CommandsDictionary["GetPeoples"]);
         
-        public void Disconnect() =>
-            _clientUtility.SendMessage(
+        public string Disconnect() =>
+            _clientUtility.SendMessageAndWaitForResponse(
                 Commands.Instance.CommandsDictionary["Disconnect"]);
         
         #region UserAccount

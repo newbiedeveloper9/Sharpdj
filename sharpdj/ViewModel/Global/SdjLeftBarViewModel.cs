@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Communication.Shared;
 using SharpDj.Core;
 using SharpDj.Enums;
 using SharpDj.Enums.Menu;
+using SharpDj.Models.Helpers;
 using SharpDj.ViewModel.Helpers;
 
 namespace SharpDj.ViewModel
@@ -320,8 +322,16 @@ namespace SharpDj.ViewModel
 
         public void LeftBarOnLogoutCommandExecute()
         {
-            SdjMainViewModel.Client.Sender.Disconnect();
-            SdjMainViewModel.MainViewVisibility = MainView.Login;
+            var resp = SdjMainViewModel.Client.Sender.Disconnect();
+            if (resp.Equals(Commands.Instance.CommandsDictionary["Error"]))
+            {
+                Debug.Log("Disconnect", "Error");
+            }
+            else
+            {
+                SdjMainViewModel.MainViewVisibility = MainView.Login;
+                Debug.Log("Disconnect", "Success");
+            }
         }
         #endregion
         
