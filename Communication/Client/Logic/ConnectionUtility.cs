@@ -4,7 +4,7 @@ using Hik.Communication.Scs.Communication;
 using Hik.Communication.Scs.Communication.Messages;
 using Hik.Communication.Scs.Communication.Messengers;
 
-namespace Communication.Shared
+namespace Communication.Client.Logic
 {
     public class ConnectionUtility
     {

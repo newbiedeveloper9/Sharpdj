@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
+using Communication.Server;
+using Communication.Server.Logic;
 using Communication.Server.Logic.Commands;
 using Hik.Communication.Scs.Server;
 using servertcp.ServerManagment.Commands;
 
-namespace Communication.Server.Logic
+namespace servertcp.ServerManagment
 {
-    public  class ServerReceiver : ServerReceiverEvents
+    public class ServerReceiver : ServerReceiverEvents
     {
         private readonly List<ICommand> _commands;
-        
-        
+
         public ServerReceiver()
         {
             _commands = new List<ICommand>
@@ -26,7 +25,7 @@ namespace Communication.Server.Logic
         public void ParseMessage(IScsServerClient client, string message, string messageId)
         {
             var parameters = Utils.Instance.GetMessageParameters(message);
-            var command = _commands.FirstOrDefault(x=>x.CommandText.Equals(parameters[0]));
+            var command = _commands.FirstOrDefault(x => x.CommandText.Equals(parameters[0]));
             command?.Run(client, parameters, messageId);
 
             /*#region Disconnect

@@ -132,14 +132,14 @@ namespace servertcp.ServerManagment
         {
             if (!Utils.Instance.IsActiveLogin(e.Client)) return;
 
-            ServerSender.ServerCoreMethods.GetRooms(e.Client, DataSingleton.Instance.Rooms.GetAllItems(), e.MessageId);
+//            ServerSender.ServerCoreMethods.GetRooms(e.Client, DataSingleton.Instance.Rooms.GetAllItems(), e.MessageId);
         }
 
         private void Receiver_CreateRoom(object sender, ServerReceiverEvents.CreateRoomEventArgs e)
         {
             if (!Utils.Instance.IsActiveLogin(e.Client))
             {
-                ServerSender.Error(e.Client, e.MessageId);
+          //      ServerSender.Error(e.Client, e.MessageId);
                 return;
             }
 
@@ -153,17 +153,17 @@ namespace servertcp.ServerManagment
                 DataSingleton.Instance.Rooms[roomCount] = new Room(DataSingleton.Instance.ServerClients.Count, e.Name, login, e.Image, e.Description);
                 DataSingleton.Instance.Rooms[roomCount].InsideInfo = new Room.InsindeInfo(new List<UserClient>(), new List<Songs>(), DataSingleton.Instance.Rooms[roomCount]);
                 roomCount++;
-                ServerSender.Success(e.Client, e.MessageId);
+         //       ServerSender.Success(e.Client, e.MessageId);
             }
-            else
-                ServerSender.Error(e.Client, e.MessageId);
+           // else
+         //       ServerSender.Error(e.Client, e.MessageId);
         }
 
         private void Receiver_JoinRoom(object sender, ServerReceiverEvents.JoinRoomEventArgs e)
         {
             if (!Utils.Instance.IsActiveLogin(e.Client))
             {
-                ServerSender.Error(e.Client, e.MessageId);
+          //      ServerSender.Error(e.Client, e.MessageId);
             };
 
             //select client class object wchich refer to user
@@ -184,14 +184,14 @@ namespace servertcp.ServerManagment
             room?.InsideInfo.Clients.Add(userclient);
 
             //send info about room
-            ServerSender.ServerCoreMethods.JoinRoom(e.Client, room?.InsideInfo, e.MessageId);
+       //     ServerSender.ServerCoreMethods.JoinRoom(e.Client, room?.InsideInfo, e.MessageId);
         }
 
         private void Receiver_GetPeople(object sender, ServerReceiverEvents.GetPeopleEventArgs e)
         {
             if (!Utils.Instance.IsActiveLogin(e.Client)) return;
 
-            ServerSender.ServerCoreMethods.GetPeopleList(e.Client, DataSingleton.Instance.UserClients);
+        //    ServerSender.ServerCoreMethods.GetPeopleList(e.Client, DataSingleton.Instance.UserClients);
         }
 
         private void Receiver_ChangeLogin(object sender, ServerReceiverEvents.ChangeLoginEventArgs e)
@@ -205,13 +205,13 @@ namespace servertcp.ServerManagment
                 if (Sql.SqlUserCommands.CheckPassword(pass, login))
                 {
                     Sql.SqlUserCommands.DataChange.ChangeLogin(userId, e.NewLogin);
-                    ServerSender.Success(e.Client, e.MessageId);
+             //       ServerSender.Success(e.Client, e.MessageId);
 
                     Sql.SqlUserCommands.AddActionInfo(userId, Utils.Instance.GetIpOfClient(e.Client),
                         SqlUserCommands.Actions.ChangeLogin);
                 }
-                else
-                    ServerSender.Error(e.Client, e.MessageId);
+             //   else
+             //       ServerSender.Error(e.Client, e.MessageId);
             }
         }
 
@@ -224,13 +224,13 @@ namespace servertcp.ServerManagment
             if (Sql.SqlUserCommands.CheckPassword(pass, login))
             {
                 Sql.SqlUserCommands.DataChange.ChangeRank(userId, e.Rank);
-                ServerSender.Success(e.Client, e.MessageId);
+             //   ServerSender.Success(e.Client, e.MessageId);
 
                 Sql.SqlUserCommands.AddActionInfo(userId, Utils.Instance.GetIpOfClient(e.Client),
                     SqlUserCommands.Actions.ChangeRank);
             }
-            else
-                ServerSender.Error(e.Client, e.MessageId);
+          //  else
+             //   ServerSender.Error(e.Client, e.MessageId);
         }
 
         private void Receiver_ChangeUsername(object sender, ServerReceiverEvents.ChangeUsernameEventArgs e)

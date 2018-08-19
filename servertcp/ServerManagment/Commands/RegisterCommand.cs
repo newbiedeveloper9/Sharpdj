@@ -14,6 +14,8 @@ namespace servertcp.ServerManagment.Commands
         
         public void Run(IScsServerClient client, List<string> parameters, string messageId)
         {
+            var sender = new ServerSender(client);
+            
             var login = parameters[1];
             var password = parameters[2];
             var email = parameters[3];       
@@ -26,22 +28,22 @@ namespace servertcp.ServerManagment.Commands
 
                     if (SqlUserCommands.CreateUser(login, Scrypt.Hash(password, salt), salt, login))
                     {
-                        ServerSender.Success(client, messageId);
+                        sender.Success(messageId);
                         var getUserID = SqlUserCommands.GetUserId(login);
 
                         SqlUserCommands.AddActionInfo(getUserID, Utils.Instance.GetIpOfClient(client),
                             SqlUserCommands.Actions.Register);
                     }
                     else
-                        ServerSender.Error(client, messageId);
+                        sender.Error(messageId);
                 }
                 else
-                    ServerSender.Error(client, messageId); //TODO acc exist param
+                    sender.Error(messageId); //TODO acc exist param
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                ServerSender.Error(client, messageId);
+                sender.Error(messageId);
             }
         }
     }

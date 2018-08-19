@@ -12,9 +12,11 @@ namespace servertcp.ServerManagment.Commands
     public class LoginCommand : ICommand
     {
         public string CommandText { get; } = Communication.Shared.Commands.Instance.CommandsDictionary["Login"]; 
-
+        
         public void Run(IScsServerClient client, List<string> parameters, string messageId)
         {
+            var sender = new ServerSender(client);
+            
             var login = parameters[1];
             var password = parameters[2];
             
@@ -41,20 +43,20 @@ namespace servertcp.ServerManagment.Commands
                            //Receiver_Disconnect(null, new ServerReceiverEvents.DisconnectEventArgs(e.Client)); ///TODO
         
                         DataSingleton.Instance.ServerClients[(int)tmpClient.Client.ClientId] = tmpClient;
-                        ServerSender.Success(client, messageId, tmpClient.Username);
+                        sender.Success(messageId, tmpClient.Username);
                         SqlUserCommands.AddActionInfo(getUserID, Utils.Instance.GetIpOfClient(client),
                         SqlUserCommands.Actions.Login);
                     }
                     else
-                        ServerSender.Error(client, messageId);
+                        sender.Error(messageId);
                 }
                 else
-                    ServerSender.Error(client, messageId);
+                    sender.Error(messageId);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                ServerSender.Error(client, messageId);
+                sender.Error(messageId);
             }
         }
     }

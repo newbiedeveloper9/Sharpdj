@@ -15,6 +15,8 @@ namespace servertcp.ServerManagment.Commands
 
         public void Run(IScsServerClient client, List<string> parameters, string messageId)
         {
+            var sender = new ServerSender(client);
+            
             try
             {
                 var login = DataSingleton.Instance.ServerClients[(int) client.ClientId].Login;
@@ -32,13 +34,13 @@ namespace servertcp.ServerManagment.Commands
                 DataSingleton.Instance.ServerClients.Remove(client.ClientId);
                 SqlUserCommands.AddActionInfo(userId, Utils.Instance.GetIpOfClient(client),
                     SqlUserCommands.Actions.Logout);
-                ServerSender.Success(client, messageId);
+                sender.Success(messageId);
                 Console.WriteLine("{0} disconnected", client.ClientId);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                ServerSender.Error(client, messageId);
+                sender.Error(messageId);
             }
         }
     }
