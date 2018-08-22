@@ -21,7 +21,7 @@ namespace SharpDj.Logic.Client
         public ClientLogic(SdjMainViewModel main)
         {
             SdjMainViewModel = main;
-            Communication.Client.Logic.ResponseActions.UpdateDjResponse.UpdateDj += UpdateDjResponseOnUpdateDj;
+            UpdateDjResponse.UpdateDj += UpdateDjResponseOnUpdateDj;
             
             Task.Factory.StartNew(() =>
             {
@@ -77,22 +77,6 @@ namespace SharpDj.Logic.Client
             roomstmp = new ObservableCollection<RoomSquareModel>
                 (roomstmp.OrderByDescending(i=>i.PeopleInRoom));
             SdjMainViewModel.RoomCollection = roomstmp;
-        }
-
-        private void Receiver_RegisterAccExistErr(object sender, EventArgs e)
-        {
-            SdjMainViewModel.SdjRegisterViewModel.ErrorNotify = ErrorMessages.RegisterAccountExistsMessage;
-        }
-
-        private void Receiver_RegisterErr(object sender, EventArgs e)
-        {
-            SdjMainViewModel.SdjRegisterViewModel.ErrorNotify = ErrorMessages.RegisterErrorMessage;
-        }
-
-        private void Receiver_SuccesfulRegister(object sender, EventArgs e)
-        {
-            SdjMainViewModel.MainViewVisibility = MainView.Login;
-            Debug.Log("Register", "Succesful register");
         }
 
         private SdjMainViewModel _sdjMainViewModel;

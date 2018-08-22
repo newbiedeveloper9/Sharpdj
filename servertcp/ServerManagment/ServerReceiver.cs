@@ -19,6 +19,8 @@ namespace servertcp.ServerManagment
                 new LoginCommand(),
                 new RegisterCommand(),
                 new DisconnectCommand(),
+                new AfterLoginData(),
+                new JoinRoom(),
             };
         }
 
@@ -26,6 +28,7 @@ namespace servertcp.ServerManagment
         {
             var parameters = Utils.Instance.GetMessageParameters(message);
             var command = _commands.FirstOrDefault(x => x.CommandText.Equals(parameters[0]));
+   
             command?.Run(client, parameters, messageId);
 
             /*#region Disconnect

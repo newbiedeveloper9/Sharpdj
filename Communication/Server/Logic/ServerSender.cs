@@ -40,13 +40,13 @@ namespace Communication.Server.Logic
         public void JoinRoom(Room.InsindeInfo room, string messId)
         {
             string output = JsonConvert.SerializeObject(room);
-            _senderUtility.SendMessage(output, messId);
+            _senderUtility.ReplyToMessage(output, messId);
         }
 
         public void GetRooms(List<Room> room, string messId)
         {
             string output = JsonConvert.SerializeObject(room);
-            _senderUtility.SendMessage(output, messId);
+            _senderUtility.ReplyToMessage(output, messId);
         }
     }
 }
