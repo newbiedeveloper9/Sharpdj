@@ -108,8 +108,9 @@
     <Compile Include="Logic\Client\ClientInfo.cs" />
     <Compile Include="Logic\Client\ClientLogic.cs" />
     <Compile Include="Logic\Client\ErrorMessages.cs" />
+    <Compile Include="Logic\Helpers\ClientConfig.cs" />
     <Compile Include="Logic\Helpers\Clone.cs" />
-    <Compile Include="Logic\Helpers\Debug.cs" />
+    <Compile Include="Logic\Helpers\FilesPath.cs" />
     <Compile Include="Logic\Helpers\Imgur.cs" />
     <Compile Include="Logic\Helpers\Updater\FTPChecker.cs" />
     <Compile Include="Logic\Helpers\Updater\GetSourcePage.cs" />

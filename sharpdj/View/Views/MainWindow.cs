@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Newtonsoft.Json;
 using SharpDj.Models.Helpers.Updater;
-using Debug = SharpDj.Models.Helpers.Debug;
+using Debug = Communication.Shared.Debug;
 
 namespace SharpDj.View.Views
 {
@@ -16,14 +16,12 @@ namespace SharpDj.View.Views
     /// </summary>
     public partial class MainWindow
     {
-        private readonly Debug _debug;
         private bool _canShow;
         private bool _updated;
 
 
         public MainWindow()
         {
-            _debug = new Debug("Updater");
             Topmost = true;
             InitializeComponent();
             MediaElement.MediaEnded += MediaElement_MediaEnded;
@@ -67,44 +65,46 @@ namespace SharpDj.View.Views
 
         private async Task InitAsync()
         {
-            _debug.Log("Local json");
+            var debug = new Debug("Updater");
+
+            debug.Log("Local json");
             if (!File.Exists("config.json"))
             {
-                _debug.Log("config.json doesn't exists");
+                debug.Log("config.json doesn't exists");
                 var defaultConfig = @"{
                           ""Version"": ""1.0.0"",
                           ""UpdateToken"": ""0"",
                           ""UpdateUrl"": ""http://sharpdj.cba.pl/updater.txt""
                         }";
                 File.WriteAllText("config.json", defaultConfig);
-                _debug.Log("Created new config.json");
+                debug.Log("Created new config.json");
             }
 
             var localJson = File.ReadAllText("config.json");
             var local = JsonConvert.DeserializeObject<FTPChecker>(localJson);
 
-            _debug.Log("Ftp Json");
+            debug.Log("Ftp Json");
             var ftpJson = GetSourcePage.GetSource(local.UpdateUrl);
             var ftp = JsonConvert.DeserializeObject<FTPChecker>(ftpJson);
 
             if (Directory.Exists("tmp"))
                 Directory.Delete("tmp", true);
 
-            _debug.Log("Check Update Token");
+            debug.Log("Check Update Token");
             if (ftp.UpdateToken != local.UpdateToken)
             {
-                _debug.Log("localToken: " + local.UpdateToken);
-                _debug.Log("ftpToken: " + ftp.UpdateToken);
-                _debug.Log("Updating");
+                debug.Log("localToken: " + local.UpdateToken);
+                debug.Log("ftpToken: " + ftp.UpdateToken);
+                debug.Log("Updating");
                 Directory.CreateDirectory("tmp");
-                _debug.Log("Download");
+                debug.Log("Download");
                 await DownloadAsync(ftp.ZipToUpdate, "tmp/update.zip");
                 ZipFile.ExtractToDirectory("tmp/update.zip", "tmp/");
-                _debug.Log("Extract");
+                debug.Log("Extract");
                 File.Delete("tmp/update.zip");
 
                 Directory.CreateDirectory("backup/backup " + local.Version);
-                _debug.Log("Replace");
+                debug.Log("Replace");
                 foreach (var file in Directory.GetFiles("tmp/"))
                 {
                     var fileName = Path.GetFileName(file);
@@ -116,7 +116,7 @@ namespace SharpDj.View.Views
                 }
 
                 Directory.Delete("tmp", true);
-                _debug.Log("Restarting");
+                debug.Log("Restarting");
 
                 await Dispatcher.BeginInvoke((Action) delegate
                 {
@@ -126,12 +126,12 @@ namespace SharpDj.View.Views
                 });
             }
 
-            _debug.Log("Closing updater");
+            debug.Log("Closing updater");
             await Dispatcher.BeginInvoke((Action) delegate { Updated = true; });
         }
 
 
-        public async Task DownloadAsync(string url, string path)
+        private async Task DownloadAsync(string url, string path)
         {
             var wc = new WebClient();
             var download = wc.DownloadFileTaskAsync(url, path);

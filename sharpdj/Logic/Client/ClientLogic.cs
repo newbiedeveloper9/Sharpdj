@@ -4,15 +4,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Communication.Client;
-using Communication.Client.Logic;
 using Communication.Client.Logic.ResponseActions;
 using Communication.Shared;
 using Newtonsoft.Json;
 using SharpDj.Core;
 using SharpDj.Enums.Menu;
 using SharpDj.Enums.User;
-using SharpDj.Models.Helpers;
 using SharpDj.ViewModel;
 using SharpDj.ViewModel.Model;
 using YoutubeExplode;
@@ -21,12 +18,10 @@ namespace SharpDj.Logic.Client
 {
     public class ClientLogic : BaseViewModel
     {
-       
-
         public ClientLogic(SdjMainViewModel main)
         {
             SdjMainViewModel = main;
-            Communication.Client.Logic.ResponseActions.UpdateDjResponse.UpdateDj += UpdateDjResponseOnUpdateDj;
+            UpdateDjResponse.UpdateDj += UpdateDjResponseOnUpdateDj;
             
             Task.Factory.StartNew(() =>
             {
@@ -82,22 +77,6 @@ namespace SharpDj.Logic.Client
             roomstmp = new ObservableCollection<RoomSquareModel>
                 (roomstmp.OrderByDescending(i=>i.PeopleInRoom));
             SdjMainViewModel.RoomCollection = roomstmp;
-        }
-
-        private void Receiver_RegisterAccExistErr(object sender, EventArgs e)
-        {
-            SdjMainViewModel.SdjRegisterViewModel.ErrorNotify = ErrorMessages.RegisterAccountExistsMessage;
-        }
-
-        private void Receiver_RegisterErr(object sender, EventArgs e)
-        {
-            SdjMainViewModel.SdjRegisterViewModel.ErrorNotify = ErrorMessages.RegisterErrorMessage;
-        }
-
-        private void Receiver_SuccesfulRegister(object sender, EventArgs e)
-        {
-            SdjMainViewModel.MainViewVisibility = MainView.Login;
-            Debug.Log("Register", "Succesful register");
         }
 
         private SdjMainViewModel _sdjMainViewModel;

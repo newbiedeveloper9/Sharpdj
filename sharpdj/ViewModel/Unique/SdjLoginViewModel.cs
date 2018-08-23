@@ -153,13 +153,14 @@ namespace SharpDj.ViewModel.Unique
             if (string.IsNullOrEmpty(resp))
                 return;
 
-            if (resp.Equals(Commands.Error))
+            if (resp.Equals(Commands.Instance.CommandsDictionary["Error"]))
             {
                 ErrorNotify = "Login error";
             }
             else
             {
-                var rgx = new Regex(Commands.Success + "(.*)");
+                //TODO fix this, refactor plxxxxx.
+                var rgx = new Regex(Commands.Instance.CommandsDictionary["Success"] + "(.*)");
                 var match = rgx.Match(resp);
                 if (match.Success)
                 {

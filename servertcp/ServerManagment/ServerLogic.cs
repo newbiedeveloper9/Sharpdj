@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Communication.Client;
 using Communication.Server;
 using Communication.Server.Logic;
+using Communication.Server.Logic.Commands;
 using Communication.Shared;
 using CryptSharp.Utility;
 using Hik.Collections;
@@ -23,17 +24,11 @@ namespace servertcp.ServerManagment
     class ServerLogic
     {
         private readonly IScsServer _server;
-        private readonly ThreadSafeSortedList<long, ServerClient> _clients;
-        private readonly ThreadSafeSortedList<long, Room> _rooms;
-        private int roomCount = 0;
 
-        public List<ServerClient> ServerClients => (from client in _clients.GetAllItems() select client).ToList();
-        public List<UserClient> UserClients => (from client in _clients.GetAllItems() select client.ToUserClient()).ToList();
+        private int roomCount = 0;
 
         public ServerLogic(ServerReceiver receiver, IScsServer server)
         {
-            _clients = new ThreadSafeSortedList<long, ServerClient>();
-            _rooms = new ThreadSafeSortedList<long, Room>();
             _server = server;
 
             using (var reader = SqlHelper.ExecuteDataReader("SELECT * FROM Room"))
@@ -44,37 +39,33 @@ namespace servertcp.ServerManagment
                     var host = reader["Host"].ToString();
                     var image = reader["ImageUrl"].ToString();
                     var description = reader["Description"].ToString();
-                    _rooms[roomCount] = new Room(id, name, host, image, description);
-                    _rooms[roomCount].InsideInfo = new Room.InsindeInfo(new List<UserClient>(), new List<Songs>(), _rooms[roomCount]);
+                    DataSingleton.Instance.Rooms[roomCount] = new Room(id, name, host, image, description);
+                    DataSingleton.Instance.Rooms[roomCount].InsideInfo = new Room.InsindeInfo(new List<UserClient>(), new List<Songs>(), DataSingleton.Instance.Rooms[roomCount]);
                     roomCount++;
                 }
 
-            _rooms[0].InsideInfo.Djs.Add(new Songs("host", new List<Songs.Song>()));
-            _rooms[0].InsideInfo.Djs.Add(new Songs("test", new List<Songs.Song>()));
+            DataSingleton.Instance.Rooms[0].InsideInfo.Djs.Add(new Songs("host", new List<Songs.Song>()));
+            DataSingleton.Instance.Rooms[0].InsideInfo.Djs.Add(new Songs("test", new List<Songs.Song>()));
 
-            _rooms[1].InsideInfo.Djs.Add(new Songs("host", new List<Songs.Song>()));
-            _rooms[1].InsideInfo.Djs.Add(new Songs("test", new List<Songs.Song>()));
-            _rooms[1].InsideInfo.Djs[0].Video.Add(new Songs.Song(10, "mj-v6zCnEaw"));
-            _rooms[1].InsideInfo.Djs[0].Video.Add(new Songs.Song(5, "JSQsIMgj1OM"));
-            _rooms[1].InsideInfo.Djs[1].Video.Add(new Songs.Song(5, "JSQsIMgj1OM"));
+            DataSingleton.Instance.Rooms[1].InsideInfo.Djs.Add(new Songs("host", new List<Songs.Song>()));
+            DataSingleton.Instance.Rooms[1].InsideInfo.Djs.Add(new Songs("test", new List<Songs.Song>()));
+            DataSingleton.Instance.Rooms[1].InsideInfo.Djs[0].Video.Add(new Songs.Song(10, "mj-v6zCnEaw"));
+            DataSingleton.Instance.Rooms[1].InsideInfo.Djs[0].Video.Add(new Songs.Song(5, "JSQsIMgj1OM"));
+            DataSingleton.Instance.Rooms[1].InsideInfo.Djs[1].Video.Add(new Songs.Song(5, "JSQsIMgj1OM"));
 
 
-            _rooms[0].InsideInfo.Djs[0].Video.Add(new Songs.Song(10, "mj-v6zCnEaw"));
-            _rooms[0].InsideInfo.Djs[0].Video.Add(new Songs.Song(5, "JSQsIMgj1OM"));
-            _rooms[0].InsideInfo.Djs[1].Video.Add(new Songs.Song(3, "mj-v6zCnEaw"));
-            _rooms[0].InsideInfo.Djs[1].Video.Add(new Songs.Song(2, "JSQsIMgj1OM"));
-            _rooms[0].InsideInfo.Djs[1].Video.Add(new Songs.Song(3, "JSQsIMgj1OM"));
-            _rooms[0].InsideInfo.TimeLeft = _rooms[0].InsideInfo.Djs[0].Video[0].Time;
+            DataSingleton.Instance.Rooms[0].InsideInfo.Djs[0].Video.Add(new Songs.Song(10, "mj-v6zCnEaw"));
+            DataSingleton.Instance.Rooms[0].InsideInfo.Djs[0].Video.Add(new Songs.Song(5, "JSQsIMgj1OM"));
+            DataSingleton.Instance.Rooms[0].InsideInfo.Djs[1].Video.Add(new Songs.Song(3, "mj-v6zCnEaw"));
+            DataSingleton.Instance.Rooms[0].InsideInfo.Djs[1].Video.Add(new Songs.Song(2, "JSQsIMgj1OM"));
+            DataSingleton.Instance.Rooms[0].InsideInfo.Djs[1].Video.Add(new Songs.Song(3, "JSQsIMgj1OM"));
+            DataSingleton.Instance.Rooms[0].InsideInfo.TimeLeft = DataSingleton.Instance.Rooms[0].InsideInfo.Djs[0].Video[0].Time;
 
             SetEvents(receiver);
         }
 
-        private void SetEvents(ServerReceiverEvents receiver)
+        private void SetEvents(ServerReceiver receiver)
         {
-            _server.ClientDisconnected += Client_Disconnected;
-            receiver.Disconnect += Receiver_Disconnect;
-            receiver.Register += Receiver_Register;
-            receiver.Login += Receiver_Login;
             receiver.ChangePassword += Receiver_ChangePassword;
             receiver.ChangeUsername += Receiver_ChangeUsername;
             receiver.ChangeRank += Receiver_ChangeRank;
@@ -90,7 +81,7 @@ namespace servertcp.ServerManagment
 
         private void TrackRefresh()
         {
-            foreach (var room in _rooms.GetAllItems())
+            foreach (var room in DataSingleton.Instance.Rooms.GetAllItems())
             {
                 if (room.InsideInfo.Djs.Count == 0) continue;
                 room.InsideInfo.TimeLeft--;
@@ -113,14 +104,14 @@ namespace servertcp.ServerManagment
         {
             Task.Factory.StartNew(() =>
             {
-                if (!IsActiveLogin(e.Client)) return;
+                if (!Utils.Instance.IsActiveLogin(e.Client)) return;
 
                 var source = JsonConvert.DeserializeObject<Songs>(e.Json);
 
-                var userclient = _clients[e.Client.ClientId].ToUserClient();
+                var userclient = DataSingleton.Instance.ServerClients[(int)e.Client.ClientId].ToUserClient();
                 source.Host = userclient.Username;
 
-                var tmp = _rooms.GetAllItems()
+                var tmp = DataSingleton.Instance.Rooms.GetAllItems()
                     .FirstOrDefault(x => x.InsideInfo.Clients.Exists(y => y.Id == userclient.Id));
                 if (tmp == null) return;
                 
@@ -130,7 +121,7 @@ namespace servertcp.ServerManagment
                 {
                     foreach (var client in tmp.InsideInfo?.Clients)
                     {
-                        ServerClients.FirstOrDefault(x => x.Id == client.Id)?.Client
+                        DataSingleton.Instance.ServerClients.GetAllItems().FirstOrDefault(x => x.Id == client.Id)?.Client
                             .SendMessage(new ScsTextMessage("updatedj$" + json));
                     }
                 }
@@ -139,50 +130,50 @@ namespace servertcp.ServerManagment
 
         private void Receiver_AfterLogin(object sender, ServerReceiverEvents.AfterLoginEventArgs e)
         {
-            if (!IsActiveLogin(e.Client)) return;
+            if (!Utils.Instance.IsActiveLogin(e.Client)) return;
 
-            ServerSender.ServerCoreMethods.GetRooms(e.Client, _rooms.GetAllItems(), e.MessageId);
+//            ServerSender.ServerCoreMethods.GetRooms(e.Client, DataSingleton.Instance.Rooms.GetAllItems(), e.MessageId);
         }
 
         private void Receiver_CreateRoom(object sender, ServerReceiverEvents.CreateRoomEventArgs e)
         {
-            if (!IsActiveLogin(e.Client))
+            if (!Utils.Instance.IsActiveLogin(e.Client))
             {
-                ServerSender.Error(e.Client, e.MessageId);
+          //      ServerSender.Error(e.Client, e.MessageId);
                 return;
             }
 
-            var login = _clients[e.Client.ClientId].Login;
+            var login = DataSingleton.Instance.ServerClients[(int)e.Client.ClientId].Login;
             var userId = SqlUserCommands.GetUserId(login);
 
             if (SqlUserCommands.Room.Create(e.Name, login, e.Image, e.Description))
             {
-                SqlUserCommands.AddActionInfo(userId, Utils.GetIpOfClient(e.Client), SqlUserCommands.Actions.CreateRoom);
+                SqlUserCommands.AddActionInfo(userId, Utils.Instance.GetIpOfClient(e.Client), SqlUserCommands.Actions.CreateRoom);
 
-                _rooms[roomCount] = new Room(_rooms.Count, e.Name, login, e.Image, e.Description);
-                _rooms[roomCount].InsideInfo = new Room.InsindeInfo(new List<UserClient>(), new List<Songs>(), _rooms[roomCount]);
+                DataSingleton.Instance.Rooms[roomCount] = new Room(DataSingleton.Instance.ServerClients.Count, e.Name, login, e.Image, e.Description);
+                DataSingleton.Instance.Rooms[roomCount].InsideInfo = new Room.InsindeInfo(new List<UserClient>(), new List<Songs>(), DataSingleton.Instance.Rooms[roomCount]);
                 roomCount++;
-                ServerSender.Success(e.Client, e.MessageId);
+         //       ServerSender.Success(e.Client, e.MessageId);
             }
-            else
-                ServerSender.Error(e.Client, e.MessageId);
+           // else
+         //       ServerSender.Error(e.Client, e.MessageId);
         }
 
         private void Receiver_JoinRoom(object sender, ServerReceiverEvents.JoinRoomEventArgs e)
         {
-            if (!IsActiveLogin(e.Client))
+            if (!Utils.Instance.IsActiveLogin(e.Client))
             {
-                ServerSender.Error(e.Client, e.MessageId);
+          //      ServerSender.Error(e.Client, e.MessageId);
             };
 
             //select client class object wchich refer to user
-            var userclient = _clients[e.Client.ClientId].ToUserClient();
+            var userclient = DataSingleton.Instance.ServerClients[(int)e.Client.ClientId].ToUserClient();
 
             //select room to join
-            var room = _rooms.GetAllItems().FirstOrDefault(x => x.Id == e.RoomId);
+            var room = DataSingleton.Instance.Rooms.GetAllItems().FirstOrDefault(x => x.Id == e.RoomId);
 
             //Set user to max 1 room, remove from other instances
-            var getRoomsWithSpecificUser = _rooms.GetAllItems().Where(x => x.InsideInfo.Clients.Exists(y => y.Id == userclient.Id));
+            var getRoomsWithSpecificUser = DataSingleton.Instance.Rooms.GetAllItems().Where(x => x.InsideInfo.Clients.Exists(y => y.Id == userclient.Id));
             foreach (var roomActive in getRoomsWithSpecificUser)
             {
                 var index = roomActive.InsideInfo.Clients.FindIndex(x => x.Id == userclient.Id);
@@ -193,124 +184,53 @@ namespace servertcp.ServerManagment
             room?.InsideInfo.Clients.Add(userclient);
 
             //send info about room
-            ServerSender.ServerCoreMethods.JoinRoom(e.Client, room?.InsideInfo, e.MessageId);
+       //     ServerSender.ServerCoreMethods.JoinRoom(e.Client, room?.InsideInfo, e.MessageId);
         }
 
         private void Receiver_GetPeople(object sender, ServerReceiverEvents.GetPeopleEventArgs e)
         {
-            if (!IsActiveLogin(e.Client)) return;
+            if (!Utils.Instance.IsActiveLogin(e.Client)) return;
 
-            ServerSender.ServerCoreMethods.GetPeopleList(e.Client, UserClients);
-        }
-
-        private void Receiver_Register(object sender, ServerReceiverEvents.RegisterEventArgs e)
-        {
-            try
-            {
-                if (!SqlUserCommands.LoginExists(e.Login))
-                {
-                    var salt = Scrypt.GenerateSalt();
-
-                    if (SqlUserCommands.CreateUser(e.Login, Scrypt.Hash(e.Password, salt), salt, e.Login))
-                    {
-                        ServerSender.Success(e.Client, e.MessageId);
-                        var getUserID = SqlUserCommands.GetUserId(e.Login);
-
-                        SqlUserCommands.AddActionInfo(getUserID, Utils.GetIpOfClient(e.Client),
-                            SqlUserCommands.Actions.Register);
-                    }
-                    else
-                        ServerSender.Error(e.Client, e.MessageId);
-                }
-                else
-                    ServerSender.Error(e.Client, e.MessageId); //TODO acc exist param
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                ServerSender.Error(e.Client, e.MessageId);
-            }
-        }
-
-        private void Receiver_Login(object sender, ServerReceiverEvents.LoginEventArgs e)
-        {
-            try
-            {
-                if (SqlUserCommands.LoginExists(e.Login))
-                {
-                    var pass = Scrypt.Hash(e.Password, SqlUserCommands.GetSalt(e.Login));
-
-                    if (SqlUserCommands.CheckPassword(pass, e.Login))
-                    {
-                        var getUserID = SqlUserCommands.GetUserId(e.Login);
-                        var rank = SqlUserCommands.GetUserRank(getUserID);
-
-                        var client = new ServerClient(e.Client)
-                        {
-                            Rank = (Rank)rank,
-                            Id = getUserID,
-                            Username = e.Login,
-                            Login = e.Login
-                        };
-
-                        if (IsActiveLogin(e.Client))
-                            Receiver_Disconnect(null, new ServerReceiverEvents.DisconnectEventArgs(e.Client));
-
-                        _clients[client.Client.ClientId] = client;
-                        ServerSender.Success(e.Client, e.MessageId, client.Username);
-                        SqlUserCommands.AddActionInfo(getUserID, Utils.GetIpOfClient(e.Client),
-                            SqlUserCommands.Actions.Login);
-                    }
-                    else
-                        ServerSender.Error(e.Client, e.MessageId);
-                }
-                else
-                    ServerSender.Error(e.Client, e.MessageId);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                ServerSender.Error(e.Client, e.MessageId);
-            }
+        //    ServerSender.ServerCoreMethods.GetPeopleList(e.Client, DataSingleton.Instance.UserClients);
         }
 
         private void Receiver_ChangeLogin(object sender, ServerReceiverEvents.ChangeLoginEventArgs e)
         {
-            var login = _clients[e.Client.ClientId].Login;
+            var login = DataSingleton.Instance.ServerClients[(int)e.Client.ClientId].Login;
             var userId = SqlUserCommands.GetUserId(login);
 
-            if (IsActiveLogin(e.Client))
+            if (Utils.Instance.IsActiveLogin(e.Client))
             {
                 var pass = Scrypt.Hash(e.Password, SqlUserCommands.GetSalt(login));
                 if (Sql.SqlUserCommands.CheckPassword(pass, login))
                 {
                     Sql.SqlUserCommands.DataChange.ChangeLogin(userId, e.NewLogin);
-                    ServerSender.Success(e.Client, e.MessageId);
+             //       ServerSender.Success(e.Client, e.MessageId);
 
-                    Sql.SqlUserCommands.AddActionInfo(userId, Utils.GetIpOfClient(e.Client),
+                    Sql.SqlUserCommands.AddActionInfo(userId, Utils.Instance.GetIpOfClient(e.Client),
                         SqlUserCommands.Actions.ChangeLogin);
                 }
-                else
-                    ServerSender.Error(e.Client, e.MessageId);
+             //   else
+             //       ServerSender.Error(e.Client, e.MessageId);
             }
         }
 
         private void Receiver_ChangeRank(object sender, ServerReceiverEvents.ChangeRankEventArgs e)
         {
-            var login = _clients[e.Client.ClientId].Login;
+            var login = DataSingleton.Instance.ServerClients[(int)e.Client.ClientId].Login;
             var userId = SqlUserCommands.GetUserId(login);
 
             var pass = Scrypt.Hash(e.Password, SqlUserCommands.GetSalt(login));
             if (Sql.SqlUserCommands.CheckPassword(pass, login))
             {
                 Sql.SqlUserCommands.DataChange.ChangeRank(userId, e.Rank);
-                ServerSender.Success(e.Client, e.MessageId);
+             //   ServerSender.Success(e.Client, e.MessageId);
 
-                Sql.SqlUserCommands.AddActionInfo(userId, Utils.GetIpOfClient(e.Client),
+                Sql.SqlUserCommands.AddActionInfo(userId, Utils.Instance.GetIpOfClient(e.Client),
                     SqlUserCommands.Actions.ChangeRank);
             }
-            else
-                ServerSender.Error(e.Client, e.MessageId);
+          //  else
+             //   ServerSender.Error(e.Client, e.MessageId);
         }
 
         private void Receiver_ChangeUsername(object sender, ServerReceiverEvents.ChangeUsernameEventArgs e)
@@ -390,27 +310,24 @@ namespace servertcp.ServerManagment
 
         private void Receiver_Disconnect(object sender, ServerReceiverEvents.DisconnectEventArgs e)
         {
-            var login = _clients[e.Client.ClientId].Login;
+            
+            var login = DataSingleton.Instance.ServerClients[(int)e.Client.ClientId].Login;
             var userId = SqlUserCommands.GetUserId(login);
 
-            var tmp = _rooms.GetAllItems().Where(x => x.InsideInfo.Clients.Exists(y => y.Id == userId));
+            var tmp = DataSingleton.Instance.Rooms.GetAllItems().Where(x => x.InsideInfo.Clients.Exists(y => y.Id == userId));
             foreach (var roomActive in tmp)
             {
                 var index = roomActive.InsideInfo.Clients.FindIndex(x => x.Id == userId);
                 roomActive.InsideInfo.Clients.RemoveAt(index);
             }
 
-            SqlUserCommands.AddActionInfo(userId, Utils.GetIpOfClient(e.Client), SqlUserCommands.Actions.Logout);
+            SqlUserCommands.AddActionInfo(userId, Utils.Instance.GetIpOfClient(e.Client), SqlUserCommands.Actions.Logout);
 
-            var client = _clients[e.Client.ClientId];
+            var client = DataSingleton.Instance.ServerClients[(int)e.Client.ClientId];
 
-            _clients.Remove(e.Client.ClientId);
+            DataSingleton.Instance.ServerClients.Remove(e.Client.ClientId);
             Console.WriteLine("{0} disconnected", client.Username);
         }
 
-        private bool IsActiveLogin(IScsServerClient client)
-        {
-            return _clients[client.ClientId] != null;
-        }
     }
 }

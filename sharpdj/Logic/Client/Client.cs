@@ -7,6 +7,7 @@ using Hik.Communication.Scs.Communication.EndPoints.Tcp;
 using Hik.Communication.Scs.Communication.Messages;
 using Hik.Communication.Scs.Communication.Messengers;
 using SharpDj.Enums.Menu;
+using SharpDj.Logic.Helpers;
 using SharpDj.ViewModel;
 
 namespace SharpDj.Logic.Client
@@ -16,16 +17,12 @@ namespace SharpDj.Logic.Client
         public SdjMainViewModel SdjMainViewModel { get; set; }
         public ClientReceiver Receiver { get; set; } = new ClientReceiver();
         public ClientSender Sender { get; set; }
-
-        public string Ip { get; set; } = "192.168.0.103";
-        public int Port { get; set; } = 1433;
-
+        public ClientConfig Config { get; } = ClientConfig.LoadConfig();
 
         public void Start(SdjMainViewModel main)
         {
-
             SdjMainViewModel = main;
-            ClientInfo.Instance.Client = ScsClientFactory.CreateClient(new ScsTcpEndPoint(Ip, Port));
+            ClientInfo.Instance.Client = ScsClientFactory.CreateClient(new ScsTcpEndPoint(Config.Ip, Config.Port));
             ClientInfo.Instance.Client.MessageReceived += Client_MessageReceived;
             ClientInfo.Instance.Client.Disconnected += Client_Disconnected;
             ClientInfo.Instance.ReplyMessenger = new RequestReplyMessenger<IScsClient>(ClientInfo.Instance.Client);
@@ -34,7 +31,7 @@ namespace SharpDj.Logic.Client
             {
                 try
                 {
-#if  DEBUG
+#if DEBUG
                     Thread.Sleep(1000);
 #endif
                     ClientInfo.Instance.Client.Connect();
@@ -44,7 +41,7 @@ namespace SharpDj.Logic.Client
                     Console.WriteLine(e.Message);
                 }
             }
-           // ClientInfo.Instance.Client.SendMessage(new ScsTextMessage("login $"));
+            // ClientInfo.Instance.Client.SendMessage(new ScsTextMessage("login $"));
 
             Sender = new ClientSender(ClientInfo.Instance.Client, ClientInfo.Instance.ReplyMessenger);
         }

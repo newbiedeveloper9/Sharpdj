@@ -136,7 +136,7 @@ namespace SharpDj.ViewModel.Unique
         {
             var resp = SdjMainViewModel.Client.Sender.Register(Login, Password, Email);
 
-            if (resp.Equals(Commands.Error))
+            if (resp.Equals(Commands.Instance.CommandsDictionary["Error"]))
             {
                 ErrorNotify = "Register error";
             }
