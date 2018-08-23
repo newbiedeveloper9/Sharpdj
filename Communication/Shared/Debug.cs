@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
-namespace SharpDj.Models.Helpers
+namespace Communication.Shared
 {
-    class Debug
+    public class Debug
     {
         public string WindowTitle { get; set; }
 

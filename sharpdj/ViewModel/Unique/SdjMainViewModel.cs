@@ -16,6 +16,7 @@ using SharpDj.Enums;
 using SharpDj.Enums.Menu;
 using SharpDj.Enums.Playlist;
 using SharpDj.Logic.Client;
+using SharpDj.Logic.Helpers;
 using SharpDj.Models;
 using SharpDj.Models.Helpers;
 using SharpDj.View.UserControls;
@@ -28,11 +29,10 @@ namespace SharpDj.ViewModel
     {
         public readonly Client Client;
         private readonly ClientLogic _clientLogic;
-
         #region .ctor
 
         public SdjMainViewModel()
-        {
+        {            
             SdjRoomViewModel = new SdjRoomViewModel(this);
             SdjBottomBarViewModel = new SdjBottomBarViewModel(this);
             SdjLeftBarViewModel = new SdjLeftBarViewModel(this);

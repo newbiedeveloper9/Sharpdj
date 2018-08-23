@@ -1,33 +1,37 @@
-﻿using System;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Communication.Server;
 using Communication.Server.Logic;
-using Communication.Shared;
-using Hik.Communication.Scs.Communication.Messages;
+using Communication.Server.Logic.Commands;
 using Hik.Communication.Scs.Server;
+using servertcp.ServerManagment.Commands;
 
 namespace servertcp.ServerManagment
 {
-    public sealed class ServerReceiver : ServerReceiverEvents
+    public class ServerReceiver : ServerReceiverEvents
     {
-        private class MessagesPattern
+        private readonly List<ICommand> _commands;
+
+        public ServerReceiver()
         {
-            public const string RegisterRgx = Commands.Register + @"(.*)\$(.*)\$(.*)";
-            public const string LoginRgx = Commands.Login + @"(.*)\$(.*)";
-            public const string ChangePasswordRgx = Commands.UserAccount.ChangePassword + @"(.*)\$(.*)";
-            public const string ChangeUsernameRgx = Commands.UserAccount.ChangeUsername + @"(.*)\$(.*)";
-            public const string ChangeLoginRgx = Commands.UserAccount.ChangeLogin + @"(.*)\$(.*)";
-            public const string ChangeRankRgx = Commands.UserAccount.ChangeRank + @"(.*)\$(.*)";
-            public const string JoinRoomRgx = Commands.Client.JoinRoom + "([0-9]+)";
-            public const string CreateRoomRgx = Commands.Client.CreateRoom + @"(.*)\$(.*)\$(.*)";
-            public const string JoinQueueRgx = Commands.Client.Room.JoinQueue + @" \$(.*)";
+            _commands = new List<ICommand>
+            {
+                new LoginCommand(),
+                new RegisterCommand(),
+                new DisconnectCommand(),
+                new AfterLoginData(),
+                new JoinRoom(),
+            };
         }
 
         public void ParseMessage(IScsServerClient client, string message, string messageId)
         {
-            #region Disconnect
+            var parameters = Utils.Instance.GetMessageParameters(message);
+            var command = _commands.FirstOrDefault(x => x.CommandText.Equals(parameters[0]));
+   
+            command?.Run(client, parameters, messageId);
+
+            /*#region Disconnect
 
             if (message.Equals(Commands.Disconnect))
             {
@@ -246,7 +250,7 @@ namespace servertcp.ServerManagment
                 }
             }
 
-            #endregion
+            #endregion*/
         }
 
         #region Methods

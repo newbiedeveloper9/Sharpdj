@@ -72,18 +72,19 @@
     <Compile Include="Client\Logic\ClientReceiver.cs" />
     <Compile Include="Client\Logic\ClientReceiverEvents.cs" />
     <Compile Include="Client\Logic\ClientSender.cs" />
+    <Compile Include="Client\Logic\ConnectionUtility.cs" />
     <Compile Include="Client\Logic\ResponseActions\IResponseActions.cs" />
     <Compile Include="Client\Logic\ResponseActions\UpdateDjResponse.cs" />
     <Compile Include="Client\User\UserClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server\Logic\ConnectionUtility.cs" />
     <Compile Include="Server\ServerClient.cs" />
     <Compile Include="Server\Logic\ServerSender.cs" />
-    <Compile Include="Server\Utils.cs" />
     <Compile Include="Shared\Commands.cs" />
-    <Compile Include="Shared\ConnectionUtility.cs" />
     <Compile Include="Shared\Data\Rank.cs" />
     <Compile Include="Shared\Data\Room.cs" />
     <Compile Include="Shared\Data\Songs.cs" />
+    <Compile Include="Shared\Debug.cs" />
     <Compile Include="Shared\PeriodicTask.cs" />
   </ItemGroup>
   <ItemGroup>
