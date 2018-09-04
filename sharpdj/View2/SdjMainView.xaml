@@ -6,14 +6,11 @@
         xmlns:local="clr-namespace:SharpDj.View2"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
+        WindowStyle="None "
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
 
         Title="SdjMainView" Height="720" Width="1280">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="757*"/>
-            <ColumnDefinition Width="515*"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="24"/>
             <RowDefinition Height="50"/>
@@ -24,22 +21,42 @@
         <Grid Grid.Row="0" Background="MediumAquamarine" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="72"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0"/>
 
             <!--Close, Minimize, Max-->
             <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <Button>X</Button>
-                <Button>O</Button>
                 <Button>_</Button>
+                <Button>O</Button>
+                <Button>X</Button>
             </StackPanel>
         </Grid>
 
         <!--SearchMenu-->
         <Grid Grid.Row="1" Background="Purple" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="124"/>
+                <ColumnDefinition Width="36"/>
+            </Grid.ColumnDefinitions>
 
+            <StackPanel Orientation="Horizontal" Grid.Column="0">
+                <Image Margin="24 0 0 0" Width="24" Height="24" VerticalAlignment="Center" HorizontalAlignment="Center" Source="../Images/LeftBar/001-white-album.png"/>
+                <TextBlock Text="SharpDj" FontSize="28" Margin="24 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            </StackPanel>
+            
+            <TextBox Grid.Column="2" Text="Search" FontSize="18" VerticalAlignment="Center"/>
+
+            <StackPanel Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Image Width="24" Height="24" Source="../Images/Icon.png"/>
+                <Image Width="24" Height="24" Margin="12 0 0 0" Source="../Images/Icon.png"/>
+                <Image Width="40" Height="40" Margin="24 0 0 0" Source="../Images/LeftBar/001-rate-star-button.png"/>
+            </StackPanel>
         </Grid>
 
         <!--MainMenu-->
@@ -50,7 +67,7 @@
             </Grid.ColumnDefinitions>
 
             <!--LeftMenu-->
-            <StackPanel Margin="24 24 12 24" Grid.Column="0" Background="Black">
+            <StackPanel Margin="24 24 12 0" Grid.Column="0" Background="Black">
                 <!--Active Rooms-->
                 <TextBlock Margin="0 0 0 12" FontSize="14" Text="Aktywne pokoje"/>
                 <StackPanel Margin="0 0 0 12">
@@ -85,13 +102,13 @@
             <Grid Grid.Column="1" Background="Yellow">
 
                 <!--Padding24-->
-                <StackPanel Margin="24 24 0 0" Background="Green">
+                <StackPanel Margin="24 24 36 0" Background="Green">
                     <TextBlock Text="Nowości ze świata" Margin="0 0 0 24" FontSize="32"/>
                     <!--News from world-->
                     <StackPanel Orientation="Horizontal">
-                        <StackPanel Background="Blue">
 
-                            <Grid Background="White" Height="240" Width="724" HorizontalAlignment="Left                                                         ">
+                        <StackPanel Background="Blue">
+                            <Grid Background="White" Height="240" Width="728" HorizontalAlignment="Left                                                         ">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="68"/>
@@ -103,18 +120,14 @@
                                 <Grid Grid.Row="1">
                                     <!--News of the day TEXT-->
                                 </Grid>
-                            </Grid> 
+                            </Grid>
                         </StackPanel>
 
                         <StackPanel Margin="24 0 0 0">
-                            <Grid Background="Black" Height="114" Width="248 " Margin="0 0 0 12">
-
-                            </Grid>
-                            <Grid Background="Black" Height="114" Width="248 ">
-
-                            </Grid>
-                        </StackPanel>
-                    </StackPanel>         
+                            <Grid Background="Black" Height="114" Width="240" Margin="0 0 0 12"/>
+                            <Grid Background="Black" Height="114" Width="240"/>
+                        </StackPanel> 
+                    </StackPanel>
                     <!--Categories-->
                     <StackPanel  Orientation="Horizontal" Margin="24 48 0 0">
                         <TextBlock FontSize="24" Text="Nowe" Margin="24 0 0 0"/>
