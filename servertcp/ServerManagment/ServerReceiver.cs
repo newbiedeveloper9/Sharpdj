@@ -11,9 +11,12 @@ namespace servertcp.ServerManagment
     public class ServerReceiver : ServerReceiverEvents
     {
         private readonly List<ICommand> _commands;
+        private readonly IScsServer _server;
 
-        public ServerReceiver()
+        public ServerReceiver(IScsServer server)
         {
+            this._server = server;
+            
             _commands = new List<ICommand>
             {
                 new LoginCommand(),
@@ -21,6 +24,7 @@ namespace servertcp.ServerManagment
                 new DisconnectCommand(),
                 new AfterLoginData(),
                 new JoinRoom(),
+                new SendMessageCommand(server),
             };
         }
 

@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Communication.Client.Logic.ResponseActions;
+using Communication.Server;
 using Communication.Shared;
 using Hik.Communication.Scs.Client;
 
@@ -12,9 +13,30 @@ namespace Communication.Client.Logic
 {
     public class ClientReceiver : ClientReceiverEvents
     {
+        public List<string> GetMessageParameters(string message)
+        {
+            var list = new List<string>();
+            var commandEnd = message.IndexOf(' ');
+            
+            list.Add(message.Remove(commandEnd));
+            message = message.Substring(commandEnd+1);
+            list.AddRange(message.Split('$'));
+            
+            return list;
+        }
+        
         public void ParseMessage(IScsClient client, string message)
         {
             IResponseActions responseActions;
+            if (message.StartsWith(Commands.Instance.CommandsDictionary["SendMessage"]))
+            {
+                Console.WriteLine(message);
+                var test = GetMessageParameters(message);
+                foreach (var tmp in test)
+                {
+                    Console.WriteLine(tmp);
+                }
+            }/*Need to implement receiver same as in Server*/
 
 //            #region User Disconnected
 //

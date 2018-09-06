@@ -37,6 +37,7 @@ namespace Communication.Shared
             {"AfterLogin", "0xC"},
             {"JoinQueue", "0x10"},
             {"UpdateDj", "0x11"},
+            {"SendMessage", "0xD"}
         };
     }
 }

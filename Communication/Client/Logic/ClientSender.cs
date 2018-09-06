@@ -76,6 +76,12 @@ namespace Communication.Client.Logic
             _clientUtility.SendMessageAndWaitForResponse(
                 Commands.Instance.CommandsDictionary["AfterLogin"]);
 
+        public void SendMessage(string text, string roomId) =>
+            _clientUtility.SendMessage(
+                Commands.Instance.CommandsDictionary["SendMessage"],
+                text, roomId);
+        
+
         #endregion
     }
 }
