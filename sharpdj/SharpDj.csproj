@@ -106,7 +106,11 @@
     <Compile Include="Enums\User\UserState.cs" />
     <Compile Include="Logic\Client\Client.cs" />
     <Compile Include="Logic\Client\ClientInfo.cs" />
-    <Compile Include="Logic\Client\ClientLogic.cs" />
+    <Compile Include="Logic\Client\ClientReceiver.cs" />
+    <Compile Include="Logic\Client\ClientSender.cs" />
+    <Compile Include="Logic\Client\Commands\ICommand.cs" />
+    <Compile Include="Logic\Client\Commands\SendMessageChatCommand.cs" />
+    <Compile Include="Logic\Client\Commands\UpdateDjCommand.cs" />
     <Compile Include="Logic\Client\ErrorMessages.cs" />
     <Compile Include="Logic\Helpers\ClientConfig.cs" />
     <Compile Include="Logic\Helpers\Clone.cs" />

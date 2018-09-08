@@ -12,27 +12,29 @@ namespace Communication.Shared
             WindowTitle = windowTitle;
         }
 
-        public Debug()
-        {
-
-        }
-
         public void Log(string message)
         {
-            var content = $"{DateTime.Now}    [{WindowTitle}]: {message}";
+            var content = $"{DateTime.Now}    [{WindowTitle.ToUpper()}]: {message}";
             log(content);
         }
 
         public static void Log(string windowTitle, string message)
         {
-            var content = $"{DateTime.Now}    [{windowTitle}]: {message}";
+            var content = $"{DateTime.Now}    [{windowTitle.ToUpper()}]: {message}";
             log(content);
         }
 
         private static void log(string content)
         {
-            Console.WriteLine(content);
-            File.AppendAllText("log", content+Environment.NewLine);
+            try
+            {
+                Console.WriteLine(content);
+                File.AppendAllText("log", content + Environment.NewLine);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

@@ -20,24 +20,29 @@ namespace servertcp.ServerManagment.Commands
             this._server = server;
         }
 
-        public string CommandText { get; } = Communication.Shared.Commands.Instance.CommandsDictionary["SendMessage"];
+        public string CommandText { get; } =
+            Communication.Shared.Commands.Instance.CommandsDictionary["SendMessage"];
 
-        public void Run(IScsServerClient client, List<string> parameters, string messageId)
+        public void Run(IScsServerClient client,
+            List<string> parameters,
+            string messageId)
         {
             string text = parameters[1];
             int roomId = Convert.ToInt32(parameters[2]);
 
             if (!string.IsNullOrWhiteSpace(text))
             {
-                var sender = new ServerSender(client);
-                var room = DataSingleton.Instance.Rooms.GetAllItems().First(x => x.Id == roomId);
-                
+                var room = DataSingleton.Instance.Rooms.GetAllItems()
+                    .First(x => x.Id == roomId);
+
                 foreach (var clientInstance in room.InsideInfo.Clients)
                 {
-                    if (clientInstance != null)
-                    {
-                        sender.SendMessage(text, roomId);
-                    }
+                    var clientServerInstance = DataSingleton.Instance.ServerClients.GetAllItems()
+                        .First(x => x.Id == clientInstance.Id);
+                    var sender = new ServerSender(clientServerInstance.Client);
+
+                    sender.SendMessage(text, roomId,
+                        (int) DataSingleton.Instance.ServerClients[client.ClientId].Id);
                 }
             }
         }

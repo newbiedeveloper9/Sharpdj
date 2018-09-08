@@ -4,39 +4,37 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Communication.Client.Logic.ResponseActions;
 using Communication.Server;
 using Communication.Shared;
 using Hik.Communication.Scs.Client;
+using SharpDj.Logic.Client.Commands;
+using SharpDj.ViewModel;
 
 namespace Communication.Client.Logic
 {
-    public class ClientReceiver : ClientReceiverEvents
+    public class ClientReceiver
     {
-        public List<string> GetMessageParameters(string message)
+        private readonly List<ICommand> _commands;
+        private readonly SdjMainViewModel _sdjMainViewModel;
+
+        public ClientReceiver(SdjMainViewModel sdjMainViewModel)
         {
-            var list = new List<string>();
-            var commandEnd = message.IndexOf(' ');
-            
-            list.Add(message.Remove(commandEnd));
-            message = message.Substring(commandEnd+1);
-            list.AddRange(message.Split('$'));
-            
-            return list;
+            this._sdjMainViewModel = sdjMainViewModel;
+            _commands = new List<ICommand>()
+            {
+                new UpdateDjCommand(),
+                new SendMessageChatCommand()       
+            };
         }
-        
+
         public void ParseMessage(IScsClient client, string message)
         {
-            IResponseActions responseActions;
-            if (message.StartsWith(Commands.Instance.CommandsDictionary["SendMessage"]))
-            {
-                Console.WriteLine(message);
-                var test = GetMessageParameters(message);
-                foreach (var tmp in test)
-                {
-                    Console.WriteLine(tmp);
-                }
-            }/*Need to implement receiver same as in Server*/
+            var parameters = Shared.Commands.Instance.GetMessageParameters(message);
+            var command = _commands.FirstOrDefault(x => x.CommandText.Equals(parameters[0]));
+
+            command?.Run(_sdjMainViewModel, parameters);
+
+            /*Need to implement receiver same as in Server*/
 
 //            #region User Disconnected
 //
@@ -98,21 +96,6 @@ namespace Communication.Client.Logic
 //            }
 //
 //            #endregion
-        }
-
-        private bool ParserResponse(string message, string regex, IResponseActions responseActions)
-        {
-            var rgx = new Regex(regex);
-            var match = rgx.Match(message);
-
-            if (match.Success)
-            {
-                responseActions.OnSuccess(match.Groups);
-                return true;
-            }
-
-            responseActions.OnFailed(match.Groups);
-            return false;
         }
     }
 }

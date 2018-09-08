@@ -52,26 +52,7 @@ namespace Communication.Server
 
             return Convert.ToInt32(port);
         }
-
-
-        /// <summary>
-        /// Returns command in index 0 and parameters in index 1+
-        /// </summary>
-        /// <param name="message">text from receiver</param>
-        /// <returns></returns>
-        public List<string> GetMessageParameters(string message)
-        {
-            var list = new List<string>();
-            var commandEnd = message.IndexOf(' ');
-            
-            list.Add(message.Remove(commandEnd));
-            message = message.Substring(commandEnd+1);
-            list.AddRange(message.Split('$'));
-            
-            return list;
-        }
-
-        
+    
         /// <summary>
         /// Returns true if given client is already signed in.
         /// </summary>

@@ -60,21 +60,6 @@ namespace servertcp.ServerManagment
             DataSingleton.Instance.Rooms[0].InsideInfo.Djs[1].Video.Add(new Songs.Song(2, "JSQsIMgj1OM"));
             DataSingleton.Instance.Rooms[0].InsideInfo.Djs[1].Video.Add(new Songs.Song(3, "JSQsIMgj1OM"));
             DataSingleton.Instance.Rooms[0].InsideInfo.TimeLeft = DataSingleton.Instance.Rooms[0].InsideInfo.Djs[0].Video[0].Time;
-
-            SetEvents(receiver);
-        }
-
-        private void SetEvents(ServerReceiver receiver)
-        {
-            receiver.ChangePassword += Receiver_ChangePassword;
-            receiver.ChangeUsername += Receiver_ChangeUsername;
-            receiver.ChangeRank += Receiver_ChangeRank;
-            receiver.ChangeLogin += Receiver_ChangeLogin;
-            receiver.GetPeople += Receiver_GetPeople;
-            receiver.JoinRoom += Receiver_JoinRoom;
-            receiver.CreateRoom += Receiver_CreateRoom;
-            receiver.AfterLogin += Receiver_AfterLogin;
-            receiver.JoinQueue += Receiver_JoinQueue;
             
             PeriodicTask.StartNew(1000, TrackRefresh);
         }
@@ -100,7 +85,7 @@ namespace servertcp.ServerManagment
         }
 
 
-        private void Receiver_JoinQueue(object sender, ServerReceiverEvents.JoinQueueEventArgs e)
+/*        private void Receiver_JoinQueue(object sender, ServerReceiverEvents.JoinQueueEventArgs e)
         {
             Task.Factory.StartNew(() =>
             {
@@ -267,7 +252,7 @@ namespace servertcp.ServerManagment
                        ServerSender.Error.ChangeUsernameError(client.Client);
                }
                else
-                   ServerSender.Error.ChangeUsernameError(client.Client);*/
+                   ServerSender.Error.ChangeUsernameError(client.Client);#1#
         }
 
         private void Receiver_ChangePassword(object sender, ServerReceiverEvents.ChangePasswordEventArgs e)
@@ -305,7 +290,7 @@ namespace servertcp.ServerManagment
                        ServerSender.Error.ChangePasswordError(client.Client);
                }
                else
-                   ServerSender.Error.ChangePasswordError(client.Client);*/
+                   ServerSender.Error.ChangePasswordError(client.Client);#1#
         }
 
         private void Receiver_Disconnect(object sender, ServerReceiverEvents.DisconnectEventArgs e)
@@ -327,7 +312,7 @@ namespace servertcp.ServerManagment
 
             DataSingleton.Instance.ServerClients.Remove(e.Client.ClientId);
             Console.WriteLine("{0} disconnected", client.Username);
-        }
+        }*/
 
     }
 }

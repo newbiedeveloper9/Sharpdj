@@ -8,7 +8,7 @@ using servertcp.ServerManagment.Commands;
 
 namespace servertcp.ServerManagment
 {
-    public class ServerReceiver : ServerReceiverEvents
+    public class ServerReceiver
     {
         private readonly List<ICommand> _commands;
         private readonly IScsServer _server;
@@ -16,7 +16,7 @@ namespace servertcp.ServerManagment
         public ServerReceiver(IScsServer server)
         {
             this._server = server;
-            
+
             _commands = new List<ICommand>
             {
                 new LoginCommand(),
@@ -30,9 +30,9 @@ namespace servertcp.ServerManagment
 
         public void ParseMessage(IScsServerClient client, string message, string messageId)
         {
-            var parameters = Utils.Instance.GetMessageParameters(message);
+            var parameters = Communication.Shared.Commands.Instance.GetMessageParameters(message);
             var command = _commands.FirstOrDefault(x => x.CommandText.Equals(parameters[0]));
-   
+
             command?.Run(client, parameters, messageId);
 
             /*#region Disconnect

@@ -25,14 +25,13 @@ namespace SharpDj.ViewModel
         public SdjRoomViewModel(SdjMainViewModel main)
         {
             SdjMainViewModel = main;
+            RoomMessageCollection = new ObservableCollection<RoomMessageModel>();
 
 /*          var vlcPlayer = new SdjVlcPlayer();
             var vlcLibDirectory = new DirectoryInfo(System.IO.Path.Combine(Environment.CurrentDirectory, "libvlc", IntPtr.Size == 4 ? "win-x86" : "win-x64"));
             vlcPlayer.VlcPlayer.SourceProvider.CreatePlayer(vlcLibDirectory);
             vlcPlayer.VlcPlayer.SourceProvider.MediaPlayer.Play("https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_5mb.mp4");
             MyVlcPlayer.Add(vlcPlayer);*/
-
-            RoomMessageCollection = new ObservableCollection<RoomMessageModel>();
 
             /*
             var mess = new RoomMessageModel(main)
@@ -191,7 +190,7 @@ namespace SharpDj.ViewModel
         }
 
 
-        private ObservableCollection<RoomMessageModel> _roomMessageCollection;
+        private ObservableCollection<RoomMessageModel> _roomMessageCollection = new ObservableCollection<RoomMessageModel>();
 
         public ObservableCollection<RoomMessageModel> RoomMessageCollection
         {

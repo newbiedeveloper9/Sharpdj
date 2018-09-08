@@ -19,7 +19,8 @@ namespace Communication.Shared
         {
         }
 
-        public readonly Dictionary<string, string> CommandsDictionary = new Dictionary<string, string>()
+        public readonly Dictionary<string, string>
+            CommandsDictionary = new Dictionary<string, string>()
         {
             {"Success", "0xF"},
             {"Error", "0xE"},
@@ -39,5 +40,22 @@ namespace Communication.Shared
             {"UpdateDj", "0x11"},
             {"SendMessage", "0xD"}
         };
+        
+        /// <summary>
+        /// Returns command in index 0 and parameters in index 1+
+        /// </summary>
+        /// <param name="message">text from receiver</param>
+        /// <returns></returns>
+        public List<string> GetMessageParameters(string message)
+        {
+            var list = new List<string>();
+            var commandEnd = message.IndexOf(' ');
+            
+            list.Add(message.Remove(commandEnd));
+            message = message.Substring(commandEnd+1);
+            list.AddRange(message.Split('$'));
+            
+            return list;
+        }
     }
 }

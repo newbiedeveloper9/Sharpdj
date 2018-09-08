@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Communication.Client;
 using Communication.Shared;
-using Google.Apis.Requests.Parameters;
 using Hik.Communication.Scs.Client;
 using Hik.Communication.Scs.Communication.Messages;
 using Hik.Communication.Scs.Communication.Messengers;
@@ -21,10 +20,10 @@ namespace Communication.Server.Logic
         }
 
         public void Success(string messageId, params string[] param) =>
-            _senderUtility.ReplyToMessage(Commands.Instance.CommandsDictionary["Success"], messageId, param);
+            _senderUtility.ReplyToMessage(Shared.Commands.Instance.CommandsDictionary["Success"], messageId, param);
 
         public void Error(string messageId, params string[] param) =>
-            _senderUtility.ReplyToMessage(Commands.Instance.CommandsDictionary["Error"], messageId, param);
+            _senderUtility.ReplyToMessage(Shared.Commands.Instance.CommandsDictionary["Error"], messageId, param);
 
         public void GetPeopleList(IEnumerable<UserClient> clientsList)
         {
@@ -44,12 +43,12 @@ namespace Communication.Server.Logic
         {
             string output = JsonConvert.SerializeObject(room);
             _senderUtility.ReplyToMessage(output, messId);
-        }
+        }  
 
-        public void SendMessage(string text, int roomId)
+        public void SendMessage(string text, int roomId, int userId)
         {
-            _senderUtility.SendMessage(Commands.Instance.CommandsDictionary["SendMessage"],
-                text, roomId.ToString());
+            _senderUtility.SendMessage(Shared.Commands.Instance.CommandsDictionary["SendMessage"],
+                text, roomId.ToString(), userId.ToString());
         }
     }
 }
