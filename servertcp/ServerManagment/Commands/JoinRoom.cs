@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Communication.Server;
 using Communication.Server.Logic;
-using Communication.Server.Logic.Commands;
 using Hik.Communication.Scs.Server;
 
 namespace servertcp.ServerManagment.Commands
@@ -15,8 +14,9 @@ namespace servertcp.ServerManagment.Commands
         public void Run(IScsServerClient client, List<string> parameters, string messageId)
         {
             var sender = new ServerSender(client);
-            var roomId = parameters[1];
+            var roomId = parameters[0];
  
+            if (!Utils.Instance.IsActiveLogin(client)) return;
             //select client class object wchich refer to user
             var userclient = DataSingleton.Instance.ServerClients[(int) client.ClientId].ToUserClient();
             //select room to join

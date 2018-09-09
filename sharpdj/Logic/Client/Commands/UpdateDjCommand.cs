@@ -13,7 +13,7 @@ namespace SharpDj.Logic.Client.Commands
         
         public void Run(SdjMainViewModel sdjMainViewModel, List<string> parameters)
         {
-            var json = parameters[1];
+            var json = parameters[0];
             
             var inside = JsonConvert.DeserializeObject<Room.InsindeInfo>(json);
 
@@ -28,7 +28,7 @@ namespace SharpDj.Logic.Client.Commands
             var client = new YoutubeClient();
             var tmp = client.GetVideoAsync(inside.Djs[0].Video[0].Id).Result;
             sdjMainViewModel.SdjRoomViewModel.SongTitle = tmp.Title;
-            sdjMainViewModel.SdjBottomBarViewModel.BottomBarTitleOfActuallySong = tmp.Title;    
+            sdjMainViewModel.SdjBottomBarViewModel.BottomBarTitleOfActuallySong = tmp.Title;
         }
     }
 }

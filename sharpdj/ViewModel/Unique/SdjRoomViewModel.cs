@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using Communication.Client;
 using Communication.Shared;
 using Hik.Communication.Scs.Communication.Messages;
 using Newtonsoft.Json;
@@ -33,25 +35,24 @@ namespace SharpDj.ViewModel
             vlcPlayer.VlcPlayer.SourceProvider.MediaPlayer.Play("https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_5mb.mp4");
             MyVlcPlayer.Add(vlcPlayer);*/
 
-            /*
+            
             var mess = new RoomMessageModel(main)
             {
                 Message =
-                    "Testowa wiadomość Testowa wiadomość Testowa wiadomość Testowa wiadomość Te xdd xdd" +
-                    " dstowa wiadomość Testowa wiadomość Testowa wiadomość Testowa wiadomość Testowa wiadomość",
+                    "Test",
                 Time = "13:03",
                 Username = "Crisey"
             };
-*/
-
-
-            /*for (int i = 0; i < 10; i++)
-                RoomMessageCollection.Add(mess);*/
+            
+            for (int i = 0; i < 2; i++)
+                RoomMessageCollection.Add(mess);
         }
 
         #endregion .ctor
 
         #region Properties
+
+        public List<UserClient> UserList;
 
         public int RoomId { get; set; }
 

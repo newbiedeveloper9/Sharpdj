@@ -2,7 +2,6 @@
 using System.Linq;
 using Communication.Server;
 using Communication.Server.Logic;
-using Communication.Server.Logic.Commands;
 using Hik.Communication.Scs.Server;
 using servertcp.ServerManagment.Commands;
 
@@ -30,10 +29,9 @@ namespace servertcp.ServerManagment
 
         public void ParseMessage(IScsServerClient client, string message, string messageId)
         {
-            var parameters = Communication.Shared.Commands.Instance.GetMessageParameters(message);
-            var command = _commands.FirstOrDefault(x => x.CommandText.Equals(parameters[0]));
-
-            command?.Run(client, parameters, messageId);
+            var command = Communication.Shared.Commands.Instance.GetMessageCommand(message);
+            var commandClass = _commands.FirstOrDefault(x => x.CommandText.Equals(command));
+            commandClass?.Run(client, Communication.Shared.Commands.Instance.GetMessageParameters(message), messageId);
 
             /*#region Disconnect
 

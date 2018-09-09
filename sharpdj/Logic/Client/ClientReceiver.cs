@@ -23,16 +23,15 @@ namespace Communication.Client.Logic
             _commands = new List<ICommand>()
             {
                 new UpdateDjCommand(),
-                new SendMessageChatCommand()       
+                new SendMessageChatCommand()
             };
         }
 
         public void ParseMessage(IScsClient client, string message)
         {
-            var parameters = Shared.Commands.Instance.GetMessageParameters(message);
-            var command = _commands.FirstOrDefault(x => x.CommandText.Equals(parameters[0]));
-
-            command?.Run(_sdjMainViewModel, parameters);
+            var command = Commands.Instance.GetMessageCommand(message);
+            var commandClass = _commands.FirstOrDefault(x => x.CommandText.Equals(command));
+            commandClass?.Run(_sdjMainViewModel, Commands.Instance.GetMessageParameters(message));
 
             /*Need to implement receiver same as in Server*/
 

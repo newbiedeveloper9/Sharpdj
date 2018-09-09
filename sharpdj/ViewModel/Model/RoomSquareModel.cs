@@ -144,6 +144,7 @@ namespace SharpDj.ViewModel.Model
             SdjMainViewModel.SdjBottomBarViewModel.BottomBarRoomName = RoomName;
             SdjMainViewModel.SdjRoomViewModel.RoomName = RoomName;
             SdjMainViewModel.SdjRoomViewModel.HostName = HostName;
+            SdjMainViewModel.SdjRoomViewModel.UserList = inside.Clients;
 
             SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfPeopleInRoom = inside.Clients.Count;
             SdjMainViewModel.SdjBottomBarViewModel.BottomBarSizeOfPlaylistInRoom = inside.Djs.Count;
@@ -180,7 +181,6 @@ namespace SharpDj.ViewModel.Model
 
         public void MainOnRoomClickCommandExecute()
         {
-            //TODO Join Room
             Task.Factory.StartNew(() =>
             {
                 var resp = SdjMainViewModel.Client.Sender.RoomJoin(RoomId);

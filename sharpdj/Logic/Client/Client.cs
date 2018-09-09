@@ -38,7 +38,7 @@ namespace SharpDj.Logic.Client
             ClientInfo.Instance.Client.Disconnected += Client_Disconnected;
             ClientInfo.Instance.ReplyMessenger = new RequestReplyMessenger<IScsClient>(ClientInfo.Instance.Client);
             ClientInfo.Instance.ReplyMessenger.Start();
-            ClientInfo.Instance.Client.ConnectTimeout = 400;
+            //ClientInfo.Instance.Client.ConnectTimeout = 400;
             while (ClientInfo.Instance.Client.CommunicationState == CommunicationStates.Disconnected)
             {
                 try
@@ -54,7 +54,6 @@ namespace SharpDj.Logic.Client
                 }
             }
             
-            ClientInfo.Instance.Client.SendMessage(new ScsTextMessage("login $"));
             PeriodicTask.StartNew(80, RefreshData);
 
             Sender = new ClientSender(ClientInfo.Instance.Client, ClientInfo.Instance.ReplyMessenger);

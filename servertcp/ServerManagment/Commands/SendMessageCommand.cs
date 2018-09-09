@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
 using Communication.Client.Logic;
 using Communication.Server;
 using Communication.Server.Logic;
-using Communication.Server.Logic.Commands;
 using Hik.Communication.Scs.Communication;
 using Hik.Communication.Scs.Server;
 
@@ -27,8 +26,8 @@ namespace servertcp.ServerManagment.Commands
             List<string> parameters,
             string messageId)
         {
-            string text = parameters[1];
-            int roomId = Convert.ToInt32(parameters[2]);
+            string text = parameters[0];
+            int roomId = Convert.ToInt32(parameters[1]);
 
             if (!string.IsNullOrWhiteSpace(text))
             {

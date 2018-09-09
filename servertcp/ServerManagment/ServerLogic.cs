@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using Communication.Client;
 using Communication.Server;
 using Communication.Server.Logic;
-using Communication.Server.Logic.Commands;
 using Communication.Shared;
 using CryptSharp.Utility;
 using Hik.Collections;
