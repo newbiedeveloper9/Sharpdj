@@ -82,7 +82,7 @@
     <Compile Include="ServerManagment\Commands\JoinRoom.cs" />
     <Compile Include="ServerManagment\Commands\LoginCommand.cs" />
     <Compile Include="ServerManagment\Commands\RegisterCommand.cs" />
-    <Compile Include="ServerManagment\Commands\SendMessageCommand.cs" />
+    <Compile Include="ServerManagment\Commands\SendMessageChatCommand.cs" />
     <Compile Include="ServerManagment\ServerLogic.cs" />
     <Compile Include="ServerManagment\Server.cs" />
     <Compile Include="ServerManagment\ServerReceiver.cs" />

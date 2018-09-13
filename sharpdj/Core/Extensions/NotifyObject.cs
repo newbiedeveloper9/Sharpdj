@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
+using SharpDj.Logic.Helpers;
 
 namespace SharpDj.Extensions
 {
@@ -38,7 +39,7 @@ namespace SharpDj.Extensions
             }
             catch (Exception e)
             {
-                new Models.Helpers.ExceptionLogger(e);
+                new ExceptionLogger(e);
             }
         }
 
@@ -46,7 +47,6 @@ namespace SharpDj.Extensions
         {
             try
             {
-                //debug
                 var name = (extension.Body as MemberExpression ?? ((UnaryExpression)extension.Body).Operand as MemberExpression).Member.Name;
                 Console.WriteLine(name);
           
@@ -55,7 +55,7 @@ namespace SharpDj.Extensions
             }
             catch (Exception e)
             {
-                new Models.Helpers.ExceptionLogger(e);
+                new ExceptionLogger(e);
             }
         }
 

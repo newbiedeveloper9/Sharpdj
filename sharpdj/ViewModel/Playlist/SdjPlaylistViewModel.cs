@@ -29,6 +29,7 @@ namespace SharpDj.ViewModel
         public SdjPlaylistViewModel(SdjMainViewModel main)
         {
             SdjMainViewModel = main;
+
             var src = File.ReadAllText(FilesPath.Instance.PlaylistConfig);
             PlaylistCollection = JsonConvert.DeserializeObject<ObservableCollection<PlaylistModel>>(src);
             PlaylistCollectionSavedState = JsonConvert.DeserializeObject<ObservableCollection<PlaylistModel>>(src);
@@ -57,6 +58,7 @@ namespace SharpDj.ViewModel
         #region Properties 
 
         private ObservableCollection<PlaylistTrackModel> _trackCollection;
+
         public ObservableCollection<PlaylistTrackModel> TrackCollection
         {
             get => _trackCollection;
@@ -69,6 +71,7 @@ namespace SharpDj.ViewModel
         }
 
         private ObservableCollection<PlaylistModel> _playlistCollection;
+
         public ObservableCollection<PlaylistModel> PlaylistCollection
         {
             get => _playlistCollection;
@@ -81,6 +84,7 @@ namespace SharpDj.ViewModel
         }
 
         private ObservableCollection<PlaylistModel> _playlistCollectionSavedState;
+
         public ObservableCollection<PlaylistModel> PlaylistCollectionSavedState
         {
             get => _playlistCollectionSavedState;
@@ -93,6 +97,7 @@ namespace SharpDj.ViewModel
         }
 
         private SdjMainViewModel _sdjMainViewModel;
+
         public SdjMainViewModel SdjMainViewModel
         {
             get => _sdjMainViewModel;
@@ -105,6 +110,7 @@ namespace SharpDj.ViewModel
         }
 
         private Playlist _playlistVisibility = Playlist.Collapsed;
+
         public Playlist PlaylistVisibility
         {
             get => _playlistVisibility;
@@ -123,15 +129,16 @@ namespace SharpDj.ViewModel
                     {
                         if (!Directory.Exists("config"))
                             Directory.CreateDirectory("config");
-                        File.WriteAllText("config/playlist.json", serialized);
+
+                        File.WriteAllText(FilesPath.Instance.PlaylistConfig, serialized);
                         PlaylistCollectionSavedState = Clone.ClonWithJson(PlaylistCollection);
                     }
-                    //DO NOT SAY ANYTHGING, PLEASE, IM JUST DONE WITH IT. NEVER TOUCH IT AGAIN.
                 }
             }
         }
 
         private PlaylistMode _playlistMode = PlaylistMode.Playlist;
+
         public PlaylistMode PlaylistMode
         {
             get => _playlistMode;
@@ -145,6 +152,7 @@ namespace SharpDj.ViewModel
 
 
         private string _searchText;
+
         public string SearchText
         {
             get => _searchText;
@@ -155,7 +163,6 @@ namespace SharpDj.ViewModel
                 OnPropertyChanged("SearchText");
             }
         }
-
 
         #endregion Properties
 
@@ -171,7 +178,6 @@ namespace SharpDj.ViewModel
 
         private void SaveApply()
         {
-
         }
 
         #endregion Methods
@@ -179,9 +185,13 @@ namespace SharpDj.ViewModel
         #region Commands
 
         #region ActivatePlaylistCommand
+
         private RelayCommand _activatePlaylistCommand;
+
         public RelayCommand ActivatePlaylistCommand => _activatePlaylistCommand
-                                                       ?? (_activatePlaylistCommand = new RelayCommand(ActivatePlaylistCommandExecute, ActivatePlaylistCommandCanExecute));
+                                                       ?? (_activatePlaylistCommand =
+                                                           new RelayCommand(ActivatePlaylistCommandExecute,
+                                                               ActivatePlaylistCommandCanExecute));
 
         public bool ActivatePlaylistCommandCanExecute()
         {
@@ -197,15 +207,20 @@ namespace SharpDj.ViewModel
                 {
                     playlist.IsActive = false;
                 }
+
                 setActive.IsActive = true;
             }
         }
+
         #endregion
 
         #region PlaylistAddModel
+
         private RelayCommand _playlistAddModel;
+
         public RelayCommand PlaylistAddModel => _playlistAddModel
-                                                ?? (_playlistAddModel = new RelayCommand(PlaylistAddModelExecute, PlaylistAddModelCanExecute));
+                                                ?? (_playlistAddModel = new RelayCommand(PlaylistAddModelExecute,
+                                                    PlaylistAddModelCanExecute));
 
         public bool PlaylistAddModelCanExecute()
         {
@@ -215,14 +230,18 @@ namespace SharpDj.ViewModel
         public void PlaylistAddModelExecute()
         {
             SdjMainViewModel.PlaylistStateCollectionVisibility = PlaylistState.Add;
-
         }
+
         #endregion
 
         #region PlaylistDeleteModel
+
         private RelayCommand _playlistDeleteModel;
+
         public RelayCommand PlaylistDeleteModel => _playlistDeleteModel
-                                                   ?? (_playlistDeleteModel = new RelayCommand(PlaylistDeleteModelExecute, PlaylistDeleteModelCanExecute));
+                                                   ?? (_playlistDeleteModel =
+                                                       new RelayCommand(PlaylistDeleteModelExecute,
+                                                           PlaylistDeleteModelCanExecute));
 
         public bool PlaylistDeleteModelCanExecute()
         {
@@ -234,12 +253,16 @@ namespace SharpDj.ViewModel
             if (PlaylistCollection.FirstOrDefault(x => x.IsSelected) != null)
                 SdjMainViewModel.PlaylistStateCollectionVisibility = PlaylistState.Remove;
         }
+
         #endregion
 
         #region PlaylistEditModel
+
         private RelayCommand _playlistEditModel;
+
         public RelayCommand PlaylistEditModel => _playlistEditModel
-                                                 ?? (_playlistEditModel = new RelayCommand(PlaylistEditModelExecute, PlaylistEditModelCanExecute));
+                                                 ?? (_playlistEditModel = new RelayCommand(PlaylistEditModelExecute,
+                                                     PlaylistEditModelCanExecute));
 
         public bool PlaylistEditModelCanExecute()
         {
@@ -251,16 +274,21 @@ namespace SharpDj.ViewModel
             if (PlaylistCollection.FirstOrDefault(x => x.IsSelected) != null)
             {
                 SdjMainViewModel.PlaylistStateCollectionVisibility = PlaylistState.Rename;
-                SdjMainViewModel.SdjEditPlaylistCollectionViewModel.PlaylistName = SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection.FirstOrDefault(x => x.IsSelected)?.PlaylistName;
+                SdjMainViewModel.SdjEditPlaylistCollectionViewModel.PlaylistName = SdjMainViewModel.SdjPlaylistViewModel
+                    .PlaylistCollection.FirstOrDefault(x => x.IsSelected)?.PlaylistName;
             }
         }
+
         #endregion
 
         #region AddTrackToPlaylistCommand
+
         private RelayCommand _addTrackToPlaylistCommand;
+
         public RelayCommand AddTrackToPlaylistCommand => _addTrackToPlaylistCommand
                                                          ?? (_addTrackToPlaylistCommand =
-            new RelayCommand(AddTrackToPlaylistCommandExecute, AddTrackToPlaylistCommandCanExecute));
+                                                             new RelayCommand(AddTrackToPlaylistCommandExecute,
+                                                                 AddTrackToPlaylistCommandCanExecute));
 
         public bool AddTrackToPlaylistCommandCanExecute()
         {
@@ -269,21 +297,28 @@ namespace SharpDj.ViewModel
 
         public void AddTrackToPlaylistCommandExecute()
         {
-            SdjMainViewModel.SdjAddTrackToPlaylistCollectionViewModel.PlaylistCollection = new ObservableCollection<PlaylistToAddTrack>();
+            SdjMainViewModel.SdjAddTrackToPlaylistCollectionViewModel.PlaylistCollection =
+                new ObservableCollection<PlaylistToAddTrack>();
             var track = TrackCollection.FirstOrDefault(x => x.SongTimeVisibility == Visibility.Collapsed);
             foreach (var playlistModel in PlaylistCollection)
             {
                 SdjMainViewModel.SdjAddTrackToPlaylistCollectionViewModel.PlaylistCollection.Add(
                     new PlaylistToAddTrack(SdjMainViewModel, playlistModel, track));
             }
+
             SdjMainViewModel.PlaylistStateCollectionVisibility = PlaylistState.AddTrack;
         }
+
         #endregion
 
         #region OnEnterSearchVideoCommand
+
         private RelayCommand _onEnterSearchVideoCommand;
+
         public RelayCommand OnEnterSearchVideoCommand => _onEnterSearchVideoCommand
-                                                         ?? (_onEnterSearchVideoCommand = new RelayCommand(OnEnterSearchVideoCommandExecute, OnEnterSearchVideoCommandCanExecute));
+                                                         ?? (_onEnterSearchVideoCommand =
+                                                             new RelayCommand(OnEnterSearchVideoCommandExecute,
+                                                                 OnEnterSearchVideoCommandCanExecute));
 
         public bool OnEnterSearchVideoCommandCanExecute()
         {
@@ -314,9 +349,9 @@ namespace SharpDj.ViewModel
                 });
             }
         }
+
         #endregion
 
         #endregion Commands
-
     }
 }

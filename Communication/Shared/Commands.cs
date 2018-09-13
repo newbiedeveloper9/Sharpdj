@@ -22,11 +22,11 @@ namespace Communication.Shared
         public readonly Dictionary<string, string>
             CommandsDictionary = new Dictionary<string, string>()
             {
-                {"Success", "0xF"},
-                {"Error", "0xE"},
+                {"Success", "0x0"},
+                {"Error", "0x1"},
 
-                {"Register", "0x1"},
-                {"Login", "0x2"},
+                {"Register", "0x2"},
+                {"Login", "0x3"},
                 {"Disconnect", "0x4"},
                 {"GetPeoples", "0x5"},
                 {"ChangePassword", "0x6"},
@@ -36,13 +36,12 @@ namespace Communication.Shared
                 {"JoinRoom", "0xA"},
                 {"CreateRoom", "0xB"},
                 {"AfterLogin", "0xC"},
-                {"JoinQueue", "0x10"},
-                {"UpdateDj", "0x11"},
-                {"SendMessage", "0xD"}
+                {"JoinQueue", "0xD"},
+                {"UpdateDj", "0xE"},
+                {"SendMessage", "0xF"},
+                {"UpdateUserListInsideRoom", "0x10"}, //16
             };
 
-        /// <param name="message">text from receiver</param>
-        /// <returns>Returns command in index 0 and parameters in index 1+</returns>
         public List<string> GetMessageParameters(string message)
         {
             var list = new List<string>();

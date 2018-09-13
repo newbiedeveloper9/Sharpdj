@@ -15,7 +15,7 @@ namespace servertcp.ServerManagment.Commands
         {
             var sender = new ServerSender(client);
             var roomId = parameters[0];
- 
+
             if (!Utils.Instance.IsActiveLogin(client)) return;
             //select client class object wchich refer to user
             var userclient = DataSingleton.Instance.ServerClients[(int) client.ClientId].ToUserClient();
@@ -32,7 +32,20 @@ namespace servertcp.ServerManagment.Commands
 
             //add client to room
             room?.InsideInfo.Clients.Add(userclient);
-            
+
+            if (room?.InsideInfo.Clients != null)
+                foreach (var clientInstance in room.InsideInfo.Clients)
+                {
+                    if (clientInstance.Id == userclient.Id)
+                        continue;
+
+                    var clientServerInstance = DataSingleton.Instance.ServerClients.GetAllItems()
+                        .First(x => x.Id == clientInstance.Id);
+                    var clientServerSender = new ServerSender(clientServerInstance.Client);
+                    
+                    clientServerSender.UpdateUserListInsideRoom(room.InsideInfo.Clients, roomId);
+                }
+
             sender.JoinRoom(room?.InsideInfo, messageId);
         }
     }

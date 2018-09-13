@@ -47,18 +47,10 @@ namespace servertcp.ServerManagment
             DataSingleton.Instance.Rooms[0].InsideInfo.Djs.Add(new Songs("test", new List<Songs.Song>()));
 
             DataSingleton.Instance.Rooms[1].InsideInfo.Djs.Add(new Songs("host", new List<Songs.Song>()));
-            DataSingleton.Instance.Rooms[1].InsideInfo.Djs.Add(new Songs("test", new List<Songs.Song>()));
             DataSingleton.Instance.Rooms[1].InsideInfo.Djs[0].Video.Add(new Songs.Song(10, "mj-v6zCnEaw"));
-            DataSingleton.Instance.Rooms[1].InsideInfo.Djs[0].Video.Add(new Songs.Song(5, "JSQsIMgj1OM"));
-            DataSingleton.Instance.Rooms[1].InsideInfo.Djs[1].Video.Add(new Songs.Song(5, "JSQsIMgj1OM"));
-
 
             DataSingleton.Instance.Rooms[0].InsideInfo.Djs[0].Video.Add(new Songs.Song(10, "mj-v6zCnEaw"));
-            DataSingleton.Instance.Rooms[0].InsideInfo.Djs[0].Video.Add(new Songs.Song(5, "JSQsIMgj1OM"));
-            DataSingleton.Instance.Rooms[0].InsideInfo.Djs[1].Video.Add(new Songs.Song(3, "mj-v6zCnEaw"));
-            DataSingleton.Instance.Rooms[0].InsideInfo.Djs[1].Video.Add(new Songs.Song(2, "JSQsIMgj1OM"));
-            DataSingleton.Instance.Rooms[0].InsideInfo.Djs[1].Video.Add(new Songs.Song(3, "JSQsIMgj1OM"));
-            DataSingleton.Instance.Rooms[0].InsideInfo.TimeLeft = DataSingleton.Instance.Rooms[0].InsideInfo.Djs[0].Video[0].Time;
+            DataSingleton.Instance.Rooms[0].InsideInfo.Djs[1].Video.Add(new Songs.Song(5, "JSQsIMgj1OM"));
             
             PeriodicTask.StartNew(1000, TrackRefresh);
         }

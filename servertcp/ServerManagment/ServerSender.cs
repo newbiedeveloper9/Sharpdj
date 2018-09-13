@@ -45,10 +45,17 @@ namespace Communication.Server.Logic
             _senderUtility.ReplyToMessage(output, messId);
         }  
 
-        public void SendMessage(string text, int roomId, int userId)
+        public void SendMessage(string text, string roomId, int userId)
         {
             _senderUtility.SendMessage(Shared.Commands.Instance.CommandsDictionary["SendMessage"],
-                text, roomId.ToString(), userId.ToString());
+                text, roomId, userId.ToString());
+        }
+
+        public void UpdateUserListInsideRoom(List<UserClient> users, string roomId)
+        {
+            string output = JsonConvert.SerializeObject(users);
+            _senderUtility.SendMessage(Commands.Instance.CommandsDictionary["UpdateUserListInsideRoom"],
+                output, roomId);
         }
     }
 }

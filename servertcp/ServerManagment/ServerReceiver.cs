@@ -23,7 +23,7 @@ namespace servertcp.ServerManagment
                 new DisconnectCommand(),
                 new AfterLoginData(),
                 new JoinRoom(),
-                new SendMessageCommand(server),
+                new SendMessageChatCommand(server),
             };
         }
 

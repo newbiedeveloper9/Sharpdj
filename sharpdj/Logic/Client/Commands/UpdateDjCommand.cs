@@ -17,10 +17,9 @@ namespace SharpDj.Logic.Client.Commands
             
             var inside = JsonConvert.DeserializeObject<Room.InsindeInfo>(json);
 
-            sdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfPeopleInRoom = inside.Clients.Count;
+          //  sdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfPeopleInRoom = inside.Clients.Count;
             sdjMainViewModel.SdjBottomBarViewModel.BottomBarSizeOfPlaylistInRoom = inside.Djs.Count;
             sdjMainViewModel.SdjBottomBarViewModel.BottomBarMaxSizeOfPlaylistInRoom = 30;
-            sdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfPeopleInRoom = inside.Clients.Count;
             sdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfAdministrationInRoom =
                 inside.Clients.Count(x => x.Rank > 0);
             sdjMainViewModel.SdjRoomViewModel.SongsQueue = (sbyte)inside.Djs.SelectMany(dj => dj.Video).Count();

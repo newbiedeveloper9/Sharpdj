@@ -146,10 +146,8 @@ namespace SharpDj.ViewModel.Model
             SdjMainViewModel.SdjRoomViewModel.HostName = HostName;
             SdjMainViewModel.SdjRoomViewModel.UserList = inside.Clients;
 
-            SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfPeopleInRoom = inside.Clients.Count;
             SdjMainViewModel.SdjBottomBarViewModel.BottomBarSizeOfPlaylistInRoom = inside.Djs.Count;
             SdjMainViewModel.SdjBottomBarViewModel.BottomBarMaxSizeOfPlaylistInRoom = 30;
-            SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfPeopleInRoom = inside.Clients.Count;
             SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfAdministrationInRoom =
                 inside.Clients.Count(x => x.Rank > 0);
             SdjMainViewModel.SdjRoomViewModel.SongsQueue = (sbyte)inside.Djs.SelectMany(dj => dj.Video).Count();

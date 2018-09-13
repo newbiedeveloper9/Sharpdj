@@ -52,7 +52,22 @@ namespace SharpDj.ViewModel
 
         #region Properties
 
-        public List<UserClient> UserList;
+        private List<UserClient> _userList;
+        public List<UserClient> UserList
+        { 
+            get => _userList;
+            set
+            {
+                if (_userList == value) return;
+                _userList = value;
+                OnPropertyChanged("UserList");
+
+                SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfPeopleInRoom = UserList.Count;
+                SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfAdministrationInRoom =
+                    value.Count(x => x.Rank > 0);
+            }
+        }
+
 
         public int RoomId { get; set; }
 

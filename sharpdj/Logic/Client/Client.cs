@@ -38,7 +38,7 @@ namespace SharpDj.Logic.Client
             ClientInfo.Instance.Client.Disconnected += Client_Disconnected;
             ClientInfo.Instance.ReplyMessenger = new RequestReplyMessenger<IScsClient>(ClientInfo.Instance.Client);
             ClientInfo.Instance.ReplyMessenger.Start();
-            //ClientInfo.Instance.Client.ConnectTimeout = 400;
+            ClientInfo.Instance.Client.ConnectTimeout = 400;
             while (ClientInfo.Instance.Client.CommunicationState == CommunicationStates.Disconnected)
             {
                 try
@@ -71,6 +71,7 @@ namespace SharpDj.Logic.Client
         
         private void Client_Disconnected(object sender, EventArgs e)
         {
+            
             _debug.Log("Disconnected");
             SdjMainViewModel.MainViewVisibility = MainView.Login;
         }

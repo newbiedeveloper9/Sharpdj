@@ -10,11 +10,11 @@ using Hik.Communication.Scs.Server;
 
 namespace servertcp.ServerManagment.Commands
 {
-    public class SendMessageCommand : ICommand
+    public class SendMessageChatCommand : ICommand
     {
         private readonly IScsServer _server;
 
-        public SendMessageCommand(IScsServer server)
+        public SendMessageChatCommand(IScsServer server)
         {
             this._server = server;
         }
@@ -25,14 +25,16 @@ namespace servertcp.ServerManagment.Commands
         public void Run(IScsServerClient client,
             List<string> parameters,
             string messageId)
-        {
+        {            
+            if (!Utils.Instance.IsActiveLogin(client)) return;
+
             string text = parameters[0];
-            int roomId = Convert.ToInt32(parameters[1]);
+            string roomId = parameters[1];
 
             if (!string.IsNullOrWhiteSpace(text))
             {
                 var room = DataSingleton.Instance.Rooms.GetAllItems()
-                    .First(x => x.Id == roomId);
+                    .First(x => x.Id == Convert.ToInt32(roomId));
 
                 foreach (var clientInstance in room.InsideInfo.Clients)
                 {

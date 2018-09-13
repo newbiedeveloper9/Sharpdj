@@ -8,6 +8,7 @@ using Communication.Server;
 using Communication.Shared;
 using Hik.Communication.Scs.Client;
 using SharpDj.Logic.Client.Commands;
+using SharpDj.Logic.Helpers;
 using SharpDj.ViewModel;
 
 namespace Communication.Client.Logic
@@ -23,7 +24,8 @@ namespace Communication.Client.Logic
             _commands = new List<ICommand>()
             {
                 new UpdateDjCommand(),
-                new SendMessageChatCommand()
+                new SendMessageChatCommand(),
+                new UpdateUserListInsideRoomCommand(),
             };
         }
 
@@ -31,7 +33,14 @@ namespace Communication.Client.Logic
         {
             var command = Commands.Instance.GetMessageCommand(message);
             var commandClass = _commands.FirstOrDefault(x => x.CommandText.Equals(command));
-            commandClass?.Run(_sdjMainViewModel, Commands.Instance.GetMessageParameters(message));
+            try
+            {
+                commandClass?.Run(_sdjMainViewModel, Commands.Instance.GetMessageParameters(message));
+            }
+            catch (Exception e)
+            {
+                new ExceptionLogger(e);
+            }
 
             /*Need to implement receiver same as in Server*/
 
