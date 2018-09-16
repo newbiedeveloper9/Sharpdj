@@ -51,9 +51,9 @@ namespace Communication.Server.Logic
                 text, roomId, userId.ToString());
         }
 
-        public void UpdateUserListInsideRoom(List<UserClient> users, string roomId)
+        public void UpdateUserListInsideRoom(UserClient user, string roomId)
         {
-            string output = JsonConvert.SerializeObject(users);
+            string output = JsonConvert.SerializeObject(user);
             _senderUtility.SendMessage(Commands.Instance.CommandsDictionary["UpdateUserListInsideRoom"],
                 output, roomId);
         }

@@ -9,7 +9,8 @@ namespace servertcp.ServerManagment.Commands
 {
     public class JoinRoom : ICommand
     {
-        public string CommandText { get; } = Communication.Shared.Commands.Instance.CommandsDictionary["JoinRoom"];
+        public string CommandText { get; } = 
+            Communication.Shared.Commands.Instance.CommandsDictionary["JoinRoom"];
 
         public void Run(IScsServerClient client, List<string> parameters, string messageId)
         {
@@ -20,7 +21,8 @@ namespace servertcp.ServerManagment.Commands
             //select client class object wchich refer to user
             var userclient = DataSingleton.Instance.ServerClients[(int) client.ClientId].ToUserClient();
             //select room to join
-            var room = DataSingleton.Instance.Rooms.GetAllItems().FirstOrDefault(x => x.Id == Convert.ToInt32(roomId));
+            var room = DataSingleton.Instance.Rooms.GetAllItems().
+                FirstOrDefault(x => x.Id == Convert.ToInt32(roomId));
             //Set user to max 1 room, remove from other instances
             var getRoomsWithSpecificUser = DataSingleton.Instance.Rooms.GetAllItems()
                 .Where(x => x.InsideInfo.Clients.Exists(y => y.Id == userclient.Id));
@@ -43,7 +45,7 @@ namespace servertcp.ServerManagment.Commands
                         .First(x => x.Id == clientInstance.Id);
                     var clientServerSender = new ServerSender(clientServerInstance.Client);
                     
-                    clientServerSender.UpdateUserListInsideRoom(room.InsideInfo.Clients, roomId);
+                    clientServerSender.UpdateUserListInsideRoom(userclient, roomId);
                 }
 
             sender.JoinRoom(room?.InsideInfo, messageId);

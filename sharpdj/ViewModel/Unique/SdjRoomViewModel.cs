@@ -28,6 +28,7 @@ namespace SharpDj.ViewModel
         {
             SdjMainViewModel = main;
             RoomMessageCollection = new ObservableCollection<RoomMessageModel>();
+            UserList = new MyUserList(main);
 
 /*          var vlcPlayer = new SdjVlcPlayer();
             var vlcLibDirectory = new DirectoryInfo(System.IO.Path.Combine(Environment.CurrentDirectory, "libvlc", IntPtr.Size == 4 ? "win-x86" : "win-x64"));
@@ -35,7 +36,7 @@ namespace SharpDj.ViewModel
             vlcPlayer.VlcPlayer.SourceProvider.MediaPlayer.Play("https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_5mb.mp4");
             MyVlcPlayer.Add(vlcPlayer);*/
 
-            
+
             var mess = new RoomMessageModel(main)
             {
                 Message =
@@ -43,7 +44,7 @@ namespace SharpDj.ViewModel
                 Time = "13:03",
                 Username = "Crisey"
             };
-            
+
             for (int i = 0; i < 2; i++)
                 RoomMessageCollection.Add(mess);
         }
@@ -52,19 +53,16 @@ namespace SharpDj.ViewModel
 
         #region Properties
 
-        private List<UserClient> _userList;
-        public List<UserClient> UserList
-        { 
+        private MyUserList _userList;
+
+        public MyUserList UserList
+        {
             get => _userList;
             set
             {
                 if (_userList == value) return;
                 _userList = value;
                 OnPropertyChanged("UserList");
-
-                SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfPeopleInRoom = UserList.Count;
-                SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfAdministrationInRoom =
-                    value.Count(x => x.Rank > 0);
             }
         }
 
@@ -206,7 +204,8 @@ namespace SharpDj.ViewModel
         }
 
 
-        private ObservableCollection<RoomMessageModel> _roomMessageCollection = new ObservableCollection<RoomMessageModel>();
+        private ObservableCollection<RoomMessageModel> _roomMessageCollection =
+            new ObservableCollection<RoomMessageModel>();
 
         public ObservableCollection<RoomMessageModel> RoomMessageCollection
         {
@@ -218,11 +217,12 @@ namespace SharpDj.ViewModel
                 OnPropertyChanged("RoomMessageCollection");
             }
         }
-        
-        
+
+
         private string _myChatMessage;
+
         public string MyChatMessage
-        { 
+        {
             get => _myChatMessage;
             set
             {
@@ -235,6 +235,24 @@ namespace SharpDj.ViewModel
         #endregion Properties
 
         #region Methods
+
+        public class MyUserList : List<UserClient>
+        {
+            private readonly SdjMainViewModel SdjMainViewModel;
+
+            public MyUserList(SdjMainViewModel sdjMainViewModel)
+            {
+                SdjMainViewModel = sdjMainViewModel;
+            }
+
+            public new void Add(UserClient tmp)
+            {
+                base.Add(tmp);
+                SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfPeopleInRoom = this.Count;
+                SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfAdministrationInRoom =
+                    this.Count(x => x.Rank > 0);
+            }
+        }
 
         #endregion Methods
 
@@ -406,15 +424,18 @@ namespace SharpDj.ViewModel
         }
 
         #endregion
-        
+
         #region SendMessageCommand
+
         private RelayCommand _sendMessageCommand;
+
         public RelayCommand SendMessageCommand
         {
             get
             {
                 return _sendMessageCommand
-                       ?? (_sendMessageCommand = new RelayCommand(SendMessageCommandExecute, SendMessageCommandCanExecute));
+                       ?? (_sendMessageCommand =
+                           new RelayCommand(SendMessageCommandExecute, SendMessageCommandCanExecute));
             }
         }
 
@@ -427,6 +448,7 @@ namespace SharpDj.ViewModel
         {
             SdjMainViewModel.Client.Sender.SendMessage(MyChatMessage, RoomId.ToString());
         }
+
         #endregion
 
         #endregion Commands

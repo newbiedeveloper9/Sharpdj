@@ -16,8 +16,11 @@ namespace SharpDj.Logic.Client.Commands
             var json = parameters[0];
             var roomId = parameters[1];
 
-            sdjMainViewModel.SdjRoomViewModel.UserList =
-                JsonConvert.DeserializeObject<List<UserClient>>(json);
+            /*sdjMainViewModel.SdjRoomViewModel.UserList =
+                */
+            sdjMainViewModel.SdjRoomViewModel.UserList.Add
+                (JsonConvert.DeserializeObject<UserClient>(json));
+            
         }
     }
 }

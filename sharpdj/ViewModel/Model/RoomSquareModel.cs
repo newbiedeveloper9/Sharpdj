@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
+using Communication.Client;
 using Communication.Shared;
 using Hik.Communication.Scs.Communication.Messages;
 using Newtonsoft.Json;
@@ -144,7 +146,8 @@ namespace SharpDj.ViewModel.Model
             SdjMainViewModel.SdjBottomBarViewModel.BottomBarRoomName = RoomName;
             SdjMainViewModel.SdjRoomViewModel.RoomName = RoomName;
             SdjMainViewModel.SdjRoomViewModel.HostName = HostName;
-            SdjMainViewModel.SdjRoomViewModel.UserList = inside.Clients;
+            SdjMainViewModel.SdjRoomViewModel.UserList = new SdjRoomViewModel.MyUserList(SdjMainViewModel);
+            inside.Clients.ForEach(x => SdjMainViewModel.SdjRoomViewModel.UserList.Add(x));
 
             SdjMainViewModel.SdjBottomBarViewModel.BottomBarSizeOfPlaylistInRoom = inside.Djs.Count;
             SdjMainViewModel.SdjBottomBarViewModel.BottomBarMaxSizeOfPlaylistInRoom = 30;
