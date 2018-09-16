@@ -35,18 +35,6 @@ namespace SharpDj.ViewModel
             vlcPlayer.VlcPlayer.SourceProvider.CreatePlayer(vlcLibDirectory);
             vlcPlayer.VlcPlayer.SourceProvider.MediaPlayer.Play("https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_5mb.mp4");
             MyVlcPlayer.Add(vlcPlayer);*/
-
-
-            var mess = new RoomMessageModel(main)
-            {
-                Message =
-                    "Test",
-                Time = "13:03",
-                Username = "Crisey"
-            };
-
-            for (int i = 0; i < 2; i++)
-                RoomMessageCollection.Add(mess);
         }
 
         #endregion .ctor
@@ -204,8 +192,7 @@ namespace SharpDj.ViewModel
         }
 
 
-        private ObservableCollection<RoomMessageModel> _roomMessageCollection =
-            new ObservableCollection<RoomMessageModel>();
+        private ObservableCollection<RoomMessageModel> _roomMessageCollection;
 
         public ObservableCollection<RoomMessageModel> RoomMessageCollection
         {
@@ -248,6 +235,27 @@ namespace SharpDj.ViewModel
             public new void Add(UserClient tmp)
             {
                 base.Add(tmp);
+                this.RefreshMembersData();
+            }
+
+            public new void RemoveAt(UserClient tmp)
+            {
+                for (int i = 0; i < base.Count; i++)
+                {
+                    Console.WriteLine(base[i].Username);
+                }
+
+                base.RemoveAt(base.FindIndex(x => x.Id == tmp.Id));
+                this.RefreshMembersData();
+                
+                for (int i = 0; i < base.Count; i++)
+                {
+                    Console.WriteLine(base[i].Username);
+                }
+            }
+
+            private void RefreshMembersData()
+            {
                 SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfPeopleInRoom = this.Count;
                 SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfAdministrationInRoom =
                     this.Count(x => x.Rank > 0);

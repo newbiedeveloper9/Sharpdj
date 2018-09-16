@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
+using System.Threading;
 using Communication.Server;
 using SharpDj.ViewModel;
 using SharpDj.ViewModel.Model;
+using Vlc.DotNet.Core.Interops.Signatures;
 
 namespace SharpDj.Logic.Client.Commands
 {
@@ -17,28 +19,26 @@ namespace SharpDj.Logic.Client.Commands
         public void Run(SdjMainViewModel sdjMainViewModel,
             List<string> parameters)
         {
-            
+            var uiContext = SynchronizationContext.Current;
+
             var text = parameters[0];
             var roomId = parameters[1];
             var userId = parameters[2];
-            var time = DateTime.Now.ToShortTimeString();
 
 
             var mess = new RoomMessageModel(sdjMainViewModel)
             {
-                Username = "",
-                Time = time,
-                Message = text
+                Time = DateTime.Now.ToShortTimeString(),
+                Message = text,
+                Username = sdjMainViewModel.SdjRoomViewModel.UserList
+                    .First(x => x.Id == Convert.ToInt64(userId))
+                    ?.Username
             };
-            
-            var username = sdjMainViewModel.SdjRoomViewModel.UserList
-                .First(x => x.Id == Convert.ToInt64(userId))
-                ?.Username;
-            
+            uiContext.Send(x => sdjMainViewModel.SdjRoomViewModel.RoomMessageCollection.Add(mess), null);
 
-            var tmp = new ObservableCollection<RoomMessageModel>(
+            /*var tmp = new ObservableCollection<RoomMessageModel>(
                 sdjMainViewModel.SdjRoomViewModel.RoomMessageCollection) {mess};
-            sdjMainViewModel.SdjRoomViewModel.RoomMessageCollection = tmp;
+            sdjMainViewModel.SdjRoomViewModel.RoomMessageCollection = tmp;*/
         }
     }
 }

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Communication.Client;
 using Communication.Shared;
-using Hik.Communication.Scs.Client;
-using Hik.Communication.Scs.Communication.Messages;
-using Hik.Communication.Scs.Communication.Messengers;
 using Hik.Communication.Scs.Server;
 using Newtonsoft.Json;
 
@@ -51,10 +47,17 @@ namespace Communication.Server.Logic
                 text, roomId, userId.ToString());
         }
 
-        public void UpdateUserListInsideRoom(UserClient user, string roomId)
+        public void AddUserToRoom(UserClient user, string roomId)
         {
             string output = JsonConvert.SerializeObject(user);
-            _senderUtility.SendMessage(Commands.Instance.CommandsDictionary["UpdateUserListInsideRoom"],
+            _senderUtility.SendMessage(Commands.Instance.CommandsDictionary["AddUserToRoom"],
+                output, roomId);
+        }
+
+        public void RemoveUserFromRoom(UserClient user, string roomId)
+        {
+            string output = JsonConvert.SerializeObject(user);
+            _senderUtility.SendMessage(Commands.Instance.CommandsDictionary["RemoveUserFromRoom"],
                 output, roomId);
         }
     }

@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Communication.Shared
 {
@@ -39,14 +34,15 @@ namespace Communication.Shared
                 {"JoinQueue", "0xD"},
                 {"UpdateDj", "0xE"},
                 {"SendMessage", "0xF"},
-                {"UpdateUserListInsideRoom", "0x10"}, //16
+                {"AddUserToRoom", "0x10"}, //16
+                {"RemoveUserFromRoom", "0x11"}
             };
 
         public List<string> GetMessageParameters(string message)
         {
             var list = new List<string>();
             message = message.Substring(message.IndexOf(' ') + 1);
-            
+
             list.AddRange(message.Split('$'));
             return list;
         }

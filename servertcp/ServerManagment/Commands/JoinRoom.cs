@@ -29,6 +29,19 @@ namespace servertcp.ServerManagment.Commands
             foreach (var roomActive in getRoomsWithSpecificUser)
             {
                 var index = roomActive.InsideInfo.Clients.FindIndex(x => x.Id == userclient.Id);
+                
+                foreach (var clientInstance in roomActive.InsideInfo.Clients)
+                {
+                    if (clientInstance.Id == userclient.Id)
+                        continue;
+
+                    var clientServerInstance = DataSingleton.Instance.ServerClients.GetAllItems()
+                        .First(x => x.Id == clientInstance.Id);
+                    var clientServerSender = new ServerSender(clientServerInstance.Client);
+                    
+                    clientServerSender.RemoveUserFromRoom(userclient, roomActive.Id.ToString());
+                }
+                
                 roomActive.InsideInfo.Clients.RemoveAt(index);
             }
 
@@ -45,7 +58,7 @@ namespace servertcp.ServerManagment.Commands
                         .First(x => x.Id == clientInstance.Id);
                     var clientServerSender = new ServerSender(clientServerInstance.Client);
                     
-                    clientServerSender.UpdateUserListInsideRoom(userclient, roomId);
+                    clientServerSender.AddUserToRoom(userclient, roomId);
                 }
 
             sender.JoinRoom(room?.InsideInfo, messageId);

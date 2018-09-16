@@ -151,8 +151,6 @@ namespace SharpDj.ViewModel.Model
 
             SdjMainViewModel.SdjBottomBarViewModel.BottomBarSizeOfPlaylistInRoom = inside.Djs.Count;
             SdjMainViewModel.SdjBottomBarViewModel.BottomBarMaxSizeOfPlaylistInRoom = 30;
-            SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfAdministrationInRoom =
-                inside.Clients.Count(x => x.Rank > 0);
             SdjMainViewModel.SdjRoomViewModel.SongsQueue = (sbyte)inside.Djs.SelectMany(dj => dj.Video).Count();
 
             var tmp = YoutubeSingleton.Instance.YtClient.GetVideoAsync(inside.Djs[0].Video[0].Id).Result;
