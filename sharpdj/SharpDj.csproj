@@ -97,6 +97,7 @@
     <Compile Include="Core\Extensions\NotifyObject.cs" />
     <Compile Include="Core\Extensions\RelayCommand.cs" />
     <Compile Include="Core\RelayCommand.cs" />
+    <Compile Include="Enums\Helpers\GetImageVisibility.cs" />
     <Compile Include="Enums\Menu\LeftBar.cs" />
     <Compile Include="Enums\Menu\MainView.cs" />
     <Compile Include="Enums\Playlist\Playlist.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="ViewModel\Global\SdjUserProfileViewModel.cs" />
     <Compile Include="ViewModel\Helpers\PasswordBoxBindingBehavior.cs" />
     <Compile Include="ViewModel\Helpers\SdjBackgroundForFormsViewModel.cs" />
+    <Compile Include="ViewModel\Helpers\SdjGetImageViewModel.cs" />
     <Compile Include="ViewModel\Model\FavoriteRoomsModel.cs" />
     <Compile Include="ViewModel\Model\PlaylistModel.cs" />
     <Compile Include="ViewModel\Model\PlaylistToAddTrack.cs" />
@@ -159,6 +161,9 @@
     <Compile Include="View\UserControls\Helpers\SdjBackgroundForForms.xaml.cs">
       <DependentUpon>SdjBackgroundForForms.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControls\Helpers\SdjGetImageUserControl.xaml.cs">
+      <DependentUpon>SdjGetImageUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserControls\Playlist\SdjAddPlaylistCollectionView.xaml.cs">
       <DependentUpon>SdjAddPlaylistCollectionView.xaml</DependentUpon>
     </Compile>
@@ -186,6 +191,9 @@
     <Compile Include="ViewModel\Model\RoomSquareModel.cs" />
     <Compile Include="View\UserControls\Helpers\SdjTitleBarForUserControls.xaml.cs">
       <DependentUpon>SdjTitleBarForUserControls.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\UniqueViews\SdjCreateServerUserControl.xaml.cs">
+      <DependentUpon>SdjCreateServerUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\UniqueViews\SdjFeedbackUserControl.xaml.cs">
       <DependentUpon>SdjFeedbackUserControl.xaml</DependentUpon>
@@ -255,6 +263,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UserControls\Helpers\SdjGetImageUserControl.xaml" />
     <Page Include="View\UserControls\Playlist\SdjAddPlaylistCollectionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -291,6 +300,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UserControls\UniqueViews\SdjCreateServerUserControl.xaml" />
     <Page Include="View\UserControls\UniqueViews\SdjFeedbackUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

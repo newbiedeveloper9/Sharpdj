@@ -27,7 +27,7 @@ namespace SharpDj.Logic.Client
         public ClientConfig Config { get; } = ClientConfig.LoadConfig();
         private Debug _debug;
 
-        public void Start(SdjMainViewModel main)
+        public Client Start(SdjMainViewModel main)
         {
             SdjMainViewModel = main;
             Receiver = new ClientReceiver(main);
@@ -57,6 +57,7 @@ namespace SharpDj.Logic.Client
             PeriodicTask.StartNew(80, RefreshData);
 
             Sender = new ClientSender(ClientInfo.Instance.Client, ClientInfo.Instance.ReplyMessenger);
+            return this;
         }
 
         #region  Methods
