@@ -195,7 +195,7 @@
             ConverterParameter={x:Static enums:Helpers.GetImageVisibility.Main}, Mode=TwoWay}">
             <Grid DataContext="{Binding SdjGetImageViewModel}">
                 <helpers:SdjBackgroundForForms />
-                <helpers:SdjGetImageUserControl Width="700" Height="500" />
+                <helpers:SdjGetImageUserControl Width="740" Height="470" />
             </Grid>
         </Grid>
     </Grid>

@@ -1,22 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Net;
-using System.Security.Policy;
 using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
+using System.Xml;
+using System.Xml.XPath;
+using Debug = Communication.Shared.Debug;
 
-namespace SharpDj.Models.Helpers
+namespace SharpDj.Logic.Helpers
 {
     class Imgur
     {
         public string ApiKey { get; set; } = "3f25bffad37f3b8";
 
-        public void AnonymousImageUpload(string path, bool local = true)
+        public string AnonymousImageUpload(string path, bool local = true)
         {
+            XmlDocument doc = new XmlDocument();
+            var debug = new Debug("Imgur");
             try
             {
                 using (var w = new WebClient())
@@ -38,16 +40,26 @@ namespace SharpDj.Models.Helpers
                     }
 
                     w.Headers.Add("Authorization", "Client-ID " + ApiKey);
+                    debug.Log("Uploading image");
                     var response = w.UploadValues("https://api.imgur.com/3/upload.xml", values);
                     var responseString = Encoding.UTF8.GetString(response);
 
-                    Console.WriteLine(responseString);
+                    doc.LoadXml(responseString);
+
+                    if (doc.ChildNodes[1].Attributes[2].InnerText.Equals("200"))
+                    {
+                        debug.Log("Success");
+                        return doc.DocumentElement.ChildNodes.Item(26).InnerText;
+                    }
+
+                    debug.Log("Error with xml parsing");
+                    return string.Empty;
                 }
             }
             catch (Exception ex)
             {
-                var error = ex.Message;
-                Console.WriteLine(error);
+                new ExceptionLogger(ex);
+                return string.Empty;
             }
         }
     }

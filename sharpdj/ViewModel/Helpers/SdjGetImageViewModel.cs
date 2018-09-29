@@ -1,6 +1,17 @@
-﻿using Microsoft.Win32;
+﻿using System;
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Threading;
+using Microsoft.Win32;
 using SharpDj.Core;
 using SharpDj.Enums.Helpers;
+using SharpDj.Logic.Helpers;
+using SharpDj.Models.Helpers;
 
 namespace SharpDj.ViewModel.Helpers
 {
@@ -16,7 +27,32 @@ namespace SharpDj.ViewModel.Helpers
 
         #region Properties
 
-        private string _localPathToImg;
+        public string PathToImage = string.Empty;
+        
+        private bool _isLoading;
+        public bool isLoading
+        {
+            get => _isLoading;
+            set
+            {
+                if (_isLoading == value) return;
+                _isLoading = value;
+                OnPropertyChanged("isLoading");
+            }
+        }
+
+        private ImageBrush _mainImage;
+        public ImageBrush MainImage
+        {
+            get => _mainImage;
+            set
+            {
+                if (_mainImage == value) return;
+                _mainImage = value;
+                OnPropertyChanged("MainImage");
+            }
+        }
+
 
         #region ViewModels
 
@@ -45,7 +81,6 @@ namespace SharpDj.ViewModel.Helpers
         }
 
         private SdjBackgroundForFormsViewModel _sdjBackgroundForFormsViewModel;
-
         public SdjBackgroundForFormsViewModel SdjBackgroundForFormsViewModel
         {
             get => _sdjBackgroundForFormsViewModel;
@@ -62,7 +97,7 @@ namespace SharpDj.ViewModel.Helpers
         #endregion
 
         #region Methods
-        
+
         private void CloseForm()
         {
             SdjMainViewModel.GetImageVisibility = GetImageVisibility.Collapsed;
@@ -95,8 +130,26 @@ namespace SharpDj.ViewModel.Helpers
         {
             var openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image files (*.png;*.jpeg)|*.png;*.jpeg,*.jpg,*.JPG,*|All files (*.*)|*.*";
+            
             if (openFileDialog.ShowDialog() == true)
-                _localPathToImg = openFileDialog.FileName;
+            {
+                MainImage = new ImageBrush();
+
+                Task.Factory.StartNew(() =>
+                {
+                    isLoading = true;
+                    var imgur = new Imgur();
+                    PathToImage = imgur.AnonymousImageUpload(openFileDialog.FileName);
+                        
+                    Application.Current.Dispatcher.Invoke(new Action(() =>
+                    {
+                        var img = new BitmapImage(new Uri(PathToImage));
+                        MainImage.ImageSource = img;
+                    }));
+                    
+                    isLoading = false;
+                });
+            }
         }
 
         #endregion
@@ -126,15 +179,18 @@ namespace SharpDj.ViewModel.Helpers
         }
 
         #endregion
-        
+
         #region AcceptChangesCommand
+
         private RelayCommand _acceptChangesCommand;
+
         public RelayCommand AcceptChangesCommand
         {
             get
             {
                 return _acceptChangesCommand
-                       ?? (_acceptChangesCommand = new RelayCommand(AcceptChangesCommandExecute, AcceptChangesCommandCanExecute));
+                       ?? (_acceptChangesCommand =
+                           new RelayCommand(AcceptChangesCommandExecute, AcceptChangesCommandCanExecute));
             }
         }
 
@@ -145,8 +201,8 @@ namespace SharpDj.ViewModel.Helpers
 
         public void AcceptChangesCommandExecute()
         {
-            
         }
+
         #endregion
 
         #endregion
