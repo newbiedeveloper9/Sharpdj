@@ -6,7 +6,11 @@
              xmlns:local="clr-namespace:SharpDj.View.UserControls.Helpers"
              xmlns:converters="clr-namespace:SharpDj.Converters"
              Height="400"
+             Width="400"
              mc:Ignorable="d">
+    
+    <!--this usercontrol is for design refactor, my target is smth like this: http://prntscr.com/l0hzjw -->
+    
 <UserControl.Resources>
     <Color x:Key="FilledColor" A="255" B="155" R="155" G="155"/>
     <Color x:Key="UnfilledColor" A="0" B="155" R="155" G="155"/>
@@ -150,6 +154,13 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
+            <Grid Grid.Column="1">
+                <Control Style="{StaticResource BusyAnimationStyle}" Width="100" Height="100" Visibility="{Binding isLoading, Converter={converters:BoolVisibilityConverter}}"/>
+
+                <Border Margin="35 20 35 20" BorderThickness="2" BorderBrush="{StaticResource BlackBrush}" Background="{Binding MainImage}">
+                </Border>
+            </Grid>
+            
             <!--Leftbar-->
             <StackPanel Margin="0 0 0 0" Background="{StaticResource BlackBrush}">
                 <Grid Background="{StaticResource BlackBrush}">
@@ -168,6 +179,29 @@
                         <TextBlock Text="Dodaj link" VerticalAlignment="Center" HorizontalAlignment="Center"  FontSize="18" FontWeight="Bold"/>
                     </Button>
                 </Grid>
+                <!--Link-->
+                <Grid Background="{StaticResource BlackBrush}"
+                      Visibility="{Binding GetImageByLinkVisibility, Converter={converters:BoolVisibilityConverter}}">
+                    
+                    <TextBox Text="{Binding LinkToUpload, UpdateSourceTrigger=PropertyChanged}" Foreground="White" Style="{StaticResource IconTextbox}" BorderThickness="0" FontSize="14" x:Name="SearchTermTextBox" VerticalAlignment="Center" Margin="0 0 0 0">
+                        <TextBox.InputBindings>
+                            <KeyBinding Command="{Binding SendLinkCommand}" Key="Enter" />
+                        </TextBox.InputBindings>
+                    </TextBox>
+                    <Label Content="Link to image" VerticalAlignment="Center" IsHitTestVisible="False" HorizontalAlignment="Left" Foreground="#bbbbbb" FontSize="14">
+                        <Label.Style>
+                            <Style TargetType="{x:Type Label}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=SearchTermTextBox}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Label.Style>
+                    </Label>
+                    
+                </Grid>
                 <!--Accept Changes-->
                 <Grid Background="{StaticResource BlackBrush}">
                     <Button Style="{StaticResource IconButtonMouseOver}" Foreground="white" BorderThickness="0"
@@ -176,15 +210,7 @@
                         <TextBlock Text="Akceptuj" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
                     </Button>
                 </Grid>
-            </StackPanel>
-
-            <Grid Grid.Column="1">
-                <Control Style="{StaticResource BusyAnimationStyle}" Width="100" Height="100" Visibility="{Binding isLoading, Converter={converters:BoolVisibilityConverter}}"/>
-
-                <Border Margin="35 20 35 20" BorderThickness="2" BorderBrush="{StaticResource BlackBrush}" Background="{Binding MainImage}">
-                </Border>
-            </Grid>
+            </StackPanel>     
         </Grid>
-
     </Grid>
 </UserControl>

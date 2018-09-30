@@ -83,9 +83,10 @@ namespace SharpDj.Logic.Client
 
             if (message == null)
                 return;
-
+            
             Debug.Log("Receiver", message.Text);
-            Console.WriteLine(message.RepliedMessageId);
+            Debug.Log("Message Id", message.RepliedMessageId);
+            
             Receiver.ParseMessage(ClientInfo.Instance.Client, message.Text);
         }
 

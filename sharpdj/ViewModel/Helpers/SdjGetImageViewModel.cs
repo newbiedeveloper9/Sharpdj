@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using Communication.Shared;
 using Microsoft.Win32;
 using SharpDj.Core;
 using SharpDj.Enums.Helpers;
@@ -28,6 +29,30 @@ namespace SharpDj.ViewModel.Helpers
         #region Properties
 
         public string PathToImage = string.Empty;
+
+        private string _linkToUpload;
+        public string LinkToUpload
+        { 
+            get => _linkToUpload;
+            set
+            {
+                if (_linkToUpload == value) return;
+                _linkToUpload = value;
+                OnPropertyChanged("LinkToUpload");
+            }
+        }
+        
+        private bool _getImageByLinkVisibility;
+        public bool GetImageByLinkVisibility
+        { 
+            get => _getImageByLinkVisibility;
+            set
+            {
+                if (_getImageByLinkVisibility == value) return;
+                _getImageByLinkVisibility = value;
+                OnPropertyChanged("GetImageByLinkVisibility");
+            }
+        }
         
         private bool _isLoading;
         public bool isLoading
@@ -103,6 +128,27 @@ namespace SharpDj.ViewModel.Helpers
             SdjMainViewModel.GetImageVisibility = GetImageVisibility.Collapsed;
         }
 
+        private void SetImage(string imgLink, bool local)
+        {
+            isLoading = true;
+            var imgur = new Imgur();
+            PathToImage = imgur.AnonymousImageUpload(imgLink, local);
+            if (string.IsNullOrEmpty(PathToImage))
+            {
+                isLoading = false;
+                Debug.Log("Get Image", "Fail with upload img, empty string");
+                return;
+            }
+
+            Application.Current.Dispatcher.Invoke(new Action(() =>
+            {
+                var img = new BitmapImage(new Uri(PathToImage));
+                MainImage.ImageSource = img;
+            }));
+                    
+            isLoading = false;
+        } 
+        
         #endregion
 
         #region Commands
@@ -134,21 +180,7 @@ namespace SharpDj.ViewModel.Helpers
             if (openFileDialog.ShowDialog() == true)
             {
                 MainImage = new ImageBrush();
-
-                Task.Factory.StartNew(() =>
-                {
-                    isLoading = true;
-                    var imgur = new Imgur();
-                    PathToImage = imgur.AnonymousImageUpload(openFileDialog.FileName);
-                        
-                    Application.Current.Dispatcher.Invoke(new Action(() =>
-                    {
-                        var img = new BitmapImage(new Uri(PathToImage));
-                        MainImage.ImageSource = img;
-                    }));
-                    
-                    isLoading = false;
-                });
+                Task.Factory.StartNew(() => SetImage(openFileDialog.FileName, true));
             }
         }
 
@@ -175,7 +207,8 @@ namespace SharpDj.ViewModel.Helpers
 
         public void AddImageByUrlCommandExecute()
         {
-            SdjMainViewModel.GetImageVisibility = GetImageVisibility.GetByLink;
+            LinkToUpload = string.Empty;
+            GetImageByLinkVisibility = !GetImageByLinkVisibility;
         }
 
         #endregion
@@ -203,6 +236,30 @@ namespace SharpDj.ViewModel.Helpers
         {
         }
 
+        #endregion
+        
+        #region SendLinkCommand
+        private RelayCommand _sendLinkCommand;
+        public RelayCommand SendLinkCommand
+        {
+            get
+            {
+                return _sendLinkCommand
+                       ?? (_sendLinkCommand = new RelayCommand(SendLinkCommandExecute, SendLinkCommandCanExecute));
+            }
+        }
+
+        public bool SendLinkCommandCanExecute()
+        {
+            return true;
+        }
+
+        public void SendLinkCommandExecute()
+        {
+            GetImageByLinkVisibility = false;
+            MainImage = new ImageBrush();
+            Task.Factory.StartNew(() => SetImage(LinkToUpload, false));
+        }
         #endregion
 
         #endregion
