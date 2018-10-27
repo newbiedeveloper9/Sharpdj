@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Communication.Shared;
+using Communication.Shared.Data;
 using Newtonsoft.Json;
 using SharpDj.ViewModel;
 using YoutubeExplode;
@@ -22,10 +23,10 @@ namespace SharpDj.Logic.Client.Commands
             sdjMainViewModel.SdjBottomBarViewModel.BottomBarMaxSizeOfPlaylistInRoom = 30;
             sdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfAdministrationInRoom =
                 inside.Clients.Count(x => x.Rank > 0);
-            sdjMainViewModel.SdjRoomViewModel.SongsQueue = (sbyte)inside.Djs.SelectMany(dj => dj.Video).Count();
+            sdjMainViewModel.SdjRoomViewModel.SongsQueue = (sbyte)inside.Djs.SelectMany(dj => dj.Track).Count();
 
             var client = new YoutubeClient();
-            var tmp = client.GetVideoAsync(inside.Djs[0].Video[0].Id).Result;
+            var tmp = client.GetVideoAsync(inside.Djs[0].Track[0].Id).Result;
             sdjMainViewModel.SdjRoomViewModel.SongTitle = tmp.Title;
             sdjMainViewModel.SdjBottomBarViewModel.BottomBarTitleOfActuallySong = tmp.Title;
         }

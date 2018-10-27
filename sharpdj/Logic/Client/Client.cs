@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using Communication.Client.Logic;
 using Communication.Shared;
+using Communication.Shared.Data;
 using Hik.Communication.Scs.Client;
 using Hik.Communication.Scs.Communication;
 using Hik.Communication.Scs.Communication.EndPoints.Tcp;

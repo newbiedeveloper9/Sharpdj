@@ -30,11 +30,13 @@ namespace SharpDj.ViewModel
             RoomMessageCollection = new ObservableCollection<RoomMessageModel>();
             UserList = new MyUserList(main);
 
-/*          var vlcPlayer = new SdjVlcPlayer();
-            var vlcLibDirectory = new DirectoryInfo(System.IO.Path.Combine(Environment.CurrentDirectory, "libvlc", IntPtr.Size == 4 ? "win-x86" : "win-x64"));
-            vlcPlayer.VlcPlayer.SourceProvider.CreatePlayer(vlcLibDirectory);
-            vlcPlayer.VlcPlayer.SourceProvider.MediaPlayer.Play("https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_5mb.mp4");
-            MyVlcPlayer.Add(vlcPlayer);*/
+            VlcPlayer = new SdjVlcPlayer();
+            MyVlcPlayer.Add(VlcPlayer);
+            var vlcLibDirectory = new DirectoryInfo(System.IO.Path.Combine(Environment.CurrentDirectory, "libvlc",
+                IntPtr.Size == 4 ? "win-x86" : "win-x64"));
+            VlcPlayer.VlcPlayer.SourceProvider.CreatePlayer(vlcLibDirectory);
+            VlcPlayer.VlcPlayer.SourceProvider.MediaPlayer.Play("http://techslides.com/demos/sample-videos/small.mp4");
+            
         }
 
         #endregion .ctor
@@ -225,11 +227,11 @@ namespace SharpDj.ViewModel
 
         public class MyUserList : List<UserClient>
         {
-            private readonly SdjMainViewModel SdjMainViewModel;
+            private readonly SdjMainViewModel _sdjMainViewModel;
 
             public MyUserList(SdjMainViewModel sdjMainViewModel)
             {
-                SdjMainViewModel = sdjMainViewModel;
+                _sdjMainViewModel = sdjMainViewModel;
             }
 
             public new void Add(UserClient tmp)
@@ -247,7 +249,7 @@ namespace SharpDj.ViewModel
 
                 base.RemoveAt(base.FindIndex(x => x.Id == tmp.Id));
                 this.RefreshMembersData();
-                
+
                 for (int i = 0; i < base.Count; i++)
                 {
                     Console.WriteLine(base[i].Username);
@@ -256,8 +258,8 @@ namespace SharpDj.ViewModel
 
             private void RefreshMembersData()
             {
-                SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfPeopleInRoom = this.Count;
-                SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfAdministrationInRoom =
+                _sdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfPeopleInRoom = this.Count;
+                _sdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfAdministrationInRoom =
                     this.Count(x => x.Rank > 0);
             }
         }
@@ -416,16 +418,15 @@ namespace SharpDj.ViewModel
             {
                 var tracks = SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection.FirstOrDefault(x => x.IsActive)
                     ?.Tracks;
-                var dj = new Songs();
+                var dj = new Dj();
                 if (tracks != null)
                     foreach (var track in tracks)
                     {
                         int seconds = (int) TimeSpan.Parse(track.SongDuration).TotalSeconds;
-                        dj.Video.Add(new Songs.Song(seconds, track.SongId));
+                        dj.Track.Add(new Dj.Song(seconds, track.SongId));
                     }
 
                 var source = JsonConvert.SerializeObject(dj);
-
 
                 ClientInfo.Instance.Client.SendMessage(new ScsTextMessage("joinqueue$" + source));
             });

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Communication.Client;
 using Communication.Shared;
+using Communication.Shared.Data;
 using Hik.Communication.Scs.Server;
 using Newtonsoft.Json;
 
@@ -52,6 +53,14 @@ namespace Communication.Server.Logic
             string output = JsonConvert.SerializeObject(user);
             _senderUtility.SendMessage(Commands.Instance.CommandsDictionary["AddUserToRoom"],
                 output, roomId);
+        }
+
+        public void ChangeTrack(Dj dj, string roomId)
+        {
+            string output = JsonConvert.SerializeObject(dj);
+            _senderUtility.SendMessage(Commands.Instance.CommandsDictionary["ChangeTrack"],
+                output, roomId);
+
         }
 
         public void RemoveUserFromRoom(UserClient user, string roomId)

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Communication.Client;
 using Communication.Shared;
+using Communication.Shared.Data;
 using Hik.Communication.Scs.Communication.Messages;
 using Newtonsoft.Json;
 using SharpDj.Core;
@@ -151,9 +152,9 @@ namespace SharpDj.ViewModel.Model
 
             SdjMainViewModel.SdjBottomBarViewModel.BottomBarSizeOfPlaylistInRoom = inside.Djs.Count;
             SdjMainViewModel.SdjBottomBarViewModel.BottomBarMaxSizeOfPlaylistInRoom = 30;
-            SdjMainViewModel.SdjRoomViewModel.SongsQueue = (sbyte)inside.Djs.SelectMany(dj => dj.Video).Count();
+            SdjMainViewModel.SdjRoomViewModel.SongsQueue = (sbyte)inside.Djs.SelectMany(dj => dj.Track).Count();
 
-            var tmp = YoutubeSingleton.Instance.YtClient.GetVideoAsync(inside.Djs[0].Video[0].Id).Result;
+            var tmp = YoutubeSingleton.Instance.YtClient.GetVideoAsync(inside.Djs[0].Track[0].Id).Result;
             SdjMainViewModel.SdjRoomViewModel.SongTitle = tmp.Title;
             SdjMainViewModel.SdjBottomBarViewModel.BottomBarTitleOfActuallySong = tmp.Title;
         }

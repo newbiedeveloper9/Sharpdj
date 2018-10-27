@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace Communication.Shared
 {
-    public class Songs
+    public class Dj
     {
-        public Songs()
+        public Dj()
         {
-            Video = new List<Song>();
+            Track = new List<Song>();
         }
 
-        public Songs(string host, List<Song> video)
+        public Dj(string host, List<Song> track)
         {
             Host = host;
-            Video = video;
+            Track = track;
         }
 
         public string Host { get; set; }
-        public List<Song> Video { get;set; }
+        public List<Song> Track { get;set; }
 
         public class Song
         {
@@ -30,8 +30,8 @@ namespace Communication.Shared
                 Id = id;
             }
 
-            public int Time;
-            public string Id;
+            public readonly int Time;
+            public readonly string Id;
         }
     }
 }

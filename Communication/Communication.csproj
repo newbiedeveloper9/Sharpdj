@@ -77,7 +77,7 @@
     <Compile Include="Shared\Commands.cs" />
     <Compile Include="Shared\Data\Rank.cs" />
     <Compile Include="Shared\Data\Room.cs" />
-    <Compile Include="Shared\Data\Songs.cs" />
+    <Compile Include="Shared\Data\Dj.cs" />
     <Compile Include="Shared\Debug.cs" />
     <Compile Include="Shared\PeriodicTask.cs" />
   </ItemGroup>

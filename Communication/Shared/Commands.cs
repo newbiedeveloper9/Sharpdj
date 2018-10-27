@@ -35,14 +35,14 @@ namespace Communication.Shared
                 {"UpdateDj", "0xE"},
                 {"SendMessage", "0xF"},
                 {"AddUserToRoom", "0x10"}, //16
-                {"RemoveUserFromRoom", "0x11"}
+                {"RemoveUserFromRoom", "0x11"},
+                {"ChangeTrack", "0x12"},
             };
 
         public List<string> GetMessageParameters(string message)
         {
             var list = new List<string>();
             message = message.Substring(message.IndexOf(' ') + 1);
-
             list.AddRange(message.Split('$'));
             return list;
         }
