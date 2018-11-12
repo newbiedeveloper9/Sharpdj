@@ -1,0 +1,346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FCBAEEB4-C2A6-4A77-8C7B-FCEA06BDC518}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>SharpDj</RootNamespace>
+    <AssemblyName>SharpDj</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Converters\NameToContentConverter.cs" />
+    <Compile Include="Core\BaseViewModel.cs" />
+    <Compile Include="Core\Extensions\CommandBase.cs" />
+    <Compile Include="Core\Extensions\Extensions.cs" />
+    <Compile Include="Core\Extensions\NotifyObject.cs" />
+    <Compile Include="Core\Extensions\RelayCommand.cs" />
+    <Compile Include="Core\RelayCommand.cs" />
+    <Compile Include="Enums\Helpers\GetImageVisibility.cs" />
+    <Compile Include="Enums\Menu\LeftBar.cs" />
+    <Compile Include="Enums\Menu\MainView.cs" />
+    <Compile Include="Enums\Playlist\Playlist.cs" />
+    <Compile Include="Enums\Playlist\PlaylistMode.cs" />
+    <Compile Include="Enums\User\UserProfile.cs" />
+    <Compile Include="Enums\Playlist\PlaylistState.cs" />
+    <Compile Include="Enums\User\UserState.cs" />
+    <Compile Include="Logic\Client\Client.cs" />
+    <Compile Include="Logic\Client\ClientInfo.cs" />
+    <Compile Include="Logic\Client\ClientReceiver.cs" />
+    <Compile Include="Logic\Client\ClientSender.cs" />
+    <Compile Include="Logic\Client\Commands\ChangeTrackCommand.cs" />
+    <Compile Include="Logic\Client\Commands\ICommand.cs" />
+    <Compile Include="Logic\Client\Commands\RemoveUserFromRoomCommand.cs" />
+    <Compile Include="Logic\Client\Commands\SendMessageChatCommand.cs" />
+    <Compile Include="Logic\Client\Commands\UpdateDjCommand.cs" />
+    <Compile Include="Logic\Client\Commands\AddUserToRoomCommand.cs" />
+    <Compile Include="Logic\Client\ErrorMessages.cs" />
+    <Compile Include="Logic\Helpers\ClientConfig.cs" />
+    <Compile Include="Logic\Helpers\Clone.cs" />
+    <Compile Include="Logic\Helpers\FilesPath.cs" />
+    <Compile Include="Logic\Helpers\Imgur.cs" />
+    <Compile Include="Logic\Helpers\Updater\FTPChecker.cs" />
+    <Compile Include="Logic\Helpers\Updater\GetSourcePage.cs" />
+    <Compile Include="Logic\Helpers\YoutubeSingleton.cs" />
+    <Compile Include="ViewModel\Global\SdjBottomBarViewModel.cs" />
+    <Compile Include="ViewModel\Global\SdjLeftBarViewModel.cs" />
+    <Compile Include="ViewModel\Global\SdjStateButtonViewModel.cs" />
+    <Compile Include="ViewModel\Global\SdjUserProfileViewModel.cs" />
+    <Compile Include="ViewModel\Helpers\PasswordBoxBindingBehavior.cs" />
+    <Compile Include="ViewModel\Helpers\SdjBackgroundForFormsViewModel.cs" />
+    <Compile Include="ViewModel\Helpers\SdjGetImageViewModel.cs" />
+    <Compile Include="ViewModel\Model\FavoriteRoomsModel.cs" />
+    <Compile Include="ViewModel\Model\PlaylistModel.cs" />
+    <Compile Include="ViewModel\Model\PlaylistToAddTrack.cs" />
+    <Compile Include="ViewModel\Model\PlaylistTrackModel.cs" />
+    <Compile Include="ViewModel\Model\RoomMessageModel.cs" />
+    <Compile Include="ViewModel\Playlist\SdjAddPlaylistCollectionViewModel.cs" />
+    <Compile Include="ViewModel\Playlist\SdjAddTrackToPlaylistCollectionViewModel.cs" />
+    <Compile Include="ViewModel\Playlist\SdjEditPlaylistCollectionViewModel.cs" />
+    <Compile Include="ViewModel\Playlist\SdjPlaylistViewModel.cs" />
+    <Compile Include="ViewModel\Playlist\SdjRemovePlaylistCollectionViewModel.cs" />
+    <Compile Include="ViewModel\Playlist\SdjRenameTrackNameInPlaylistViewModel.cs" />
+    <Compile Include="ViewModel\Helpers\SdjTitleBarForUserControlsViewModel.cs" />
+    <Compile Include="ViewModel\Unique\SdjFeedbackViewModel.cs" />
+    <Compile Include="ViewModel\Unique\SdjLoginViewModel.cs" />
+    <Compile Include="ViewModel\Unique\SdjMainViewModel.cs" />
+    <Compile Include="ViewModel\Unique\SdjRegisterViewModel.cs" />
+    <Compile Include="ViewModel\Unique\SdjRoomViewModel.cs" />
+    <Compile Include="View\UserControls\Global\SdjBottomBarUserControl.xaml.cs">
+      <DependentUpon>SdjBottomBarUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\Global\SdjLeftBarUserControl.xaml.cs">
+      <DependentUpon>SdjLeftBarUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\Global\SdjStateButtonsUserControl.xaml.cs">
+      <DependentUpon>SdjStateButtonsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\Global\SdjUserProfileUserControl.xaml.cs">
+      <DependentUpon>SdjUserProfileUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\Helpers\SdjBackgroundForForms.xaml.cs">
+      <DependentUpon>SdjBackgroundForForms.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\Helpers\SdjGetImageUserControl.xaml.cs">
+      <DependentUpon>SdjGetImageUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\Playlist\SdjAddPlaylistCollectionView.xaml.cs">
+      <DependentUpon>SdjAddPlaylistCollectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\Playlist\SdjAddTrackToPlaylistCollectionUserControl.xaml.cs">
+      <DependentUpon>SdjAddTrackToPlaylistCollectionUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\Playlist\SdjEditPlaylistCollectionView.xaml.cs">
+      <DependentUpon>SdjEditPlaylistCollectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\Playlist\SdjPlaylistUserControl.xaml.cs">
+      <DependentUpon>SdjPlaylistUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\Playlist\SdjRemovePlaylistCollectionView.xaml.cs">
+      <DependentUpon>SdjRemovePlaylistCollectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\Playlist\SdjRenameTrackNameInPlaylist.xaml.cs">
+      <DependentUpon>SdjRenameTrackNameInPlaylist.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\Room\SdjRoomView.xaml.cs">
+      <DependentUpon>SdjRoomView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\Room\SdjVlcPlayer.xaml.cs">
+      <DependentUpon>SdjVlcPlayer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\Model\RoomSquareModel.cs" />
+    <Compile Include="View\UserControls\Helpers\SdjTitleBarForUserControls.xaml.cs">
+      <DependentUpon>SdjTitleBarForUserControls.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\UniqueViews\SdjCreateServerUserControl.xaml.cs">
+      <DependentUpon>SdjCreateServerUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\UniqueViews\SdjFeedbackUserControl.xaml.cs">
+      <DependentUpon>SdjFeedbackUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\UniqueViews\SdjLoginUserControl.xaml.cs">
+      <DependentUpon>SdjLoginUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\UniqueViews\SdjMainUserControl.xaml.cs">
+      <DependentUpon>SdjMainUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\UniqueViews\SdjRegisterUserControl.xaml.cs">
+      <DependentUpon>SdjRegisterUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Views\MainWindow.cs">
+      <DependentUpon>SdjUpdaterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Views\SdjLoggerView.xaml.cs">
+      <DependentUpon>SdjLoggerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Views\SdjMainView.xaml.cs">
+      <DependentUpon>SdjMainView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Converters\BoolToStatusConverter.cs" />
+    <Compile Include="Converters\BoolVisibilityConverter.cs" />
+    <Compile Include="Converters\EnumToBoolConverter.cs" />
+    <Compile Include="Converters\EnumToVisibilityConverter.cs" />
+    <Compile Include="Converters\MarkuExtensionConverterBase.cs" />
+    <Compile Include="Converters\NotBoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\NotNullToBoolConverter.cs" />
+    <Compile Include="Converters\NullVisibilityConverter.cs" />
+    <Compile Include="Logic\Helpers\ExceptionLogger.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Communication\Communication.csproj">
+      <Project>{e8790b81-831e-458b-800d-bcae0017cfcb}</Project>
+      <Name>Communication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\servertcp\servertcp.csproj">
+      <Project>{9017fa31-937c-47e0-9775-8cd429f2f604}</Project>
+      <Name>servertcp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\VideoLAN.LibVLC.Windows.3.0.4\build\VideoLAN.LibVLC.Windows.targets" Condition="Exists('..\packages\VideoLAN.LibVLC.Windows.3.0.4\build\VideoLAN.LibVLC.Windows.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105.The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\VideoLAN.LibVLC.Windows.3.0.4\build\VideoLAN.LibVLC.Windows.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\VideoLAN.LibVLC.Windows.3.0.4\build\VideoLAN.LibVLC.Windows.targets'))" />
+  </Target>
+  <ItemGroup>
+    <ReferencePath Include="C:\Users\Michal\Desktop\C#\sharpdj\packages\AngleSharp.0.9.10\lib\net45\AngleSharp.dll" />
+    <ReferencePath Include="C:\Users\Michal\Desktop\C#\sharpdj\Communication\bin\Debug\Communication.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\Microsoft.CSharp.dll" />
+    <ReferencePath Include="C:\Users\Michal\Desktop\C#\sharpdj\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\mscorlib.dll" />
+    <ReferencePath Include="C:\Users\Michal\Desktop\C#\sharpdj\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\PresentationCore.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\PresentationFramework.dll" />
+    <ReferencePath Include="C:\Users\Michal\Desktop\C#\sharpdj\packages\Scs.1.1.1\lib\net40-client\Scs.dll" />
+    <ReferencePath Include="C:\Users\Michal\Desktop\C#\sharpdj\servertcp\bin\Debug\servertcp.exe" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Core.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.IO.Compression.FileSystem.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Net.Http.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Runtime.Serialization.dll" />
+    <ReferencePath Include="C:\Users\Michal\Desktop\C#\sharpdj\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Xaml.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Xml.dll" />
+    <ReferencePath Include="C:\Users\Michal\Desktop\C#\sharpdj\packages\Vlc.DotNet.Core.3.0.0-develop317\lib\net45\Vlc.DotNet.Core.dll" />
+    <ReferencePath Include="C:\Users\Michal\Desktop\C#\sharpdj\packages\Vlc.DotNet.Core.Interops.3.0.0-develop317\lib\net45\Vlc.DotNet.Core.Interops.dll" />
+    <ReferencePath Include="C:\Users\Michal\Desktop\C#\sharpdj\packages\Vlc.DotNet.Wpf.3.0.0-develop317\lib\net45\Vlc.DotNet.Wpf.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\WindowsBase.dll" />
+    <ReferencePath Include="C:\Users\Michal\Desktop\C#\sharpdj\packages\YoutubeExplode.4.5.1\lib\net45\YoutubeExplode.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\Global\SdjBottomBarUserControl.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\Global\SdjLeftBarUserControl.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\Global\SdjStateButtonsUserControl.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\Global\SdjUserProfileUserControl.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\Helpers\SdjBackgroundForForms.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\Helpers\SdjGetImageUserControl.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\Playlist\SdjAddPlaylistCollectionView.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\Playlist\SdjAddTrackToPlaylistCollectionUserControl.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\Playlist\SdjEditPlaylistCollectionView.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\Playlist\SdjPlaylistUserControl.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\Playlist\SdjRemovePlaylistCollectionView.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\Playlist\SdjRenameTrackNameInPlaylist.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\Room\SdjRoomView.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\Room\SdjVlcPlayer.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\Helpers\SdjTitleBarForUserControls.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\UniqueViews\SdjCreateServerUserControl.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\UniqueViews\SdjFeedbackUserControl.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\UniqueViews\SdjLoginUserControl.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\UniqueViews\SdjMainUserControl.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\UserControls\UniqueViews\SdjRegisterUserControl.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\Views\SdjLoggerView.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\Views\SdjMainView.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\View\Views\SdjUpdaterView.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\App.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\SharpDj_Content.g.cs" />
+    <Compile Include="C:\Users\Michal\Desktop\C#\sharpdj\SharpDj\obj\Debug\GeneratedInternalTypeHelper.g.cs" />
+  </ItemGroup>
+</Project>

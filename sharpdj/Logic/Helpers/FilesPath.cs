@@ -1,10 +1,11 @@
 ﻿using System;
+using System.IO;
 
 namespace SharpDj.Logic.Helpers
 {
     public sealed class FilesPath
     {
-        private readonly string _configFolder = Environment.CurrentDirectory + @"\config\";
+        public readonly string ConfigFolder;
 
         private static Lazy<FilesPath> lazy =
             new Lazy<FilesPath>(() => new FilesPath());
@@ -13,13 +14,14 @@ namespace SharpDj.Logic.Helpers
 
         private FilesPath()
         {
+            ConfigFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/sharpdj/config/";
         }
 
 
         public string PlaylistConfig =>
-           $"{_configFolder}playlist.json";
+           $"{ConfigFolder}playlist.json";
 
         public string ClientConfig =>
-            $"{_configFolder}config.json";
+            $"{ConfigFolder}config.json";
     }
 }

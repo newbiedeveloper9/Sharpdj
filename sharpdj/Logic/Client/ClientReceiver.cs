@@ -27,6 +27,7 @@ namespace Communication.Client.Logic
                 new SendMessageChatCommand(),
                 new AddUserToRoomCommand(),
                 new RemoveUserFromRoomCommand(),
+                new ChangeTrackCommand(),
             };
         }
 
