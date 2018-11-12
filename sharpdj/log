@@ -1,0 +1,751 @@
+12.11.2018 00:49:00    [CONFIG]: Created new config file.
+12.11.2018 00:49:01    [CONFIG]: Success deserialize
+12.11.2018 00:49:09    [RECEIVER]: 0x0 test
+12.11.2018 00:49:09    [MESSAGE ID]: 78c6cb30-79d1-402c-9d8f-1d1d950951f7
+12.11.2018 00:49:09    [LOGIN]: Success
+12.11.2018 00:49:09    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 00:49:09    [MESSAGE ID]: cd67fafa-a48c-47be-8ed9-0988f8f8313d
+12.11.2018 00:49:10    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 00:49:10    [MESSAGE ID]: 8f0843b6-5bdb-41b2-aca9-017b99e6e42d
+12.11.2018 00:49:29    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 00:49:29    [MESSAGE ID]: 127262ef-7dfa-4441-a963-f65c6cfc0a6b
+12.11.2018 00:49:32    [RECEIVER]: {"Clients":[{"Id":60021,"Username":"test","Rank":0}],"Djs":[{"Host":"test","Track":[{"Time":5,"Id":"JSQsIMgj1OM"}]},{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}],"TimeLeft":5} 
+12.11.2018 00:49:32    [MESSAGE ID]: d3310ee8-065f-4e41-960a-8ca0e2304421
+12.11.2018 00:49:35    [CONNECTION]: Disconnected
+12.11.2018 00:49:48    [RECEIVER]: 0x0 test
+12.11.2018 00:49:48    [MESSAGE ID]: 6a1336ea-d3d3-4e1f-acc9-78f8fa42fdea
+12.11.2018 00:49:48    [LOGIN]: Success
+12.11.2018 00:49:49    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 00:49:49    [MESSAGE ID]: d3d53750-6807-4826-aedd-15aa0baa8ac8
+12.11.2018 00:49:49    [RECEIVER]: {"Clients":[{"Id":60021,"Username":"test","Rank":0}],"Djs":[{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]},{"Host":"test","Track":[{"Time":5,"Id":"JSQsIMgj1OM"}]}],"TimeLeft":10} 
+12.11.2018 00:49:49    [MESSAGE ID]: 84ec320c-11bb-41fa-9600-5c7f149f10f2
+12.11.2018 00:50:09    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 00:50:09    [MESSAGE ID]: 5c289367-a123-44fd-bc60-d67bd2028111
+12.11.2018 00:50:25    [CONNECTION]: Disconnected
+12.11.2018 00:50:31    [RECEIVER]: 0x0 crisey
+12.11.2018 00:50:31    [MESSAGE ID]: 3d7b4a3e-8289-4176-8194-1e835eefff1c
+12.11.2018 00:50:31    [LOGIN]: Success
+12.11.2018 00:50:33    [RECEIVER]: {"Clients":[{"Id":13,"Username":"crisey","Rank":1}],"Djs":[{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}],"TimeLeft":6} 
+12.11.2018 00:50:33    [MESSAGE ID]: a7febadd-3cd2-4a78-af6c-22c00e122b6d
+12.11.2018 00:50:38    [CONNECTION]: Disconnected
+12.11.2018 00:51:38    [CONFIG]: Success deserialize
+12.11.2018 00:51:40    [CONNECTION]: The host failed to connect. Timeout occured.
+12.11.2018 00:51:41    [CONNECTION]: The host failed to connect. Timeout occured.
+12.11.2018 00:51:43    [CONNECTION]: The host failed to connect. Timeout occured.
+12.11.2018 00:51:44    [CONNECTION]: The host failed to connect. Timeout occured.
+12.11.2018 00:51:54    [CONFIG]: Success deserialize
+12.11.2018 00:58:36    [CONFIG]: Success deserialize
+12.11.2018 00:58:44    [RECEIVER]: 0x0 test
+12.11.2018 00:58:44    [MESSAGE ID]: c4226ca4-207e-48a7-8525-6dd178e8f407
+12.11.2018 00:58:44    [LOGIN]: Success
+12.11.2018 00:58:44    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 00:58:44    [MESSAGE ID]: 141f06f3-fe56-49c1-8a93-8c1f9f03a879
+12.11.2018 00:58:45    [RECEIVER]: {"Clients":[{"Id":60021,"Username":"test","Rank":0}],"Djs":[{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]},{"Host":"test","Track":[{"Time":5,"Id":"JSQsIMgj1OM"}]}],"TimeLeft":8} 
+12.11.2018 00:58:45    [MESSAGE ID]: 4ce2ce25-9581-4bf1-aacc-57ff66ca9290
+12.11.2018 00:58:52    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"JSQsIMgj1OM"}]}$1
+12.11.2018 00:58:52    [MESSAGE ID]: 
+12.11.2018 00:58:57    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 00:58:57    [MESSAGE ID]: 
+12.11.2018 00:59:04    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 00:59:04    [MESSAGE ID]: 8580e656-97d3-4ad3-ade8-07febdba7336
+12.11.2018 00:59:05    [RECEIVER]: {"Clients":[{"Id":60021,"Username":"test","Rank":0}],"Djs":[{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}],"TimeLeft":3} 
+12.11.2018 00:59:05    [MESSAGE ID]: bfdabdb6-b712-4e21-b2a4-779de03a5c92
+12.11.2018 00:59:07    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 00:59:07    [MESSAGE ID]: 
+12.11.2018 00:59:17    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 00:59:17    [MESSAGE ID]: 
+12.11.2018 00:59:24    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 00:59:24    [MESSAGE ID]: 87f0578e-1e35-4834-85b5-178267f393ef
+12.11.2018 00:59:27    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 00:59:27    [MESSAGE ID]: 
+12.11.2018 00:59:37    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 00:59:37    [MESSAGE ID]: 
+12.11.2018 00:59:44    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 00:59:44    [MESSAGE ID]: 7cb5f84d-56c7-4e9a-b14b-922bbb372f19
+12.11.2018 00:59:47    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 00:59:47    [MESSAGE ID]: 
+12.11.2018 00:59:57    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 00:59:57    [MESSAGE ID]: 
+12.11.2018 01:00:07    [CONFIG]: Success deserialize
+12.11.2018 01:00:13    [RECEIVER]: 0x0 test
+12.11.2018 01:00:13    [MESSAGE ID]: e6d2543f-1627-4852-9c51-257ef9790dbb
+12.11.2018 01:00:13    [LOGIN]: Success
+12.11.2018 01:00:13    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:00:13    [MESSAGE ID]: 42448683-2d81-4962-b5a7-0c40a157cafc
+12.11.2018 01:00:16    [RECEIVER]: {"Clients":[{"Id":60021,"Username":"test","Rank":0}],"Djs":[{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]},{"Host":"test","Track":[{"Time":5,"Id":"JSQsIMgj1OM"}]}],"TimeLeft":8} 
+12.11.2018 01:00:16    [MESSAGE ID]: d620bb63-e972-4d70-96ee-695c1ebce980
+12.11.2018 01:00:23    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"JSQsIMgj1OM"}]}$1
+12.11.2018 01:00:23    [MESSAGE ID]: 
+12.11.2018 01:09:36    [CONFIG]: Success deserialize
+12.11.2018 01:09:44    [RECEIVER]: 0x0 test
+12.11.2018 01:09:44    [MESSAGE ID]: 8310f36c-41e6-4130-bfbd-7b39c2ceb687
+12.11.2018 01:09:44    [LOGIN]: Success
+12.11.2018 01:09:44    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:09:44    [MESSAGE ID]: a9cbddf2-7291-411d-aefe-a6cc6295084f
+12.11.2018 01:09:45    [RECEIVER]: {"Clients":[{"Id":60021,"Username":"test","Rank":0}],"Djs":[{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]},{"Host":"test","Track":[{"Time":5,"Id":"JSQsIMgj1OM"}]}],"TimeLeft":8} 
+12.11.2018 01:09:45    [MESSAGE ID]: 884a5d1e-67e2-46bb-8c94-91b96621166f
+12.11.2018 01:09:52    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"JSQsIMgj1OM"}]}$1
+12.11.2018 01:09:52    [MESSAGE ID]: 
+12.11.2018 01:11:31    [CONFIG]: Success deserialize
+12.11.2018 01:11:37    [RECEIVER]: 0x0 
+12.11.2018 01:11:37    [MESSAGE ID]: 220b55af-bdd6-40ff-b9b0-b3e472919d0d
+12.11.2018 01:11:37    [LOGIN]: Success
+12.11.2018 01:11:37    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:11:37    [MESSAGE ID]: 95366c2c-600f-44bd-a919-6b14c9c528ab
+12.11.2018 01:11:37    [RECEIVER]: {"Clients":[{"Id":15,"Username":"","Rank":0}],"Djs":[{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]},{"Host":"test","Track":[{"Time":5,"Id":"JSQsIMgj1OM"}]}],"TimeLeft":10} 
+12.11.2018 01:11:37    [MESSAGE ID]: b78b0feb-940f-42e1-aa75-d418173224af
+12.11.2018 01:11:47    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"JSQsIMgj1OM"}]}$1
+12.11.2018 01:11:47    [MESSAGE ID]: 
+12.11.2018 01:11:59    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 01:11:59    [MESSAGE ID]: 
+12.11.2018 01:12:10    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"JSQsIMgj1OM"}]}$1
+12.11.2018 01:12:10    [MESSAGE ID]: 
+12.11.2018 01:12:11    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 01:12:11    [MESSAGE ID]: 
+12.11.2018 01:12:11    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:12:11    [MESSAGE ID]: 4812db1e-9160-4adc-ba11-e6bc72d7d198
+12.11.2018 01:12:16    [CONFIG]: Success deserialize
+12.11.2018 01:12:20    [RECEIVER]: 0x0 
+12.11.2018 01:12:20    [MESSAGE ID]: 6d91be72-ac1f-4ceb-becc-c52c8ea86842
+12.11.2018 01:12:20    [LOGIN]: Success
+12.11.2018 01:12:20    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:12:20    [MESSAGE ID]: 34135540-06ea-4c44-9e7f-0f46c5342054
+12.11.2018 01:12:21    [RECEIVER]: {"Clients":[{"Id":15,"Username":"","Rank":0}],"Djs":[{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}],"TimeLeft":6} 
+12.11.2018 01:12:21    [MESSAGE ID]: e982bbac-c16c-4bbb-9087-8f7a8d03307d
+12.11.2018 01:12:26    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:12:26    [MESSAGE ID]: 
+12.11.2018 01:15:28    [CONFIG]: Success deserialize
+12.11.2018 01:15:33    [RECEIVER]: 0x0 
+12.11.2018 01:15:33    [MESSAGE ID]: 46c1169b-196a-4663-ad8c-382095b644ff
+12.11.2018 01:15:33    [LOGIN]: Success
+12.11.2018 01:15:33    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:15:33    [MESSAGE ID]: be830483-0a4f-4237-aa6d-d2f873dd30a0
+12.11.2018 01:15:33    [RECEIVER]: {"Clients":[{"Id":15,"Username":"","Rank":0}],"Djs":[{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}],"TimeLeft":6} 
+12.11.2018 01:15:33    [MESSAGE ID]: 9b86a2e5-9208-4331-961c-75bd4efe42c6
+12.11.2018 01:15:39    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:15:39    [MESSAGE ID]: 
+12.11.2018 01:15:49    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:15:49    [MESSAGE ID]: 
+12.11.2018 01:15:53    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:15:53    [MESSAGE ID]: 2476a809-22e6-4cde-8e11-bfe8af519a52
+12.11.2018 01:15:59    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:15:59    [MESSAGE ID]: 
+12.11.2018 01:16:09    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:16:09    [MESSAGE ID]: 
+12.11.2018 01:16:13    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:16:13    [MESSAGE ID]: d8a1123b-df80-47e3-9b17-a5e5bc7def2d
+12.11.2018 01:16:19    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:16:19    [MESSAGE ID]: 
+12.11.2018 01:16:29    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:16:29    [MESSAGE ID]: 
+12.11.2018 01:16:34    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:16:34    [MESSAGE ID]: 7874c826-8207-42d2-949d-77d8314dbc48
+12.11.2018 01:16:39    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:16:39    [MESSAGE ID]: 
+12.11.2018 01:16:49    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:16:49    [MESSAGE ID]: 
+12.11.2018 01:16:54    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:16:54    [MESSAGE ID]: 7acce4fb-7190-4dd6-9ed9-4a9f62c76190
+12.11.2018 01:16:59    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:16:59    [MESSAGE ID]: 
+12.11.2018 01:17:09    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:17:09    [MESSAGE ID]: 
+12.11.2018 01:17:15    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:17:15    [MESSAGE ID]: 2542f833-95ce-40e8-b254-6db240f92ae5
+12.11.2018 01:17:19    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:17:19    [MESSAGE ID]: 
+12.11.2018 01:17:29    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:17:29    [MESSAGE ID]: 
+12.11.2018 01:17:35    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:17:35    [MESSAGE ID]: 9feb1309-d0b6-45fb-8e3f-e883974db4de
+12.11.2018 01:17:39    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:17:39    [MESSAGE ID]: 
+12.11.2018 01:17:49    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:17:49    [MESSAGE ID]: 
+12.11.2018 01:17:55    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:17:55    [MESSAGE ID]: c604dfcc-ed01-4d34-b765-30cbf225ae7f
+12.11.2018 01:17:59    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:17:59    [MESSAGE ID]: 
+12.11.2018 01:18:09    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:18:09    [MESSAGE ID]: 
+12.11.2018 01:18:16    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:18:16    [MESSAGE ID]: 1087aec1-c3c0-4f4b-b6de-86f364c07683
+12.11.2018 01:18:19    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:18:19    [MESSAGE ID]: 
+12.11.2018 01:18:29    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:18:29    [MESSAGE ID]: 
+12.11.2018 01:18:36    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:18:36    [MESSAGE ID]: 1085a387-7467-4ef4-a360-b21442e92925
+12.11.2018 01:18:39    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:18:39    [MESSAGE ID]: 
+12.11.2018 01:18:49    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:18:49    [MESSAGE ID]: 
+12.11.2018 01:18:57    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:18:57    [MESSAGE ID]: 599b9e3b-5250-49b6-993b-73e29d779098
+12.11.2018 01:18:59    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:18:59    [MESSAGE ID]: 
+12.11.2018 01:19:09    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:19:09    [MESSAGE ID]: 
+12.11.2018 01:19:18    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:19:18    [MESSAGE ID]: 4044dadd-dca3-41fa-91f1-c46c72d6131f
+12.11.2018 01:19:19    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:19:19    [MESSAGE ID]: 
+12.11.2018 01:19:29    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:19:29    [MESSAGE ID]: 
+12.11.2018 01:19:38    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:19:38    [MESSAGE ID]: 87a9dcf5-7361-438c-a1fb-11a85566fea4
+12.11.2018 01:19:39    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:19:39    [MESSAGE ID]: 
+12.11.2018 01:19:49    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:19:49    [MESSAGE ID]: 
+12.11.2018 01:19:58    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:19:58    [MESSAGE ID]: 72ef17ab-50a6-4c01-bf64-4d9446fc3852
+12.11.2018 01:19:59    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:19:59    [MESSAGE ID]: 
+12.11.2018 01:20:09    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:20:09    [MESSAGE ID]: 
+12.11.2018 01:20:19    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:20:19    [MESSAGE ID]: 43a19347-5bee-4b45-9212-6fb238f5e8c6
+12.11.2018 01:20:19    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:20:19    [MESSAGE ID]: 
+12.11.2018 01:20:29    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:20:29    [MESSAGE ID]: 
+12.11.2018 01:20:39    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:20:39    [MESSAGE ID]: a75253d0-f3db-44ea-85c1-77be87b34e34
+12.11.2018 01:20:39    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:20:39    [MESSAGE ID]: 
+12.11.2018 01:20:49    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:20:49    [MESSAGE ID]: 
+12.11.2018 01:20:59    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:20:59    [MESSAGE ID]: 
+12.11.2018 01:20:59    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:20:59    [MESSAGE ID]: 41df96b7-20fb-4d3d-bdbc-f51067436a49
+12.11.2018 01:21:09    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:21:09    [MESSAGE ID]: 
+12.11.2018 01:21:19    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:21:19    [MESSAGE ID]: 
+12.11.2018 01:21:20    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:21:20    [MESSAGE ID]: faebdc93-fad9-451b-aefe-68e01d65cb1e
+12.11.2018 01:21:29    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:21:29    [MESSAGE ID]: 
+12.11.2018 01:21:39    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:21:39    [MESSAGE ID]: 
+12.11.2018 01:21:40    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:21:40    [MESSAGE ID]: 950d72e4-b447-4db1-9e66-d086ce3c5db4
+12.11.2018 01:21:49    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:21:49    [MESSAGE ID]: 
+12.11.2018 01:21:59    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:21:59    [MESSAGE ID]: 
+12.11.2018 01:22:01    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:22:01    [MESSAGE ID]: e42461bf-ac6f-4c10-ba01-129da6de9b80
+12.11.2018 01:22:09    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:22:09    [MESSAGE ID]: 
+12.11.2018 01:22:19    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:22:19    [MESSAGE ID]: 
+12.11.2018 01:22:21    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:22:21    [MESSAGE ID]: 8993c35b-a95f-4d93-bde3-c11616b4956e
+12.11.2018 01:37:34    [CONFIG]: Success deserialize
+12.11.2018 01:37:35    [CONNECTION]: The host failed to connect. Timeout occured.
+12.11.2018 01:47:30    [CONFIG]: Success deserialize
+12.11.2018 01:47:34    [RECEIVER]: 0x0 
+12.11.2018 01:47:34    [MESSAGE ID]: bef85e48-ad82-4259-95f8-af3f0f9cf475
+12.11.2018 01:47:34    [LOGIN]: Success
+12.11.2018 01:47:34    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:47:34    [MESSAGE ID]: 223740a5-3c34-4a74-807d-bc5ca633811a
+12.11.2018 01:47:35    [RECEIVER]: {"Clients":[{"Id":15,"Username":"","Rank":0}],"Djs":[{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]},{"Host":"test","Track":[{"Time":5,"Id":"JSQsIMgj1OM"}]}],"TimeLeft":9} 
+12.11.2018 01:47:35    [MESSAGE ID]: 421a8d00-dc11-4fb6-b759-d84a9e72c8cf
+12.11.2018 01:47:44    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"JSQsIMgj1OM"}]}$1
+12.11.2018 01:47:44    [MESSAGE ID]: 
+12.11.2018 01:48:26    [CONFIG]: Success deserialize
+12.11.2018 01:48:28    [CONNECTION]: The host failed to connect. Timeout occured.
+12.11.2018 01:48:32    [RECEIVER]: 0x0 
+12.11.2018 01:48:32    [MESSAGE ID]: f4d75aea-15f0-4ccc-ac7b-86b66b324939
+12.11.2018 01:48:32    [LOGIN]: Success
+12.11.2018 01:48:33    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:48:33    [MESSAGE ID]: d989997d-2397-43d4-860c-f07065865e09
+12.11.2018 01:48:33    [RECEIVER]: {"Clients":[{"Id":15,"Username":"","Rank":0}],"Djs":[{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}],"TimeLeft":6} 
+12.11.2018 01:48:33    [MESSAGE ID]: 71264c65-2f89-4709-b5d4-e267da83892f
+12.11.2018 01:48:39    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:48:39    [MESSAGE ID]: 
+12.11.2018 01:48:52    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:48:52    [MESSAGE ID]: 
+12.11.2018 01:48:55    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:48:55    [MESSAGE ID]: 0b30874c-4a38-4cdc-a48f-967f2289709a
+12.11.2018 01:48:59    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:48:59    [MESSAGE ID]: 
+12.11.2018 01:49:09    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:49:09    [MESSAGE ID]: 
+12.11.2018 01:49:09    [RECEIVER]: {"Clients":[{"Id":15,"Username":"","Rank":0}],"Djs":[{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]},{"Host":"test","Track":[{"Time":5,"Id":"JSQsIMgj1OM"}]}],"TimeLeft":5} 
+12.11.2018 01:49:09    [MESSAGE ID]: ff348d68-d6ba-4153-9f22-10ac955b49a8
+12.11.2018 01:49:14    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"JSQsIMgj1OM"}]}$1
+12.11.2018 01:49:14    [MESSAGE ID]: 
+12.11.2018 01:49:15    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:49:15    [MESSAGE ID]: eacb0ea9-4992-4977-b250-6d6a4332bc25
+12.11.2018 01:49:59    [CONFIG]: Success deserialize
+12.11.2018 01:50:03    [RECEIVER]: 0x0 
+12.11.2018 01:50:03    [MESSAGE ID]: 0c2c2376-3924-4f5c-b2ba-39550bbbcd73
+12.11.2018 01:50:03    [LOGIN]: Success
+12.11.2018 01:50:03    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:50:03    [MESSAGE ID]: bee09298-0abc-448f-9718-3d5416bebe5a
+12.11.2018 01:50:04    [RECEIVER]: {"Clients":[{"Id":15,"Username":"","Rank":0}],"Djs":[{"Host":"test","Track":[{"Time":5,"Id":"JSQsIMgj1OM"}]},{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}],"TimeLeft":1} 
+12.11.2018 01:50:04    [MESSAGE ID]: baa9608a-650f-4f2c-ac01-817feced298e
+12.11.2018 01:50:05    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 01:50:05    [MESSAGE ID]: 
+12.11.2018 01:50:15    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"JSQsIMgj1OM"}]}$1
+12.11.2018 01:50:15    [MESSAGE ID]: 
+12.11.2018 01:52:41    [CONFIG]: Success deserialize
+12.11.2018 01:52:42    [CONNECTION]: The host failed to connect. Timeout occured.
+12.11.2018 01:52:44    [CONNECTION]: The host failed to connect. Timeout occured.
+12.11.2018 01:52:50    [RECEIVER]: 0x0 
+12.11.2018 01:52:50    [MESSAGE ID]: 34483e6b-a926-4de7-a11f-674ec6bb5170
+12.11.2018 01:52:50    [LOGIN]: Success
+12.11.2018 01:52:50    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:52:50    [MESSAGE ID]: a15f5666-96e1-4228-89c1-382e42e65c41
+12.11.2018 01:52:51    [RECEIVER]: {"Clients":[{"Id":15,"Username":"","Rank":0}],"Djs":[{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]},{"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}],"TimeLeft":8} 
+12.11.2018 01:52:51    [MESSAGE ID]: b5ac177b-a70a-47ed-9215-1564fba6feb9
+12.11.2018 01:52:59    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 01:52:59    [MESSAGE ID]: 
+12.11.2018 01:53:55    [CONFIG]: Success deserialize
+12.11.2018 01:53:56    [CONNECTION]: The host failed to connect. Timeout occured.
+12.11.2018 01:53:58    [CONNECTION]: The host failed to connect. Timeout occured.
+12.11.2018 01:54:04    [RECEIVER]: 0x0 
+12.11.2018 01:54:04    [MESSAGE ID]: 33b70cd7-c2a7-41e2-ad19-93f34b277048
+12.11.2018 01:54:04    [LOGIN]: Success
+12.11.2018 01:54:04    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:54:04    [MESSAGE ID]: 75f2cb92-c718-4b3e-bbde-ec8b30af3d14
+12.11.2018 01:54:05    [RECEIVER]: {"Clients":[{"Id":15,"Username":"","Rank":0}],"Djs":[{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]},{"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}],"TimeLeft":8} 
+12.11.2018 01:54:05    [MESSAGE ID]: d4a4f389-cd12-4395-80e5-f7eb525b27e2
+12.11.2018 01:54:12    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 01:54:12    [MESSAGE ID]: 
+12.11.2018 01:54:19    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 01:54:19    [MESSAGE ID]: 
+12.11.2018 01:54:24    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:54:24    [MESSAGE ID]: c73e234b-fc65-49ae-b9c7-7d6238b73682
+12.11.2018 01:54:29    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]}$1
+12.11.2018 01:54:29    [MESSAGE ID]: 
+12.11.2018 01:54:34    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 01:54:34    [MESSAGE ID]: 
+12.11.2018 01:54:44    [RECEIVER]: {"Clients":[{"Id":15,"Username":"","Rank":0}],"Djs":[{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}],"TimeLeft":4} 
+12.11.2018 01:54:44    [MESSAGE ID]: 83d6bf8f-cbd3-4199-90ca-92a4d87331b7
+12.11.2018 01:54:44    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:54:44    [MESSAGE ID]: 188751cd-06b6-46d9-b507-f2b187c6b44c
+12.11.2018 01:54:47    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:54:47    [MESSAGE ID]: 
+12.11.2018 01:54:57    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:54:57    [MESSAGE ID]: 
+12.11.2018 01:55:05    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:55:05    [MESSAGE ID]: 0dfdbe0d-e0b2-4b30-9edc-8fc151a44035
+12.11.2018 01:55:07    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$2
+12.11.2018 01:55:07    [MESSAGE ID]: 
+12.11.2018 01:55:11    [RECEIVER]: {"Clients":[{"Id":15,"Username":"","Rank":0}],"Djs":[{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]},{"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}],"TimeLeft":6} 
+12.11.2018 01:55:11    [MESSAGE ID]: 8060c10e-b564-4e7d-90c0-fa9e466059ff
+12.11.2018 01:55:16    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 01:55:16    [MESSAGE ID]: 
+12.11.2018 01:55:23    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 01:55:23    [MESSAGE ID]: 
+12.11.2018 01:55:25    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:55:25    [MESSAGE ID]: d87695f8-1e2d-4f89-be5b-b455656b5601
+12.11.2018 01:55:33    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]}$1
+12.11.2018 01:55:34    [MESSAGE ID]: 
+12.11.2018 01:55:39    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 01:55:39    [MESSAGE ID]: 
+12.11.2018 01:55:45    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:55:45    [MESSAGE ID]: c62eef02-3c1a-4c2f-940e-fa707a79cbf0
+12.11.2018 01:55:49    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 01:55:49    [MESSAGE ID]: 
+12.11.2018 01:55:56    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 01:55:56    [MESSAGE ID]: 
+12.11.2018 01:56:06    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:56:06    [MESSAGE ID]: 8ee1023d-5307-4192-be9b-4f54e459b67b
+12.11.2018 01:56:06    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]}$1
+12.11.2018 01:56:06    [MESSAGE ID]: 
+12.11.2018 01:56:11    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 01:56:11    [MESSAGE ID]: 
+12.11.2018 01:56:21    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 01:56:21    [MESSAGE ID]: 
+12.11.2018 01:56:26    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:56:26    [MESSAGE ID]: 9df4bb49-c769-4839-8a5d-018a3ec49d02
+12.11.2018 01:56:28    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 01:56:28    [MESSAGE ID]: 
+12.11.2018 01:58:31    [CONFIG]: Success deserialize
+12.11.2018 01:58:33    [CONNECTION]: The host failed to connect. Timeout occured.
+12.11.2018 01:58:34    [CONNECTION]: The host failed to connect. Timeout occured.
+12.11.2018 01:58:36    [CONNECTION]: The host failed to connect. Timeout occured.
+12.11.2018 01:58:40    [RECEIVER]: 0x0 
+12.11.2018 01:58:40    [MESSAGE ID]: 427d2891-ef2f-4a9b-8f88-00b9b61cdb3e
+12.11.2018 01:58:40    [LOGIN]: Success
+12.11.2018 01:58:40    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 01:58:40    [MESSAGE ID]: 43e5d42e-5ad8-46b5-b24c-de03a9a32d6d
+12.11.2018 01:58:40    [RECEIVER]: {"Clients":[{"Id":15,"Username":"","Rank":0}],"Djs":[{"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]},{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}],"TimeLeft":1} 
+12.11.2018 01:58:40    [MESSAGE ID]: 82ffde9b-426e-40ee-b78a-805b7a474e7a
+12.11.2018 01:58:41    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 01:58:41    [MESSAGE ID]: 
+12.11.2018 01:58:46    [RECEIVER]: {"Clients":[{"Id":15,"Username":"","Rank":0}],"Djs":[{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}],"TimeLeft":10} 
+12.11.2018 01:58:46    [MESSAGE ID]: 211a8f93-ab41-456f-b3ea-bfbde10e4ebd
+12.11.2018 02:00:45    [CONFIG]: Success deserialize
+12.11.2018 02:00:47    [CONNECTION]: The host failed to connect. Timeout occured.
+12.11.2018 02:00:48    [CONNECTION]: The host failed to connect. Timeout occured.
+12.11.2018 02:00:49    [CONNECTION]: The host failed to connect. Timeout occured.
+12.11.2018 02:00:54    [RECEIVER]: 0x0 
+12.11.2018 02:00:54    [MESSAGE ID]: a2fa4ce5-88e9-49a0-a0e1-87fc6ae43ebb
+12.11.2018 02:00:54    [LOGIN]: Success
+12.11.2018 02:00:54    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:00:54    [MESSAGE ID]: 9ce42e61-52fc-440b-a0bd-c00949f0ef78
+12.11.2018 02:00:54    [RECEIVER]: {"Clients":[{"Id":15,"Username":"","Rank":0}],"Djs":[{"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]},{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}],"TimeLeft":1} 
+12.11.2018 02:00:54    [MESSAGE ID]: b5e359c7-617e-4d90-b53f-ed70516e60ae
+12.11.2018 02:00:54    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:00:54    [MESSAGE ID]: 
+12.11.2018 02:01:04    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 02:01:04    [MESSAGE ID]: 
+12.11.2018 02:01:11    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:01:11    [MESSAGE ID]: 
+12.11.2018 02:01:14    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:01:14    [MESSAGE ID]: b1ce8623-5b49-432e-8b67-eacfccbd88a1
+12.11.2018 02:01:21    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]}$1
+12.11.2018 02:01:21    [MESSAGE ID]: 
+12.11.2018 02:01:26    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:01:26    [MESSAGE ID]: 
+12.11.2018 02:01:34    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:01:34    [MESSAGE ID]: ae6c39a1-c4d3-4d1c-a010-cf4014dbf2c7
+12.11.2018 02:01:36    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 02:01:36    [MESSAGE ID]: 
+12.11.2018 02:01:43    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:01:43    [MESSAGE ID]: 
+12.11.2018 02:01:53    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]}$1
+12.11.2018 02:01:53    [MESSAGE ID]: 
+12.11.2018 02:01:54    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:01:54    [MESSAGE ID]: ba3299c6-60fd-44dd-a2c6-09156f78c7ff
+12.11.2018 02:01:58    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:01:58    [MESSAGE ID]: 
+12.11.2018 02:02:08    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 02:02:08    [MESSAGE ID]: 
+12.11.2018 02:02:14    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:02:14    [MESSAGE ID]: 67deb1e8-b856-48c5-877b-066e0afeb23d
+12.11.2018 02:02:15    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:02:15    [MESSAGE ID]: 
+12.11.2018 02:02:25    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]}$1
+12.11.2018 02:02:25    [MESSAGE ID]: 
+12.11.2018 02:02:30    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:02:30    [MESSAGE ID]: 
+12.11.2018 02:02:34    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:02:34    [MESSAGE ID]: 3a4f1abe-6e3c-47cf-9677-b3c3cf6afc2b
+12.11.2018 02:02:40    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 02:02:40    [MESSAGE ID]: 
+12.11.2018 02:02:47    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:02:47    [MESSAGE ID]: 
+12.11.2018 02:02:54    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:02:54    [MESSAGE ID]: 4ec9b7ae-f4c4-4ab9-91d8-4282c7d3ac9e
+12.11.2018 02:02:57    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]}$1
+12.11.2018 02:02:57    [MESSAGE ID]: 
+12.11.2018 02:05:27    [CONFIG]: Success deserialize
+12.11.2018 02:05:31    [RECEIVER]: 0x0 
+12.11.2018 02:05:31    [MESSAGE ID]: 8ab5f609-d741-4a54-82b3-61d2da609932
+12.11.2018 02:05:31    [LOGIN]: Success
+12.11.2018 02:05:31    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:05:31    [MESSAGE ID]: 829ae65b-392d-48ea-94e7-129cb05c3e10
+12.11.2018 02:05:32    [RECEIVER]: {"Clients":[{"Id":15,"Username":"","Rank":0}],"Djs":[{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]},{"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}],"TimeLeft":10} 
+12.11.2018 02:05:32    [MESSAGE ID]: 6f425587-cf0e-47a4-ba04-21366a3a26bf
+12.11.2018 02:05:42    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 02:05:42    [MESSAGE ID]: 
+12.11.2018 02:05:49    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:05:49    [MESSAGE ID]: 
+12.11.2018 02:05:52    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:05:52    [MESSAGE ID]: c68750ac-d335-4fbb-ba69-904e23f47422
+12.11.2018 02:05:59    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]}$1
+12.11.2018 02:05:59    [MESSAGE ID]: 
+12.11.2018 02:06:04    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:06:04    [MESSAGE ID]: 
+12.11.2018 02:06:12    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:06:12    [MESSAGE ID]: 7c054f18-2ae1-4bc0-a186-2e53ce9adb47
+12.11.2018 02:06:14    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 02:06:14    [MESSAGE ID]: 
+12.11.2018 02:06:21    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:06:21    [MESSAGE ID]: 
+12.11.2018 02:06:31    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]}$1
+12.11.2018 02:06:31    [MESSAGE ID]: 
+12.11.2018 02:06:32    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:06:32    [MESSAGE ID]: 9c28edf0-688f-479d-bf2f-8357f73477f1
+12.11.2018 02:06:36    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:06:36    [MESSAGE ID]: 
+12.11.2018 02:06:46    [CONFIG]: Success deserialize
+12.11.2018 02:06:50    [RECEIVER]: 0x0 
+12.11.2018 02:06:50    [MESSAGE ID]: 1f228083-96c7-45d8-a784-2d8f7676fa3e
+12.11.2018 02:06:50    [LOGIN]: Success
+12.11.2018 02:06:50    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:06:50    [MESSAGE ID]: af4765bc-a55a-4945-9e3e-51bbc7a8242b
+12.11.2018 02:06:51    [RECEIVER]: {"Clients":[{"Id":15,"Username":"","Rank":0}],"Djs":[{"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]},{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}],"TimeLeft":1} 
+12.11.2018 02:06:51    [MESSAGE ID]: 81906133-3133-47c0-992f-bacb36c89e8c
+12.11.2018 02:06:51    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:06:51    [MESSAGE ID]: 
+12.11.2018 02:08:02    [CONFIG]: Success deserialize
+12.11.2018 02:08:03    [CONNECTION]: The host failed to connect. Timeout occured.
+12.11.2018 02:08:28    [CONFIG]: Success deserialize
+12.11.2018 02:08:30    [CONNECTION]: The host failed to connect. Timeout occured.
+12.11.2018 02:08:34    [RECEIVER]: 0x0 
+12.11.2018 02:08:34    [MESSAGE ID]: 92885afb-30d2-45ac-ada5-cb071966b870
+12.11.2018 02:08:34    [LOGIN]: Success
+12.11.2018 02:08:34    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:08:34    [MESSAGE ID]: 182dd2bd-70aa-474a-9571-82225001008b
+12.11.2018 02:08:35    [RECEIVER]: {"Clients":[{"Id":15,"Username":"","Rank":0}],"Djs":[{"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]},{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}],"TimeLeft":2} 
+12.11.2018 02:08:35    [MESSAGE ID]: dd9efa1a-82a8-44e9-bb55-082363b06a82
+12.11.2018 02:08:36    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:08:36    [MESSAGE ID]: 
+12.11.2018 02:08:46    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 02:08:46    [MESSAGE ID]: 
+12.11.2018 02:08:53    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:08:53    [MESSAGE ID]: 
+12.11.2018 02:08:54    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:08:54    [MESSAGE ID]: 1dd6aa0e-a6ba-41bd-946c-995e7cc47204
+12.11.2018 02:09:03    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]}$1
+12.11.2018 02:09:03    [MESSAGE ID]: 
+12.11.2018 02:09:08    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:09:08    [MESSAGE ID]: 
+12.11.2018 02:09:14    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:09:14    [MESSAGE ID]: 1cade346-fe49-4324-be5d-3650e5350cc1
+12.11.2018 02:09:18    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 02:09:18    [MESSAGE ID]: 
+12.11.2018 02:09:25    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:09:25    [MESSAGE ID]: 
+12.11.2018 02:09:34    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:09:34    [MESSAGE ID]: ffa02bfe-9902-4781-8650-f4636b48d5ce
+12.11.2018 02:09:35    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]}$1
+12.11.2018 02:09:35    [MESSAGE ID]: 
+12.11.2018 02:09:40    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:09:40    [MESSAGE ID]: 
+12.11.2018 02:09:50    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 02:09:50    [MESSAGE ID]: 
+12.11.2018 02:09:54    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:09:54    [MESSAGE ID]: 7123ba55-5ee7-4f3a-a271-1c192f7c3e21
+12.11.2018 02:09:57    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:09:57    [MESSAGE ID]: 
+12.11.2018 02:10:07    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]}$1
+12.11.2018 02:10:07    [MESSAGE ID]: 
+12.11.2018 02:10:12    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:10:12    [MESSAGE ID]: 
+12.11.2018 02:10:14    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:10:14    [MESSAGE ID]: 2b65e61b-4851-489f-b6f9-c18b9afb361d
+12.11.2018 02:10:22    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 02:10:22    [MESSAGE ID]: 
+12.11.2018 02:10:29    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:10:29    [MESSAGE ID]: 
+12.11.2018 02:10:34    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:10:34    [MESSAGE ID]: 13604abb-59c1-49ad-87b2-30d68e3bd542
+12.11.2018 02:10:39    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]}$1
+12.11.2018 02:10:39    [MESSAGE ID]: 
+12.11.2018 02:10:44    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:10:44    [MESSAGE ID]: 
+12.11.2018 02:10:54    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 02:10:54    [MESSAGE ID]: 
+12.11.2018 02:10:55    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:10:55    [MESSAGE ID]: f6517b9d-90d2-4fea-9c3c-10914197d821
+12.11.2018 02:11:01    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:11:01    [MESSAGE ID]: 
+12.11.2018 02:11:11    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]}$1
+12.11.2018 02:11:11    [MESSAGE ID]: 
+12.11.2018 02:11:15    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:11:15    [MESSAGE ID]: 336c1adb-7d20-4e9e-b5c5-c5a15cc2a204
+12.11.2018 02:11:16    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:11:16    [MESSAGE ID]: 
+12.11.2018 02:11:26    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 02:11:26    [MESSAGE ID]: 
+12.11.2018 02:11:33    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:11:33    [MESSAGE ID]: 
+12.11.2018 02:11:35    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:11:35    [MESSAGE ID]: 3a383ef8-9401-4c48-97a6-e0ddc333c859
+12.11.2018 02:11:43    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]}$1
+12.11.2018 02:11:43    [MESSAGE ID]: 
+12.11.2018 02:11:48    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:11:48    [MESSAGE ID]: 
+12.11.2018 02:11:55    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:11:55    [MESSAGE ID]: 99e1c696-98f5-493a-8ecd-09b14fe35023
+12.11.2018 02:11:58    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 02:11:58    [MESSAGE ID]: 
+12.11.2018 02:12:05    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:12:05    [MESSAGE ID]: 
+12.11.2018 02:12:15    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]}$1
+12.11.2018 02:12:15    [MESSAGE ID]: 
+12.11.2018 02:12:15    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:12:15    [MESSAGE ID]: 89aabeb3-e535-4d00-bcb6-5547fa642855
+12.11.2018 02:12:20    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:12:20    [MESSAGE ID]: 
+12.11.2018 02:12:30    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 02:12:30    [MESSAGE ID]: 
+12.11.2018 02:12:35    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:12:35    [MESSAGE ID]: b7e6ee21-1267-44b4-baa8-ea7bdd692b9a
+12.11.2018 02:12:37    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:12:37    [MESSAGE ID]: 
+12.11.2018 02:12:47    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]}$1
+12.11.2018 02:12:47    [MESSAGE ID]: 
+12.11.2018 02:12:52    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:12:52    [MESSAGE ID]: 
+12.11.2018 02:12:55    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:12:55    [MESSAGE ID]: 422b395e-64bd-45c1-9a41-de03b96cdb16
+12.11.2018 02:13:02    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 02:13:02    [MESSAGE ID]: 
+12.11.2018 02:13:09    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:13:09    [MESSAGE ID]: 
+12.11.2018 02:13:15    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:13:15    [MESSAGE ID]: 3899fcf9-46a7-4481-b884-cae989d6fdf9
+12.11.2018 02:13:19    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]}$1
+12.11.2018 02:13:19    [MESSAGE ID]: 
+12.11.2018 02:13:24    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:13:24    [MESSAGE ID]: 
+12.11.2018 02:13:34    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 02:13:34    [MESSAGE ID]: 
+12.11.2018 02:13:35    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:13:35    [MESSAGE ID]: 07e8f12a-a419-4407-a8be-6406d0bc247e
+12.11.2018 02:13:54    [CONFIG]: Success deserialize
+12.11.2018 02:13:58    [RECEIVER]: 0x0 
+12.11.2018 02:13:58    [MESSAGE ID]: 8a5b0fde-9f16-47c7-b995-dc483202c10d
+12.11.2018 02:13:58    [LOGIN]: Success
+12.11.2018 02:13:59    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:13:59    [MESSAGE ID]: 8dd2e3a0-49fb-4aca-a6bc-01668a94251e
+12.11.2018 02:13:59    [RECEIVER]: {"Clients":[{"Id":15,"Username":"","Rank":0}],"Djs":[{"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]},{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}],"TimeLeft":1} 
+12.11.2018 02:13:59    [MESSAGE ID]: fcef4435-b6fc-4302-bfa7-c360e4f283c9
+12.11.2018 02:13:59    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:13:59    [MESSAGE ID]: 
+12.11.2018 02:14:09    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 02:14:09    [MESSAGE ID]: 
+12.11.2018 02:15:20    [CONFIG]: Success deserialize
+12.11.2018 02:15:24    [RECEIVER]: 0x0 
+12.11.2018 02:15:24    [MESSAGE ID]: 4daacf6b-ab1d-46a5-84e4-bbdf9b7dfb90
+12.11.2018 02:15:24    [LOGIN]: Success
+12.11.2018 02:15:24    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:15:24    [MESSAGE ID]: 69292357-5b78-4ff4-8b06-74a22edcc9ed
+12.11.2018 02:15:25    [RECEIVER]: {"Clients":[{"Id":15,"Username":"","Rank":0}],"Djs":[{"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]},{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}],"TimeLeft":1} 
+12.11.2018 02:15:25    [MESSAGE ID]: 09370969-deb4-401c-882e-9ddccb0ca75f
+12.11.2018 02:15:25    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:15:25    [MESSAGE ID]: 
+12.11.2018 02:15:35    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 02:15:35    [MESSAGE ID]: 
+12.11.2018 02:16:06    [CONFIG]: Success deserialize
+12.11.2018 02:16:10    [RECEIVER]: 0x0 
+12.11.2018 02:16:10    [MESSAGE ID]: c8db87a0-0910-4a8b-9e4c-1904ee93f12c
+12.11.2018 02:16:10    [LOGIN]: Success
+12.11.2018 02:16:10    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:16:10    [MESSAGE ID]: 8b764651-b298-4e6e-8a47-6390925bd3ef
+12.11.2018 02:16:11    [RECEIVER]: {"Clients":[{"Id":15,"Username":"","Rank":0}],"Djs":[{"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]},{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}],"TimeLeft":1} 
+12.11.2018 02:16:11    [MESSAGE ID]: 5b9ea81f-2f59-4b37-b248-1abc3c3aa81c
+12.11.2018 02:16:11    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:16:11    [MESSAGE ID]: 
+12.11.2018 02:17:19    [CONFIG]: Success deserialize
+12.11.2018 02:17:23    [RECEIVER]: 0x0 
+12.11.2018 02:17:23    [MESSAGE ID]: b9e1292f-5453-44af-9425-18cef94d3b29
+12.11.2018 02:17:23    [LOGIN]: Success
+12.11.2018 02:17:23    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:17:23    [MESSAGE ID]: 077697a9-36d6-4073-83ed-7310fd087f07
+12.11.2018 02:17:24    [RECEIVER]: {"Clients":[{"Id":15,"Username":"","Rank":0}],"Djs":[{"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]},{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}],"TimeLeft":1} 
+12.11.2018 02:17:24    [MESSAGE ID]: 9d195fff-de71-4bec-b41a-f75bbbc06abf
+12.11.2018 02:17:25    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:17:25    [MESSAGE ID]: 
+12.11.2018 02:17:35    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 02:17:35    [MESSAGE ID]: 
+12.11.2018 02:17:42    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:17:42    [MESSAGE ID]: 
+12.11.2018 02:17:43    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:17:43    [MESSAGE ID]: 7228f70f-568d-4710-a192-e4c37953601c
+12.11.2018 02:17:52    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]}$1
+12.11.2018 02:17:52    [MESSAGE ID]: 
+12.11.2018 02:17:57    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:17:57    [MESSAGE ID]: 
+12.11.2018 02:18:03    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:18:03    [MESSAGE ID]: 082119e7-e272-44d9-ac01-28ff87e2e41d
+12.11.2018 02:18:07    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 02:18:07    [MESSAGE ID]: 
+12.11.2018 02:18:14    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:18:14    [MESSAGE ID]: 
+12.11.2018 02:18:24    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:18:24    [MESSAGE ID]: c07c824d-79a4-48f4-bf6e-7a0c7eff94d1
+12.11.2018 02:18:24    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]}$1
+12.11.2018 02:18:24    [MESSAGE ID]: 
+12.11.2018 02:18:29    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:18:29    [MESSAGE ID]: 
+12.11.2018 02:18:47    [CONFIG]: Success deserialize
+12.11.2018 02:19:19    [CONFIG]: Success deserialize
+12.11.2018 02:19:51    [CONFIG]: Success deserialize
+12.11.2018 02:21:20    [CONFIG]: Success deserialize
+12.11.2018 02:21:24    [RECEIVER]: 0x0 
+12.11.2018 02:21:24    [MESSAGE ID]: 6c95d7cb-f29b-460f-b6ea-586ed1ba8fec
+12.11.2018 02:21:24    [LOGIN]: Success
+12.11.2018 02:21:24    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:21:24    [MESSAGE ID]: 68597ca7-2254-4569-bb7b-a790af7c9503
+12.11.2018 02:21:25    [RECEIVER]: {"Clients":[{"Id":15,"Username":"","Rank":0}],"Djs":[{"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]},{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}],"TimeLeft":1} 
+12.11.2018 02:21:25    [MESSAGE ID]: 8361c73b-0db9-4ded-92f4-57db7ff0b1de
+12.11.2018 02:21:25    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:21:25    [MESSAGE ID]: 
+12.11.2018 02:31:06    [CONFIG]: Success deserialize
+12.11.2018 02:31:11    [RECEIVER]: 0x0 
+12.11.2018 02:31:11    [MESSAGE ID]: b14e9014-1776-46ae-b7bb-a09170a2ed05
+12.11.2018 02:31:11    [LOGIN]: Success
+12.11.2018 02:31:11    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:31:11    [MESSAGE ID]: e838c7b6-ce3f-4cd5-86b0-f18933cedeae
+12.11.2018 02:31:12    [RECEIVER]: {"Clients":[{"Id":15,"Username":"","Rank":0}],"Djs":[{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]},{"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}],"TimeLeft":10} 
+12.11.2018 02:31:12    [MESSAGE ID]: 3f0b0efb-f3eb-4a0f-8e51-897de71bf1a9
+12.11.2018 02:31:21    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 02:31:21    [MESSAGE ID]: 
+12.11.2018 02:31:28    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:31:28    [MESSAGE ID]: 
+12.11.2018 02:31:31    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:31:31    [MESSAGE ID]: 757c34c7-0a0a-42fb-85d4-2b0f535f5721
+12.11.2018 02:32:23    [CONFIG]: Success deserialize
+12.11.2018 02:32:28    [RECEIVER]: 0x0 
+12.11.2018 02:32:28    [MESSAGE ID]: 2125ef79-9efa-4b73-ab43-a51cc1fe0b8f
+12.11.2018 02:32:28    [LOGIN]: Success
+12.11.2018 02:32:28    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:32:28    [MESSAGE ID]: f7280961-84ab-41fb-8186-d8256313b956
+12.11.2018 02:32:28    [RECEIVER]: {"Clients":[{"Id":15,"Username":"","Rank":0}],"Djs":[{"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]},{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}],"TimeLeft":1} 
+12.11.2018 02:32:28    [MESSAGE ID]: a8edf80b-91ac-40d7-aa67-c8ed75fc57c0
+12.11.2018 02:32:28    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:32:28    [MESSAGE ID]: 
+12.11.2018 02:32:38    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 02:32:38    [MESSAGE ID]: 
+12.11.2018 02:32:45    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:32:45    [MESSAGE ID]: 
+12.11.2018 02:32:48    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:32:48    [MESSAGE ID]: c90eeb53-a3ad-4a70-8020-6420905465c4
+12.11.2018 02:32:55    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]}$1
+12.11.2018 02:32:55    [MESSAGE ID]: 
+12.11.2018 02:33:00    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:33:00    [MESSAGE ID]: 
+12.11.2018 02:33:30    [CONFIG]: Success deserialize
+12.11.2018 02:33:34    [RECEIVER]: 0x0 
+12.11.2018 02:33:34    [MESSAGE ID]: d4c1e58f-6b1e-4106-b99d-a175f5372f8e
+12.11.2018 02:33:34    [LOGIN]: Success
+12.11.2018 02:33:34    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:33:34    [MESSAGE ID]: ea7ecb78-4cb7-4fa2-97a7-8a39c49eae46
+12.11.2018 02:33:35    [RECEIVER]: {"Clients":[{"Id":15,"Username":"","Rank":0}],"Djs":[{"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]},{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}],"TimeLeft":1} 
+12.11.2018 02:33:35    [MESSAGE ID]: 944d484b-ea06-4796-b90a-7649d18e1bd6
+12.11.2018 02:33:35    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:33:35    [MESSAGE ID]: 
+12.11.2018 02:33:45    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 02:33:45    [MESSAGE ID]: 
+12.11.2018 02:48:34    [CONFIG]: Success deserialize
+12.11.2018 02:48:39    [RECEIVER]: 0x0 
+12.11.2018 02:48:39    [MESSAGE ID]: d0af24e9-1070-4b97-b66f-c2272834bfe6
+12.11.2018 02:48:39    [LOGIN]: Success
+12.11.2018 02:48:39    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:48:39    [MESSAGE ID]: 3b0cfdda-5b22-4a1d-923a-fef538db084a
+12.11.2018 02:48:40    [RECEIVER]: {"Clients":[{"Id":15,"Username":"","Rank":0}],"Djs":[{"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]},{"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}],"TimeLeft":7} 
+12.11.2018 02:48:40    [MESSAGE ID]: 727eded4-2f38-44e3-b677-974354d76e4d
+12.11.2018 02:48:46    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 02:48:46    [MESSAGE ID]: 
+12.11.2018 02:48:53    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:48:53    [MESSAGE ID]: 
+12.11.2018 02:48:59    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:48:59    [MESSAGE ID]: 7cd81955-27e0-4e8b-9c09-258350c1254d
+12.11.2018 02:49:03    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]}$1
+12.11.2018 02:49:03    [MESSAGE ID]: 
+12.11.2018 02:49:08    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:49:08    [MESSAGE ID]: 
+12.11.2018 02:49:18    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":7,"Id":"3Hm9vX3na44"},{"Time":5,"Id":"kAdkRGuKzhQ"}]}$1
+12.11.2018 02:49:18    [MESSAGE ID]: 
+12.11.2018 02:49:20    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:49:20    [MESSAGE ID]: 370b82ac-d66e-4e1c-b4c5-4878774cda5f
+12.11.2018 02:49:25    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:49:25    [MESSAGE ID]: 
+12.11.2018 02:49:35    [RECEIVER]: 0x12 {"Host":"test","Track":[{"Time":5,"Id":"kAdkRGuKzhQ"},{"Time":7,"Id":"3Hm9vX3na44"}]}$1
+12.11.2018 02:49:35    [MESSAGE ID]: 
+12.11.2018 02:49:40    [RECEIVER]: [{"Id":1,"Name":"test","Host":"host","Image":"xD","Description":"3","AmountOfPeople":0,"AmountOfAdministration":0},{"Id":2,"Name":"test","Host":"test","Image":"test","Description":"test","AmountOfPeople":0,"AmountOfAdministration":0}] 
+12.11.2018 02:49:40    [MESSAGE ID]: 6890fa0d-5547-47db-bd4f-56cf515d2beb
+12.11.2018 02:49:40    [RECEIVER]: 0x12 {"Host":"host","Track":[{"Time":10,"Id":"mj-v6zCnEaw"}]}$1
+12.11.2018 02:49:40    [MESSAGE ID]: 

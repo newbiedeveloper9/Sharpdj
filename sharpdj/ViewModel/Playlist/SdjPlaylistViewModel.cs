@@ -30,26 +30,27 @@ namespace SharpDj.ViewModel
         {
             SdjMainViewModel = main;
 
-            var src = File.ReadAllText(FilesPath.Instance.PlaylistConfig);
-            PlaylistCollection = JsonConvert.DeserializeObject<ObservableCollection<PlaylistModel>>(src);
-            PlaylistCollectionSavedState = JsonConvert.DeserializeObject<ObservableCollection<PlaylistModel>>(src);
+            PlaylistCollection = new ObservableCollection<PlaylistModel>();
+            PlaylistCollectionSavedState = new ObservableCollection<PlaylistModel>();
 
-            if (PlaylistCollection != null && PlaylistCollectionSavedState != null)
-                for (var index = 0; index < PlaylistCollection.Count; index++)
-                {
-                    PlaylistCollection[index].SdjMainViewModel = SdjMainViewModel;
-                    PlaylistCollectionSavedState[index].SdjMainViewModel = SdjMainViewModel;
-
-                    for (var i = 0; i < PlaylistCollection[index].Tracks.Count; i++)
-                    {
-                        PlaylistCollection[index].Tracks[i].SdjMainViewModel = SdjMainViewModel;
-                        PlaylistCollectionSavedState[index].Tracks[i].SdjMainViewModel = SdjMainViewModel;
-                    }
-                }
-            else
+            if (Directory.Exists(FilesPath.Instance.ConfigFolder) && File.Exists(FilesPath.Instance.PlaylistConfig))
             {
-                PlaylistCollection = new ObservableCollection<PlaylistModel>();
-                PlaylistCollectionSavedState = new ObservableCollection<PlaylistModel>();
+                var src = File.ReadAllText(FilesPath.Instance.PlaylistConfig);
+                PlaylistCollection = JsonConvert.DeserializeObject<ObservableCollection<PlaylistModel>>(src);
+                PlaylistCollectionSavedState = JsonConvert.DeserializeObject<ObservableCollection<PlaylistModel>>(src);
+
+                if (PlaylistCollection != null && PlaylistCollectionSavedState != null)
+                    for (var index = 0; index < PlaylistCollection.Count; index++)
+                    {
+                        PlaylistCollection[index].SdjMainViewModel = SdjMainViewModel;
+                        PlaylistCollectionSavedState[index].SdjMainViewModel = SdjMainViewModel;
+
+                        for (var i = 0; i < PlaylistCollection[index].Tracks.Count; i++)
+                        {
+                            PlaylistCollection[index].Tracks[i].SdjMainViewModel = SdjMainViewModel;
+                            PlaylistCollectionSavedState[index].Tracks[i].SdjMainViewModel = SdjMainViewModel;
+                        }
+                    }
             }
         }
 
@@ -127,8 +128,8 @@ namespace SharpDj.ViewModel
 
                     if (!serializedSavedState.Equals(serialized))
                     {
-                        if (!Directory.Exists("config"))
-                            Directory.CreateDirectory("config");
+                        if (!Directory.Exists(FilesPath.Instance.ConfigFolder))
+                            Directory.CreateDirectory(FilesPath.Instance.ConfigFolder);
 
                         File.WriteAllText(FilesPath.Instance.PlaylistConfig, serialized);
                         PlaylistCollectionSavedState = Clone.ClonWithJson(PlaylistCollection);

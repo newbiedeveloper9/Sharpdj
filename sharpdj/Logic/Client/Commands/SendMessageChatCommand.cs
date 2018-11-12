@@ -35,10 +35,6 @@ namespace SharpDj.Logic.Client.Commands
                     ?.Username
             };
             uiContext.Send(x => sdjMainViewModel.SdjRoomViewModel.RoomMessageCollection.Add(mess), null);
-
-            /*var tmp = new ObservableCollection<RoomMessageModel>(
-                sdjMainViewModel.SdjRoomViewModel.RoomMessageCollection) {mess};
-            sdjMainViewModel.SdjRoomViewModel.RoomMessageCollection = tmp;*/
         }
     }
 }

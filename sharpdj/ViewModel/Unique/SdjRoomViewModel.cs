@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using Communication.Client;
@@ -30,15 +31,18 @@ namespace SharpDj.ViewModel
             RoomMessageCollection = new ObservableCollection<RoomMessageModel>();
             UserList = new MyUserList(main);
 
-            VlcPlayer = new SdjVlcPlayer();
+            VlcPlayer = new SdjVlcPlayer(); 
             MyVlcPlayer.Add(VlcPlayer);
-            var vlcLibDirectory = new DirectoryInfo(System.IO.Path.Combine(Environment.CurrentDirectory, "libvlc",
-                IntPtr.Size == 4 ? "win-x86" : "win-x64"));
-            VlcPlayer.VlcPlayer.SourceProvider.CreatePlayer(vlcLibDirectory);
-            VlcPlayer.VlcPlayer.SourceProvider.MediaPlayer.Play("http://techslides.com/demos/sample-videos/small.mp4");
-            
-        }
+            var location = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+            var libDirectory = new DirectoryInfo(Path.Combine(location,
+            "libvlc", IntPtr.Size == 4 ? "win-x86" : "win-x64"));
+            VlcPlayer.VlcPlayer.SourceProvider.CreatePlayer(libDirectory);
+            VlcPlayer.VlcPlayer.SourceProvider.MediaPlayer.SetMedia(
+                new Uri(location+@"\mj-v6zCnEaw.mp4"));
+            VlcPlayer.VlcPlayer.SourceProvider.MediaPlayer.Play();
 
+        }
+    
         #endregion .ctor
 
         #region Properties
