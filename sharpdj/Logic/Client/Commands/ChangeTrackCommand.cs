@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Communication.Shared;
 using Newtonsoft.Json;
+using SharpDj.Logic.Helpers;
 using SharpDj.ViewModel;
 using YoutubeExplode;
 using YoutubeExplode.Converter;
@@ -25,21 +26,19 @@ namespace SharpDj.Logic.Client.Commands
             var roomId = parameters[1];
 
             Console.WriteLine(json);
-            var location = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
 
-            while (!File.Exists(location + $@"\music\{json.Track[0].Id}.mp4"))
+            while (!File.Exists($@"{FilesPath.Instance.MusicFolder}{json.Track[0].Id}.mp4"))
             {
-                Thread.Sleep(100);
-                Console.WriteLine("downloading " + DateTime.Now);
+                Thread.Sleep(200);
             }
             
             Play:
-            Thread.Sleep(500);
+            Thread.Sleep(300);
             try
             {
                 
                 sdjMainViewModel.SdjRoomViewModel.VlcPlayer.VlcPlayer.SourceProvider.MediaPlayer.SetMedia(
-                    new Uri(location + $@"\music\{json.Track[0].Id}.mp4"));
+                    new Uri($@"{FilesPath.Instance.MusicFolder}{json.Track[0].Id}.mp4"));
                 sdjMainViewModel.SdjRoomViewModel.VlcPlayer.VlcPlayer.SourceProvider.MediaPlayer.Play();
             }
             catch (Exception ex)

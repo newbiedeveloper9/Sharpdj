@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using YoutubeExplode.Converter;
 
 namespace SharpDj.Logic.Helpers
 {
@@ -8,8 +9,8 @@ namespace SharpDj.Logic.Helpers
         {
             if (!Directory.Exists(FilesPath.Instance.ConfigFolder))
                 Directory.CreateDirectory(FilesPath.Instance.ConfigFolder);
-            if (!Directory.Exists(FilesPath.LocalPath+@"\music"))
-                Directory.CreateDirectory(FilesPath.LocalPath+@"\music");
+            if (!Directory.Exists(FilesPath.Instance.MusicFolder))
+                Directory.CreateDirectory(FilesPath.Instance.MusicFolder);
         }
     }
 }

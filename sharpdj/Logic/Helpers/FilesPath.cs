@@ -7,6 +7,7 @@ namespace SharpDj.Logic.Helpers
     public sealed class FilesPath
     {
         public readonly string ConfigFolder;
+        public readonly string MusicFolder;
         
         public static readonly string LocalPath = Path.GetDirectoryName(
             Assembly.GetEntryAssembly().Location);
@@ -19,7 +20,9 @@ namespace SharpDj.Logic.Helpers
 
         private FilesPath()
         {
-            ConfigFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/sharpdj/config/";
+            var appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            ConfigFolder = $@"{appdata}\sharpdj\config\";
+            MusicFolder = $@"{LocalPath}\music\";
         }
 
         public string PlaylistConfig =>
@@ -27,5 +30,6 @@ namespace SharpDj.Logic.Helpers
 
         public string ClientConfig =>
             $"{ConfigFolder}config.json";
+
     }
 }
