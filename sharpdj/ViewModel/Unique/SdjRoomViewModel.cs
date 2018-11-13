@@ -1,13 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using Communication.Client;
+using Communication.Server.Logic;
 using Communication.Shared;
 using Hik.Communication.Scs.Communication.Messages;
 using Newtonsoft.Json;
 using SharpDj.Core;
 using SharpDj.Logic.Client;
+using SharpDj.Logic.Helpers;
 using SharpDj.View.UserControls;
 using SharpDj.ViewModel.Model;
 using Vlc.DotNet.Core;
@@ -18,41 +24,45 @@ namespace SharpDj.ViewModel
     public class SdjRoomViewModel : BaseViewModel
     {
         public SdjVlcPlayer VlcPlayer { get; set; }
-        
+
         #region .ctor
 
         public SdjRoomViewModel(SdjMainViewModel main)
         {
             SdjMainViewModel = main;
-
-/*          var vlcPlayer = new SdjVlcPlayer();
-            var vlcLibDirectory = new DirectoryInfo(System.IO.Path.Combine(Environment.CurrentDirectory, "libvlc", IntPtr.Size == 4 ? "win-x86" : "win-x64"));
-            vlcPlayer.VlcPlayer.SourceProvider.CreatePlayer(vlcLibDirectory);
-            vlcPlayer.VlcPlayer.SourceProvider.MediaPlayer.Play("https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_5mb.mp4");
-            MyVlcPlayer.Add(vlcPlayer);*/
-
             RoomMessageCollection = new ObservableCollection<RoomMessageModel>();
-            var mess = new RoomMessageModel(main)
-            {
-                Message =
-                    "Testowa wiadomość Testowa wiadomość Testowa wiadomość Testowa wiadomość Te xdd xdd" +
-                    " dstowa wiadomość Testowa wiadomość Testowa wiadomość Testowa wiadomość Testowa wiadomość",
-                Time = "13:03",
-                Username = "Crisey"
-            };
+            UserList = new MyUserList(main);
 
+            VlcPlayer = new SdjVlcPlayer();
+            MyVlcPlayer.Add(VlcPlayer);
 
-            for (int i = 0; i < 10; i++)
-                RoomMessageCollection.Add(mess);
+            var libDirectory = new DirectoryInfo(Path.Combine(FilesPath.LocalPath,
+                "libvlc", IntPtr.Size == 4 ? "win-x86" : "win-x64"));
+            VlcPlayer.VlcPlayer.SourceProvider.CreatePlayer(libDirectory);
         }
 
         #endregion .ctor
 
         #region Properties
 
+        private MyUserList _userList;
+
+        public MyUserList UserList
+        {
+            get => _userList;
+            set
+            {
+                if (_userList == value) return;
+                _userList = value;
+                OnPropertyChanged("UserList");
+            }
+        }
+
+
         public int RoomId { get; set; }
 
         private SdjMainViewModel _sdjMainViewModel;
+
         public SdjMainViewModel SdjMainViewModel
         {
             get => _sdjMainViewModel;
@@ -69,6 +79,7 @@ namespace SharpDj.ViewModel
 
 
         private string _songTitle;
+
         public string SongTitle
         {
             get => _songTitle;
@@ -81,6 +92,7 @@ namespace SharpDj.ViewModel
         }
 
         private ushort _likes = 10;
+
         public ushort Likes
         {
             get => _likes;
@@ -93,6 +105,7 @@ namespace SharpDj.ViewModel
         }
 
         private ushort _dislikes = 20;
+
         public ushort Dislikes
         {
             get => _dislikes;
@@ -105,6 +118,7 @@ namespace SharpDj.ViewModel
         }
 
         private sbyte _songsQueue = 30;
+
         public sbyte SongsQueue
         {
             get => _songsQueue;
@@ -117,6 +131,7 @@ namespace SharpDj.ViewModel
         }
 
         private string _timeLeft = "4:00";
+
         public string TimeLeft
         {
             get => _timeLeft;
@@ -129,6 +144,7 @@ namespace SharpDj.ViewModel
         }
 
         private sbyte _volume = 100;
+
         public sbyte Volume
         {
             get => _volume;
@@ -141,6 +157,7 @@ namespace SharpDj.ViewModel
         }
 
         private string _roomName = "RoomName";
+
         public string RoomName
         {
             get => _roomName;
@@ -153,6 +170,7 @@ namespace SharpDj.ViewModel
         }
 
         private string _hostName = "HostName";
+
         public string HostName
         {
             get => _hostName;
@@ -165,6 +183,7 @@ namespace SharpDj.ViewModel
         }
 
         private bool _inQueue = false;
+
         public bool InQueue
         {
             get => _inQueue;
@@ -178,6 +197,7 @@ namespace SharpDj.ViewModel
 
 
         private ObservableCollection<RoomMessageModel> _roomMessageCollection;
+
         public ObservableCollection<RoomMessageModel> RoomMessageCollection
         {
             get => _roomMessageCollection;
@@ -190,17 +210,70 @@ namespace SharpDj.ViewModel
         }
 
 
+        private string _myChatMessage;
+
+        public string MyChatMessage
+        {
+            get => _myChatMessage;
+            set
+            {
+                if (_myChatMessage == value) return;
+                _myChatMessage = value;
+                OnPropertyChanged("MyChatMessage");
+            }
+        }
+
         #endregion Properties
 
         #region Methods
 
+        public class MyUserList : List<UserClient>
+        {
+            private readonly SdjMainViewModel _sdjMainViewModel;
+
+            public MyUserList(SdjMainViewModel sdjMainViewModel)
+            {
+                _sdjMainViewModel = sdjMainViewModel;
+            }
+
+            public new void Add(UserClient tmp)
+            {
+                base.Add(tmp);
+                this.RefreshMembersData();
+            }
+
+            public new void RemoveAt(UserClient tmp)
+            {
+                for (int i = 0; i < base.Count; i++)
+                {
+                    Console.WriteLine(base[i].Username);
+                }
+
+                base.RemoveAt(base.FindIndex(x => x.Id == tmp.Id));
+                this.RefreshMembersData();
+
+                for (int i = 0; i < base.Count; i++)
+                {
+                    Console.WriteLine(base[i].Username);
+                }
+            }
+
+            private void RefreshMembersData()
+            {
+                _sdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfPeopleInRoom = this.Count;
+                _sdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfAdministrationInRoom =
+                    this.Count(x => x.Rank > 0);
+            }
+        }
 
         #endregion Methods
 
         #region Commands
 
         #region LikeTrackCommand
+
         private RelayCommand _likeTrackCommand;
+
         public RelayCommand LikeTrackCommand
         {
             get
@@ -219,16 +292,20 @@ namespace SharpDj.ViewModel
         {
             Likes++;
         }
+
         #endregion
 
         #region DislikeTrackCommand
+
         private RelayCommand _dislikeTrackCommand;
+
         public RelayCommand DislikeTrackCommand
         {
             get
             {
                 return _dislikeTrackCommand
-                       ?? (_dislikeTrackCommand = new RelayCommand(DislikeTrackCommandExecute, DislikeTrackCommandCanExecute));
+                       ?? (_dislikeTrackCommand =
+                           new RelayCommand(DislikeTrackCommandExecute, DislikeTrackCommandCanExecute));
             }
         }
 
@@ -239,18 +316,21 @@ namespace SharpDj.ViewModel
 
         public void DislikeTrackCommandExecute()
         {
-
         }
+
         #endregion
 
         #region AddTrackToPlaylistCommand
+
         private RelayCommand _addTrackToPlaylistCommand;
+
         public RelayCommand AddTrackToPlaylistCommand
         {
             get
             {
                 return _addTrackToPlaylistCommand
-                       ?? (_addTrackToPlaylistCommand = new RelayCommand(AddTrackToPlaylistCommandExecute, AddTrackToPlaylistCommandCanExecute));
+                       ?? (_addTrackToPlaylistCommand = new RelayCommand(AddTrackToPlaylistCommandExecute,
+                           AddTrackToPlaylistCommandCanExecute));
             }
         }
 
@@ -261,18 +341,21 @@ namespace SharpDj.ViewModel
 
         public void AddTrackToPlaylistCommandExecute()
         {
-
         }
+
         #endregion
 
         #region StopPlayTrackCommand
+
         private RelayCommand _stopPlayTrackCommand;
+
         public RelayCommand StopPlayTrackCommand
         {
             get
             {
                 return _stopPlayTrackCommand
-                       ?? (_stopPlayTrackCommand = new RelayCommand(StopPlayTrackCommandExecute, StopPlayTrackCommandCanExecute));
+                       ?? (_stopPlayTrackCommand =
+                           new RelayCommand(StopPlayTrackCommandExecute, StopPlayTrackCommandCanExecute));
             }
         }
 
@@ -283,13 +366,14 @@ namespace SharpDj.ViewModel
 
         public void StopPlayTrackCommandExecute()
         {
-
         }
+
         #endregion
 
-
         #region LeftQueueCommand
+
         private RelayCommand _leftQueueCommand;
+
         public RelayCommand LeftQueueCommand
         {
             get
@@ -301,19 +385,20 @@ namespace SharpDj.ViewModel
 
         public bool LeftQueueCommandCanExecute()
         {
-            return true;
+            return InQueue;
         }
 
         public void LeftQueueCommandExecute()
         {
             InQueue = false;
         }
+
         #endregion
 
-
-
         #region JoinQueueCommand
+
         private RelayCommand _joinQueueCommand;
+
         public RelayCommand JoinQueueCommand
         {
             get
@@ -325,33 +410,70 @@ namespace SharpDj.ViewModel
 
         private bool JoinQueueCommandCanExecute()
         {
-            return true;
+            return !InQueue;
         }
 
         public void JoinQueueCommandExecute()
         {
-            InQueue = true;
             Task.Factory.StartNew(() =>
             {
-                var tracks = SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection.FirstOrDefault(x => x.IsActive)?.Tracks;
-                var dj = new Songs();
+                var tracks = SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection.FirstOrDefault(x => x.IsActive)
+                    ?.Tracks;
+                var dj = new Dj();
                 if (tracks != null)
                     foreach (var track in tracks)
                     {
                         int seconds = (int) TimeSpan.Parse(track.SongDuration).TotalSeconds;
-                        dj.Video.Add(new Songs.Song(seconds, track.SongId));
+                        dj.Track.Add(new Dj.Song(seconds, track.SongId));
                     }
+                
+                var json = JsonConvert.SerializeObject(dj);
 
-                var source = JsonConvert.SerializeObject(dj);
-                
-                
-                ClientInfo.Instance.Client.SendMessage(new ScsTextMessage("joinqueue$"+source));
+                var response = SdjMainViewModel.Client.Sender.JoinQueue(json);
+                var validation = ServerValidation.ServerResponseValidation(response);
+                switch (validation.Item2)
+                {
+                    case ServerValidation.ResponseValidationEnum.NullOrEmpty:
+                        Debug.Log("JoinQueue", "Null or empty response");
+                        break;
+                    case ServerValidation.ResponseValidationEnum.Success:
+                        InQueue = true;
+                        break;
+                    default:
+                        Debug.Log("JoinQueue", "Error with joining queue");
+                        break;                    
+                }
             });
         }
+
         #endregion
 
+        #region SendMessageCommand
+
+        private RelayCommand _sendMessageCommand;
+
+        public RelayCommand SendMessageCommand
+        {
+            get
+            {
+                return _sendMessageCommand
+                       ?? (_sendMessageCommand =
+                           new RelayCommand(SendMessageCommandExecute, SendMessageCommandCanExecute));
+            }
+        }
+
+        public bool SendMessageCommandCanExecute()
+        {
+            return true;
+        }
+
+        public void SendMessageCommandExecute()
+        {
+            SdjMainViewModel.Client.Sender.SendMessage(MyChatMessage, RoomId.ToString());
+        }
+
+        #endregion
 
         #endregion Commands
-
     }
 }

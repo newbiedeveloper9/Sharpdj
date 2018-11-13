@@ -9,6 +9,7 @@ namespace SharpDj.Logic.Helpers
     {
         public int Port { get; set; } = 21337;
         public string Ip { get; set; } = "192.168.0.103";
+        public int RefreshDataDelay { get; set; } = 20000;
 
         private ClientConfig()
         {

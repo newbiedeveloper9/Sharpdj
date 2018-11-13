@@ -4,6 +4,7 @@ using System.Linq;
 using Communication.Client;
 using Communication.Server;
 using Communication.Shared;
+using Communication.Shared.Data;
 using Hik.Collections;
 
 namespace servertcp

@@ -11,17 +11,27 @@
                         <ResourceDictionary Source="/Themes/Colors.xaml" />
                         <ResourceDictionary Source="/Themes/Buttons.xaml" />
                         <ResourceDictionary Source="/Themes/UserTabStyles.xaml" />
-                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
-                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Grey.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.DeepPurple.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+                <ResourceDictionary Source="Themes/GlobalStyles.xaml" />
+                <ResourceDictionary Source="/Themes/Colors.xaml" />
+                <ResourceDictionary Source="/Themes/Buttons.xaml" />
+                <ResourceDictionary Source="/Themes/UserTabStyles.xaml" />
+                <!--<ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Grey.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.DeepPurple.xaml" />-->
             </ResourceDictionary.MergedDictionaries>
-            
+
             <Style TargetType="{x:Type Window}">
                 <Setter Property="FontFamily"
                         Value="Roboto Light" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>
-   
+
 </Application>

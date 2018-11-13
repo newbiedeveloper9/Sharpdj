@@ -1,4 +1,5 @@
-﻿using System.Security;
+﻿using System;
+using System.Security;
 using System.Text.RegularExpressions;
 using Communication.Client;
 using Communication.Shared;
@@ -7,6 +8,7 @@ using SharpDj.Core;
 using SharpDj.Enums.Menu;
 using SharpDj.Enums.User;
 using SharpDj.Logic.Client;
+using SharpDj.Logic.Helpers;
 using SharpDj.Models.Helpers;
 
 namespace SharpDj.ViewModel.Unique
@@ -148,8 +150,7 @@ namespace SharpDj.ViewModel.Unique
 
         public void LoginCommandExecute()
         {
-            var resp = SdjMainViewModel.Client.Sender.Login(Login, Password);
-
+/*
             if (string.IsNullOrEmpty(resp))
                 return;
 
@@ -175,9 +176,29 @@ namespace SharpDj.ViewModel.Unique
                 {
                     ErrorNotify = "Login error";
                 }
+            }*/
+
+            var resp = SdjMainViewModel.Client.Sender.Login(Login, Password);
+            var validation = ServerValidation.ServerResponseValidation(resp);
+
+            switch (validation.Item2)
+            {
+                case ServerValidation.ResponseValidationEnum.NullOrEmpty:
+                    ErrorNotify = "Error with Request/Response";
+                    break;
+                case ServerValidation.ResponseValidationEnum.Success:
+                    var username = validation.Item1;
+                    SdjMainViewModel.Profile = new UserClient() {Username = username};
+                    ClientInfo.Instance.UserState = UserState.Logged;
+                    SdjMainViewModel.MainViewVisibility = MainView.Main;
+
+                    Debug.Log("Login", "Success");
+                    break;
+                default:
+                    ErrorNotify = "Login error";
+                    break;
             }
         }
-
         #endregion
 
         #region RegisterCommand

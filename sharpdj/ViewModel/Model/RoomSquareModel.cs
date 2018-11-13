@@ -1,6 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
+using Communication.Client;
 using Communication.Shared;
+using Communication.Shared.Data;
 using Hik.Communication.Scs.Communication.Messages;
 using Newtonsoft.Json;
 using SharpDj.Core;
@@ -144,16 +147,14 @@ namespace SharpDj.ViewModel.Model
             SdjMainViewModel.SdjBottomBarViewModel.BottomBarRoomName = RoomName;
             SdjMainViewModel.SdjRoomViewModel.RoomName = RoomName;
             SdjMainViewModel.SdjRoomViewModel.HostName = HostName;
+            SdjMainViewModel.SdjRoomViewModel.UserList = new SdjRoomViewModel.MyUserList(SdjMainViewModel);
+            inside.Clients.ForEach(x => SdjMainViewModel.SdjRoomViewModel.UserList.Add(x));
 
-            SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfPeopleInRoom = inside.Clients.Count;
             SdjMainViewModel.SdjBottomBarViewModel.BottomBarSizeOfPlaylistInRoom = inside.Djs.Count;
             SdjMainViewModel.SdjBottomBarViewModel.BottomBarMaxSizeOfPlaylistInRoom = 30;
-            SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfPeopleInRoom = inside.Clients.Count;
-            SdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfAdministrationInRoom =
-                inside.Clients.Count(x => x.Rank > 0);
-            SdjMainViewModel.SdjRoomViewModel.SongsQueue = (sbyte)inside.Djs.SelectMany(dj => dj.Video).Count();
+            SdjMainViewModel.SdjRoomViewModel.SongsQueue = (sbyte)inside.Djs.SelectMany(dj => dj.Track).Count();
 
-            var tmp = YoutubeSingleton.Instance.YtClient.GetVideoAsync(inside.Djs[0].Video[0].Id).Result;
+            var tmp = YoutubeSingleton.Instance.YtClient.GetVideoAsync(inside.Djs[0].Track[0].Id).Result;
             SdjMainViewModel.SdjRoomViewModel.SongTitle = tmp.Title;
             SdjMainViewModel.SdjBottomBarViewModel.BottomBarTitleOfActuallySong = tmp.Title;
         }
@@ -180,7 +181,6 @@ namespace SharpDj.ViewModel.Model
 
         public void MainOnRoomClickCommandExecute()
         {
-            //TODO Join Room
             Task.Factory.StartNew(() =>
             {
                 var resp = SdjMainViewModel.Client.Sender.RoomJoin(RoomId);
