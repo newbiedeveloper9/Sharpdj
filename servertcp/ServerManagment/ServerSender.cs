@@ -62,6 +62,14 @@ namespace Communication.Server.Logic
                 output, roomId);
 
         }
+        
+        public void NewDjInQueue(Dj dj)
+        {
+            string output = JsonConvert.SerializeObject(dj);
+            _senderUtility.SendMessage(Commands.Instance.CommandsDictionary["JoinQueue"],
+                output);
+
+        }
 
         public void RemoveUserFromRoom(UserClient user, string roomId)
         {

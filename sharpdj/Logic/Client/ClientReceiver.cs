@@ -28,6 +28,7 @@ namespace Communication.Client.Logic
                 new AddUserToRoomCommand(),
                 new RemoveUserFromRoomCommand(),
                 new ChangeTrackCommand(),
+                new JoinQueueCommand(),
             };
         }
 

@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 using Communication.Shared;
 using Newtonsoft.Json;
 using SharpDj.ViewModel;
@@ -14,8 +18,8 @@ namespace SharpDj.Logic.Client.Commands
     {
         public string CommandText { get; } =
             Communication.Shared.Commands.Instance.CommandsDictionary["ChangeTrack"];
-        
-        public async void Run(SdjMainViewModel sdjMainViewModel, List<string> parameters)
+
+        public void Run(SdjMainViewModel sdjMainViewModel, List<string> parameters)
         {
             var json = JsonConvert.DeserializeObject<Dj>(parameters[0]);
             var roomId = parameters[1];
@@ -23,12 +27,25 @@ namespace SharpDj.Logic.Client.Commands
             Console.WriteLine(json);
             var location = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
 
-            var converter = new YoutubeConverter();
-            await converter.DownloadVideoAsync(json.Track[0].Id, $@"{location}\{json.Track[0].Id}.mp4");
-           
-            sdjMainViewModel.SdjRoomViewModel.VlcPlayer.VlcPlayer.SourceProvider.MediaPlayer.SetMedia(
-                new Uri(location+$@"\{json.Track[0].Id}.mp4"));
-            sdjMainViewModel.SdjRoomViewModel.VlcPlayer.VlcPlayer.SourceProvider.MediaPlayer.Play();
+            while (!File.Exists(location + $@"\music\{json.Track[0].Id}.mp4"))
+            {
+                Thread.Sleep(100);
+                Console.WriteLine("downloading " + DateTime.Now);
+            }
+            
+            Play:
+            Thread.Sleep(500);
+            try
+            {
+                
+                sdjMainViewModel.SdjRoomViewModel.VlcPlayer.VlcPlayer.SourceProvider.MediaPlayer.SetMedia(
+                    new Uri(location + $@"\music\{json.Track[0].Id}.mp4"));
+                sdjMainViewModel.SdjRoomViewModel.VlcPlayer.VlcPlayer.SourceProvider.MediaPlayer.Play();
+            }
+            catch (Exception ex)
+            {
+                goto Play;
+            }
         }
     }
 }

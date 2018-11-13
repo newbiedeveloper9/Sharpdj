@@ -124,6 +124,7 @@
     <Compile Include="Logic\Client\ClientSender.cs" />
     <Compile Include="Logic\Client\Commands\ChangeTrackCommand.cs" />
     <Compile Include="Logic\Client\Commands\ICommand.cs" />
+    <Compile Include="Logic\Client\Commands\JoinQueueCommand.cs" />
     <Compile Include="Logic\Client\Commands\RemoveUserFromRoomCommand.cs" />
     <Compile Include="Logic\Client\Commands\SendMessageChatCommand.cs" />
     <Compile Include="Logic\Client\Commands\UpdateDjCommand.cs" />
@@ -134,6 +135,7 @@
     <Compile Include="Logic\Helpers\ExecuteOnStart.cs" />
     <Compile Include="Logic\Helpers\FilesPath.cs" />
     <Compile Include="Logic\Helpers\Imgur.cs" />
+    <Compile Include="Logic\Helpers\ServerValidation.cs" />
     <Compile Include="Logic\Helpers\Updater\FTPChecker.cs" />
     <Compile Include="Logic\Helpers\Updater\GetSourcePage.cs" />
     <Compile Include="Logic\Helpers\YoutubeSingleton.cs" />
@@ -479,10 +481,6 @@
     <ProjectReference Include="..\Communication\Communication.csproj">
       <Project>{e8790b81-831e-458b-800d-bcae0017cfcb}</Project>
       <Name>Communication</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\servertcp\servertcp.csproj">
-      <Project>{9017fa31-937c-47e0-9775-8cd429f2f604}</Project>
-      <Name>servertcp</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

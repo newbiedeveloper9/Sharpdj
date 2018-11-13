@@ -24,14 +24,15 @@ namespace Communication.Shared
 
         public class Song
         {
+            //TODO create enum with type of media (yt, soundcloud, etc.)
             public Song(int time, string id)
             {
                 Time = time;
                 Id = id;
             }
 
-            public readonly int Time;
-            public readonly string Id;
+            public int Time;
+            public string Id;
         }
     }
 }

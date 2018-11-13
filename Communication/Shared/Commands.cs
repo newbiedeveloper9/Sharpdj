@@ -13,6 +13,8 @@ namespace Communication.Shared
         private Commands()
         {
         }
+        
+        
 
         public readonly Dictionary<string, string>
             CommandsDictionary = new Dictionary<string, string>()

@@ -1,10 +1,14 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 
 namespace Communication.Shared
 {
     public class Debug
     {
+        private static readonly string LocalPath = Path.GetDirectoryName(
+            Assembly.GetEntryAssembly().Location);
+        
         public string WindowTitle { get; set; }
 
         public Debug(string windowTitle)
@@ -29,7 +33,7 @@ namespace Communication.Shared
             try
             {
                 Console.WriteLine(content);
-                File.AppendAllText("log", content + Environment.NewLine);
+                File.AppendAllText(LocalPath + @"\log", content + Environment.NewLine);
             }
             catch (Exception ex)
             {

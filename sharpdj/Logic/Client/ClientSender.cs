@@ -15,6 +15,11 @@ namespace Communication.Client.Logic
             _clientUtility = new ConnectionUtility(client, clientRequestReply);
         }
 
+         public string JoinQueue(string json) =>
+                    _clientUtility.SendMessageAndWaitForResponse(
+                        Commands.Instance.CommandsDictionary["JoinQueue"],
+                        json);
+
         public string Register(string login, SecureString password, string email) =>
             _clientUtility.SendMessageAndWaitForResponse(
                 Commands.Instance.CommandsDictionary["Register"],

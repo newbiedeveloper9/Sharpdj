@@ -7,11 +7,13 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using Communication.Client;
+using Communication.Server.Logic;
 using Communication.Shared;
 using Hik.Communication.Scs.Communication.Messages;
 using Newtonsoft.Json;
 using SharpDj.Core;
 using SharpDj.Logic.Client;
+using SharpDj.Logic.Helpers;
 using SharpDj.View.UserControls;
 using SharpDj.ViewModel.Model;
 using Vlc.DotNet.Core;
@@ -31,18 +33,14 @@ namespace SharpDj.ViewModel
             RoomMessageCollection = new ObservableCollection<RoomMessageModel>();
             UserList = new MyUserList(main);
 
-            VlcPlayer = new SdjVlcPlayer(); 
+            VlcPlayer = new SdjVlcPlayer();
             MyVlcPlayer.Add(VlcPlayer);
-            var location = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-            var libDirectory = new DirectoryInfo(Path.Combine(location,
-            "libvlc", IntPtr.Size == 4 ? "win-x86" : "win-x64"));
-            VlcPlayer.VlcPlayer.SourceProvider.CreatePlayer(libDirectory);
-            VlcPlayer.VlcPlayer.SourceProvider.MediaPlayer.SetMedia(
-                new Uri(location+@"\mj-v6zCnEaw.mp4"));
-            VlcPlayer.VlcPlayer.SourceProvider.MediaPlayer.Play();
 
+            var libDirectory = new DirectoryInfo(Path.Combine(FilesPath.LocalPath,
+                "libvlc", IntPtr.Size == 4 ? "win-x86" : "win-x64"));
+            VlcPlayer.VlcPlayer.SourceProvider.CreatePlayer(libDirectory);
         }
-    
+
         #endregion .ctor
 
         #region Properties
@@ -387,7 +385,7 @@ namespace SharpDj.ViewModel
 
         public bool LeftQueueCommandCanExecute()
         {
-            return true;
+            return InQueue;
         }
 
         public void LeftQueueCommandExecute()
@@ -412,12 +410,11 @@ namespace SharpDj.ViewModel
 
         private bool JoinQueueCommandCanExecute()
         {
-            return true;
+            return !InQueue;
         }
 
         public void JoinQueueCommandExecute()
         {
-            InQueue = true;
             Task.Factory.StartNew(() =>
             {
                 var tracks = SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection.FirstOrDefault(x => x.IsActive)
@@ -429,10 +426,23 @@ namespace SharpDj.ViewModel
                         int seconds = (int) TimeSpan.Parse(track.SongDuration).TotalSeconds;
                         dj.Track.Add(new Dj.Song(seconds, track.SongId));
                     }
+                
+                var json = JsonConvert.SerializeObject(dj);
 
-                var source = JsonConvert.SerializeObject(dj);
-
-                ClientInfo.Instance.Client.SendMessage(new ScsTextMessage("joinqueue$" + source));
+                var response = SdjMainViewModel.Client.Sender.JoinQueue(json);
+                var validation = ServerValidation.ServerResponseValidation(response);
+                switch (validation.Item2)
+                {
+                    case ServerValidation.ResponseValidationEnum.NullOrEmpty:
+                        Debug.Log("JoinQueue", "Null or empty response");
+                        break;
+                    case ServerValidation.ResponseValidationEnum.Success:
+                        InQueue = true;
+                        break;
+                    default:
+                        Debug.Log("JoinQueue", "Error with joining queue");
+                        break;                    
+                }
             });
         }
 

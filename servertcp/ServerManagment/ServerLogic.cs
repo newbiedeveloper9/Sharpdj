@@ -45,16 +45,6 @@ namespace servertcp.ServerManagment
                     roomCount++;
                 }
 
-            DataSingleton.Instance.Rooms[0].InsideInfo.Djs.Add(new Dj("host", new List<Dj.Song>()));
-            DataSingleton.Instance.Rooms[0].InsideInfo.Djs.Add(new Dj("test", new List<Dj.Song>()));
-
-            DataSingleton.Instance.Rooms[1].InsideInfo.Djs.Add(new Dj("host", new List<Dj.Song>()));
-            DataSingleton.Instance.Rooms[1].InsideInfo.Djs[0].Track.Add(new Dj.Song(10, "mj-v6zCnEaw"));
-
-            DataSingleton.Instance.Rooms[0].InsideInfo.Djs[0].Track.Add(new Dj.Song(10, "mj-v6zCnEaw"));
-            DataSingleton.Instance.Rooms[0].InsideInfo.Djs[1].Track.Add(new Dj.Song(5, "kAdkRGuKzhQ"));
-            DataSingleton.Instance.Rooms[0].InsideInfo.Djs[1].Track.Add(new Dj.Song(7, "3Hm9vX3na44"));
-
             PeriodicTask.StartNew(1000, TrackRefresh);
         }
 

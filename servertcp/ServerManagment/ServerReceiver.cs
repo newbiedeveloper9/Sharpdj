@@ -24,6 +24,7 @@ namespace servertcp.ServerManagment
                 new AfterLoginData(),
                 new JoinRoom(),
                 new SendMessageChatCommand(server),
+                new JoinQueueCommand(),
             };
         }
 

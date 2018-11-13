@@ -51,6 +51,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AngleSharp, Version=0.9.9.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea">
+      <HintPath>..\packages\AngleSharp.0.9.9.1\lib\net45\AngleSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Communication, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Communication\bin\Debug\Communication.dll</HintPath>
@@ -68,7 +72,12 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="YoutubeExplode, Version=4.5.3.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\YoutubeExplode.4.5.3\lib\net45\YoutubeExplode.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataSingleton.cs" />
@@ -79,6 +88,7 @@
     <Compile Include="ServerManagment\Commands\AfterLoginData.cs" />
     <Compile Include="ServerManagment\Commands\DisconnectCommand.cs" />
     <Compile Include="ServerManagment\Commands\ICommand.cs" />
+    <Compile Include="ServerManagment\Commands\JoinQueueCommand.cs" />
     <Compile Include="ServerManagment\Commands\JoinRoom.cs" />
     <Compile Include="ServerManagment\Commands\LoginCommand.cs" />
     <Compile Include="ServerManagment\Commands\RegisterCommand.cs" />

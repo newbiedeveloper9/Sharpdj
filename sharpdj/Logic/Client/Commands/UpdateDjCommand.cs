@@ -17,6 +17,7 @@ namespace SharpDj.Logic.Client.Commands
             var json = parameters[0];
             
             var inside = JsonConvert.DeserializeObject<Room.InsindeInfo>(json);
+            
 
           //  sdjMainViewModel.SdjBottomBarViewModel.BottomBarNumberOfPeopleInRoom = inside.Clients.Count;
             sdjMainViewModel.SdjBottomBarViewModel.BottomBarSizeOfPlaylistInRoom = inside.Djs.Count;

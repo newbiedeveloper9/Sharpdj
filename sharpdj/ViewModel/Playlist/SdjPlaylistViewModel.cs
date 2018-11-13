@@ -336,8 +336,8 @@ namespace SharpDj.ViewModel
         private async Task QueryVideos()
         {
             var client = new YoutubeClient();
-            var query = await client.SearchVideosAsync(SearchText, 1);
             TrackCollection = new ObservableCollection<PlaylistTrackModel>();
+            var query = await client.SearchVideosAsync(SearchText, 1);
 
             foreach (var item in query)
             {
