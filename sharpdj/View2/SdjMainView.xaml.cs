@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SharpDj.View.UserControls
+namespace SharpDj.View2
 {
     /// <summary>
-    /// Interaction logic for SdjRegisterView.xaml
+    /// Interaction logic for SdjMainView.xaml
     /// </summary>
-    public partial class SdjRegisterView : UserControl
+    public partial class SdjMainView : Window
     {
-        public SdjRegisterView()
+        public SdjMainView()
         {
             InitializeComponent();
         }
