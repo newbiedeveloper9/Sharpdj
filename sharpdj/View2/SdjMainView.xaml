@@ -7,14 +7,14 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         ResizeMode="CanResizeWithGrip"
-        AllowsTransparency="False"
         TextElement.FontSize="14"
+        AllowsTransparency="True"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         WindowStyle="None"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="#171717"
         UseLayoutRounding="True"
-        Title="SdjMainView" Height="720" Width="1290">
+        Title="SdjMainView" Height="720" Width="1300">
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="24" />
@@ -32,10 +32,20 @@
             <Grid Grid.Column="0" />
 
             <!--Close, Minimize, Max-->
+            <Grid HorizontalAlignment="Center" Grid.ColumnSpan="3">
+                <Image Source="../Images/sdj.png" Margin="0 0 0 0"/>
+            </Grid>
+
             <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <Button>_</Button>
-                <Button>O</Button>
-                <Button>X</Button>
+                <Button Background="Transparent" BorderThickness="0">
+                    <materialDesign:PackIcon Kind="WindowMinimize" />
+                </Button>
+                <Button Background="Transparent" BorderThickness="0" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="WindowMaximize" />
+                </Button>
+                <Button Background="Transparent" BorderThickness="0" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="WindowClose" />
+                </Button>
             </StackPanel>
         </Grid>
 
@@ -46,7 +56,7 @@
                 <ColumnDefinition Width="100" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="124" />
+                <ColumnDefinition Width="148" />
                 <ColumnDefinition Width="36" />
             </Grid.ColumnDefinitions>
 
@@ -62,9 +72,13 @@
             <TextBox Grid.Column="2" Text="Search" FontSize="18" VerticalAlignment="Center" />
 
             <StackPanel Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Image Width="24" Height="24" Source="../Images/Icon.png" />
-                <Image Width="24" Height="24" Margin="12 0 0 0" Source="../Images/Icon.png" />
-                <Image Width="40" Height="40" Margin="24 0 0 0" Source="../Images/LeftBar/001-rate-star-button.png" />
+                <materialDesign:PackIcon Kind="MessageGroup" VerticalAlignment="Center" Height="22" Width="22"/>
+                <materialDesign:PackIcon Kind="Bell" Margin="24 0 0 0" Width="22" Height="22" VerticalAlignment="Center"/>
+                <Ellipse Width="40" Height="36" Margin="24 0 0 0" VerticalAlignment="Center">
+                    <Ellipse.Fill>
+                        <ImageBrush  ImageSource="../Images/avatar.png"/>
+                    </Ellipse.Fill>
+                </Ellipse>
             </StackPanel>
         </Grid>
 
@@ -80,7 +94,7 @@
             <Grid Background="#1C1C1C">
                 <StackPanel Margin="24 24 12 0">
                     <!--Active Rooms-->
-                    <TextBlock Margin="0 0 0 12" FontSize="14" Text="Aktywne pokoje" FontWeight="Regular" Foreground="#707070"/>
+                    <TextBlock Margin="0 0 0 12" FontSize="14" Text="AKTYWNE POKOJE" FontWeight="Regular" Foreground="#999999"/>
                     <StackPanel Margin="0 0 0 12">
                         <StackPanel Margin="0 0 0 12" Height="24" Width="184" Orientation="Horizontal">
                             <Ellipse Width="24" Height="24">
@@ -150,15 +164,15 @@
                     </StackPanel>
 
                     <!--Playlists-->
-                    <TextBlock Margin="0 0 0 12" FontSize="14" Text="Playlisty" FontWeight="Regular" Foreground="#707070"/>
+                    <TextBlock Margin="0 0 0 12" FontSize="14" Text="PLAYLISTY" FontWeight="Regular" Foreground="#999999"/>
                     <StackPanel Margin="6 0 0 0">
                         <DockPanel Margin="0 0 0 12" Height="24" Width="180">
-                            <materialDesign:PackIcon Kind="RadioboxBlank" VerticalAlignment="Center" HorizontalAlignment="Center" Height="8" Width="8" Foreground="White"/>
+                            <materialDesign:PackIcon Kind="RadioboxBlank" VerticalAlignment="Center" HorizontalAlignment="Center" Height="12" Width="12" Foreground="White"/>
                             <TextBlock Margin="12 0 0 0" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"  FontWeight="Light"
                                    Text="MyOwnPlaylist" />
                         </DockPanel>
                         <DockPanel Margin="0 0 0 12" Height="24" Width="180">
-                            <materialDesign:PackIcon Kind="RadioboxMarked" VerticalAlignment="Center" HorizontalAlignment="Center" Height="8" Width="8" Foreground="White"/>
+                            <materialDesign:PackIcon Kind="RadioboxMarked" VerticalAlignment="Center" HorizontalAlignment="Center" Height="12" Width="12" Foreground="White"/>
                             <TextBlock Margin="12 0 0 0" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"  FontWeight="Light"
                                    Text="MyOwnPlaylist xDDDDDDDDDD" />
                         </DockPanel>
@@ -166,11 +180,11 @@
 
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="PlaylistAdd" Width="24" Height="24" Foreground="White"/>
-                        <TextBlock Text="STWÓRZ PLAYTLISTE" VerticalAlignment="Center" Margin="12 0 0 0" Foreground="#707070"/>
+                        <TextBlock Text="STWÓRZ PLAYTLISTE" VerticalAlignment="Center" Margin="12 0 0 0" Foreground="#999999"/>
                     </StackPanel>
 
                     <!--Observed-->
-                    <TextBlock Margin="0 24 0 12" FontSize="14" Text="Obserwowane" FontWeight="Regular" Foreground="#707070"/>
+                    <TextBlock Margin="0 24 0 12" FontSize="14" Text="OBSERWOWANE" FontWeight="Regular" Foreground="#999999"/>
                     <StackPanel Margin="0 0 0 12">
                         <DockPanel Margin="0 0 0 12" Height="24" Width="184">
                             <Ellipse Width="24" Height="24">
@@ -185,22 +199,20 @@
                     </StackPanel>
 
                     <!--Biblioteka-->
-                    <TextBlock Margin="0 0 0 0" FontSize="14" Text="BIBLIOTEKA" FontWeight="Regular" Foreground="#707070"/>
+                    <TextBlock Margin="0 0 0 0" FontSize="14" Text="BIBLIOTEKA" FontWeight="Regular" Foreground="#999999"/>
                 </StackPanel>
             </Grid>
 
-            <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden" Grid.ColumnSpan="2">
-                <!--Center Menu-->
-                <Grid>
-
-                    <!--Padding24-->
-                    <StackPanel Margin="24 24 36 0">
+            <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Grid.ColumnSpan="2">
+                <!--Padding24-->
+                <StackPanel Margin="24 24 0 0" >
+                    <StackPanel HorizontalAlignment="Center">
                         <TextBlock Text="Nowości ze świata" Margin="0 0 0 24" FontSize="32" />
                         <!--News from world-->
-                        <StackPanel Orientation="Horizontal">
-                                                        <materialDesign:Card  materialDesign:ShadowAssist.ShadowDepth="Depth4">
+                        <StackPanel Orientation="Horizontal" Margin="0 0 28 0">
+                            <materialDesign:Card  materialDesign:ShadowAssist.ShadowDepth="Depth4">
                                 <StackPanel>
-                                    <Grid Height="240" Width="728"
+                                    <Grid Height="240" Width="724"
                                           HorizontalAlignment="Left">
 
                                         <!--Blured Image-->
@@ -262,6 +274,9 @@
                                 </materialDesign:Card>
                             </StackPanel>
                         </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel HorizontalAlignment="Center">
                         <!--Categories-->
                         <StackPanel Orientation="Horizontal" Margin="24 48 0 0">
                             <TextBlock FontSize="24" FontWeight="Light" Text="Nowe" Margin="24 0 0 0"  Foreground="{DynamicResource PrimaryHueLightBrush}" Opacity="0.42"/>
@@ -270,73 +285,295 @@
                             <TextBlock FontSize="24" FontWeight="Light" Text="Wybrane" Margin="24 0 0 0" Foreground="{DynamicResource PrimaryHueLightBrush}" Opacity="0.42" />
                         </StackPanel>
 
-                        <WrapPanel Margin="0 24 0 0">
-
+                        <WrapPanel  Margin="0 24 0 0">
                             <!--Room Instance-->
-                            <materialDesign:Card Margin="0 0 24 24">
-                                <Grid Width="488">
+                            <materialDesign:Card Margin="0 0 24 24" Width="486"  materialDesign:ShadowAssist.ShadowDepth="Depth3">
+                                <Grid >
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="88" />
                                         <RowDefinition Height="122" />
                                     </Grid.RowDefinitions>
-                                    <Grid Grid.Row="0" Background="Purple">
-                                        <TextBlock Margin="48 24 0 0" Text="JeffDiggins room  with long name"
-                                                   FontSize="18" />
+                                    <Grid Grid.Row="0">
+                                        <Grid.Background>
+                                            <VisualBrush Stretch="UniformToFill" Opacity="0.87">
+                                                <VisualBrush.Visual>
+                                                    <Grid ClipToBounds="True">
+                                                        <Image Source="C:\Users\Michal\Desktop\C#\sharpdj\sharpdj\Images\3.jpg">
+                                                            <Image.Effect>
+                                                                <BlurEffect Radius="11"/>
+                                                            </Image.Effect>
+                                                        </Image>
+                                                    </Grid>
+                                                </VisualBrush.Visual>
+                                            </VisualBrush>
+                                        </Grid.Background>
+
+                                        <Border Background="{DynamicResource PrimaryHueDarkBrush}" Opacity="0.25">
+                                            <Border.Effect>
+                                                <BlurEffect Radius="5" KernelType="Gaussian"/>
+                                            </Border.Effect>
+                                        </Border>
+
+
+                                        <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <TextBlock Margin="24 24 24 0" TextTrimming="CharacterEllipsis" TextWrapping="WrapWithOverflow" Height="22" Text="Jeff Diggins room with very very long name"
+                                                       FontSize="19">
+                                                <TextBlock.Effect>
+                                                    <DropShadowEffect ShadowDepth="3" BlurRadius="8" RenderingBias="Quality"/>
+                                                </TextBlock.Effect>
+                                            </TextBlock>
+
+                                            <StackPanel Orientation="Horizontal" Margin="0 0 0 0" HorizontalAlignment="Center">
+                                                <StackPanel Orientation="Horizontal" Margin="6 6 6 6" >
+                                                    <TextBlock Text="15" FontSize="16">
+                                                        <TextBlock.Effect>
+                                                            <DropShadowEffect ShadowDepth="2" BlurRadius="4" RenderingBias="Quality"/>
+                                                        </TextBlock.Effect>
+                                                    </TextBlock>
+                                                    <materialDesign:PackIcon Kind="AccountSupervisor" Margin="2 0 0 0" VerticalAlignment="Center">
+                                                        <materialDesign:PackIcon.Effect>
+                                                            <DropShadowEffect ShadowDepth="3" BlurRadius="5" RenderingBias="Quality"/>
+                                                        </materialDesign:PackIcon.Effect>
+                                                    </materialDesign:PackIcon>
+                                                </StackPanel>
+
+                                                <StackPanel Orientation="Horizontal" Margin="6 6 6 6">
+                                                    <TextBlock Text="15" FontSize="16">
+                                                        <TextBlock.Effect>
+                                                            <DropShadowEffect ShadowDepth="2" BlurRadius="4" RenderingBias="Quality"/>
+                                                        </TextBlock.Effect>
+                                                    </TextBlock>
+                                                    <materialDesign:PackIcon Kind="AccountStar" Margin="2 0 0 0" VerticalAlignment="Center">
+                                                        <materialDesign:PackIcon.Effect>
+                                                            <DropShadowEffect ShadowDepth="3" BlurRadius="5" RenderingBias="Quality"/>
+                                                        </materialDesign:PackIcon.Effect>
+                                                    </materialDesign:PackIcon>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </StackPanel>
                                     </Grid>
-                                    <StackPanel Orientation="Horizontal" Grid.Row="1" Background="DarkSlateGray">
-                                        <StackPanel Margin="24 12 0 0">
-                                            <TextBlock Text="Next track" Margin="0 0 0 24" FontSize="13"
+
+                                    <Grid Grid.Row="1" Background="#151515">
+                                        <Border Background="{DynamicResource PrimaryHueDarkBrush}" Opacity="0.195">
+                                            <Border.Effect>
+                                                <BlurEffect Radius="5" KernelType="Box"/>
+                                            </Border.Effect>
+                                        </Border>
+                                        <DockPanel >
+                                            <StackPanel Margin="24 12 0 0">
+                                                <TextBlock Text="Next track" Margin="0 0 0 24" FontSize="13"  Opacity="0.7"
                                                        HorizontalAlignment="Right" />
-                                            <TextBlock Text="Current track" Margin="0 0 0 24" FontSize="13"
+                                                <TextBlock Text="Current track" Margin="0 0 0 24" FontSize="13"  Opacity="0.7"
                                                        HorizontalAlignment="Right" />
-                                            <TextBlock Text="Last track" Margin="0 0 0 24" FontSize="13"
+                                                <TextBlock Text="Last track" Margin="0 0 0 24" FontSize="13"  Opacity="0.7"
                                                        HorizontalAlignment="Right" />
-                                        </StackPanel>
-                                        <StackPanel Margin="12 12 0 0">
-                                            <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left"
+                                            </StackPanel>
+                                            <StackPanel Margin="12 12 0 0">
+                                                <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left" Opacity="0.7"
                                                        Text="Two Ways - These Years [Arctic Special] | Chillstep" />
-                                            <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left"
+                                                <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left"  Opacity="0.7"
                                                        Text="Two Ways - These Years [Arctic Special] | Chillstep" />
-                                            <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left"
+                                                <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left"  Opacity="0.7"
                                                        Text="Two Ways - These Years [Arctic Special] | Chillstep" />
-                                        </StackPanel>
-                                    </StackPanel>
+                                            </StackPanel>
+                                        </DockPanel>
+                                    </Grid>
                                 </Grid>
                             </materialDesign:Card>
-                            <materialDesign:Card Margin="0 0 0 24">
-                                <Grid Width="488">
+
+                            <!--Room Instance-->
+                            <materialDesign:Card Margin="0 0 24 24" Width="486"  materialDesign:ShadowAssist.ShadowDepth="Depth3">
+                                <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="88" />
                                         <RowDefinition Height="122" />
                                     </Grid.RowDefinitions>
-                                    <Grid Grid.Row="0" Background="Purple">
-                                        <TextBlock Margin="48 24 0 0" Text="JeffDiggins room  with long name"
-                                                   FontSize="18" />
+                                    <Grid Grid.Row="0">
+                                        <Grid.Background>
+                                            <VisualBrush Stretch="UniformToFill" Opacity="0.87">
+                                                <VisualBrush.Visual>
+                                                    <Grid ClipToBounds="True">
+                                                        <Image Source="C:\Users\Michal\Desktop\C#\sharpdj\sharpdj\Images\1.jpg">
+                                                            <Image.Effect>
+                                                                <BlurEffect Radius="11"/>
+                                                            </Image.Effect>
+                                                        </Image>
+                                                    </Grid>
+                                                </VisualBrush.Visual>
+                                            </VisualBrush>
+                                        </Grid.Background>
+
+                                        <Border Background="{DynamicResource PrimaryHueDarkBrush}" Opacity="0.25">
+                                            <Border.Effect>
+                                                <BlurEffect Radius="5" KernelType="Gaussian"/>
+                                            </Border.Effect>
+                                        </Border>
+
+
+                                        <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <TextBlock Margin="24 24 24 0" TextTrimming="CharacterEllipsis" TextWrapping="WrapWithOverflow" Height="22" Text="Jeff Diggins room with very very long name"
+                                                       FontSize="19">
+                                                <TextBlock.Effect>
+                                                    <DropShadowEffect ShadowDepth="3" BlurRadius="8" RenderingBias="Quality"/>
+                                                </TextBlock.Effect>
+                                            </TextBlock>
+
+                                            <StackPanel Orientation="Horizontal" Margin="0 0 0 0" HorizontalAlignment="Center">
+                                                <StackPanel Orientation="Horizontal" Margin="6 6 6 6" >
+                                                    <TextBlock Text="15" FontSize="16">
+                                                        <TextBlock.Effect>
+                                                            <DropShadowEffect ShadowDepth="2" BlurRadius="4" RenderingBias="Quality"/>
+                                                        </TextBlock.Effect>
+                                                    </TextBlock>
+                                                    <materialDesign:PackIcon Kind="AccountSupervisor" Margin="2 0 0 0" VerticalAlignment="Center">
+                                                        <materialDesign:PackIcon.Effect>
+                                                            <DropShadowEffect ShadowDepth="3" BlurRadius="5" RenderingBias="Quality"/>
+                                                        </materialDesign:PackIcon.Effect>
+                                                    </materialDesign:PackIcon>
+                                                </StackPanel>
+
+                                                <StackPanel Orientation="Horizontal" Margin="6 6 6 6">
+                                                    <TextBlock Text="15" FontSize="16">
+                                                        <TextBlock.Effect>
+                                                            <DropShadowEffect ShadowDepth="2" BlurRadius="4" RenderingBias="Quality"/>
+                                                        </TextBlock.Effect>
+                                                    </TextBlock>
+                                                    <materialDesign:PackIcon Kind="AccountStar" Margin="2 0 0 0" VerticalAlignment="Center">
+                                                        <materialDesign:PackIcon.Effect>
+                                                            <DropShadowEffect ShadowDepth="3" BlurRadius="5" RenderingBias="Quality"/>
+                                                        </materialDesign:PackIcon.Effect>
+                                                    </materialDesign:PackIcon>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </StackPanel>
                                     </Grid>
-                                    <StackPanel Orientation="Horizontal" Grid.Row="1" Background="DarkSlateGray">
-                                        <StackPanel Margin="24 12 0 0">
-                                            <TextBlock Text="Next track" Margin="0 0 0 24" FontSize="13"
+
+                                    <Grid Grid.Row="1" Background="#151515">
+                                        <Border Background="{DynamicResource PrimaryHueDarkBrush}" Opacity="0.195">
+                                            <Border.Effect>
+                                                <BlurEffect Radius="5" KernelType="Box"/>
+                                            </Border.Effect>
+                                        </Border>
+                                        <DockPanel >
+                                            <StackPanel Margin="24 12 0 0">
+                                                <TextBlock Text="Next track" Margin="0 0 0 24" FontSize="13"  Opacity="0.7"
                                                        HorizontalAlignment="Right" />
-                                            <TextBlock Text="Current track" Margin="0 0 0 24" FontSize="13"
+                                                <TextBlock Text="Current track" Margin="0 0 0 24" FontSize="13"  Opacity="0.7"
                                                        HorizontalAlignment="Right" />
-                                            <TextBlock Text="Last track" Margin="0 0 0 24" FontSize="13"
+                                                <TextBlock Text="Last track" Margin="0 0 0 24" FontSize="13"  Opacity="0.7"
                                                        HorizontalAlignment="Right" />
+                                            </StackPanel>
+                                            <StackPanel Margin="12 12 0 0">
+                                                <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left" Opacity="0.7"
+                                                       Text="Two Ways - These Years [Arctic Special] | Chillstep" />
+                                                <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left"  Opacity="0.7"
+                                                       Text="Two Ways - These Years [Arctic Special] | Chillstep" />
+                                                <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left"  Opacity="0.7"
+                                                       Text="Two Ways - These Years [Arctic Special] | Chillstep" />
+                                            </StackPanel>
+                                        </DockPanel>
+                                    </Grid>
+                                </Grid>
+                            </materialDesign:Card>
+
+                            <!--Room Instance-->
+                            <materialDesign:Card Margin="0 0 24 24" Width="486"  materialDesign:ShadowAssist.ShadowDepth="Depth3">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="88" />
+                                        <RowDefinition Height="122" />
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0">
+                                        <Grid.Background>
+                                            <VisualBrush Stretch="UniformToFill" Opacity="0.87">
+                                                <VisualBrush.Visual>
+                                                    <Grid ClipToBounds="True">
+                                                        <Image Source="C:\Users\Michal\Desktop\C#\sharpdj\sharpdj\Images\2.png">
+                                                            <Image.Effect>
+                                                                <BlurEffect Radius="11"/>
+                                                            </Image.Effect>
+                                                        </Image>
+                                                    </Grid>
+                                                </VisualBrush.Visual>
+                                            </VisualBrush>
+                                        </Grid.Background>
+
+                                        <Border Background="{DynamicResource PrimaryHueDarkBrush}" Opacity="0.25">
+                                            <Border.Effect>
+                                                <BlurEffect Radius="5" KernelType="Gaussian"/>
+                                            </Border.Effect>
+                                        </Border>
+
+
+                                        <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <TextBlock Margin="24 24 24 0" TextTrimming="CharacterEllipsis" TextWrapping="WrapWithOverflow" Height="22" Text="Jeff Diggins room with very very long name"
+                                                       FontSize="19">
+                                                <TextBlock.Effect>
+                                                    <DropShadowEffect ShadowDepth="3" BlurRadius="8" RenderingBias="Quality"/>
+                                                </TextBlock.Effect>
+                                            </TextBlock>
+
+                                            <StackPanel Orientation="Horizontal" Margin="0 0 0 0" HorizontalAlignment="Center">
+                                                <StackPanel Orientation="Horizontal" Margin="6 6 6 6" >
+                                                    <TextBlock Text="15" FontSize="16">
+                                                        <TextBlock.Effect>
+                                                            <DropShadowEffect ShadowDepth="2" BlurRadius="4" RenderingBias="Quality"/>
+                                                        </TextBlock.Effect>
+                                                    </TextBlock>
+                                                    <materialDesign:PackIcon Kind="AccountSupervisor" Margin="2 0 0 0" VerticalAlignment="Center">
+                                                        <materialDesign:PackIcon.Effect>
+                                                            <DropShadowEffect ShadowDepth="3" BlurRadius="5" RenderingBias="Quality"/>
+                                                        </materialDesign:PackIcon.Effect>
+                                                    </materialDesign:PackIcon>
+                                                </StackPanel>
+
+                                                <StackPanel Orientation="Horizontal" Margin="6 6 6 6">
+                                                    <TextBlock Text="15" FontSize="16">
+                                                        <TextBlock.Effect>
+                                                            <DropShadowEffect ShadowDepth="2" BlurRadius="4" RenderingBias="Quality"/>
+                                                        </TextBlock.Effect>
+                                                    </TextBlock>
+                                                    <materialDesign:PackIcon Kind="AccountStar" Margin="2 0 0 0" VerticalAlignment="Center">
+                                                        <materialDesign:PackIcon.Effect>
+                                                            <DropShadowEffect ShadowDepth="3" BlurRadius="5" RenderingBias="Quality"/>
+                                                        </materialDesign:PackIcon.Effect>
+                                                    </materialDesign:PackIcon>
+                                                </StackPanel>
+                                            </StackPanel>
                                         </StackPanel>
-                                        <StackPanel Margin="12 12 0 0">
-                                            <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left"
+                                    </Grid>
+
+                                    <Grid Grid.Row="1" Background="#151515">
+                                        <Border Background="{DynamicResource PrimaryHueDarkBrush}" Opacity="0.195">
+                                            <Border.Effect>
+                                                <BlurEffect Radius="5" KernelType="Box"/>
+                                            </Border.Effect>
+                                        </Border>
+                                        <DockPanel >
+                                            <StackPanel Margin="24 12 0 0">
+                                                <TextBlock Text="Next track" Margin="0 0 0 24" FontSize="13"  Opacity="0.7"
+                                                       HorizontalAlignment="Right" />
+                                                <TextBlock Text="Current track" Margin="0 0 0 24" FontSize="13"  Opacity="0.7"
+                                                       HorizontalAlignment="Right" />
+                                                <TextBlock Text="Last track" Margin="0 0 0 24" FontSize="13"  Opacity="0.7"
+                                                       HorizontalAlignment="Right" />
+                                            </StackPanel>
+                                            <StackPanel Margin="12 12 0 0">
+                                                <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left" Opacity="0.7"
                                                        Text="Two Ways - These Years [Arctic Special] | Chillstep" />
-                                            <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left"
+                                                <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left"  Opacity="0.7"
                                                        Text="Two Ways - These Years [Arctic Special] | Chillstep" />
-                                            <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left"
+                                                <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left"  Opacity="0.7"
                                                        Text="Two Ways - These Years [Arctic Special] | Chillstep" />
-                                        </StackPanel>
-                                    </StackPanel>
+                                            </StackPanel>
+                                        </DockPanel>
+                                    </Grid>
                                 </Grid>
                             </materialDesign:Card>
                         </WrapPanel>
-                        <!--Rooms-->
                     </StackPanel>
-                </Grid>
+                    <!--Rooms-->
+                </StackPanel>
             </ScrollViewer>
         </Grid>
     </Grid>

@@ -506,6 +506,12 @@
     <Resource Include="Images\2.png" />
     <Resource Include="Images\3.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\sdj.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\sharp_mini.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\VideoLAN.LibVLC.Windows.3.0.4\build\VideoLAN.LibVLC.Windows.targets" Condition="Exists('..\packages\VideoLAN.LibVLC.Windows.3.0.4\build\VideoLAN.LibVLC.Windows.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
