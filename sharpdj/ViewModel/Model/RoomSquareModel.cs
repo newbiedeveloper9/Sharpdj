@@ -154,9 +154,11 @@ namespace SharpDj.ViewModel.Model
             SdjMainViewModel.SdjBottomBarViewModel.BottomBarMaxSizeOfPlaylistInRoom = 30;
             SdjMainViewModel.SdjRoomViewModel.SongsQueue = (sbyte)inside.Djs.SelectMany(dj => dj.Track).Count();
 
-            var tmp = YoutubeSingleton.Instance.YtClient.GetVideoAsync(inside.Djs[0].Track[0].Id).Result;
-            SdjMainViewModel.SdjRoomViewModel.SongTitle = tmp.Title;
-            SdjMainViewModel.SdjBottomBarViewModel.BottomBarTitleOfActuallySong = tmp.Title;
+            if(inside.Djs.Count>0 && inside.Djs[0].Track != null) {
+                var tmp = YoutubeSingleton.Instance.YtClient.GetVideoAsync(inside.Djs[0].Track[0].Id).Result;
+                SdjMainViewModel.SdjRoomViewModel.SongTitle = tmp.Title;
+                SdjMainViewModel.SdjBottomBarViewModel.BottomBarTitleOfActuallySong = tmp.Title;
+            }
         }
 
         #endregion Methods

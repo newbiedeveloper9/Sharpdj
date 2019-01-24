@@ -81,11 +81,11 @@ namespace SharpDj.View.Views
             }
 
             var localJson = File.ReadAllText("config.json");
-            var local = JsonConvert.DeserializeObject<FTPChecker>(localJson);
+            var local = JsonConvert.DeserializeObject<FTPModel>(localJson);
 
             debug.Log("Ftp Json");
             var ftpJson = GetSourcePage.GetSource(local.UpdateUrl);
-            var ftp = JsonConvert.DeserializeObject<FTPChecker>(ftpJson);
+            var ftp = JsonConvert.DeserializeObject<FTPModel>(ftpJson);
 
             if (Directory.Exists("tmp"))
                 Directory.Delete("tmp", true);

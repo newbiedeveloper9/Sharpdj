@@ -31,29 +31,29 @@
 
         <!--Main-->
         <local:SdjMainUserControl Grid.Row="1" Grid.ColumnSpan="2"
-                                  Visibility="{Binding MainViewVisibility,
+            Visibility="{Binding MainViewVisibility,
             Converter={converters:EnumToVisibilityConverter},
-            ConverterParameter={x:Static enums:Menu.MainView.Main}}" />
+            ConverterParameter='Main'}"/>
 
         <!--Room-->
         <Grid Grid.Row="1" Grid.ColumnSpan="2"
-              Visibility="{Binding MainViewVisibility,
+            Visibility="{Binding MainViewVisibility,
             Converter={converters:EnumToVisibilityConverter},
-            ConverterParameter={x:Static enums:Menu.MainView.Room}}">
+            ConverterParameter='Room'}">
             <local:SdjRoomView DataContext="{Binding SdjRoomViewModel}" />
         </Grid>
 
         <!--Playlist-->
         <Grid Grid.Row="1" Grid.ColumnSpan="2"
-              Visibility="{Binding SdjPlaylistViewModel.PlaylistVisibility,
+            Visibility="{Binding SdjPlaylistViewModel.PlaylistVisibility,
             Converter={converters:EnumToVisibilityConverter},
-            ConverterParameter={x:Static enums:Playlist.Playlist.Visible}}">
+            ConverterParameter='Visible'}">
             <local:SdjPlaylistUserControl DataContext="{Binding SdjPlaylistViewModel}" />
         </Grid>
 
         <!-- Profile -->
         <Grid Grid.Row="1" Grid.ColumnSpan="2" DataContext="{Binding SdjUserProfileViewModel}"
-              Visibility="{Binding IsVisible, Converter={converters:BoolVisibilityConverter}}">
+             Visibility="{Binding IsVisible, Converter={converters:BoolVisibilityConverter}}">
             <helpers:SdjBackgroundForForms />
             <local:SdjUserProfileUserControl Width="600" Height="520"
                                              Visibility="{Binding IsMaximized, Converter={converters:NotBoolToVisibilityConverter}}" />
@@ -93,7 +93,7 @@
         <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2" Background="Black" Opacity="0.7"
               Visibility="{Binding LeftBarVisibility,
             Converter={converters:EnumToVisibilityConverter},
-            ConverterParameter={x:Static enums:Menu.LeftBar.Visible}, Mode=TwoWay}"
+            ConverterParameter='Visible', Mode=TwoWay}"
               DataContext="{Binding SdjLeftBarViewModel}">
             <helpers:SdjBackgroundForForms />
         </Grid>
@@ -102,7 +102,7 @@
         <Grid Grid.RowSpan="2" Grid.Row="1" Grid.Column="0"
               Visibility="{Binding LeftBarVisibility,
             Converter={converters:EnumToVisibilityConverter},
-            ConverterParameter={x:Static enums:Menu.LeftBar.Visible}, Mode=TwoWay}"
+            ConverterParameter='Visible', Mode=TwoWay}"
               DataContext="{Binding SdjLeftBarViewModel}">
             <local:SdjLeftBarView />
         </Grid>
@@ -119,7 +119,7 @@
         <DockPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2"
                    Visibility="{Binding MainViewVisibility,
             Converter={converters:EnumToVisibilityConverter},
-            ConverterParameter={x:Static enums:Menu.MainView.Login}}"
+            ConverterParameter='Login'}"
                    Background="{StaticResource MidBrush}">
             <local:SdjLoginView DataContext="{Binding SdjLoginViewModel}" />
         </DockPanel>
@@ -128,7 +128,7 @@
         <DockPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2"
                    Visibility="{Binding MainViewVisibility,
             Converter={converters:EnumToVisibilityConverter},
-            ConverterParameter={x:Static enums:Menu.MainView.Register}}"
+            ConverterParameter='Register'}"
                    Background="{StaticResource MidBrush}">
             <local:SdjRegisterView DataContext="{Binding SdjRegisterViewModel}" />
         </DockPanel>
@@ -137,7 +137,7 @@
         <Grid RowSpan="3" ColumnSpan="2"
               Visibility="{Binding PlaylistStateCollectionVisibility,
             Converter={converters:EnumToVisibilityConverter},
-            ConverterParameter={x:Static enums:Playlist.PlaylistState.Add}, Mode=TwoWay}">
+            ConverterParameter='Add', Mode=TwoWay}">
             <Grid DataContext="{Binding SdjAddPlaylistCollectionViewModel}">
                 <helpers:SdjBackgroundForForms />
                 <local:SdjAddPlaylistCollectionView Width="420" Height="110" />
@@ -148,7 +148,7 @@
         <Grid RowSpan="3" ColumnSpan="2"
               Visibility="{Binding PlaylistStateCollectionVisibility,
             Converter={converters:EnumToVisibilityConverter},
-            ConverterParameter={x:Static enums:Playlist.PlaylistState.Rename}, Mode=TwoWay}">
+            ConverterParameter='Rename', Mode=TwoWay}">
             <Grid DataContext="{Binding SdjEditPlaylistCollectionViewModel}">
                 <helpers:SdjBackgroundForForms />
                 <local:SdjEditPlaylistCollectionView Width="420" Height="110" />
@@ -159,7 +159,7 @@
         <Grid RowSpan="3" ColumnSpan="2"
               Visibility="{Binding PlaylistStateCollectionVisibility,
             Converter={converters:EnumToVisibilityConverter},
-            ConverterParameter={x:Static enums:Playlist.PlaylistState.RenameTrack}, Mode=TwoWay}">
+            ConverterParameter='RenameTrack', Mode=TwoWay}">
             <Grid DataContext="{Binding SdjRenameTrackNameInPlaylistViewModel}">
                 <helpers:SdjBackgroundForForms />
                 <local:SdjRenameTrackNameInPlaylist Width="500" Height="180" />
@@ -170,7 +170,7 @@
         <Grid RowSpan="3" ColumnSpan="2"
               Visibility="{Binding PlaylistStateCollectionVisibility,
             Converter={converters:EnumToVisibilityConverter},
-            ConverterParameter={x:Static enums:Playlist.PlaylistState.Remove}, Mode=TwoWay}">
+            ConverterParameter='Remove', Mode=TwoWay}">
             <Grid DataContext="{Binding SdjRemovePlaylistCollectionViewModel}">
                 <helpers:SdjBackgroundForForms />
                 <local:SdjRemovePlaylistCollectionView Width="270" Height="135" />
@@ -181,7 +181,7 @@
         <Grid Row="0" RowSpan="3" ColumnSpan="2"
               Visibility="{Binding PlaylistStateCollectionVisibility,
             Converter={converters:EnumToVisibilityConverter},
-            ConverterParameter={x:Static enums:Playlist.PlaylistState.AddTrack}, Mode=TwoWay}">
+            ConverterParameter='AddTrack', Mode=TwoWay}">
             <Grid DataContext="{Binding SdjAddTrackToPlaylistCollectionViewModel}">
                 <helpers:SdjBackgroundForForms />
                 <local:SdjAddTrackToPlaylistCollectionUserControl Width="300" Height="500" />
@@ -192,7 +192,7 @@
         <Grid Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2"
               Visibility="{Binding GetImageVisibility,
             Converter={converters:EnumToVisibilityConverter},
-            ConverterParameter={x:Static enums:Helpers.GetImageVisibility.Main}, Mode=TwoWay}">
+            ConverterParameter='Main', Mode=TwoWay}">
             <Grid DataContext="{Binding SdjGetImageViewModel}">
                 <helpers:SdjBackgroundForForms />
                 <helpers:SdjGetImageUserControl Width="740" Height="470" />

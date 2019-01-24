@@ -17,11 +17,12 @@ namespace SharpDj.Logic.Helpers
 
         public static ClientConfig LoadConfig()
         {
-            var debug = new Debug("Config");
+            var debug = new Debug("Config");    
             var path = FilesPath.Instance.ClientConfig;
 
             if (!File.Exists(path))
             {
+
                 var json = JsonConvert.SerializeObject(new ClientConfig(), Formatting.Indented);
                 File.WriteAllText(path, json);
                 debug.Log("Created new config file.");

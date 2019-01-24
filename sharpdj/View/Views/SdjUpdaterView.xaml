@@ -9,9 +9,9 @@
         WindowStyle="None"
         AllowsTransparency="True"
         Title="MainWindow" Height="300" Width="300">
-    <Grid Background="#101010">
-        <StackPanel HorizontalAlignment="Center">
-            <MediaElement Source="updater.mp4" Width="256" Height="256" Name="MediaElement" UnloadedBehavior="Manual" />
+    <Grid Background="Black">
+        <StackPanel HorizontalAlignment="Center" Background="Black">
+            <MediaElement Source="updater.mp4"  Width="256" Height="256" Name="MediaElement" UnloadedBehavior="Manual" />
             <Label Content="Updating..." Foreground="White" HorizontalAlignment="Center" Margin="0 -20 0 0" />
         </StackPanel>
     </Grid>

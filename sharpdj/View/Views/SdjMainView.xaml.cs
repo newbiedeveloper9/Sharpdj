@@ -11,11 +11,10 @@ namespace SharpDj.View.Views
     {
         public SdjMainView()
         {
+            var onStart = new ExecuteOnStart();
             DataContext = new SdjMainViewModel();
             InitializeComponent();
             Style = (Style)FindResource(typeof(Window));            
-            var onStart = new ExecuteOnStart();
-
         }
     }
 }

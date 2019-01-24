@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>SharpDj</RootNamespace>
     <AssemblyName>SharpDj</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -44,11 +44,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AngleSharp, Version=0.9.9.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
-      <HintPath>..\packages\AngleSharp.0.9.10\lib\net45\AngleSharp.dll</HintPath>
+      <HintPath>..\packages\AngleSharp.0.9.11\lib\net45\AngleSharp.dll</HintPath>
     </Reference>
-    <Reference Include="CliWrap, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\CliWrap.2.1.0\lib\net45\CliWrap.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="CliWrap, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CliWrap.2.2.0\lib\net45\CliWrap.dll</HintPath>
     </Reference>
     <Reference Include="MaterialDesignColors, Version=1.0.0.14576, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.1.1\lib\net45\MaterialDesignColors.dll</HintPath>
@@ -97,13 +96,11 @@
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
-    <Reference Include="YoutubeExplode, Version=4.5.3.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\YoutubeExplode.4.5.3\lib\net45\YoutubeExplode.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="YoutubeExplode, Version=4.6.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YoutubeExplode.4.6.4\lib\net45\YoutubeExplode.dll</HintPath>
     </Reference>
-    <Reference Include="YoutubeExplode.Converter, Version=1.0.1.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\YoutubeExplode.Converter.1.0.1\lib\net45\YoutubeExplode.Converter.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="YoutubeExplode.Converter, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YoutubeExplode.Converter.1.4.0\lib\net45\YoutubeExplode.Converter.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -144,7 +141,7 @@
     <Compile Include="Logic\Helpers\FilesPath.cs" />
     <Compile Include="Logic\Helpers\Imgur.cs" />
     <Compile Include="Logic\Helpers\ServerValidation.cs" />
-    <Compile Include="Logic\Helpers\Updater\FTPChecker.cs" />
+    <Compile Include="Logic\Helpers\Updater\FTPModel.cs" />
     <Compile Include="Logic\Helpers\Updater\GetSourcePage.cs" />
     <Compile Include="Logic\Helpers\YoutubeSingleton.cs" />
     <Compile Include="View2\SdjMainView.xaml.cs">

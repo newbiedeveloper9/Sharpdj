@@ -26,7 +26,7 @@ namespace SharpDj.Logic.Client
         public SdjMainViewModel SdjMainViewModel { get; set; }
         public ClientReceiver Receiver { get; set; }
         public ClientSender Sender { get; set; }
-        public ClientConfig Config { get; } = ClientConfig.LoadConfig();
+        public ClientConfig Config { get; private set; }
         private Debug _debug;
 
         public Client Start(SdjMainViewModel main)
@@ -34,7 +34,7 @@ namespace SharpDj.Logic.Client
             SdjMainViewModel = main;
             Receiver = new ClientReceiver(main);
             _debug = new Debug("Connection");
-
+            Config = ClientConfig.LoadConfig();
             ClientInfo.Instance.Client = ScsClientFactory.CreateClient(new ScsTcpEndPoint(Config.Ip, Config.Port));
             ClientInfo.Instance.Client.MessageReceived += Client_MessageReceived;
             ClientInfo.Instance.Client.Disconnected += Client_Disconnected;
