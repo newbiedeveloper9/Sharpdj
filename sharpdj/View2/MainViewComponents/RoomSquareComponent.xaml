@@ -1,0 +1,103 @@
+﻿<UserControl x:Class="SharpDj.View2.MainViewComponents.RoomSquareComponent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SharpDj.View2.MainViewComponents"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="240" d:DesignWidth="486">
+        <materialDesign:Card Margin="0 0 24 24" Width="486"  materialDesign:ShadowAssist.ShadowDepth="Depth3">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="88" />
+                    <RowDefinition Height="122" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.Background>
+                        <VisualBrush Stretch="UniformToFill" Opacity="0.87">
+                            <VisualBrush.Visual>
+                                <Grid ClipToBounds="True">
+                                    <Image Source="..\..\Images\2.png">
+                                        <Image.Effect>
+                                            <BlurEffect Radius="11"/>
+                                        </Image.Effect>
+                                    </Image>
+                                </Grid>
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Grid.Background>
+
+                    <Border Background="{DynamicResource PrimaryHueDarkBrush}" Opacity="0.25">
+                        <Border.Effect>
+                            <BlurEffect Radius="5" KernelType="Gaussian"/>
+                        </Border.Effect>
+                    </Border>
+
+
+                    <StackPanel  VerticalAlignment="Center">
+                        <TextBlock Margin="24 24 24 0" TextTrimming="CharacterEllipsis" TextWrapping="WrapWithOverflow" Height="26" Text="Jeff Diggins room with very very very long name"
+                                                       FontSize="19">
+                            <TextBlock.Effect>
+                                <DropShadowEffect ShadowDepth="3" BlurRadius="8" RenderingBias="Quality"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 0" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" Margin="6 6 6 6" >
+                                <TextBlock Text="15" FontSize="16">
+                                    <TextBlock.Effect>
+                                        <DropShadowEffect ShadowDepth="2" BlurRadius="4" RenderingBias="Quality"/>
+                                    </TextBlock.Effect>
+                                </TextBlock>
+                                <materialDesign:PackIcon Kind="AccountSupervisor" Margin="2 0 0 0" VerticalAlignment="Center">
+                                    <materialDesign:PackIcon.Effect>
+                                        <DropShadowEffect ShadowDepth="3" BlurRadius="5" RenderingBias="Quality"/>
+                                    </materialDesign:PackIcon.Effect>
+                                </materialDesign:PackIcon>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Margin="6 6 6 6">
+                                <TextBlock Text="15" FontSize="16">
+                                    <TextBlock.Effect>
+                                        <DropShadowEffect ShadowDepth="2" BlurRadius="4" RenderingBias="Quality"/>
+                                    </TextBlock.Effect>
+                                </TextBlock>
+                                <materialDesign:PackIcon Kind="AccountStar" Margin="2 0 0 0" VerticalAlignment="Center">
+                                    <materialDesign:PackIcon.Effect>
+                                        <DropShadowEffect ShadowDepth="3" BlurRadius="5" RenderingBias="Quality"/>
+                                    </materialDesign:PackIcon.Effect>
+                                </materialDesign:PackIcon>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="1" Background="#151515">
+                    <Border Background="{DynamicResource PrimaryHueDarkBrush}" Opacity="0.195">
+                        <Border.Effect>
+                            <BlurEffect Radius="5" KernelType="Box"/>
+                        </Border.Effect>
+                    </Border>
+                    <DockPanel >
+                        <StackPanel Margin="24 12 0 0">
+                            <TextBlock Text="Next track" Margin="0 0 0 24" FontSize="13"  Opacity="0.7"
+                                                       HorizontalAlignment="Right" />
+                            <TextBlock Text="Current track" Margin="0 0 0 24" FontSize="13"  Opacity="0.7"
+                                                       HorizontalAlignment="Right" />
+                            <TextBlock Text="Last track" Margin="0 0 0 24" FontSize="13"  Opacity="0.7"
+                                                       HorizontalAlignment="Right" />
+                        </StackPanel>
+                        <StackPanel Margin="12 12 0 0">
+                            <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left" Opacity="0.7"
+                                                       Text="Two Ways - These Years [Arctic Special] | Chillstep" />
+                            <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left"  Opacity="0.7"
+                                                       Text="Two Ways - These Years [Arctic Special] | Chillstep" />
+                            <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left"  Opacity="0.7"
+                                                       Text="Two Ways - These Years [Arctic Special] | Chillstep" />
+                        </StackPanel>
+                    </DockPanel>
+                </Grid>
+            </Grid>
+        </materialDesign:Card>
+</UserControl>

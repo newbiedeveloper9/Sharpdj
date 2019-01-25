@@ -7,7 +7,6 @@
         xmlns:local="clr-namespace:SharpDj.View.UserControls"
         xmlns:converters="clr-namespace:SharpDj.Converters"
         xmlns:helpers="clr-namespace:SharpDj.View.UserControls.Helpers"
-        xmlns:enums="clr-namespace:SharpDj.Enums"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip"
