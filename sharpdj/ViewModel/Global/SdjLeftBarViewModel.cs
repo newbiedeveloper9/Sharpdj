@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Communication.Shared;
 using SharpDj.Core;
 using SharpDj.Enums;
+using SharpDj.Enums.Helpers;
 using SharpDj.Enums.Menu;
 using SharpDj.Models.Helpers;
 using SharpDj.ViewModel.Helpers;
@@ -303,7 +304,6 @@ namespace SharpDj.ViewModel
         }
         #endregion
 
-        
         #region LeftBarOnLogoutCommand
         private RelayCommand _leftBarOnLogoutCommand;
         public RelayCommand LeftBarOnLogoutCommand
@@ -335,6 +335,29 @@ namespace SharpDj.ViewModel
         }
         #endregion
         
+        
+        #region TestCommand
+        private RelayCommand _testCommand;
+        public RelayCommand TestCommand
+        {
+            get
+            {
+                return _testCommand
+                       ?? (_testCommand = new RelayCommand(TestCommandExecute, TestCommandCanExecute));
+            }
+        }
+
+        public bool TestCommandCanExecute()
+        {
+            return true;
+        }
+
+        public void TestCommandExecute()
+        {
+            SdjMainViewModel.GetImageVisibility = GetImageVisibility.Main;
+        }
+        #endregion
+
         #endregion Commands
     }
 }

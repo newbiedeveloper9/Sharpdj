@@ -1,33 +1,48 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Communication.Client.Logic;
+using Communication.Shared;
+using Communication.Shared.Data;
 using Hik.Communication.Scs.Client;
 using Hik.Communication.Scs.Communication;
 using Hik.Communication.Scs.Communication.EndPoints.Tcp;
 using Hik.Communication.Scs.Communication.Messages;
 using Hik.Communication.Scs.Communication.Messengers;
+using Newtonsoft.Json;
 using SharpDj.Enums.Menu;
+using SharpDj.Enums.User;
 using SharpDj.Logic.Helpers;
 using SharpDj.ViewModel;
+using SharpDj.ViewModel.Model;
 
 namespace SharpDj.Logic.Client
 {
     public class Client
     {
         public SdjMainViewModel SdjMainViewModel { get; set; }
-        public ClientReceiver Receiver { get; set; } = new ClientReceiver();
+        public ClientReceiver Receiver { get; set; }
         public ClientSender Sender { get; set; }
-        public ClientConfig Config { get; } = ClientConfig.LoadConfig();
+        public ClientConfig Config { get; private set; }
+        private Debug _debug;
 
-        public void Start(SdjMainViewModel main)
+        public Client Start(SdjMainViewModel main)
         {
             SdjMainViewModel = main;
+            Receiver = new ClientReceiver(main);
+            _debug = new Debug("Connection");
+            Config = ClientConfig.LoadConfig();
             ClientInfo.Instance.Client = ScsClientFactory.CreateClient(new ScsTcpEndPoint(Config.Ip, Config.Port));
             ClientInfo.Instance.Client.MessageReceived += Client_MessageReceived;
             ClientInfo.Instance.Client.Disconnected += Client_Disconnected;
             ClientInfo.Instance.ReplyMessenger = new RequestReplyMessenger<IScsClient>(ClientInfo.Instance.Client);
             ClientInfo.Instance.ReplyMessenger.Start();
-            ClientInfo.Instance.Client.ConnectTimeout = 300;
+          
+            ClientInfo.Instance.Client.ConnectTimeout = 400;
+          
             while (ClientInfo.Instance.Client.CommunicationState == CommunicationStates.Disconnected)
             {
                 try
@@ -39,17 +54,29 @@ namespace SharpDj.Logic.Client
                 }
                 catch (TimeoutException e)
                 {
-                    Console.WriteLine(e.Message);
+                    _debug.Log(e.Message);
                 }
             }
-            // ClientInfo.Instance.Client.SendMessage(new ScsTextMessage("login $"));
+
+            PeriodicTask.StartNew(80, RefreshData);
 
             Sender = new ClientSender(ClientInfo.Instance.Client, ClientInfo.Instance.ReplyMessenger);
+            return this;
+        }
+
+        #region  Methods
+
+        private void RefreshData()
+        {
+            if (ClientInfo.Instance.UserState != UserState.Logged) return;
+
+            RefreshInfo();
+            Thread.Sleep(Config.RefreshDataDelay);
         }
 
         private void Client_Disconnected(object sender, EventArgs e)
         {
-            Console.WriteLine("Disconnected");
+            _debug.Log("Disconnected");
             SdjMainViewModel.MainViewVisibility = MainView.Login;
         }
 
@@ -60,8 +87,40 @@ namespace SharpDj.Logic.Client
             if (message == null)
                 return;
 
-            Console.WriteLine(message.Text + "\n");
+            Debug.Log("Receiver", message.Text);
+            Debug.Log("Message Id", message.RepliedMessageId);
+
             Receiver.ParseMessage(ClientInfo.Instance.Client, message.Text);
         }
+
+        public void RefreshInfo()
+        {
+            Task.Factory.StartNew(() =>
+            {
+                string reply = SdjMainViewModel.Client.Sender.AfterLogin();
+                if (reply == null) return;
+
+                var source = JsonConvert.DeserializeObject<List<Room>>(reply);
+                var roomstmp = new ObservableCollection<RoomSquareModel>();
+                for (int i = 0; i < source.Count; i++)
+                {
+                    roomstmp.Add(new RoomSquareModel(SdjMainViewModel)
+                    {
+                        HostName = source[i].Host,
+                        RoomName = source[i].Name,
+                        AdminsInRoom = source[i].AmountOfAdministration,
+                        PeopleInRoom = source[i].AmountOfPeople,
+                        RoomDescription = source[i].Description,
+                        RoomId = source[i].Id,
+                    });
+                }
+
+                roomstmp = new ObservableCollection<RoomSquareModel>
+                    (roomstmp.OrderByDescending(i => i.PeopleInRoom));
+                SdjMainViewModel.RoomCollection = roomstmp;
+            });
+        }
+
+        #endregion
     }
 }

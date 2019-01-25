@@ -1,6 +1,6 @@
 ﻿namespace SharpDj.Models.Helpers.Updater
 {
-    class FTPChecker
+    class FTPModel
     {
         public string Version { get; set; }
         public string UpdateToken { get; set; }

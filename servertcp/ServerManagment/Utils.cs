@@ -40,10 +40,11 @@ namespace Communication.Server
             var ipWithPort = all.Substring(ipStart + 2);
             var portStart = ipWithPort.IndexOf(":");
             var ip = ipWithPort.Remove(portStart);
-
             return ip;
         }
 
+        
+        
         public int GetPortOfClient(IScsServerClient client)
         {
             var all = client.RemoteEndPoint.ToString();
@@ -52,31 +53,9 @@ namespace Communication.Server
 
             return Convert.ToInt32(port);
         }
-
-
-        /// <summary>
-        /// Returns command in index 0 and parameters in index 1+
-        /// </summary>
-        /// <param name="message">text from receiver</param>
-        /// <returns></returns>
-        public List<string> GetMessageParameters(string message)
-        {
-            var list = new List<string>();
-            var commandEnd = message.IndexOf(' ');
-            
-            list.Add(message.Remove(commandEnd));
-            message = message.Substring(commandEnd+1);
-            list.AddRange(message.Split('$'));
-            
-            return list;
-        }
-
-        
-        /// <summary>
-        /// Returns true if given client is already signed in.
-        /// </summary>
+    
         /// <param name="client"></param>
-        /// <returns></returns>
+        /// <returns> true if given client is already signed in.</returns>
         public bool IsActiveLogin(IScsServerClient client)
         {
              return DataSingleton.Instance.ServerClients[(int)client.ClientId] != null;

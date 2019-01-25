@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Communication.Shared;
 
-namespace SharpDj.Models.Helpers
+namespace SharpDj.Logic.Helpers
 {
     class ExceptionLogger
     {
         public ExceptionLogger(Exception e)
         {
-           
+            Debug.Log($"Exception:{e.Source}", $"{e.Message}" );
+            Debug.Log($"StackTrace", $"{e.StackTrace}" );
         }
-
-        //ExceptionContent
     }
 }

@@ -9,6 +9,7 @@ namespace SharpDj.Logic.Helpers
     {
         public int Port { get; set; } = 21337;
         public string Ip { get; set; } = "192.168.0.103";
+        public int RefreshDataDelay { get; set; } = 20000;
 
         private ClientConfig()
         {
@@ -16,11 +17,12 @@ namespace SharpDj.Logic.Helpers
 
         public static ClientConfig LoadConfig()
         {
-            var debug = new Debug("Config");
+            var debug = new Debug("Config");    
             var path = FilesPath.Instance.ClientConfig;
 
             if (!File.Exists(path))
             {
+
                 var json = JsonConvert.SerializeObject(new ClientConfig(), Formatting.Indented);
                 File.WriteAllText(path, json);
                 debug.Log("Created new config file.");

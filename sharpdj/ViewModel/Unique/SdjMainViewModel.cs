@@ -13,6 +13,7 @@ using Hik.Communication.Scs.Communication.Messages;
 using Hik.Communication.Scs.Communication.Messengers;
 using SharpDj.Core;
 using SharpDj.Enums;
+using SharpDj.Enums.Helpers;
 using SharpDj.Enums.Menu;
 using SharpDj.Enums.Playlist;
 using SharpDj.Logic.Client;
@@ -20,6 +21,7 @@ using SharpDj.Logic.Helpers;
 using SharpDj.Models;
 using SharpDj.Models.Helpers;
 using SharpDj.View.UserControls;
+using SharpDj.ViewModel.Helpers;
 using SharpDj.ViewModel.Model;
 using SharpDj.ViewModel.Unique;
 
@@ -28,37 +30,21 @@ namespace SharpDj.ViewModel
     public class SdjMainViewModel : BaseViewModel
     {
         public readonly Client Client;
-        private readonly ClientLogic _clientLogic;
         #region .ctor
 
         public SdjMainViewModel()
-        {            
-            SdjRoomViewModel = new SdjRoomViewModel(this);
-            SdjBottomBarViewModel = new SdjBottomBarViewModel(this);
-            SdjLeftBarViewModel = new SdjLeftBarViewModel(this);
-            SdjPlaylistViewModel = new SdjPlaylistViewModel(this);
-            SdjStateButtonViewModel = new SdjStateButtonViewModel(this);
-            SdjAddPlaylistCollectionViewModel = new SdjAddPlaylistCollectionViewModel(this);
-            SdjEditPlaylistCollectionViewModel = new SdjEditPlaylistCollectionViewModel(this);
-            SdjRemovePlaylistCollectionViewModel = new SdjRemovePlaylistCollectionViewModel(this);
-            SdjAddTrackToPlaylistCollectionViewModel = new SdjAddTrackToPlaylistCollectionViewModel(this);
-            SdjRenameTrackNameInPlaylistViewModel = new SdjRenameTrackNameInPlaylistViewModel(this);
-            SdjLoginViewModel = new SdjLoginViewModel(this);
-            SdjRegisterViewModel = new SdjRegisterViewModel(this);
-            SdjUserProfileViewModel = new SdjUserProfileViewModel(this);
-            SdjFeedbackViewModel = new SdjFeedbackViewModel(this);
+        {
+            InitializeViewModels();
+            SetViewModelsVisibility();
 
-            MainViewVisibility = MainView.Login;
             Profile = new UserClient();
 
-            for (int i = 0; i < 7; i++)
+/*            for (int i = 0; i < 7; i++)
             {
                 FavoriteCollection.Add(new FavoriteRoomsModel(this){});
-            }
+            }*/
 
-            Client = new Client();
-            Client.Start(this);
-            _clientLogic = new ClientLogic(this);
+            Client = new Client().Start(this);
         }
 
         #endregion .ctor
@@ -153,11 +139,40 @@ namespace SharpDj.ViewModel
                 OnPropertyChanged("PlaylistStateCollectionVisibility");
             }
         }
+        
+        
+      
+        private GetImageVisibility _getImageVisibility;
+        public GetImageVisibility GetImageVisibility
+        { 
+            get => _getImageVisibility;
+            set
+            {
+                if (_getImageVisibility == value) return;
+                _getImageVisibility = value;
+                OnPropertyChanged("GetImageVisibility");
+            }
+        }
+
+
 
         #endregion
 
         #region ViewModels
 
+        private SdjGetImageViewModel _sdjGetImageViewModel;
+        public SdjGetImageViewModel SdjGetImageViewModel
+        { 
+            get => _sdjGetImageViewModel;
+            set
+            {
+                if (_sdjGetImageViewModel == value) return;
+                _sdjGetImageViewModel = value;
+                OnPropertyChanged("SdjGetImageViewModel");
+            }
+        }
+
+        
         private SdjBottomBarViewModel _sdjBottomBarViewModel;
         public SdjBottomBarViewModel SdjBottomBarViewModel
         {
@@ -335,6 +350,31 @@ namespace SharpDj.ViewModel
 
         #region Methods
 
+        private void InitializeViewModels()
+        {
+            SdjRoomViewModel = new SdjRoomViewModel(this);
+            SdjBottomBarViewModel = new SdjBottomBarViewModel(this);
+            SdjLeftBarViewModel = new SdjLeftBarViewModel(this);
+            SdjPlaylistViewModel = new SdjPlaylistViewModel(this);
+            SdjStateButtonViewModel = new SdjStateButtonViewModel(this);
+            SdjAddPlaylistCollectionViewModel = new SdjAddPlaylistCollectionViewModel(this);
+            SdjEditPlaylistCollectionViewModel = new SdjEditPlaylistCollectionViewModel(this);
+            SdjRemovePlaylistCollectionViewModel = new SdjRemovePlaylistCollectionViewModel(this);
+            SdjAddTrackToPlaylistCollectionViewModel = new SdjAddTrackToPlaylistCollectionViewModel(this);
+            SdjRenameTrackNameInPlaylistViewModel = new SdjRenameTrackNameInPlaylistViewModel(this);
+            SdjLoginViewModel = new SdjLoginViewModel(this);
+            SdjRegisterViewModel = new SdjRegisterViewModel(this);
+            SdjUserProfileViewModel = new SdjUserProfileViewModel(this);
+            SdjFeedbackViewModel = new SdjFeedbackViewModel(this);
+            SdjGetImageViewModel = new SdjGetImageViewModel(this);
+        }
+
+        private void SetViewModelsVisibility()
+        {
+            MainViewVisibility = MainView.Login;
+            GetImageVisibility = GetImageVisibility.Collapsed;
+        }
+        
         #endregion Methods
 
         #region Commands
@@ -357,7 +397,7 @@ namespace SharpDj.ViewModel
 
         public void RefreshCommandExecute()
         {
-            _clientLogic.RefreshInfo();
+            Client.RefreshInfo();
         }
         #endregion
 

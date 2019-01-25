@@ -15,6 +15,11 @@ namespace Communication.Client.Logic
             _clientUtility = new ConnectionUtility(client, clientRequestReply);
         }
 
+         public string JoinQueue(string json) =>
+                    _clientUtility.SendMessageAndWaitForResponse(
+                        Commands.Instance.CommandsDictionary["JoinQueue"],
+                        json);
+
         public string Register(string login, SecureString password, string email) =>
             _clientUtility.SendMessageAndWaitForResponse(
                 Commands.Instance.CommandsDictionary["Register"],
@@ -75,6 +80,12 @@ namespace Communication.Client.Logic
         public string AfterLogin() =>
             _clientUtility.SendMessageAndWaitForResponse(
                 Commands.Instance.CommandsDictionary["AfterLogin"]);
+
+        public void SendMessage(string text, string roomId) =>
+            _clientUtility.SendMessage(
+                Commands.Instance.CommandsDictionary["SendMessage"],
+                text, roomId);
+        
 
         #endregion
     }
