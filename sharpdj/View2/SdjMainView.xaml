@@ -5,13 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mainViewComponents="clr-namespace:SharpDj.View2.MainViewComponents"
         mc:Ignorable="d"
-<<<<<<< HEAD
-        WindowStyle="None "
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-
-        Title="SdjMainView" Height="720" Width="1280">
-    <Grid>
-=======
         ResizeMode="CanResizeWithGrip"
         TextElement.FontSize="14"
         AllowsTransparency="True"
@@ -23,7 +16,6 @@
         UseLayoutRounding="True"
         Title="SdjMainView" Height="720" Width="1300">
     <Grid >
->>>>>>> master
         <Grid.RowDefinitions>
             <RowDefinition Height="24" />
             <RowDefinition Height="50" />
@@ -31,47 +23,6 @@
         </Grid.RowDefinitions>
 
         <!--DragAndDropMenu-->
-<<<<<<< HEAD
-        <Grid Grid.Row="0" Background="MediumAquamarine" Grid.ColumnSpan="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-
-            <Grid Grid.Column="0"/>
-
-            <!--Close, Minimize, Max-->
-            <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <Button>_</Button>
-                <Button>O</Button>
-                <Button>X</Button>
-            </StackPanel>
-        </Grid>
-
-        <!--SearchMenu-->
-        <Grid Grid.Row="1" Background="Purple" Grid.ColumnSpan="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="220"/>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="124"/>
-                <ColumnDefinition Width="36"/>
-            </Grid.ColumnDefinitions>
-
-            <StackPanel Orientation="Horizontal" Grid.Column="0">
-                <Image Margin="24 0 0 0" Width="24" Height="24" VerticalAlignment="Center" HorizontalAlignment="Center" Source="../Images/LeftBar/001-white-album.png"/>
-                <TextBlock Text="SharpDj" FontSize="28" Margin="24 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            </StackPanel>
-            
-            <TextBox Grid.Column="2" Text="Search" FontSize="18" VerticalAlignment="Center"/>
-
-            <StackPanel Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Image Width="24" Height="24" Source="../Images/Icon.png"/>
-                <Image Width="24" Height="24" Margin="12 0 0 0" Source="../Images/Icon.png"/>
-                <Image Width="40" Height="40" Margin="24 0 0 0" Source="../Images/LeftBar/001-rate-star-button.png"/>
-            </StackPanel>
-=======
         <Grid Grid.Row="0" Grid.ColumnSpan="2">
            <mainViewComponents:DraggableTopMenuComponent/>
         </Grid>
@@ -79,7 +30,6 @@
         <!--SearchMenu-->
         <Grid Grid.Row="1" Grid.ColumnSpan="2">
                <mainViewComponents:SearchMenuComponent/>
->>>>>>> master
         </Grid>
 
         <!--MainMenu-->
@@ -91,87 +41,13 @@
             </Grid.ColumnDefinitions>
 
             <!--LeftMenu-->
-<<<<<<< HEAD
-            <StackPanel Margin="24 24 12 0" Grid.Column="0" Background="Black">
-                <!--Active Rooms-->
-                <TextBlock Margin="0 0 0 12" FontSize="14" Text="Aktywne pokoje"/>
-                <StackPanel Margin="0 0 0 12">
-                    <StackPanel Margin="0 0 0 12" Height="24" Width="184" Orientation="Horizontal">
-                        <Image Width="24" Source="../Images/LeftBar/001-white-album.png"/>
-                        <TextBlock Margin="12 0 0 0"  Width="116" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Text="Best japanease playlist"/>
-                        <Image Margin="24 0 0 0" Width="8" Height="8" VerticalAlignment="Center" HorizontalAlignment="Center" Source="../Images/LeftBar/001-white-album.png"/>
-                    </StackPanel>
-                </StackPanel>
-
-                <!--Playlists-->
-                <TextBlock Margin="0 0 0 12" FontSize="14" Text="Playlists"/>
-                <StackPanel Margin="0 0 0 12">
-                    <StackPanel Margin="0 0 0 12" Height="24" Width="184" Orientation="Horizontal">
-                        <Image Margin="0 0 0 0" Width="8" Height="8" VerticalAlignment="Center" HorizontalAlignment="Center" Source="../Images/LeftBar/001-white-album.png"/>
-                        <TextBlock Margin="12 0 0 0" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Text="MyOwnPlaylist"/>
-                    </StackPanel>
-                </StackPanel>
-
-                <!--Observed-->
-                <TextBlock Margin="0 0 0 12" FontSize="14" Text="Obserwowane"/>
-                <StackPanel Margin="0 0 0 12">
-                    <StackPanel Margin="0 0 0 12" Height="24" Width="184" Orientation="Horizontal">
-                        <Image Width="24" Source="../Images/LeftBar/001-white-album.png"/>
-                        <TextBlock Margin="12 0 0 0"  Width="116" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Text="MyOwnPlaylist"/>
-                        <Image Margin="24 0 0 0" Width="8" Height="8"/>
-                    </StackPanel>
-                </StackPanel>
-            </StackPanel>
-
-            <!--Center Menu-->
-            <Grid Grid.Column="1" Background="Yellow">
-=======
             <Grid Background="#1C1C1C">
                <mainViewComponents:LeftMenuComponent/>
             </Grid>
             
->>>>>>> master
 
             <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Grid.ColumnSpan="2">
                 <!--Padding24-->
-<<<<<<< HEAD
-                <StackPanel Margin="24 24 36 0" Background="Green">
-                    <TextBlock Text="Nowości ze świata" Margin="0 0 0 24" FontSize="32"/>
-                    <!--News from world-->
-                    <StackPanel Orientation="Horizontal">
-
-                        <StackPanel Background="Blue">
-                            <Grid Background="White" Height="240" Width="728" HorizontalAlignment="Left                                                         ">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="68"/>
-                                </Grid.RowDefinitions>
-                                <Grid Grid.RowSpan="2">
-                                    <!--News of the day IMAGE-->
-                                </Grid>
-
-                                <Grid Grid.Row="1">
-                                    <!--News of the day TEXT-->
-                                </Grid>
-                            </Grid>
-                        </StackPanel>
-
-                        <StackPanel Margin="24 0 0 0">
-                            <Grid Background="Black" Height="114" Width="240" Margin="0 0 0 12"/>
-                            <Grid Background="Black" Height="114" Width="240"/>
-                        </StackPanel> 
-                    </StackPanel>
-                    <!--Categories-->
-                    <StackPanel  Orientation="Horizontal" Margin="24 48 0 0">
-                        <TextBlock FontSize="24" Text="Nowe" Margin="24 0 0 0"/>
-                        <TextBlock FontSize="24" Text="Popularne" Margin="24 0 0 0"/>
-                        <TextBlock FontSize="24" Text="Wsz ystkie" Margin="24 0 0 0"/>
-                        <TextBlock FontSize="24" Text="Wybrane" Margin="24 0 0 0"/>
-                    </StackPanel>
-
-                    <ScrollViewer VerticalScrollBarVisibility="Hidden">
-                        <WrapPanel Margin="0 24 0 0">
-=======
                 <StackPanel Margin="24 24 0 0" >
                    <mainViewComponents:NewsCarouselComponent/>
      
@@ -183,7 +59,6 @@
                             <TextBlock FontSize="24" FontWeight="Light" Text="Wszystkie" Margin="24 0 0 0" Foreground="{DynamicResource PrimaryHueLightBrush}" Opacity="1" />
                             <TextBlock FontSize="24" FontWeight="Light" Text="Wybrane" Margin="24 0 0 0" Foreground="{DynamicResource PrimaryHueLightBrush}" Opacity="0.42" />
                         </StackPanel>
->>>>>>> master
 
                         <WrapPanel  Margin="0 24 0 0">
                            <mainViewComponents:RoomSquareComponent/>
