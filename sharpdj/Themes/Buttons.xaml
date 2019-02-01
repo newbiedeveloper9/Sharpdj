@@ -31,8 +31,6 @@
 
     <!--Icon Button-->
     <Style x:Key="IconButton" TargetType="Button">
-        <!--  <Setter Property="BorderBrush" Value="Transparent"/>
-        -->
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Template">
@@ -46,6 +44,47 @@
         </Setter>
     </Style>
 
+    <!--     
+    
+    -->
+
+    <Style x:Key="IconicButton" TargetType="Button">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="Padding" Value="24 0 12 0"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Button Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}"
+                            Margin="{TemplateBinding Margin}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            Cursor="{TemplateBinding Cursor}">
+                            
+                        <ContentPresenter VerticalAlignment="Center"/>
+                    </Button>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="TextIconicButton" TargetType="TextBlock">
+        <Setter Property="Text" Value="Lorem Ipsum"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+        <Setter Property="Foreground" Value="#999999"/>
+    </Style>
+
+    <!--
+    
+ -->
+
+
     <Style x:Key="IconButtonMouseOver" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Cursor" Value="Hand"/>
@@ -53,7 +92,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid >
-                        <Grid Background="{TemplateBinding Background}"> </Grid>
+                        <Grid Background="{TemplateBinding Background}"></Grid>
                         <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                             <ContentPresenter/>
                         </Border>

@@ -5,84 +5,80 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SharpDj.View2.MainViewComponents"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:converters="clr-namespace:SharpDj.Converters"
+             xmlns:leftMenuComponents="clr-namespace:SharpDj.View2.MainViewComponents.LeftMenuComponents"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="220">
+             d:DesignHeight="640" d:DesignWidth="220">
 
     <!--LeftMenu-->
     <Grid>
-        <StackPanel Margin="24 24 12 0">
+        <StackPanel Margin="0 24 0 0">
             <!--Active Rooms-->
-            <TextBlock Margin="0 0 0 12" FontSize="14" Text="AKTYWNE POKOJE" FontWeight="Regular" Foreground="#999999"/>
-            <StackPanel Margin="0 0 0 12">
-                <StackPanel Margin="0 0 0 12" Height="24" Width="184" Orientation="Horizontal">
-                    <Ellipse Width="24" Height="24">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="{Binding ActiveRoomImagePath}" />
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <TextBlock Margin="12 0 0 0" Width="116" TextTrimming="CharacterEllipsis"
-                                   VerticalAlignment="Center" Text="{Binding ActiveRoomName}" FontWeight="Light"/>
-
-                    <Canvas Background="LightGray"  VerticalAlignment="Center"
-                                HorizontalAlignment="Center">
-                        <Ellipse  
-                                Width="8" 
-                                Height="8"
-                                Canvas.Top="-4"  
-                                Canvas.Left="0"  
-                                Margin="24 0 0 0" 
-                                Fill="{Binding ActiveRoomStateBrush}"
-                                StrokeThickness="0"/>
-                    </Canvas>
-                </StackPanel>
+            <Grid Margin="0 0 0 6">
+                <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Left" Padding="24 0 12 0" Command="{Binding ShowMyLibraryCommand}">
+                    <TextBlock Style="{StaticResource TextIconicButton}" Text="AKTYWNE POKOJE" Margin="0" Padding="0"/>
+                </Button>
+            </Grid>
+            <StackPanel Orientation="Vertical" Margin="0 0 0 24">
+                <leftMenuComponents:RoomRectangleComponent/>
+                <leftMenuComponents:RoomRectangleComponent />
             </StackPanel>
 
+
             <!--Playlists-->
-            <TextBlock Margin="0 0 0 12" FontSize="14" Text="PLAYLISTY" FontWeight="Regular" Foreground="#999999"/>
-            <StackPanel Margin="6 0 0 0">
-                <DockPanel Margin="0 0 0 12" Height="24" Width="180">
+            <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Left" Padding="24 0 12 0" Command="{Binding ShowMyLibraryCommand}">
+                <TextBlock Style="{StaticResource TextIconicButton}" Text="PLAYLISTY"/>
+            </Button>
+
+            <StackPanel Margin="0 6 0 6">
+                <!--<DockPanel Margin="0 0 0 12" Height="24" Width="180">
                     <materialDesign:PackIcon Kind="{Binding PlaylistCheckKind}" VerticalAlignment="Center" HorizontalAlignment="Center" Height="12" Width="12" Foreground="White"/>
                     <TextBlock Margin="12 0 0 0" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"  FontWeight="Light"
                                    Text="{Binding PlaylistName}" />
-                </DockPanel>
+                </DockPanel>-->
 
-                <DockPanel Margin="0 0 0 12" Height="24" Width="180">
-                    <materialDesign:PackIcon Kind="RadioboxMarked" VerticalAlignment="Center" HorizontalAlignment="Center" Height="12" Width="12" Foreground="White"/>
-                    <TextBlock Margin="12 0 0 0" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"  FontWeight="Light"
-                                   Text="MyOwnPlayliD" />
-                </DockPanel>
+                <Button Style="{StaticResource MaterialDesignFlatButton}"  HorizontalContentAlignment="Left" Padding="30 0 12 0" Command="{Binding CreateNewPlaylistCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="RadioButtonChecked" Width="12" Height="12" VerticalAlignment="Center" Foreground="White"/>
+                        <TextBlock Text="MyOwnPlaylist" VerticalAlignment="Center" Margin="12 0 0 0" Foreground="White" FontWeight="Light"/>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource MaterialDesignFlatButton}"  HorizontalContentAlignment="Left" Padding="30 0 12 0" Command="{Binding CreateNewPlaylistCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="RadioButtonChecked" Width="12" Height="12" VerticalAlignment="Center" Foreground="White"/>
+                        <TextBlock Text="MyOwnPlaylist with long name" TextTrimming="CharacterEllipsis" Width="154"
+                                   VerticalAlignment="Center" Margin="12 0 0 0" Foreground="White" FontWeight="Light"/>
+                    </StackPanel>
+                </Button>
             </StackPanel>
 
-            <Button Style="{StaticResource IconButton}" Command="{Binding CreateNewPlaylistCommand}">
-                <StackPanel Orientation="Horizontal">
-                    <materialDesign:PackIcon Kind="PlaylistAdd" Width="24" Height="24" Foreground="White"/>
-                    <TextBlock Text="STWÓRZ PLAYTLISTE" VerticalAlignment="Center" Margin="12 0 0 0" Foreground="#999999"/>
-                </StackPanel>
-            </Button>
+            <Grid Margin="0 0 0 24">
+                <Button Style="{StaticResource MaterialDesignFlatButton}"  HorizontalContentAlignment="Left" Padding="24 0 12 0" Command="{Binding CreateNewPlaylistCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="PlaylistAdd" Width="24" Height="24" Foreground="White"/>
+                        <TextBlock Text="STWÓRZ PLAYTLISTE" VerticalAlignment="Center" Margin="12 0 0 0" Foreground="#999999" FontWeight="Normal" FontSize="12"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
 
             <!--Observed-->
-            <TextBlock Margin="0 24 0 12" FontSize="14" Text="OBSERWOWANE" FontWeight="Regular" Foreground="#999999"/>
-            <StackPanel Margin="0 0 0 12">
-                <DockPanel Margin="0 0 0 12" Height="24" Width="184">
-                    <Ellipse Width="24" Height="24">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="{Binding FollowedRoomImagePath}" />
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <TextBlock Margin="12 0 0 0" Width="100" TextTrimming="CharacterEllipsis"
-                                   VerticalAlignment="Center" Text="{Binding FollowedRoomName}"  FontWeight="Light" />
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
-                        <TextBlock Text="#" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis"  FontWeight="Light"/>
-                        <TextBlock Text="{Binding FollowedRoomId}" VerticalAlignment="Center" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis"  FontWeight="Light"/>
-                    </StackPanel>
-                </DockPanel>
-            </StackPanel>
-
-            <!--Biblioteka-->
-            <Button Style="{StaticResource IconButton}" Command="{Binding ShowMyLibraryCommand}">
-                <TextBlock Margin="0 0 0 0" FontSize="14" Text="BIBLIOTEKA" FontWeight="Regular" Foreground="#999999"/>
+            <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Left" Padding="24 0 12 0" Command="{Binding ShowMyLibraryCommand}">
+                <TextBlock Style="{StaticResource TextIconicButton}" Text="OBSERWOWANE"/>
             </Button>
 
+            <StackPanel Margin="0 6 0 0" >
+                <leftMenuComponents:ObservedRoomComponent Margin="0 0 0 6"/>
+                <leftMenuComponents:ObservedRoomComponent Margin="0 0 0 6"/>
+                <leftMenuComponents:ObservedRoomComponent Margin="0 0 0 6"/>
+            </StackPanel>
         </StackPanel>
+        <!--Biblioteka-->
+        <Grid VerticalAlignment="Bottom" Background="#1C1C1C">
+
+            <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Left" Padding="24 0 12 0" Command="{Binding ShowMyLibraryCommand}">
+                <TextBlock Style="{StaticResource TextIconicButton}" Text="BIBLIOTEKA"/>
+            </Button>
+        </Grid>
+
     </Grid>
 </UserControl>

@@ -13,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SharpDj.View2.MainViewComponents
+namespace SharpDj.View2.MainViewComponents.LeftMenuComponents
 {
     /// <summary>
-    /// Interaction logic for LeftMenuComponent.xaml
+    /// Interaction logic for RoomRectangleComponent.xaml
     /// </summary>
-    public partial class LeftMenuComponent : UserControl
+    public partial class RoomRectangleComponent : UserControl
     {
-        public LeftMenuComponent()
+        public RoomRectangleComponent()
         {
             InitializeComponent();
-        }
-
-        private void RoomRectangleComponent_Loaded(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
