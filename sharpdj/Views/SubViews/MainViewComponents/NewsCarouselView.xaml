@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="SharpDj.View2.MainViewComponents.NewsCarouselComponent"
+﻿<UserControl x:Class="SharpDj.Views.SubViews.MainViewComponents.NewsCarouselView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SharpDj.View2.MainViewComponents"
+             xmlns:local="clr-namespace:SharpDj.Views.SubViews.MainViewComponents"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="350" d:DesignWidth="1100">
@@ -22,7 +22,7 @@
                                 <VisualBrush Stretch="UniformToFill">
                                     <VisualBrush.Visual>
                                         <Grid ClipToBounds="True">
-                                            <Image Source="..\..\Images\1.jpg">
+                                            <Image Source="..\..\..\Images\1.jpg">
                                                 <Image.Effect>
                                                     <BlurEffect Radius="11"/>
                                                 </Image.Effect>
@@ -66,12 +66,12 @@
                 <StackPanel Margin="24 0 0 0">
                     <materialDesign:Card Margin="0 0 0 12"  materialDesign:ShadowAssist.ShadowDepth="Depth3">
                         <Grid Background="Black" Height="114" Width="248" >
-                            <Image Source="../../Images/2.png" Stretch="Fill"/>
+                            <Image Source="../../../Images/2.png" Stretch="Fill"/>
                         </Grid>
                     </materialDesign:Card>
                     <materialDesign:Card  materialDesign:ShadowAssist.ShadowDepth="Depth3">
                         <Grid Background="Black" Height="114" Width="248" >
-                            <Image Source="../../Images/1.jpg" Stretch="Fill"/>
+                            <Image Source="../../../Images/1.jpg" Stretch="Fill"/>
                         </Grid>
                     </materialDesign:Card>
                 </StackPanel>

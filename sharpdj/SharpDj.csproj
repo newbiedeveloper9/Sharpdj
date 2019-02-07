@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>SharpDj</RootNamespace>
     <AssemblyName>SharpDj</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -70,11 +70,20 @@
     <Reference Include="AngleSharp, Version=0.9.9.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
       <HintPath>..\packages\AngleSharp.0.9.11\lib\net45\AngleSharp.dll</HintPath>
     </Reference>
+    <Reference Include="Caliburn.Micro, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Caliburn.Micro.Core.3.2.0\lib\net45\Caliburn.Micro.dll</HintPath>
+    </Reference>
+    <Reference Include="Caliburn.Micro.Platform, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Caliburn.Micro.3.2.0\lib\net45\Caliburn.Micro.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Caliburn.Micro.Platform.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Caliburn.Micro.3.2.0\lib\net45\Caliburn.Micro.Platform.Core.dll</HintPath>
+    </Reference>
     <Reference Include="CliWrap, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CliWrap.2.2.0\lib\net45\CliWrap.dll</HintPath>
     </Reference>
-    <Reference Include="MaterialDesignColors, Version=1.0.0.14576, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaterialDesignColors.1.1.1\lib\net45\MaterialDesignColors.dll</HintPath>
+    <Reference Include="MaterialDesignColors, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.1.3\lib\net45\MaterialDesignColors.dll</HintPath>
     </Reference>
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.0.1205, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.2.5.0.1205\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
@@ -98,9 +107,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Caliburn.Micro.3.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
@@ -132,8 +140,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AppBootstrapper.cs" />
     <Compile Include="Converters\NameToContentConverter.cs" />
-    <Compile Include="Converters\StringToUpperConverter.cs" />
     <Compile Include="Core\BaseViewModel.cs" />
     <Compile Include="Core\Extensions\CommandBase.cs" />
     <Compile Include="Core\Extensions\Extensions.cs" />
@@ -148,6 +156,8 @@
     <Compile Include="Enums\User\UserProfile.cs" />
     <Compile Include="Enums\Playlist\PlaylistState.cs" />
     <Compile Include="Enums\User\UserState.cs" />
+    <Compile Include="Interfaces\IShell.cs" />
+    <Compile Include="Interfaces\ITest.cs" />
     <Compile Include="Logic\Client\Client.cs" />
     <Compile Include="Logic\Client\ClientInfo.cs" />
     <Compile Include="Logic\Client\ClientReceiver.cs" />
@@ -169,124 +179,109 @@
     <Compile Include="Logic\Helpers\Updater\FTPModel.cs" />
     <Compile Include="Logic\Helpers\Updater\GetSourcePage.cs" />
     <Compile Include="Logic\Helpers\YoutubeSingleton.cs" />
-    <Compile Include="View2\MainViewComponents\DraggableTopMenuComponent.xaml.cs">
-      <DependentUpon>DraggableTopMenuComponent.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View2\MainViewComponents\LeftMenuComponent.xaml.cs">
-      <DependentUpon>LeftMenuComponent.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View2\MainViewComponents\LeftMenuComponents\ObservedRoomComponent.xaml.cs">
-      <DependentUpon>ObservedRoomComponent.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View2\MainViewComponents\LeftMenuComponents\RoomRectangleComponent.xaml.cs">
-      <DependentUpon>RoomRectangleComponent.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View2\MainViewComponents\NewsCarouselComponent.xaml.cs">
-      <DependentUpon>NewsCarouselComponent.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View2\MainViewComponents\RoomSquareComponent.xaml.cs">
-      <DependentUpon>RoomSquareComponent.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View2\MainViewComponents\SearchMenuComponent.xaml.cs">
-      <DependentUpon>SearchMenuComponent.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View2\SdjMainView.xaml.cs">
-      <DependentUpon>SdjMainView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModel\Global\SdjBottomBarViewModel.cs" />
-    <Compile Include="ViewModel\Global\SdjLeftBarViewModel.cs" />
-    <Compile Include="ViewModel\Global\SdjStateButtonViewModel.cs" />
-    <Compile Include="ViewModel\Global\SdjUserProfileViewModel.cs" />
-    <Compile Include="ViewModel\Helpers\PasswordBoxBindingBehavior.cs" />
-    <Compile Include="ViewModel\Helpers\SdjBackgroundForFormsViewModel.cs" />
-    <Compile Include="ViewModel\Helpers\SdjGetImageViewModel.cs" />
-    <Compile Include="ViewModel\Model\FavoriteRoomsModel.cs" />
-    <Compile Include="ViewModel\Model\PlaylistModel.cs" />
-    <Compile Include="ViewModel\Model\PlaylistToAddTrack.cs" />
-    <Compile Include="ViewModel\Model\PlaylistTrackModel.cs" />
-    <Compile Include="ViewModel\Model\RoomMessageModel.cs" />
-    <Compile Include="ViewModel\Playlist\SdjAddPlaylistCollectionViewModel.cs" />
-    <Compile Include="ViewModel\Playlist\SdjAddTrackToPlaylistCollectionViewModel.cs" />
-    <Compile Include="ViewModel\Playlist\SdjEditPlaylistCollectionViewModel.cs" />
-    <Compile Include="ViewModel\Playlist\SdjPlaylistViewModel.cs" />
-    <Compile Include="ViewModel\Playlist\SdjRemovePlaylistCollectionViewModel.cs" />
-    <Compile Include="ViewModel\Playlist\SdjRenameTrackNameInPlaylistViewModel.cs" />
-    <Compile Include="ViewModel\Helpers\SdjTitleBarForUserControlsViewModel.cs" />
-    <Compile Include="ViewModel\Unique\SdjFeedbackViewModel.cs" />
-    <Compile Include="ViewModel\Unique\SdjLoginViewModel.cs" />
-    <Compile Include="ViewModel\Unique\SdjMainViewModel.cs" />
-    <Compile Include="ViewModel\Unique\SdjRegisterViewModel.cs" />
-    <Compile Include="ViewModel\Unique\SdjRoomViewModel.cs" />
-    <Compile Include="View\UserControls\Global\SdjBottomBarUserControl.xaml.cs">
+    <Compile Include="ViewModels\SubViews\MainViewModel.cs" />
+    <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="ViewModels\SubViews\MainViewComponents\TopMenuViewModel.cs" />
+    <Compile Include="deprecatedViewModel\Global\SdjBottomBarViewModel.cs" />
+    <Compile Include="deprecatedViewModel\Global\SdjLeftBarViewModel.cs" />
+    <Compile Include="deprecatedViewModel\Global\SdjStateButtonViewModel.cs" />
+    <Compile Include="deprecatedViewModel\Global\SdjUserProfileViewModel.cs" />
+    <Compile Include="deprecatedViewModel\Helpers\PasswordBoxBindingBehavior.cs" />
+    <Compile Include="deprecatedViewModel\Helpers\SdjBackgroundForFormsViewModel.cs" />
+    <Compile Include="deprecatedViewModel\Helpers\SdjGetImageViewModel.cs" />
+    <Compile Include="deprecatedViewModel\Model\FavoriteRoomsModel.cs" />
+    <Compile Include="deprecatedViewModel\Model\PlaylistModel.cs" />
+    <Compile Include="deprecatedViewModel\Model\PlaylistToAddTrack.cs" />
+    <Compile Include="deprecatedViewModel\Model\PlaylistTrackModel.cs" />
+    <Compile Include="deprecatedViewModel\Model\RoomMessageModel.cs" />
+    <Compile Include="deprecatedViewModel\Playlist\SdjAddPlaylistCollectionViewModel.cs" />
+    <Compile Include="deprecatedViewModel\Playlist\SdjAddTrackToPlaylistCollectionViewModel.cs" />
+    <Compile Include="deprecatedViewModel\Playlist\SdjEditPlaylistCollectionViewModel.cs" />
+    <Compile Include="deprecatedViewModel\Playlist\SdjPlaylistViewModel.cs" />
+    <Compile Include="deprecatedViewModel\Playlist\SdjRemovePlaylistCollectionViewModel.cs" />
+    <Compile Include="deprecatedViewModel\Playlist\SdjRenameTrackNameInPlaylistViewModel.cs" />
+    <Compile Include="deprecatedViewModel\Helpers\SdjTitleBarForUserControlsViewModel.cs" />
+    <Compile Include="deprecatedViewModel\Unique\SdjFeedbackViewModel.cs" />
+    <Compile Include="deprecatedViewModel\Unique\SdjLoginViewModel.cs" />
+    <Compile Include="deprecatedViewModel\Unique\SdjMainViewModel.cs" />
+    <Compile Include="deprecatedViewModel\Unique\SdjRegisterViewModel.cs" />
+    <Compile Include="deprecatedViewModel\Unique\SdjRoomViewModel.cs" />
+    <Compile Include="deprecatedView\UserControls\Global\SdjBottomBarUserControl.xaml.cs">
       <DependentUpon>SdjBottomBarUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControls\Global\SdjLeftBarUserControl.xaml.cs">
+    <Compile Include="deprecatedView\UserControls\Global\SdjLeftBarUserControl.xaml.cs">
       <DependentUpon>SdjLeftBarUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControls\Global\SdjStateButtonsUserControl.xaml.cs">
+    <Compile Include="deprecatedView\UserControls\Global\SdjStateButtonsUserControl.xaml.cs">
       <DependentUpon>SdjStateButtonsUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControls\Global\SdjUserProfileUserControl.xaml.cs">
+    <Compile Include="deprecatedView\UserControls\Global\SdjUserProfileUserControl.xaml.cs">
       <DependentUpon>SdjUserProfileUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControls\Helpers\SdjBackgroundForForms.xaml.cs">
+    <Compile Include="deprecatedView\UserControls\Helpers\SdjBackgroundForForms.xaml.cs">
       <DependentUpon>SdjBackgroundForForms.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControls\Helpers\SdjGetImageUserControl.xaml.cs">
+    <Compile Include="deprecatedView\UserControls\Helpers\SdjGetImageUserControl.xaml.cs">
       <DependentUpon>SdjGetImageUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControls\Playlist\SdjAddPlaylistCollectionView.xaml.cs">
+    <Compile Include="deprecatedView\UserControls\Playlist\SdjAddPlaylistCollectionView.xaml.cs">
       <DependentUpon>SdjAddPlaylistCollectionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControls\Playlist\SdjAddTrackToPlaylistCollectionUserControl.xaml.cs">
+    <Compile Include="deprecatedView\UserControls\Playlist\SdjAddTrackToPlaylistCollectionUserControl.xaml.cs">
       <DependentUpon>SdjAddTrackToPlaylistCollectionUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControls\Playlist\SdjEditPlaylistCollectionView.xaml.cs">
+    <Compile Include="deprecatedView\UserControls\Playlist\SdjEditPlaylistCollectionView.xaml.cs">
       <DependentUpon>SdjEditPlaylistCollectionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControls\Playlist\SdjPlaylistUserControl.xaml.cs">
+    <Compile Include="deprecatedView\UserControls\Playlist\SdjPlaylistUserControl.xaml.cs">
       <DependentUpon>SdjPlaylistUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControls\Playlist\SdjRemovePlaylistCollectionView.xaml.cs">
+    <Compile Include="deprecatedView\UserControls\Playlist\SdjRemovePlaylistCollectionView.xaml.cs">
       <DependentUpon>SdjRemovePlaylistCollectionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControls\Playlist\SdjRenameTrackNameInPlaylist.xaml.cs">
+    <Compile Include="deprecatedView\UserControls\Playlist\SdjRenameTrackNameInPlaylist.xaml.cs">
       <DependentUpon>SdjRenameTrackNameInPlaylist.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControls\Room\SdjRoomView.xaml.cs">
+    <Compile Include="deprecatedView\UserControls\Room\SdjRoomView.xaml.cs">
       <DependentUpon>SdjRoomView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControls\Room\SdjVlcPlayer.xaml.cs">
+    <Compile Include="deprecatedView\UserControls\Room\SdjVlcPlayer.xaml.cs">
       <DependentUpon>SdjVlcPlayer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\Model\RoomSquareModel.cs" />
-    <Compile Include="View\UserControls\Helpers\SdjTitleBarForUserControls.xaml.cs">
+    <Compile Include="deprecatedViewModel\Model\RoomSquareModel.cs" />
+    <Compile Include="deprecatedView\UserControls\Helpers\SdjTitleBarForUserControls.xaml.cs">
       <DependentUpon>SdjTitleBarForUserControls.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControls\UniqueViews\SdjCreateServerUserControl.xaml.cs">
+    <Compile Include="deprecatedView\UserControls\UniqueViews\SdjCreateServerUserControl.xaml.cs">
       <DependentUpon>SdjCreateServerUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControls\UniqueViews\SdjFeedbackUserControl.xaml.cs">
+    <Compile Include="deprecatedView\UserControls\UniqueViews\SdjFeedbackUserControl.xaml.cs">
       <DependentUpon>SdjFeedbackUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControls\UniqueViews\SdjLoginUserControl.xaml.cs">
+    <Compile Include="deprecatedView\UserControls\UniqueViews\SdjLoginUserControl.xaml.cs">
       <DependentUpon>SdjLoginUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControls\UniqueViews\SdjMainUserControl.xaml.cs">
+    <Compile Include="deprecatedView\UserControls\UniqueViews\SdjMainUserControl.xaml.cs">
       <DependentUpon>SdjMainUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControls\UniqueViews\SdjRegisterUserControl.xaml.cs">
+    <Compile Include="deprecatedView\UserControls\UniqueViews\SdjRegisterUserControl.xaml.cs">
       <DependentUpon>SdjRegisterUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Views\MainWindow.cs">
+    <Compile Include="deprecatedView\Views\MainWindow.cs">
       <DependentUpon>SdjUpdaterView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Views\SdjLoggerView.xaml.cs">
+    <Compile Include="deprecatedView\Views\SdjLoggerView.xaml.cs">
       <DependentUpon>SdjLoggerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Views\SdjMainView.xaml.cs">
+    <Compile Include="deprecatedView\Views\SdjMainView.xaml.cs">
       <DependentUpon>SdjMainView.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\SubViews\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubViews\MainViewComponents\TopMenuView.xaml.cs">
+      <DependentUpon>TopMenuView.xaml</DependentUpon>
     </Compile>
     <Page Include="Themes\Buttons.xaml">
       <SubType>Designer</SubType>
@@ -314,123 +309,127 @@
     <Compile Include="Converters\NotNullToBoolConverter.cs" />
     <Compile Include="Converters\NullVisibilityConverter.cs" />
     <Compile Include="Logic\Helpers\ExceptionLogger.cs" />
-    <Page Include="View2\MainViewComponents\DraggableTopMenuComponent.xaml">
+    <Page Include="Views\ShellView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View2\MainViewComponents\LeftMenuComponent.xaml">
+    <Page Include="Views\SubViews\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View2\MainViewComponents\LeftMenuComponents\ObservedRoomComponent.xaml">
+    <Page Include="Views\SubViews\MainViewComponents\LeftMenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View2\MainViewComponents\LeftMenuComponents\RoomRectangleComponent.xaml">
+    <Page Include="Views\SubViews\MainViewComponents\LeftMenuComponents\ObservedRoomView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View2\MainViewComponents\NewsCarouselComponent.xaml">
+    <Page Include="Views\SubViews\MainViewComponents\LeftMenuComponents\RoomRectangleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View2\MainViewComponents\RoomSquareComponent.xaml">
+    <Page Include="Views\SubViews\MainViewComponents\NewsCarouselView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View2\MainViewComponents\SearchMenuComponent.xaml">
+    <Page Include="Views\SubViews\MainViewComponents\RoomSquareView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View2\SdjMainView.xaml">
+    <Page Include="Views\SubViews\MainViewComponents\SearchMenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControls\Global\SdjBottomBarUserControl.xaml">
+    <Page Include="deprecatedView\UserControls\Global\SdjBottomBarUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControls\Global\SdjLeftBarUserControl.xaml">
+    <Page Include="deprecatedView\UserControls\Global\SdjLeftBarUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControls\Global\SdjStateButtonsUserControl.xaml">
+    <Page Include="deprecatedView\UserControls\Global\SdjStateButtonsUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControls\Global\SdjUserProfileUserControl.xaml">
+    <Page Include="deprecatedView\UserControls\Global\SdjUserProfileUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControls\Helpers\SdjBackgroundForForms.xaml">
+    <Page Include="deprecatedView\UserControls\Helpers\SdjBackgroundForForms.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControls\Helpers\SdjGetImageUserControl.xaml" />
-    <Page Include="View\UserControls\Playlist\SdjAddPlaylistCollectionView.xaml">
+    <Page Include="deprecatedView\UserControls\Helpers\SdjGetImageUserControl.xaml" />
+    <Page Include="deprecatedView\UserControls\Playlist\SdjAddPlaylistCollectionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControls\Playlist\SdjAddTrackToPlaylistCollectionUserControl.xaml">
+    <Page Include="deprecatedView\UserControls\Playlist\SdjAddTrackToPlaylistCollectionUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControls\Playlist\SdjEditPlaylistCollectionView.xaml">
+    <Page Include="deprecatedView\UserControls\Playlist\SdjEditPlaylistCollectionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControls\Playlist\SdjPlaylistUserControl.xaml">
+    <Page Include="deprecatedView\UserControls\Playlist\SdjPlaylistUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControls\Playlist\SdjRemovePlaylistCollectionView.xaml">
+    <Page Include="deprecatedView\UserControls\Playlist\SdjRemovePlaylistCollectionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControls\Playlist\SdjRenameTrackNameInPlaylist.xaml">
+    <Page Include="deprecatedView\UserControls\Playlist\SdjRenameTrackNameInPlaylist.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControls\Room\SdjRoomView.xaml">
+    <Page Include="deprecatedView\UserControls\Room\SdjRoomView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControls\Room\SdjVlcPlayer.xaml">
+    <Page Include="deprecatedView\UserControls\Room\SdjVlcPlayer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControls\Helpers\SdjTitleBarForUserControls.xaml">
+    <Page Include="deprecatedView\UserControls\Helpers\SdjTitleBarForUserControls.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControls\UniqueViews\SdjCreateServerUserControl.xaml" />
-    <Page Include="View\UserControls\UniqueViews\SdjFeedbackUserControl.xaml">
+    <Page Include="deprecatedView\UserControls\UniqueViews\SdjCreateServerUserControl.xaml" />
+    <Page Include="deprecatedView\UserControls\UniqueViews\SdjFeedbackUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControls\UniqueViews\SdjLoginUserControl.xaml">
+    <Page Include="deprecatedView\UserControls\UniqueViews\SdjLoginUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControls\UniqueViews\SdjMainUserControl.xaml">
+    <Page Include="deprecatedView\UserControls\UniqueViews\SdjMainUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControls\UniqueViews\SdjRegisterUserControl.xaml">
+    <Page Include="deprecatedView\UserControls\UniqueViews\SdjRegisterUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Views\SdjLoggerView.xaml">
+    <Page Include="deprecatedView\Views\SdjLoggerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Views\SdjMainView.xaml">
+    <Page Include="deprecatedView\Views\SdjMainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Views\SdjUpdaterView.xaml">
+    <Page Include="deprecatedView\Views\SdjUpdaterView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SubViews\MainViewComponents\TopMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -571,9 +570,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="B0000013-Smart-Background-Sound-System-sq.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\1.jpg" />
     <Resource Include="Images\2.png" />
     <Resource Include="Images\3.jpg" />
@@ -596,6 +592,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\VideoLAN.LibVLC.Windows.3.0.4\build\VideoLAN.LibVLC.Windows.targets" Condition="Exists('..\packages\VideoLAN.LibVLC.Windows.3.0.4\build\VideoLAN.LibVLC.Windows.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

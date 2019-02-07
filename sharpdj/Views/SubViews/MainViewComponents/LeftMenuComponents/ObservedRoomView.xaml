@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="SharpDj.View2.MainViewComponents.LeftMenuComponents.ObservedRoomComponent"
+﻿<UserControl x:Class="SharpDj.Views.SubViews.MainViewComponents.LeftMenuComponents.ObservedRoomView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SharpDj.View2.MainViewComponents.LeftMenuComponents"
+             xmlns:local="clr-namespace:SharpDj.Views.SubViews.MainViewComponents.LeftMenuComponents"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="72" d:DesignWidth="220">
@@ -13,7 +13,7 @@
                 <VisualBrush Stretch="UniformToFill" Opacity="0.87">
                     <VisualBrush.Visual>
                         <Grid ClipToBounds="True">
-                            <Image Source="..\..\..\Images\3.jpg">
+                            <Image Source="..\..\..\..\Images\3.jpg">
                                 <Image.Effect>
                                     <BlurEffect Radius="40"/>
                                 </Image.Effect>
@@ -76,9 +76,7 @@
                         </TextBlock>
                     </StackPanel>
                 </DockPanel>
-
             </StackPanel>
         </Button>
-
     </Grid>
 </UserControl>

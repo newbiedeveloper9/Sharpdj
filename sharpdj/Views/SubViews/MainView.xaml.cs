@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SharpDj.View2.MainViewComponents
+namespace SharpDj.Views.SubViews
 {
     /// <summary>
-    /// Interaction logic for DraggableTopMenuComponent.xaml
+    /// Interaction logic for MainView.xaml
     /// </summary>
-    public partial class DraggableTopMenuComponent : UserControl
+    public partial class MainView : UserControl
     {
-        public DraggableTopMenuComponent()
+        public MainView()
         {
             InitializeComponent();
         }
