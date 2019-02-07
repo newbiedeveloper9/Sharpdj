@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Communication.Server;
 using Communication.Server.Logic;
-using Communication.Server.Logic.Commands;
 using Hik.Communication.Scs.Server;
 using servertcp.Sql;
 

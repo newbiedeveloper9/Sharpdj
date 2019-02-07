@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="SharpDj.View.UserControls.SdjRemovePlaylistCollectionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SharpDj.View.UserControls"
+             xmlns:helpers="clr-namespace:SharpDj.View.UserControls.Helpers"
+             mc:Ignorable="d" Height="135" Width="270"
+             d:DesignHeight="135" d:DesignWidth="270">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid>
+            <helpers:SdjTitleBarForUserControls/>
+        </Grid>
+        
+        <Grid Grid.Row="1" Background="{StaticResource DarkBrush}">
+            <StackPanel Background="{StaticResource DarkBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+                <Label Content="Are you sure about it?" Foreground="White" FontSize="16"/>
+                <Button Command="{Binding RemovePlaylistCommand}" Width="90" HorizontalAlignment="Center" BorderThickness="2"  BorderBrush="White" Style="{StaticResource IconButtonMouseOver}" VerticalAlignment="Center" Margin="0 5 0 0">
+                    <Label Content="Do it" Foreground="White" FontSize="18" HorizontalContentAlignment="Center"/>
+                    <Button.ToolTip>
+                        <ToolTip>
+                            You did well, Anakin
+                        </ToolTip>
+                    </Button.ToolTip>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

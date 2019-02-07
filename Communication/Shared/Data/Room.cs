@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Communication.Client;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
-namespace Communication.Shared
+namespace Communication.Shared.Data
 {
     public class Room
     {
@@ -45,7 +43,7 @@ namespace Communication.Shared
                 
             }
 
-            public InsindeInfo(List<UserClient> clients, List<Songs> djs, Room room, int timeLeft = 0)
+            public InsindeInfo(List<UserClient> clients, List<Dj> djs, Room room, int timeLeft = 0)
             {
                 _room = room;
                 Clients = clients;
@@ -53,7 +51,7 @@ namespace Communication.Shared
                 TimeLeft = timeLeft;
             }
 
-            public InsindeInfo(List<UserClient> clients, List<Songs> djs, int timeLeft = 0)
+            public InsindeInfo(List<UserClient> clients, List<Dj> djs, int timeLeft = 0)
             {
                 Clients = clients;
                 Djs = djs;
@@ -73,15 +71,15 @@ namespace Communication.Shared
                 }
             }
 
-            public List<Songs> Djs { get; set; }
+            public List<Dj> Djs { get; set; }
 
             public int TimeLeft { get; set; }
 
             public void NextDj()
             {
-                Djs[0].Video = Djs[0].Video.Skip(1).Concat(Djs[0].Video.Take(1)).ToList();
+                Djs[0].Track = Djs[0].Track.Skip(1).Concat(Djs[0].Track.Take(1)).ToList();
                 Djs = Djs.Skip(1).Concat(Djs.Take(1)).ToList();
-                TimeLeft = Djs[0].Video[0].Time;
+                TimeLeft = Djs[0].Track[0].Time;
             }
         }
     }

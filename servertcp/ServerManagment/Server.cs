@@ -19,7 +19,7 @@ namespace servertcp.ServerManagment
         public void Start()
         {
             _config = ServerConfig.LoadConfig();            
-            _receiver = new ServerReceiver();
+            _receiver = new ServerReceiver(_server);
             _server = ScsServerFactory.CreateServer(new ScsTcpEndPoint(_config.Ip, _config.Port));
 
             new ServerLogic(_receiver, _server);

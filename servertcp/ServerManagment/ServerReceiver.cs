@@ -2,18 +2,20 @@
 using System.Linq;
 using Communication.Server;
 using Communication.Server.Logic;
-using Communication.Server.Logic.Commands;
 using Hik.Communication.Scs.Server;
 using servertcp.ServerManagment.Commands;
 
 namespace servertcp.ServerManagment
 {
-    public class ServerReceiver : ServerReceiverEvents
+    public class ServerReceiver
     {
         private readonly List<ICommand> _commands;
+        private readonly IScsServer _server;
 
-        public ServerReceiver()
+        public ServerReceiver(IScsServer server)
         {
+            this._server = server;
+
             _commands = new List<ICommand>
             {
                 new LoginCommand(),
@@ -21,15 +23,16 @@ namespace servertcp.ServerManagment
                 new DisconnectCommand(),
                 new AfterLoginData(),
                 new JoinRoom(),
+                new SendMessageChatCommand(server),
+                new JoinQueueCommand(),
             };
         }
 
         public void ParseMessage(IScsServerClient client, string message, string messageId)
         {
-            var parameters = Utils.Instance.GetMessageParameters(message);
-            var command = _commands.FirstOrDefault(x => x.CommandText.Equals(parameters[0]));
-   
-            command?.Run(client, parameters, messageId);
+            var command = Communication.Shared.Commands.Instance.GetMessageCommand(message);
+            var commandClass = _commands.FirstOrDefault(x => x.CommandText.Equals(command));
+            commandClass?.Run(client, Communication.Shared.Commands.Instance.GetMessageParameters(message), messageId);
 
             /*#region Disconnect
 

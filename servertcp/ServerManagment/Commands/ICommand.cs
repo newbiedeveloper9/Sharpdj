@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Hik.Communication.Scs.Server;
 
-namespace Communication.Server.Logic.Commands
+namespace servertcp.ServerManagment.Commands
 {
     public interface ICommand
     {

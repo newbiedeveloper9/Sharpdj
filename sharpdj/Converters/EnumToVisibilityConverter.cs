@@ -1,24 +1,35 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows;
+using System.Windows.Data;
 
 namespace SharpDj.Converters
 {
     public class EnumToVisibilityConverter : MarkuExtensionConverterBase<EnumToVisibilityConverter>
     {
-        public override object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (value == null || parameter == null || !(value is Enum))
+                return Visibility.Collapsed;
 
-            if (Enum.IsDefined(value.GetType(), value) == false)
-                return DependencyProperty.UnsetValue;
+            var currentState = value.ToString();
+            var stateStrings = parameter.ToString();
+            var found = false;
 
-            var parameterValue = Enum.Parse(value.GetType(), parameter.ToString());
+            foreach (var state in stateStrings.Split(','))
+            {
+                found = (currentState == state.Trim());
 
-            return parameterValue.Equals(value) ? Visibility.Visible : Visibility.Collapsed;
+                if (found)
+                    break;
+            }
+
+            return found ? Visibility.Visible : Visibility.Collapsed;
         }
 
-        public override object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return Enum.Parse(targetType, parameter.ToString());
+            throw new NotImplementedException();
         }
     }
 }

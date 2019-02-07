@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 using Communication.Client;
 using Communication.Server;
 using Communication.Server.Logic;
-using Communication.Server.Logic.Commands;
 using Communication.Shared;
+using Communication.Shared.Data;
 using CryptSharp.Utility;
 using Hik.Collections;
 using Hik.Communication.Scs.Client;
@@ -40,42 +40,11 @@ namespace servertcp.ServerManagment
                     var image = reader["ImageUrl"].ToString();
                     var description = reader["Description"].ToString();
                     DataSingleton.Instance.Rooms[roomCount] = new Room(id, name, host, image, description);
-                    DataSingleton.Instance.Rooms[roomCount].InsideInfo = new Room.InsindeInfo(new List<UserClient>(), new List<Songs>(), DataSingleton.Instance.Rooms[roomCount]);
+                    DataSingleton.Instance.Rooms[roomCount].InsideInfo = new Room.InsindeInfo(new List<UserClient>(),
+                        new List<Dj>(), DataSingleton.Instance.Rooms[roomCount]);
                     roomCount++;
                 }
 
-            DataSingleton.Instance.Rooms[0].InsideInfo.Djs.Add(new Songs("host", new List<Songs.Song>()));
-            DataSingleton.Instance.Rooms[0].InsideInfo.Djs.Add(new Songs("test", new List<Songs.Song>()));
-
-            DataSingleton.Instance.Rooms[1].InsideInfo.Djs.Add(new Songs("host", new List<Songs.Song>()));
-            DataSingleton.Instance.Rooms[1].InsideInfo.Djs.Add(new Songs("test", new List<Songs.Song>()));
-            DataSingleton.Instance.Rooms[1].InsideInfo.Djs[0].Video.Add(new Songs.Song(10, "mj-v6zCnEaw"));
-            DataSingleton.Instance.Rooms[1].InsideInfo.Djs[0].Video.Add(new Songs.Song(5, "JSQsIMgj1OM"));
-            DataSingleton.Instance.Rooms[1].InsideInfo.Djs[1].Video.Add(new Songs.Song(5, "JSQsIMgj1OM"));
-
-
-            DataSingleton.Instance.Rooms[0].InsideInfo.Djs[0].Video.Add(new Songs.Song(10, "mj-v6zCnEaw"));
-            DataSingleton.Instance.Rooms[0].InsideInfo.Djs[0].Video.Add(new Songs.Song(5, "JSQsIMgj1OM"));
-            DataSingleton.Instance.Rooms[0].InsideInfo.Djs[1].Video.Add(new Songs.Song(3, "mj-v6zCnEaw"));
-            DataSingleton.Instance.Rooms[0].InsideInfo.Djs[1].Video.Add(new Songs.Song(2, "JSQsIMgj1OM"));
-            DataSingleton.Instance.Rooms[0].InsideInfo.Djs[1].Video.Add(new Songs.Song(3, "JSQsIMgj1OM"));
-            DataSingleton.Instance.Rooms[0].InsideInfo.TimeLeft = DataSingleton.Instance.Rooms[0].InsideInfo.Djs[0].Video[0].Time;
-
-            SetEvents(receiver);
-        }
-
-        private void SetEvents(ServerReceiver receiver)
-        {
-            receiver.ChangePassword += Receiver_ChangePassword;
-            receiver.ChangeUsername += Receiver_ChangeUsername;
-            receiver.ChangeRank += Receiver_ChangeRank;
-            receiver.ChangeLogin += Receiver_ChangeLogin;
-            receiver.GetPeople += Receiver_GetPeople;
-            receiver.JoinRoom += Receiver_JoinRoom;
-            receiver.CreateRoom += Receiver_CreateRoom;
-            receiver.AfterLogin += Receiver_AfterLogin;
-            receiver.JoinQueue += Receiver_JoinQueue;
-            
             PeriodicTask.StartNew(1000, TrackRefresh);
         }
 
@@ -85,11 +54,19 @@ namespace servertcp.ServerManagment
             {
                 if (room.InsideInfo.Djs.Count == 0) continue;
                 room.InsideInfo.TimeLeft--;
-                
+
                 if (room.InsideInfo.TimeLeft <= 0)
                 {
                     room.InsideInfo.NextDj();
-                    Console.WriteLine(room.InsideInfo.Djs[0].Video[0].Id + " new " + room.InsideInfo.TimeLeft);
+                    foreach (var user in room.InsideInfo.Clients)
+                    {
+                        var client = new ServerSender(DataSingleton.Instance.ServerClients.GetAllItems()
+                            .First(x => x.Id.Equals(user.Id)).Client);
+                        
+                        client.ChangeTrack(room.InsideInfo.Djs[0], room.Id.ToString());
+                    }
+
+                    Console.WriteLine(room.InsideInfo.Djs[0].Track[0].Id + " new " + room.InsideInfo.TimeLeft);
                 }
             }
         }
@@ -100,7 +77,7 @@ namespace servertcp.ServerManagment
         }
 
 
-        private void Receiver_JoinQueue(object sender, ServerReceiverEvents.JoinQueueEventArgs e)
+/*        private void Receiver_JoinQueue(object sender, ServerReceiverEvents.JoinQueueEventArgs e)
         {
             Task.Factory.StartNew(() =>
             {
@@ -267,7 +244,7 @@ namespace servertcp.ServerManagment
                        ServerSender.Error.ChangeUsernameError(client.Client);
                }
                else
-                   ServerSender.Error.ChangeUsernameError(client.Client);*/
+                   ServerSender.Error.ChangeUsernameError(client.Client);#1#
         }
 
         private void Receiver_ChangePassword(object sender, ServerReceiverEvents.ChangePasswordEventArgs e)
@@ -305,7 +282,7 @@ namespace servertcp.ServerManagment
                        ServerSender.Error.ChangePasswordError(client.Client);
                }
                else
-                   ServerSender.Error.ChangePasswordError(client.Client);*/
+                   ServerSender.Error.ChangePasswordError(client.Client);#1#
         }
 
         private void Receiver_Disconnect(object sender, ServerReceiverEvents.DisconnectEventArgs e)
@@ -327,7 +304,6 @@ namespace servertcp.ServerManagment
 
             DataSingleton.Instance.ServerClients.Remove(e.Client.ClientId);
             Console.WriteLine("{0} disconnected", client.Username);
-        }
-
+        }*/
     }
 }

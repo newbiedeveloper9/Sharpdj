@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Communication.Server;
 using Communication.Server.Logic;
-using Communication.Server.Logic.Commands;
 using Hik.Communication.Scs.Server;
 using servertcp.Sql;
 
@@ -16,9 +15,9 @@ namespace servertcp.ServerManagment.Commands
         {
             var sender = new ServerSender(client);
             
-            var login = parameters[1];
-            var password = parameters[2];
-            var email = parameters[3];       
+            var login = parameters[0];
+            var password = parameters[1];
+            var email = parameters[2];       
 
             try
             {
