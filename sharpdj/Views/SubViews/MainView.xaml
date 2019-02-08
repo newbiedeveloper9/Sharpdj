@@ -3,8 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mainViewComponents="clr-namespace:SharpDj.Views.SubViews.MainViewComponents"
         Background="#171717" 
-        Height="720" Width="1300" DataContext="{Binding MainViewModel}">
+        xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:subViews="clr-namespace:SharpDj.ViewModels.SubViews"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" 
+        cal:Bind.AtDesignTime="True"
+        d:DataContext="{d:DesignInstance Type=subViews:MainViewModel, IsDesignTimeCreatable=True}"
+        Height="728" Width="1300">
     <Grid >
+
         <Grid.RowDefinitions>
             <RowDefinition Height="24" />
             <RowDefinition Height="50" />
@@ -13,7 +21,7 @@
 
         <!--DragAndDropMenu-->
         <Grid Grid.Row="0" Grid.ColumnSpan="2">
-            <mainViewComponents:TopMenuView x:Name="TopMenuViewModel" DataContext="{Binding TopMenuViewModel}"/>
+            <mainViewComponents:TopMenuView cal:View.Model="{Binding Path=TopMenuViewModel}"/>
         </Grid>
 
         <!--SearchMenu-->
@@ -31,7 +39,7 @@
 
             <!--LeftMenu-->
             <Grid Background="#1C1C1C">
-                <mainViewComponents:LeftMenuView/>
+                <mainViewComponents:LeftMenuView cal:View.Model="{Binding Path=LeftMenuViewModel}"/>
             </Grid>
 
 

@@ -8,9 +8,18 @@
         ResizeMode="CanResizeWithGrip"
         AllowsTransparency="True"
         WindowStyle="None"
+        UseLayoutRounding="True"
         WindowStartupLocation="CenterScreen"
+        xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:viewModels="clr-namespace:SharpDj.ViewModels"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        mc:Ignorable="d"
+        cal:Bind.AtDesignTime="True"
+        d:DataContext="{d:DesignInstance Type=viewModels:ShellViewModel, IsDesignTimeCreatable=True}"
         Title="ShellView" Height="720" Width="1300">
     <Grid>
-        <subViews:MainView DataContext="{Binding MainViewModel}"/>
+        <subViews:MainView cal:View.Model="{Binding Path=MainViewModel}"/>
     </Grid>
 </Window>

@@ -141,6 +141,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppBootstrapper.cs" />
+    <Compile Include="Converters\ActivityStatusToColorConverter.cs" />
     <Compile Include="Converters\NameToContentConverter.cs" />
     <Compile Include="Core\BaseViewModel.cs" />
     <Compile Include="Core\Extensions\CommandBase.cs" />
@@ -179,6 +180,11 @@
     <Compile Include="Logic\Helpers\Updater\FTPModel.cs" />
     <Compile Include="Logic\Helpers\Updater\GetSourcePage.cs" />
     <Compile Include="Logic\Helpers\YoutubeSingleton.cs" />
+    <Compile Include="Models\PlaylistModel.cs" />
+    <Compile Include="Models\RoomModel.cs" />
+    <Compile Include="ViewModels\SubViews\MainViewComponents\LeftMenuComponents\ObservedRoomViewModel.cs" />
+    <Compile Include="ViewModels\SubViews\MainViewComponents\LeftMenuComponents\RoomRectangleViewModel.cs" />
+    <Compile Include="ViewModels\SubViews\MainViewComponents\LeftMenuViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\TopMenuViewModel.cs" />
@@ -280,6 +286,12 @@
     <Compile Include="Views\SubViews\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SubViews\MainViewComponents\LeftMenuComponents\ObservedRoomView.xaml.cs">
+      <DependentUpon>ObservedRoomView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubViews\MainViewComponents\LeftMenuComponents\RoomRectangleView.xaml.cs">
+      <DependentUpon>RoomRectangleView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SubViews\MainViewComponents\TopMenuView.xaml.cs">
       <DependentUpon>TopMenuView.xaml</DependentUpon>
     </Compile>
@@ -317,15 +329,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SubViews\MainViewComponents\LeftMenuView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\SubViews\MainViewComponents\LeftMenuComponents\ObservedRoomView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SubViews\MainViewComponents\LeftMenuComponents\RoomRectangleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SubViews\MainViewComponents\LeftMenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

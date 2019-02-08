@@ -3,35 +3,44 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SharpDj.Views.SubViews.MainViewComponents.LeftMenuComponents"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:leftMenuComponents="clr-namespace:SharpDj.ViewModels.SubViews.MainViewComponents.LeftMenuComponents"
+             xmlns:converters="clr-namespace:SharpDj.Converters"
              mc:Ignorable="d" 
+             cal:Bind.AtDesignTime="True"
+             d:DataContext="{d:DesignInstance Type=leftMenuComponents:RoomRectangleViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="36" d:DesignWidth="220">
-    <Grid Margin="0 0 0 0">
-        <Button Style="{StaticResource MaterialDesignFlatButton}">
-            <Grid >
-                <StackPanel Width="186" Orientation="Horizontal">
-                    <Ellipse Width="24" Height="24">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="../../../../Images/1.jpg" />
-                        </Ellipse.Fill>
-                    </Ellipse>
-                    <TextBlock Margin="12 0 0 0" Width="120" TextTrimming="CharacterEllipsis"  Foreground="White"
-                               VerticalAlignment="Center" Text="testxd xd xd xc xd xd xd x" FontWeight="Light"/>
+    <StackPanel Orientation="Vertical" Margin="0 0 0 0">
+        <ItemsControl x:Name="ActiveRoomCollection">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Style="{StaticResource MaterialDesignFlatButton}">
+                        <Grid >
+                            <StackPanel Width="186" Orientation="Horizontal">
+                                <Ellipse Width="24" Height="24">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="{Binding ImageSource}"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <TextBlock Margin="12 0 0 0" Width="120" TextTrimming="CharacterEllipsis"  Foreground="White"
+                               VerticalAlignment="Center" Text="{Binding Name}" FontWeight="Light"/>
 
-                    <Canvas Background="LightGray"  VerticalAlignment="Center"
-                            HorizontalAlignment="Center">
-                        <Ellipse  
-                            Width="8" 
-                            Height="8"
-                            Canvas.Top="-4"  
-                            Canvas.Left="0"  
-                            Margin="20 0 0 0" 
-                            Fill="LawnGreen"
-                            StrokeThickness="0"/>
-                        <!--{Binding ActiveRoomStateBrush}-->
-                    </Canvas>
-                </StackPanel>
-            </Grid>
-        </Button>
-    </Grid>
+                                <Canvas Background="LightGray"  VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                                    <Ellipse  
+                                        Width="8" 
+                                        Height="8"
+                                        Canvas.Top="-4"  
+                                        Canvas.Left="0"  
+                                        Margin="20 0 0 0" 
+                                        Fill="{Binding Status, Converter={converters:ActivityStatusToColorConverter}}"
+                                    StrokeThickness="0"/>
+                                </Canvas>
+                            </StackPanel>
+                        </Grid>
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </StackPanel>
 </UserControl>

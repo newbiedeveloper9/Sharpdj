@@ -1,49 +1,42 @@
 ﻿<UserControl x:Class="SharpDj.Views.SubViews.MainViewComponents.TopMenuView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:subViews="clr-namespace:SharpDj.ViewModels.SubViews"
+             xmlns:mainViewComponents="clr-namespace:SharpDj.ViewModels.SubViews.MainViewComponents"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:sharpDj="clr-namespace:SharpDj"
              mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=mainViewComponents:TopMenuViewModel, IsDesignTimeCreatable=True}"
+             cal:Bind.AtDesignTime="True"
              d:DesignHeight="24" d:DesignWidth="1000">
+
     <Grid Background="#171717">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <!--<Grid Grid.Column="0">
-            ~1~<i:Interaction.Triggers>
-                <i:EventTrigger EventName="Click">
-                    <cal:ActionMessage MethodName="SayHello" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>@1@
-            ~1~<i:Interaction.Triggers>
-                <i:EventTrigger EventName="MouseLeftButtonDown">
-                    <i:InvokeCommandAction Command="{Binding DragWindow}" />
-                </i:EventTrigger>
-                <i:EventTrigger EventName="MouseDoubleClick">
-                    <i:InvokeCommandAction Command="{Binding MaximizeWindow}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>@1@
-        </Grid>-->
-
         <!--Close, Minimize, Max-->
         <Grid HorizontalAlignment="Center" Grid.ColumnSpan="3">
             <Image Source="../../../Images/sdj.png" Margin="0 0 0 0"/>
-            <Label Content="{Binding}"/>
         </Grid>
 
         <StackPanel Grid.Column="1" Orientation="Horizontal">
-            <Button Background="Transparent" BorderThickness="0">
+            <Button Background="Transparent" BorderThickness="0" x:Name="MinimizeApplication">
                 <materialDesign:PackIcon Kind="WindowMinimize" />
             </Button>
-            <Button Background="Transparent" BorderThickness="0" VerticalAlignment="Center">
+            <Button Background="Transparent" BorderThickness="0" VerticalAlignment="Center" x:Name="MaximizeApplication">
                 <materialDesign:PackIcon Kind="WindowMaximize" />
             </Button>
-            <Button Background="Transparent" BorderThickness="0" VerticalAlignment="Center">
+            <Button Background="Transparent" BorderThickness="0" VerticalAlignment="Center" x:Name="CloseApplication">
                 <materialDesign:PackIcon Kind="WindowClose" />
             </Button>
         </StackPanel>
+
+        <Grid cal:Message.Attach="[Event MouseLeftButtonDown]=[Action DragWindow]" Background="Transparent"/>
     </Grid>
 </UserControl>
