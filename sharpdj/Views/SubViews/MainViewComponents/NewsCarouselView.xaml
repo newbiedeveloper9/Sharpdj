@@ -3,9 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SharpDj.Views.SubViews.MainViewComponents"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:mainViewComponents="clr-namespace:SharpDj.ViewModels.SubViews.MainViewComponents"
              mc:Ignorable="d" 
+             cal:Bind.AtDesignTime="True"
+             d:DataContext="{d:DesignInstance Type=mainViewComponents:NewsCarouselViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="350" d:DesignWidth="1100">
     <Grid Background="#171717">
         <StackPanel HorizontalAlignment="Center">
@@ -14,15 +17,14 @@
             <StackPanel Orientation="Horizontal" Margin="0 0 28 0">
                 <materialDesign:Card  materialDesign:ShadowAssist.ShadowDepth="Depth4">
                     <StackPanel>
-                        <Grid Height="240" Width="724"
-                                          HorizontalAlignment="Left">
-
+                        <Grid Height="240" Width="724" Cursor="Hand"
+                        HorizontalAlignment="Left">
                             <!--Blured Image-->
                             <Grid.Background>
                                 <VisualBrush Stretch="UniformToFill">
                                     <VisualBrush.Visual>
                                         <Grid ClipToBounds="True">
-                                            <Image Source="..\..\..\Images\1.jpg">
+                                            <Image Source="{Binding PrimaryNews.ImageSource}">
                                                 <Image.Effect>
                                                     <BlurEffect Radius="11"/>
                                                 </Image.Effect>
@@ -55,8 +57,8 @@
 
                                 <!--News of the day TEXT-->
                                 <StackPanel Margin="24 12 12 12">
-                                    <TextBlock Text="JeffDiggins room - jakis tekst by wypelnic luke" FontWeight="Regular" FontSize="20" TextTrimming="WordEllipsis"/>
-                                    <TextBlock Text="Grab these champions on sale for 75% off for a limited time." FontWeight="Light" FontSize="16" TextTrimming="WordEllipsis"/>
+                                    <TextBlock Text="{Binding PrimaryNews.Title}" FontWeight="Regular" FontSize="20" TextTrimming="WordEllipsis"/>
+                                    <TextBlock  Text="{Binding PrimaryNews.Description}"  FontWeight="Light" FontSize="16" TextTrimming="WordEllipsis"/>
                                 </StackPanel>
                             </Grid>
                         </Grid>
@@ -64,16 +66,17 @@
                 </materialDesign:Card>
 
                 <StackPanel Margin="24 0 0 0">
-                    <materialDesign:Card Margin="0 0 0 12"  materialDesign:ShadowAssist.ShadowDepth="Depth3">
-                        <Grid Background="Black" Height="114" Width="248" >
-                            <Image Source="../../../Images/2.png" Stretch="Fill"/>
-                        </Grid>
-                    </materialDesign:Card>
-                    <materialDesign:Card  materialDesign:ShadowAssist.ShadowDepth="Depth3">
-                        <Grid Background="Black" Height="114" Width="248" >
-                            <Image Source="../../../Images/1.jpg" Stretch="Fill"/>
-                        </Grid>
-                    </materialDesign:Card>
+                    <ItemsControl x:Name="NewsCollection">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <materialDesign:Card Margin="0 0 0 12"  materialDesign:ShadowAssist.ShadowDepth="Depth3" Cursor="Hand">
+                                    <Grid Background="Black" Height="114" Width="248" >
+                                        <Image Source="{Binding ImageSource}" Stretch="Fill"/>
+                                    </Grid>
+                                </materialDesign:Card>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

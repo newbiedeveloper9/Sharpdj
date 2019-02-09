@@ -19,7 +19,6 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
         public void MinimizeApplication()
         {
             if (Current.MainWindow == null) return;
-
             Current.MainWindow.WindowState = WindowState.Minimized;
         }
 

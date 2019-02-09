@@ -60,7 +60,7 @@
                                                 <Button Style="{StaticResource IconButtonMouseOver}" Command="{Binding SetRoomAsFavoriteCommand}" BorderThickness="0">
                                                     <Grid>
                                                         <Image Source="../../../Images/Rooms/favorite.png" Width="16" Height="16" VerticalAlignment="Center"  
-                                                               Visibility="{Binding IsFavorite, Converter={converter:NotBoolToVisibilityConverter}}"/>
+                                                               Visibility="{Binding IsFavorite, Converter={converter:BoolVisibilityConverter}, ConverterParameter=true}"/>
                                                         <Image Source="../../../Images/Rooms/favorite_full.png" Width="16" Height="16" VerticalAlignment="Center"  
                                                                Visibility="{Binding IsFavorite, Converter={converter:BoolVisibilityConverter}}"/>
                                                     </Grid>

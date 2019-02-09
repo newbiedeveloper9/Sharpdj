@@ -15,12 +15,12 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid Visibility="{Binding IsMaximized, Converter={converters:NotBoolToVisibilityConverter}}">
+        <Grid Visibility="{Binding IsMaximized, Converter={converters:BoolVisibilityConverter}, ConverterParameter=true}">
             <helpers:SdjTitleBarForUserControls>
                 <!--SdjUserProfileViewModel-->
                 <Button Style="{StaticResource IconButton}" Command="{Binding SdjMainViewModel.SdjUserProfileViewModel.MaximizeProfile}">
                     <!-- Style="{StaticResource IconButton}"-->
-                    <Image Source="../../../Titlebar/maximize_24.png" Height="24" Width="40"/>
+                    <Image Source="../../../Images/Titlebar/maximize_24.png" Height="24" Width="40"/>
                 </Button>
             </helpers:SdjTitleBarForUserControls>
         </Grid>

@@ -36,7 +36,7 @@
             <ItemsControl ItemsSource="{Binding MyVlcPlayer}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <ContentControl Content="{Binding VlcPlayer,Converter={StaticResource NameToContentConverter}}" />
+                        <ContentControl Content="{Binding VlcPlayer,Converter={converters:NameToContentConverter}}" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
@@ -157,7 +157,7 @@
                 </StackPanel>
             </Button>
             <Button Style="{StaticResource IconButtonMouseOverMid}" Margin="5" Command="{Binding JoinQueueCommand}"
-                    Visibility="{Binding InQueue, Converter={converters:NotBoolToVisibilityConverter}}">
+                    Visibility="{Binding InQueue, Converter={converters:BoolVisibilityConverter}, ConverterParameter=true}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../../../Images/Room/003-playlist-1.png" Width="32" Height="32"
                            HorizontalAlignment="Center" VerticalAlignment="Center" />

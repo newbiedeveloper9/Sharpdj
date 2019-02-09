@@ -55,7 +55,7 @@
              Visibility="{Binding IsVisible, Converter={converters:BoolVisibilityConverter}}">
             <helpers:SdjBackgroundForForms />
             <local:SdjUserProfileUserControl Width="600" Height="520"
-                                             Visibility="{Binding IsMaximized, Converter={converters:NotBoolToVisibilityConverter}}" />
+                                             Visibility="{Binding IsMaximized, Converter={converters:BoolVisibilityConverter}, ConverterParameter=true}" />
             <local:SdjUserProfileUserControl
                 Visibility="{Binding IsMaximized, Converter={converters:BoolVisibilityConverter}}" />
         </Grid>

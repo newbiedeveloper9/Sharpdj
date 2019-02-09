@@ -9,8 +9,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" 
         cal:Bind.AtDesignTime="True"
-        d:DataContext="{d:DesignInstance Type=subViews:MainViewModel, IsDesignTimeCreatable=True}"
-        Height="728" Width="1300">
+        d:DataContext="{d:DesignInstance Type=subViews:MainViewModel, IsDesignTimeCreatable=True}" d:DesignWidth="1300" d:DesignHeight="728">
     <Grid >
 
         <Grid.RowDefinitions>
@@ -46,7 +45,7 @@
             <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Grid.ColumnSpan="2">
                 <!--Padding24-->
                 <StackPanel Margin="24 24 0 0" >
-                    <mainViewComponents:NewsCarouselView/>
+                    <mainViewComponents:NewsCarouselView cal:Bind.Model="{Binding Path=NewsCarouselViewModel}"/>
 
                     <StackPanel HorizontalAlignment="Center">
                         <!--Categories-->
@@ -58,9 +57,7 @@
                         </StackPanel>
 
                         <WrapPanel  Margin="0 24 0 0">
-                            <mainViewComponents:RoomSquareView/>
-                            <mainViewComponents:RoomSquareView/>
-                            <mainViewComponents:RoomSquareView/>
+                            <mainViewComponents:RoomSquareView cal:Bind.Model="{Binding Path=RoomSquareViewModel}"/>
                         </WrapPanel>
                     </StackPanel>
                     <!--Rooms-->

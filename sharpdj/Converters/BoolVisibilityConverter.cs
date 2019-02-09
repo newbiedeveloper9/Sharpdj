@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using MaterialDesignThemes.Wpf.Converters;
 
 namespace SharpDj.Converters
 {
@@ -8,7 +9,11 @@ namespace SharpDj.Converters
 
         public override object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            return value is bool && (bool)value ? Visibility.Visible : Visibility.Collapsed;
+            if (!(value is bool booleanVal))
+                throw new ArgumentException();
+
+            var negate = (parameter is bool b && b);
+            return (booleanVal != negate) ? Visibility.Visible : Visibility.Collapsed; //xor
         }
 
         public override object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

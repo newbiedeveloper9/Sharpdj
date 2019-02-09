@@ -142,6 +142,8 @@
     </ApplicationDefinition>
     <Compile Include="AppBootstrapper.cs" />
     <Compile Include="Converters\ActivityStatusToColorConverter.cs" />
+    <Compile Include="Converters\BoolVisibilityConverter.cs" />
+    <Compile Include="Converters\EnumToVisibilityConverter.cs" />
     <Compile Include="Converters\NameToContentConverter.cs" />
     <Compile Include="Core\BaseViewModel.cs" />
     <Compile Include="Core\Extensions\CommandBase.cs" />
@@ -180,11 +182,14 @@
     <Compile Include="Logic\Helpers\Updater\FTPModel.cs" />
     <Compile Include="Logic\Helpers\Updater\GetSourcePage.cs" />
     <Compile Include="Logic\Helpers\YoutubeSingleton.cs" />
+    <Compile Include="Models\NewsModel.cs" />
     <Compile Include="Models\PlaylistModel.cs" />
     <Compile Include="Models\RoomModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\LeftMenuComponents\ObservedRoomViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\LeftMenuComponents\RoomRectangleViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\LeftMenuViewModel.cs" />
+    <Compile Include="ViewModels\SubViews\MainViewComponents\NewsCarouselViewModel.cs" />
+    <Compile Include="ViewModels\SubViews\MainViewComponents\RoomSquareViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\TopMenuViewModel.cs" />
@@ -292,6 +297,12 @@
     <Compile Include="Views\SubViews\MainViewComponents\LeftMenuComponents\RoomRectangleView.xaml.cs">
       <DependentUpon>RoomRectangleView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SubViews\MainViewComponents\NewsCarouselView.xaml.cs">
+      <DependentUpon>NewsCarouselView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubViews\MainViewComponents\RoomSquareView.xaml.cs">
+      <DependentUpon>RoomSquareView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SubViews\MainViewComponents\TopMenuView.xaml.cs">
       <DependentUpon>TopMenuView.xaml</DependentUpon>
     </Compile>
@@ -312,14 +323,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Converters\BoolToStatusConverter.cs" />
-    <Compile Include="Converters\BoolVisibilityConverter.cs" />
-    <Compile Include="Converters\EnumToBoolConverter.cs" />
-    <Compile Include="Converters\EnumToVisibilityConverter.cs" />
     <Compile Include="Converters\MarkuExtensionConverterBase.cs" />
-    <Compile Include="Converters\NotBoolToVisibilityConverter.cs" />
-    <Compile Include="Converters\NotNullToBoolConverter.cs" />
-    <Compile Include="Converters\NullVisibilityConverter.cs" />
     <Compile Include="Logic\Helpers\ExceptionLogger.cs" />
     <Page Include="Views\ShellView.xaml">
       <SubType>Designer</SubType>

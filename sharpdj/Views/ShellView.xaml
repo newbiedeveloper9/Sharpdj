@@ -18,7 +18,7 @@
         mc:Ignorable="d"
         cal:Bind.AtDesignTime="True"
         d:DataContext="{d:DesignInstance Type=viewModels:ShellViewModel, IsDesignTimeCreatable=True}"
-        Title="ShellView" Height="720" Width="1300">
+        Title="ShellView" Height="720" Width="1366" MinWidth="1025">
     <Grid>
         <subViews:MainView cal:View.Model="{Binding Path=MainViewModel}"/>
     </Grid>

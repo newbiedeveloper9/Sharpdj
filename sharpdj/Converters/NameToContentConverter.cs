@@ -5,9 +5,9 @@ using System.Windows.Data;
 
 namespace SharpDj.Converters
 {
-    public class NameToContentConverter : IValueConverter
+    public class NameToContentConverter : MarkuExtensionConverterBase<NameToContentConverter>
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null) return string.Empty;
 
@@ -15,9 +15,9 @@ namespace SharpDj.Converters
             return Activator.CreateInstance(userControl);
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
-    }
+    }   
 }
