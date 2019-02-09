@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>SharpDj</RootNamespace>
     <AssemblyName>SharpDj</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -156,6 +156,7 @@
     <Compile Include="Enums\Menu\MainView.cs" />
     <Compile Include="Enums\Playlist\Playlist.cs" />
     <Compile Include="Enums\Playlist\PlaylistMode.cs" />
+    <Compile Include="Enums\SideNewsVisibilityEnum.cs" />
     <Compile Include="Enums\User\UserProfile.cs" />
     <Compile Include="Enums\Playlist\PlaylistState.cs" />
     <Compile Include="Enums\User\UserState.cs" />

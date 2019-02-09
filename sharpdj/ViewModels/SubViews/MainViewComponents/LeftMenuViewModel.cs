@@ -9,7 +9,7 @@ using SharpDj.ViewModels.SubViews.MainViewComponents.LeftMenuComponents;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents
 {
-    public class LeftMenuViewModel : PropertyChangedBase
+    public class LeftMenuViewModel
     {
         public LeftMenuViewModel()
         {
@@ -19,8 +19,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
                 new PlaylistModel("Nowa playlista Criseya", true),
                 new PlaylistModel("XD"),
             };
-        
-        }
+                }
      
         public BindableCollection<PlaylistModel> PlaylistCollection { get; private set; }
         public RoomRectangleViewModel RoomRectangleViewModel { get; set; } = new RoomRectangleViewModel();

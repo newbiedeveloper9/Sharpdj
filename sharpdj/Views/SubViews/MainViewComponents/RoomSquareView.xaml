@@ -4,12 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
              xmlns:mainViewComponents="clr-namespace:SharpDj.ViewModels.SubViews.MainViewComponents"
              mc:Ignorable="d" 
              cal:Bind.AtDesignTime="True"
              d:DataContext="{d:DesignInstance Type=mainViewComponents:RoomSquareViewModel, IsDesignTimeCreatable=True}"
-             d:DesignHeight="220" d:DesignWidth="520">
+             d:DesignHeight="235" d:DesignWidth="520">
         <ItemsControl x:Name="RoomInstancesCollection">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -18,7 +18,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <materialDesign:Card Margin="0 0 24 24" Width="486"  materialDesign:ShadowAssist.ShadowDepth="Depth3">
+                    <materialDesign:Card Margin="0 0 24 24" Width="488"  materialDesign:ShadowAssist.ShadowDepth="Depth3">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="88" />
@@ -99,12 +99,12 @@
                                         <TextBlock Text="Previous track" Margin="0 0 0 24" FontSize="13"  Opacity="0.7"
                                                        HorizontalAlignment="Right" />
                                     </StackPanel>
-                                    <StackPanel Margin="12 12 0 0">
-                                        <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left" Opacity="0.7"
+                                    <StackPanel Margin="12 12 24 0">
+                                        <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left" Opacity="0.7" TextTrimming="CharacterEllipsis"
                                                        Text="{Binding NextTrack.Name}" />
-                                        <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left"  Opacity="0.7"
+                                    <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left"  Opacity="0.7" TextTrimming="CharacterEllipsis"
                                                        Text="{Binding CurrentTrack.Name}" />
-                                        <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left"  Opacity="0.7"
+                                    <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left"  Opacity="0.7" TextTrimming="CharacterEllipsis"
                                                        Text="{Binding PreviousTrack.Name}" />
                                     </StackPanel>
                                 </DockPanel>

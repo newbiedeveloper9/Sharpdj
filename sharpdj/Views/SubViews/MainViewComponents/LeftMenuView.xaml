@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:mainViewComponents="clr-namespace:SharpDj.ViewModels.SubViews.MainViewComponents"
-             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
              xmlns:leftMenuComponents="clr-namespace:SharpDj.Views.SubViews.MainViewComponents.LeftMenuComponents"
              mc:Ignorable="d" 
              cal:Bind.AtDesignTime="True"

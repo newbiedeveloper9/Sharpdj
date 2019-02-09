@@ -1,22 +1,117 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Caliburn.Micro;
 
 namespace SharpDj.Models
 {
-    public class RoomModel
+    public class RoomModel : PropertyChangedBase
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string ImageSource { get; set; }
-        public Activity Status { get; set; }
-        public int AmountOfPeople { get; set; }
-        public int AmountOfAdministration { get; set; }
-        public Track NextTrack { get; set; }
-        public Track CurrentTrack { get; set; }
-        public Track PreviousTrack { get; set; }
+        private int _id;
+        public int Id
+        {
+            get => _id;
+            set
+            {
+                if (_id == value) return;
+                _id = value;
+                NotifyOfPropertyChange(() => Id);
+            }
+        }
+
+        private string _name;
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                if (_name == value) return;
+                _name = value;
+                NotifyOfPropertyChange(() => Name);
+            }
+        }
+
+        private string _imageSource;
+        public string ImageSource
+        {
+            get => _imageSource;
+            set
+            {
+                if (_imageSource == value) return;
+                _imageSource = value;
+                NotifyOfPropertyChange(() => ImageSource);
+            }
+        }
+
+        private Activity _status;
+        public Activity Status
+        {
+            get => _status;
+            set
+            {
+                if (_status == value) return;
+                _status = value;
+                NotifyOfPropertyChange(() => Status);
+            }
+        }
+
+
+        private int _amountOfPeople;
+        public int AmountOfPeople
+        {
+            get => _amountOfPeople;
+            set
+            {
+                if (_amountOfPeople == value) return;
+                _amountOfPeople = value;
+                NotifyOfPropertyChange(() => AmountOfPeople);
+            }
+        }
+
+        private int _amountOfAdministration;
+        public int AmountOfAdministration
+        {
+            get => _amountOfAdministration;
+            set
+            {
+                if (_amountOfAdministration == value) return;
+                _amountOfAdministration = value;
+                NotifyOfPropertyChange(() => AmountOfAdministration);
+            }
+        }
+
+        private Track _previousTrack;
+        public Track PreviousTrack
+        {
+            get => _previousTrack;
+            set
+            {
+                if (_previousTrack == value) return;
+                _previousTrack = value;
+                NotifyOfPropertyChange(() => PreviousTrack);
+            }
+        }
+
+        private Track _currentTrack;
+        public Track CurrentTrack
+        {
+            get => _currentTrack;
+            set
+            {
+                if (_currentTrack == value) return;
+                _currentTrack = value;
+                NotifyOfPropertyChange(() => CurrentTrack);
+            }
+        }
+
+        private Track _nextTrack;
+        public Track NextTrack
+        {
+            get => _nextTrack;
+            set
+            {
+                if (_nextTrack == value) return;
+                _nextTrack = value;
+                NotifyOfPropertyChange(() => NextTrack);
+            }
+        }
 
         public enum Activity
         {
@@ -25,10 +120,31 @@ namespace SharpDj.Models
             InActive
         }
 
-        public class Track
+        public class Track : PropertyChangedBase
         {
-            public string Id { get; set; }
-            public string Name { get; set; }
+            private int _id;
+            public int Id
+            {
+                get => _id;
+                set
+                {
+                    if (_id == value) return;
+                    _id = value;
+                    NotifyOfPropertyChange(() => Id);
+                }
+            }
+
+            private string _name;
+            public string Name
+            {
+                get => _name;
+                set
+                {
+                    if (_name == value) return;
+                    _name = value;
+                    NotifyOfPropertyChange(() => Name);
+                }
+            }
         }
     }
 }

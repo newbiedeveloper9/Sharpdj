@@ -1,24 +1,23 @@
-﻿using Caliburn.Micro;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Caliburn.Micro;
+using SharpDj.Enums;
 using SharpDj.Models;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents
 {
-    public class NewsCarouselViewModel : PropertyChangedBase
+    public class NewsCarouselViewModel : Screen
     {
-        public NewsModel PrimaryNews { get; private set; }
+        public NewsModel PrimaryNews { get; set; } = new NewsModel();
         public BindableCollection<NewsModel> NewsCollection { get; private set; }
 
         public NewsCarouselViewModel()
         {
-            var dicPic =
-                "https://scontent-waw1-1.xx.fbcdn.net/v/t1.0-9/48381819_1430635463734644_3734049519239692288_n.jpg?_nc_cat=108&_nc_ht=scontent-waw1-1.xx&oh=78baa8d9ec33c2277aeaae214ab21f3a&oe=5CF5C8DD";
+            PrimaryNews.Description = "xd";
+            PrimaryNews.Title = "123";
 
-            PrimaryNews = new NewsModel
-            {
-                Title = "Jakub Maciejewski to fajny kolega",
-                Description = "Wyszło tak, a nie inaczej. Komentował dla was Adam Skóra",
-                ImageSource = dicPic
-            };
+            var dicPic = @"..\..\..\Images\1.jpg";
 
             NewsCollection = new BindableCollection<NewsModel>()
             {
@@ -27,6 +26,31 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
             };
         }
 
+        private void WindowResize(object sender, System.Windows.SizeChangedEventArgs e)
+        {
+            //724 Primary +24left margin
+            //248 Side + 24left margin + 24 right
+            //220 left
+            //20 shadow
+            SideNewsVisibility = App.Current.MainWindow.ActualWidth > 1284 ?  SideNewsVisibilityEnum.Right : SideNewsVisibilityEnum.Bottom;
+        }
 
+        protected override void OnViewLoaded(object view)
+        {
+            base.OnViewLoaded(view);
+            App.Current.MainWindow.SizeChanged += WindowResize;
+        }
+
+        private SideNewsVisibilityEnum _sideNewsVisibility;
+        public SideNewsVisibilityEnum SideNewsVisibility
+        {
+            get => _sideNewsVisibility;
+            set
+            {
+                if (_sideNewsVisibility == value) return;
+                _sideNewsVisibility = value;
+                NotifyOfPropertyChange(() => SideNewsVisibility);
+            }
+        }
     }
 }

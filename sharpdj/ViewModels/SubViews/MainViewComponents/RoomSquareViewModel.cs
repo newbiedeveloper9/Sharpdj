@@ -1,18 +1,25 @@
-﻿using Caliburn.Micro;
+﻿using System;
+using Caliburn.Micro;
 using SharpDj.Models;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents
 {
-    public class RoomSquareViewModel : PropertyChangedBase
+    public class RoomSquareViewModel : Screen
     {
         public BindableCollection<RoomModel> RoomInstancesCollection { get; private set; }
 
         public RoomSquareViewModel()
         {
+
+        }
+
+        protected override void OnViewLoaded(object view)
+        {
+            Console.WriteLine("rSquare loaded");
             var current = new RoomModel.Track() { Name = "Hashinshin VS NASUS (and Tanks) - Streamhighlights" };
             var next = new RoomModel.Track() { Name = "jfarr & Willford - Blue Eyes (feat. Hanna Pettersson) | Ninety9Lives Release" };
             var previous = new RoomModel.Track() { Name = "Finesu - Homecoming (feat. jfarr) | Ninety9Lives Release" };
-            var dicPic = "https://i.ytimg.com/vi/VI2aG57aaCw/maxresdefault.jpg";
+            var dicPic = @"..\..\..\Images\3.jpg";
 
             RoomInstancesCollection = new BindableCollection<RoomModel>()
             {
@@ -37,6 +44,13 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
                     ImageSource = dicPic
                 }
             };
+
+            base.OnViewLoaded(view);
+        }
+
+        protected override void OnViewReady(object view)
+        {
+            base.OnViewReady(view);
         }
     }
 }

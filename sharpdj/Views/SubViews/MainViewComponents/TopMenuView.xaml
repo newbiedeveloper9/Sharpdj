@@ -7,7 +7,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:subViews="clr-namespace:SharpDj.ViewModels.SubViews"
              xmlns:mainViewComponents="clr-namespace:SharpDj.ViewModels.SubViews.MainViewComponents"
-             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
              xmlns:sharpDj="clr-namespace:SharpDj"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=mainViewComponents:TopMenuViewModel, IsDesignTimeCreatable=True}"

@@ -4,7 +4,7 @@ using static System.Windows.Application;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents
 {
-    public class TopMenuViewModel : PropertyChangedBase
+    public class TopMenuViewModel
     {
         public TopMenuViewModel()
         {
