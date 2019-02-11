@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SharpDj.Views.SubViews.MainViewComponents.LeftMenuComponents
+namespace SharpDj.Views.SubViews
 {
     /// <summary>
-    /// Interaction logic for ObservedRoomView.xaml
+    /// Interaction logic for LeftMenuView.xaml
     /// </summary>
-    public partial class ObservedRoomView : UserControl
+    public partial class LeftMenuView : UserControl
     {
-        public ObservedRoomView()
+        public LeftMenuView()
         {
             InitializeComponent();
         }

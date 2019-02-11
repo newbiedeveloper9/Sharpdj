@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SharpDj.Views.SubViews.MainViewComponents
+namespace SharpDj.Views.SubViews.LeftMenuComponents
 {
     /// <summary>
-    /// Interaction logic for NewsCarouselView.xaml
+    /// Interaction logic for RoomRectangleView.xaml
     /// </summary>
-    public partial class NewsCarouselView : UserControl
+    public partial class RoomRectangleView : UserControl
     {
-        public NewsCarouselView()
+        public RoomRectangleView()
         {
             InitializeComponent();
         }

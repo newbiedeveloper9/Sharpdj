@@ -1,18 +1,13 @@
 ﻿using Caliburn.Micro;
 using SharpDj.Models;
 
-namespace SharpDj.ViewModels.SubViews.MainViewComponents.LeftMenuComponents
+namespace SharpDj.ViewModels.SubViews.LeftMenuComponents
 {
-    public class RoomRectangleViewModel : Screen
+    public class RoomRectangleViewModel : PropertyChangedBase
     {
         public BindableCollection<RoomModel> ActiveRoomCollection { get; private set; }
 
         public RoomRectangleViewModel()
-        {
-          
-        }
-
-        protected override void OnViewLoaded(object view)
         {
             var dicPic = @"..\..\..\..\Images\3.jpg";
 
@@ -22,8 +17,6 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.LeftMenuComponents
                 new RoomModel(){ImageSource = dicPic, Name = "Testowy pokój 2", Status = RoomModel.Activity.Sleep},
                 new RoomModel(){ImageSource = dicPic, Name = "Testowy pokój 3", Status = RoomModel.Activity.InActive},
             };
-
-            base.OnViewLoaded(view);
         }
     }
 }

@@ -186,14 +186,15 @@
     <Compile Include="Models\NewsModel.cs" />
     <Compile Include="Models\PlaylistModel.cs" />
     <Compile Include="Models\RoomModel.cs" />
-    <Compile Include="ViewModels\SubViews\MainViewComponents\LeftMenuComponents\ObservedRoomViewModel.cs" />
-    <Compile Include="ViewModels\SubViews\MainViewComponents\LeftMenuComponents\RoomRectangleViewModel.cs" />
-    <Compile Include="ViewModels\SubViews\MainViewComponents\LeftMenuViewModel.cs" />
-    <Compile Include="ViewModels\SubViews\MainViewComponents\NewsCarouselViewModel.cs" />
-    <Compile Include="ViewModels\SubViews\MainViewComponents\RoomSquareViewModel.cs" />
+    <Compile Include="ViewModels\SubViews\MainViewComponents\MajorScreenViewModel.cs" />
+    <Compile Include="ViewModels\SubViews\LeftMenuComponents\ObservedRoomViewModel.cs" />
+    <Compile Include="ViewModels\SubViews\LeftMenuComponents\RoomRectangleViewModel.cs" />
+    <Compile Include="ViewModels\SubViews\LeftMenuViewModel.cs" />
+    <Compile Include="ViewModels\SubViews\MainViewComponents\MajorViewComponents\NewsCarouselViewModel.cs" />
+    <Compile Include="ViewModels\SubViews\MainViewComponents\MajorViewComponents\RoomSquareViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
-    <Compile Include="ViewModels\SubViews\MainViewComponents\TopMenuViewModel.cs" />
+    <Compile Include="ViewModels\SubViews\TopMenuViewModel.cs" />
     <Compile Include="deprecatedViewModel\Global\SdjBottomBarViewModel.cs" />
     <Compile Include="deprecatedViewModel\Global\SdjLeftBarViewModel.cs" />
     <Compile Include="deprecatedViewModel\Global\SdjStateButtonViewModel.cs" />
@@ -289,23 +290,36 @@
       <DependentUpon>SdjMainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModels\SubViews\RoomViewModel.cs" />
+    <Compile Include="Views\SubViews\LeftMenuComponents\ObservedRoomView.xaml.cs">
+      <DependentUpon>ObservedRoomView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubViews\LeftMenuComponents\RoomRectangleView.xaml.cs">
+      <DependentUpon>RoomRectangleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubViews\LeftMenuView.xaml.cs">
+      <DependentUpon>LeftMenuView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SubViews\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SubViews\MainViewComponents\LeftMenuComponents\ObservedRoomView.xaml.cs">
-      <DependentUpon>ObservedRoomView.xaml</DependentUpon>
+    <Compile Include="Views\SubViews\MainViewComponents\MajorScreenView.xaml.cs">
+      <DependentUpon>MajorScreenView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SubViews\MainViewComponents\LeftMenuComponents\RoomRectangleView.xaml.cs">
-      <DependentUpon>RoomRectangleView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SubViews\MainViewComponents\NewsCarouselView.xaml.cs">
+    <Compile Include="Views\SubViews\MainViewComponents\MajorScreenComponents\NewsCarouselView.xaml.cs">
       <DependentUpon>NewsCarouselView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SubViews\MainViewComponents\RoomSquareView.xaml.cs">
+    <Compile Include="Views\SubViews\MainViewComponents\MajorScreenComponents\RoomSquareView.xaml.cs">
       <DependentUpon>RoomSquareView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SubViews\MainViewComponents\TopMenuView.xaml.cs">
+    <Compile Include="Views\SubViews\SearchMenuView.xaml.cs">
+      <DependentUpon>SearchMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubViews\TopMenuView.xaml.cs">
       <DependentUpon>TopMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubViews\RoomView.xaml.cs">
+      <DependentUpon>RoomView.xaml</DependentUpon>
     </Compile>
     <Page Include="Themes\Buttons.xaml">
       <SubType>Designer</SubType>
@@ -330,31 +344,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\SubViews\LeftMenuComponents\ObservedRoomView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SubViews\LeftMenuComponents\RoomRectangleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SubViews\LeftMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SubViews\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SubViews\MainViewComponents\LeftMenuComponents\ObservedRoomView.xaml">
+    <Page Include="Views\SubViews\MainViewComponents\MajorScreenView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SubViews\MainViewComponents\LeftMenuComponents\RoomRectangleView.xaml">
+    <Page Include="Views\SubViews\MainViewComponents\MajorScreenComponents\NewsCarouselView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SubViews\MainViewComponents\LeftMenuView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\SubViews\MainViewComponents\NewsCarouselView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\SubViews\MainViewComponents\RoomSquareView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\SubViews\MainViewComponents\SearchMenuView.xaml">
+    <Page Include="Views\SubViews\MainViewComponents\MajorScreenComponents\RoomSquareView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -444,7 +458,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\SubViews\MainViewComponents\TopMenuView.xaml">
+    <Page Include="Views\SubViews\SearchMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SubViews\TopMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SubViews\RoomView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

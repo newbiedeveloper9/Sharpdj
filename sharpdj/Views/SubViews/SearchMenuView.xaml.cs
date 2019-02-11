@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SharpDj.Views.SubViews.MainViewComponents
+namespace SharpDj.Views.SubViews
 {
     /// <summary>
-    /// Interaction logic for TopMenuView.xaml
+    /// Interaction logic for SearchMenuView.xaml
     /// </summary>
-    public partial class TopMenuView : UserControl
+    public partial class SearchMenuView : UserControl
     {
-        public TopMenuView()
+        public SearchMenuView()
         {
             InitializeComponent();
         }

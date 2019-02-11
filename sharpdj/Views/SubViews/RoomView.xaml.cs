@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SharpDj.Views.SubViews.MainViewComponents
+namespace SharpDj.Views.SubViews
 {
     /// <summary>
-    /// Interaction logic for RoomSquareViewModel.xaml
+    /// Interaction logic for RoomView.xaml
     /// </summary>
-    public partial class RoomSquareView : UserControl
+    public partial class RoomView : UserControl
     {
-        public RoomSquareView()
+        public RoomView()
         {
             InitializeComponent();
         }

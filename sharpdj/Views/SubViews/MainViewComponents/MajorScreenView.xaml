@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="SharpDj.Views.SubViews.MainViewComponents.MajorScreenView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:mainViewComponents="clr-namespace:SharpDj.ViewModels.SubViews.MainViewComponents"
+             xmlns:majorScreenComponents="clr-namespace:SharpDj.Views.SubViews.MainViewComponents.MajorScreenComponents"
+             mc:Ignorable="d" 
+             cal:Bind.AtDesignTime="True"
+             d:DataContext="{d:DesignInstance Type=mainViewComponents:MajorScreenViewModel, IsDesignTimeCreatable=True}"
+             d:DesignHeight="1400" d:DesignWidth="1200">
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <!--Padding24-->
+            <StackPanel Margin="24 24 0 0">
+                <majorScreenComponents:NewsCarouselView cal:Bind.Model="{Binding Path=NewsCarouselViewModel}"/>
+
+                <StackPanel HorizontalAlignment="Center">
+                    <!--Categories-->
+                    <StackPanel Orientation="Horizontal" Margin="24 48 0 0">
+                        <TextBlock FontSize="24" FontWeight="Light" Text="Nowe" Margin="24 0 0 0"  Foreground="{DynamicResource PrimaryHueLightBrush}" Opacity="0.42"/>
+                        <TextBlock FontSize="24" FontWeight="Light" Text="Popularne" Margin="24 0 0 0" Foreground="{DynamicResource PrimaryHueLightBrush}" Opacity="0.42" />
+                        <TextBlock FontSize="24" FontWeight="Light" Text="Wszystkie" Margin="24 0 0 0" Foreground="{DynamicResource PrimaryHueLightBrush}" Opacity="1" />
+                        <TextBlock FontSize="24" FontWeight="Light" Text="Wybrane" Margin="24 0 0 0" Foreground="{DynamicResource PrimaryHueLightBrush}" Opacity="0.42" />
+                    </StackPanel>
+
+                    <WrapPanel  Margin="0 24 0 0">
+                        <majorScreenComponents:RoomSquareView cal:Bind.Model="{Binding Path=RoomSquareViewModel}"/>
+                    </WrapPanel>
+                </StackPanel>
+                <!--Rooms-->
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

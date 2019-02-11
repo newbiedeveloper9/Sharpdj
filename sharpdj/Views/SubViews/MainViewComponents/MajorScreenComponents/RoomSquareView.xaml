@@ -1,14 +1,14 @@
-﻿<UserControl x:Class="SharpDj.Views.SubViews.MainViewComponents.RoomSquareView"
+﻿<UserControl x:Class="SharpDj.Views.SubViews.MainViewComponents.MajorScreenComponents.RoomSquareView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
-             xmlns:mainViewComponents="clr-namespace:SharpDj.ViewModels.SubViews.MainViewComponents"
+             xmlns:majorViewComponents="clr-namespace:SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents"
              mc:Ignorable="d" 
              cal:Bind.AtDesignTime="True"
-             d:DataContext="{d:DesignInstance Type=mainViewComponents:RoomSquareViewModel, IsDesignTimeCreatable=True}"
+             d:DataContext="{d:DesignInstance Type=majorViewComponents:RoomSquareViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="235" d:DesignWidth="520">
         <ItemsControl x:Name="RoomInstancesCollection">
             <ItemsControl.ItemsPanel>
@@ -18,7 +18,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <materialDesign:Card Margin="0 0 24 24" Width="488"  materialDesign:ShadowAssist.ShadowDepth="Depth3">
+                    <materialDesign:Card Margin="0 0 24 24" Width="488"  materialDesign:ShadowAssist.ShadowDepth="Depth3" cal:Message.Attach="[Event MouseUp]=[Action OpenRoom()]">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="88" />

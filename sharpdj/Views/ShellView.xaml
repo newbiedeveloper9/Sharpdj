@@ -14,12 +14,30 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:viewModels="clr-namespace:SharpDj.ViewModels"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         cal:Bind.AtDesignTime="True"
         d:DataContext="{d:DesignInstance Type=viewModels:ShellViewModel, IsDesignTimeCreatable=True}"
         Title="ShellView" Height="720" Width="1366" MinWidth="1015">
     <Grid>
-        <subViews:MainView cal:View.Model="{Binding Path=MainViewModel}"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="24"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <subViews:TopMenuView cal:View.Model="{Binding Path=TopMenuViewModel}"
+                                  Grid.ColumnSpan="2"/>
+
+        <subViews:MainView cal:View.Model="{Binding Path=MainViewModel}"
+                           Grid.Column="1" Grid.Row="2"/>
+
+        <subViews:LeftMenuView cal:Bind.Model="{Binding Path=LeftMenuViewModel}"
+                               Grid.Row="2"/>
+        
+        <subViews:SearchMenuView Grid.Row="1" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>

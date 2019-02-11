@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using SharpDj.Models;
-using SharpDj.ViewModels.SubViews.MainViewComponents.LeftMenuComponents;
+using SharpDj.ViewModels.SubViews.LeftMenuComponents;
 
-namespace SharpDj.ViewModels.SubViews.MainViewComponents
+namespace SharpDj.ViewModels.SubViews
 {
     public class LeftMenuViewModel
     {
@@ -19,8 +14,8 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
                 new PlaylistModel("Nowa playlista Criseya", true),
                 new PlaylistModel("XD"),
             };
-                }
-     
+        }
+
         public BindableCollection<PlaylistModel> PlaylistCollection { get; private set; }
         public RoomRectangleViewModel RoomRectangleViewModel { get; set; } = new RoomRectangleViewModel();
         public ObservedRoomViewModel ObservedRoomViewModel { get; set; } = new ObservedRoomViewModel();

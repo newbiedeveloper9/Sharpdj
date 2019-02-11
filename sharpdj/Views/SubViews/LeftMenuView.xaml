@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="SharpDj.Views.SubViews.MainViewComponents.LeftMenuView"
+﻿<UserControl x:Class="SharpDj.Views.SubViews.LeftMenuView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,14 +6,15 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:mainViewComponents="clr-namespace:SharpDj.ViewModels.SubViews.MainViewComponents"
              xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
-             xmlns:leftMenuComponents="clr-namespace:SharpDj.Views.SubViews.MainViewComponents.LeftMenuComponents"
+             xmlns:subViews="clr-namespace:SharpDj.ViewModels.SubViews"
+             xmlns:leftMenuComponents1="clr-namespace:SharpDj.Views.SubViews.LeftMenuComponents"
              mc:Ignorable="d" 
              cal:Bind.AtDesignTime="True"
-             d:DataContext="{d:DesignInstance Type=mainViewComponents:LeftMenuViewModel, IsDesignTimeCreatable=True}"
+             d:DataContext="{d:DesignInstance Type=subViews:LeftMenuViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="728" d:DesignWidth="220">
 
     <!--LeftMenu-->
-    <Grid>
+    <Grid Background="#1C1C1C">
         <StackPanel Margin="0 24 0 0">
             <!--Active Rooms-->
             <Grid Margin="0 0 0 6">
@@ -22,7 +23,7 @@
                 </Button>
             </Grid>
             <StackPanel Orientation="Vertical" Margin="0 0 0 24">
-                <leftMenuComponents:RoomRectangleView cal:Bind.Model="{Binding RoomRectangleViewModel}"/>
+                <leftMenuComponents1:RoomRectangleView cal:Bind.Model="{Binding RoomRectangleViewModel}"/>
             </StackPanel>
 
 
@@ -62,7 +63,7 @@
             </Button>
 
             <StackPanel Margin="0 6 0 0" >
-                <leftMenuComponents:ObservedRoomView cal:Bind.Model="{Binding ObservedRoomViewModel}"/>
+                <leftMenuComponents1:ObservedRoomView cal:Bind.Model="{Binding ObservedRoomViewModel}"/>
             </StackPanel>
         </StackPanel>
         <!--Biblioteka-->

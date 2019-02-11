@@ -1,11 +1,8 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using SharpDj.Enums;
 using SharpDj.Models;
 
-namespace SharpDj.ViewModels.SubViews.MainViewComponents
+namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
 {
     public class NewsCarouselViewModel : Screen
     {
@@ -17,7 +14,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
             PrimaryNews.Description = "xd";
             PrimaryNews.Title = "123";
 
-            var dicPic = @"..\..\..\Images\1.jpg";
+            var dicPic = @"..\..\..\..\Images\1.jpg";
 
             NewsCollection = new BindableCollection<NewsModel>()
             {

@@ -5,17 +5,13 @@ namespace SharpDj.ViewModels.SubViews
 {
     public class MainViewModel : PropertyChangedBase
     {
-        public TopMenuViewModel TopMenuViewModel { get; private set; }
-        public LeftMenuViewModel LeftMenuViewModel { get; private set; }
-        public NewsCarouselViewModel NewsCarouselViewModel { get; private set; }
-        public RoomSquareViewModel RoomSquareViewModel { get; private set; }
+        public MajorScreenViewModel MajorScreenViewModel { get; private set; }
+        public RoomViewModel RoomViewModel { get; private set; }
 
         public MainViewModel()
         {
-            RoomSquareViewModel = new RoomSquareViewModel();
-            NewsCarouselViewModel = new NewsCarouselViewModel();
-            LeftMenuViewModel = new LeftMenuViewModel();
-            TopMenuViewModel = new TopMenuViewModel();
+            MajorScreenViewModel = new MajorScreenViewModel();
+            RoomViewModel = new RoomViewModel();
         }
     }
 }
