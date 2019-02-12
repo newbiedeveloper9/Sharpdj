@@ -9,9 +9,10 @@ namespace SharpDj.ViewModels
     {
         private readonly IEventAggregator _eventAggregator;
 
-        public MainViewModel MainViewModel { get; set; }
+        public MainViewModel MainViewModel { get; private set; }
         public TopMenuViewModel TopMenuViewModel { get; private set; }
         public LeftMenuViewModel LeftMenuViewModel { get; private set; }
+        public SearchMenuViewModel SearchMenuViewModel { get; private set; }
 
         public ShellViewModel()
         {
@@ -20,6 +21,7 @@ namespace SharpDj.ViewModels
             MainViewModel = new MainViewModel(_eventAggregator);
             LeftMenuViewModel = new LeftMenuViewModel();
             TopMenuViewModel = new TopMenuViewModel();
+            SearchMenuViewModel = new SearchMenuViewModel(_eventAggregator);
         }
     }
 }

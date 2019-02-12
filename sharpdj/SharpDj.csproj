@@ -186,6 +186,8 @@
     <Compile Include="Models\NewsModel.cs" />
     <Compile Include="Models\PlaylistModel.cs" />
     <Compile Include="Models\RoomModel.cs" />
+    <Compile Include="PubSubModels\NavigateToHome.cs" />
+    <Compile Include="PubSubModels\RoomInfoForOpen.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\MajorScreenViewModel.cs" />
     <Compile Include="ViewModels\SubViews\LeftMenuComponents\ObservedRoomViewModel.cs" />
     <Compile Include="ViewModels\SubViews\LeftMenuComponents\RoomRectangleViewModel.cs" />
@@ -194,6 +196,7 @@
     <Compile Include="ViewModels\SubViews\MainViewComponents\MajorViewComponents\RoomSquareViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="ViewModels\SubViews\SearchMenuViewModel.cs" />
     <Compile Include="ViewModels\SubViews\TopMenuViewModel.cs" />
     <Compile Include="deprecatedViewModel\Global\SdjBottomBarViewModel.cs" />
     <Compile Include="deprecatedViewModel\Global\SdjLeftBarViewModel.cs" />

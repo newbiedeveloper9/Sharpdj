@@ -21,8 +21,18 @@
             <materialDesign:PackIcon Kind="HamburgerMenu" Margin="24 0 0 0" Width="24" Height="24"
                                      VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-            <TextBlock Text="SharpDj" FontSize="28" Margin="24 0 0 0" VerticalAlignment="Center"
-                       HorizontalAlignment="Left" />
+            <Button Margin="24 0 0 0"  Height="50" Style="{StaticResource MaterialDesignFlatButton}" Foreground="{StaticResource MaterialDesignDarkForeground}" x:Name="Home">
+                <Grid>
+                    <TextBlock Text="SharpDj" FontSize="28" VerticalAlignment="Center" 
+                               HorizontalAlignment="Left" Margin="3 3 0 0" Foreground="{StaticResource PrimaryHueMidBrush}">
+                        <TextBlock.Effect>
+                            <BlurEffect KernelType="Gaussian" Radius="5"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <TextBlock Text="SharpDj" FontSize="28" VerticalAlignment="Center" 
+                               HorizontalAlignment="Left"/>
+                </Grid>
+            </Button>
         </StackPanel>
 
         <TextBox Grid.Column="2" Text="Search" FontSize="18" VerticalAlignment="Center" />

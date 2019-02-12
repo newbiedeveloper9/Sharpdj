@@ -23,13 +23,13 @@
         <Grid Background="#121212">
         </Grid>
 
-        <Grid Grid.RowSpan="2" Grid.Column="1">
+        <Grid Grid.RowSpan="2" Grid.Column="1" Background="#1C1C1C">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <StackPanel Background="{StaticResource BlackBrush}">
+            <StackPanel>
                 <DockPanel VerticalAlignment="Top" HorizontalAlignment="Left">
                     <Button Style="{StaticResource MaterialDesignFlatButton}" Height="48" Width="64">
                         <Grid>
@@ -43,14 +43,16 @@
                     </Button>
 
                 </DockPanel>
-                <StackPanel Margin="12 24 24 0" VerticalAlignment="Top">
+                <StackPanel Margin="12 12 24 0" VerticalAlignment="Top">
                     <StackPanel Orientation="Vertical" Margin="0 12 0 0">
                         <TextBox Text="Crisey" Style="{StaticResource TextboxChat}" Width="auto" Foreground="DarkViolet" FontWeight="Bold" Margin="0 0 0 4"/>
-                        <TextBox Text="test XDddddddddddddddddddd x dx d xd xd111123x  xd x dx d xd xd xd 1 2 3 213" AcceptsReturn="True"  Style="{StaticResource TextboxChat}"/>
+                        <TextBox Text="test XDddddddddddddddddddd x dx d xd xd111123x  xd x dx d xd xd xd 1 2 3 213" AcceptsReturn="True"
+                                 Foreground="{StaticResource PrimaryHueMidForegroundBrush}"  Style="{StaticResource TextboxChat}"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Margin="0 12 0 0">
                         <TextBox Text="Crisey" Style="{StaticResource TextboxChat}" Width="auto" Foreground="DarkViolet" FontWeight="Bold" Margin="0 0 0 4"/>
-                        <TextBox Text="test XDddddddddddddddddddd x dx d xd xd111123x  xd x dx d xd xd xd 1 2 3 213" AcceptsReturn="True"  Style="{StaticResource TextboxChat}"/>
+                        <TextBox Text="test XDddddddddddddddddddd x dx d xd xd111123x  xd x dx d xd xd xd 1 2 3 213" AcceptsReturn="True"
+                                 Foreground="{StaticResource PrimaryHueMidForegroundBrush}"  Style="{StaticResource TextboxChat}"/>
                     </StackPanel>
 
                 </StackPanel>
@@ -58,9 +60,9 @@
 
             <Grid Grid.Row="1">
                 <StackPanel>
-                    <TextBox Background="White"/>
-                    <DockPanel>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}">
+                    <TextBox Style="{StaticResource MaterialDesignTextBox}" Margin="12 0 12 12"/>
+                    <DockPanel Margin="12 0 12 12">
+                        <Button Style="{StaticResource MaterialDesignFlatButton}" >
                             <Grid>
                                 <materialDesign:PackIcon Kind="Settings" Foreground="{StaticResource MidBrush}"/>
                             </Grid>

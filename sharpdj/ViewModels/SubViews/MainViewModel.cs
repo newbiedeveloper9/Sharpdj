@@ -1,9 +1,10 @@
 ﻿using Caliburn.Micro;
+using SharpDj.PubSubModels;
 using SharpDj.ViewModels.SubViews.MainViewComponents;
 
 namespace SharpDj.ViewModels.SubViews
 {
-    public class MainViewModel : Conductor<PropertyChangedBase>.Collection.OneActive, IHandle<MainViewModel.RoomInfoForOpen>
+    public class MainViewModel : Conductor<PropertyChangedBase>.Collection.OneActive, IHandle<IRoomInfoForOpen>, IHandle<INavigateToHome>
     {
         private readonly IEventAggregator _eventAggregator;
 
@@ -21,15 +22,14 @@ namespace SharpDj.ViewModels.SubViews
             ActivateItem(MajorScreenViewModel);
         }
 
-        public void Handle(RoomInfoForOpen message)
+        public void Handle(IRoomInfoForOpen message)
         {
-            System.Console.WriteLine("test");
             ActivateItem(RoomViewModel);
         }
 
-        public class RoomInfoForOpen
+        public void Handle(INavigateToHome message)
         {
-            
+            ActivateItem(MajorScreenViewModel);
         }
     }
 }

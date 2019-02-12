@@ -1,6 +1,7 @@
 ﻿using System;
 using Caliburn.Micro;
 using SharpDj.Models;
+using SharpDj.PubSubModels;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
 {
@@ -46,8 +47,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
 
         public void OpenRoom()
         {
-            _eventAggregator.PublishOnUIThread(new MainViewModel.RoomInfoForOpen());
-            //add EventAggregator for set room viewmodel as active
+            _eventAggregator.PublishOnUIThread(new RoomInfoForOpen());
         }
     }
 }

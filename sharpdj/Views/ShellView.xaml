@@ -38,6 +38,7 @@
         <subViews:LeftMenuView cal:Bind.Model="{Binding Path=LeftMenuViewModel}"
                                Grid.Row="2"/>
         
-        <subViews:SearchMenuView Grid.Row="1" Grid.ColumnSpan="2"/>
+        <subViews:SearchMenuView Grid.Row="1" Grid.ColumnSpan="2"
+                                 cal:Bind.Model="{Binding Path=SearchMenuViewModel}"/>
     </Grid>
 </Window>
