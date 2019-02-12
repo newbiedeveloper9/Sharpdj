@@ -44,7 +44,13 @@
         </Setter>
     </Style>
 
-
+    <!--Icon Button-->
+    <Style x:Key="TextboxChat" TargetType="TextBox">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="IsReadOnly" Value="True" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
 
     <Style x:Key="TextIconicButton" TargetType="TextBlock">
         <Setter Property="Text" Value="Lorem Ipsum"/>

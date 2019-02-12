@@ -22,7 +22,7 @@
 
         <!--Close, Minimize, Max-->
         <Grid HorizontalAlignment="Center" Grid.ColumnSpan="3">
-            <Image Source="../../../Images/sdj.png" Margin="0 0 0 0"/>
+            <Image Source="../../Images/sdj.png" Margin="0 0 0 0"/>
         </Grid>
 
         <StackPanel Grid.Column="1" Orientation="Horizontal">

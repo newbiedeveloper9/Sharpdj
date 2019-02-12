@@ -290,7 +290,7 @@
       <DependentUpon>SdjMainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ViewModels\SubViews\RoomViewModel.cs" />
+    <Compile Include="ViewModels\SubViews\MainViewComponents\RoomViewModel.cs" />
     <Compile Include="Views\SubViews\LeftMenuComponents\ObservedRoomView.xaml.cs">
       <DependentUpon>ObservedRoomView.xaml</DependentUpon>
     </Compile>
@@ -318,7 +318,7 @@
     <Compile Include="Views\SubViews\TopMenuView.xaml.cs">
       <DependentUpon>TopMenuView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SubViews\RoomView.xaml.cs">
+    <Compile Include="Views\SubViews\MainViewComponents\RoomView.xaml.cs">
       <DependentUpon>RoomView.xaml</DependentUpon>
     </Compile>
     <Page Include="Themes\Buttons.xaml">
@@ -466,7 +466,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SubViews\RoomView.xaml">
+    <Page Include="Views\SubViews\MainViewComponents\RoomView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

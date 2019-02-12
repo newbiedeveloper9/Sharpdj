@@ -6,10 +6,14 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
 {
     public class RoomSquareViewModel : PropertyChangedBase
     {
+        private readonly IEventAggregator _eventAggregator;
         public BindableCollection<RoomModel> RoomInstancesCollection { get; private set; }
 
-        public RoomSquareViewModel()
+        public RoomSquareViewModel(IEventAggregator eventAggregator)
         {
+            _eventAggregator = eventAggregator;
+            _eventAggregator.PublishOnUIThread(new object());
+
             var current = new RoomModel.Track() { Name = "Hashinshin VS NASUS (and Tanks) - Streamhighlights" };
             var next = new RoomModel.Track() { Name = "jfarr & Willford - Blue Eyes (feat. Hanna Pettersson) | Ninety9Lives Release" };
             var previous = new RoomModel.Track() { Name = "Finesu - Homecoming (feat. jfarr) | Ninety9Lives Release" };
@@ -42,6 +46,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
 
         public void OpenRoom()
         {
+            _eventAggregator.PublishOnUIThread(new MainViewModel.RoomInfoForOpen());
             //add EventAggregator for set room viewmodel as active
         }
     }

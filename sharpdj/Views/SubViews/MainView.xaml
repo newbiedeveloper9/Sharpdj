@@ -13,6 +13,7 @@
         d:DesignWidth="1300" d:DesignHeight="728">
     <Grid >
         <!--MainMenu-->
-        <mainViewComponents:MajorScreenView cal:Bind.Model="{Binding Path=MajorScreenViewModel}"/>
+        <!--<mainViewComponents:MajorScreenView cal:Bind.Model="{Binding Path=MajorScreenViewModel}"/>-->
+        <ContentControl x:Name="ActiveItem"/>
     </Grid>
 </UserControl>
