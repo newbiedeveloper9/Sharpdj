@@ -44,7 +44,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
             if (string.IsNullOrWhiteSpace(MessageText)) return;
 
             CommentsCollection.Add(new CommentModel(){Author = "Crisey", Comment = MessageText});
-            MessageText = String.Empty;
+            MessageText = string.Empty;
         }
     }
 }

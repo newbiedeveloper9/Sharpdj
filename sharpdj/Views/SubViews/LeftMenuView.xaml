@@ -8,6 +8,7 @@
              xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
              xmlns:subViews="clr-namespace:SharpDj.ViewModels.SubViews"
              xmlns:leftMenuComponents1="clr-namespace:SharpDj.Views.SubViews.LeftMenuComponents"
+             xmlns:converters="clr-namespace:SharpDj.Converters"
              mc:Ignorable="d" 
              cal:Bind.AtDesignTime="True"
              d:DataContext="{d:DesignInstance Type=subViews:LeftMenuViewModel, IsDesignTimeCreatable=True}"
@@ -38,7 +39,7 @@
                         <DataTemplate>
                             <Button Style="{StaticResource MaterialDesignFlatButton}"  HorizontalContentAlignment="Left" Padding="24 0 12 0">
                                 <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon Kind="RadioButtonChecked" Width="12" Height="12" VerticalAlignment="Center" Foreground="White"/>
+                                    <materialDesign:PackIcon Kind="{Binding IsActive,Converter={converters:ActivityStatusToRadioIconConverter}}" Width="12" Height="12" VerticalAlignment="Center" Foreground="White"/>
                                     <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="12 0 0 0" Foreground="White" FontWeight="Light"/>
                                 </StackPanel>
                             </Button>
@@ -68,7 +69,6 @@
         </StackPanel>
         <!--Biblioteka-->
         <Grid VerticalAlignment="Bottom" Background="#1C1C1C">
-
             <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Left" Padding="24 0 12 0" Command="{Binding ShowMyLibraryCommand}">
                 <TextBlock Style="{StaticResource TextIconicButton}" Text="BIBLIOTEKA"/>
             </Button>

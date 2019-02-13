@@ -142,6 +142,7 @@
     </ApplicationDefinition>
     <Compile Include="AppBootstrapper.cs" />
     <Compile Include="Converters\ActivityStatusToColorConverter.cs" />
+    <Compile Include="Converters\ActivityStatusToRadioIconConverter.cs" />
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
     <Compile Include="Converters\EnumToVisibilityConverter.cs" />
     <Compile Include="Converters\NameToContentConverter.cs" />
