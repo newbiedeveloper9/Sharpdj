@@ -25,42 +25,43 @@
 
         <Grid Grid.RowSpan="2" Grid.Column="1" Background="#1C1C1C">
             <Grid.RowDefinitions>
+                <RowDefinition Height="48"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <StackPanel>
-                <DockPanel VerticalAlignment="Top" HorizontalAlignment="Left">
-                    <Button Style="{StaticResource MaterialDesignFlatButton}" Height="48" Width="64">
-                        <Grid>
-                            <materialDesign:PackIcon Kind="AccountGroup" Foreground="{StaticResource MidBrush}" Height="32" Width="32"/>
-                        </Grid>
-                    </Button>
-                    <Button Style="{StaticResource MaterialDesignFlatButton}" Background="{StaticResource DarkBrush}" Height="48" Width="64">
-                        <Grid>
-                            <materialDesign:PackIcon Kind="ChatProcessing" Foreground="{StaticResource MidBrush}" Height="32" Width="32"/>
-                        </Grid>
-                    </Button>
+            <DockPanel VerticalAlignment="Top" HorizontalAlignment="Left">
+                <Button Style="{StaticResource MaterialDesignFlatButton}" Height="48" Width="64">
+                    <Grid>
+                        <materialDesign:PackIcon Kind="AccountGroup" Foreground="{StaticResource MidBrush}" Height="32" Width="32"/>
+                    </Grid>
+                </Button>
+                <Button Style="{StaticResource MaterialDesignFlatButton}" Background="{StaticResource DarkBrush}" Height="48" Width="64">
+                    <Grid>
+                        <materialDesign:PackIcon Kind="ChatProcessing" Foreground="{StaticResource MidBrush}" Height="32" Width="32"/>
+                    </Grid>
+                </Button>
+            </DockPanel>
 
-                </DockPanel>
-                <StackPanel Margin="12 12 24 0" VerticalAlignment="Top">
-                    <StackPanel Orientation="Vertical" Margin="0 12 0 0">
-                        <TextBox Text="Crisey" Style="{StaticResource TextboxChat}" Width="auto" Foreground="DarkViolet" FontWeight="Bold" Margin="0 0 0 4"/>
-                        <TextBox Text="test XDddddddddddddddddddd x dx d xd xd111123x  xd x dx d xd xd xd 1 2 3 213" AcceptsReturn="True"
-                                 Foreground="{StaticResource PrimaryHueMidForegroundBrush}"  Style="{StaticResource TextboxChat}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical" Margin="0 12 0 0">
-                        <TextBox Text="Crisey" Style="{StaticResource TextboxChat}" Width="auto" Foreground="DarkViolet" FontWeight="Bold" Margin="0 0 0 4"/>
-                        <TextBox Text="test XDddddddddddddddddddd x dx d xd xd111123x  xd x dx d xd xd xd 1 2 3 213" AcceptsReturn="True"
-                                 Foreground="{StaticResource PrimaryHueMidForegroundBrush}"  Style="{StaticResource TextboxChat}"/>
-                    </StackPanel>
-
-                </StackPanel>
-            </StackPanel>
-
-            <Grid Grid.Row="1">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="12 6 18 12">
                 <StackPanel>
-                    <TextBox Style="{StaticResource MaterialDesignTextBox}" Margin="12 0 12 12"/>
+                    <ItemsControl x:Name="CommentsCollection">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical" Margin="0 12 0 0">
+                                    <TextBox Text="{Binding Path=Author}" Style="{StaticResource TextboxChat}" Width="auto" Foreground="DarkViolet" FontWeight="Bold" Margin="0 0 0 4"/>
+                                    <TextBox Text="{Binding Path=Comment}" AcceptsReturn="True"
+                                             Foreground="{StaticResource PrimaryHueMidForegroundBrush}"  Style="{StaticResource TextboxChat}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </ScrollViewer>
+            <Grid Grid.Row="2">
+                <StackPanel>
+                    <TextBox Style="{StaticResource MaterialDesignTextBox}" Margin="12 0 12 12" x:Name="MessageText"
+                             cal:Message.Attach="[Key Enter]=[SendMessage];"/>
                     <DockPanel Margin="12 0 12 12">
                         <Button Style="{StaticResource MaterialDesignFlatButton}" >
                             <Grid>
@@ -68,7 +69,7 @@
                             </Grid>
                         </Button>
 
-                        <Button HorizontalAlignment="Right">
+                        <Button HorizontalAlignment="Right" x:Name="SendMessage">
                             <Grid>
                                 <TextBlock Text="Chat"/>
                             </Grid>

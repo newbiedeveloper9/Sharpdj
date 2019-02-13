@@ -11,6 +11,14 @@ namespace SharpDj.ViewModels.SubViews
         public MajorScreenViewModel MajorScreenViewModel { get; private set; }
         public RoomViewModel RoomViewModel { get; private set; }
 
+        public MainViewModel()
+        {
+            MajorScreenViewModel = new MajorScreenViewModel(_eventAggregator);
+            RoomViewModel = new RoomViewModel();
+
+            ActivateItem(MajorScreenViewModel);
+        }
+
         public MainViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;

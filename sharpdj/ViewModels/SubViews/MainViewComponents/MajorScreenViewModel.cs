@@ -10,6 +10,12 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
         public NewsCarouselViewModel NewsCarouselViewModel { get; private set; }
         public RoomSquareViewModel RoomSquareViewModel { get; private set; }
 
+        public MajorScreenViewModel()
+        {
+            RoomSquareViewModel = new RoomSquareViewModel();
+            NewsCarouselViewModel = new NewsCarouselViewModel();
+        }
+
         public MajorScreenViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;

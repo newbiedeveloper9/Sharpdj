@@ -10,6 +10,11 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
         private readonly IEventAggregator _eventAggregator;
         public BindableCollection<RoomModel> RoomInstancesCollection { get; private set; }
 
+        public RoomSquareViewModel()
+        {
+            
+        }
+
         public RoomSquareViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
