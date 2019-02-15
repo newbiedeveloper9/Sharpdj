@@ -16,6 +16,7 @@ namespace SharpDj.ViewModels
         public ShellViewModel()
         {
             _eventAggregator = new EventAggregator();
+            _eventAggregator.Subscribe(this);
 
             TopMenuViewModel = new TopMenuViewModel();
             AfterLoginScreenViewModel = new AfterLoginScreenViewModel(_eventAggregator);
