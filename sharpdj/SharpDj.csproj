@@ -192,8 +192,14 @@
     <Compile Include="Models\NewsModel.cs" />
     <Compile Include="Models\PlaylistModel.cs" />
     <Compile Include="Models\RoomModel.cs" />
+    <Compile Include="PubSubModels\LoginPublishInfo.cs" />
+    <Compile Include="PubSubModels\LoginRegisterAgentHandler.cs" />
     <Compile Include="PubSubModels\NavigateToHome.cs" />
     <Compile Include="PubSubModels\RoomInfoForOpen.cs" />
+    <Compile Include="ViewModels\AfterLoginScreenViewModel.cs" />
+    <Compile Include="ViewModels\BeforeLoginComponents\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\BeforeLoginScreenViewModel.cs" />
+    <Compile Include="ViewModels\BeforeLoginComponents\LoginViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\MajorScreenViewModel.cs" />
     <Compile Include="ViewModels\SubViews\LeftMenuComponents\ObservedRoomViewModel.cs" />
     <Compile Include="ViewModels\SubViews\LeftMenuComponents\RoomRectangleViewModel.cs" />
@@ -300,6 +306,15 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModels\SubViews\MainViewComponents\RoomViewModel.cs" />
+    <Compile Include="Views\AfterLoginScreenView.xaml.cs">
+      <DependentUpon>AfterLoginScreenView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BeforeLoginComponents\RegisterView.xaml.cs">
+      <DependentUpon>RegisterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BeforeLoginScreenView.xaml.cs">
+      <DependentUpon>BeforeLoginScreenView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SubViews\LeftMenuComponents\ObservedRoomView.xaml.cs">
       <DependentUpon>ObservedRoomView.xaml</DependentUpon>
     </Compile>
@@ -308,6 +323,9 @@
     </Compile>
     <Compile Include="Views\SubViews\LeftMenuView.xaml.cs">
       <DependentUpon>LeftMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BeforeLoginComponents\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SubViews\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -349,7 +367,19 @@
     </Compile>
     <Compile Include="Converters\MarkuExtensionConverterBase.cs" />
     <Compile Include="Logic\Helpers\ExceptionLogger.cs" />
+    <Page Include="Views\BeforeLoginComponents\RegisterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BeforeLoginScreenView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ShellView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AfterLoginScreenView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -362,6 +392,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SubViews\LeftMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BeforeLoginComponents\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

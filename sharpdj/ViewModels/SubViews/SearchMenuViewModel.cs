@@ -8,7 +8,7 @@ using SharpDj.PubSubModels;
 
 namespace SharpDj.ViewModels.SubViews
 {
-    class SearchMenuViewModel : PropertyChangedBase
+    public class SearchMenuViewModel : PropertyChangedBase
     {
         private readonly IEventAggregator _eventAggregator;
 

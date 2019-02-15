@@ -14,31 +14,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:viewModels="clr-namespace:SharpDj.ViewModels"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:SharpDj.Views"
         mc:Ignorable="d"
         cal:Bind.AtDesignTime="True"
         d:DataContext="{d:DesignInstance Type=viewModels:ShellViewModel, IsDesignTimeCreatable=True}"
         Title="ShellView" Height="720" Width="1366" MinWidth="1015">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="24"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="220"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        <subViews:TopMenuView cal:View.Model="{Binding Path=TopMenuViewModel}"
-                                  Grid.ColumnSpan="2"/>
+            <!--<views:AfterLoginScreenView Grid.Row="1"
+                cal:View.Model="{Binding Path=AfterLoginScreenViewModel}"/>-->
+            <ContentControl Grid.Row="1" x:Name="ActiveItem"/>
 
-        <subViews:MainView cal:View.Model="{Binding Path=MainViewModel}"
-                           Grid.Column="1" Grid.Row="2"/>
+            <subViews:TopMenuView 
+                cal:View.Model="{Binding Path=TopMenuViewModel}"/>
 
-        <subViews:LeftMenuView cal:Bind.Model="{Binding Path=LeftMenuViewModel}"
-                               Grid.Row="2"/>
-        
-        <subViews:SearchMenuView Grid.Row="1" Grid.ColumnSpan="2"
-                                 cal:Bind.Model="{Binding Path=SearchMenuViewModel}"/>
+        </Grid>
     </Grid>
+
 </Window>

@@ -1,27 +1,32 @@
-﻿using System;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
+using SharpDj.PubSubModels;
 using SharpDj.ViewModels.SubViews;
-using SharpDj.ViewModels.SubViews.MainViewComponents;
 
 namespace SharpDj.ViewModels
 {
-    class ShellViewModel : PropertyChangedBase, IShell
+    public class ShellViewModel : Conductor<object>.Collection.OneActive, IShell, IHandle<ILoginPublishInfo>
     {
         private readonly IEventAggregator _eventAggregator;
 
-        public MainViewModel MainViewModel { get; private set; }
+        public AfterLoginScreenViewModel AfterLoginScreenViewModel { get; private set; }
+        public BeforeLoginScreenViewModel BeforeLoginScreenViewModel { get; private set; }
         public TopMenuViewModel TopMenuViewModel { get; private set; }
-        public LeftMenuViewModel LeftMenuViewModel { get; private set; }
-        public SearchMenuViewModel SearchMenuViewModel { get; private set; }
+
 
         public ShellViewModel()
         {
             _eventAggregator = new EventAggregator();
 
-            MainViewModel = new MainViewModel(_eventAggregator);
-            LeftMenuViewModel = new LeftMenuViewModel();
             TopMenuViewModel = new TopMenuViewModel();
-            SearchMenuViewModel = new SearchMenuViewModel(_eventAggregator);
+            AfterLoginScreenViewModel = new AfterLoginScreenViewModel(_eventAggregator);
+            BeforeLoginScreenViewModel = new BeforeLoginScreenViewModel(_eventAggregator);
+
+            ActivateItem(BeforeLoginScreenViewModel);
+        }
+
+        public void Handle(ILoginPublishInfo message)
+        {
+            ActivateItem(AfterLoginScreenViewModel);
         }
     }
 }
