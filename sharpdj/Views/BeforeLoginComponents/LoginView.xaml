@@ -18,42 +18,49 @@
             <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth5" Padding="32" Background="#232323">
                 <StackPanel>
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="25">
-                    <Grid>
-                        <TextBlock Text="Witaj ponownie :3!" FontSize="32" Foreground="{StaticResource PrimaryHueMidBrush}" HorizontalAlignment="Center" Margin="3 2 0 0"/>
-                        <TextBlock Text="Witaj ponownie :3!" FontSize="32" Foreground="{StaticResource PrimaryHueDarkForegroundBrush}" HorizontalAlignment="Center"/>
-                    </Grid>
-                    <Grid>
-                        <TextBlock Text="Jakiś tekst zachęcający tutaj będzie hehe XD" FontSize="16" FontWeight="DemiBold" Foreground="{StaticResource PrimaryHueDarkBrush}" Opacity="0.4" Margin="2 12 0 0"/>
-                        <TextBlock Text="Jakiś tekst zachęcający tutaj będzie hehe XD" FontSize="16" FontWeight="DemiBold" Foreground="{StaticResource PrimaryHueMidForegroundBrush}" Opacity="0.55" Margin="0 10 0 0"/>
-                    </Grid>
-                </StackPanel>
-                <StackPanel Margin="0 24 0 0">
-                    <TextBlock Text="Login or E-mail" Foreground="{StaticResource PrimaryHueDarkForegroundBrush}"
+                        <Grid>
+                            <TextBlock Text="Enter into the system" FontSize="32" Foreground="{StaticResource PrimaryHueMidBrush}" HorizontalAlignment="Center" Margin="3 2 0 0"/>
+                            <TextBlock Text="Enter into the system" FontSize="32" Foreground="{StaticResource PrimaryHueDarkForegroundBrush}" HorizontalAlignment="Center"/>
+                        </Grid>
+                        <StackPanel>
+                            <Grid HorizontalAlignment="Center" Margin="0 10 0 0">
+                                <TextBlock Text="Listen to music and watch movies together." FontSize="16" FontWeight="DemiBold" Foreground="{StaticResource PrimaryHueDarkBrush}" Opacity="0.4" Margin="2 2 0 0"/>
+                                <TextBlock Text="Listen to music and watch movies together." FontSize="16" FontWeight="DemiBold" Foreground="{StaticResource PrimaryHueMidForegroundBrush}" Opacity="0.55"/>
+                            </Grid>
+                            <Grid HorizontalAlignment="Center" Margin="0 0 0 0">
+                                <TextBlock Text="Be Community DJ or just play music in background." FontSize="16" FontWeight="DemiBold" Foreground="{StaticResource PrimaryHueDarkBrush}" Opacity="0.4" Margin="2 2 0 0"/>
+                                <TextBlock Text="Be Community DJ or just play music in background." FontSize="16" FontWeight="DemiBold" Foreground="{StaticResource PrimaryHueMidForegroundBrush}" Opacity="0.55"/>
+                            </Grid>
+                        </StackPanel>
+
+                    </StackPanel>
+                    <StackPanel Margin="0 24 0 0">
+                        <TextBlock Text="Login or E-mail" Foreground="{StaticResource PrimaryHueDarkForegroundBrush}"
                            Margin="0 0 0 6" HorizontalAlignment="Left" Opacity="0.6" FontWeight="Bold" FontSize="12"/>
-                    <TextBox  x:Name="LoginText"/>
-                </StackPanel>
-                <StackPanel Margin="0 24 0 0">
-                    <TextBlock Text="Password" Foreground="{StaticResource PrimaryHueDarkForegroundBrush}" 
+                        <TextBox  x:Name="LoginText"/>
+                    </StackPanel>
+                    <StackPanel Margin="0 24 0 0">
+                        <TextBlock Text="Password" Foreground="{StaticResource PrimaryHueDarkForegroundBrush}" 
                            Margin="0 0 0 6" HorizontalAlignment="Left" Opacity="0.6" FontWeight="Bold" FontSize="12"/>
-                    <PasswordBox x:Name="PasswordText">
-                        <i:Interaction.Behaviors>
-                            <helpers:PasswordBoxBindingBehavior Password="{Binding PasswordText}"/>
-                        </i:Interaction.Behaviors>
-                    </PasswordBox>
+                        <PasswordBox x:Name="PasswordText">
+                            <i:Interaction.Behaviors>
+                                <helpers:PasswordBoxBindingBehavior Password="{Binding PasswordText}"/>
+                            </i:Interaction.Behaviors>
+                        </PasswordBox>
+                    </StackPanel>
+
+                    <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Forgot your password?" HorizontalAlignment="Right" Margin="0 6 4 0" Padding="4 0 4 0"/>
+
+                    <Button Margin="0 12 0 0" x:Name="TryLogin">
+                        <TextBlock Text="Login" VerticalAlignment="Center"/>
+                    </Button>
+
+                    <StackPanel Orientation="Horizontal" Margin="4 4 0 0">
+                        <TextBlock Text="Or" VerticalAlignment="Center" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="create a new account" Margin="1 0 0 0" Padding="4 0 4 0" x:Name="Register"/>
+                    </StackPanel>
                 </StackPanel>
-
-                <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Forgot your password?" HorizontalAlignment="Right" Margin="0 6 4 0" Padding="4 0 4 0"/>
-
-                <Button Margin="0 12 0 0" x:Name="TryLogin">
-                    <TextBlock Text="Login" VerticalAlignment="Center"/>
-                </Button>
-
-                <StackPanel Orientation="Horizontal" Margin="4 4 0 0">
-                    <TextBlock Text="Or" VerticalAlignment="Center" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
-                    <Button Style="{StaticResource MaterialDesignFlatButton}" Content="create a new account" Margin="1 0 0 0" Padding="4 0 4 0" x:Name="Register"/>
-                </StackPanel>
-        </StackPanel>
-</materialDesign:Card>
+            </materialDesign:Card>
         </StackPanel>
     </Grid>
 </UserControl>

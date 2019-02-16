@@ -36,6 +36,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
         {
             base.OnViewLoaded(view);
             App.Current.MainWindow.SizeChanged += WindowResize;
+            WindowResize(null,null);
         }
 
         private SideNewsVisibilityEnum _sideNewsVisibility;

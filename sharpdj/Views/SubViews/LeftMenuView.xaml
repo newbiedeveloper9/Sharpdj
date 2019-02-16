@@ -16,63 +16,70 @@
 
     <!--LeftMenu-->
     <Grid Background="#1C1C1C">
-        <StackPanel Margin="0 24 0 0">
-            <!--Active Rooms-->
-            <Grid Margin="0 0 0 6">
-                <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Left" Padding="24 0 12 0">
-                    <TextBlock Style="{StaticResource TextIconicButton}" Text="AKTYWNE POKOJE" Margin="0" Padding="0"/>
-                </Button>
-            </Grid>
-            <StackPanel Orientation="Vertical" Margin="0 0 0 24">
-                <leftMenuComponents1:RoomRectangleView cal:Bind.Model="{Binding RoomRectangleViewModel}"/>
-            </StackPanel>
-
-
-            <!--Playlists-->
-            <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Left" Padding="24 0 12 0" x:Name="ShowPlaylist">
-                <TextBlock Style="{StaticResource TextIconicButton}" Text="PLAYLISTY"/>
-            </Button>
-
-            <StackPanel Margin="0 6 0 6">
-                <ItemsControl x:Name="PlaylistCollection">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Button Style="{StaticResource MaterialDesignFlatButton}"  HorizontalContentAlignment="Left" Padding="24 0 12 0">
-                                <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon Kind="{Binding IsActive,Converter={converters:ActivityStatusToRadioIconConverter}}" Width="12" Height="12" VerticalAlignment="Center" Foreground="White"/>
-                                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="12 0 0 0" Foreground="White" FontWeight="Light"/>
-                                </StackPanel>
-                            </Button>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-
-            </StackPanel>
-
-            <Grid Margin="0 0 0 24">
-                <Button Style="{StaticResource MaterialDesignFlatButton}"  HorizontalContentAlignment="Left" Padding="24 0 12 0" Command="{Binding CreateNewPlaylistCommand}">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="PlaylistAdd" Width="24" Height="24" Foreground="White"/>
-                        <TextBlock Text="STWÓRZ PLAYTLISTE" VerticalAlignment="Center" Margin="12 0 0 0" Foreground="#999999" FontWeight="Normal" FontSize="12"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" FlowDirection="RightToLeft">
+            <Grid FlowDirection="LeftToRight">
+                <StackPanel Margin="0 24 0 64" FlowDirection="LeftToRight">
+                    <!--Active Rooms-->
+                    <Grid Margin="0 0 0 6">
+                        <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Left" Padding="24 0 12 0">
+                            <TextBlock Style="{StaticResource TextIconicButton}" Text="AKTYWNE POKOJE" Margin="0" Padding="0"/>
+                        </Button>
+                    </Grid>
+                    <StackPanel Orientation="Vertical" Margin="0 0 0 24">
+                        <leftMenuComponents1:RoomRectangleView cal:Bind.Model="{Binding RoomRectangleViewModel}"/>
                     </StackPanel>
-                </Button>
+
+
+                    <!--Playlists-->
+                    <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Left" Padding="24 0 12 0" x:Name="ShowPlaylist">
+                        <TextBlock Style="{StaticResource TextIconicButton}" Text="PLAYLISTY"/>
+                    </Button>
+
+                    <StackPanel Margin="0 6 0 6">
+                        <ItemsControl x:Name="PlaylistCollection">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Style="{StaticResource MaterialDesignFlatButton}"  HorizontalContentAlignment="Left" Padding="24 0 12 0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="{Binding IsActive,Converter={converters:ActivityStatusToRadioIconConverter}}" Width="12" Height="12" VerticalAlignment="Center" Foreground="White"/>
+                                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="12 0 0 0" Foreground="White" FontWeight="Light"/>
+                                        </StackPanel>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                    </StackPanel>
+
+                    <Grid Margin="0 0 0 24">
+                        <Button Style="{StaticResource MaterialDesignFlatButton}"  HorizontalContentAlignment="Left" Padding="24 0 12 0" Command="{Binding CreateNewPlaylistCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="PlaylistAdd" Width="24" Height="24" Foreground="White"/>
+                                <TextBlock Text="STWÓRZ PLAYTLISTE" VerticalAlignment="Center" Margin="12 0 0 0" Foreground="#999999" FontWeight="Normal" FontSize="12"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+                    <!--Observed-->
+                    <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Left" Padding="24 0 12 0" Command="{Binding ShowMyLibraryCommand}">
+                        <TextBlock Style="{StaticResource TextIconicButton}" Text="OBSERWOWANE"/>
+                    </Button>
+
+                    <StackPanel Margin="0 6 0 0" >
+                        <leftMenuComponents1:ObservedRoomView cal:Bind.Model="{Binding ObservedRoomViewModel}"/>
+                    </StackPanel>
+                </StackPanel>
+                <!--Biblioteka-->
+                <Grid VerticalAlignment="Bottom" Margin="0 0 0 0">
+                    <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Left" Command="{Binding ShowMyLibraryCommand}" Padding="0">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Bookmark" VerticalAlignment="Center" Margin="12 0 0 0" Height="18" Width="24" Foreground="{StaticResource PrimaryHueDarkForegroundBrush}"/>
+                            <TextBlock Style="{StaticResource TextIconicButton}" Text="BIBLIOTEKA" Margin="12 0 0 0"/>
+                            
+                        </StackPanel>
+                    </Button>
+                </Grid>
             </Grid>
-
-            <!--Observed-->
-            <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Left" Padding="24 0 12 0" Command="{Binding ShowMyLibraryCommand}">
-                <TextBlock Style="{StaticResource TextIconicButton}" Text="OBSERWOWANE"/>
-            </Button>
-
-            <StackPanel Margin="0 6 0 0" >
-                <leftMenuComponents1:ObservedRoomView cal:Bind.Model="{Binding ObservedRoomViewModel}"/>
-            </StackPanel>
-        </StackPanel>
-        <!--Biblioteka-->
-        <Grid VerticalAlignment="Bottom" Background="#1C1C1C">
-            <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Left" Padding="24 0 12 0" Command="{Binding ShowMyLibraryCommand}">
-                <TextBlock Style="{StaticResource TextIconicButton}" Text="BIBLIOTEKA"/>
-            </Button>
-        </Grid>
-
+        </ScrollViewer>
     </Grid>
 </UserControl>
