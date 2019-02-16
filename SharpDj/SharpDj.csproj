@@ -161,6 +161,7 @@
     <Compile Include="Enums\User\UserProfile.cs" />
     <Compile Include="Enums\Playlist\PlaylistState.cs" />
     <Compile Include="Enums\User\UserState.cs" />
+    <Compile Include="Input\CAllViewmodelMethod.cs" />
     <Compile Include="Input\UserValidation.cs" />
     <Compile Include="Input\KeySequence.cs" />
     <Compile Include="Input\KeyTrigger.cs" />

@@ -9,6 +9,7 @@
              xmlns:mainViewComponents="clr-namespace:SharpDj.ViewModels.SubViews.MainViewComponents"
              xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
              xmlns:sharpDj="clr-namespace:SharpDj"
+             xmlns:input="clr-namespace:SharpDj.Input"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=subViews:TopMenuViewModel, IsDesignTimeCreatable=True}"
              cal:Bind.AtDesignTime="True"
@@ -37,6 +38,12 @@
             </Button>
         </StackPanel>
 
-        <Grid cal:Message.Attach="[Event MouseLeftButtonDown]=[Action DragWindow]" Background="Transparent"/>
-    </Grid>
+        <Grid Cursor=""
+                cal:Message.Attach="[Event MouseLeftButtonDown]=[Action DragWindow];" Background="Transparent">
+            <Grid.InputBindings>
+                <MouseBinding Gesture="LeftDoubleClick"
+                              Command="{input:CallViemodelMethod MaximizeApplication}" />
+            </Grid.InputBindings>
+        </Grid>
+        </Grid>
 </UserControl>
