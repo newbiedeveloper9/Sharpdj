@@ -43,7 +43,7 @@
                 </Button>
             </DockPanel>
 
-            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="12 6 18 12">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" Grid.Row="1" Padding="12 6 18 12" x:Name="ScrollViewer" ScrollChanged="ScrollViewer_ScrollChanged">
                 <StackPanel>
                     <ItemsControl x:Name="CommentsCollection">
                         <ItemsControl.ItemTemplate>
