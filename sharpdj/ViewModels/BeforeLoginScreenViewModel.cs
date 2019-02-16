@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using SharpDj.PubSubModels;
 using SharpDj.ViewModels.BeforeLoginComponents;
+using System;
 
 namespace SharpDj.ViewModels
 {
@@ -18,7 +14,7 @@ namespace SharpDj.ViewModels
 
         public BeforeLoginScreenViewModel()
         {
-            
+
         }
 
         public BeforeLoginScreenViewModel(IEventAggregator eventAggregator)
@@ -26,10 +22,8 @@ namespace SharpDj.ViewModels
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
 
-            LoginViewModel = new LoginViewModel(_eventAggregator);
-            RegisterViewModel = new RegisterViewModel(_eventAggregator);
-
-            ActivateItem(LoginViewModel);
+            ActivateItem(new LoginViewModel(_eventAggregator));
+            /*Creates a new Bindings to View each time*/
         }
 
         public void Handle(ILoginRegisterAgentHandler message)
@@ -37,10 +31,10 @@ namespace SharpDj.ViewModels
             switch (message.MoveTo)
             {
                 case MoveTo.Login:
-                    ActivateItem(LoginViewModel);
+                    ActivateItem(new LoginViewModel(_eventAggregator));
                     break;
                 case MoveTo.Register:
-                    ActivateItem(RegisterViewModel);
+                    ActivateItem(new RegisterViewModel(_eventAggregator));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

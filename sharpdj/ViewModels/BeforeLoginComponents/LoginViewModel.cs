@@ -1,5 +1,4 @@
 ﻿using Caliburn.Micro;
-using System;
 using System.Security;
 using SharpDj.PubSubModels;
 
