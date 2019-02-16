@@ -3,13 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SharpDj.Views.SubViews"
              mc:Ignorable="d" 
              xmlns:cal="http://www.caliburnproject.org"
              xmlns:beforeLoginComponents="clr-namespace:SharpDj.ViewModels.BeforeLoginComponents"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:helpers="clr-namespace:SharpDj.ViewModel.Helpers"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:helpers="clr-namespace:SharpDj.deprecatedViewModel.Helpers"
              cal:Bind.AtDesignTime="True"
              d:DataContext="{d:DesignInstance Type=beforeLoginComponents:LoginViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="700" d:DesignWidth="1300">
@@ -57,7 +56,7 @@
 
                     <StackPanel Orientation="Horizontal" Margin="4 4 0 0">
                         <TextBlock Text="Or" VerticalAlignment="Center" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="create a new account" Margin="1 0 0 0" Padding="4 0 4 0" x:Name="Register"/>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="create a new account" Margin="1 0 0 0"  Padding="4 0 4 0" x:Name="Register"/>
                     </StackPanel>
                 </StackPanel>
             </materialDesign:Card>

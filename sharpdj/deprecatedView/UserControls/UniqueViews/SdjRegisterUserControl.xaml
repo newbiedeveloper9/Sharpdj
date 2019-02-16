@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:SharpDj.View.UserControls"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:helpers="clr-namespace:SharpDj.ViewModel.Helpers"
+             xmlns:helpers1="clr-namespace:SharpDj.deprecatedViewModel.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
@@ -19,7 +20,7 @@
             <Label Content="Password"/>
             <PasswordBox>
                 <i:Interaction.Behaviors>
-                    <helpers:PasswordBoxBindingBehavior Password="{Binding Password}"/>
+                    <helpers1:PasswordBoxBindingBehavior Password="{Binding Password}"/>
                 </i:Interaction.Behaviors>
             </PasswordBox>
 

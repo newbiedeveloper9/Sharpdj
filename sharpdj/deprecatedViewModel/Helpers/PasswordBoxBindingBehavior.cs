@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Interactivity;
 
-namespace SharpDj.ViewModel.Helpers
+namespace SharpDj.deprecatedViewModel.Helpers
 {
     public class PasswordBoxBindingBehavior : Behavior<PasswordBox>
     {

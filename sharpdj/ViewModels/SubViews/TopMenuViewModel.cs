@@ -1,8 +1,9 @@
 ﻿using System.Windows;
+using Caliburn.Micro;
 
 namespace SharpDj.ViewModels.SubViews
 {
-    public class TopMenuViewModel
+    public class TopMenuViewModel : PropertyChangedBase
     {
         public TopMenuViewModel()
         {

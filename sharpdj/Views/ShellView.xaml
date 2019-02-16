@@ -5,7 +5,7 @@
         TextElement.FontSize="14"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        ResizeMode="CanResizeWithGrip"
+        ResizeMode="CanResize"
         AllowsTransparency="True"
         WindowStyle="None"
         UseLayoutRounding="True"
@@ -18,7 +18,12 @@
         mc:Ignorable="d"
         cal:Bind.AtDesignTime="True"
         d:DataContext="{d:DesignInstance Type=viewModels:ShellViewModel, IsDesignTimeCreatable=True}"
-        Title="ShellView" Height="720" Width="1366" MinWidth="1015" MinHeight="540">
+       
+        Title="ShellView" MinWidth="1015" MinHeight="540">
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="0" CornerRadius="0" CaptionHeight="0" 
+                      UseAeroCaptionButtons="False" ResizeBorderThickness="7" />
+    </WindowChrome.WindowChrome>
     <Grid>
         <Grid>
             <Grid.RowDefinitions>

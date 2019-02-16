@@ -9,6 +9,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:helpers="clr-namespace:SharpDj.ViewModel.Helpers"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:helpers1="clr-namespace:SharpDj.deprecatedViewModel.Helpers"
              cal:Bind.AtDesignTime="True"
              d:DataContext="{d:DesignInstance Type=beforeLoginComponents:RegisterViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="700" d:DesignWidth="800">
@@ -38,7 +39,7 @@
                            Margin="0 0 0 6" HorizontalAlignment="Left" Opacity="0.6" FontWeight="Bold" FontSize="12"/>
                         <PasswordBox Width="350" x:Name="PasswordText">
                             <i:Interaction.Behaviors>
-                                <helpers:PasswordBoxBindingBehavior Password="{Binding PasswordText}"/>
+                                <helpers1:PasswordBoxBindingBehavior Password="{Binding PasswordText}"/>
                             </i:Interaction.Behaviors>
                         </PasswordBox>
                         <TextBlock Text="Your password must be between 6 and 32 characters" Foreground="{StaticResource PrimaryHueLightBrush}" Margin="0 6 0 0" Opacity="0.35"/>
