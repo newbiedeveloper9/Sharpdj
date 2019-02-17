@@ -190,6 +190,7 @@
     <Compile Include="Logic\Helpers\Updater\FTPModel.cs" />
     <Compile Include="Logic\Helpers\Updater\GetSourcePage.cs" />
     <Compile Include="Logic\Helpers\YoutubeSingleton.cs" />
+    <Compile Include="Logic\UI\ScrollViewerLogic.cs" />
     <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Models\NewsModel.cs" />
     <Compile Include="Models\PlaylistModel.cs" />

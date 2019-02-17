@@ -43,7 +43,7 @@
                 </Button>
             </DockPanel>
 
-            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="12 6 18 12" cal:Message.Attach="[Event ScrollChanged]=[Action ScrollChanged($source)]">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="12 6 18 12" cal:Message.Attach="[Event Loaded]=[Action ScrollLoaded($source)]">
                 <StackPanel>
                     <ItemsControl x:Name="CommentsCollection">
                         <ItemsControl.ItemTemplate>

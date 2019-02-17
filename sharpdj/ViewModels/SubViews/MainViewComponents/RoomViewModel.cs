@@ -60,10 +60,8 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
             scrollViewerLogic.ScrollToDown();
         }
 
-        public void ScrollChanged(ScrollViewer scrollViewer)
+        public void ScrollLoaded(ScrollViewer scrollViewer)
         {
-            if (scrollViewerLogic != null) return;
-
             scrollViewerLogic = new ScrollViewerLogic(scrollViewer);
             scrollViewerLogic.ScrollNotOnBottom +=
                 (sender, args) => ScrollToBottomIsVisible = !scrollViewerLogic.CanScrollDown;
