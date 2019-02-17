@@ -48,6 +48,7 @@ namespace SharpDj.Input
             var key = (e.Key == Key.System) ? e.SystemKey : e.Key;
             if ((key == Key) && (Keyboard.Modifiers == GetActualModifiers(e.Key, Modifiers)))
             {
+
                 InvokeActions(e);
             }
         }

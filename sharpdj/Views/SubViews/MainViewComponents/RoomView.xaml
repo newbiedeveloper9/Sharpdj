@@ -43,7 +43,7 @@
                 </Button>
             </DockPanel>
 
-            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="12 6 18 12" x:Name="ScrollViewer" ScrollChanged="ScrollViewer_ScrollChanged">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="12 6 18 12" cal:Message.Attach="[Event ScrollChanged]=[Action ScrollChanged($source)]">
                 <StackPanel>
                     <ItemsControl x:Name="CommentsCollection">
                         <ItemsControl.ItemTemplate>
@@ -58,15 +58,15 @@
                     </ItemsControl>
                 </StackPanel>
             </ScrollViewer>
-            <Grid Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ChatToBottomIsVisible">
-                <Button x:Name="ChatToBottom">
+            <Grid Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ScrollToBottomIsVisible">
+                <Button x:Name="ScrollToBottom">
                     <materialDesign:PackIcon Kind="ArrowCollapseDown"></materialDesign:PackIcon>
                 </Button>
             </Grid>
             <Grid Grid.Row="2">
                 <StackPanel>
                     <TextBox Style="{StaticResource MaterialDesignTextBox}" Margin="12 0 12 12" x:Name="MessageText"
-                             cal:Message.Attach="[Key Enter]=[SendMessage];"/>
+                             cal:Message.Attach="[Key Enter]=[SendChatMessage];"/>
                     <DockPanel Margin="12 0 12 12">
                         <Button Style="{StaticResource MaterialDesignFlatButton}" >
                             <Grid>
@@ -74,7 +74,7 @@
                             </Grid>
                         </Button>
 
-                        <Button HorizontalAlignment="Right" x:Name="SendMessage">
+                        <Button HorizontalAlignment="Right" x:Name="SendChatMessage">
                             <Grid>
                                 <TextBlock Text="Chat"/>
                             </Grid>

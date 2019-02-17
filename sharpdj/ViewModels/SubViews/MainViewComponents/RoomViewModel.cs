@@ -1,12 +1,15 @@
-﻿using Caliburn.Micro;
+﻿using System;
+using Caliburn.Micro;
+using SharpDj.Logic.UI;
 using SharpDj.Models;
 using SharpDj.Views.SubViews.MainViewComponents;
+using System.Windows.Controls;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents
 {
-    public class RoomViewModel : Screen
+    public class RoomViewModel : PropertyChangedBase
     {
-        private RoomView _view;
+        private ScrollViewerLogic scrollViewerLogic;
         public BindableCollection<CommentModel> CommentsCollection { get; private set; }
 
         public RoomViewModel()
@@ -18,15 +21,6 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
                 new CommentModel(){Author = "Jeff Diggins", Comment = "Testowy tekst XD"},
                 new CommentModel(){Author = "XDDDDDDD", Comment = "TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest"},
             };
-        }
-
-        protected override void OnViewLoaded(object view)
-        {
-            _view = view as RoomView;
-            _view.CanScrollDown += (sender, args) =>
-                ChatToBottomIsVisible = _view.Test;
-
-            base.OnViewLoaded(view);
         }
 
         private string _messageText;
@@ -41,29 +35,38 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
             }
         }
 
-        private bool _chatToToBottomIsVisible = false;
-        public bool ChatToBottomIsVisible
-        {
-            get => _chatToToBottomIsVisible;
-            set
-            {
-                if (_chatToToBottomIsVisible == value) return;
-                _chatToToBottomIsVisible = value;
-                NotifyOfPropertyChange(() => ChatToBottomIsVisible);
-            }
-        }
-
-        public void ChatToBottom()
-        {
-            _view.ChatScrollDown();
-        }
-
-        public void SendMessage()
+        public void SendChatMessage()
         {
             if (string.IsNullOrWhiteSpace(MessageText)) return;
 
             CommentsCollection.Add(new CommentModel() { Author = "Crisey", Comment = MessageText });
             MessageText = string.Empty;
+        }
+
+
+        private bool _scrollToBottomIsVisible = false;
+        public bool ScrollToBottomIsVisible
+        {
+            get => _scrollToBottomIsVisible;
+            set
+            {
+                if (_scrollToBottomIsVisible == value) return;
+                _scrollToBottomIsVisible = value;
+                NotifyOfPropertyChange(() => ScrollToBottomIsVisible);
+            }
+        }
+        public void ScrollToBottom()
+        {
+            scrollViewerLogic.ScrollToDown();
+        }
+
+        public void ScrollChanged(ScrollViewer scrollViewer)
+        {
+            if (scrollViewerLogic != null) return;
+
+            scrollViewerLogic = new ScrollViewerLogic(scrollViewer);
+            scrollViewerLogic.ScrollNotOnBottom +=
+                (sender, args) => ScrollToBottomIsVisible = !scrollViewerLogic.CanScrollDown;
         }
     }
 }

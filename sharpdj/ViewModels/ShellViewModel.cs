@@ -22,7 +22,12 @@ namespace SharpDj.ViewModels
             AfterLoginScreenViewModel = new AfterLoginScreenViewModel(_eventAggregator);
             BeforeLoginScreenViewModel = new BeforeLoginScreenViewModel(_eventAggregator);
 
+#if DEBUG
+            ActivateItem(AfterLoginScreenViewModel);
+#else  
             ActivateItem(BeforeLoginScreenViewModel);
+#endif
+
         }
 
         public void Handle(ILoginPublishInfo message)
