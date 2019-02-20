@@ -11,6 +11,13 @@ namespace SharpDj.ViewModels
         public LeftMenuViewModel LeftMenuViewModel { get; private set; }
         public SearchMenuViewModel SearchMenuViewModel { get; private set; }
 
+        public AfterLoginScreenViewModel()
+        {
+            MainViewModel = new MainViewModel();
+            LeftMenuViewModel = new LeftMenuViewModel();
+            SearchMenuViewModel = new SearchMenuViewModel();
+        }
+
         public AfterLoginScreenViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;

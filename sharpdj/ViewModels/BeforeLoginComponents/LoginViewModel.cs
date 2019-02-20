@@ -1,6 +1,7 @@
 ﻿using System;
 using Caliburn.Micro;
 using System.Security;
+using SharpDj.Enums;
 using SharpDj.PubSubModels;
 
 namespace SharpDj.ViewModels.BeforeLoginComponents
@@ -58,7 +59,7 @@ namespace SharpDj.ViewModels.BeforeLoginComponents
 
         public void Register()
         {
-            _eventAggregator.PublishOnUIThread(new LoginRegisterAgentHandler(MoveTo.Register));
+            _eventAggregator.PublishOnUIThread(BeforeLoginEnum.Register);
         }
     }
 }

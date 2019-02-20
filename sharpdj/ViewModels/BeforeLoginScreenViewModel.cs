@@ -2,10 +2,11 @@
 using SharpDj.PubSubModels;
 using SharpDj.ViewModels.BeforeLoginComponents;
 using System;
+using SharpDj.Enums;
 
 namespace SharpDj.ViewModels
 {
-    public class BeforeLoginScreenViewModel : Conductor<object>.Collection.OneActive, IHandle<ILoginRegisterAgentHandler>
+    public class BeforeLoginScreenViewModel : Conductor<object>.Collection.OneActive, IHandle<BeforeLoginEnum>
     {
         private readonly IEventAggregator _eventAggregator;
 
@@ -26,14 +27,14 @@ namespace SharpDj.ViewModels
             /*Creates a new Bindings to View each time*/
         }
 
-        public void Handle(ILoginRegisterAgentHandler message)
+        public void Handle(BeforeLoginEnum message)
         {
-            switch (message.MoveTo)
+            switch (message)
             {
-                case MoveTo.Login:
+                case BeforeLoginEnum.Login:
                     ActivateItem(new LoginViewModel(_eventAggregator));
                     break;
-                case MoveTo.Register:
+                case BeforeLoginEnum.Register:
                     ActivateItem(new RegisterViewModel(_eventAggregator));
                     break;
                 default:

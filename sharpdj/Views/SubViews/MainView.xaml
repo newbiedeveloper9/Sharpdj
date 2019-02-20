@@ -7,11 +7,28 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:subViews="clr-namespace:SharpDj.ViewModels.SubViews"
+        xmlns:converters="clr-namespace:SharpDj.Converters"
         mc:Ignorable="d" 
         cal:Bind.AtDesignTime="True"
         d:DataContext="{d:DesignInstance Type=subViews:MainViewModel, IsDesignTimeCreatable=True}"
         d:DesignWidth="1300" d:DesignHeight="728">
     <Grid >
         <ContentControl x:Name="ActiveItem"/>
+
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 4 36 0"
+            Visibility="{Binding RollingMenuVisibility,
+            Converter={converters:EnumToVisibilityConverter},
+            ConverterParameter='Options'}"  Width="300">
+
+            <mainViewComponents:ProfileOptionsView cal:Bind.Model="{Binding Path=ProfileOptionsViewModel}"/>
+        </Grid>
+
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 4 148 0"
+            Visibility="{Binding RollingMenuVisibility,
+            Converter={converters:EnumToVisibilityConverter},
+            ConverterParameter='Conversations'}"  Width="300">
+
+            <mainViewComponents:ConversationsView cal:Bind.Model="{Binding Path=ConversationsViewModel}"/>
+        </Grid>
     </Grid>
 </UserControl>

@@ -13,6 +13,7 @@ namespace SharpDj.Converters
                 throw new ArgumentException("Value not of type Activity");
 
             var val = (RoomModel.Activity)value;
+
             switch (val)
             {
                 case RoomModel.Activity.Active:

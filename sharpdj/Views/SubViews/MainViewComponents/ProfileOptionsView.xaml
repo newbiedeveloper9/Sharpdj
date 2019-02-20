@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="SharpDj.Views.SubViews.MainViewComponents.ProfileOptionsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converters="clr-namespace:SharpDj.Converters"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:mainViewComponents="clr-namespace:SharpDj.ViewModels.SubViews.MainViewComponents"
+             mc:Ignorable="d" 
+             cal:Bind.AtDesignTime="True"
+             d:DataContext="{d:DesignInstance Type=mainViewComponents:ProfileOptionsViewModel, IsDesignTimeCreatable=True}"
+             d:DesignHeight="500" d:DesignWidth="300">
+    <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth3" Background="#232323">
+        <StackPanel>
+            <Grid ZIndex="1">
+                <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth3" Background="#111111">
+                    <Button Height="70" BorderBrush="Transparent" Style="{StaticResource MaterialDesignFlatButton}" Foreground="{StaticResource MaterialDesignDarkForeground}" x:Name="ShowProfile">
+                        <StackPanel HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                                <TextBlock FontSize="20" Text="Hello " FontWeight="Regular"/>
+                                <TextBlock Text="{Binding Username}" FontSize="20" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>
+                                <TextBlock FontSize="20" Text="," FontWeight="Regular"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Your rank is " FontWeight="Light" FontSize="18"/>
+                                <TextBlock Text="{Binding Role}" Foreground="{Binding Role, Converter={converters:RoleToBrushConverter}}" HorizontalAlignment="Center"
+                       FontWeight="Regular" FontSize="18"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Button>
+                </materialDesign:Card>
+            </Grid>
+
+            <StackPanel Margin="0 12 0 24">
+                <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Left" Margin="0 6 0 0">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="People" VerticalAlignment="Center" Width="24" Height="24" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
+                        <TextBlock Text="Your friends" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="16" FontWeight="Regular" VerticalAlignment="Center" Margin="24 0 0 0"/>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Left" Margin="0 6 0 0">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Settings" VerticalAlignment="Center" Width="24" Height="24" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
+                        <TextBlock Text="Change settings" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="16" FontWeight="Regular" VerticalAlignment="Center" Margin="24 0 0 0"/>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Left" Margin="0 6 0 0">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Logout" VerticalAlignment="Center" Width="24" Height="24" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
+                        <TextBlock Text="Logout" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="16" FontWeight="Regular" VerticalAlignment="Center" Margin="24 0 0 0"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </materialDesign:Card>
+</UserControl>

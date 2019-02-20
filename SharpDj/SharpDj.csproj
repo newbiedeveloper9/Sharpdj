@@ -128,8 +128,8 @@
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
-    <Reference Include="YoutubeExplode, Version=4.6.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\YoutubeExplode.4.6.4\lib\net45\YoutubeExplode.dll</HintPath>
+    <Reference Include="YoutubeExplode, Version=4.6.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YoutubeExplode.4.6.5\lib\net45\YoutubeExplode.dll</HintPath>
     </Reference>
     <Reference Include="YoutubeExplode.Converter, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\YoutubeExplode.Converter.1.4.0\lib\net45\YoutubeExplode.Converter.dll</HintPath>
@@ -146,17 +146,20 @@
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
     <Compile Include="Converters\EnumToVisibilityConverter.cs" />
     <Compile Include="Converters\NameToContentConverter.cs" />
+    <Compile Include="Converters\RoleToBrushConverter.cs" />
     <Compile Include="Core\BaseViewModel.cs" />
     <Compile Include="Core\Extensions\CommandBase.cs" />
     <Compile Include="Core\Extensions\Extensions.cs" />
     <Compile Include="Core\Extensions\NotifyObject.cs" />
     <Compile Include="Core\Extensions\RelayCommand.cs" />
     <Compile Include="Core\RelayCommand.cs" />
+    <Compile Include="Enums\BeforeLoginEnum.cs" />
     <Compile Include="Enums\Helpers\GetImageVisibility.cs" />
     <Compile Include="Enums\Menu\LeftBar.cs" />
     <Compile Include="Enums\Menu\MainView.cs" />
     <Compile Include="Enums\Playlist\Playlist.cs" />
     <Compile Include="Enums\Playlist\PlaylistMode.cs" />
+    <Compile Include="Enums\RollingMenuVisibilityEnum.cs" />
     <Compile Include="Enums\SideNewsVisibilityEnum.cs" />
     <Compile Include="Enums\User\UserProfile.cs" />
     <Compile Include="Enums\Playlist\PlaylistState.cs" />
@@ -196,7 +199,6 @@
     <Compile Include="Models\PlaylistModel.cs" />
     <Compile Include="Models\RoomModel.cs" />
     <Compile Include="PubSubModels\LoginPublishInfo.cs" />
-    <Compile Include="PubSubModels\LoginRegisterAgentHandler.cs" />
     <Compile Include="PubSubModels\NavigateToHome.cs" />
     <Compile Include="PubSubModels\RoomInfoForOpen.cs" />
     <Compile Include="ViewModels\AfterLoginScreenViewModel.cs" />
@@ -207,7 +209,9 @@
     <Compile Include="ViewModels\SubViews\LeftMenuComponents\ObservedRoomViewModel.cs" />
     <Compile Include="ViewModels\SubViews\LeftMenuComponents\RoomRectangleViewModel.cs" />
     <Compile Include="ViewModels\SubViews\LeftMenuViewModel.cs" />
+    <Compile Include="ViewModels\SubViews\MainViewComponents\ConversationsViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\MajorViewComponents\NewsCarouselViewModel.cs" />
+    <Compile Include="ViewModels\SubViews\MainViewComponents\ProfileOptionsViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\MajorViewComponents\RoomSquareViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
@@ -333,6 +337,12 @@
     <Compile Include="Views\SubViews\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SubViews\MainViewComponents\ConversationsView.xaml.cs">
+      <DependentUpon>ConversationsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubViews\MainViewComponents\ProfileOptionsView.xaml.cs">
+      <DependentUpon>ProfileOptionsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SubViews\MainViewComponents\MajorScreenView.xaml.cs">
       <DependentUpon>MajorScreenView.xaml</DependentUpon>
     </Compile>
@@ -403,6 +413,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SubViews\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SubViews\MainViewComponents\ConversationsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SubViews\MainViewComponents\ProfileOptionsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

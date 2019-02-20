@@ -3,6 +3,7 @@ using SharpDj.Input;
 using SharpDj.PubSubModels;
 using System.ComponentModel;
 using System.Security;
+using SharpDj.Enums;
 
 namespace SharpDj.ViewModels.BeforeLoginComponents
 {
@@ -118,7 +119,7 @@ namespace SharpDj.ViewModels.BeforeLoginComponents
 
         public void GotoLogin()
         {
-            _eventAggregator.PublishOnUIThread(new LoginRegisterAgentHandler(MoveTo.Login));
+            _eventAggregator.PublishOnUIThread(BeforeLoginEnum.Login);
         }
 
         public string this[string columnName]
