@@ -195,6 +195,7 @@
     <Compile Include="Logic\Helpers\YoutubeSingleton.cs" />
     <Compile Include="Logic\UI\ScrollViewerLogic.cs" />
     <Compile Include="Models\CommentModel.cs" />
+    <Compile Include="Models\ConversationModel.cs" />
     <Compile Include="Models\NewsModel.cs" />
     <Compile Include="Models\PlaylistModel.cs" />
     <Compile Include="Models\RoomModel.cs" />

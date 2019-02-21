@@ -1,5 +1,7 @@
-﻿using Caliburn.Micro;
+﻿using System.Windows.Media;
+using Caliburn.Micro;
 using SharpDj.Enums;
+using SharpDj.Models;
 using SharpDj.PubSubModels;
 
 namespace SharpDj.ViewModels.SubViews
@@ -7,11 +9,19 @@ namespace SharpDj.ViewModels.SubViews
     public class SearchMenuViewModel : PropertyChangedBase, IHandle<RollingMenuVisibilityEnum>
     {
         private readonly IEventAggregator _eventAggregator;
+        public BindableCollection<ConversationModel> ConversationsCollection { get; private set; }
 
         public SearchMenuViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
+
+
+            ConversationsCollection = new BindableCollection<ConversationModel>()
+            {
+                new ConversationModel(){BadgeCount = 0, Color = Brushes.BlueViolet, Name = "Jeff Diggins"},
+                new ConversationModel(){BadgeCount = 2, Color = Brushes.BlueViolet, Name = "Jeff Diggins"},
+            };
         }
 
         public SearchMenuViewModel()
