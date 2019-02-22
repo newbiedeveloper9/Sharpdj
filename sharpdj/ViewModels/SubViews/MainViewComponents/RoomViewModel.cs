@@ -7,7 +7,8 @@ using System.Windows.Controls;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents
 {
-    public class RoomViewModel : PropertyChangedBase
+    public class RoomViewModel : PropertyChangedBase,
+        INavMainView
     {
         private ScrollViewerLogic scrollViewerLogic;
         public BindableCollection<CommentModel> CommentsCollection { get; private set; }

@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:mainViewComponents="clr-namespace:SharpDj.ViewModels.SubViews.MainViewComponents"
              xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
              xmlns:subViews="clr-namespace:SharpDj.ViewModels.SubViews"
              xmlns:leftMenuComponents1="clr-namespace:SharpDj.Views.SubViews.LeftMenuComponents"
@@ -39,7 +38,7 @@
                         <ItemsControl x:Name="PlaylistCollection">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Button Style="{StaticResource MaterialDesignFlatButton}"  HorizontalContentAlignment="Left" Padding="24 0 12 0">
+                                    <Button Style="{StaticResource MaterialDesignFlatButton}"  HorizontalContentAlignment="Left" Padding="24 0 12 0" cal:Message.Attach="[Event Click]=[ActivatePlaylist($dataContext)]">
                                         <StackPanel Orientation="Horizontal">
                                             <materialDesign:PackIcon Kind="{Binding IsActive,Converter={converters:ActivityStatusToRadioIconConverter}}" Width="12" Height="12" VerticalAlignment="Center" Foreground="White"/>
                                             <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="12 0 0 0" Foreground="White" FontWeight="Light"/>
@@ -75,7 +74,7 @@
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Bookmark" VerticalAlignment="Center" Margin="12 0 0 0" Height="18" Width="24" Foreground="{StaticResource PrimaryHueDarkForegroundBrush}"/>
                             <TextBlock Style="{StaticResource TextIconicButton}" Text="BIBLIOTEKA" Margin="12 0 0 0"/>
-                            
+
                         </StackPanel>
                     </Button>
                 </Grid>

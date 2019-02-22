@@ -4,9 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
              xmlns:converters="clr-namespace:SharpDj.Converters"
+             xmlns:subViews="clr-namespace:SharpDj.ViewModels.SubViews"
+             xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d" 
+             cal:Bind.AtDesignTime="True"
+             d:DataContext="{d:DesignInstance Type=subViews:SearchMenuViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="50" d:DesignWidth="1300">
     <Grid Background="#232323">
         <Grid.ColumnDefinitions>
@@ -46,26 +49,26 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Height="50" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFlatButton}"
-                                Foreground="{StaticResource MaterialDesignDarkForeground}" Margin="0 6 6 0" Padding="6 0 12 0">
-                            <StackPanel Orientation="Horizontal" Height="50" Margin="12 0 0 0">
-                                <Grid Margin="0 0 12 0" Visibility="{Binding BadgeIsVisible, Converter={converters:BoolVisibilityConverter}}">
-                                    <materialDesign:Badged Badge="{Binding BadgeCount}" BadgePlacementMode="Left" Height="50"
+                        <Grid>
+                            <Button Height="45" Style="{StaticResource MaterialDesignFlatButton}"
+                                Foreground="{StaticResource MaterialDesignDarkForeground}" Margin="0 18 6 0" Padding="6 0 6 0">
+                                <StackPanel Orientation="Horizontal" Height="45" Margin="0 0 0 0">
+                                    <Grid Margin="12 4 12 0" Visibility="{Binding BadgeIsVisible, Converter={converters:BoolVisibilityConverter}}">
+                                        <materialDesign:Badged Badge="{Binding BadgeCount}" BadgePlacementMode="Left" Height="32"
                                      BadgeBackground="#cc3015"/>
-                                </Grid>
-                                <DockPanel>
+                                    </Grid>
                                     <Grid>
                                         <TextBlock Text="{Binding Name}" MaxWidth="108" TextTrimming="CharacterEllipsis" 
-                                                   VerticalAlignment="Center" Margin="4 0 4 0"/>
+                                                   VerticalAlignment="Center" Margin="4 0 4 8"/>
                                         <Grid Background="{StaticResource PrimaryHueLightBrush}" Height="4" 
                                               Margin="0 0 0 6" VerticalAlignment="Bottom"/>
                                     </Grid>
-                                    <Button Padding="0" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignFlatButton}"  VerticalAlignment="Top">
-                                        <materialDesign:PackIcon Kind="CloseCircleOutline" Foreground="{StaticResource MaterialDesignLightBackground}"/>
-                                    </Button>
-                                </DockPanel>
-                            </StackPanel>
-                        </Button>
+                                </StackPanel>
+                            </Button>
+                            <Button Padding="2" Margin="0 3 8 0" HorizontalAlignment="Right" VerticalAlignment="Top" Background="Transparent" BorderBrush="Transparent">
+                                <materialDesign:PackIcon Kind="CloseCircleOutline"  Foreground="{StaticResource MaterialDesignDarkForeground}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Button>
+                        </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

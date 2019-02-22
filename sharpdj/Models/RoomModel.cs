@@ -119,32 +119,5 @@ namespace SharpDj.Models
             Sleep,
             InActive
         }
-
-        public class Track : PropertyChangedBase
-        {
-            private int _id;
-            public int Id
-            {
-                get => _id;
-                set
-                {
-                    if (_id == value) return;
-                    _id = value;
-                    NotifyOfPropertyChange(() => Id);
-                }
-            }
-
-            private string _name;
-            public string Name
-            {
-                get => _name;
-                set
-                {
-                    if (_name == value) return;
-                    _name = value;
-                    NotifyOfPropertyChange(() => Name);
-                }
-            }
-        }
     }
 }

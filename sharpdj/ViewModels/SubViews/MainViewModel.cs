@@ -2,28 +2,39 @@
 using SharpDj.Enums;
 using SharpDj.PubSubModels;
 using SharpDj.ViewModels.SubViews.MainViewComponents;
+using System.Collections.Generic;
 
 
 namespace SharpDj.ViewModels.SubViews
 {
-    public class MainViewModel : Conductor<PropertyChangedBase>.Collection.OneActive, IHandle<IRoomInfoForOpen>, IHandle<INavigateToHome>, IHandle<RollingMenuVisibilityEnum>
+    public class MainViewModel : Conductor<PropertyChangedBase>.Collection.OneActive,
+        IHandle<IRoomInfoForOpen>,
+        IHandle<NavigateMainView>,
+        IHandle<RollingMenuVisibilityEnum>
     {
         private readonly IEventAggregator _eventAggregator;
 
-        public MajorScreenViewModel MajorScreenViewModel { get; private set; }
-        public RoomViewModel RoomViewModel { get; private set; }
+        private Dictionary<NavigateMainView, INavMainView> NavigationDictionary;
+
+        public INavMainView MajorScreenViewModel { get; private set; }
+        public INavMainView RoomViewModel { get; private set; }
+        public INavMainView PlaylistViewModel { get; private set; }
+
         public ProfileOptionsViewModel ProfileOptionsViewModel { get; private set; }
         public ConversationsViewModel ConversationsViewModel { get; private set; }
 
+
         public MainViewModel()
         {
-            MajorScreenViewModel = new MajorScreenViewModel(_eventAggregator);
+            MajorScreenViewModel = new MajorScreenViewModel();
             RoomViewModel = new RoomViewModel();
+            PlaylistViewModel = new PlaylistViewModel();
 
             ProfileOptionsViewModel = new ProfileOptionsViewModel();
             ConversationsViewModel = new ConversationsViewModel();
 
-            ActivateItem(MajorScreenViewModel);
+
+            ActivateItem((PropertyChangedBase)MajorScreenViewModel);
         }
 
         public MainViewModel(IEventAggregator eventAggregator)
@@ -33,11 +44,19 @@ namespace SharpDj.ViewModels.SubViews
 
             MajorScreenViewModel = new MajorScreenViewModel(_eventAggregator);
             RoomViewModel = new RoomViewModel();
+            PlaylistViewModel = new PlaylistViewModel();
 
             ProfileOptionsViewModel = new ProfileOptionsViewModel();
             ConversationsViewModel = new ConversationsViewModel();
 
-            ActivateItem(MajorScreenViewModel);
+            NavigationDictionary = new Dictionary<NavigateMainView, INavMainView>()
+            {
+                {NavigateMainView.Home, MajorScreenViewModel },
+                {NavigateMainView.Playlist, PlaylistViewModel },
+                {NavigateMainView.Room, RoomViewModel },
+            };
+
+            ActivateItem((PropertyChangedBase)NavigationDictionary[NavigateMainView.Home]);
         }
 
         public void Handle(RollingMenuVisibilityEnum message)
@@ -47,14 +66,13 @@ namespace SharpDj.ViewModels.SubViews
 
         public void Handle(IRoomInfoForOpen message)
         {
-            _eventAggregator.PublishOnUIThread(RollingMenuVisibilityEnum.Void);
-            ActivateItem(RoomViewModel);
+            Handle(NavigateMainView.Room);
         }
 
-        public void Handle(INavigateToHome message)
+        public void Handle(NavigateMainView message)
         {
             _eventAggregator.PublishOnUIThread(RollingMenuVisibilityEnum.Void);
-            ActivateItem(MajorScreenViewModel);
+            ActivateItem((PropertyChangedBase)NavigationDictionary[message]);
         }
 
 

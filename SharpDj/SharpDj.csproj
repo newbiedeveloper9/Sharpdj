@@ -157,6 +157,7 @@
     <Compile Include="Enums\Helpers\GetImageVisibility.cs" />
     <Compile Include="Enums\Menu\LeftBar.cs" />
     <Compile Include="Enums\Menu\MainView.cs" />
+    <Compile Include="Enums\NavigateMainView.cs" />
     <Compile Include="Enums\Playlist\Playlist.cs" />
     <Compile Include="Enums\Playlist\PlaylistMode.cs" />
     <Compile Include="Enums\RollingMenuVisibilityEnum.cs" />
@@ -170,6 +171,7 @@
     <Compile Include="Input\KeyTrigger.cs" />
     <Compile Include="Input\MultiKeyGesture.cs" />
     <Compile Include="Input\MultiKeyGestureConverter.cs" />
+    <Compile Include="Interfaces\INavMainView.cs" />
     <Compile Include="Interfaces\IShell.cs" />
     <Compile Include="Interfaces\ITest.cs" />
     <Compile Include="Logic\Client\Client.cs" />
@@ -199,8 +201,8 @@
     <Compile Include="Models\NewsModel.cs" />
     <Compile Include="Models\PlaylistModel.cs" />
     <Compile Include="Models\RoomModel.cs" />
+    <Compile Include="Models\Track.cs" />
     <Compile Include="PubSubModels\LoginPublishInfo.cs" />
-    <Compile Include="PubSubModels\NavigateToHome.cs" />
     <Compile Include="PubSubModels\RoomInfoForOpen.cs" />
     <Compile Include="ViewModels\AfterLoginScreenViewModel.cs" />
     <Compile Include="ViewModels\BeforeLoginComponents\RegisterViewModel.cs" />
@@ -212,6 +214,7 @@
     <Compile Include="ViewModels\SubViews\LeftMenuViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\ConversationsViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\MajorViewComponents\NewsCarouselViewModel.cs" />
+    <Compile Include="ViewModels\SubViews\MainViewComponents\PlaylistViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\ProfileOptionsViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\MajorViewComponents\RoomSquareViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewModel.cs" />
@@ -341,6 +344,9 @@
     <Compile Include="Views\SubViews\MainViewComponents\ConversationsView.xaml.cs">
       <DependentUpon>ConversationsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SubViews\MainViewComponents\PlaylistView.xaml.cs">
+      <DependentUpon>PlaylistView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SubViews\MainViewComponents\ProfileOptionsView.xaml.cs">
       <DependentUpon>ProfileOptionsView.xaml</DependentUpon>
     </Compile>
@@ -418,6 +424,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SubViews\MainViewComponents\ConversationsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SubViews\MainViewComponents\PlaylistView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

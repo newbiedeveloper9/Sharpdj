@@ -23,7 +23,7 @@ namespace SharpDj.ViewModels
             _eventAggregator = eventAggregator;
 
             MainViewModel = new MainViewModel(_eventAggregator);
-            LeftMenuViewModel = new LeftMenuViewModel();
+            LeftMenuViewModel = new LeftMenuViewModel(_eventAggregator);
             SearchMenuViewModel = new SearchMenuViewModel(_eventAggregator);
         }
     }

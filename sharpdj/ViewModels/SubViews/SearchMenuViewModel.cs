@@ -2,7 +2,6 @@
 using Caliburn.Micro;
 using SharpDj.Enums;
 using SharpDj.Models;
-using SharpDj.PubSubModels;
 
 namespace SharpDj.ViewModels.SubViews
 {
@@ -31,7 +30,7 @@ namespace SharpDj.ViewModels.SubViews
 
         public void Home()
         {
-            _eventAggregator.PublishOnUIThread(new NavigateToHome());
+            _eventAggregator.PublishOnUIThread(NavigateMainView.Home);
         }
 
         public void ShowOptions()

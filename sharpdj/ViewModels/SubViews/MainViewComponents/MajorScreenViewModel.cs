@@ -5,7 +5,8 @@ using SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents
 {
-    public class MajorScreenViewModel : PropertyChangedBase
+    public class MajorScreenViewModel : PropertyChangedBase,
+        INavMainView
     {
         private readonly IEventAggregator _eventAggregator;
 

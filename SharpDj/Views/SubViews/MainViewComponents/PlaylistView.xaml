@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="SharpDj.Views.SubViews.MainViewComponents.PlaylistView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SharpDj.Views.SubViews.MainViewComponents"
+             xmlns:mainViewComponents="clr-namespace:SharpDj.ViewModels.SubViews.MainViewComponents"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             cal:Bind.AtDesignTime="True"
+             d:DataContext="{d:DesignInstance Type=mainViewComponents:PlaylistViewModel, IsDesignTimeCreatable=True}"
+             d:DesignHeight="696" d:DesignWidth="1300">
+    <WrapPanel Background="#1c1c1c" Margin="0 12 0 0">
+        <ItemsControl x:Name="TracksCollection">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <materialDesign:Card Margin="24 12 0 24">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="192"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="{Binding ImgSource}"/>
+
+                            <DockPanel Grid.Column="1" Margin="12 12 0 0">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Name}" Foreground="{StaticResource MaterialDesignDarkForeground}" FontWeight="Regular" FontSize="18"/>
+                                    <TextBlock Text="{Binding Author}" Foreground="{StaticResource MaterialDesignDarkForeground}" FontWeight="Light" FontSize="14"/>
+                                </StackPanel>
+                                <TextBlock Text="{Binding Duration}" Foreground="{StaticResource MaterialDesignDarkForeground}"
+                                           FontWeight="Light" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="6"/>
+                            </DockPanel>
+                        </Grid>
+                    </materialDesign:Card>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </WrapPanel>
+</UserControl>
