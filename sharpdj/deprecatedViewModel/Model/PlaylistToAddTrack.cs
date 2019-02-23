@@ -80,7 +80,7 @@ namespace SharpDj.ViewModel.Model
             {
                 if (_track == value) return;
                 _track = value;
-                OnPropertyChanged("Track");
+                OnPropertyChanged("TrackModel");
             }
         }
 

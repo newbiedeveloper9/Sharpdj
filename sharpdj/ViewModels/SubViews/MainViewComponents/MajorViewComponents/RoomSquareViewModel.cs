@@ -20,9 +20,9 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
             _eventAggregator = eventAggregator;
             _eventAggregator.PublishOnUIThread(new object());
 
-            var current = new Track() { Name = "Hashinshin VS NASUS (and Tanks) - Streamhighlights" };
-            var next = new Track() { Name = "jfarr & Willford - Blue Eyes (feat. Hanna Pettersson) | Ninety9Lives Release" };
-            var previous = new Track() { Name = "Finesu - Homecoming (feat. jfarr) | Ninety9Lives Release" };
+            var current = new TrackModel() { Name = "Hashinshin VS NASUS (and Tanks) - Streamhighlights" };
+            var next = new TrackModel() { Name = "jfarr & Willford - Blue Eyes (feat. Hanna Pettersson) | Ninety9Lives Release"};
+            var previous = new TrackModel() { Name = "Finesu - Homecoming (feat. jfarr) | Ninety9Lives Release" };
             var dicPic = @"..\..\..\..\Images\3.jpg";
 
             RoomInstancesCollection = new BindableCollection<RoomModel>()

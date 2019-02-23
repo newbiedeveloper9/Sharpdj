@@ -15,9 +15,9 @@ namespace SharpDj.ViewModels.SubViews
 
             PlaylistCollection = new BindableCollection<PlaylistModel>()
             {
-                new PlaylistModel("Test"),
-                new PlaylistModel("Nowa playlista Criseya", true),
-                new PlaylistModel("XD"),
+                new PlaylistModel(){Name = "test"},
+                new PlaylistModel(){Name = "Testowa długa playlista xd", IsActive = true},
+                new PlaylistModel(){Name = "xd"},
             };
         }
 

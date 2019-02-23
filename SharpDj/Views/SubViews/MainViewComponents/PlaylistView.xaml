@@ -10,32 +10,96 @@
              mc:Ignorable="d" 
              cal:Bind.AtDesignTime="True"
              d:DataContext="{d:DesignInstance Type=mainViewComponents:PlaylistViewModel, IsDesignTimeCreatable=True}"
-             d:DesignHeight="696" d:DesignWidth="1300">
-    <WrapPanel Background="#1c1c1c" Margin="0 12 0 0">
-        <ItemsControl x:Name="TracksCollection">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <materialDesign:Card Margin="24 12 0 24">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="192"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+             d:DesignHeight="696" d:DesignWidth="1000">
+    <Grid>
+        <StackPanel>
+            <WrapPanel Margin="24 12 24 36" Orientation="Horizontal">
+                <ItemsControl x:Name="PlaylistCollection">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Padding="0" Height="80" Opacity="0.8" Style="{StaticResource MaterialDesignFlatButton}" Margin="6">
+                                <RadioButton Height="72" VerticalAlignment="Center" 
+                                     cal:Message.Attach="[Event Checked]=[OnActivePlaylistChanged($dataContext)]" GroupName="Playlist"
+                                     Style="{StaticResource MaterialDesignTabRadioButton}"
+                                     Margin="4"
+                                     IsChecked="{Binding IsActive}">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Name}" FontSize="24" FontWeight="Light" VerticalAlignment="Center"
+                                           Foreground="{StaticResource MaterialDesignDarkForeground}"/>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <materialDesign:PackIcon Kind="Music" Foreground="{StaticResource MaterialDesignDarkForeground}" Width="24" Height="24" 
+                                                             VerticalAlignment="Center" />
+                                            <TextBlock Text="{Binding TrackCollection.Count}" FontSize="24" FontWeight="Regular" VerticalAlignment="Center" Margin="6 0 6 0"
+                                               Foreground="{StaticResource MaterialDesignDarkForeground}"/>
+                                            <materialDesign:PackIcon Kind="Music" Foreground="{StaticResource MaterialDesignDarkForeground}" Width="24" Height="24"
+                                                             VerticalAlignment="Center" />
 
-                            <Image Source="{Binding ImgSource}"/>
 
-                            <DockPanel Grid.Column="1" Margin="12 12 0 0">
-                                <StackPanel>
-                                    <TextBlock Text="{Binding Name}" Foreground="{StaticResource MaterialDesignDarkForeground}" FontWeight="Regular" FontSize="18"/>
-                                    <TextBlock Text="{Binding Author}" Foreground="{StaticResource MaterialDesignDarkForeground}" FontWeight="Light" FontSize="14"/>
-                                </StackPanel>
-                                <TextBlock Text="{Binding Duration}" Foreground="{StaticResource MaterialDesignDarkForeground}"
+                                        </StackPanel>
+                                    </StackPanel>
+                                </RadioButton>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </WrapPanel>
+            <WrapPanel Margin="24 0 24 0" Orientation="Horizontal">
+                <ItemsControl x:Name="TrackCollection">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <materialDesign:Card Margin="24 12 0 24" Background="#0f0f0f" materialDesign:ShadowAssist.ShadowDepth="Depth3">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="192"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image Source="{Binding ImgSource}"/>
+
+                                    <DockPanel Grid.Column="1" Margin="12 12 0 0">
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Name}" Foreground="{StaticResource MaterialDesignDarkForeground}" FontWeight="Regular" FontSize="18"/>
+                                            <TextBlock Text="{Binding Author}" Foreground="{StaticResource MaterialDesignDarkForeground}" FontWeight="Light" FontSize="14"/>
+                                        </StackPanel>
+                                        <TextBlock Text="{Binding Duration}" Foreground="{StaticResource MaterialDesignDarkForeground}"
                                            FontWeight="Light" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="6"/>
-                            </DockPanel>
-                        </Grid>
-                    </materialDesign:Card>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    </WrapPanel>
+                                    </DockPanel>
+                                </Grid>
+                            </materialDesign:Card>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </WrapPanel>
+        </StackPanel>
+        <materialDesign:DialogHost>
+            <materialDesign:DialogHost.DialogContent>
+                <Grid></Grid>
+            </materialDesign:DialogHost.DialogContent>
+            <Button
+            Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+            Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+            materialDesign:HintAssist.Hint="Add new media"
+            materialDesign:HintAssist.HintOpacity="1"
+           
+            materialDesign:HintAssist.IsFloating="True"
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Right"
+            Margin="0 0 24 24">
+                <materialDesign:PackIcon
+                Kind="Plus"
+                Height="24"
+                Width="24" />
+            </Button>
+        </materialDesign:DialogHost>
+    </Grid>
 </UserControl>

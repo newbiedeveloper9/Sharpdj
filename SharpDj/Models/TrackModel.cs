@@ -7,7 +7,7 @@ using Caliburn.Micro;
 
 namespace SharpDj.Models
 {
-    public class Track : PropertyChangedBase
+    public class TrackModel : PropertyChangedBase
     {
         private string _name;
         public string Name

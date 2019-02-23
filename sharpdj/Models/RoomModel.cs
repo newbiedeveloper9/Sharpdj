@@ -77,8 +77,8 @@ namespace SharpDj.Models
             }
         }
 
-        private Track _previousTrack;
-        public Track PreviousTrack
+        private TrackModel _previousTrack;
+        public TrackModel PreviousTrack
         {
             get => _previousTrack;
             set
@@ -89,8 +89,8 @@ namespace SharpDj.Models
             }
         }
 
-        private Track _currentTrack;
-        public Track CurrentTrack
+        private TrackModel _currentTrack;
+        public TrackModel CurrentTrack
         {
             get => _currentTrack;
             set
@@ -101,8 +101,8 @@ namespace SharpDj.Models
             }
         }
 
-        private Track _nextTrack;
-        public Track NextTrack
+        private TrackModel _nextTrack;
+        public TrackModel NextTrack
         {
             get => _nextTrack;
             set

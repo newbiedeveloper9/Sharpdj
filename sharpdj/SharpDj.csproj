@@ -172,6 +172,7 @@
     <Compile Include="Input\MultiKeyGesture.cs" />
     <Compile Include="Input\MultiKeyGestureConverter.cs" />
     <Compile Include="Interfaces\INavMainView.cs" />
+    <Compile Include="Interfaces\IPlaylistChanged.cs" />
     <Compile Include="Interfaces\IShell.cs" />
     <Compile Include="Interfaces\ITest.cs" />
     <Compile Include="Logic\Client\Client.cs" />
@@ -201,7 +202,7 @@
     <Compile Include="Models\NewsModel.cs" />
     <Compile Include="Models\PlaylistModel.cs" />
     <Compile Include="Models\RoomModel.cs" />
-    <Compile Include="Models\Track.cs" />
+    <Compile Include="Models\TrackModel.cs" />
     <Compile Include="PubSubModels\LoginPublishInfo.cs" />
     <Compile Include="PubSubModels\RoomInfoForOpen.cs" />
     <Compile Include="ViewModels\AfterLoginScreenViewModel.cs" />

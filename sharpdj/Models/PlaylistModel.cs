@@ -11,22 +11,6 @@ namespace SharpDj.Models
 {
     public class PlaylistModel : PropertyChangedBase
     {
-        public PlaylistModel(string name, bool isActive)
-        {
-            Name = name;
-            IsActive = isActive;
-        }
-
-        public PlaylistModel(string name)
-        {
-            Name = name;
-        }
-
-        public PlaylistModel()
-        {
-            
-        }
-
         private string _name;
         public string Name
         {
@@ -39,7 +23,6 @@ namespace SharpDj.Models
             }
         }
 
-
         private bool _isActive;
         public bool IsActive
         {
@@ -49,6 +32,19 @@ namespace SharpDj.Models
                 if (_isActive == value) return;
                 _isActive = value;
                 NotifyOfPropertyChange(() => IsActive);
+            }
+        }
+
+        private BindableCollection<TrackModel> _trackCollection =
+            new BindableCollection<TrackModel>();
+        public BindableCollection<TrackModel> TrackCollection
+        {
+            get => _trackCollection;
+            set
+            {
+                if (_trackCollection == value) return;
+                _trackCollection = value;
+                NotifyOfPropertyChange(() => TrackCollection);
             }
         }
     }

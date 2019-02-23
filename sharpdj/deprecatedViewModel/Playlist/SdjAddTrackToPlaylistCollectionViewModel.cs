@@ -20,7 +20,7 @@ namespace SharpDj.ViewModel
         {
             PlaylistCollection = new ObservableCollection<PlaylistToAddTrack>();
             SdjMainViewModel = main;
-            SdjTitleBarForUserControlsViewModel = new SdjTitleBarForUserControlsViewModel(main, closeForm, "Add Track to Playlist");
+            SdjTitleBarForUserControlsViewModel = new SdjTitleBarForUserControlsViewModel(main, closeForm, "Add TrackModel to Playlist");
             SdjBackgroundForFormsViewModel = new SdjBackgroundForFormsViewModel(main, closeForm);
         }
 

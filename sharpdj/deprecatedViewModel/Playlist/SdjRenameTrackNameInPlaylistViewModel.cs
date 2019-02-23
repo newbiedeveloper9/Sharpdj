@@ -36,7 +36,7 @@ namespace SharpDj.ViewModel
                 TrackName = value.SongName;
                 if (_track == value) return;
                 _track = value;
-                OnPropertyChanged("Track");
+                OnPropertyChanged("TrackModel");
             }
         }
 
