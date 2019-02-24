@@ -55,7 +55,7 @@
                         <TextBlock Text="Register" VerticalAlignment="Center"/>
                     </Button>
 
-                    <StackPanel Orientation="Horizontal" Margin="4 4 0 0">
+                    <StackPanel Orientation="Horizontal" Margin="4 4 0 0" materialDesign:ThemeAssist.Theme="Light">
                         <TextBlock Text="Or" VerticalAlignment="Center" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="12"/>
                         <Button Style="{StaticResource MaterialDesignFlatButton}" Content="already have an account" Margin="1 0 0 0" Padding="4 0 4 0" x:Name="GotoLogin" FontSize="12"/>
                     </StackPanel>

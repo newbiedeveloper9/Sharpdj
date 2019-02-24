@@ -48,15 +48,17 @@
                         </PasswordBox>
                     </StackPanel>
 
-                    <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Forgot your password?" HorizontalAlignment="Right" Margin="0 6 4 0" Padding="4 0 4 0"/>
+                    <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Forgot your password?"
+                            HorizontalAlignment="Right" Margin="0 6 4 0" Padding="4 0 4 0" materialDesign:ThemeAssist.Theme="Light"/>
 
                     <Button Margin="0 12 0 0" x:Name="TryLogin">
-                        <TextBlock Text="Login" VerticalAlignment="Center"/>
+                        <TextBlock Text="Login" VerticalAlignment="Center" materialDesign:ThemeAssist.Theme="Light"/>
                     </Button>
 
                     <StackPanel Orientation="Horizontal" Margin="4 4 0 0">
                         <TextBlock Text="Or" VerticalAlignment="Center" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="create a new account" Margin="1 0 0 0"  Padding="4 0 4 0" x:Name="Register"/>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="create a new account"
+                                Margin="1 0 0 0"  Padding="4 0 4 0" x:Name="Register" materialDesign:ThemeAssist.Theme="Light"/>
                     </StackPanel>
                 </StackPanel>
             </materialDesign:Card>

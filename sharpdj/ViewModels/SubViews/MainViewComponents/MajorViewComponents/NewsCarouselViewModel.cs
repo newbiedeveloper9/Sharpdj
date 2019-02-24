@@ -34,6 +34,8 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
 
         protected override void OnViewLoaded(object view)
         {
+            if (view == null) return;
+
             base.OnViewLoaded(view);
             App.Current.MainWindow.SizeChanged += WindowResize;
             WindowResize(null,null);

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using Caliburn.Micro;
 using SharpDj.Models;
+using SharpDj.ViewModels.SubViews.MainViewComponents.PlaylistViewComponents;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents
 {
@@ -13,6 +14,8 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
         INavMainView,
         IHandle<IPlaylistChanged>
     {
+        public SearchNewMediaDialogViewModel SearchNewMediaDialogViewModel { get; private set; }
+
         public BindableCollection<PlaylistModel> PlaylistCollection { get; private set; }
         private BindableCollection<TrackModel> _trackCollection;
         public BindableCollection<TrackModel> TrackCollection
@@ -28,6 +31,8 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
 
         public PlaylistViewModel()
         {
+            SearchNewMediaDialogViewModel = new SearchNewMediaDialogViewModel();
+            
             var dicPic = @"C:\Users\Michal\Desktop\Icons\maxresdefault.jpg";
 
             PlaylistCollection = new BindableCollection<PlaylistModel>()
@@ -39,8 +44,8 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
             };
             PlaylistCollection[1].TrackCollection = new BindableCollection<TrackModel>()
             {
-                new TrackModel(){Author = "Anime Openings", Duration = "4:03", ImgSource = dicPic, Name = "Kimi no Na wa", TrackLink = "none"},
-                new TrackModel(){Author = "Anime Openings", Duration = "4:03", ImgSource = dicPic, Name = "Kimi no Na wa", TrackLink = "none"},
+                new TrackModel(){Author = "Anime Openings", Duration = "4:01", ImgSource = dicPic, Name = "Kimi no Na wa", TrackLink = "none"},
+                new TrackModel(){Author = "Anime Openings", Duration = "4:02", ImgSource = dicPic, Name = "Kimi no Na wa", TrackLink = "none"},
                 new TrackModel(){Author = "Anime Openings", Duration = "4:03", ImgSource = dicPic, Name = "Kimi no Na wa", TrackLink = "none"},
             };
 

@@ -7,6 +7,7 @@
              xmlns:mainViewComponents="clr-namespace:SharpDj.ViewModels.SubViews.MainViewComponents"
              xmlns:cal="http://www.caliburnproject.org"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:playlistViewComponents="clr-namespace:SharpDj.Views.SubViews.MainViewComponents.PlaylistViewComponents"
              mc:Ignorable="d" 
              cal:Bind.AtDesignTime="True"
              d:DataContext="{d:DesignInstance Type=mainViewComponents:PlaylistViewModel, IsDesignTimeCreatable=True}"
@@ -48,7 +49,7 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </WrapPanel>
-            <WrapPanel Margin="24 0 24 0" Orientation="Horizontal">
+            <WrapPanel Margin="36 0 24 0" Orientation="Horizontal">
                 <ItemsControl x:Name="TrackCollection">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -57,41 +58,20 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <materialDesign:Card Margin="24 12 0 24" Background="#0f0f0f" materialDesign:ShadowAssist.ShadowDepth="Depth3">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="192"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <Image Source="{Binding ImgSource}"/>
-
-                                    <DockPanel Grid.Column="1" Margin="12 12 0 0">
-                                        <StackPanel>
-                                            <TextBlock Text="{Binding Name}" Foreground="{StaticResource MaterialDesignDarkForeground}" FontWeight="Regular" FontSize="18"/>
-                                            <TextBlock Text="{Binding Author}" Foreground="{StaticResource MaterialDesignDarkForeground}" FontWeight="Light" FontSize="14"/>
-                                        </StackPanel>
-                                        <TextBlock Text="{Binding Duration}" Foreground="{StaticResource MaterialDesignDarkForeground}"
-                                           FontWeight="Light" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="6"/>
-                                    </DockPanel>
-                                </Grid>
-                            </materialDesign:Card>
+                           <playlistViewComponents:TrackView Margin="12" Height="105"/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </WrapPanel>
         </StackPanel>
+
         <materialDesign:DialogHost>
             <materialDesign:DialogHost.DialogContent>
-                <Grid></Grid>
+              <playlistViewComponents:SearchNewMediaDialogView cal:Bind.Model="{Binding Path=SearchNewMediaDialogViewModel}"/>
             </materialDesign:DialogHost.DialogContent>
             <Button
             Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
             Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-            materialDesign:HintAssist.Hint="Add new media"
-            materialDesign:HintAssist.HintOpacity="1"
-           
-            materialDesign:HintAssist.IsFloating="True"
             VerticalAlignment="Bottom"
             HorizontalAlignment="Right"
             Margin="0 0 24 24">

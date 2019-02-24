@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace SharpDj.Views.SubViews.MainViewComponents.MajorScreenComponents
+namespace SharpDj.Views.SubViews.MainViewComponents.MajorViewComponents
 {
     /// <summary>
     /// Interaction logic for NewsCarouselView.xaml
