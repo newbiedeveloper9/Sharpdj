@@ -14,12 +14,13 @@
              d:DesignHeight="696" d:DesignWidth="1000">
     <Grid>
         <StackPanel>
-            <WrapPanel Margin="24 12 24 36" Orientation="Horizontal">
+            <WrapPanel Orientation="Horizontal" Margin="24 12 24 36">
                 <ItemsControl x:Name="PlaylistCollection">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel Orientation="Horizontal"/>
                         </ItemsPanelTemplate>
+
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -39,7 +40,6 @@
                                                Foreground="{StaticResource MaterialDesignDarkForeground}"/>
                                             <materialDesign:PackIcon Kind="Music" Foreground="{StaticResource MaterialDesignDarkForeground}" Width="24" Height="24"
                                                              VerticalAlignment="Center" />
-
 
                                         </StackPanel>
                                     </StackPanel>
@@ -71,17 +71,27 @@
                     <playlistViewComponents:SearchNewMediaDialogView cal:Bind.Model="{Binding Path=SearchNewMediaDialogViewModel}"/>
                 </Grid>
             </materialDesign:DialogHost.DialogContent>
-            <Button
-            Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-            Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-            VerticalAlignment="Bottom"
-            HorizontalAlignment="Right"
-            Margin="0 0 24 24">
-                <materialDesign:PackIcon
-                Kind="Plus"
-                Height="24"
-                Width="24" />
-            </Button>
+
+            <materialDesign:PopupBox  Style="{StaticResource MaterialDesignMultiFloatingActionAccentPopupBox}"
+            PlacementMode="TopAndAlignCentres"
+            ToolTipService.Placement="Right"
+            Margin="0 0 24 24" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+            PopupMode="Click">
+                <StackPanel HorizontalAlignment="Center">
+                    <Button  Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Margin="0 0 0 6"
+                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" >
+                        <materialDesign:PackIcon
+                                Kind="Disc"
+                                Height="24"
+                                Width="24" />
+                    </Button>
+
+                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Margin="0 0 0 6">
+                        <materialDesign:PackIcon Kind="PlaylistAdd" Width="24" Height="24"/>
+                    </Button>
+                </StackPanel>
+            </materialDesign:PopupBox>
         </materialDesign:DialogHost>
+
     </Grid>
 </UserControl>

@@ -7,11 +7,12 @@
              xmlns:converters="clr-namespace:SharpDj.Converters"
              xmlns:subViews="clr-namespace:SharpDj.ViewModels.SubViews"
              xmlns:cal="http://www.caliburnproject.org"
+             xmlns:sharpDj="clr-namespace:SharpDj"
              mc:Ignorable="d" 
              cal:Bind.AtDesignTime="True"
              d:DataContext="{d:DesignInstance Type=subViews:SearchMenuViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="50" d:DesignWidth="1300">
-    <Grid Background="#232323">
+    <Grid Background="#232323" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="220" />
             <ColumnDefinition Width="24" />
@@ -34,44 +35,12 @@
                             <BlurEffect KernelType="Gaussian" Radius="5"/>
                         </TextBlock.Effect>
                     </TextBlock>
-                    <TextBlock Text="SharpDj" FontSize="28" VerticalAlignment="Center" 
-                               HorizontalAlignment="Left"/>
+                    <TextBlock Text="SharpDj" FontSize="28" VerticalAlignment="Center"  HorizontalAlignment="Left"/>
                 </Grid>
             </Button>
         </StackPanel>
 
         <DockPanel Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center">
-            <!--<ItemsControl x:Name="ConversationsCollection">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <DockPanel/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Button Height="45" Style="{StaticResource MaterialDesignFlatButton}"
-                                Foreground="{StaticResource MaterialDesignDarkForeground}" Margin="0 18 6 0" Padding="6 0 6 0">
-                                <StackPanel Orientation="Horizontal" Height="45" Margin="0 0 0 0">
-                                    <Grid Margin="12 4 12 0" Visibility="{Binding BadgeIsVisible, Converter={converters:BoolVisibilityConverter}}">
-                                        <materialDesign:Badged Badge="{Binding BadgeCount}" BadgePlacementMode="Left" Height="32"
-                                     BadgeBackground="#cc3015"/>
-                                    </Grid>
-                                    <Grid>
-                                        <TextBlock Text="{Binding Name}" MaxWidth="108" TextTrimming="CharacterEllipsis" 
-                                                   VerticalAlignment="Center" Margin="4 0 4 8"/>
-                                        <Grid Background="{StaticResource PrimaryHueLightBrush}" Height="4" 
-                                              Margin="0 0 0 6" VerticalAlignment="Bottom"/>
-                                    </Grid>
-                                </StackPanel>
-                            </Button>
-                            <Button Padding="2" Margin="0 3 8 0" HorizontalAlignment="Right" VerticalAlignment="Top" Background="Transparent" BorderBrush="Transparent">
-                                <materialDesign:PackIcon Kind="CloseCircleOutline"  Foreground="{StaticResource MaterialDesignDarkForeground}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            </Button>
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>-->
             <ItemsControl x:Name="ConversationsCollection">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -80,27 +49,39 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <materialDesign:Chip
-                        Margin="12 0 0 0"
-                        Height="32"
-                        IsDeletable="True"
-                        Background="{Binding Color}"
-                        IconBackground="Transparent"
-                        cal:Message.Attach="[Click]=[ConversationClick]; [DeleteClick]=[ConversationDeleteClick($dataContext)];">
-                            <materialDesign:Chip.Icon>
-                                <Ellipse Width="32" Height="32">
-                                    <Ellipse.Fill >
-                                        <ImageBrush  ImageSource="{Binding ImagePath}"/>
-                                    </Ellipse.Fill>
-                                </Ellipse>
-                            </materialDesign:Chip.Icon>
-                            <materialDesign:Chip.Content>
-                                <DockPanel>
-                                    <TextBlock Text="{Binding Name}" Foreground="{StaticResource MaterialDesignDarkForeground}"
+                        <materialDesign:PopupBox PlacementMode="BottomAndAlignCentres" StaysOpen="True" IsPopupOpen="{Binding IsOpen, Mode=TwoWay}">
+                            <materialDesign:PopupBox.ToggleContent>
+                                <materialDesign:Chip   Margin="12 0 0 0"  Height="32" IsDeletable="True" Background="{Binding Color}"  IconBackground="Transparent"
+                                                      cal:Message.Attach="[Click]=[ConversationClick($dataContext)]; [DeleteClick]=[ConversationDeleteClick($dataContext)];">
+                                    <materialDesign:Chip.Icon>
+                                        <Ellipse Width="32" Height="32">
+                                            <Ellipse.Fill >
+                                                <ImageBrush  ImageSource="{Binding ImagePath}"/>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                    </materialDesign:Chip.Icon>
+
+                                    <materialDesign:Chip.Content>
+                                        <DockPanel>
+                                            <TextBlock Text="{Binding Name}" Foreground="{StaticResource MaterialDesignDarkForeground}"
                                                FontSize="15" FontWeight="{Binding IsReaded, Converter={converters:IsConversationReadedToFontWeightConverter}}"/>
-                                </DockPanel>
-                            </materialDesign:Chip.Content>
-                        </materialDesign:Chip>
+                                        </DockPanel>
+                                    </materialDesign:Chip.Content>
+                                </materialDesign:Chip>
+                            </materialDesign:PopupBox.ToggleContent>
+
+                            <materialDesign:PopupBox.PopupContent>
+                                <StackPanel>
+                                    <TextBlock Text="help me pls"/>
+                                    <TextBlock Text="help me pls"/>
+                                    <TextBlock Text="help me pls"/>
+                                    <TextBlock Text="help me pls"/>
+                                    <TextBlock Text="help me pls"/>
+                                    <Button Content="test"></Button>
+                                    <TextBox Width="50"></TextBox>
+                                </StackPanel>
+                            </materialDesign:PopupBox.PopupContent>
+                        </materialDesign:PopupBox>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
@@ -108,14 +89,12 @@
 
 
         <StackPanel Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right">
-
             <Button VerticalAlignment="Center" Width="44" Padding="0" Margin="12 0 0 0"
                     Background="Transparent" BorderThickness="0" Height="48" x:Name="ShowConversationsPanel">
                 <Grid>
                     <materialDesign:PackIcon Kind="MessageGroup" VerticalAlignment="Center" Height="22" Width="22" HorizontalAlignment="Center"/>
 
-                    <Grid Background="{StaticResource PrimaryHueMidBrush}" Width="44" Height="4"
-                          Margin="0 46 0 0" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                    <Grid Background="{StaticResource PrimaryHueMidBrush}" Width="44" Height="4" Margin="0 46 0 0" VerticalAlignment="Bottom" HorizontalAlignment="Left"
                           Visibility="{Binding RollingMenuVisibility,
                             Converter={converters:EnumToVisibilityConverter},
                             ConverterParameter='Conversations'}"/>

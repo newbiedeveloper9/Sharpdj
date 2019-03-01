@@ -58,7 +58,16 @@ namespace SharpDj.Models
             }
         }
 
-
-
+        private bool _isOpen = false;
+        public bool IsOpen
+        {
+            get => _isOpen;
+            set
+            {
+                if (_isOpen == value) return;
+                _isOpen = value;
+                NotifyOfPropertyChange(() => IsOpen);
+            }
+        }
     }
 }

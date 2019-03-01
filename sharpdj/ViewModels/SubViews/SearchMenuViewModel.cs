@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Linq;
+using System.Windows.Input;
 using System.Windows.Media;
 using Caliburn.Micro;
 using SharpDj.Enums;
 using SharpDj.Models;
+using SharpDj.Views.SubViews;
 
 namespace SharpDj.ViewModels.SubViews
 {
-    public class SearchMenuViewModel : PropertyChangedBase, IHandle<RollingMenuVisibilityEnum>
+    public class SearchMenuViewModel : Screen, IHandle<RollingMenuVisibilityEnum>
     {
         private readonly IEventAggregator _eventAggregator;
+        private SearchMenuView SearchMenuView { get; set; }
         public BindableCollection<ConversationModel> ConversationsCollection { get; private set; }
 
         public SearchMenuViewModel(IEventAggregator eventAggregator)
@@ -20,12 +24,12 @@ namespace SharpDj.ViewModels.SubViews
 
             ConversationsCollection = new BindableCollection<ConversationModel>()
             {
-                new ConversationModel(){IsReaded = false, Color = Brushes.DeepPink, Name = "Jeff Diggins", ImagePath = dicPic},
-                new ConversationModel(){IsReaded = true, Color = Brushes.BlueViolet, Name = "Jeff Diggins", ImagePath = dicPic},
+                new ConversationModel(){IsReaded = false, Color = Brushes.DeepPink, Name = "Test Diggins", ImagePath = dicPic},
+                new ConversationModel(){IsReaded = true, Color = Brushes.BlueViolet, Name = "Test Diggins", ImagePath = dicPic},
                 new ConversationModel(){IsReaded = true, Color = Brushes.Black, Name = "Jeff Diggins", ImagePath = dicPic},
                 new ConversationModel(){IsReaded = false, Color = Brushes.LimeGreen, Name = "Jeff Diggins", ImagePath = dicPic},
-                new ConversationModel(){IsReaded = false, Color = Brushes.DeepSkyBlue, Name = "Jeff Diggins", ImagePath = dicPic},
-                new ConversationModel(){IsReaded = false, Color = Brushes.Gray, Name = "Jeff Diggins", ImagePath = dicPic},
+                new ConversationModel(){IsReaded = false, Color = Brushes.DeepSkyBlue, Name = "Test Diggins", ImagePath = dicPic},
+                new ConversationModel(){IsReaded = false, Color = Brushes.Gray, Name = "Test Diggins", ImagePath = dicPic},
             };
         }
 
@@ -34,9 +38,9 @@ namespace SharpDj.ViewModels.SubViews
             
         }
 
-        public void ConversationClick()
+        public void ConversationClick(ConversationModel model)
         {
-            Console.WriteLine("xd");
+            model.IsOpen = !model.IsOpen;
         }
 
         public void ConversationDeleteClick(ConversationModel model)
