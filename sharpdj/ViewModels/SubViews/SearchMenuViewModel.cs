@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using System;
+using System.Windows.Media;
 using Caliburn.Micro;
 using SharpDj.Enums;
 using SharpDj.Models;
@@ -15,11 +16,16 @@ namespace SharpDj.ViewModels.SubViews
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
 
+            var dicPic = "../../../Images/1.jpg";
 
             ConversationsCollection = new BindableCollection<ConversationModel>()
             {
-                new ConversationModel(){BadgeCount = 0, Color = Brushes.BlueViolet, Name = "Jeff Diggins"},
-                new ConversationModel(){BadgeCount = 2, Color = Brushes.BlueViolet, Name = "Jeff Diggins"},
+                new ConversationModel(){IsReaded = false, Color = Brushes.DeepPink, Name = "Jeff Diggins", ImagePath = dicPic},
+                new ConversationModel(){IsReaded = true, Color = Brushes.BlueViolet, Name = "Jeff Diggins", ImagePath = dicPic},
+                new ConversationModel(){IsReaded = true, Color = Brushes.Black, Name = "Jeff Diggins", ImagePath = dicPic},
+                new ConversationModel(){IsReaded = false, Color = Brushes.LimeGreen, Name = "Jeff Diggins", ImagePath = dicPic},
+                new ConversationModel(){IsReaded = false, Color = Brushes.DeepSkyBlue, Name = "Jeff Diggins", ImagePath = dicPic},
+                new ConversationModel(){IsReaded = false, Color = Brushes.Gray, Name = "Jeff Diggins", ImagePath = dicPic},
             };
         }
 
@@ -28,17 +34,27 @@ namespace SharpDj.ViewModels.SubViews
             
         }
 
+        public void ConversationClick()
+        {
+            Console.WriteLine("xd");
+        }
+
+        public void ConversationDeleteClick(ConversationModel model)
+        {
+            ConversationsCollection.Remove(model);
+        }
+
         public void Home()
         {
             _eventAggregator.PublishOnUIThread(NavigateMainView.Home);
         }
 
-        public void ShowOptions()
+        public void ShowOptionsPanel()
         {
             _eventAggregator.PublishOnUIThread(RollingMenuVisibilityEnum.Options);
         }
 
-        public void ShowConversations()
+        public void ShowConversationsPanel()
         {
             _eventAggregator.PublishOnUIThread(RollingMenuVisibilityEnum.Conversations);
         }

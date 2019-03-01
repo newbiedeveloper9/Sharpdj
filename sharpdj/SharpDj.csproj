@@ -145,6 +145,7 @@
     <Compile Include="Converters\ActivityStatusToRadioIconConverter.cs" />
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
     <Compile Include="Converters\EnumToVisibilityConverter.cs" />
+    <Compile Include="Converters\IsConversationReadedToFontWeightConverter.cs" />
     <Compile Include="Converters\NameToContentConverter.cs" />
     <Compile Include="Converters\RoleToBrushConverter.cs" />
     <Compile Include="Core\BaseViewModel.cs" />
@@ -215,6 +216,8 @@
     <Compile Include="ViewModels\SubViews\LeftMenuViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\ConversationsViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\MajorViewComponents\NewsCarouselViewModel.cs" />
+    <Compile Include="ViewModels\SubViews\MainViewComponents\PlaylistViewComponents\SearchNewMediaDialogViewModel.cs" />
+    <Compile Include="ViewModels\SubViews\MainViewComponents\PlaylistViewComponents\TrackViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\PlaylistViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\ProfileOptionsViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\MajorViewComponents\RoomSquareViewModel.cs" />
@@ -348,16 +351,22 @@
     <Compile Include="Views\SubViews\MainViewComponents\PlaylistView.xaml.cs">
       <DependentUpon>PlaylistView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SubViews\MainViewComponents\PlaylistViewComponents\SearchNewMediaDialogView.xaml.cs">
+      <DependentUpon>SearchNewMediaDialogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubViews\MainViewComponents\PlaylistViewComponents\TrackView.xaml.cs">
+      <DependentUpon>TrackView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SubViews\MainViewComponents\ProfileOptionsView.xaml.cs">
       <DependentUpon>ProfileOptionsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SubViews\MainViewComponents\MajorScreenView.xaml.cs">
       <DependentUpon>MajorScreenView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SubViews\MainViewComponents\MajorScreenComponents\NewsCarouselView.xaml.cs">
+    <Compile Include="Views\SubViews\MainViewComponents\MajorViewComponents\NewsCarouselView.xaml.cs">
       <DependentUpon>NewsCarouselView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SubViews\MainViewComponents\MajorScreenComponents\RoomSquareView.xaml.cs">
+    <Compile Include="Views\SubViews\MainViewComponents\MajorViewComponents\RoomSquareView.xaml.cs">
       <DependentUpon>RoomSquareView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SubViews\SearchMenuView.xaml.cs">
@@ -432,6 +441,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\SubViews\MainViewComponents\PlaylistViewComponents\SearchNewMediaDialogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SubViews\MainViewComponents\PlaylistViewComponents\TrackView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SubViews\MainViewComponents\ProfileOptionsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -440,11 +457,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SubViews\MainViewComponents\MajorScreenComponents\NewsCarouselView.xaml">
+    <Page Include="Views\SubViews\MainViewComponents\MajorViewComponents\NewsCarouselView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SubViews\MainViewComponents\MajorScreenComponents\RoomSquareView.xaml">
+    <Page Include="Views\SubViews\MainViewComponents\MajorViewComponents\RoomSquareView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

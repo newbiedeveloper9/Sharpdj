@@ -41,7 +41,7 @@
         </StackPanel>
 
         <DockPanel Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center">
-            <ItemsControl x:Name="ConversationsCollection">
+            <!--<ItemsControl x:Name="ConversationsCollection">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <DockPanel/>
@@ -71,6 +71,38 @@
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
+            </ItemsControl>-->
+            <ItemsControl x:Name="ConversationsCollection">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <DockPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <materialDesign:Chip
+                        Margin="12 0 0 0"
+                        Height="32"
+                        IsDeletable="True"
+                        Background="{Binding Color}"
+                        IconBackground="Transparent"
+                        cal:Message.Attach="[Click]=[ConversationClick]; [DeleteClick]=[ConversationDeleteClick($dataContext)];">
+                            <materialDesign:Chip.Icon>
+                                <Ellipse Width="32" Height="32">
+                                    <Ellipse.Fill >
+                                        <ImageBrush  ImageSource="{Binding ImagePath}"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                            </materialDesign:Chip.Icon>
+                            <materialDesign:Chip.Content>
+                                <DockPanel>
+                                    <TextBlock Text="{Binding Name}" Foreground="{StaticResource MaterialDesignDarkForeground}"
+                                               FontSize="15" FontWeight="{Binding IsReaded, Converter={converters:IsConversationReadedToFontWeightConverter}}"/>
+                                </DockPanel>
+                            </materialDesign:Chip.Content>
+                        </materialDesign:Chip>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
             </ItemsControl>
         </DockPanel>
 
@@ -78,11 +110,12 @@
         <StackPanel Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right">
 
             <Button VerticalAlignment="Center" Width="44" Padding="0" Margin="12 0 0 0"
-                    Background="Transparent" BorderThickness="0" Height="48" x:Name="ShowConversations">
+                    Background="Transparent" BorderThickness="0" Height="48" x:Name="ShowConversationsPanel">
                 <Grid>
                     <materialDesign:PackIcon Kind="MessageGroup" VerticalAlignment="Center" Height="22" Width="22" HorizontalAlignment="Center"/>
 
-                    <Grid Background="{StaticResource PrimaryHueMidBrush}" Width="44" Height="4" Margin="0 46 0 0" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                    <Grid Background="{StaticResource PrimaryHueMidBrush}" Width="44" Height="4"
+                          Margin="0 46 0 0" VerticalAlignment="Bottom" HorizontalAlignment="Left"
                           Visibility="{Binding RollingMenuVisibility,
                             Converter={converters:EnumToVisibilityConverter},
                             ConverterParameter='Conversations'}"/>
@@ -99,9 +132,10 @@
                             ConverterParameter='Notifications'}"/>
                 </Grid>
             </Button>
-            <Button VerticalAlignment="Center" Width="44" Padding="0" Margin="12 0 0 0" Background="Transparent" BorderThickness="0" Height="48" x:Name="ShowOptions">
+            <Button VerticalAlignment="Center" Width="44" Padding="0" Margin="12 0 0 0" Background="Transparent"
+                    BorderThickness="0" Height="48" x:Name="ShowOptionsPanel">
                 <Grid>
-                    <Ellipse VerticalAlignment="Center" HorizontalAlignment="Center" Width="40" Height="36">
+                    <Ellipse VerticalAlignment="Center" HorizontalAlignment="Center" Width="36" Height="36">
                         <Ellipse.Fill>
                             <ImageBrush  ImageSource="../../Images/avatar.png"/>
                         </Ellipse.Fill>

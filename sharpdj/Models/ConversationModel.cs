@@ -10,11 +10,6 @@ namespace SharpDj.Models
 {
     public class ConversationModel : PropertyChangedBase
     {
-        public ConversationModel()
-        {
-
-        }
-
         private string _name;
         public string Name
         {
@@ -27,28 +22,15 @@ namespace SharpDj.Models
             }
         }
 
-        private bool _badgeIsVisible;
-        public bool BadgeIsVisible
+        private bool _isReaded;
+        public bool IsReaded
         {
-            get => _badgeIsVisible;
+            get => _isReaded;
             set
             {
-                if (_badgeIsVisible == value) return;
-                _badgeIsVisible = value;
-                NotifyOfPropertyChange(() => BadgeIsVisible);
-            }
-        }
-
-        private int _badgeCount;
-        public int BadgeCount
-        {
-            get => _badgeCount;
-            set
-            {
-                if (_badgeCount == value) return;
-                _badgeCount = value;
-                NotifyOfPropertyChange(() => BadgeCount);
-                BadgeIsVisible = value > 0;
+                if (_isReaded == value) return;
+                _isReaded = value;
+                NotifyOfPropertyChange(() => IsReaded);
             }
         }
 
@@ -63,5 +45,20 @@ namespace SharpDj.Models
                 NotifyOfPropertyChange(() => Color);
             }
         }
+
+        private string _imagePath;
+        public string ImagePath
+        {
+            get => _imagePath;
+            set
+            {
+                if (_imagePath == value) return;
+                _imagePath = value;
+                NotifyOfPropertyChange(() => ImagePath);
+            }
+        }
+
+
+
     }
 }

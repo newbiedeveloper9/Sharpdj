@@ -145,6 +145,7 @@
     <Compile Include="Converters\ActivityStatusToRadioIconConverter.cs" />
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
     <Compile Include="Converters\EnumToVisibilityConverter.cs" />
+    <Compile Include="Converters\IsConversationReadedToFontWeightConverter.cs" />
     <Compile Include="Converters\NameToContentConverter.cs" />
     <Compile Include="Converters\RoleToBrushConverter.cs" />
     <Compile Include="Core\BaseViewModel.cs" />

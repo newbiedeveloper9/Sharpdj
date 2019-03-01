@@ -58,16 +58,18 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                           <playlistViewComponents:TrackView Margin="12" Height="105"/>
+                            <playlistViewComponents:TrackView Margin="12" Height="105"/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </WrapPanel>
         </StackPanel>
 
-        <materialDesign:DialogHost>
+        <materialDesign:DialogHost CloseOnClickAway="True">
             <materialDesign:DialogHost.DialogContent>
-              <playlistViewComponents:SearchNewMediaDialogView cal:Bind.Model="{Binding Path=SearchNewMediaDialogViewModel}"/>
+                <Grid Background="White">
+                    <playlistViewComponents:SearchNewMediaDialogView cal:Bind.Model="{Binding Path=SearchNewMediaDialogViewModel}"/>
+                </Grid>
             </materialDesign:DialogHost.DialogContent>
             <Button
             Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
