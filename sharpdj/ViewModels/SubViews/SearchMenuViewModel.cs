@@ -3,23 +3,40 @@ using System.Linq;
 using System.Windows.Input;
 using System.Windows.Media;
 using Caliburn.Micro;
+using MaterialDesignThemes.Wpf;
 using SharpDj.Enums;
 using SharpDj.Models;
+using SharpDj.ViewModels.SubViews.SearchMenuComponents;
 using SharpDj.Views.SubViews;
 
 namespace SharpDj.ViewModels.SubViews
 {
-    public class SearchMenuViewModel : Screen, IHandle<RollingMenuVisibilityEnum>
+    public class SearchMenuViewModel : PropertyChangedBase, IHandle<RollingMenuVisibilityEnum>
     {
         private readonly IEventAggregator _eventAggregator;
-        private SearchMenuView SearchMenuView { get; set; }
+
+        public ConversationPopupViewModel ConversationPopupViewModel { get; private set; }
+
         public BindableCollection<ConversationModel> ConversationsCollection { get; private set; }
+
 
         public SearchMenuViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
 
+            ConversationPopupViewModel = new ConversationPopupViewModel();
+            Design();
+        }
+
+        public SearchMenuViewModel()
+        {
+            ConversationPopupViewModel = new ConversationPopupViewModel();
+            Design();
+        }
+
+        private void Design()
+        {
             var dicPic = "../../../Images/1.jpg";
 
             ConversationsCollection = new BindableCollection<ConversationModel>()
@@ -31,11 +48,6 @@ namespace SharpDj.ViewModels.SubViews
                 new ConversationModel(){IsReaded = false, Color = Brushes.DeepSkyBlue, Name = "Test Diggins", ImagePath = dicPic},
                 new ConversationModel(){IsReaded = false, Color = Brushes.Gray, Name = "Test Diggins", ImagePath = dicPic},
             };
-        }
-
-        public SearchMenuViewModel()
-        {
-            
         }
 
         public void ConversationClick(ConversationModel model)

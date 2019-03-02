@@ -69,5 +69,7 @@ namespace SharpDj.Models
                 NotifyOfPropertyChange(() => IsOpen);
             }
         }
+
+
     }
 }

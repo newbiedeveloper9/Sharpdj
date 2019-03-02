@@ -202,6 +202,7 @@
     <Compile Include="Logic\UI\ScrollViewerLogic.cs" />
     <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Models\ConversationModel.cs" />
+    <Compile Include="Models\MessageModel.cs" />
     <Compile Include="Models\NewsModel.cs" />
     <Compile Include="Models\PlaylistModel.cs" />
     <Compile Include="Models\RoomModel.cs" />
@@ -225,6 +226,7 @@
     <Compile Include="ViewModels\SubViews\MainViewComponents\MajorViewComponents\RoomSquareViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="ViewModels\SubViews\SearchMenuComponents\ConversationPopupViewModel.cs" />
     <Compile Include="ViewModels\SubViews\SearchMenuViewModel.cs" />
     <Compile Include="ViewModels\SubViews\TopMenuViewModel.cs" />
     <Compile Include="deprecatedViewModel\Global\SdjBottomBarViewModel.cs" />
@@ -370,6 +372,9 @@
     </Compile>
     <Compile Include="Views\SubViews\MainViewComponents\MajorViewComponents\RoomSquareView.xaml.cs">
       <DependentUpon>RoomSquareView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubViews\SearchMenuComponents\ConversationPopupView.xaml.cs">
+      <DependentUpon>ConversationPopupView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SubViews\SearchMenuView.xaml.cs">
       <DependentUpon>SearchMenuView.xaml</DependentUpon>
@@ -552,6 +557,10 @@
     <Page Include="deprecatedView\Views\SdjUpdaterView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SubViews\SearchMenuComponents\ConversationPopupView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SubViews\SearchMenuView.xaml">
       <SubType>Designer</SubType>

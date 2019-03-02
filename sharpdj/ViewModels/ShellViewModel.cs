@@ -1,6 +1,8 @@
-﻿using Caliburn.Micro;
+﻿using System;
+using Caliburn.Micro;
 using SharpDj.PubSubModels;
 using SharpDj.ViewModels.SubViews;
+using SharpDj.Views;
 
 namespace SharpDj.ViewModels
 {
@@ -27,7 +29,8 @@ namespace SharpDj.ViewModels
 #else  
             ActivateItem(BeforeLoginScreenViewModel);
 #endif
-
+       
+            
         }
 
         public void Handle(ILoginPublishInfo message)

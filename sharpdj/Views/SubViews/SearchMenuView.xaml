@@ -8,6 +8,7 @@
              xmlns:subViews="clr-namespace:SharpDj.ViewModels.SubViews"
              xmlns:cal="http://www.caliburnproject.org"
              xmlns:sharpDj="clr-namespace:SharpDj"
+             xmlns:searchMenuComponents="clr-namespace:SharpDj.Views.SubViews.SearchMenuComponents"
              mc:Ignorable="d" 
              cal:Bind.AtDesignTime="True"
              d:DataContext="{d:DesignInstance Type=subViews:SearchMenuViewModel, IsDesignTimeCreatable=True}"
@@ -15,9 +16,9 @@
     <Grid Background="#232323" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="220" />
-            <ColumnDefinition Width="24" />
+            <ColumnDefinition Width="48" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="96" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="36" />
         </Grid.ColumnDefinitions>
@@ -49,39 +50,37 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <materialDesign:PopupBox PlacementMode="BottomAndAlignCentres" StaysOpen="True" IsPopupOpen="{Binding IsOpen, Mode=TwoWay}">
-                            <materialDesign:PopupBox.ToggleContent>
-                                <materialDesign:Chip   Margin="12 0 0 0"  Height="32" IsDeletable="True" Background="{Binding Color}"  IconBackground="Transparent"
+                        <StackPanel Orientation="Horizontal">
+                            <Grid Margin="44 0 0 0" Visibility="{Binding IsOpen, Converter={converters:BoolVisibilityConverter}}"/>
+
+                            <materialDesign:PopupBox PlacementMode="BottomAndAlignCentres" StaysOpen="True" IsPopupOpen="{Binding IsOpen, Mode=TwoWay}" Opened="PopupBox_OnOpened" Closed="PopupBox_OnOpened" Padding="0">
+                                <materialDesign:PopupBox.ToggleContent>
+                                    <materialDesign:Chip   Margin="12 0 0 0"  Height="32" IsDeletable="True" Background="{Binding Color}"  IconBackground="Transparent"
                                                       cal:Message.Attach="[Click]=[ConversationClick($dataContext)]; [DeleteClick]=[ConversationDeleteClick($dataContext)];">
-                                    <materialDesign:Chip.Icon>
-                                        <Ellipse Width="32" Height="32">
-                                            <Ellipse.Fill >
-                                                <ImageBrush  ImageSource="{Binding ImagePath}"/>
-                                            </Ellipse.Fill>
-                                        </Ellipse>
-                                    </materialDesign:Chip.Icon>
+                                        <materialDesign:Chip.Icon>
+                                            <Ellipse Width="32" Height="32">
+                                                <Ellipse.Fill >
+                                                    <ImageBrush  ImageSource="{Binding ImagePath}"/>
+                                                </Ellipse.Fill>
+                                            </Ellipse>
+                                        </materialDesign:Chip.Icon>
 
-                                    <materialDesign:Chip.Content>
-                                        <DockPanel>
-                                            <TextBlock Text="{Binding Name}" Foreground="{StaticResource MaterialDesignDarkForeground}"
+                                        <materialDesign:Chip.Content>
+                                            <DockPanel>
+                                                <TextBlock Text="{Binding Name}" Foreground="{StaticResource MaterialDesignDarkForeground}"
                                                FontSize="15" FontWeight="{Binding IsReaded, Converter={converters:IsConversationReadedToFontWeightConverter}}"/>
-                                        </DockPanel>
-                                    </materialDesign:Chip.Content>
-                                </materialDesign:Chip>
-                            </materialDesign:PopupBox.ToggleContent>
+                                            </DockPanel>
+                                        </materialDesign:Chip.Content>
+                                    </materialDesign:Chip>
+                                </materialDesign:PopupBox.ToggleContent>
 
-                            <materialDesign:PopupBox.PopupContent>
-                                <StackPanel>
-                                    <TextBlock Text="help me pls"/>
-                                    <TextBlock Text="help me pls"/>
-                                    <TextBlock Text="help me pls"/>
-                                    <TextBlock Text="help me pls"/>
-                                    <TextBlock Text="help me pls"/>
-                                    <Button Content="test"></Button>
-                                    <TextBox Width="50"></TextBox>
-                                </StackPanel>
-                            </materialDesign:PopupBox.PopupContent>
-                        </materialDesign:PopupBox>
+                                <materialDesign:PopupBox.PopupContent>
+                                    <searchMenuComponents:ConversationPopupView cal:Bind.Model="{Binding Path=ConversationPopupViewModel}"/>
+                                </materialDesign:PopupBox.PopupContent>
+                            </materialDesign:PopupBox>
+
+                            <Grid Margin="0 0 80 0" Visibility="{Binding IsOpen, Converter={converters:BoolVisibilityConverter}}"/>
+                        </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

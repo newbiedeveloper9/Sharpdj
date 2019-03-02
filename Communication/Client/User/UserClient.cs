@@ -14,7 +14,7 @@ namespace Communication.Client
             
         }
 
-        public UserClient(long id, string username, Rank rank, List<Dj> songs)
+        public UserClient(long id, string username, Rank rank)
         {
             Id = id;
             Username = username;
