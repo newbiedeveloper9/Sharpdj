@@ -33,7 +33,7 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                                    <!--<materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth1"
                                         Background="{Binding IsOwnMessage, Converter={StaticResource AuthorToBackground}}"
                                         Foreground="{Binding IsOwnMessage, Converter={StaticResource AuthorToForeground}}"
                                         HorizontalAlignment="{Binding IsOwnMessage, Converter={StaticResource AuthorToHorizontalAlignment}}"
@@ -43,7 +43,8 @@
                                         UniformCornerRadius="7">
                                         <TextBox Margin="4 2 4 2"  Style="{StaticResource TextboxChat}"
                                             Foreground="{Binding IsOwnMessage, Converter={StaticResource AuthorToFontForeground}}" Text="{Binding Text}"/>
-                                    </materialDesign:Card>
+                                    </materialDesign:Card>-->
+
                                 </StackPanel>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>

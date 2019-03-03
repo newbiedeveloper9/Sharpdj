@@ -45,7 +45,7 @@ namespace SharpDj.ViewModels.SubViews
                 new ConversationModel(){IsReaded = false, Color = Brushes.Gray, Name = "Test Diggins", ImagePath = dicPic},
             };
 
-            ConversationsCollection[0].ConversationPopupViewModel.MessageCollection.Add(new MessageModel(){Text = "test"});
+          //  ConversationsCollection[0].ConversationPopupViewModel.MessageCollection.Add(new MessageModel(){Text = "test"});
         }
 
         public void ConversationClick(ConversationModel model)

@@ -23,7 +23,6 @@ namespace SharpDj.Models
             }
         }
 
-
         private string _text;
         public string Text
         {
@@ -35,23 +34,6 @@ namespace SharpDj.Models
                 NotifyOfPropertyChange(() => Text);
             }
         }
-
-
-        private UserClient _author;
-        public UserClient Author
-        {
-            get => _author;
-            set
-            {
-                if (_author == value) return;
-                _author = value;
-                NotifyOfPropertyChange(() => Author);
-
-                if (UserInfoSingleton.Instance.UserClient.Equals(Author))
-                    IsOwnMessage = true;
-            }
-        }
-
 
         private DateTime _time;
         public DateTime Time
@@ -65,17 +47,13 @@ namespace SharpDj.Models
             }
         }
 
+        private MessageListModel _parent;
 
-        private bool _isOwnMessage;
-        public bool IsOwnMessage
+        public MessageListModel Parent
         {
-            get => _isOwnMessage;
-            set
-            {
-                if (_isOwnMessage == value) return;
-                _isOwnMessage = value;
-                NotifyOfPropertyChange(() => IsOwnMessage);
-            }
+            get { return _parent; }
+            set { _parent = value; }
         }
+
     }
 }
