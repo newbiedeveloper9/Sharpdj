@@ -1,6 +1,6 @@
-﻿using Communication.Shared;
+﻿using Communication.Shared.Data;
 
-namespace Communication.Client
+namespace Communication.Client.User
 {
     public class UserClient
     {

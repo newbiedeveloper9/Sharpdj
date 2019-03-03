@@ -3,7 +3,6 @@ using System.Security;
 using Communication.Shared;
 using SharpDj.Core;
 using SharpDj.Enums.Menu;
-using SharpDj.Models.Helpers;
 
 namespace SharpDj.ViewModel.Unique
 {

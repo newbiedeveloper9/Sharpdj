@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace SharpDj.Extensions
+namespace SharpDj.Core.Extensions
 {
     public abstract class CommandBase : ICommand
     {

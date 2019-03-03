@@ -4,6 +4,7 @@ using SharpDj.Logic.UI;
 using SharpDj.Models;
 using SharpDj.Views.SubViews.MainViewComponents;
 using System.Windows.Controls;
+using SharpDj.Interfaces;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents
 {

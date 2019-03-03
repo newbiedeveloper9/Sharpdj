@@ -2,6 +2,7 @@
 using System.Security;
 using System.Text.RegularExpressions;
 using Communication.Client;
+using Communication.Client.User;
 using Communication.Shared;
 using Hik.Communication.Scs.Communication.Messages;
 using SharpDj.Core;
@@ -9,7 +10,6 @@ using SharpDj.Enums.Menu;
 using SharpDj.Enums.User;
 using SharpDj.Logic.Client;
 using SharpDj.Logic.Helpers;
-using SharpDj.Models.Helpers;
 
 namespace SharpDj.ViewModel.Unique
 {

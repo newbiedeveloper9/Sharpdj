@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Communication.Client;
+using Communication.Client.User;
 using Communication.Server;
-using Communication.Shared;
 using Communication.Shared.Data;
 using Hik.Collections;
 
-namespace servertcp
+namespace Server
 {
     public sealed class DataSingleton
     {

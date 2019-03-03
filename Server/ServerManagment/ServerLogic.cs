@@ -1,25 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Communication.Client;
-using Communication.Server;
-using Communication.Server.Logic;
+using Communication.Client.User;
 using Communication.Shared;
 using Communication.Shared.Data;
-using CryptSharp.Utility;
-using Hik.Collections;
-using Hik.Communication.Scs.Client;
-using Hik.Communication.Scs.Communication.Messages;
 using Hik.Communication.Scs.Server;
-using Newtonsoft.Json;
-using servertcp.Sql;
+using Server.Sql;
 
-namespace servertcp.ServerManagment
+namespace Server.ServerManagment
 {
     class ServerLogic
     {

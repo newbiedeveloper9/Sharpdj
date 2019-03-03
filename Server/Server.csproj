@@ -7,8 +7,8 @@
     <ProjectGuid>{9017FA31-937C-47E0-9775-8CD429F2F604}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>servertcp</RootNamespace>
-    <AssemblyName>servertcp</AssemblyName>
+    <RootNamespace>Server</RootNamespace>
+    <AssemblyName>Server</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -71,8 +71,6 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
     <Reference Include="YoutubeExplode, Version=4.6.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\YoutubeExplode.4.6.4\lib\net45\YoutubeExplode.dll</HintPath>
     </Reference>

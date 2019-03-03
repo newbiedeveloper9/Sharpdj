@@ -1,5 +1,6 @@
 ﻿using System;
 using Caliburn.Micro;
+using SharpDj.Interfaces;
 using SharpDj.PubSubModels;
 using SharpDj.ViewModels.SubViews;
 using SharpDj.Views;

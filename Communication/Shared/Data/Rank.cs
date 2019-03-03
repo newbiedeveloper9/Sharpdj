@@ -1,4 +1,4 @@
-﻿namespace Communication.Shared
+﻿namespace Communication.Shared.Data
 {
     public enum Rank
     {

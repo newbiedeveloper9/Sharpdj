@@ -14,8 +14,6 @@ using SharpDj.Core;
 using SharpDj.Enums;
 using SharpDj.Enums.Playlist;
 using SharpDj.Logic.Helpers;
-using SharpDj.Models.Helpers;
-using SharpDj.Models.Helpers.Updater;
 using SharpDj.ViewModel.Model;
 using Playlist = SharpDj.Enums.Playlist.Playlist;
 using YoutubeExplode;

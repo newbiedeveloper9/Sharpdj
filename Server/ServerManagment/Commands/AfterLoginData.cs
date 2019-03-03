@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using Communication.Server;
-using Communication.Server.Logic;
 using Hik.Communication.Scs.Server;
 
-namespace servertcp.ServerManagment.Commands
+namespace Server.ServerManagment.Commands
 {
     public class AfterLoginData : ICommand
     {

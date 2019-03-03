@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Communication.Shared;
+using Communication.Shared.Data;
 using Newtonsoft.Json;
 using SharpDj.Logic.Helpers;
 using SharpDj.ViewModel;

@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Communication.Server;
-using Communication.Server.Logic;
 using Hik.Communication.Scs.Server;
-using servertcp.ServerManagment.Commands;
+using Server.ServerManagment.Commands;
 
-namespace servertcp.ServerManagment
+namespace Server.ServerManagment
 {
     public class ServerReceiver
     {

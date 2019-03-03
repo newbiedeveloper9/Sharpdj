@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using Communication.Client.Logic;
-using Communication.Server;
-using Communication.Server.Logic;
-using Hik.Communication.Scs.Communication;
 using Hik.Communication.Scs.Server;
 
-namespace servertcp.ServerManagment.Commands
+namespace Server.ServerManagment.Commands
 {
     public class SendMessageChatCommand : ICommand
     {

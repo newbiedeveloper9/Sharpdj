@@ -3,6 +3,7 @@ using SharpDj.Enums;
 using SharpDj.PubSubModels;
 using SharpDj.ViewModels.SubViews.MainViewComponents;
 using System.Collections.Generic;
+using SharpDj.Interfaces;
 
 
 namespace SharpDj.ViewModels.SubViews

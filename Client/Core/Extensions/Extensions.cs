@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace SharpDj.Extensions
+namespace SharpDj.Core.Extensions
 {
     public static class Extensions
     {

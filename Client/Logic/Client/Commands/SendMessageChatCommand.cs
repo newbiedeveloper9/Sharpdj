@@ -7,7 +7,6 @@ using System.Threading;
 using Communication.Server;
 using SharpDj.ViewModel;
 using SharpDj.ViewModel.Model;
-using Vlc.DotNet.Core.Interops.Signatures;
 
 namespace SharpDj.Logic.Client.Commands
 {

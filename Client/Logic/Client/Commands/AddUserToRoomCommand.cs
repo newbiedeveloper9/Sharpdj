@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Communication.Client;
+using Communication.Client.User;
 using Newtonsoft.Json;
 using SharpDj.ViewModel;
 

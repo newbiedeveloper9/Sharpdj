@@ -1,4 +1,4 @@
-﻿namespace SharpDj.Models.Helpers.Updater
+﻿namespace SharpDj.Logic.Helpers.Updater
 {
     class FTPModel
     {

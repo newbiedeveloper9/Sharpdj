@@ -2,7 +2,7 @@
 using System.IO;
 using Newtonsoft.Json;
 
-namespace servertcp
+namespace Server
 {
     public class ServerConfig
     {

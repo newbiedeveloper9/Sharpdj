@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SharpDj.Core;
 using SharpDj.Enums;
 using SharpDj.ViewModel.Model;
 
@@ -87,7 +88,7 @@ namespace SharpDj.ViewModel
         {
             SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection.Add(new PlaylistModel(SdjMainViewModel) { PlaylistName = PlaylistName });
 
-            SdjMainViewModel.SdjPlaylistViewModel.SetLastPlaylistSelected();
+           // SdjMainViewModel.SdjPlaylistViewModel.SetLastPlaylistSelected();
             SdjMainViewModel.SdjPlaylistViewModel
                 .PlaylistCollection[SdjMainViewModel.SdjPlaylistViewModel.PlaylistCollection.Count-1].IsSelected = true;
 

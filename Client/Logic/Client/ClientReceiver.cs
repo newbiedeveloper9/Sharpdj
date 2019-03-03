@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Communication.Server;
-using Communication.Shared;
 using Hik.Communication.Scs.Client;
 using SharpDj.Logic.Client.Commands;
 using SharpDj.Logic.Helpers;
 using SharpDj.ViewModel;
 
-namespace Communication.Client.Logic
+namespace SharpDj.Logic.Client
 {
     public class ClientReceiver
     {
@@ -34,11 +29,11 @@ namespace Communication.Client.Logic
 
         public void ParseMessage(IScsClient client, string message)
         {
-            var command = Commands.Instance.GetMessageCommand(message);
+            var command = Communication.Shared.Commands.Instance.GetMessageCommand(message);
             var commandClass = _commands.FirstOrDefault(x => x.CommandText.Equals(command));
             try
             {
-                commandClass?.Run(_sdjMainViewModel, Commands.Instance.GetMessageParameters(message));
+                commandClass?.Run(_sdjMainViewModel, Communication.Shared.Commands.Instance.GetMessageParameters(message));
             }
             catch (Exception e)
             {

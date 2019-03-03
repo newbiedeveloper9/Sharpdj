@@ -1,14 +1,9 @@
 using System;
-using System.Diagnostics;
-using Communication;
-using Communication.Server;
-using Communication.Server.Logic;
-using Communication.Shared;
 using Hik.Communication.Scs.Communication.EndPoints.Tcp;
 using Hik.Communication.Scs.Communication.Messages;
 using Hik.Communication.Scs.Server;
 
-namespace servertcp.ServerManagment
+namespace Server.ServerManagment
 {
     public class Server
     {

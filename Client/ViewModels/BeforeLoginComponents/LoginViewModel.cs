@@ -1,8 +1,7 @@
-﻿using System;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using System.Security;
-using Communication.Client;
-using Communication.Shared;
+using Communication.Client.User;
+using Communication.Shared.Data;
 using SharpDj.Enums;
 using SharpDj.Logic.Helpers;
 using SharpDj.PubSubModels;
@@ -65,7 +64,5 @@ namespace SharpDj.ViewModels.BeforeLoginComponents
         {
             _eventAggregator.PublishOnUIThread(BeforeLoginEnum.Register);
         }
-
-
     }
 }

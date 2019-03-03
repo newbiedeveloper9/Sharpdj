@@ -1,6 +1,7 @@
 ﻿using System;
 using Caliburn.Micro;
 using SharpDj.Enums;
+using SharpDj.Interfaces;
 using SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents

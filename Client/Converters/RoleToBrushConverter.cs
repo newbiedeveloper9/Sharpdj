@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Media;
-using Communication.Shared;
+using Communication.Shared.Data;
 
 namespace SharpDj.Converters
 {

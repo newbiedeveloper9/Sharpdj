@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
-using Communication.Shared;
+using Communication.Shared.Data;
 using Newtonsoft.Json;
 using SharpDj.Logic.Helpers;
 using SharpDj.ViewModel;

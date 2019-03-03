@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using Caliburn.Micro;
+using SharpDj.Interfaces;
 using SharpDj.Models;
 using SharpDj.ViewModels.SubViews.MainViewComponents.PlaylistViewComponents;
 

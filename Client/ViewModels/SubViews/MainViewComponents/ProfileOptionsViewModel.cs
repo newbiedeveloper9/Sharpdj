@@ -1,5 +1,5 @@
 ﻿using Caliburn.Micro;
-using Communication.Shared;
+using Communication.Shared.Data;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents
 {

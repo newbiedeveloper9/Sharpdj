@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Communication.Server;
-using Communication.Server.Logic;
-using Communication.Shared;
+using Communication.Shared.Data;
 using Hik.Communication.Scs.Server;
-using servertcp.Sql;
+using Server.Security;
+using Server.Sql;
 
-namespace servertcp.ServerManagment.Commands
+namespace Server.ServerManagment.Commands
 {
     public class LoginCommand : ICommand
     {

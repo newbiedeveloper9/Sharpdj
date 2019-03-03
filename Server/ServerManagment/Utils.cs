@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Hik.Communication.Scs.Communication;
 using Hik.Communication.Scs.Communication.Messages;
 using Hik.Communication.Scs.Server;
-using servertcp;
 
-namespace Communication.Server
+namespace Server.ServerManagment
 {
     /// <summary>
     /// Utils class is singleton.

@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Windows.Documents;
-using SharpDj.Enums.Playlist;
 using SharpDj.Models;
 
-namespace SharpDj
+namespace SharpDj.Interfaces
 {
     public class PlaylistChangedData : IPlaylistChanged {
         public List<PlaylistModel> PlaylistCollection { get; set; }

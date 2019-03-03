@@ -6,7 +6,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
 using Newtonsoft.Json;
-using SharpDj.Models.Helpers.Updater;
+using SharpDj.Logic.Helpers.Updater;
 using Debug = Communication.Shared.Debug;
 
 namespace SharpDj.View.Views

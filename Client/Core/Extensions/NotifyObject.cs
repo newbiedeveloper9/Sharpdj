@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using SharpDj.Logic.Helpers;
 
-namespace SharpDj.Extensions
+namespace SharpDj.Core.Extensions
 {
     public class NotifyObject : INotifyPropertyChanged, IDisposable
     {

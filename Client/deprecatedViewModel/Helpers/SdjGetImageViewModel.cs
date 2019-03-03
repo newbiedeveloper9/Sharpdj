@@ -12,7 +12,6 @@ using Microsoft.Win32;
 using SharpDj.Core;
 using SharpDj.Enums.Helpers;
 using SharpDj.Logic.Helpers;
-using SharpDj.Models.Helpers;
 
 namespace SharpDj.ViewModel.Helpers
 {

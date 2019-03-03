@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Communication.Client;
+using Communication.Client.User;
 using Communication.Shared;
+using Communication.Shared.Data;
 
 namespace SharpDj.Logic.Helpers
 {

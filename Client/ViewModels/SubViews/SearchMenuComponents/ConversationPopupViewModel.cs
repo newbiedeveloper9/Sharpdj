@@ -1,7 +1,9 @@
 ﻿using System;
 using Caliburn.Micro;
 using Communication.Client;
+using Communication.Client.User;
 using Communication.Shared;
+using Communication.Shared.Data;
 using SharpDj.Logic.Helpers;
 using SharpDj.Models;
 

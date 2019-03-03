@@ -8,7 +8,6 @@ using SharpDj.Core;
 using SharpDj.Enums;
 using SharpDj.Enums.Helpers;
 using SharpDj.Enums.Menu;
-using SharpDj.Models.Helpers;
 using SharpDj.ViewModel.Helpers;
 
 namespace SharpDj.ViewModel

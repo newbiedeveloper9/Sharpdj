@@ -7,6 +7,7 @@ using Caliburn.Micro;
 using SharpDj.ViewModels;
 using SharpDj.ViewModels.SubViews;
 using SharpDj.Input;
+using SharpDj.Interfaces;
 
 namespace SharpDj
 {

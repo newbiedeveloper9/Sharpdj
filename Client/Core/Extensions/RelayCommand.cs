@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SharpDj.Extensions
+namespace SharpDj.Core.Extensions
 {
     public class RelayCommand : CommandBase
     {

@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Communication.Server;
-using Communication.Server.Logic;
-using Communication.Shared;
+using Communication.Shared.Data;
 using Hik.Communication.Scs.Server;
 using Newtonsoft.Json;
 using YoutubeExplode;
 
-namespace servertcp.ServerManagment.Commands
+namespace Server.ServerManagment.Commands
 {
     public class JoinQueueCommand : ICommand
     {

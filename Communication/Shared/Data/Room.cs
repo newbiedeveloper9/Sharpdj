@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Communication.Client;
+using Communication.Client.User;
 using Newtonsoft.Json;
 
 namespace Communication.Shared.Data
