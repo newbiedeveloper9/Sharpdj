@@ -1,7 +1,10 @@
 ﻿using System;
 using Caliburn.Micro;
 using System.Security;
+using Communication.Client;
+using Communication.Shared;
 using SharpDj.Enums;
+using SharpDj.Logic.Helpers;
 using SharpDj.PubSubModels;
 
 namespace SharpDj.ViewModels.BeforeLoginComponents
@@ -55,11 +58,14 @@ namespace SharpDj.ViewModels.BeforeLoginComponents
         public void TryLogin()
         {
             _eventAggregator.PublishOnUIThread(new LoginPublishInfo());
+            UserInfoSingleton.Instance.UserClient = new UserClient(0, "Crisey", Rank.Admin);
         }
 
         public void Register()
         {
             _eventAggregator.PublishOnUIThread(BeforeLoginEnum.Register);
         }
+
+
     }
 }

@@ -146,6 +146,10 @@
     <Compile Include="Converters\ActivityStatusToColorConverter.cs" />
     <Compile Include="Converters\ActivityStatusToRadioIconConverter.cs" />
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
+    <Compile Include="Converters\Conversation\AuthorToBackgroundBrushConverter.cs" />
+    <Compile Include="Converters\Conversation\AuthorToFontForegroundConverter.cs" />
+    <Compile Include="Converters\Conversation\AuthorToForegroundBrushConverter.cs" />
+    <Compile Include="Converters\Conversation\AuthorToHorizontalAlignmentConverter.cs" />
     <Compile Include="Converters\EnumToVisibilityConverter.cs" />
     <Compile Include="Converters\IsConversationReadedToFontWeightConverter.cs" />
     <Compile Include="Converters\NameToContentConverter.cs" />
@@ -189,7 +193,6 @@
     <Compile Include="Logic\Client\Commands\SendMessageChatCommand.cs" />
     <Compile Include="Logic\Client\Commands\UpdateDjCommand.cs" />
     <Compile Include="Logic\Client\Commands\AddUserToRoomCommand.cs" />
-    <Compile Include="Logic\Client\ErrorMessages.cs" />
     <Compile Include="Logic\Helpers\ClientConfig.cs" />
     <Compile Include="Logic\Helpers\Clone.cs" />
     <Compile Include="Logic\Helpers\ExecuteOnStart.cs" />
@@ -198,6 +201,7 @@
     <Compile Include="Logic\Helpers\ServerValidation.cs" />
     <Compile Include="Logic\Helpers\Updater\FTPModel.cs" />
     <Compile Include="Logic\Helpers\Updater\GetSourcePage.cs" />
+    <Compile Include="Logic\Helpers\UserInfoSingleton.cs" />
     <Compile Include="Logic\Helpers\YoutubeSingleton.cs" />
     <Compile Include="Logic\UI\ScrollViewerLogic.cs" />
     <Compile Include="Models\CommentModel.cs" />

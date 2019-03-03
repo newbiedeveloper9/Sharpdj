@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using Caliburn.Micro;
+using SharpDj.ViewModels.SubViews.SearchMenuComponents;
 
 namespace SharpDj.Models
 {
@@ -71,5 +72,16 @@ namespace SharpDj.Models
         }
 
 
+        private ConversationPopupViewModel _conversationPopupViewModel = new ConversationPopupViewModel();
+        public ConversationPopupViewModel ConversationPopupViewModel
+        {
+            get => _conversationPopupViewModel;
+            set
+            {
+                if (_conversationPopupViewModel == value) return;
+                _conversationPopupViewModel = value;
+                NotifyOfPropertyChange(() => ConversationPopupViewModel);
+            }
+        }
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Communication.Shared;
+﻿using Communication.Shared;
 
 namespace Communication.Client
 {
@@ -11,7 +6,7 @@ namespace Communication.Client
     {
         public UserClient()
         {
-            
+
         }
 
         public UserClient(long id, string username, Rank rank)
@@ -24,5 +19,15 @@ namespace Communication.Client
         public long Id { get; set; }
         public string Username { get; set; }
         public Rank Rank { get; set; } = Rank.User;
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is UserClient)) return false;
+            var eq = (UserClient)obj;
+
+            return Rank == eq.Rank &&
+                   Username == eq.Username &&
+                   Id == eq.Id;
+        }
     }
 }

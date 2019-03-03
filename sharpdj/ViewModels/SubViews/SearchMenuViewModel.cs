@@ -15,8 +15,6 @@ namespace SharpDj.ViewModels.SubViews
     {
         private readonly IEventAggregator _eventAggregator;
 
-        public ConversationPopupViewModel ConversationPopupViewModel { get; private set; }
-
         public BindableCollection<ConversationModel> ConversationsCollection { get; private set; }
 
 
@@ -25,13 +23,11 @@ namespace SharpDj.ViewModels.SubViews
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
 
-            ConversationPopupViewModel = new ConversationPopupViewModel();
             Design();
         }
 
         public SearchMenuViewModel()
         {
-            ConversationPopupViewModel = new ConversationPopupViewModel();
             Design();
         }
 
@@ -48,6 +44,8 @@ namespace SharpDj.ViewModels.SubViews
                 new ConversationModel(){IsReaded = false, Color = Brushes.DeepSkyBlue, Name = "Test Diggins", ImagePath = dicPic},
                 new ConversationModel(){IsReaded = false, Color = Brushes.Gray, Name = "Test Diggins", ImagePath = dicPic},
             };
+
+            ConversationsCollection[0].ConversationPopupViewModel.MessageCollection.Add(new MessageModel(){Text = "test"});
         }
 
         public void ConversationClick(ConversationModel model)

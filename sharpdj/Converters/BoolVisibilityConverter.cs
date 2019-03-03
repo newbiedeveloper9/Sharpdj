@@ -12,7 +12,7 @@ namespace SharpDj.Converters
             if (!(value is bool booleanVal))
                 throw new ArgumentException();
 
-            var negate = (parameter is bool b && b);
+            var negate = (parameter is string b && !string.IsNullOrEmpty(b));
             return (booleanVal != negate) ? Visibility.Visible : Visibility.Collapsed; //xor
         }
 

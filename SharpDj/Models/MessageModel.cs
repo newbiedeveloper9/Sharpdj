@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Caliburn.Micro;
 using Communication.Client;
+using SharpDj.Logic.Helpers;
 
 namespace SharpDj.Models
 {
@@ -45,6 +46,9 @@ namespace SharpDj.Models
                 if (_author == value) return;
                 _author = value;
                 NotifyOfPropertyChange(() => Author);
+
+                if (UserInfoSingleton.Instance.UserClient.Equals(Author))
+                    IsOwnMessage = true;
             }
         }
 
@@ -62,6 +66,16 @@ namespace SharpDj.Models
         }
 
 
-
+        private bool _isOwnMessage;
+        public bool IsOwnMessage
+        {
+            get => _isOwnMessage;
+            set
+            {
+                if (_isOwnMessage == value) return;
+                _isOwnMessage = value;
+                NotifyOfPropertyChange(() => IsOwnMessage);
+            }
+        }
     }
 }
