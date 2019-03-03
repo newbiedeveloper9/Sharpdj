@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="SharpDj.Views.SubViews.SearchMenuComponents.ConversationPopupView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:searchMenuComponents="clr-namespace:SharpDj.ViewModels.SubViews.SearchMenuComponents"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:conversation="clr-namespace:SharpDj.Converters.Conversation"
+             xmlns:converters="clr-namespace:SharpDj.Converters"
+             mc:Ignorable="d" 
+             cal:Bind.AtDesignTime="True"
+             d:DataContext="{d:DesignInstance Type=searchMenuComponents:ConversationPopupViewModel, IsDesignTimeCreatable=True}"
+             d:DesignHeight="400" d:DesignWidth="260">
+    <UserControl.Resources>
+        <conversation:AuthorToBackgroundBrushConverter x:Key="AuthorToBackground" />
+        <conversation:AuthorToForegroundBrushConverter x:Key="AuthorToForeground"/>
+        <conversation:AuthorToHorizontalAlignmentConverter x:Key="AuthorToHorizontalAlignment"/>
+        <conversation:AuthorToFontForegroundConverter x:Key="AuthorToFontForeground"/>
+    </UserControl.Resources>
+
+    <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth4">
+        <Grid Height="400" Background="LightGray">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <ScrollViewer Width="260" Margin="0 6 0 6" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Grid.Row="0" materialDesign:ThemeAssist.Theme="Light">
+                <StackPanel>
+                    <ItemsControl x:Name="MessageCollection">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <!--<materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                                        Background="{Binding IsOwnMessage, Converter={StaticResource AuthorToBackground}}"
+                                        Foreground="{Binding IsOwnMessage, Converter={StaticResource AuthorToForeground}}"
+                                        HorizontalAlignment="{Binding IsOwnMessage, Converter={StaticResource AuthorToHorizontalAlignment}}"
+                                        MaxWidth="220"
+                                        Margin="10 3 10 3"
+                                        Padding="4"
+                                        UniformCornerRadius="7">
+                                        <TextBox Margin="4 2 4 2"  Style="{StaticResource TextboxChat}"
+                                            Foreground="{Binding IsOwnMessage, Converter={StaticResource AuthorToFontForeground}}" Text="{Binding Text}"/>
+                                    </materialDesign:Card>-->
+
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </ScrollViewer>
+
+            <StackPanel Grid.Row="1">
+                <TextBox FontSize="14" FontWeight="Light" Width="260" MaxHeight="280" IsUndoEnabled="True" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:ThemeAssist.Theme="Light" HorizontalAlignment="Stretch"
+                     TextWrapping="Wrap" Foreground="{StaticResource MaterialDesignLightForeground}"
+                     VerticalAlignment="Stretch"
+                     AcceptsReturn="True"
+                     VerticalScrollBarVisibility="Auto"
+                     SpellCheck.IsEnabled="True"
+                     materialDesign:HintAssist.Hint="Wpisz wiadomość..."/>
+            </StackPanel>
+
+            <DockPanel Grid.Row="2" Background="#303030" VerticalAlignment="Top">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" materialDesign:ThemeAssist.Theme="Light" Background="#1c1c1c">
+                    <Button Height="32" Background="#1c1c1c" Style="{StaticResource MaterialDesignFlatButton}">
+                        <materialDesign:PackIcon Kind="Settings" VerticalAlignment="Center"/>
+                    </Button>
+                    <Button Height="32" Background="#1c1c1c" Style="{StaticResource MaterialDesignFlatButton}" x:Name="Minimize">
+                        <materialDesign:PackIcon Kind="Close" VerticalAlignment="Center"/>
+                    </Button>
+                </StackPanel>
+            </DockPanel>
+            <Border Background="#0f0f0f" Height="1" VerticalAlignment="Bottom" Grid.Row="2"/>
+        </Grid>
+    </materialDesign:Card>
+</UserControl>
