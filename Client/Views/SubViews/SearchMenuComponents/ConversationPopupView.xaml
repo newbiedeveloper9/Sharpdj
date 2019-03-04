@@ -27,23 +27,36 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <ScrollViewer Width="260" Margin="0 6 0 6" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Grid.Row="0" materialDesign:ThemeAssist.Theme="Light">
-                <StackPanel>
-                    <ItemsControl x:Name="MessageCollection">
+            <ScrollViewer Width="260" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Grid.Row="0" materialDesign:ThemeAssist.Theme="Light">
+                <StackPanel Margin="0 12 0 12">
+                    <ItemsControl x:Name="MessagesCollection">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <!--<materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth1"
-                                        Background="{Binding IsOwnMessage, Converter={StaticResource AuthorToBackground}}"
-                                        Foreground="{Binding IsOwnMessage, Converter={StaticResource AuthorToForeground}}"
-                                        HorizontalAlignment="{Binding IsOwnMessage, Converter={StaticResource AuthorToHorizontalAlignment}}"
-                                        MaxWidth="220"
-                                        Margin="10 3 10 3"
-                                        Padding="4"
-                                        UniformCornerRadius="7">
-                                        <TextBox Margin="4 2 4 2"  Style="{StaticResource TextboxChat}"
+                                    <Grid>
+                                        <Grid Visibility="{Binding Separator, Converter={converters:BoolVisibilityConverter}}">
+                                            <Polygon  VerticalAlignment="Bottom" Points="4,2 17,2 10,-5" Margin="0 0 0 1"  HorizontalAlignment="Left"
+                                                      Visibility="{Binding IsOwnMessage, Converter={converters:BoolVisibilityConverter}, ConverterParameter=smth}" StrokeThickness="0">
+                                                <Polygon.Fill>
+                                                    <SolidColorBrush Color="#f1f1f1" Opacity="0.9"/>
+                                                </Polygon.Fill>
+                                            </Polygon>
+                                            <Polygon  VerticalAlignment="Bottom" Points="4,2 17,2 10,-5" Margin="0 0 4 1"  HorizontalAlignment="Right"
+                                                      Visibility="{Binding IsOwnMessage, Converter={converters:BoolVisibilityConverter}}" StrokeThickness="0" Fill="{Binding Color}"/>
+                                        </Grid>
+
+                                        <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                                                    Background="{Binding IsOwnMessage, Converter={StaticResource AuthorToBackground}}"
+                                                    Foreground="{Binding IsOwnMessage, Converter={StaticResource AuthorToForeground}}"
+                                                    HorizontalAlignment="{Binding IsOwnMessage, Converter={StaticResource AuthorToHorizontalAlignment}}"
+                                                    MaxWidth="220" Margin="10 1 10 1"
+                                                    Padding="4" UniformCornerRadius="6">
+                                            <TextBox Margin="4 2 4 2"  Style="{StaticResource TextboxChat}"
                                             Foreground="{Binding IsOwnMessage, Converter={StaticResource AuthorToFontForeground}}" Text="{Binding Text}"/>
-                                    </materialDesign:Card>-->
+                                        </materialDesign:Card>
+                                    </Grid>
+
+                                    <Grid Margin="0 0 0 8" Visibility="{Binding Separator, Converter={converters:BoolVisibilityConverter}}"/>
 
                                 </StackPanel>
                             </DataTemplate>

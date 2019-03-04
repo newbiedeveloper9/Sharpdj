@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Media;
 using Caliburn.Micro;
-using Communication.Client;
+using Communication.Client.User;
 using SharpDj.Logic.Helpers;
 
 namespace SharpDj.Models
@@ -35,6 +32,21 @@ namespace SharpDj.Models
             }
         }
 
+        private UserClient _author;
+        public UserClient Author
+        {
+            get => _author;
+            set
+            {
+                if (_author == value) return;
+                _author = value;
+                NotifyOfPropertyChange(() => Author);
+
+                if (UserInfoSingleton.Instance.UserClient.Equals(Author))
+                    IsOwnMessage = true;
+            }
+        }
+
         private DateTime _time;
         public DateTime Time
         {
@@ -47,13 +59,40 @@ namespace SharpDj.Models
             }
         }
 
-        private MessageListModel _parent;
-
-        public MessageListModel Parent
+        private SolidColorBrush _color = new SolidColorBrush(new Color(){R = 81, G = 41, B = 165, A = Byte.MaxValue});
+        public SolidColorBrush Color
         {
-            get { return _parent; }
-            set { _parent = value; }
+            get => _color;
+            set
+            {
+                if (_color == value) return;
+                _color = value;
+                NotifyOfPropertyChange(() => Color);
+            }
         }
 
+        private bool _isOwnMessage;
+        public bool IsOwnMessage
+        {
+            get => _isOwnMessage;
+            set
+            {
+                if (_isOwnMessage == value) return;
+                _isOwnMessage = value;
+                NotifyOfPropertyChange(() => IsOwnMessage);
+            }
+        }
+
+        private bool _separator;
+        public bool Separator
+        {
+            get => _separator;
+            set
+            {
+                if (_separator == value) return;
+                _separator = value;
+                NotifyOfPropertyChange(() => Separator);
+            }
+        }
     }
 }

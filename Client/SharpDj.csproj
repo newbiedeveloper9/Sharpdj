@@ -290,7 +290,6 @@
     <Compile Include="Logic\UI\ScrollViewerLogic.cs" />
     <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Models\ConversationModel.cs" />
-    <Compile Include="Models\MessageListModel.cs" />
     <Compile Include="Models\MessageModel.cs" />
     <Compile Include="Models\NewsModel.cs" />
     <Compile Include="Models\PlaylistModel.cs" />

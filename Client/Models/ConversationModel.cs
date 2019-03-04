@@ -44,6 +44,7 @@ namespace SharpDj.Models
                 if (_color == value) return;
                 _color = value;
                 NotifyOfPropertyChange(() => Color);
+                ConversationPopupViewModel.Color = value;
             }
         }
 
