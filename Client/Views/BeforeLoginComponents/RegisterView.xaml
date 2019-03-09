@@ -7,9 +7,8 @@
              xmlns:cal="http://www.caliburnproject.org"
              xmlns:beforeLoginComponents="clr-namespace:SharpDj.ViewModels.BeforeLoginComponents"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:helpers="clr-namespace:SharpDj.ViewModel.Helpers"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:helpers1="clr-namespace:SharpDj.deprecatedViewModel.Helpers"
+             xmlns:helpers1="clr-namespace:SharpDj.Logic.Helpers"
              cal:Bind.AtDesignTime="True"
              d:DataContext="{d:DesignInstance Type=beforeLoginComponents:RegisterViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="700" d:DesignWidth="800">

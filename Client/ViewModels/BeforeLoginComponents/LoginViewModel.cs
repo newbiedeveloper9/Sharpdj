@@ -1,7 +1,6 @@
 ﻿using Caliburn.Micro;
 using System.Security;
-using Communication.Client.User;
-using Communication.Shared.Data;
+using SCPackets;
 using SharpDj.Enums;
 using SharpDj.Logic.Helpers;
 using SharpDj.PubSubModels;

@@ -1,6 +1,5 @@
 ﻿using Caliburn.Micro;
-using Communication.Client.User;
-using Communication.Shared.Data;
+using SCPackets;
 using SharpDj.Logic.Helpers;
 using SharpDj.Models;
 using System;
@@ -12,7 +11,7 @@ namespace SharpDj.ViewModels.SubViews.SearchMenuComponents
     {
         public MessageBindable<MessageModel> MessagesCollection { get; private set; }
         private SolidColorBrush _color;
-        public SolidColorBrush Color
+        public  SolidColorBrush Color
         {
             get => _color;
             set
@@ -20,6 +19,10 @@ namespace SharpDj.ViewModels.SubViews.SearchMenuComponents
                 if (_color == value) return;
                 _color = value;
                 NotifyOfPropertyChange(() => Color);
+                foreach (var messageModel in MessagesCollection)
+                {
+                    messageModel.Color = value;
+                }
             }
         }
 
@@ -54,7 +57,6 @@ namespace SharpDj.ViewModels.SubViews.SearchMenuComponents
 
         public void Minimize()
         {
-            Color = Brushes.Black;
 
         }
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Media;
 using Caliburn.Micro;
-using Communication.Client.User;
+using SCPackets;
 using SharpDj.Logic.Helpers;
 
 namespace SharpDj.Models

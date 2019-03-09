@@ -1,5 +1,4 @@
 ﻿using System;
-using Communication.Shared;
 
 namespace SharpDj.Logic.Helpers
 {
@@ -7,8 +6,8 @@ namespace SharpDj.Logic.Helpers
     {
         public ExceptionLogger(Exception e)
         {
-            Debug.Log($"Exception:{e.Source}", $"{e.Message}" );
-            Debug.Log($"StackTrace", $"{e.StackTrace}" );
+            Console.WriteLine($"Exception:{e.Source}", $"{e.Message}" );
+            Console.WriteLine($"StackTrace", $"{e.StackTrace}" );
         }
     }
 }

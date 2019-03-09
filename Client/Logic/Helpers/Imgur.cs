@@ -7,18 +7,16 @@ using System.Text;
 using System.Windows;
 using System.Xml;
 using System.Xml.XPath;
-using Debug = Communication.Shared.Debug;
 
 namespace SharpDj.Logic.Helpers
 {
-    class Imgur
+    public class Imgur
     {
         public string ApiKey { get; set; } = "3f25bffad37f3b8";
 
         public string AnonymousImageUpload(string path, bool local = true)
         {
             XmlDocument doc = new XmlDocument();
-            var debug = new Debug("Imgur");
             try
             {
                 using (var w = new WebClient())
@@ -40,19 +38,20 @@ namespace SharpDj.Logic.Helpers
                     }
 
                     w.Headers.Add("Authorization", "Client-ID " + ApiKey);
-                    debug.Log("Uploading image");
+                    Console.WriteLine("Uploading image");
                     var response = w.UploadValues("https://api.imgur.com/3/upload.xml", values);
                     var responseString = Encoding.UTF8.GetString(response);
 
                     doc.LoadXml(responseString);
 
-                    if (doc.ChildNodes[1].Attributes[2].InnerText.Equals("200"))
+                    var xmlAttributeCollection = doc.ChildNodes[1].Attributes;
+                    if (xmlAttributeCollection != null && xmlAttributeCollection[2].InnerText.Equals("200"))
                     {
-                        debug.Log("Success");
-                        return doc.DocumentElement.ChildNodes.Item(26).InnerText;
+                        Console.WriteLine("Upload Success");
+                        if (doc.DocumentElement != null) return doc.DocumentElement.ChildNodes.Item(26)?.InnerText;
                     }
 
-                    debug.Log("Error with xml parsing");
+                    Console.WriteLine("Error with xml parsing");
                     return string.Empty;
                 }
             }
