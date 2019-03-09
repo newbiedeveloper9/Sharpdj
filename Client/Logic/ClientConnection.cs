@@ -3,6 +3,7 @@ using Network;
 using SCPackets;
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace SharpDj.Logic
 {
@@ -35,7 +36,6 @@ namespace SharpDj.Logic
 
         private void ConnectionEstablished()
         {
-            System.Console.WriteLine("Connection with server established.");
             _packetsList.RegisterPackets(_connection, this);
             _sender = new ClientSender(_eventAggregator, _connection, this);
         }

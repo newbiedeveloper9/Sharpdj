@@ -4,6 +4,7 @@ using SharpDj.Input;
 using SharpDj.PubSubModels;
 using System.ComponentModel;
 using System.Security;
+using SCPackets;
 using SharpDj.Enums;
 
 namespace SharpDj.ViewModels.BeforeLoginComponents
@@ -107,7 +108,7 @@ namespace SharpDj.ViewModels.BeforeLoginComponents
                                    !string.IsNullOrWhiteSpace(LoginText) &&
                                    !string.IsNullOrWhiteSpace(EmailText) &&
                                    UserValidation.EmailIsValid(EmailText) &&
-                                   UserValidation.PasswordIsValid(PasswordText, 6, 32) &&
+                                   UserValidation.PasswordIsValid(PasswordText, 6, 48) &&
                                    UserValidation.LoginIsValid(LoginText, 2, 32) &&
                                    UserValidation.LoginIsValid(UsernameText, 2, 32) &&
                                    !string.IsNullOrWhiteSpace(new System.Net.NetworkCredential(string.Empty, PasswordText)

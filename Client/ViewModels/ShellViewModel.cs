@@ -39,7 +39,6 @@ namespace SharpDj.ViewModels
             Task.Factory.StartNew(() =>
             {
                 client = new ClientConnection(_eventAggregator);
-
             });
         }
 
@@ -48,11 +47,6 @@ namespace SharpDj.ViewModels
             ActivateItem(AfterLoginScreenViewModel);
         }
 
-        public void Handle(IMessageQueue message)
-        {
-            Task.Factory.StartNew(() => 
-                MessagesQueue.Enqueue($"{message.ViewName}: {message.Message}"));
-        }
 
         private SnackbarMessageQueue _messagesQueue;
         public SnackbarMessageQueue MessagesQueue
@@ -64,6 +58,12 @@ namespace SharpDj.ViewModels
                 _messagesQueue = value;
                 NotifyOfPropertyChange(() => MessagesQueue);
             }
+        }
+
+        public void Handle(IMessageQueue message)
+        {
+            Task.Factory.StartNew(() => 
+                MessagesQueue.Enqueue($"{message.ViewName}: {message.Message}"));
         }
     }
 }

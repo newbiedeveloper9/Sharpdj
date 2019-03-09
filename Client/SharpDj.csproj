@@ -110,9 +110,6 @@
     <Reference Include="PresentationFramework">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.1\PresentationFramework.dll</HintPath>
     </Reference>
-    <Reference Include="Scs, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Scs.1.1.1\lib\net40-client\Scs.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Core" />
@@ -197,7 +194,6 @@
     <Compile Include="Enums\Playlist\PlaylistState.cs" />
     <Compile Include="Enums\User\UserState.cs" />
     <Compile Include="Input\CallViewmodelMethod.cs" />
-    <Compile Include="Input\UserValidation.cs" />
     <Compile Include="Input\KeySequence.cs" />
     <Compile Include="Input\KeyTrigger.cs" />
     <Compile Include="Input\MultiKeyGesture.cs" />

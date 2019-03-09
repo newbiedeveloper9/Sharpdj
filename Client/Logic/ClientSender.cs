@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using Network;
 using SCPackets;
-using SCPackets.LoginPacket;
 using SharpDj.PubSubModels;
 
 namespace SharpDj.Logic
@@ -26,7 +20,10 @@ namespace SharpDj.Logic
 
         public void Handle(ISendPacket message)
         {
-            _connection.Send(message.Packet, _instance);
+            if (_connection.IsAlive)
+            {
+                _connection.Send(message.Packet, _instance);
+            }
         }
     }
 }
