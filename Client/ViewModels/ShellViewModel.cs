@@ -1,15 +1,18 @@
-﻿using System;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
+using MaterialDesignThemes.Wpf;
 using SharpDj.Interfaces;
+using SharpDj.Logic;
 using SharpDj.PubSubModels;
 using SharpDj.ViewModels.SubViews;
-using SharpDj.Views;
+using System;
+using System.Threading.Tasks;
 
 namespace SharpDj.ViewModels
 {
-    public class ShellViewModel : Conductor<object>.Collection.OneActive, IShell, IHandle<ILoginPublishInfo>
+    public sealed class ShellViewModel : Conductor<object>.Collection.OneActive, IShell, IHandle<ILoginPublishInfo>, IHandle<IMessageQueue>
     {
         private readonly IEventAggregator _eventAggregator;
+        private ClientConnection client;
 
         public AfterLoginScreenViewModel AfterLoginScreenViewModel { get; private set; }
         public BeforeLoginScreenViewModel BeforeLoginScreenViewModel { get; private set; }
@@ -20,6 +23,8 @@ namespace SharpDj.ViewModels
         {
             _eventAggregator = new EventAggregator();
             _eventAggregator.Subscribe(this);
+            MessagesQueue = new SnackbarMessageQueue(TimeSpan.FromMilliseconds(3750));
+            
 
             TopMenuViewModel = new TopMenuViewModel();
             AfterLoginScreenViewModel = new AfterLoginScreenViewModel(_eventAggregator);
@@ -30,13 +35,35 @@ namespace SharpDj.ViewModels
 #else  
             ActivateItem(BeforeLoginScreenViewModel);
 #endif
-       
-            
+
+            Task.Factory.StartNew(() =>
+            {
+                client = new ClientConnection(_eventAggregator);
+
+            });
         }
 
         public void Handle(ILoginPublishInfo message)
         {
             ActivateItem(AfterLoginScreenViewModel);
+        }
+
+        public void Handle(IMessageQueue message)
+        {
+            Task.Factory.StartNew(() => 
+                MessagesQueue.Enqueue($"{message.ViewName}: {message.Message}"));
+        }
+
+        private SnackbarMessageQueue _messagesQueue;
+        public SnackbarMessageQueue MessagesQueue
+        {
+            get => _messagesQueue;
+            set
+            {
+                if (_messagesQueue == value) return;
+                _messagesQueue = value;
+                NotifyOfPropertyChange(() => MessagesQueue);
+            }
         }
     }
 }

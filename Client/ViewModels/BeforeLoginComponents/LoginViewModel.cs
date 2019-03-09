@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using System.Security;
 using SCPackets;
+using SCPackets.LoginPacket;
 using SharpDj.Enums;
 using SharpDj.Logic.Helpers;
 using SharpDj.PubSubModels;
@@ -55,8 +56,8 @@ namespace SharpDj.ViewModels.BeforeLoginComponents
 
         public void TryLogin()
         {
-            _eventAggregator.PublishOnUIThread(new LoginPublishInfo());
-            UserInfoSingleton.Instance.UserClient = new UserClient(0, "Crisey", Rank.Admin);
+            _eventAggregator.PublishOnUIThread(new SendPacket(new LoginRequest(
+                LoginText, new System.Net.NetworkCredential(string.Empty, PasswordText).Password)));
         }
 
         public void Register()

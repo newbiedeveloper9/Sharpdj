@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using SCPackets.RegisterPacket;
 using SharpDj.Input;
 using SharpDj.PubSubModels;
 using System.ComponentModel;
@@ -114,10 +115,14 @@ namespace SharpDj.ViewModels.BeforeLoginComponents
 
         public void Register()
         {
-            GotoLogin();
+            _eventAggregator.PublishOnUIThread(
+                new SendPacket(
+                    new RegisterRequest(LoginText, new System.Net.NetworkCredential(string.Empty, PasswordText).Password, EmailText, UsernameText)
+                )
+            );
         }
 
-        public void GotoLogin()
+        public void BackToLogin()
         {
             _eventAggregator.PublishOnUIThread(BeforeLoginEnum.Login);
         }

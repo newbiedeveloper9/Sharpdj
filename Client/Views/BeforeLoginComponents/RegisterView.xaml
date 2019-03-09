@@ -41,7 +41,7 @@
                                 <helpers1:PasswordBoxBindingBehavior Password="{Binding PasswordText}"/>
                             </i:Interaction.Behaviors>
                         </PasswordBox>
-                        <TextBlock Text="Your password must be between 6 and 32 characters" Foreground="{StaticResource PrimaryHueLightBrush}" Margin="0 6 0 0" Opacity="0.35"/>
+                        <TextBlock Text="Your password must be between 6 and 32 characters" Foreground="{StaticResource PrimaryHueLightBrush}" Margin="0 6 0 0" Opacity="0.53"/>
                     </StackPanel>
 
 
@@ -56,7 +56,7 @@
 
                     <StackPanel Orientation="Horizontal" Margin="4 4 0 0" materialDesign:ThemeAssist.Theme="Light">
                         <TextBlock Text="Or" VerticalAlignment="Center" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="12"/>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="already have an account" Margin="1 0 0 0" Padding="4 0 4 0" x:Name="GotoLogin" FontSize="12"/>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="already have an account" Margin="1 0 0 0" Padding="4 0 4 0" x:Name="BackToLogin" FontSize="12"/>
                     </StackPanel>
                 </StackPanel>
             </materialDesign:Card>

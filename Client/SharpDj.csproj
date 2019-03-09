@@ -206,7 +206,11 @@
     <Compile Include="Interfaces\IPlaylistChanged.cs" />
     <Compile Include="Interfaces\IShell.cs" />
     <Compile Include="Interfaces\ITest.cs" />
+    <Compile Include="Logic\ActionToServer\ClientLoginAction.cs" />
+    <Compile Include="Logic\ActionToServer\ClientRegisterAction.cs" />
     <Compile Include="Logic\ClientConnection.cs" />
+    <Compile Include="Logic\ClientPacketsToHandleList.cs" />
+    <Compile Include="Logic\ClientSender.cs" />
     <Compile Include="Logic\Helpers\ClientConfig.cs" />
     <Compile Include="Logic\Helpers\Clone.cs" />
     <Compile Include="Logic\Helpers\ExecuteOnStart.cs" />
@@ -225,8 +229,10 @@
     <Compile Include="Models\PlaylistModel.cs" />
     <Compile Include="Models\RoomModel.cs" />
     <Compile Include="Models\TrackModel.cs" />
+    <Compile Include="PubSubModels\ErrorMessage.cs" />
     <Compile Include="PubSubModels\LoginPublishInfo.cs" />
     <Compile Include="PubSubModels\RoomInfoForOpen.cs" />
+    <Compile Include="PubSubModels\SendPacket.cs" />
     <Compile Include="ViewModels\AfterLoginScreenViewModel.cs" />
     <Compile Include="ViewModels\BeforeLoginComponents\RegisterViewModel.cs" />
     <Compile Include="ViewModels\BeforeLoginScreenViewModel.cs" />
