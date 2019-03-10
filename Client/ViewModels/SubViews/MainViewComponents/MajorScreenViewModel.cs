@@ -1,6 +1,4 @@
-﻿using System;
-using Caliburn.Micro;
-using SharpDj.Enums;
+﻿using Caliburn.Micro;
 using SharpDj.Interfaces;
 using SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents;
 
@@ -18,7 +16,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
         {
             RoomSquareViewModel = new RoomSquareViewModel();
             NewsCarouselViewModel = new NewsCarouselViewModel();
-                  }
+        }
 
         public MajorScreenViewModel(IEventAggregator eventAggregator)
         {

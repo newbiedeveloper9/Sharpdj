@@ -1,17 +1,16 @@
 ﻿using Caliburn.Micro;
 using Network;
 using SCPackets;
-using System;
+using SharpDj.PubSubModels;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace SharpDj.Logic
 {
     public class ClientConnection : IClient
     {
-        private ConnectionResult result = ConnectionResult.TCPConnectionNotAlive;
+        public ConnectionResult Result = ConnectionResult.TCPConnectionNotAlive;
 
-        private readonly TcpConnection _connection;
+        private TcpConnection _connection;
         private readonly IEventAggregator _eventAggregator;
         private readonly ClientPacketsToHandleList _packetsList;
         private ClientSender _sender;
@@ -19,17 +18,25 @@ namespace SharpDj.Logic
         public ClientConnection(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
-
             _packetsList = new ClientPacketsToHandleList(_eventAggregator);
+        }
 
+        public void Init()
+        {
             int iterator = 0;
             do
             {
-                if (iterator > 0) Console.WriteLine("Reconnecting. Attempt number {0}", iterator);
-                _connection = ConnectionFactory.CreateSecureTcpConnection("127.0.0.1", 5666, out result, 2048);
-                Thread.Sleep(2500);
                 iterator++;
-            } while (result != ConnectionResult.Connected);
+                _connection = ConnectionFactory.CreateSecureTcpConnection("127.0.0.1", 5666, out Result, 2048);
+
+                var mess = Result == ConnectionResult.Connected
+                    ? new MessageQueue("Connection", "Successfully connected")
+                    : new MessageQueue("Reconnecting", $"Attempt number {iterator}");
+
+                _eventAggregator.PublishOnUIThread(mess);
+
+                Thread.Sleep(4000);
+            } while (Result != ConnectionResult.Connected);
 
             ConnectionEstablished();
         }

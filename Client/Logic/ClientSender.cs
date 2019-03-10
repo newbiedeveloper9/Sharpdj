@@ -1,4 +1,5 @@
-﻿using Caliburn.Micro;
+﻿using System;
+using Caliburn.Micro;
 using Network;
 using SCPackets;
 using SharpDj.PubSubModels;
@@ -23,6 +24,11 @@ namespace SharpDj.Logic
             if (_connection.IsAlive)
             {
                 _connection.Send(message.Packet, _instance);
+            }
+            else
+            {
+                _eventAggregator.Unsubscribe(this);
+                _eventAggregator.PublishOnUIThread(new Reconnect());
             }
         }
     }

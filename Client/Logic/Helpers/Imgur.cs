@@ -47,11 +47,16 @@ namespace SharpDj.Logic.Helpers
                     var xmlAttributeCollection = doc.ChildNodes[1].Attributes;
                     if (xmlAttributeCollection != null && xmlAttributeCollection[2].InnerText.Equals("200"))
                     {
-                        Console.WriteLine("Upload Success");
-                        if (doc.DocumentElement != null) return doc.DocumentElement.ChildNodes.Item(26)?.InnerText;
+                        if (doc.DocumentElement != null)
+                        {
+                            OnUploadSuccess(EventArgs.Empty);
+                            Console.WriteLine("Upload Success");
+                            return doc.DocumentElement.ChildNodes.Item(26)?.InnerText;
+                        }
                     }
 
                     Console.WriteLine("Error with xml parsing");
+                    OnXmlParsingError(EventArgs.Empty);
                     return string.Empty;
                 }
             }
@@ -60,6 +65,20 @@ namespace SharpDj.Logic.Helpers
                 new ExceptionLogger(ex);
                 return string.Empty;
             }
+        }
+
+        public event EventHandler XmlParsingError;
+        protected virtual void OnXmlParsingError(EventArgs e)
+        {
+            EventHandler handler = XmlParsingError;
+            handler?.Invoke(this, e);
+        }
+
+        public event EventHandler UploadSuccess;
+        protected virtual void OnUploadSuccess(EventArgs e)
+        {
+            EventHandler handler = UploadSuccess;
+            handler?.Invoke(this, e);
         }
     }
 }

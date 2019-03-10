@@ -43,7 +43,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
                     CurrentTrack = previous,
                     NextTrack = current,
                     PreviousTrack = next,
-                    Name = "XD xd xd xd Lorem Ipsum dolor xD XD xd",
+                    Name = "12345678901234567890123456789012345678901234567890",
                     Id = 2,
                     ImageSource = dicPic
                 }

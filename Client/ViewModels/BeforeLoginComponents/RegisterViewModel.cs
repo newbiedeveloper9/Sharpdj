@@ -107,10 +107,10 @@ namespace SharpDj.ViewModels.BeforeLoginComponents
         public bool CanRegister => PrivacyPolicy && ToS &&
                                    !string.IsNullOrWhiteSpace(LoginText) &&
                                    !string.IsNullOrWhiteSpace(EmailText) &&
-                                   UserValidation.EmailIsValid(EmailText) &&
-                                   UserValidation.PasswordIsValid(PasswordText, 6, 48) &&
-                                   UserValidation.LoginIsValid(LoginText, 2, 32) &&
-                                   UserValidation.LoginIsValid(UsernameText, 2, 32) &&
+                                   DataValidation.EmailIsValid(EmailText) &&
+                                   DataValidation.PasswordIsValid(PasswordText, 6, 48) &&
+                                   DataValidation.LengthIsValid(LoginText, 2, 32) &&
+                                   DataValidation.LengthIsValid(UsernameText, 2, 32) &&
                                    !string.IsNullOrWhiteSpace(new System.Net.NetworkCredential(string.Empty, PasswordText)
                                        .Password);
 
@@ -137,15 +137,15 @@ namespace SharpDj.ViewModels.BeforeLoginComponents
                     case "EmailText":
                         if (string.IsNullOrEmpty(EmailText))
                             break;
-                        if (!UserValidation.EmailIsValid(EmailText))
+                        if (!DataValidation.EmailIsValid(EmailText))
                             return "Please enter a valid email.";
                         break;
                     case "UsernameText":
-                        if (!UserValidation.LoginIsValid(UsernameText, 2, 32))
+                        if (!DataValidation.LengthIsValid(UsernameText, 2, 32))
                             return "Your Username must be between 2 and 32 characters";
                         break;
                     case "LoginText":
-                        if (!UserValidation.LoginIsValid(LoginText, 2, 32))
+                        if (!DataValidation.LengthIsValid(LoginText, 2, 32))
                             return "Your Login must be between 2 and 32 characters";
                         break;
                 }

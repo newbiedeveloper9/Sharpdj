@@ -20,6 +20,7 @@ namespace SharpDj.ViewModels.SubViews
         public INavMainView MajorScreenViewModel { get; private set; }
         public INavMainView RoomViewModel { get; private set; }
         public INavMainView PlaylistViewModel { get; private set; }
+        public INavMainView CreateRoomViewModel { get; private set; }
 
         public ProfileOptionsViewModel ProfileOptionsViewModel { get; private set; }
         public ConversationsViewModel ConversationsViewModel { get; private set; }
@@ -30,6 +31,7 @@ namespace SharpDj.ViewModels.SubViews
             MajorScreenViewModel = new MajorScreenViewModel();
             RoomViewModel = new RoomViewModel();
             PlaylistViewModel = new PlaylistViewModel();
+            CreateRoomViewModel = new CreateRoomViewModel();
 
             ProfileOptionsViewModel = new ProfileOptionsViewModel();
             ConversationsViewModel = new ConversationsViewModel();
@@ -46,8 +48,9 @@ namespace SharpDj.ViewModels.SubViews
             MajorScreenViewModel = new MajorScreenViewModel(_eventAggregator);
             RoomViewModel = new RoomViewModel();
             PlaylistViewModel = new PlaylistViewModel();
+            CreateRoomViewModel = new CreateRoomViewModel(_eventAggregator);
 
-            ProfileOptionsViewModel = new ProfileOptionsViewModel();
+            ProfileOptionsViewModel = new ProfileOptionsViewModel(eventAggregator);
             ConversationsViewModel = new ConversationsViewModel();
 
             NavigationDictionary = new Dictionary<NavigateMainView, INavMainView>()
@@ -55,6 +58,7 @@ namespace SharpDj.ViewModels.SubViews
                 {NavigateMainView.Home, MajorScreenViewModel },
                 {NavigateMainView.Playlist, PlaylistViewModel },
                 {NavigateMainView.Room, RoomViewModel },
+                {NavigateMainView.CreateRoom, CreateRoomViewModel },
             };
 
             ActivateItem((PropertyChangedBase)NavigationDictionary[NavigateMainView.Home]);

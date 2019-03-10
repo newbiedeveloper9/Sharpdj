@@ -27,8 +27,8 @@ namespace SharpDj.ViewModels.SubViews
         }
 
         public BindableCollection<PlaylistModel> PlaylistCollection { get; private set; }
-        public RoomRectangleViewModel RoomRectangleViewModel { get; set; } = new RoomRectangleViewModel();
-        public ObservedRoomViewModel ObservedRoomViewModel { get; set; } = new ObservedRoomViewModel();
+        public RoomRectangleViewModel RoomRectangleViewModel { get; private set; } = new RoomRectangleViewModel();
+        public ObservedRoomViewModel ObservedRoomViewModel { get; private set; } = new ObservedRoomViewModel();
 
         public void ActivatePlaylist(PlaylistModel model)
         {

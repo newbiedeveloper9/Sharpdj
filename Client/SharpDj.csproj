@@ -202,6 +202,7 @@
     <Compile Include="Interfaces\IPlaylistChanged.cs" />
     <Compile Include="Interfaces\IShell.cs" />
     <Compile Include="Interfaces\ITest.cs" />
+    <Compile Include="Logic\ActionToServer\ClientCreateRoomAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientLoginAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientRegisterAction.cs" />
     <Compile Include="Logic\ClientConnection.cs" />
@@ -223,16 +224,19 @@
     <Compile Include="Models\MessageModel.cs" />
     <Compile Include="Models\NewsModel.cs" />
     <Compile Include="Models\PlaylistModel.cs" />
+    <Compile Include="Models\RoomCreationModel.cs" />
     <Compile Include="Models\RoomModel.cs" />
     <Compile Include="Models\TrackModel.cs" />
-    <Compile Include="PubSubModels\ErrorMessage.cs" />
+    <Compile Include="PubSubModels\MessageQueue.cs" />
     <Compile Include="PubSubModels\LoginPublishInfo.cs" />
+    <Compile Include="PubSubModels\Reconnect.cs" />
     <Compile Include="PubSubModels\RoomInfoForOpen.cs" />
     <Compile Include="PubSubModels\SendPacket.cs" />
     <Compile Include="ViewModels\AfterLoginScreenViewModel.cs" />
     <Compile Include="ViewModels\BeforeLoginComponents\RegisterViewModel.cs" />
     <Compile Include="ViewModels\BeforeLoginScreenViewModel.cs" />
     <Compile Include="ViewModels\BeforeLoginComponents\LoginViewModel.cs" />
+    <Compile Include="ViewModels\SubViews\MainViewComponents\CreateRoomViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\MajorScreenViewModel.cs" />
     <Compile Include="ViewModels\SubViews\LeftMenuComponents\ObservedRoomViewModel.cs" />
     <Compile Include="ViewModels\SubViews\LeftMenuComponents\RoomRectangleViewModel.cs" />
@@ -276,6 +280,9 @@
     </Compile>
     <Compile Include="Views\SubViews\MainViewComponents\ConversationsView.xaml.cs">
       <DependentUpon>ConversationsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubViews\MainViewComponents\CreateRoomView.xaml.cs">
+      <DependentUpon>CreateRoomView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SubViews\MainViewComponents\PlaylistView.xaml.cs">
       <DependentUpon>PlaylistView.xaml</DependentUpon>
@@ -366,6 +373,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SubViews\MainViewComponents\ConversationsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SubViews\MainViewComponents\CreateRoomView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

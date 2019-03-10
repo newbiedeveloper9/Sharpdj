@@ -5,14 +5,16 @@ using SharpDj.Logic;
 using SharpDj.PubSubModels;
 using SharpDj.ViewModels.SubViews;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SharpDj.ViewModels
 {
-    public sealed class ShellViewModel : Conductor<object>.Collection.OneActive, IShell, IHandle<ILoginPublishInfo>, IHandle<IMessageQueue>
+    public sealed class ShellViewModel : Conductor<object>.Collection.OneActive, IShell, IHandle<ILoginPublishInfo>, IHandle<IMessageQueue>, IHandle<IReconnect>
     {
         private readonly IEventAggregator _eventAggregator;
         private ClientConnection client;
+        private bool reconnecting;
 
         public AfterLoginScreenViewModel AfterLoginScreenViewModel { get; private set; }
         public BeforeLoginScreenViewModel BeforeLoginScreenViewModel { get; private set; }
@@ -24,7 +26,7 @@ namespace SharpDj.ViewModels
             _eventAggregator = new EventAggregator();
             _eventAggregator.Subscribe(this);
             MessagesQueue = new SnackbarMessageQueue(TimeSpan.FromMilliseconds(3750));
-            
+
 
             TopMenuViewModel = new TopMenuViewModel();
             AfterLoginScreenViewModel = new AfterLoginScreenViewModel(_eventAggregator);
@@ -35,10 +37,10 @@ namespace SharpDj.ViewModels
 #else  
             ActivateItem(BeforeLoginScreenViewModel);
 #endif
-
+            client = new ClientConnection(_eventAggregator);
             Task.Factory.StartNew(() =>
             {
-                client = new ClientConnection(_eventAggregator);
+                client.Init();
             });
         }
 
@@ -62,8 +64,22 @@ namespace SharpDj.ViewModels
 
         public void Handle(IMessageQueue message)
         {
-            Task.Factory.StartNew(() => 
+            Task.Factory.StartNew(() =>
                 MessagesQueue.Enqueue($"{message.ViewName}: {message.Message}"));
+        }
+
+        public void Handle(IReconnect message)
+        {
+            if (!reconnecting)
+            {
+                reconnecting = true;
+                client = new ClientConnection(_eventAggregator);
+                Task.Factory.StartNew(() =>
+                {
+                    client.Init();
+                    reconnecting = false;
+                });
+            }
         }
     }
 }

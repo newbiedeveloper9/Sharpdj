@@ -23,7 +23,8 @@ namespace SharpDj.Logic.ActionToServer
             var dictionaryMessages = new Dictionary<Result, MessageQueue>()
             {
                 {Result.Success, new MessageQueue("Login", "You have been successfully logged in!") },
-                {Result.Error, new MessageQueue("Login", "Authentication error!") }
+                {Result.Error, new MessageQueue("Login", "Authentication error!") },
+                {Result.AlreadyLogged, new MessageQueue("Login", "Error, You are currently logged in") }
             };
 
             if (response.Result == Result.Success)

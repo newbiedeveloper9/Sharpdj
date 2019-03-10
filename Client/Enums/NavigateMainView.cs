@@ -8,5 +8,6 @@ namespace SharpDj.Enums
         Home,
         Playlist,
         Room,
+        CreateRoom,
     }
 }

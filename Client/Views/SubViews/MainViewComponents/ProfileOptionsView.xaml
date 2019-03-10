@@ -39,6 +39,12 @@
                         <TextBlock Text="Your friends" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="16" FontWeight="Regular" VerticalAlignment="Center" Margin="24 0 0 0"/>
                     </StackPanel>
                 </Button>
+                <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Left" Margin="0 6 0 0" cal:Message.Attach="Navigate('CreateRoom')">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Plus" VerticalAlignment="Center" Width="24" Height="24" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
+                        <TextBlock Text="Create room" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="16" FontWeight="Regular" VerticalAlignment="Center" Margin="24 0 0 0"/>
+                    </StackPanel>
+                </Button>
                 <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Left" Margin="0 6 0 0">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Settings" VerticalAlignment="Center" Width="24" Height="24" Foreground="{StaticResource MaterialDesignDarkForeground}"/>

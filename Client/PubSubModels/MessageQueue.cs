@@ -16,6 +16,7 @@ namespace SharpDj.PubSubModels
 
         public string ViewName { get; set; }
         public string Message { get; set; }
+
     }
 
     public interface IMessageQueue
