@@ -199,7 +199,8 @@
     <Compile Include="Input\MultiKeyGesture.cs" />
     <Compile Include="Input\MultiKeyGestureConverter.cs" />
     <Compile Include="Interfaces\INavMainView.cs" />
-    <Compile Include="Interfaces\INotLoggedIn.cs" />
+    <Compile Include="PubSubModels\CreatedRoomPublish.cs" />
+    <Compile Include="PubSubModels\NotLoggedIn.cs" />
     <Compile Include="Interfaces\IPlaylistChanged.cs" />
     <Compile Include="Interfaces\IShell.cs" />
     <Compile Include="Interfaces\ITest.cs" />

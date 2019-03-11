@@ -36,7 +36,7 @@ namespace SharpDj.Logic.ActionToServer
 
             if (response.Result == Result.Success)
             {
-                _eventAggregator.PublishOnUIThread(NavigateMainView.Room);
+                _eventAggregator.PublishOnUIThread(new CreatedRoomPublish());
             }
 
             _eventAggregator.PublishOnUIThread(dictionaryMessages[response.Result]);

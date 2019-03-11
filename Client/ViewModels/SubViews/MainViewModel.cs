@@ -1,15 +1,16 @@
-﻿using Caliburn.Micro;
+﻿using System;
+using Caliburn.Micro;
 using SharpDj.Enums;
 using SharpDj.PubSubModels;
 using SharpDj.ViewModels.SubViews.MainViewComponents;
 using System.Collections.Generic;
+using System.Linq;
 using SharpDj.Interfaces;
 
 
 namespace SharpDj.ViewModels.SubViews
 {
-    public class MainViewModel : Conductor<PropertyChangedBase>.Collection.OneActive,
-        IHandle<IRoomInfoForOpen>,
+    public class MainViewModel : Conductor<object>.Collection.OneActive,
         IHandle<NavigateMainView>,
         IHandle<RollingMenuVisibilityEnum>
     {
@@ -67,11 +68,6 @@ namespace SharpDj.ViewModels.SubViews
         public void Handle(RollingMenuVisibilityEnum message)
         {
             RollingMenuVisibility = RollingMenuVisibility != message ? message : RollingMenuVisibilityEnum.Void;
-        }
-
-        public void Handle(IRoomInfoForOpen message)
-        {
-            Handle(NavigateMainView.Room);
         }
 
         public void Handle(NavigateMainView message)

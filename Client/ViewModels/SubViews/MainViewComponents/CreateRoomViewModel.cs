@@ -6,11 +6,12 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 using SCPackets.CreateRoom;
+using SharpDj.Enums;
 using SharpDj.Models;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents
 {
-    public class CreateRoomViewModel : PropertyChangedBase, INavMainView
+    public class CreateRoomViewModel : Screen, INavMainView, IHandle<ICreatedRoomPublish>
     {
         private readonly IEventAggregator _eventAggregator;
 
@@ -30,6 +31,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
         public CreateRoomViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
+            _eventAggregator.Subscribe(this);
         }
 
 
@@ -73,6 +75,12 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
         {
             _eventAggregator.PublishOnUIThread(new SendPacket(
                 new CreateRoomRequest(Model.ToLibraryModel())));
+        }
+
+        public void Handle(ICreatedRoomPublish message)
+        {
+            Model = new RoomCreationModel();
+            _eventAggregator.PublishOnUIThread(NavigateMainView.Room);
         }
     }
 }
