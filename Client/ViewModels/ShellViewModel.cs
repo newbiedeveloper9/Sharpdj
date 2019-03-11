@@ -7,10 +7,13 @@ using SharpDj.ViewModels.SubViews;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using SharpDj.Enums;
 
 namespace SharpDj.ViewModels
 {
-    public sealed class ShellViewModel : Conductor<object>.Collection.OneActive, IShell, IHandle<ILoginPublishInfo>, IHandle<IMessageQueue>, IHandle<IReconnect>
+    public sealed class ShellViewModel : Conductor<object>.Collection.OneActive,
+        IShell,
+        IHandle<ILoginPublishInfo>, IHandle<IMessageQueue>, IHandle<IReconnect>, IHandle<INotLoggedIn>
     {
         private readonly IEventAggregator _eventAggregator;
         private ClientConnection client;
@@ -77,9 +80,18 @@ namespace SharpDj.ViewModels
                 Task.Factory.StartNew(() =>
                 {
                     client.Init();
+                    if(ActiveItem == AfterLoginScreenViewModel)
+                        _eventAggregator.PublishOnUIThread(new NotLoggedIn());
                     reconnecting = false;
                 });
             }
+        }
+
+        public void Handle(INotLoggedIn message)
+        {
+            _eventAggregator.PublishOnUIThread(new MessageQueue("Connection","You are not anymore logged in"));
+            _eventAggregator.PublishOnUIThread(NavigateMainView.Home);
+            ActivateItem(BeforeLoginScreenViewModel);
         }
     }
 }

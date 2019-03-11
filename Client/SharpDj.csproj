@@ -199,11 +199,13 @@
     <Compile Include="Input\MultiKeyGesture.cs" />
     <Compile Include="Input\MultiKeyGestureConverter.cs" />
     <Compile Include="Interfaces\INavMainView.cs" />
+    <Compile Include="Interfaces\INotLoggedIn.cs" />
     <Compile Include="Interfaces\IPlaylistChanged.cs" />
     <Compile Include="Interfaces\IShell.cs" />
     <Compile Include="Interfaces\ITest.cs" />
     <Compile Include="Logic\ActionToServer\ClientCreateRoomAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientLoginAction.cs" />
+    <Compile Include="Logic\ActionToServer\ClientNotLoggedInAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientRegisterAction.cs" />
     <Compile Include="Logic\ClientConnection.cs" />
     <Compile Include="Logic\ClientPacketsToHandleList.cs" />

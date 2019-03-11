@@ -15,6 +15,8 @@ namespace SharpDj.Logic
         public HandlerModel<CreateRoomResponse> CreateRoom { get; set; }
         public HandlerModel<LoginResponse> Login { get; set; }
         public HandlerModel<RegisterResponse> Register { get; set; }
+        public HandlerModel<NotLoggedInRequest> NotLoggedIn { get; set; }
+
 
         public ClientPacketsToHandleList(IEventAggregator eventAggregator)
         {
@@ -23,6 +25,7 @@ namespace SharpDj.Logic
             Login = new HandlerModel<LoginResponse> { Action = new ClientLoginAction(_eventAggregator).Action };
             Register = new HandlerModel<RegisterResponse> { Action = new ClientRegisterAction(_eventAggregator).Action };
             CreateRoom = new HandlerModel<CreateRoomResponse> { Action = new ClientCreateRoomAction(_eventAggregator).Action };
+            NotLoggedIn = new HandlerModel<NotLoggedInRequest> { Action = new ClientNotLoggedInAction(_eventAggregator).Action };
         }
 
         public void RegisterPackets(Connection conn, IClient client)
@@ -30,6 +33,7 @@ namespace SharpDj.Logic
             Login.RegisterPacket(conn, client);
             Register.RegisterPacket(conn, client);
             CreateRoom.RegisterPacket(conn, client);
+            NotLoggedIn.RegisterPacket(conn, client);
         }
     }
 }
