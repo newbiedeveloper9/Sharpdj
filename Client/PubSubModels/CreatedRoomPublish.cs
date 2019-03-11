@@ -4,15 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SharpDj.Interfaces
+namespace SharpDj.PubSubModels
 {
-    public class NotLoggedIn : INotLoggedIn
+    public class CreatedRoomPublish : ICreatedRoomPublish
     {
-
     }
 
-    public interface INotLoggedIn
+    public interface ICreatedRoomPublish
     {
-
+        
     }
 }
