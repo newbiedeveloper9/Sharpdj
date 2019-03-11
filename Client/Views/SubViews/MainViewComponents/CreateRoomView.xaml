@@ -22,9 +22,9 @@
                 </Grid.ColumnDefinitions>
                 <!--Left Side-->
                 <StackPanel Margin="24 12 12 12">
-                    <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="Name" Margin="12 0 12 12" Width="250" HorizontalAlignment="Left" Text="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="Name" Margin="12 0 12 12" Width="250" HorizontalAlignment="Left" Text="{Binding Model.Name, Mode=TwoWay}"/>
                     <Grid>
-                        <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="Image link" Width="250" Margin="12 0 12 12" Padding="0 0 42 0" Text="{Binding Model.ImageLink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="Image link" Width="250" Margin="12 0 12 12" Padding="0 0 42 0" Text="{Binding Model.ImageLink, Mode=TwoWay}" />
                         <Button Margin="0 0 18 0" HorizontalAlignment="Right" Height="32" Width="32" Padding="0" Style="{StaticResource MaterialDesignFlatButton}" x:Name="UploadLocalFile">
                             <materialDesign:PackIcon Kind="Download" HorizontalAlignment="Center" VerticalAlignment="Center" Height="18" Width="18" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
                         </Button>
