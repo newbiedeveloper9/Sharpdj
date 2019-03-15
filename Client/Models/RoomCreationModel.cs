@@ -81,7 +81,7 @@ namespace SharpDj.Models
             }
         }
 
-        public RoomCreationModel ToClientModel(SCPackets.CreateRoom.Container.RoomModel model)
+        public static RoomCreationModel ToClientModel(SCPackets.CreateRoom.Container.RoomModel model)
         {
             return new RoomCreationModel()
             {
@@ -94,7 +94,7 @@ namespace SharpDj.Models
             };
         }
 
-        public SCPackets.CreateRoom.Container.RoomModel ToLibraryModel()
+        public SCPackets.CreateRoom.Container.RoomModel ToSCPacketRoomCreationModel()
         {
             return new SCPackets.CreateRoom.Container.RoomModel()
             {

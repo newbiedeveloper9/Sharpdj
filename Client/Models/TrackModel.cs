@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Caliburn.Micro;
 
 namespace SharpDj.Models
@@ -10,6 +6,7 @@ namespace SharpDj.Models
     public class TrackModel : PropertyChangedBase
     {
         private string _name;
+
         public string Name
         {
             get => _name;
@@ -22,6 +19,7 @@ namespace SharpDj.Models
         }
 
         private string _author;
+
         public string Author
         {
             get => _author;
@@ -33,8 +31,9 @@ namespace SharpDj.Models
             }
         }
 
-        private string _duration;
-        public string Duration
+        private int _duration;
+
+        public int Duration
         {
             get => _duration;
             set
@@ -46,6 +45,7 @@ namespace SharpDj.Models
         }
 
         private string _trackLink;
+
         public string TrackLink
         {
             get => _trackLink;
@@ -58,6 +58,7 @@ namespace SharpDj.Models
         }
 
         private string _imgSource;
+
         public string ImgSource
         {
             get => _imgSource;
@@ -67,6 +68,30 @@ namespace SharpDj.Models
                 _imgSource = value;
                 NotifyOfPropertyChange(() => ImgSource);
             }
+        }
+
+        public SCPackets.Models.TrackModel ToSCPacketTrackModel()
+        {
+            return new SCPackets.Models.TrackModel()
+            {
+                Author = this.Author,
+                Duration =  this.Duration,
+                ImageUrl = this.ImgSource,
+                Name = this.Name,
+                TrackUrl =  this.TrackLink,
+            };
+        }
+
+        public static TrackModel ToClientModel(SCPackets.Models.TrackModel model)
+        {
+            return new TrackModel()
+            {
+                Author = model.Author,
+                Name = model.Name,
+                Duration = model.Duration,
+            ImgSource = model.ImageUrl,
+                TrackLink = model.TrackUrl,
+            };
         }
     }
 }

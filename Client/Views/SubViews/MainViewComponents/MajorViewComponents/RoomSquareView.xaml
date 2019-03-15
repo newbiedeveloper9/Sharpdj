@@ -18,13 +18,13 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <materialDesign:Card Margin="0 0 24 24" Width="488"  materialDesign:ShadowAssist.ShadowDepth="Depth3" cal:Message.Attach="[Event MouseUp]=[Action OpenRoom()]">
+                    <materialDesign:Card Margin="0 0 24 24" Width="488"  materialDesign:ShadowAssist.ShadowDepth="Depth3" cal:Message.Attach="[Event MouseUp]=[Action OpenRoom()]" Cursor="Hand">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="88" />
                                 <RowDefinition Height="122" />
                             </Grid.RowDefinitions>
-                            <Grid Grid.Row="0" Cursor="Hand">
+                            <Grid Grid.Row="0">
                                 <Grid.Background>
                                     <VisualBrush Stretch="UniformToFill" Opacity="0.87">
                                         <VisualBrush.Visual>

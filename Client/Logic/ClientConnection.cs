@@ -1,7 +1,9 @@
 ﻿using Caliburn.Micro;
 using Network;
 using SCPackets;
+using SCPackets.LoginPacket;
 using SharpDj.PubSubModels;
+using System;
 using System.Threading;
 
 namespace SharpDj.Logic
@@ -26,8 +28,10 @@ namespace SharpDj.Logic
             int iterator = 0;
             do
             {
+                if (iterator > 0)
+                    Thread.Sleep(3900);
                 iterator++;
-                _connection = ConnectionFactory.CreateSecureTcpConnection("127.0.0.1", 5666, out Result, 2048);
+                _connection = ConnectionFactory.CreateTcpConnection("127.0.0.1", 5666, out Result);
 
                 var mess = Result == ConnectionResult.Connected
                     ? new MessageQueue("Connection", "Successfully connected")
@@ -35,7 +39,6 @@ namespace SharpDj.Logic
 
                 _eventAggregator.PublishOnUIThread(mess);
 
-                Thread.Sleep(4000);
             } while (Result != ConnectionResult.Connected);
 
             ConnectionEstablished();
@@ -43,8 +46,13 @@ namespace SharpDj.Logic
 
         private void ConnectionEstablished()
         {
+            _connection.EnableLogging = true;
+            _connection.LogIntoStream(Console.OpenStandardOutput());
             _packetsList.RegisterPackets(_connection, this);
             _sender = new ClientSender(_eventAggregator, _connection, this);
+#if DEBUG
+            _connection.Send(new LoginRequest("1515", "151515"), this);
+#endif
         }
     }
 }

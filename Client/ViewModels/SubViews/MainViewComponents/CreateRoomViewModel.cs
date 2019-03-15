@@ -74,7 +74,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
         public void CreateRoom()
         {
             _eventAggregator.PublishOnUIThread(new SendPacket(
-                new CreateRoomRequest(Model.ToLibraryModel())));
+                new CreateRoomRequest(Model.ToSCPacketRoomCreationModel())));
         }
 
         public void Handle(ICreatedRoomPublish message)

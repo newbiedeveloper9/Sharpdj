@@ -3,6 +3,7 @@ using Network;
 using SCPackets;
 using SCPackets.CreateRoom;
 using SCPackets.LoginPacket;
+using SCPackets.NotLoggedIn;
 using SCPackets.RegisterPacket;
 using SharpDj.Logic.ActionToServer;
 

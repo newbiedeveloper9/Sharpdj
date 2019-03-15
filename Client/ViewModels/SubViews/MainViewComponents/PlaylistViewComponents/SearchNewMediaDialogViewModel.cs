@@ -11,7 +11,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.PlaylistViewComponents
 {
     public class SearchNewMediaDialogViewModel : PropertyChangedBase
     {
-        private BindableCollection<TrackModel> _trackCollection;
+        private BindableCollection<TrackModel> _trackCollection = new BindableCollection<TrackModel>();
         public BindableCollection<TrackModel> TrackCollection
         {
             get => _trackCollection;
@@ -25,16 +25,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.PlaylistViewComponents
 
         public SearchNewMediaDialogViewModel()
         {
-            var dicPic = @"C:\Users\Michal\Desktop\Icons\maxresdefault.jpg";
 
-            TrackCollection = new BindableCollection<TrackModel>()
-            {
-                new TrackModel(){Author = "Anime Openings", Duration = "4:01", ImgSource = dicPic, Name = "Kimi no Na wa", TrackLink = "none"},
-                new TrackModel(){Author = "Anime Openings", Duration = "4:02", ImgSource = dicPic, Name = "Kimi no Na wa", TrackLink = "none"},
-                new TrackModel(){Author = "Anime Openings", Duration = "4:02", ImgSource = dicPic, Name = "Kimi no Na wa", TrackLink = "none"},
-                new TrackModel(){Author = "Anime Openings", Duration = "4:02", ImgSource = dicPic, Name = "Kimi no Na wa", TrackLink = "none"},
-                new TrackModel(){Author = "Anime Openings", Duration = "4:03", ImgSource = dicPic, Name = "Kimi no Na wa", TrackLink = "none"},
-            };
         }
     }
 }

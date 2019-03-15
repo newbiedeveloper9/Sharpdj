@@ -1,19 +1,19 @@
 ﻿using Caliburn.Micro;
 using MaterialDesignThemes.Wpf;
+using SharpDj.Enums;
 using SharpDj.Interfaces;
 using SharpDj.Logic;
 using SharpDj.PubSubModels;
 using SharpDj.ViewModels.SubViews;
 using System;
-using System.Threading;
 using System.Threading.Tasks;
-using SharpDj.Enums;
+using SharpDj.Logic.Helpers;
 
 namespace SharpDj.ViewModels
 {
     public sealed class ShellViewModel : Conductor<object>.Collection.OneActive,
         IShell,
-        IHandle<ILoginPublishInfo>, IHandle<IMessageQueue>, IHandle<IReconnect>, IHandle<INotLoggedIn>
+        IHandle<ILoginPublish>, IHandle<IMessageQueue>, IHandle<IReconnect>, IHandle<INotLoggedIn>
     {
         private readonly IEventAggregator _eventAggregator;
         private ClientConnection client;
@@ -35,11 +35,13 @@ namespace SharpDj.ViewModels
             AfterLoginScreenViewModel = new AfterLoginScreenViewModel(_eventAggregator);
             BeforeLoginScreenViewModel = new BeforeLoginScreenViewModel(_eventAggregator);
 
-#if DEBUG
-            ActivateItem(AfterLoginScreenViewModel);
-#else  
+            /*#if DEBUG
+                        ActivateItem(AfterLoginScreenViewModel);
+            #else  
+                        ActivateItem(BeforeLoginScreenViewModel);
+            #endif*/
             ActivateItem(BeforeLoginScreenViewModel);
-#endif
+
             client = new ClientConnection(_eventAggregator);
             Task.Factory.StartNew(() =>
             {
@@ -47,11 +49,11 @@ namespace SharpDj.ViewModels
             });
         }
 
-        public void Handle(ILoginPublishInfo message)
+        public void Handle(ILoginPublish message)
         {
+            UserInfoSingleton.Instance.UserClient = message.Client;
             ActivateItem(AfterLoginScreenViewModel);
         }
-
 
         private SnackbarMessageQueue _messagesQueue;
         public SnackbarMessageQueue MessagesQueue
@@ -80,7 +82,7 @@ namespace SharpDj.ViewModels
                 Task.Factory.StartNew(() =>
                 {
                     client.Init();
-                    if(ActiveItem == AfterLoginScreenViewModel)
+                    if (ActiveItem == AfterLoginScreenViewModel)
                         _eventAggregator.PublishOnUIThread(new NotLoggedIn());
                     reconnecting = false;
                 });
@@ -89,7 +91,7 @@ namespace SharpDj.ViewModels
 
         public void Handle(INotLoggedIn message)
         {
-            _eventAggregator.PublishOnUIThread(new MessageQueue("Connection","You are not anymore logged in"));
+            _eventAggregator.PublishOnUIThread(new MessageQueue("Connection", "You are not anymore logged in"));
             _eventAggregator.PublishOnUIThread(NavigateMainView.Home);
             ActivateItem(BeforeLoginScreenViewModel);
         }

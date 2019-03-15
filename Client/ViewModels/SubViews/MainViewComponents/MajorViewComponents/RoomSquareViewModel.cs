@@ -1,27 +1,32 @@
 ﻿using System;
+using System.Collections.Generic;
 using Caliburn.Micro;
 using SharpDj.Models;
 using SharpDj.PubSubModels;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
 {
-    public class RoomSquareViewModel : PropertyChangedBase
+    public class RoomSquareViewModel : PropertyChangedBase, IHandle<IRefreshOutsideRoomsPublish>
     {
         private readonly IEventAggregator _eventAggregator;
-        public BindableCollection<RoomModel> RoomInstancesCollection { get; private set; }
+
+        private BindableCollection<RoomModel> _roomInstancesCollection = new BindableCollection<RoomModel>();
+        public BindableCollection<RoomModel> RoomInstancesCollection
+        {
+            get => _roomInstancesCollection;
+            set
+            {
+                if (_roomInstancesCollection == value) return;
+                _roomInstancesCollection = value;
+                NotifyOfPropertyChange(() => RoomInstancesCollection);
+            }
+        }
+
 
         public RoomSquareViewModel()
         {
-            
-        }
-
-        public RoomSquareViewModel(IEventAggregator eventAggregator)
-        {
-            _eventAggregator = eventAggregator;
-            _eventAggregator.PublishOnUIThread(new object());
-
             var current = new TrackModel() { Name = "Hashinshin VS NASUS (and Tanks) - Streamhighlights" };
-            var next = new TrackModel() { Name = "jfarr & Willford - Blue Eyes (feat. Hanna Pettersson) | Ninety9Lives Release"};
+            var next = new TrackModel() { Name = "jfarr & Willford - Blue Eyes (feat. Hanna Pettersson) | Ninety9Lives Release" };
             var previous = new TrackModel() { Name = "Finesu - Homecoming (feat. jfarr) | Ninety9Lives Release" };
             var dicPic = @"..\..\..\..\Images\3.jpg";
 
@@ -50,9 +55,27 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
             };
         }
 
+        public RoomSquareViewModel(IEventAggregator eventAggregator)
+        {
+            _eventAggregator = eventAggregator;
+            _eventAggregator.Subscribe(this);
+        }
+
         public void OpenRoom()
         {
             _eventAggregator.PublishOnUIThread(new RoomInfoForOpen());
+        }
+
+        public void Handle(IRefreshOutsideRoomsPublish message)
+        {
+            RoomInstancesCollection.Clear();
+
+            if (message?.Rooms == null) return;
+            foreach (var room in message.Rooms)
+            {
+                RoomInstancesCollection.Add(RoomModel.ToClientModel(room));
+            }
+
         }
     }
 }

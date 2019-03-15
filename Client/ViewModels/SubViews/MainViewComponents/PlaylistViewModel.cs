@@ -15,10 +15,24 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
         INavMainView,
         IHandle<IPlaylistChanged>
     {
+        private readonly IEventAggregator _eventAggregator;
+
+        #region Properties
         public SearchNewMediaDialogViewModel SearchNewMediaDialogViewModel { get; private set; }
 
-        public BindableCollection<PlaylistModel> PlaylistCollection { get; private set; }
-        private BindableCollection<TrackModel> _trackCollection;
+        private BindableCollection<PlaylistModel> _playlistCollection = new BindableCollection<PlaylistModel>();
+        public BindableCollection<PlaylistModel> PlaylistCollection
+        {
+            get => _playlistCollection;
+            set
+            {
+                if (_playlistCollection == value) return;
+                _playlistCollection = value;
+                NotifyOfPropertyChange(() => PlaylistCollection);
+            }
+        }
+      
+        private BindableCollection<TrackModel> _trackCollection = new BindableCollection<TrackModel>();
         public BindableCollection<TrackModel> TrackCollection
         {
             get => _trackCollection;
@@ -29,28 +43,19 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
                 NotifyOfPropertyChange(() => TrackCollection);
             }
         }
+        #endregion Properties
+
+        public PlaylistViewModel(IEventAggregator eventAggregator)
+        {
+            _eventAggregator = eventAggregator;
+            _eventAggregator.Subscribe(this);
+
+            SearchNewMediaDialogViewModel = new SearchNewMediaDialogViewModel();
+        }
 
         public PlaylistViewModel()
         {
             SearchNewMediaDialogViewModel = new SearchNewMediaDialogViewModel();
-            
-            var dicPic = @"C:\Users\Michal\Desktop\Icons\maxresdefault.jpg";
-
-            PlaylistCollection = new BindableCollection<PlaylistModel>()
-            {
-                new PlaylistModel(){Name = "Testowa nazwa playlisty", IsActive = false},
-                new PlaylistModel(){Name = "Testowa nazwa playlisty", IsActive = true},
-                new PlaylistModel(){Name = "Testowa nazwa playlisty", IsActive = false},
-                new PlaylistModel(){Name = "Testowa nazwa playlisty", IsActive = false},
-            };
-            PlaylistCollection[1].TrackCollection = new BindableCollection<TrackModel>()
-            {
-                new TrackModel(){Author = "Anime Openings", Duration = "4:01", ImgSource = dicPic, Name = "Kimi no Na wa", TrackLink = "none"},
-                new TrackModel(){Author = "Anime Openings", Duration = "4:02", ImgSource = dicPic, Name = "Kimi no Na wa", TrackLink = "none"},
-                new TrackModel(){Author = "Anime Openings", Duration = "4:03", ImgSource = dicPic, Name = "Kimi no Na wa", TrackLink = "none"},
-            };
-
-            OnActivePlaylistChanged(PlaylistCollection[1]);
         }
 
         public void OnActivePlaylistChanged(PlaylistModel model)

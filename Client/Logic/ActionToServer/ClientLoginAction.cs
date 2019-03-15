@@ -1,11 +1,10 @@
-﻿using Caliburn.Micro;
+﻿using System;
+using Caliburn.Micro;
 using Network;
 using SCPackets.LoginPacket;
-using System;
-using System.Collections.Generic;
-using SCPackets;
-using SharpDj.Logic.Helpers;
+using SCPackets.LoginPacket.Container;
 using SharpDj.PubSubModels;
+using System.Collections.Generic;
 
 namespace SharpDj.Logic.ActionToServer
 {
@@ -20,6 +19,7 @@ namespace SharpDj.Logic.ActionToServer
 
         public void Action(LoginResponse response, Connection connection)
         {
+            
             var dictionaryMessages = new Dictionary<Result, MessageQueue>()
             {
                 {Result.Success, new MessageQueue("Login", "You have been successfully logged in!") },
@@ -29,8 +29,9 @@ namespace SharpDj.Logic.ActionToServer
 
             if (response.Result == Result.Success)
             {
-                _eventAggregator.PublishOnUIThread(new LoginPublishInfo());
-                UserInfoSingleton.Instance.UserClient = new UserClient(0, "Crisey", Rank.Admin);
+                if (response.RoomOutsideModelList?.Count > 0)
+                    _eventAggregator.PublishOnUIThread(new RefreshOutsideRoomsPublish(response.RoomOutsideModelList));
+                _eventAggregator.PublishOnUIThread(new LoginPublish(response.User));
             }
 
             _eventAggregator.PublishOnUIThread(dictionaryMessages[response.Result]);

@@ -101,8 +101,8 @@
       <HintPath>..\packages\MaterialDesignThemes.2.5.0.1205\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Network, Version=6.1.0.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Network.6.1.0.3\lib\net46\Network.dll</HintPath>
+    <Reference Include="Network, Version=6.1.0.7, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Network.6.1.0.7\lib\net46\Network.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -231,8 +231,9 @@
     <Compile Include="Models\RoomModel.cs" />
     <Compile Include="Models\TrackModel.cs" />
     <Compile Include="PubSubModels\MessageQueue.cs" />
-    <Compile Include="PubSubModels\LoginPublishInfo.cs" />
+    <Compile Include="PubSubModels\LoginPublish.cs" />
     <Compile Include="PubSubModels\Reconnect.cs" />
+    <Compile Include="PubSubModels\RefreshOutsideRoomsPublish.cs" />
     <Compile Include="PubSubModels\RoomInfoForOpen.cs" />
     <Compile Include="PubSubModels\SendPacket.cs" />
     <Compile Include="ViewModels\AfterLoginScreenViewModel.cs" />

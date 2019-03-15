@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using SCPackets.Models;
 
 namespace SharpDj.Models
 {
@@ -118,6 +119,34 @@ namespace SharpDj.Models
             Active,
             Sleep,
             InActive
+        }
+
+        public RoomOutsideModel ToSCPacketOutsideModel()
+        {
+            return new RoomOutsideModel()
+            {
+                Name = this.Name,
+                AmountOfAdministration = this.AmountOfAdministration,
+                AmountOfPeople = this.AmountOfPeople,
+                ImagePath = this.ImageSource,
+                CurrentTrack = this.CurrentTrack.ToSCPacketTrackModel(),
+                NextTrack = this.NextTrack.ToSCPacketTrackModel(),
+                PreviousTrack = this.PreviousTrack.ToSCPacketTrackModel()
+            };
+        }
+
+        public static RoomModel ToClientModel(RoomOutsideModel model)
+        {
+            return new RoomModel()
+            {
+                Name = model.Name,
+                AmountOfAdministration = model.AmountOfAdministration,
+                AmountOfPeople = model.AmountOfPeople,
+                ImageSource = model.ImagePath,
+                CurrentTrack = TrackModel.ToClientModel(model.CurrentTrack),
+                NextTrack = TrackModel.ToClientModel(model.NextTrack),
+                PreviousTrack = TrackModel.ToClientModel(model.PreviousTrack),
+            };
         }
     }
 }
