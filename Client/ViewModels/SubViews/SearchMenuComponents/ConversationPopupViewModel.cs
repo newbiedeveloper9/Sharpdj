@@ -1,9 +1,9 @@
 ﻿using Caliburn.Micro;
-using SCPackets;
 using SharpDj.Logic.Helpers;
 using SharpDj.Models;
 using System;
 using System.Windows.Media;
+using SCPackets.Models;
 
 namespace SharpDj.ViewModels.SubViews.SearchMenuComponents
 {

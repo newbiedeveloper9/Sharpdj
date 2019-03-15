@@ -9,10 +9,12 @@
              mc:Ignorable="d" 
              cal:Bind.AtDesignTime="True"
              d:DataContext="{d:DesignInstance Type=mainViewComponents:CreateRoomViewModel, IsDesignTimeCreatable=True}"
-             d:DesignWidth="1200" Height="600">
+             d:DesignWidth="1200" d:DesignHeight="600">
     <materialDesign:Card Margin="0 0 0 24" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#232323" materialDesign:ShadowAssist.ShadowDepth="Depth5">
         <StackPanel>
-            <TextBlock Text="Create your own room" HorizontalAlignment="Center" Foreground="{StaticResource MaterialDesignDarkForeground}" FontWeight="Light" FontSize="32" Margin="0 24 0 0"/>
+            <TextBlock x:Name="Title" HorizontalAlignment="Center" 
+                       Foreground="{StaticResource MaterialDesignDarkForeground}"
+                       FontWeight="Light" FontSize="32" Margin="0 24 0 0"/>
 
             <Grid Margin="12 32 12 12" HorizontalAlignment="Center">
                 <Grid.ColumnDefinitions>
@@ -22,25 +24,32 @@
                 </Grid.ColumnDefinitions>
                 <!--Left Side-->
                 <StackPanel Margin="24 12 12 12">
-                    <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="Name" Margin="12 0 12 12" Width="250" HorizontalAlignment="Left" Text="{Binding Model.Name, Mode=TwoWay}"/>
+                    <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="Name" Margin="12 0 12 12" MinWidth="200" HorizontalAlignment="Left" Text="{Binding Model.Name, Mode=TwoWay}"/>
                     <Grid>
-                        <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="Image link" Width="250" Margin="12 0 12 12" Padding="0 0 42 0" Text="{Binding Model.ImageLink, Mode=TwoWay}" />
-                        <Button Margin="0 0 18 0" HorizontalAlignment="Right" Height="32" Width="32" Padding="0" Style="{StaticResource MaterialDesignFlatButton}" x:Name="UploadLocalFile">
-                            <materialDesign:PackIcon Kind="Download" HorizontalAlignment="Center" VerticalAlignment="Center" Height="18" Width="18" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
+                        <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="Image link"
+                                 MinWidth="200" Margin="12 0 12 12" Padding="0 0 42 0" Text="{Binding Model.ImageLink, Mode=TwoWay}" />
+                        <Button Margin="0 0 18 0" HorizontalAlignment="Right" Height="32" Width="32"
+                                Padding="0" Style="{StaticResource MaterialDesignFlatButton}" x:Name="UploadLocalFile">
+                            <materialDesign:PackIcon Kind="Download" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                     Height="18" Width="18" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
                         </Button>
                     </Grid>
                 </StackPanel>
 
                 <!--Center Side-->
                 <StackPanel Margin="12 12 12 12" Grid.Column="1">
-                    <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="Local message for user after enter room" Margin="12 0 12 12" Width="250" HorizontalAlignment="Left" Text="{Binding Model.LocalEnterMessage, Mode=TwoWay}"/>
-                    <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="Local message for user after leave room" Margin="12 0 12 12" Width="250" HorizontalAlignment="Left" Text="{Binding Model.LocalLeaveMessage, Mode=TwoWay}"/>
+                    <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="Local message for user after enter room"
+                             Margin="12 0 12 12" MinWidth="235" HorizontalAlignment="Left" Text="{Binding Model.LocalEnterMessage, Mode=TwoWay}" AcceptsReturn="True"/>
+                    <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="Local message for user after leave room"
+                             Margin="12 0 12 12" MinWidth="235" HorizontalAlignment="Left" Text="{Binding Model.LocalLeaveMessage, Mode=TwoWay}" AcceptsReturn="True"/>
                 </StackPanel>
 
                 <!--Right side-->
                 <StackPanel Margin="12 12 24 12" Grid.Column="2">
-                    <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="Message for all after enter room" Margin="12 0 12 12" Width="235" HorizontalAlignment="Left" Text="{Binding Model.PublicEnterMessage, Mode=TwoWay}"/>
-                    <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="Message for all after leave room" Margin="12 0 12 12" Width="235" HorizontalAlignment="Left" Text="{Binding Model.PublicLeaveMessage, Mode=TwoWay}"/>
+                    <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="Message for all after enter room"
+                             Margin="12 0 12 12" MinWidth="235" HorizontalAlignment="Left" Text="{Binding Model.PublicEnterMessage, Mode=TwoWay}" AcceptsReturn="True"/>
+                    <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="Message for all after leave room"
+                             Margin="12 0 12 12" MinWidth="235" HorizontalAlignment="Left" Text="{Binding Model.PublicLeaveMessage, Mode=TwoWay}" AcceptsReturn="True"/>
                 </StackPanel>
 
             </Grid>

@@ -1,8 +1,7 @@
 ﻿using System;
 using Caliburn.Micro;
-using SCPackets;
+using SCPackets.Models;
 using SharpDj.Enums;
-using SharpDj.Logic.Helpers;
 using SharpDj.PubSubModels;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents

@@ -15,15 +15,14 @@ namespace SharpDj.ViewModels
         IShell,
         IHandle<ILoginPublish>, IHandle<IMessageQueue>, IHandle<IReconnect>, IHandle<INotLoggedIn>
     {
+        #region Fields
         private readonly IEventAggregator _eventAggregator;
-        private ClientConnection client;
-        private bool reconnecting;
+        private ClientConnection _client;
+        private bool _reconnecting;
 
-        public AfterLoginScreenViewModel AfterLoginScreenViewModel { get; private set; }
-        public BeforeLoginScreenViewModel BeforeLoginScreenViewModel { get; private set; }
-        public TopMenuViewModel TopMenuViewModel { get; private set; }
+        #endregion Fields
 
-
+        #region .ctor
         public ShellViewModel()
         {
             _eventAggregator = new EventAggregator();
@@ -42,13 +41,37 @@ namespace SharpDj.ViewModels
             #endif*/
             ActivateItem(BeforeLoginScreenViewModel);
 
-            client = new ClientConnection(_eventAggregator);
+            _client = new ClientConnection(_eventAggregator);
             Task.Factory.StartNew(() =>
             {
-                client.Init();
+                _client.Init();
             });
         }
+        #endregion .ctor
 
+        #region ViewModels
+        public AfterLoginScreenViewModel AfterLoginScreenViewModel { get; private set; }
+        public BeforeLoginScreenViewModel BeforeLoginScreenViewModel { get; private set; }
+        public TopMenuViewModel TopMenuViewModel { get; private set; }
+        #endregion ViewModels
+
+        #region Props
+
+        private SnackbarMessageQueue _messagesQueue;
+        public SnackbarMessageQueue MessagesQueue
+        {
+            get => _messagesQueue;
+            set
+            {
+                if (_messagesQueue == value) return;
+                _messagesQueue = value;
+                NotifyOfPropertyChange(() => MessagesQueue);
+            }
+        }
+
+        #endregion Props
+
+        #region Handle's
         public void Handle(ILoginPublish message)
         {
             UserInfoSingleton.Instance.UserClient = message.Client;
@@ -63,16 +86,16 @@ namespace SharpDj.ViewModels
 
         public void Handle(IReconnect message)
         {
-            if (!reconnecting)
+            if (!_reconnecting)
             {
-                reconnecting = true;
-                client = new ClientConnection(_eventAggregator);
+                _reconnecting = true;
+                _client = new ClientConnection(_eventAggregator);
                 Task.Factory.StartNew(() =>
                 {
-                    client.Init();
+                    _client.Init();
                     if (ActiveItem == AfterLoginScreenViewModel)
                         _eventAggregator.PublishOnUIThread(new NotLoggedIn());
-                    reconnecting = false;
+                    _reconnecting = false;
                 });
             }
         }
@@ -83,18 +106,6 @@ namespace SharpDj.ViewModels
             _eventAggregator.PublishOnUIThread(NavigateMainView.Home);
             ActivateItem(BeforeLoginScreenViewModel);
         }
-
-
-        private SnackbarMessageQueue _messagesQueue;
-        public SnackbarMessageQueue MessagesQueue
-        {
-            get => _messagesQueue;
-            set
-            {
-                if (_messagesQueue == value) return;
-                _messagesQueue = value;
-                NotifyOfPropertyChange(() => MessagesQueue);
-            }
-        }
+        #endregion Handle's
     }
 }

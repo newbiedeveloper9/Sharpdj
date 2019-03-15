@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="SharpDj.Views.SubViews.MainViewComponents.ManageRoomsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SharpDj.Views.SubViews.MainViewComponents"
+             xmlns:mainViewComponents="clr-namespace:SharpDj.ViewModels.SubViews.MainViewComponents"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             cal:Bind.AtDesignTime="True"
+             d:DataContext="{d:DesignInstance Type=mainViewComponents:ManageRoomsViewModel, IsDesignTimeCreatable=True}"
+             d:DesignHeight="696" d:DesignWidth="1000">
+    <StackPanel>
+        <WrapPanel Orientation="Horizontal" Margin="24">
+            <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" GroupName="RoomGroup" Height="40"
+                         cal:Message.Attach="[Event Checked]=[OnManageRoomChanged($dataContext)]">
+                <Grid>
+                    <TextBlock Text="Server #1" FontSize="24" FontWeight="Regular" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
+                </Grid>
+            </RadioButton>
+            <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" GroupName="RoomGroup" Height="40">
+                <Grid>
+                    <TextBlock Text="Server #2" FontSize="24" FontWeight="Regular" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
+                </Grid>
+            </RadioButton>
+        </WrapPanel>
+
+        <local:CreateRoomView Margin="24" Height="400" cal:View.Model="{Binding Path=CreateRoomViewModel}" x:Name="RoomModifyIsVisible"/>
+
+        <Button HorizontalAlignment="Right" Background="Red" BorderBrush="IndianRed" Margin="24 0 36 0">
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="Delete" VerticalAlignment="Center"/>
+                <TextBlock Text="Delete room" Margin="6 0 0 0"/>
+            </StackPanel>
+        </Button>
+    </StackPanel>
+</UserControl>

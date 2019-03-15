@@ -11,10 +11,14 @@ using System.Threading.Tasks;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents
 {
-    public class CreateRoomViewModel : Screen, INavMainView, IHandle<ICreatedRoomPublish>
+    public class CreateRoomViewModel : Screen, INavMainView,
+        IHandle<ICreatedRoomPublish>
     {
+        #region Fields
         private readonly IEventAggregator _eventAggregator;
+        #endregion Fields
 
+        #region Properties
         private RoomCreationModel _model = new RoomCreationModel();
         public RoomCreationModel Model
         {
@@ -27,9 +31,24 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
             }
         }
 
-
-        public CreateRoomViewModel(IEventAggregator eventAggregator)
+        private string _title = "Create your own room";
+        public string Title
         {
+            get => _title;
+            set
+            {
+                if (_title == value) return;
+                _title = value;
+                NotifyOfPropertyChange(() => Title);
+            }
+        }
+        #endregion Properties
+
+        #region .ctor
+        public CreateRoomViewModel(IEventAggregator eventAggregator, string title="Create your own room")
+        {
+            Title = title;
+
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
         }
@@ -37,9 +56,10 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
 
         public CreateRoomViewModel()
         {
-
         }
+        #endregion .ctor
 
+        #region Methods
         public void UploadLocalFile()
         {
             var dlg = new OpenFileDialog
@@ -77,11 +97,14 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
             _eventAggregator.PublishOnUIThread(new SendPacket(
                 new CreateRoomRequest(Model.ToSCPacketRoomCreationModel())));
         }
+        #endregion Methods
 
+        #region Handle's
         public void Handle(ICreatedRoomPublish message)
         {
             Model = new RoomCreationModel();
             _eventAggregator.PublishOnUIThread(NavigateMainView.Room);
         }
+        #endregion Handle's
     }
 }

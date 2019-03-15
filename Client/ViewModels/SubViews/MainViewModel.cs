@@ -1,10 +1,8 @@
-﻿using System;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using SharpDj.Enums;
 using SharpDj.PubSubModels;
 using SharpDj.ViewModels.SubViews.MainViewComponents;
 using System.Collections.Generic;
-using System.Linq;
 using SharpDj.Interfaces;
 
 
@@ -15,25 +13,30 @@ namespace SharpDj.ViewModels.SubViews
         IHandle<RollingMenuVisibilityEnum>,
         IHandle<IRoomInfoForOpen>
     {
+        #region Fields
         private readonly IEventAggregator _eventAggregator;
+        private readonly Dictionary<NavigateMainView, INavMainView> _navigationDictionary;
+        #endregion Fields
 
-        private Dictionary<NavigateMainView, INavMainView> NavigationDictionary;
-
+        #region VM's
         public INavMainView MajorScreenViewModel { get; private set; }
         public INavMainView RoomViewModel { get; private set; }
         public INavMainView PlaylistViewModel { get; private set; }
         public INavMainView CreateRoomViewModel { get; private set; }
+        public INavMainView ManageRoomsViewModel { get; private set; }
 
         public ProfileOptionsViewModel ProfileOptionsViewModel { get; private set; }
         public ConversationsViewModel ConversationsViewModel { get; private set; }
+        #endregion VM's
 
-
+        #region .ctor
         public MainViewModel()
         {
             MajorScreenViewModel = new MajorScreenViewModel();
             RoomViewModel = new RoomViewModel();
             PlaylistViewModel = new PlaylistViewModel();
             CreateRoomViewModel = new CreateRoomViewModel();
+            ManageRoomsViewModel = new ManageRoomsViewModel();
 
             ProfileOptionsViewModel = new ProfileOptionsViewModel();
             ConversationsViewModel = new ConversationsViewModel();
@@ -51,32 +54,25 @@ namespace SharpDj.ViewModels.SubViews
             RoomViewModel = new RoomViewModel();
             PlaylistViewModel = new PlaylistViewModel(_eventAggregator);
             CreateRoomViewModel = new CreateRoomViewModel(_eventAggregator);
+            ManageRoomsViewModel = new ManageRoomsViewModel(_eventAggregator);
 
-            ProfileOptionsViewModel = new ProfileOptionsViewModel(eventAggregator);
+            ProfileOptionsViewModel = new ProfileOptionsViewModel(_eventAggregator);
             ConversationsViewModel = new ConversationsViewModel();
 
-            NavigationDictionary = new Dictionary<NavigateMainView, INavMainView>()
+            _navigationDictionary = new Dictionary<NavigateMainView, INavMainView>()
             {
                 {NavigateMainView.Home, MajorScreenViewModel },
                 {NavigateMainView.Playlist, PlaylistViewModel },
                 {NavigateMainView.Room, RoomViewModel },
                 {NavigateMainView.CreateRoom, CreateRoomViewModel },
+                {NavigateMainView.ManageRooms, ManageRoomsViewModel },
             };
 
-            ActivateItem((PropertyChangedBase)NavigationDictionary[NavigateMainView.Home]);
+            ActivateItem((PropertyChangedBase)_navigationDictionary[NavigateMainView.Home]);
         }
+        #endregion ctor
 
-        public void Handle(RollingMenuVisibilityEnum message)
-        {
-            RollingMenuVisibility = RollingMenuVisibility != message ? message : RollingMenuVisibilityEnum.Void;
-        }
-
-        public void Handle(NavigateMainView message)
-        {
-            _eventAggregator.PublishOnUIThread(RollingMenuVisibilityEnum.Void);
-            ActivateItem((PropertyChangedBase)NavigationDictionary[message]);
-        }
-
+        #region Properties
 
         private RollingMenuVisibilityEnum _rollingMenuVisibility;
         public RollingMenuVisibilityEnum RollingMenuVisibility
@@ -89,10 +85,24 @@ namespace SharpDj.ViewModels.SubViews
                 NotifyOfPropertyChange(() => RollingMenuVisibility);
             }
         }
+        #endregion Properties
+
+        #region Handle's
+        public void Handle(RollingMenuVisibilityEnum message)
+        {
+            RollingMenuVisibility = RollingMenuVisibility != message ? message : RollingMenuVisibilityEnum.Void;
+        }
+
+        public void Handle(NavigateMainView message)
+        {
+            _eventAggregator.PublishOnUIThread(RollingMenuVisibilityEnum.Void);
+            ActivateItem((PropertyChangedBase)_navigationDictionary[message]);
+        }
 
         public void Handle(IRoomInfoForOpen message)
         {
             Handle(NavigateMainView.Room);
         }
+        #endregion Handle's
     }
 }

@@ -250,6 +250,7 @@
     <Compile Include="ViewModels\SubViews\LeftMenuViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\ConversationsViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\MajorViewComponents\NewsCarouselViewModel.cs" />
+    <Compile Include="ViewModels\SubViews\MainViewComponents\ManageRoomsViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\PlaylistViewComponents\SearchNewMediaDialogViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\PlaylistViewComponents\TrackViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\PlaylistViewModel.cs" />
@@ -290,6 +291,9 @@
     </Compile>
     <Compile Include="Views\SubViews\MainViewComponents\CreateRoomView.xaml.cs">
       <DependentUpon>CreateRoomView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubViews\MainViewComponents\ManageRoomsView.xaml.cs">
+      <DependentUpon>ManageRoomsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SubViews\MainViewComponents\PlaylistView.xaml.cs">
       <DependentUpon>PlaylistView.xaml</DependentUpon>
@@ -384,6 +388,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SubViews\MainViewComponents\CreateRoomView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SubViews\MainViewComponents\ManageRoomsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

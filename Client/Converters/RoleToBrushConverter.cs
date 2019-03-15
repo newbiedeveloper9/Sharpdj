@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Media;
-using SCPackets;
+using SCPackets.Models;
 
 namespace SharpDj.Converters
 {
