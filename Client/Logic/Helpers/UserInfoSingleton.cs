@@ -16,9 +16,9 @@ namespace SharpDj.Logic.Helpers
 
         private UserInfoSingleton()
         {
-
+            UserClient = new UserClient();
         }
 
-       public UserClient UserClient { get; set; } = new UserClient(0, "Crisey", Rank.Admin);
+       public UserClient UserClient { get; set; }
     }
 }

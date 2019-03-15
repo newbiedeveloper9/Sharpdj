@@ -26,7 +26,7 @@
                             </Grid.RowDefinitions>
                             <Grid Grid.Row="0">
                                 <Grid.Background>
-                                    <VisualBrush Stretch="UniformToFill" Opacity="0.87">
+                                    <VisualBrush Stretch="Fill" Opacity="0.87">
                                         <VisualBrush.Visual>
                                             <Grid ClipToBounds="True">
                                                 <Image Source="{Binding ImageSource}">

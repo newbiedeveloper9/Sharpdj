@@ -3,6 +3,7 @@ using Network;
 using SCPackets;
 using SCPackets.CreateRoom;
 using SCPackets.LoginPacket;
+using SCPackets.NewRoomCreated;
 using SCPackets.NotLoggedIn;
 using SCPackets.RegisterPacket;
 using SharpDj.Logic.ActionToServer;
@@ -17,6 +18,7 @@ namespace SharpDj.Logic
         public HandlerModel<LoginResponse> Login { get; set; }
         public HandlerModel<RegisterResponse> Register { get; set; }
         public HandlerModel<NotLoggedInRequest> NotLoggedIn { get; set; }
+        public HandlerModel<NewRoomCreatedRequest> NewRoomCreated { get; set; }
 
 
         public ClientPacketsToHandleList(IEventAggregator eventAggregator)
@@ -27,6 +29,7 @@ namespace SharpDj.Logic
             Register = new HandlerModel<RegisterResponse> { Action = new ClientRegisterAction(_eventAggregator).Action };
             CreateRoom = new HandlerModel<CreateRoomResponse> { Action = new ClientCreateRoomAction(_eventAggregator).Action };
             NotLoggedIn = new HandlerModel<NotLoggedInRequest> { Action = new ClientNotLoggedInAction(_eventAggregator).Action };
+            NewRoomCreated = new HandlerModel<NewRoomCreatedRequest> {Action = new ClientNewRoomCreatedAction(_eventAggregator).Action};
         }
 
         public void RegisterPackets(Connection conn, IClient client)
@@ -35,6 +38,7 @@ namespace SharpDj.Logic
             Register.RegisterPacket(conn, client);
             CreateRoom.RegisterPacket(conn, client);
             NotLoggedIn.RegisterPacket(conn, client);
+            NewRoomCreated.RegisterPacket(conn, client);
         }
     }
 }

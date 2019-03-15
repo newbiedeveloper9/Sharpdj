@@ -7,7 +7,6 @@ namespace SharpDj.PubSubModels
     {
         public IEnumerable<RoomOutsideModel> Rooms { get; }
 
-
         public RefreshOutsideRoomsPublish(IEnumerable<RoomOutsideModel> rooms)
         {
             Rooms = rooms;

@@ -19,12 +19,12 @@
                         <StackPanel HorizontalAlignment="Center">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
                                 <TextBlock FontSize="20" Text="Hello " FontWeight="Regular"/>
-                                <TextBlock Text="{Binding Username}" FontSize="20" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>
+                                <TextBlock x:Name="Username" FontSize="20" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>
                                 <TextBlock FontSize="20" Text="," FontWeight="Regular"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Your rank is " FontWeight="Light" FontSize="18"/>
-                                <TextBlock Text="{Binding Role}" Foreground="{Binding Role, Converter={converters:RoleToBrushConverter}}" HorizontalAlignment="Center"
+                                <TextBlock x:Name="Role" Foreground="{Binding Role, Converter={converters:RoleToBrushConverter}}" HorizontalAlignment="Center"
                        FontWeight="Regular" FontSize="18"/>
                             </StackPanel>
                         </StackPanel>
@@ -39,10 +39,10 @@
                         <TextBlock Text="Your friends" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="16" FontWeight="Regular" VerticalAlignment="Center" Margin="24 0 0 0"/>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Left" Margin="0 6 0 0" cal:Message.Attach="Navigate('CreateRoom')">
+                <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Left" Margin="0 6 0 0" cal:Message.Attach="Navigate('ManageRooms')">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Plus" VerticalAlignment="Center" Width="24" Height="24" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
-                        <TextBlock Text="Create room" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="16" FontWeight="Regular" VerticalAlignment="Center" Margin="24 0 0 0"/>
+                        <materialDesign:PackIcon Kind="Locker" VerticalAlignment="Center" Width="24" Height="24" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
+                        <TextBlock Text="Manage rooms" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="16" FontWeight="Regular" VerticalAlignment="Center" Margin="24 0 0 0"/>
                     </StackPanel>
                 </Button>
                 <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Left" Margin="0 6 0 0">

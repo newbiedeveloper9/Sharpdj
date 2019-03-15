@@ -48,6 +48,7 @@ namespace SharpDj.Logic
         {
             _connection.EnableLogging = true;
             _connection.LogIntoStream(Console.OpenStandardOutput());
+
             _packetsList.RegisterPackets(_connection, this);
             _sender = new ClientSender(_eventAggregator, _connection, this);
 #if DEBUG

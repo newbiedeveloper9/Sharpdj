@@ -55,18 +55,6 @@ namespace SharpDj.ViewModels
             ActivateItem(AfterLoginScreenViewModel);
         }
 
-        private SnackbarMessageQueue _messagesQueue;
-        public SnackbarMessageQueue MessagesQueue
-        {
-            get => _messagesQueue;
-            set
-            {
-                if (_messagesQueue == value) return;
-                _messagesQueue = value;
-                NotifyOfPropertyChange(() => MessagesQueue);
-            }
-        }
-
         public void Handle(IMessageQueue message)
         {
             Task.Factory.StartNew(() =>
@@ -94,6 +82,19 @@ namespace SharpDj.ViewModels
             _eventAggregator.PublishOnUIThread(new MessageQueue("Connection", "You are not anymore logged in"));
             _eventAggregator.PublishOnUIThread(NavigateMainView.Home);
             ActivateItem(BeforeLoginScreenViewModel);
+        }
+
+
+        private SnackbarMessageQueue _messagesQueue;
+        public SnackbarMessageQueue MessagesQueue
+        {
+            get => _messagesQueue;
+            set
+            {
+                if (_messagesQueue == value) return;
+                _messagesQueue = value;
+                NotifyOfPropertyChange(() => MessagesQueue);
+            }
         }
     }
 }

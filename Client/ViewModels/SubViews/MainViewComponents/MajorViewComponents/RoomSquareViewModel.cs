@@ -6,7 +6,9 @@ using SharpDj.PubSubModels;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
 {
-    public class RoomSquareViewModel : PropertyChangedBase, IHandle<IRefreshOutsideRoomsPublish>
+    public class RoomSquareViewModel : PropertyChangedBase,
+        IHandle<IRefreshOutsideRoomsPublish>,
+        IHandle<INewRoomCreatedPublish>
     {
         private readonly IEventAggregator _eventAggregator;
 
@@ -76,6 +78,13 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
                 RoomInstancesCollection.Add(RoomModel.ToClientModel(room));
             }
 
+        }
+        public void Handle(INewRoomCreatedPublish message)
+        {
+            if (message.RoomOutsideModel == null) return;
+
+            RoomInstancesCollection.Add(
+                RoomModel.ToClientModel(message.RoomOutsideModel));
         }
     }
 }

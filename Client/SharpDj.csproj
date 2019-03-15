@@ -111,6 +111,7 @@
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.1\PresentationFramework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
@@ -199,7 +200,9 @@
     <Compile Include="Input\MultiKeyGesture.cs" />
     <Compile Include="Input\MultiKeyGestureConverter.cs" />
     <Compile Include="Interfaces\INavMainView.cs" />
+    <Compile Include="Logic\ActionToServer\ClientNewRoomCreatedAction.cs" />
     <Compile Include="PubSubModels\CreatedRoomPublish.cs" />
+    <Compile Include="PubSubModels\NewRoomCreatedPublish.cs" />
     <Compile Include="PubSubModels\NotLoggedIn.cs" />
     <Compile Include="Interfaces\IPlaylistChanged.cs" />
     <Compile Include="Interfaces\IShell.cs" />

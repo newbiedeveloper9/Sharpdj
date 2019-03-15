@@ -12,7 +12,8 @@ namespace SharpDj.ViewModels.SubViews
 {
     public class MainViewModel : Conductor<object>.Collection.OneActive,
         IHandle<NavigateMainView>,
-        IHandle<RollingMenuVisibilityEnum>
+        IHandle<RollingMenuVisibilityEnum>,
+        IHandle<IRoomInfoForOpen>
     {
         private readonly IEventAggregator _eventAggregator;
 
@@ -87,6 +88,11 @@ namespace SharpDj.ViewModels.SubViews
                 _rollingMenuVisibility = value;
                 NotifyOfPropertyChange(() => RollingMenuVisibility);
             }
+        }
+
+        public void Handle(IRoomInfoForOpen message)
+        {
+            Handle(NavigateMainView.Room);
         }
     }
 }

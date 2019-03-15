@@ -1,13 +1,13 @@
 ﻿using Caliburn.Micro;
-using SharpDj.Interfaces;
-using SharpDj.Logic.Helpers;
-using SharpDj.PubSubModels;
-using System;
-using System.Threading.Tasks;
 using Microsoft.Win32;
 using SCPackets.CreateRoom;
 using SharpDj.Enums;
+using SharpDj.Interfaces;
+using SharpDj.Logic.Helpers;
 using SharpDj.Models;
+using SharpDj.PubSubModels;
+using System;
+using System.Threading.Tasks;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents
 {
@@ -38,7 +38,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
         public CreateRoomViewModel()
         {
 
-        } 
+        }
 
         public void UploadLocalFile()
         {
@@ -66,7 +66,8 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
 
                 Task.Factory.StartNew(() =>
                 {
-                   Model.ImageLink = imgur.AnonymousImageUpload(dlg.FileName);
+                    string imgUrl = imgur.AnonymousImageUpload(dlg.FileName);
+                    Model.ImageLink = imgUrl;
                 });
             }
         }

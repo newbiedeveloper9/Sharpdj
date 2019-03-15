@@ -51,7 +51,7 @@ namespace SharpDj.Logic.Helpers
                         {
                             OnUploadSuccess(EventArgs.Empty);
                             Console.WriteLine("Upload Success");
-                            return doc.DocumentElement.ChildNodes.Item(26)?.InnerText;
+                            return doc.DocumentElement.LastChild.InnerText;
                         }
                     }
 
