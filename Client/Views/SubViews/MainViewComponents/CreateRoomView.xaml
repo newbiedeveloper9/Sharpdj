@@ -10,7 +10,7 @@
              cal:Bind.AtDesignTime="True"
              d:DataContext="{d:DesignInstance Type=mainViewComponents:CreateRoomViewModel, IsDesignTimeCreatable=True}"
              d:DesignWidth="1200" d:DesignHeight="600">
-    <materialDesign:Card Margin="0 0 0 24" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#232323" materialDesign:ShadowAssist.ShadowDepth="Depth5">
+    <materialDesign:Card Margin="0 0 0 24" Background="#232323" materialDesign:ShadowAssist.ShadowDepth="Depth5">
         <StackPanel>
             <TextBlock x:Name="Title" HorizontalAlignment="Center" 
                        Foreground="{StaticResource MaterialDesignDarkForeground}"
@@ -53,7 +53,10 @@
                 </StackPanel>
 
             </Grid>
-            <Button Content="Create room" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 48 24" x:Name="CreateRoom"/>
+            <Grid x:Name="CreateRoomIsVisible">
+                <Button Content="Create room" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 48 24"
+                    cal:Message.Attach="[Click]=[CreateRoom]"/>
+            </Grid>
         </StackPanel>
     </materialDesign:Card>
 </UserControl>

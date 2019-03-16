@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Caliburn.Micro;
+using SCPackets.UpdateRoomData;
 using SharpDj.Interfaces;
 using SharpDj.Models;
+using SharpDj.PubSubModels;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents
 {
     public class ManageRoomsViewModel : PropertyChangedBase,
-    INavMainView
+    INavMainView,
+    IHandle<IManageRoomsPublish>
     {
         #region Fields
 
@@ -33,17 +32,44 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
             }
         }
 
+        private BindableCollection<RoomCreationModel> _serverCollection = new BindableCollection<RoomCreationModel>();
+        public BindableCollection<RoomCreationModel> ServerCollection
+        {
+            get => _serverCollection;
+            set
+            {
+                if (_serverCollection == value) return;
+                _serverCollection = value;
+                NotifyOfPropertyChange(() => ServerCollection);
+            }
+        }
+
+        private bool _modifyBarIsVisible;
+        public bool ModifyBarIsVisible
+        {
+            get => _modifyBarIsVisible;
+            set
+            {
+                if (_modifyBarIsVisible == value) return;
+                _modifyBarIsVisible = value;
+                NotifyOfPropertyChange(() => ModifyBarIsVisible);
+            }
+        }
+
         #endregion Properties
 
         #region .ctor
         public ManageRoomsViewModel()
         {
             CreateRoomViewModel = new CreateRoomViewModel();
+            ServerCollection.Add(new RoomCreationModel() { Name = "Test" });
+            ServerCollection.Add(new RoomCreationModel() { Name = "Heheszki" });
         }
 
         public ManageRoomsViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
+            _eventAggregator.Subscribe(this);
             CreateRoomViewModel = new CreateRoomViewModel(_eventAggregator, "Modify your room");
         }
         #endregion .ctor
@@ -53,10 +79,32 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
         public void OnManageRoomChanged(RoomCreationModel model)
         {
             RoomModifyIsVisible = true;
+            ModifyBarIsVisible = true;
 
-            //CreateRoomViewModel.Model = model;
+            CreateRoomViewModel.Model = model;
         }
 
+        public void SaveRoom()
+        {
+            var model = CreateRoomViewModel.Model.ToSCPacketRoomCreationModel();
+            _eventAggregator.PublishOnUIThread( new SendPacket(
+                new UpdateRoomDataRequest(model)));
+        }
         #endregion Methods
+
+        #region  Handle's
+        public void Handle(IManageRoomsPublish message)
+        {
+            ServerCollection.Clear();
+
+            if (message.RoomModelsList == null) return;
+            foreach (var roomModel in message.RoomModelsList)
+            {
+                ServerCollection.Add(
+                    RoomCreationModel.ToClientModel(roomModel));
+            }
+        }
+
+        #endregion Handle's
     }
 }

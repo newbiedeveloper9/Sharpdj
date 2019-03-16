@@ -9,6 +9,18 @@ namespace SharpDj.Models
 {
     public class RoomCreationModel : PropertyChangedBase
     {
+        private int _id;
+        public int Id
+        {
+            get => _id;
+            set
+            {
+                if (_id == value) return;
+                _id = value;
+                NotifyOfPropertyChange(() => Id);
+            }
+        }
+
         private string _name;
         public string Name
         {
@@ -85,6 +97,7 @@ namespace SharpDj.Models
         {
             return new RoomCreationModel()
             {
+                Id = model.Id,
                 ImageLink = model.ImageUrl,
                 LocalEnterMessage = model.LocalEnterMessage,
                 LocalLeaveMessage = model.LocalLeaveMessage,
@@ -98,6 +111,7 @@ namespace SharpDj.Models
         {
             return new SCPackets.CreateRoom.Container.RoomModel()
             {
+                Id = this.Id,
                 ImageUrl = this.ImageLink,
                 LocalEnterMessage = this.LocalEnterMessage,
                 LocalLeaveMessage = this.LocalLeaveMessage,

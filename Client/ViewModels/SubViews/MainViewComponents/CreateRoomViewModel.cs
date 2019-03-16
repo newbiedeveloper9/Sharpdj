@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents
 {
-    public class CreateRoomViewModel : Screen, INavMainView,
+    public class CreateRoomViewModel : PropertyChangedBase, INavMainView,
         IHandle<ICreatedRoomPublish>
     {
         #region Fields
@@ -42,12 +42,27 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
                 NotifyOfPropertyChange(() => Title);
             }
         }
+
+        private bool _createRoomIsVisible = true;
+        public bool CreateRoomIsVisible
+        {
+            get => _createRoomIsVisible;
+            set
+            {
+                if (_createRoomIsVisible == value) return;
+                _createRoomIsVisible = value;
+                NotifyOfPropertyChange(() => CreateRoomIsVisible);
+            }
+        }
+
         #endregion Properties
 
         #region .ctor
-        public CreateRoomViewModel(IEventAggregator eventAggregator, string title="Create your own room")
+        public CreateRoomViewModel(IEventAggregator eventAggregator,
+            string title="Create your own room", bool roomCreator = false)
         {
             Title = title;
+            CreateRoomIsVisible = roomCreator;
 
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);

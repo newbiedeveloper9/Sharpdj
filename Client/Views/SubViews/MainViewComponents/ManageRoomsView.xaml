@@ -12,27 +12,57 @@
              d:DataContext="{d:DesignInstance Type=mainViewComponents:ManageRoomsViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="696" d:DesignWidth="1000">
     <StackPanel>
-        <WrapPanel Orientation="Horizontal" Margin="24">
-            <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" GroupName="RoomGroup" Height="40"
-                         cal:Message.Attach="[Event Checked]=[OnManageRoomChanged($dataContext)]">
-                <Grid>
-                    <TextBlock Text="Server #1" FontSize="24" FontWeight="Regular" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
-                </Grid>
-            </RadioButton>
-            <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" GroupName="RoomGroup" Height="40">
-                <Grid>
-                    <TextBlock Text="Server #2" FontSize="24" FontWeight="Regular" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
-                </Grid>
-            </RadioButton>
-        </WrapPanel>
+        <TextBlock Text="You are allowed to modify those rooms:" FontWeight="Regular" FontSize="24" Margin="24 24 0 0" 
+                   Foreground="{StaticResource MaterialDesignDarkForeground}" />
+        <ItemsControl x:Name="ServerCollection">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" Margin="24 8 24 24"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}" Margin="4" GroupName="RoomGroup" Height="40"
+                                 cal:Message.Attach="[Event Checked]=[OnManageRoomChanged($dataContext)]">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Name}" FontSize="24" FontWeight="Regular" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
+                            <TextBlock Text=" #" FontSize="24" FontWeight="Regular" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
+                            <TextBlock Text="{Binding Id}" FontSize="24" FontWeight="Regular" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
+                        </StackPanel>
+                    </RadioButton>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
 
-        <local:CreateRoomView Margin="24" Height="400" cal:View.Model="{Binding Path=CreateRoomViewModel}" x:Name="RoomModifyIsVisible"/>
 
-        <Button HorizontalAlignment="Right" Background="Red" BorderBrush="IndianRed" Margin="24 0 36 0">
-            <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon Kind="Delete" VerticalAlignment="Center"/>
-                <TextBlock Text="Delete room" Margin="6 0 0 0"/>
-            </StackPanel>
-        </Button>
+        <StackPanel HorizontalAlignment="Center" x:Name="ModifyBarIsVisible">
+            <Grid Margin="24 32 24 0">
+                <materialDesign:Card Background="#1c1c1c">
+                    <DockPanel Margin="6">
+                        <Button Background="Red" BorderBrush="Red" Margin="6" materialDesign:ThemeAssist.Theme="Dark">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Delete" VerticalAlignment="Center"/>
+                                <TextBlock Text="Delete room" Margin="6 0 0 0"/>
+                            </StackPanel>
+                        </Button>
+
+
+                        <Button HorizontalAlignment="Right" Margin="6" materialDesign:ThemeAssist.Theme="Light" cal:Message.Attach="[Click]=[SaveRoom]">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="ContentSaveAll" VerticalAlignment="Center"/>
+                                <TextBlock Text="Save changes" Margin="6 0 0 0"/>
+                            </StackPanel>
+                        </Button>
+                    </DockPanel>
+                </materialDesign:Card>
+                <Separator VerticalAlignment="Bottom" Background="#181818" Height="1"/>
+            </Grid>
+
+            <local:CreateRoomView Margin="24 -2 24 24" Height="400"
+                              cal:View.Model="{Binding Path=CreateRoomViewModel}"/>
+            <!--<local:CreateRoomView Margin="24 1 24 24" Height="400"
+                              cal:View.Model="{Binding Path=CreateRoomViewModel}" x:Name="RoomModifyIsVisible"/>-->
+
+        </StackPanel>
     </StackPanel>
 </UserControl>

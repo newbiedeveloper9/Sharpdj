@@ -125,6 +125,7 @@ namespace SharpDj.Models
         {
             return new RoomOutsideModel()
             {
+                Id = this.Id,
                 Name = this.Name,
                 AmountOfAdministration = this.AmountOfAdministration,
                 AmountOfPeople = this.AmountOfPeople,
@@ -139,6 +140,7 @@ namespace SharpDj.Models
         {
             return new RoomModel()
             {
+                Id = model.Id,
                 Name = model.Name,
                 AmountOfAdministration = model.AmountOfAdministration,
                 AmountOfPeople = model.AmountOfPeople,

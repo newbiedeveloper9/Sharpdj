@@ -6,6 +6,7 @@ using SCPackets.LoginPacket;
 using SCPackets.NewRoomCreated;
 using SCPackets.NotLoggedIn;
 using SCPackets.RegisterPacket;
+using SCPackets.UpdateRoomData;
 using SharpDj.Logic.ActionToServer;
 
 namespace SharpDj.Logic
@@ -19,17 +20,25 @@ namespace SharpDj.Logic
         public HandlerModel<RegisterResponse> Register { get; set; }
         public HandlerModel<NotLoggedInRequest> NotLoggedIn { get; set; }
         public HandlerModel<NewRoomCreatedRequest> NewRoomCreated { get; set; }
+        public HandlerModel<UpdateRoomDataResponse> RoomUpdate { get; set; }
 
 
         public ClientPacketsToHandleList(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
 
-            Login = new HandlerModel<LoginResponse> { Action = new ClientLoginAction(_eventAggregator).Action };
-            Register = new HandlerModel<RegisterResponse> { Action = new ClientRegisterAction(_eventAggregator).Action };
-            CreateRoom = new HandlerModel<CreateRoomResponse> { Action = new ClientCreateRoomAction(_eventAggregator).Action };
-            NotLoggedIn = new HandlerModel<NotLoggedInRequest> { Action = new ClientNotLoggedInAction(_eventAggregator).Action };
-            NewRoomCreated = new HandlerModel<NewRoomCreatedRequest> {Action = new ClientNewRoomCreatedAction(_eventAggregator).Action};
+            Login = new HandlerModel<LoginResponse>
+            { Action = new ClientLoginAction(_eventAggregator).Action };
+            Register = new HandlerModel<RegisterResponse>
+            { Action = new ClientRegisterAction(_eventAggregator).Action };
+            CreateRoom = new HandlerModel<CreateRoomResponse>
+            { Action = new ClientCreateRoomAction(_eventAggregator).Action };
+            NotLoggedIn = new HandlerModel<NotLoggedInRequest>
+            { Action = new ClientNotLoggedInAction(_eventAggregator).Action };
+            NewRoomCreated = new HandlerModel<NewRoomCreatedRequest>
+            { Action = new ClientNewRoomCreatedAction(_eventAggregator).Action };
+            RoomUpdate = new HandlerModel<UpdateRoomDataResponse>
+            { Action = new ClientUpdateRoomAction(_eventAggregator).Action };
         }
 
         public void RegisterPackets(Connection conn, IClient client)
@@ -39,6 +48,7 @@ namespace SharpDj.Logic
             CreateRoom.RegisterPacket(conn, client);
             NotLoggedIn.RegisterPacket(conn, client);
             NewRoomCreated.RegisterPacket(conn, client);
+            RoomUpdate.RegisterPacket(conn, client);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Caliburn.Micro;
+﻿using System;
+using Caliburn.Micro;
 using SharpDj.Enums;
 using SharpDj.PubSubModels;
 using SharpDj.ViewModels.SubViews.MainViewComponents;
@@ -96,7 +97,8 @@ namespace SharpDj.ViewModels.SubViews
         public void Handle(NavigateMainView message)
         {
             _eventAggregator.PublishOnUIThread(RollingMenuVisibilityEnum.Void);
-            ActivateItem((PropertyChangedBase)_navigationDictionary[message]);
+            var newItem = _navigationDictionary[message];
+            ActivateItem((PropertyChangedBase)newItem);
         }
 
         public void Handle(IRoomInfoForOpen message)

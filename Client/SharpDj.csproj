@@ -201,7 +201,9 @@
     <Compile Include="Input\MultiKeyGestureConverter.cs" />
     <Compile Include="Interfaces\INavMainView.cs" />
     <Compile Include="Logic\ActionToServer\ClientNewRoomCreatedAction.cs" />
+    <Compile Include="Logic\ActionToServer\ClientUpdateRoomAction.cs" />
     <Compile Include="PubSubModels\CreatedRoomPublish.cs" />
+    <Compile Include="PubSubModels\ManageRoomsPublish.cs" />
     <Compile Include="PubSubModels\NewRoomCreatedPublish.cs" />
     <Compile Include="PubSubModels\NotLoggedIn.cs" />
     <Compile Include="Interfaces\IPlaylistChanged.cs" />
