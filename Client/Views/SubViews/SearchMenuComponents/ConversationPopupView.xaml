@@ -76,11 +76,11 @@
             </StackPanel>
 
             <DockPanel Grid.Row="2" Background="#303030" VerticalAlignment="Top">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" materialDesign:ThemeAssist.Theme="Light" Background="#1c1c1c">
-                    <Button Height="32" Background="#1c1c1c" Style="{StaticResource MaterialDesignFlatButton}">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" materialDesign:ThemeAssist.Theme="Dark" Background="#1c1c1c">
+                    <Button Height="32" Background="#1c1c1c" Style="{StaticResource MaterialDesignFlatAccentButton}">
                         <materialDesign:PackIcon Kind="Settings" VerticalAlignment="Center"/>
                     </Button>
-                    <Button Height="32" Background="#1c1c1c" Style="{StaticResource MaterialDesignFlatButton}" x:Name="Minimize">
+                    <Button Height="32" Background="#1c1c1c" Style="{StaticResource MaterialDesignFlatAccentButton}" materialDesign:ThemeAssist.Theme="Dark" x:Name="Minimize">
                         <materialDesign:PackIcon Kind="Close" VerticalAlignment="Center"/>
                     </Button>
                 </StackPanel>

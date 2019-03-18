@@ -11,8 +11,7 @@ using System.Threading.Tasks;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents
 {
-    public class CreateRoomViewModel : PropertyChangedBase, INavMainView,
-        IHandle<ICreatedRoomPublish>
+    public class CreateRoomViewModel : PropertyChangedBase, INavMainView
     {
         #region Fields
         private readonly IEventAggregator _eventAggregator;
@@ -55,14 +54,28 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
             }
         }
 
+        private bool _titleIsVisible = true;
+        public bool TitleIsVisible
+        {
+            get => _titleIsVisible;
+            set
+            {
+                if (_titleIsVisible == value) return;
+                _titleIsVisible = value;
+                NotifyOfPropertyChange(() => TitleIsVisible);
+            }
+        }
+
+
         #endregion Properties
 
         #region .ctor
         public CreateRoomViewModel(IEventAggregator eventAggregator,
-            string title="Create your own room", bool roomCreator = false)
+            string title="Create your own room", bool roomCreator = false, bool titleIsVisible = false)
         {
             Title = title;
             CreateRoomIsVisible = roomCreator;
+            TitleIsVisible = titleIsVisible;
 
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
@@ -113,13 +126,5 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
                 new CreateRoomRequest(Model.ToSCPacketRoomCreationModel())));
         }
         #endregion Methods
-
-        #region Handle's
-        public void Handle(ICreatedRoomPublish message)
-        {
-            Model = new RoomCreationModel();
-            _eventAggregator.PublishOnUIThread(NavigateMainView.Room);
-        }
-        #endregion Handle's
     }
 }

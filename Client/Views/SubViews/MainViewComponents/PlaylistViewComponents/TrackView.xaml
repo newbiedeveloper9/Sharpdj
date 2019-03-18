@@ -11,7 +11,7 @@
         <DockPanel>
 
 
-            <Image Source="{Binding ImgSource}"/>
+            <Image Source="{Binding ImgSource, Converter={StaticResource nullImageConverter}}"/>
 
             <DockPanel Margin="12 12 6 4">
                 <StackPanel>

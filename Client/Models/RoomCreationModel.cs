@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 
 namespace SharpDj.Models
 {
@@ -111,14 +106,44 @@ namespace SharpDj.Models
         {
             return new SCPackets.CreateRoom.Container.RoomModel()
             {
-                Id = this.Id,
-                ImageUrl = this.ImageLink,
-                LocalEnterMessage = this.LocalEnterMessage,
-                LocalLeaveMessage = this.LocalLeaveMessage,
-                Name = this.Name,
-                PublicEnterMessage = this.PublicEnterMessage,
-                PublicLeaveMessage = this.PublicLeaveMessage
+                Id = Id,
+                ImageUrl = ImageLink,
+                LocalEnterMessage = LocalEnterMessage,
+                LocalLeaveMessage = LocalLeaveMessage,
+                Name = Name,
+                PublicEnterMessage = PublicEnterMessage,
+                PublicLeaveMessage = PublicLeaveMessage
             };
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as RoomCreationModel);
+        }
+
+        protected bool Equals(RoomCreationModel other)
+        {
+            return _id == other._id && string.Equals(_name, other._name) &&
+                   string.Equals(_imageLink, other._imageLink) &&
+                   string.Equals(_localEnterMessage, other._localEnterMessage) &&
+                   string.Equals(_localLeaveMessage, other._localLeaveMessage) && 
+                   string.Equals(_publicEnterMessage, other._publicEnterMessage) &&
+                   string.Equals(_publicLeaveMessage, other._publicLeaveMessage);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = _id;
+                hashCode = (hashCode * 397) ^ (_name != null ? _name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (_imageLink != null ? _imageLink.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (_localEnterMessage != null ? _localEnterMessage.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (_localLeaveMessage != null ? _localLeaveMessage.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (_publicEnterMessage != null ? _publicEnterMessage.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (_publicLeaveMessage != null ? _publicLeaveMessage.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 }

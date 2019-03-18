@@ -1,5 +1,4 @@
-﻿using System;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using SCPackets.UpdateRoomData;
 using SharpDj.Interfaces;
 using SharpDj.Models;
@@ -9,16 +8,21 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
 {
     public class ManageRoomsViewModel : PropertyChangedBase,
     INavMainView,
-    IHandle<IManageRoomsPublish>
+    IHandle<IManageRoomsPublish>,
+    IHandle<IManageEditedRoomPublish>,
+    IHandle<ICreatedRoomPublish>
+
     {
         #region Fields
 
         private readonly IEventAggregator _eventAggregator;
+        private RoomCreationModel _saveModel;
+        private RoomCreationModel _withoutChangedModel;
         #endregion Fields
 
         #region Properties
 
-        public CreateRoomViewModel CreateRoomViewModel { get; private set; }
+        public CreateRoomViewModel EditRoomViewModel { get; private set; }
 
         private bool _roomModifyIsVisible;
         public bool RoomModifyIsVisible
@@ -31,6 +35,19 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
                 NotifyOfPropertyChange(() => RoomModifyIsVisible);
             }
         }
+
+        private CreateRoomViewModel _createRoomViewModel;
+        public CreateRoomViewModel CreateRoomViewModel
+        {
+            get => _createRoomViewModel;
+            set
+            {
+                if (_createRoomViewModel == value) return;
+                _createRoomViewModel = value;
+                NotifyOfPropertyChange(() => CreateRoomViewModel);
+            }
+        }
+
 
         private BindableCollection<RoomCreationModel> _serverCollection = new BindableCollection<RoomCreationModel>();
         public BindableCollection<RoomCreationModel> ServerCollection
@@ -62,6 +79,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
         public ManageRoomsViewModel()
         {
             CreateRoomViewModel = new CreateRoomViewModel();
+            EditRoomViewModel = new CreateRoomViewModel();
             ServerCollection.Add(new RoomCreationModel() { Name = "Test" });
             ServerCollection.Add(new RoomCreationModel() { Name = "Heheszki" });
         }
@@ -70,7 +88,8 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
         {
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
-            CreateRoomViewModel = new CreateRoomViewModel(_eventAggregator, "Modify your room");
+            EditRoomViewModel = new CreateRoomViewModel(_eventAggregator, "Modify your room");
+            CreateRoomViewModel = new CreateRoomViewModel(_eventAggregator, roomCreator: true, titleIsVisible: true);
         }
         #endregion .ctor
 
@@ -78,18 +97,31 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
 
         public void OnManageRoomChanged(RoomCreationModel model)
         {
+            if (model == null)
+            {
+                RoomModifyIsVisible = false;
+                ModifyBarIsVisible = false;
+                return;
+            };
+
             RoomModifyIsVisible = true;
             ModifyBarIsVisible = true;
 
-            CreateRoomViewModel.Model = model;
+            _saveModel = RoomCreationModel.ToClientModel(model.ToSCPacketRoomCreationModel());
+            _withoutChangedModel = model;
+            EditRoomViewModel.Model = _saveModel;
         }
 
         public void SaveRoom()
         {
-            var model = CreateRoomViewModel.Model.ToSCPacketRoomCreationModel();
-            _eventAggregator.PublishOnUIThread( new SendPacket(
+            if (_saveModel.Equals(_withoutChangedModel)) return;
+
+            var model = _saveModel.ToSCPacketRoomCreationModel();
+
+            _eventAggregator.PublishOnUIThread(new SendPacket(
                 new UpdateRoomDataRequest(model)));
         }
+
         #endregion Methods
 
         #region  Handle's
@@ -105,6 +137,21 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
             }
         }
 
+        public void Handle(IManageEditedRoomPublish message)
+        {
+            for (var i = 0; i < ServerCollection.Count; i++)
+                if (ServerCollection[i].Id == message.Room.Id)
+                    ServerCollection[i] = RoomCreationModel.ToClientModel(message.Room);
+
+            _withoutChangedModel = RoomCreationModel.ToClientModel(message.Room);
+        }
+
         #endregion Handle's
+
+        public void Handle(ICreatedRoomPublish message)
+        {
+            ServerCollection.Add(
+                RoomCreationModel.ToClientModel(message.Room));
+        }
     }
 }

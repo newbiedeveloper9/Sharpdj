@@ -12,9 +12,11 @@
              d:DesignWidth="1200" d:DesignHeight="600">
     <materialDesign:Card Margin="0 0 0 24" Background="#232323" materialDesign:ShadowAssist.ShadowDepth="Depth5">
         <StackPanel>
-            <TextBlock x:Name="Title" HorizontalAlignment="Center" 
+            <Grid HorizontalAlignment="Center"  Margin="0 24 0 0" x:Name="TitleIsVisible">
+                <TextBlock x:Name="Title"
                        Foreground="{StaticResource MaterialDesignDarkForeground}"
-                       FontWeight="Light" FontSize="32" Margin="0 24 0 0"/>
+                       FontWeight="Light" FontSize="32"/>
+            </Grid>
 
             <Grid Margin="12 32 12 12" HorizontalAlignment="Center">
                 <Grid.ColumnDefinitions>
@@ -24,7 +26,9 @@
                 </Grid.ColumnDefinitions>
                 <!--Left Side-->
                 <StackPanel Margin="24 12 12 12">
-                    <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="Name" Margin="12 0 12 12" MinWidth="200" HorizontalAlignment="Left" Text="{Binding Model.Name, Mode=TwoWay}"/>
+                    <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                             materialDesign:HintAssist.Hint="Name" Margin="12 0 12 12" MinWidth="200" 
+                             HorizontalAlignment="Left" Text="{Binding Model.Name, Mode=TwoWay}"/>
                     <Grid>
                         <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="Image link"
                                  MinWidth="200" Margin="12 0 12 12" Padding="0 0 42 0" Text="{Binding Model.ImageLink, Mode=TwoWay}" />

@@ -19,7 +19,7 @@
                             <VisualBrush Stretch="UniformToFill" Opacity="0.87">
                                 <VisualBrush.Visual>
                                     <Grid ClipToBounds="True">
-                                        <Image Source="{Binding ImageSource}">
+                                        <Image Source="{Binding ImageSource, Converter={StaticResource nullImageConverter}}">
                                             <Image.Effect>
                                                 <BlurEffect Radius="40"/>
                                             </Image.Effect>

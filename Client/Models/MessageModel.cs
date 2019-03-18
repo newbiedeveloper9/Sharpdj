@@ -59,7 +59,7 @@ namespace SharpDj.Models
             }
         }
 
-        private SolidColorBrush _color = new SolidColorBrush(new Color(){R = 81, G = 41, B = 165, A = Byte.MaxValue});
+        private SolidColorBrush _color;
         public SolidColorBrush Color
         {
             get => _color;

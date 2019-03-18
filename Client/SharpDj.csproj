@@ -94,18 +94,19 @@
     <Reference Include="InTheHand.Net.Personal, Version=3.5.605.0, Culture=neutral, PublicKeyToken=ea38caa273134499, processorArchitecture=MSIL">
       <HintPath>..\packages\32feet.NET.3.5.0.0\lib\net\InTheHand.Net.Personal.dll</HintPath>
     </Reference>
-    <Reference Include="MaterialDesignColors, Version=1.0.0.14576, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaterialDesignColors.1.1.1\lib\net45\MaterialDesignColors.dll</HintPath>
+    <Reference Include="MaterialDesignColors, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.1.3\lib\net45\MaterialDesignColors.dll</HintPath>
     </Reference>
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.0.1205, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaterialDesignThemes.2.5.0.1205\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\MaterialDesignInXamlToolkit-master\MaterialDesignThemes.Wpf\bin\Debug\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Network, Version=6.1.0.7, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Network.6.1.0.7\lib\net46\Network.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.1\PresentationFramework.dll</HintPath>
@@ -174,6 +175,7 @@
     <Compile Include="Converters\EnumToVisibilityConverter.cs" />
     <Compile Include="Converters\IsConversationReadedToFontWeightConverter.cs" />
     <Compile Include="Converters\NameToContentConverter.cs" />
+    <Compile Include="Converters\NullImageConverter.cs" />
     <Compile Include="Converters\RoleToBrushConverter.cs" />
     <Compile Include="Core\BaseViewModel.cs" />
     <Compile Include="Core\Extensions\CommandBase.cs" />
@@ -204,6 +206,7 @@
     <Compile Include="Logic\ActionToServer\ClientUpdateRoomAction.cs" />
     <Compile Include="PubSubModels\CreatedRoomPublish.cs" />
     <Compile Include="PubSubModels\ManageRoomsPublish.cs" />
+    <Compile Include="PubSubModels\ManageRoomsUpdatedPublish.cs" />
     <Compile Include="PubSubModels\NewRoomCreatedPublish.cs" />
     <Compile Include="PubSubModels\NotLoggedIn.cs" />
     <Compile Include="Interfaces\IPlaylistChanged.cs" />
