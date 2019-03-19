@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Caliburn.Micro;
 using SharpDj.Models;
 using SharpDj.PubSubModels;
@@ -8,6 +9,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
 {
     public class RoomSquareViewModel : PropertyChangedBase,
         IHandle<IRefreshOutsideRoomsPublish>,
+        IHandle<IUpdateOutsideRoomPublish>,
         IHandle<INewRoomCreatedPublish>
     {
         private readonly IEventAggregator _eventAggregator;
@@ -85,6 +87,15 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
 
             RoomInstancesCollection.Add(
                 RoomModel.ToClientModel(message.RoomOutsideModel));
+        }
+
+        public void Handle(IUpdateOutsideRoomPublish message)
+        {
+            for (int i = 0; i < RoomInstancesCollection.Count; i++)
+            {
+                if(RoomInstancesCollection[i].Id == message.RoomOutsideModel.Id)
+                    RoomInstancesCollection[i] = RoomModel.ToClientModel(message.RoomOutsideModel);
+            }
         }
     }
 }

@@ -203,6 +203,7 @@
     <Compile Include="Input\MultiKeyGestureConverter.cs" />
     <Compile Include="Interfaces\INavMainView.cs" />
     <Compile Include="Logic\ActionToServer\ClientNewRoomCreatedAction.cs" />
+    <Compile Include="Logic\ActionToServer\ClientRoomOutsideUpdateAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientUpdateRoomAction.cs" />
     <Compile Include="PubSubModels\CreatedRoomPublish.cs" />
     <Compile Include="PubSubModels\ManageRoomsPublish.cs" />
@@ -244,6 +245,7 @@
     <Compile Include="PubSubModels\RefreshOutsideRoomsPublish.cs" />
     <Compile Include="PubSubModels\RoomInfoForOpen.cs" />
     <Compile Include="PubSubModels\SendPacket.cs" />
+    <Compile Include="PubSubModels\UpdateOutsideRoomPublish.cs" />
     <Compile Include="ViewModels\AfterLoginScreenViewModel.cs" />
     <Compile Include="ViewModels\BeforeLoginComponents\RegisterViewModel.cs" />
     <Compile Include="ViewModels\BeforeLoginScreenViewModel.cs" />

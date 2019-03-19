@@ -6,6 +6,7 @@ using SCPackets.LoginPacket;
 using SCPackets.NewRoomCreated;
 using SCPackets.NotLoggedIn;
 using SCPackets.RegisterPacket;
+using SCPackets.RoomOutsideUpdate;
 using SCPackets.UpdateRoomData;
 using SharpDj.Logic.ActionToServer;
 
@@ -21,6 +22,7 @@ namespace SharpDj.Logic
         public HandlerModel<NotLoggedInRequest> NotLoggedIn { get; set; }
         public HandlerModel<NewRoomCreatedRequest> NewRoomCreated { get; set; }
         public HandlerModel<UpdateRoomDataResponse> RoomUpdate { get; set; }
+        public HandlerModel<RoomOutsideUpdateRequest> RoomOutsideUpdate { get; set; }
 
 
         public ClientPacketsToHandleList(IEventAggregator eventAggregator)
@@ -39,6 +41,8 @@ namespace SharpDj.Logic
             { Action = new ClientNewRoomCreatedAction(_eventAggregator).Action };
             RoomUpdate = new HandlerModel<UpdateRoomDataResponse>
             { Action = new ClientUpdateRoomAction(_eventAggregator).Action };
+            RoomOutsideUpdate = new HandlerModel<RoomOutsideUpdateRequest>
+            { Action = new ClientRoomOutsideUpdateAction(_eventAggregator).Action };
         }
 
         public void RegisterPackets(Connection conn, IClient client)
@@ -49,6 +53,7 @@ namespace SharpDj.Logic
             NotLoggedIn.RegisterPacket(conn, client);
             NewRoomCreated.RegisterPacket(conn, client);
             RoomUpdate.RegisterPacket(conn, client);
+            RoomOutsideUpdate.RegisterPacket(conn, client);
         }
     }
 }
