@@ -43,7 +43,7 @@
                            Margin="0 0 0 6" HorizontalAlignment="Left" Opacity="0.6" FontWeight="Bold" FontSize="12"/>
                         <PasswordBox x:Name="PasswordText">
                             <i:Interaction.Behaviors>
-                                <helpers:PasswordBoxBindingBehavior Password="{Binding PasswordText}"/>
+                                <helpers:PasswordBoxBindingBehavior Password="{Binding PasswordText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             </i:Interaction.Behaviors>
                         </PasswordBox>
                     </StackPanel>

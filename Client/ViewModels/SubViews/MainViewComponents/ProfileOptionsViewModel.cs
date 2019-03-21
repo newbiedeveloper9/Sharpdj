@@ -1,12 +1,13 @@
-﻿using System;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
+using SCPackets.Disconnect;
 using SCPackets.Models;
 using SharpDj.Enums;
 using SharpDj.PubSubModels;
+using System;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents
 {
-    public class ProfileOptionsViewModel : PropertyChangedBase, 
+    public class ProfileOptionsViewModel : PropertyChangedBase,
         IHandle<ILoginPublish>
     {
         private readonly IEventAggregator _eventAggregator;
@@ -44,7 +45,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
 
         public ProfileOptionsViewModel()
         {
-            
+
         }
 
         public void Navigate(string path)
@@ -57,7 +58,10 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
                 case "ManageRooms":
                     _eventAggregator.PublishOnUIThread(NavigateMainView.ManageRooms);
                     break;
-                default: 
+                case "Logout":
+                    _eventAggregator.PublishOnUIThread(new SendPacket(new DisconnectRequest()));
+                    break;
+                default:
                     throw new ArgumentOutOfRangeException("path");
             }
         }

@@ -23,8 +23,13 @@ namespace SharpDj.ViewModels
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
 
-            ActivateItem(new LoginViewModel(_eventAggregator));
+            Activated += OnActivated;
             /*Creates a new Bindings to View each time*/
+        }
+
+        private void OnActivated(object sender, ActivationEventArgs e)
+        {
+            ActivateItem(new LoginViewModel(_eventAggregator));
         }
 
         public void Handle(BeforeLoginEnum message)

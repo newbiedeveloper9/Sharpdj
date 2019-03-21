@@ -202,6 +202,7 @@
     <Compile Include="Input\MultiKeyGesture.cs" />
     <Compile Include="Input\MultiKeyGestureConverter.cs" />
     <Compile Include="Interfaces\INavMainView.cs" />
+    <Compile Include="Logic\ActionToServer\ClientDisconnectAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientNewRoomCreatedAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientRoomOutsideUpdateAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientUpdateRoomAction.cs" />

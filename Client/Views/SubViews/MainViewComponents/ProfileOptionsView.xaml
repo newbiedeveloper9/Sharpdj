@@ -51,7 +51,7 @@
                         <TextBlock Text="Change settings" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="16" FontWeight="Regular" VerticalAlignment="Center" Margin="24 0 0 0"/>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Left" Margin="0 6 0 0">
+                <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalContentAlignment="Left" Margin="0 6 0 0"  cal:Message.Attach="Navigate('Logout')">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Logout" VerticalAlignment="Center" Width="24" Height="24" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
                         <TextBlock Text="Logout" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="16" FontWeight="Regular" VerticalAlignment="Center" Margin="24 0 0 0"/>

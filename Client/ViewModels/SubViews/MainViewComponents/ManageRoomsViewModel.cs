@@ -146,12 +146,11 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
             _withoutChangedModel = RoomCreationModel.ToClientModel(message.Room);
         }
 
-        #endregion Handle's
-
         public void Handle(ICreatedRoomPublish message)
         {
             ServerCollection.Add(
                 RoomCreationModel.ToClientModel(message.Room));
         }
+        #endregion Handle's
     }
 }

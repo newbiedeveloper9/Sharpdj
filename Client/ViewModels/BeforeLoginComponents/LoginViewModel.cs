@@ -1,4 +1,5 @@
-﻿using Caliburn.Micro;
+﻿using System.Net;
+using Caliburn.Micro;
 using System.Security;
 using SCPackets;
 using SCPackets.LoginPacket;
@@ -20,6 +21,7 @@ namespace SharpDj.ViewModels.BeforeLoginComponents
         public LoginViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
+            _eventAggregator.Subscribe(this);
         }
 
         private string _loginText;
@@ -64,5 +66,6 @@ namespace SharpDj.ViewModels.BeforeLoginComponents
         {
             _eventAggregator.PublishOnUIThread(BeforeLoginEnum.Register);
         }
+
     }
 }

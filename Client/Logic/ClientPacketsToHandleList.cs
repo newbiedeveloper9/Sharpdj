@@ -2,6 +2,7 @@
 using Network;
 using SCPackets;
 using SCPackets.CreateRoom;
+using SCPackets.Disconnect;
 using SCPackets.LoginPacket;
 using SCPackets.NewRoomCreated;
 using SCPackets.NotLoggedIn;
@@ -23,6 +24,7 @@ namespace SharpDj.Logic
         public HandlerModel<NewRoomCreatedRequest> NewRoomCreated { get; set; }
         public HandlerModel<UpdateRoomDataResponse> RoomUpdate { get; set; }
         public HandlerModel<RoomOutsideUpdateRequest> RoomOutsideUpdate { get; set; }
+        public HandlerModel<DisconnectResponse> Disconnect { get; set; }
 
 
         public ClientPacketsToHandleList(IEventAggregator eventAggregator)
@@ -43,6 +45,10 @@ namespace SharpDj.Logic
             { Action = new ClientUpdateRoomAction(_eventAggregator).Action };
             RoomOutsideUpdate = new HandlerModel<RoomOutsideUpdateRequest>
             { Action = new ClientRoomOutsideUpdateAction(_eventAggregator).Action };
+            Disconnect = new HandlerModel<DisconnectResponse>
+            { Action = new ClientDisconnectAction(_eventAggregator).Action };
+
+
         }
 
         public void RegisterPackets(Connection conn, IClient client)
@@ -54,6 +60,7 @@ namespace SharpDj.Logic
             NewRoomCreated.RegisterPacket(conn, client);
             RoomUpdate.RegisterPacket(conn, client);
             RoomOutsideUpdate.RegisterPacket(conn, client);
+            Disconnect.RegisterPacket(conn, client);
         }
     }
 }
