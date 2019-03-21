@@ -66,6 +66,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
         public void Handle(IPlaylistChanged message)
         {
             this.PlaylistCollection = new BindableCollection<PlaylistModel>(message.PlaylistCollection);
+
         }
     }
 }

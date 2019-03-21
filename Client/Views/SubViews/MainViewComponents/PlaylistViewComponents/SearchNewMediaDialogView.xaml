@@ -7,6 +7,7 @@
              xmlns:playlistComponents="clr-namespace:SharpDj.ViewModels.SubViews.MainViewComponents.PlaylistViewComponents"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:playlistViewComponents="clr-namespace:SharpDj.Views.SubViews.MainViewComponents.PlaylistViewComponents"
+             xmlns:converters="clr-namespace:SharpDj.Converters"
              mc:Ignorable="d" 
              cal:Bind.AtDesignTime="True"
              d:DataContext="{d:DesignInstance Type=playlistComponents:SearchNewMediaDialogViewModel, IsDesignTimeCreatable=True}"
@@ -19,10 +20,15 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Background="#171717" materialDesign:ThemeAssist.Theme="Light">
-            <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" HorizontalAlignment="Left" Margin="0" Height="40" Width="60">
+            <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" HorizontalAlignment="Left" Margin="0" Height="40" Width="60" 
+                    Visibility="{Binding MediaSearchIsVisible, Converter={converters:BoolVisibilityConverter}}">
                 <materialDesign:PackIcon Kind="KeyboardReturn" VerticalAlignment="Center"/>
             </Button>
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Dodaj utwór" FontWeight="Regular" FontSize="24" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
+            <Button  HorizontalAlignment="Left" Margin="0" Height="40" Width="60" x:Name="BackToSearch"
+                         Visibility="{Binding MediaSearchIsVisible, Converter={converters:BoolVisibilityConverter}, ConverterParameter='negate'}">
+                <materialDesign:PackIcon Kind="KeyboardReturn" VerticalAlignment="Center"/>
+            </Button>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="Titlebar" FontWeight="Regular" FontSize="24" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
         </Grid>
 
         <Grid Margin="24" materialDesign:ThemeAssist.Theme="Dark" Grid.Row="1">
@@ -66,29 +72,80 @@
         </Grid>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2" materialDesign:ThemeAssist.Theme="Dark">
-            <ItemsControl x:Name="TrackCollection" Margin="0 0 0 12">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Margin="0 12 0 0">
-                            <playlistViewComponents:TrackView Margin="24 0 24 0" Height="105"/>
-                            <DockPanel Height="40" Margin="12 0 24 0" HorizontalAlignment="Right" materialDesign:ThemeAssist.Theme="Light">
-                                <Button HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}">
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="Play" VerticalAlignment="Center"/>
-                                        <TextBlock Text="Obejrzyj" FontSize="14" FontWeight="Regular" Margin="6 0 0 0" VerticalAlignment="Center"/>
-                                    </StackPanel>
-                                </Button>
-                                <Button HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}">
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="PlaylistAdd" VerticalAlignment="Center"/>
-                                        <TextBlock Text="Zapisz" FontSize="14" FontWeight="Regular" Margin="6 0 0 0" VerticalAlignment="Center"/>
-                                    </StackPanel>
-                                </Button>
-                            </DockPanel>
+            <Grid>
+                <Grid x:Name="MediaSearchIsVisible">
+                    <ItemsControl x:Name="TrackCollection" Margin="0 0 0 12">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0 12 0 0">
+                                    <playlistViewComponents:TrackView cal:View.Model="{Binding}" Margin="24 0 24 0" Height="105"/>
+
+                                    <DockPanel Height="40" Margin="12 0 24 0" HorizontalAlignment="Right" materialDesign:ThemeAssist.Theme="Light">
+                                        <Button HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}">
+                                            <StackPanel Orientation="Horizontal">
+                                                <materialDesign:PackIcon Kind="Play" VerticalAlignment="Center"/>
+                                                <TextBlock Text="Obejrzyj" FontSize="14" FontWeight="Regular" Margin="6 0 0 0" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Button>
+
+                                        <Button HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" cal:Message.Attach="[Click]=[SaveTrack($dataContext)]">
+                                            <StackPanel Orientation="Horizontal">
+                                                <materialDesign:PackIcon Kind="PlaylistAdd" VerticalAlignment="Center"/>
+                                                <TextBlock Text="Zapisz" FontSize="14" FontWeight="Regular" Margin="6 0 0 0" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Button>
+                                    </DockPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
+
+                <Grid Visibility="{Binding MediaSearchIsVisible, Converter={converters:BoolVisibilityConverter}, ConverterParameter='negate'}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <playlistViewComponents:TrackView cal:View.Model="{Binding Path=TemporaryTrack}"  Height="105"  Margin="24 12 24 0" />
+
+                    <ItemsControl x:Name="PlaylistCollection"  Grid.Row="1" Margin="0 24 0 0">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Button HorizontalContentAlignment="Stretch" Height="50" VerticalContentAlignment="Center" Style="{StaticResource MaterialDesignFlatButton}"
+                                            cal:Message.Attach="[Click]=[SaveToPlaylist($dataContext)]">
+                                        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" VerticalAlignment="Center">
+                                            <CheckBox IsChecked="{Binding Contains}"  Style="{StaticResource MaterialDesignActionDarkCheckBox}"
+                                                  ToolTip="MaterialDesignActionDarkCheckBox" VerticalAlignment="Center">
+                                                <materialDesign:PackIcon Kind="Plus" VerticalAlignment="Center"/>
+                                            </CheckBox>
+                                            <TextBlock Margin="12 0 0 0" FontSize="24" Foreground="{StaticResource MaterialDesignDarkForeground}" TextTrimming="WordEllipsis"
+                                                   VerticalAlignment="Center" Text="{Binding Name}"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <TextBlock FontSize="24" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" Margin="0 0 12 0" VerticalAlignment="Center"
+                                               Text="{Binding TrackCollection.Count}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <Button Grid.Row="2" Margin="0 12 0 0" cal:Message.Attach="[Click]=[BackToSearch]">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="KeyboardReturn" VerticalAlignment="Center"/>
+                            <TextBlock Margin="6 0 0 0" VerticalAlignment="Center" Foreground="{StaticResource MaterialDesignDarkForeground}" Text="Back"/>
                         </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                    </Button>
+
+                </Grid>
+            </Grid>
         </ScrollViewer>
     </Grid>
 </UserControl>

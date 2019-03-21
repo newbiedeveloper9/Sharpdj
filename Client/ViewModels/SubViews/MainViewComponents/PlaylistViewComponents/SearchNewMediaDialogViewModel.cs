@@ -1,17 +1,28 @@
 ﻿using Caliburn.Micro;
+using SharpDj.Interfaces;
 using SharpDj.Logic.Helpers;
 using SharpDj.Models;
-using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using SharpDj.Views.SubViews.MainViewComponents.PlaylistViewComponents;
 using YoutubeExplode;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents.PlaylistViewComponents
 {
-    public class SearchNewMediaDialogViewModel : PropertyChangedBase
+    public class SearchNewMediaDialogViewModel : PropertyChangedBase,
+        IHandle<IPlaylistChanged>
     {
-        private string _searchText = "";
+        #region _fields
+        private const int Delay = 700;
 
+        private string _delayedSearchText = "";
+        private bool _searched = false;
+
+        #endregion _fields
+
+        #region Properties
+        private string _searchText = "";
         public string SearchText
         {
             get => _searchText;
@@ -23,9 +34,8 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.PlaylistViewComponents
             }
         }
 
-        private BindableCollection<TrackModel> _trackCollection = new BindableCollection<TrackModel>();
-
-        public BindableCollection<TrackModel> TrackCollection
+        private BindableCollection<TrackViewModel> _trackCollection = new BindableCollection<TrackViewModel>();
+        public BindableCollection<TrackViewModel> TrackCollection
         {
             get => _trackCollection;
             set
@@ -36,21 +46,97 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.PlaylistViewComponents
             }
         }
 
-        private const int Delay = 700;
-
-        public SearchNewMediaDialogViewModel()
+        private BindableCollection<PlaylistModel> _playlistCollection = new BindableCollection<PlaylistModel>();
+        public BindableCollection<PlaylistModel> PlaylistCollection
         {
-            Task.Factory.StartNew(ContinuousSearchNewMedia);
+            get => _playlistCollection;
+            set
+            {
+                if (_playlistCollection == value) return;
+                _playlistCollection = value;
+                NotifyOfPropertyChange(() => PlaylistCollection);
+            }
+        }
+
+        private string _titlebar = "Dodaj utwór";
+        public string Titlebar
+        {
+            get => _titlebar;
+            set
+            {
+                if (_titlebar == value) return;
+                _titlebar = value;
+                NotifyOfPropertyChange(() => Titlebar);
+            }
         }
 
 
-        string delayedSearchText = "";
-        bool searched = false;
+        private bool _mediaSearchIsVisible = true;
+        public bool MediaSearchIsVisible
+        {
+            get => _mediaSearchIsVisible;
+            set
+            {
+                Titlebar = value ? "Dodaj utwór" : "Dodaj utwór do playlisty";
+                NotifyOfPropertyChange(() => Titlebar);
 
+                if (_mediaSearchIsVisible == value) return;
+                _mediaSearchIsVisible = value;
+                NotifyOfPropertyChange(() => MediaSearchIsVisible);
+            }
+        }
+
+        private TrackViewModel _temporaryTrack = new TrackViewModel();
+        public TrackViewModel TemporaryTrack
+        {
+            get => _temporaryTrack;
+            set
+            {
+                if (_temporaryTrack == value) return;
+                _temporaryTrack = value;
+                NotifyOfPropertyChange(() => TemporaryTrack);
+            }
+        }
+
+        #endregion Properties
+
+        #region .ctor
+        public SearchNewMediaDialogViewModel()
+        {
+            Task.Factory.StartNew(ContinuousSearchNewMedia);
+            PlaylistCollection.Add(new PlaylistModel()
+            {
+                IsActive = false,
+                Name = "testowy test"
+            });
+            PlaylistCollection.Add(new PlaylistModel()
+            {
+                IsActive = false,
+                Name = "drugi heheheheheh teścik"
+            });
+        }
+        #endregion .ctor
+
+        #region Methods
+
+        public void SaveTrack(TrackViewModel model)
+        {
+            MediaSearchIsVisible = false;
+            TemporaryTrack.Track = model.Track;
+
+            foreach (var playlistModel in PlaylistCollection)
+            {
+                playlistModel.Contains = playlistModel.TrackCollection.Any(
+                    x => x.TrackLink.Equals(model.Track.TrackLink));
+            }
+        }
+
+        #region Search
         public void FasterSearch()
         {
-            searched = false;
-            delayedSearchText = SearchText;
+            MediaSearchIsVisible = true;
+            _searched = false;
+            _delayedSearchText = SearchText;
         }
 
         public async void ContinuousSearchNewMedia()
@@ -61,12 +147,12 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.PlaylistViewComponents
             {
                 Thread.Sleep(Delay);
 
-                if (delayedSearchText != SearchText)
+                if (_delayedSearchText != SearchText)
                 {
-                    delayedSearchText = SearchText;
-                    searched = false;
+                    _delayedSearchText = SearchText;
+                    _searched = false;
                 }
-                else if (delayedSearchText == SearchText && !searched)
+                else if (_delayedSearchText == SearchText && !_searched)
                 {
                     TrackCollection.Clear();
 
@@ -74,21 +160,44 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.PlaylistViewComponents
                     if (YoutubeClient.ValidateVideoId(id))
                     {
                         var video = await client.GetVideoAsync(id);
-                        TrackCollection.Add(
-                            YtVideoHelper.ToTrackModel(video));
+                        TrackCollection.Add(new TrackViewModel() { 
+                            Track = YtVideoHelper.ToTrackModel(video)});
                     }
                     else
                     {
-                        foreach (var video in await client.SearchVideosAsync(delayedSearchText, 1))
+                        foreach (var video in await client.SearchVideosAsync(_delayedSearchText, 1))
                         {
-                            TrackCollection.Add(
-                                YtVideoHelper.ToTrackModel(video));
+                            TrackCollection.Add(new TrackViewModel()
+                            {
+                                Track = YtVideoHelper.ToTrackModel(video)
+                            });
                         }
                     }
 
-                    searched = true;
+                    _searched = true;
                 }
             }
+        }
+        #endregion Search
+
+        public void BackToSearch()
+        {
+            MediaSearchIsVisible = true;
+            TemporaryTrack.Track = null;
+        }
+
+        public void SaveToPlaylist(PlaylistModel model)
+        {
+            if (model.Contains)
+                model.TrackCollection.Add(TemporaryTrack.Track);
+            else
+                model.TrackCollection.Remove(TemporaryTrack.Track);
+        }
+        #endregion Methods
+
+        public void Handle(IPlaylistChanged message)
+        {
+            PlaylistCollection = new BindableCollection<PlaylistModel>(message.PlaylistCollection);
         }
     }
 }

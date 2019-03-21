@@ -47,5 +47,17 @@ namespace SharpDj.Models
                 NotifyOfPropertyChange(() => TrackCollection);
             }
         }
+
+        private bool _contains;
+        public bool Contains
+        {
+            get => _contains;
+            set
+            {
+                if (_contains == value) return;
+                _contains = value;
+                NotifyOfPropertyChange(() => Contains);
+            }
+        }
     }
 }
