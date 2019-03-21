@@ -8,19 +8,24 @@
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="800">
     <materialDesign:Card Margin="0 0 0 0" Background="#0f0f0f" materialDesign:ShadowAssist.ShadowDepth="Depth2">
-        <DockPanel>
+        <Grid>
+            <DockPanel>
 
 
-            <Image Source="{Binding ImgSource, Converter={StaticResource nullImageConverter}}"/>
+                <Image Source="{Binding ImgSource, Converter={StaticResource nullImageConverter}}"/>
 
-            <DockPanel Margin="12 12 6 4">
-                <StackPanel>
-                    <TextBlock Text="{Binding Name}" Foreground="{StaticResource MaterialDesignDarkForeground}" FontWeight="Regular" FontSize="20"/>
-                    <TextBlock Text="{Binding Author}" Foreground="{StaticResource MaterialDesignDarkForeground}" FontWeight="Light" FontSize="16"/>
-                </StackPanel>
-                <TextBlock Text="{Binding Duration, StringFormat={}{0:HH}:{0:mm}{0:ss}, FallbackValue=00:00:00}" Foreground="{StaticResource MaterialDesignDarkForeground}"
-                               FontWeight="Light" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="6"/>
+                <DockPanel Margin="12 12 6 4">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Name}" Foreground="{StaticResource MaterialDesignDarkForeground}" TextTrimming="CharacterEllipsis" Margin="0 0 24 0" FontWeight="Regular" FontSize="20"/>
+                        <TextBlock Text="{Binding Author}" Foreground="{StaticResource MaterialDesignDarkForeground}" TextTrimming="CharacterEllipsis" Margin="0 0 72 0" FontWeight="Light" FontSize="16"/>
+                    </StackPanel>
+                </DockPanel>
+
             </DockPanel>
-        </DockPanel>
+            <TextBlock Foreground="{StaticResource MaterialDesignDarkForeground}" Text="{Binding Duration,StringFormat=hh\\:mm\\:ss}"
+                       FontWeight="Light" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="12">
+               
+            </TextBlock>
+        </Grid>
     </materialDesign:Card>
 </UserControl>

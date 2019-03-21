@@ -1,5 +1,5 @@
-﻿using System;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
+using System;
 
 namespace SharpDj.Models
 {
@@ -31,9 +31,9 @@ namespace SharpDj.Models
             }
         }
 
-        private int _duration;
+        private TimeSpan _duration;
 
-        public int Duration
+        public TimeSpan Duration
         {
             get => _duration;
             set
@@ -74,11 +74,11 @@ namespace SharpDj.Models
         {
             return new SCPackets.Models.TrackModel()
             {
-                Author = this.Author,
-                Duration =  this.Duration,
-                ImageUrl = this.ImgSource,
-                Name = this.Name,
-                TrackUrl =  this.TrackLink,
+                Author = Author,
+                Duration = (int)Duration.TotalSeconds,
+                ImageUrl = ImgSource,
+                Name = Name,
+                TrackUrl = TrackLink,
             };
         }
 
@@ -88,8 +88,8 @@ namespace SharpDj.Models
             {
                 Author = model.Author,
                 Name = model.Name,
-                Duration = model.Duration,
-            ImgSource = model.ImageUrl,
+                Duration = TimeSpan.FromSeconds(model.Duration),
+                ImgSource = model.ImageUrl,
                 TrackLink = model.TrackUrl,
             };
         }

@@ -31,8 +31,8 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <TextBox Grid.Column="0" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="18" FontWeight="Light"
-                     materialDesign:HintAssist.Hint="Search..." materialDesign:HintAssist.FloatingScale="0.75" materialDesign:HintAssist.HintOpacity="0.45" Padding="1 0 0 0" />
+            <TextBox Grid.Column="0" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="18" FontWeight="Light" x:Name="SearchText" cal:Message.Attach="[Key Enter]=[FasterSearch]"
+                     materialDesign:HintAssist.Hint="Search by title or id..." materialDesign:HintAssist.FloatingScale="0.75" materialDesign:HintAssist.HintOpacity="0.45" Padding="1 0 0 0" />
 
             <ComboBox Width="124" Grid.Column="1" VerticalAlignment="Bottom"
             materialDesign:ComboBoxAssist.ClassicMode="True" 
@@ -65,13 +65,13 @@
             </ComboBox>
         </Grid>
 
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2" materialDesign:ThemeAssist.Theme="Dark">
             <ItemsControl x:Name="TrackCollection" Margin="0 0 0 12">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Margin="0 12 0 0">
                             <playlistViewComponents:TrackView Margin="24 0 24 0" Height="105"/>
-                            <DockPanel Height="40" Margin="12 0 24 0" HorizontalAlignment="Right">
+                            <DockPanel Height="40" Margin="12 0 24 0" HorizontalAlignment="Right" materialDesign:ThemeAssist.Theme="Light">
                                 <Button HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="Play" VerticalAlignment="Center"/>
