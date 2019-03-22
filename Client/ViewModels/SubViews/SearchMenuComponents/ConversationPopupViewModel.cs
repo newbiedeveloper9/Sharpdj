@@ -1,17 +1,30 @@
 ﻿using Caliburn.Micro;
+using SCPackets.Models;
 using SharpDj.Logic.Helpers;
 using SharpDj.Models;
 using System;
+using System.Windows.Controls;
 using System.Windows.Media;
-using SCPackets.Models;
 
 namespace SharpDj.ViewModels.SubViews.SearchMenuComponents
 {
     public class ConversationPopupViewModel : PropertyChangedBase
     {
+        private string _message;
+        public string Message
+        {
+            get => _message;
+            set
+            {
+                if (_message == value) return;
+                _message = value;
+                NotifyOfPropertyChange(() => Message);
+            }
+        }
+
         public MessageBindable<MessageModel> MessagesCollection { get; private set; }
         private SolidColorBrush _color;
-        public  SolidColorBrush Color
+        public SolidColorBrush Color
         {
             get => _color;
             set
@@ -58,6 +71,24 @@ namespace SharpDj.ViewModels.SubViews.SearchMenuComponents
         public void Minimize()
         {
 
+        }
+
+        public void TextPushToNewLine(TextBox textBox)
+        {
+            TextboxHelper.CreateNewLine(textBox);
+        }
+
+        public void SendChatMessage()
+        {
+            if (string.IsNullOrWhiteSpace(Message)) return;
+
+            MessagesCollection.Add(new MessageModel()
+            {
+                Author = UserInfoSingleton.Instance.UserClient,
+                Text = Message,
+                Time = DateTime.Now,
+            });
+            Message = string.Empty;
         }
 
         public class MessageBindable<T> : BindableCollection<Models.MessageModel>

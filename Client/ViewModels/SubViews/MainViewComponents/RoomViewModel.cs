@@ -5,6 +5,7 @@ using SharpDj.Models;
 using SharpDj.Views.SubViews.MainViewComponents;
 using System.Windows.Controls;
 using SharpDj.Interfaces;
+using SharpDj.Logic.Helpers;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents
 {
@@ -67,6 +68,11 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
             scrollViewerLogic = new ScrollViewerLogic(scrollViewer);
             scrollViewerLogic.ScrollNotOnBottom +=
                 (sender, args) => ScrollToBottomIsVisible = !scrollViewerLogic.CanScrollDown;
+        }
+
+        public void TextPushToNewLine(TextBox txtBox)
+        {
+            TextboxHelper.CreateNewLine(txtBox);
         }
     }
 }

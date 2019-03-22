@@ -206,6 +206,7 @@
     <Compile Include="Logic\ActionToServer\ClientNewRoomCreatedAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientRoomOutsideUpdateAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientUpdateRoomAction.cs" />
+    <Compile Include="Logic\Helpers\TextboxHelper.cs" />
     <Compile Include="Logic\Helpers\YtVideoHelper.cs" />
     <Compile Include="PubSubModels\CreatedRoomPublish.cs" />
     <Compile Include="PubSubModels\ManageRoomsPublish.cs" />

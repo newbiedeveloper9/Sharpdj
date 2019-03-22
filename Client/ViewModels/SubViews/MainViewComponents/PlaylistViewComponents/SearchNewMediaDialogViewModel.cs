@@ -14,7 +14,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.PlaylistViewComponents
         IHandle<IPlaylistChanged>
     {
         #region _fields
-        private const int Delay = 700;
+        private const int Delay = 550;
 
         private string _delayedSearchText = "";
         private bool _searched = false;

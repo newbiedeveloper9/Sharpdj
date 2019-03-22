@@ -66,12 +66,17 @@
             </ScrollViewer>
 
             <StackPanel Grid.Row="1">
-                <TextBox FontSize="14" FontWeight="Light" Width="260" MaxHeight="280" IsUndoEnabled="True" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:ThemeAssist.Theme="Light" HorizontalAlignment="Stretch"
+                <TextBox FontSize="14" FontWeight="Light" Width="260" MaxHeight="280" IsUndoEnabled="True" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                     materialDesign:ThemeAssist.Theme="Light" HorizontalAlignment="Stretch"
                      TextWrapping="Wrap" Foreground="{StaticResource MaterialDesignLightForeground}"
                      VerticalAlignment="Stretch"
-                     AcceptsReturn="True"
                      VerticalScrollBarVisibility="Auto"
                      SpellCheck.IsEnabled="True"
+                     x:Name="Message"
+                     cal:Message.Attach="
+                             [Gesture Ctrl+Enter]=[TextPushToNewLine($source)];
+                             [Gesture Shift+Enter]=[TextPushToNewLine($source)];
+                             [Key Enter]=[SendChatMessage];"
                      materialDesign:HintAssist.Hint="Wpisz wiadomość..."/>
             </StackPanel>
 

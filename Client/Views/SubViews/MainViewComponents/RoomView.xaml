@@ -65,8 +65,12 @@
             </Grid>
             <Grid Grid.Row="2">
                 <StackPanel>
-                    <TextBox Style="{StaticResource MaterialDesignTextBox}" Margin="12 0 12 12" x:Name="MessageText"
-                             cal:Message.Attach="[Key Enter]=[SendChatMessage];"/>
+                    <TextBox Style="{StaticResource MaterialDesignTextBox}" Margin="12 0 12 12" x:Name="MessageText" AcceptsTab="True"
+                             cal:Message.Attach="
+                             [Gesture Ctrl+Enter]=[TextPushToNewLine($source)];
+                             [Gesture Shift+Enter]=[TextPushToNewLine($source)];
+                             [Key Enter]=[SendChatMessage];"/>
+
                     <DockPanel Margin="12 0 12 12">
                         <Button Style="{StaticResource MaterialDesignFlatButton}" >
                             <Grid>

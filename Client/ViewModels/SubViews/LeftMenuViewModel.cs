@@ -13,12 +13,12 @@ namespace SharpDj.ViewModels.SubViews
         {
             _eventAggregator = eventAggregator;
 
-            PlaylistCollection = new BindableCollection<PlaylistModel>()
+/*            PlaylistCollection = new BindableCollection<PlaylistModel>()
             {
                 new PlaylistModel(){Name = "test"},
                 new PlaylistModel(){Name = "Testowa długa playlista xd", IsActive = true},
                 new PlaylistModel(){Name = "xd"},
-            };
+            };*/
         }
 
         public LeftMenuViewModel()
