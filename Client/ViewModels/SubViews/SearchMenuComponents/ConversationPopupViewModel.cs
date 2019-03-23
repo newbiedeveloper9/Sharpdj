@@ -1,8 +1,10 @@
 ﻿using Caliburn.Micro;
-using SCPackets.Models;
 using SharpDj.Logic.Helpers;
+using SharpDj.Logic.UI;
 using SharpDj.Models;
+using SharpDj.PubSubModels;
 using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -10,6 +12,16 @@ namespace SharpDj.ViewModels.SubViews.SearchMenuComponents
 {
     public class ConversationPopupViewModel : PropertyChangedBase
     {
+        #region _fields
+        private readonly IEventAggregator _eventAggregator;
+        private ScrollViewerLogic _scrollViewerLogic;
+
+        #endregion _fields
+
+        #region Properties
+        public ConversationModel Parent { get; set; }
+
+
         private string _message;
         public string Message
         {
@@ -22,7 +34,30 @@ namespace SharpDj.ViewModels.SubViews.SearchMenuComponents
             }
         }
 
-        public MessageBindable<MessageModel> MessagesCollection { get; private set; }
+        private MessageBindable<MessageModel> _messagesCollection = new MessageBindable<MessageModel>();
+        public MessageBindable<MessageModel> MessagesCollection
+        {
+            get => _messagesCollection;
+            set
+            {
+                if (_messagesCollection == value) return;
+                _messagesCollection = value;
+                NotifyOfPropertyChange(() => MessagesCollection);
+            }
+        }
+
+        private bool _scrollToBottomIsVisible = false;
+        public bool ScrollToBottomIsVisible
+        {
+            get => _scrollToBottomIsVisible;
+            set
+            {
+                if (_scrollToBottomIsVisible == value) return;
+                _scrollToBottomIsVisible = value;
+                NotifyOfPropertyChange(() => ScrollToBottomIsVisible);
+            }
+        }
+
         private SolidColorBrush _color;
         public SolidColorBrush Color
         {
@@ -39,43 +74,31 @@ namespace SharpDj.ViewModels.SubViews.SearchMenuComponents
             }
         }
 
+        #endregion Properties
+
+        #region .ctor
         public ConversationPopupViewModel()
         {
-            var author = new UserClient(1, "Test Diggins", Rank.Moderator);
-
-            MessagesCollection = new MessageBindable<MessageModel>()
-            {
-                new MessageModel()
-                    {Author = author, Id = 0, Text = "Testowy przykład wiadomości", Time = DateTime.UtcNow},
-                new MessageModel()
-                {
-                    Author = UserInfoSingleton.Instance.UserClient, Id = 1, Text = "Testowy przykład wiadomości",
-                    Time = DateTime.UtcNow
-                },
-                new MessageModel()
-                {
-                    Author = UserInfoSingleton.Instance.UserClient, Id = 2, Text = "Testowy przykład wiadomości",
-                    Time = DateTime.UtcNow
-                },
-                new MessageModel()
-                    {Author = author, Id = 3, Text = "Testowy przykład wiadomości", Time = DateTime.UtcNow},
-                new MessageModel() {Author = author, Id = 4, Text = "Testowy przykład", Time = DateTime.UtcNow},
-                new MessageModel()
-                {
-                    Author = UserInfoSingleton.Instance.UserClient, Id = 5, Text = "Testowy przykład wiadomości",
-                    Time = DateTime.UtcNow
-                },
-            };
         }
 
+        public ConversationPopupViewModel(IEventAggregator eventAggregator, ConversationModel parent)
+        {
+            _eventAggregator = eventAggregator;
+            Parent = parent;
+        }
+        #endregion .ctor
+
+        #region Methods
         public void Minimize()
         {
-
+            _eventAggregator.PublishOnUIThread(new MinimizeChatPublish(Parent));
         }
 
-        public void TextPushToNewLine(TextBox textBox)
+        public void ScrollLoaded(ScrollViewer scrollViewer)
         {
-            TextboxHelper.CreateNewLine(textBox);
+            _scrollViewerLogic = new ScrollViewerLogic(scrollViewer);
+            _scrollViewerLogic.ScrollNotOnBottom +=
+                (sender, args) => ScrollToBottomIsVisible = !_scrollViewerLogic.CanScrollDown;
         }
 
         public void SendChatMessage()
@@ -87,28 +110,34 @@ namespace SharpDj.ViewModels.SubViews.SearchMenuComponents
                 Author = UserInfoSingleton.Instance.UserClient,
                 Text = Message,
                 Time = DateTime.Now,
+                Color = Color
             });
             Message = string.Empty;
         }
-
-        public class MessageBindable<T> : BindableCollection<Models.MessageModel>
+        public void ScrollToBottom()
         {
-            protected override void InsertItemBase(int index, Models.MessageModel item)
+            _scrollViewerLogic.ScrollToDown();
+        }
+        #endregion Methods
+    }
+
+    public class MessageBindable<T> : BindableCollection<Models.MessageModel>
+    {
+        protected override void InsertItemBase(int index, Models.MessageModel item)
+        {
+            if (!(item is Models.MessageModel model)) return;
+
+            if (Count > 0)
             {
-                if (!(item is Models.MessageModel model)) return;
-
-                if (Count > 0)
+                MessageModel lastMess = Items[Count - 1];
+                if (lastMess.Author.Equals(model.Author))
                 {
-                    MessageModel lastMess = Items[Count - 1];
-                    if (lastMess.Author.Equals(model.Author))
-                    {
-                        lastMess.Separator = false;
-                    }
+                    lastMess.Separator = false;
                 }
-                item.Separator = true;
-
-                base.InsertItemBase(index, item);
             }
+            item.Separator = true;
+
+            base.InsertItemBase(index, item);
         }
     }
 }

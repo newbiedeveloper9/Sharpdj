@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SharpDj.Logic.Helpers;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Environment = System.Environment;
 
 namespace SharpDj.Views.SubViews.SearchMenuComponents
 {
@@ -23,6 +14,12 @@ namespace SharpDj.Views.SubViews.SearchMenuComponents
         public ConversationPopupView()
         {
             InitializeComponent();
+        }
+
+        private void Message_OnPreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (!(sender is TextBox txtBox)) return;
+            e.Handled = TextboxHelper.ShortcutsFixHandled(txtBox, e.Key);
         }
     }
 }

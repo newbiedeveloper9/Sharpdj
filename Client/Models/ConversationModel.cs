@@ -11,6 +11,9 @@ namespace SharpDj.Models
 {
     public class ConversationModel : PropertyChangedBase
     {
+        private readonly IEventAggregator _eventAggregator;
+
+        #region Properties
         private string _name;
         public string Name
         {
@@ -71,9 +74,8 @@ namespace SharpDj.Models
                 NotifyOfPropertyChange(() => IsOpen);
             }
         }
-
-
-        private ConversationPopupViewModel _conversationPopupViewModel = new ConversationPopupViewModel();
+      
+        private ConversationPopupViewModel _conversationPopupViewModel;
         public ConversationPopupViewModel ConversationPopupViewModel
         {
             get => _conversationPopupViewModel;
@@ -83,6 +85,14 @@ namespace SharpDj.Models
                 _conversationPopupViewModel = value;
                 NotifyOfPropertyChange(() => ConversationPopupViewModel);
             }
+        }
+
+        #endregion Properties
+
+        public ConversationModel(IEventAggregator eventAggregator)
+        {
+            _eventAggregator = eventAggregator;
+            _conversationPopupViewModel = new ConversationPopupViewModel(_eventAggregator, this);
         }
     }
 }

@@ -27,7 +27,8 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <ScrollViewer Width="260" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Grid.Row="0" materialDesign:ThemeAssist.Theme="Light">
+            <ScrollViewer Width="260" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Grid.Row="0" materialDesign:ThemeAssist.Theme="Light"
+                          cal:Message.Attach="[Event Loaded]=[Action ScrollLoaded($source)]">
                 <StackPanel Margin="0 12 0 12">
                     <ItemsControl x:Name="MessagesCollection">
                         <ItemsControl.ItemTemplate>
@@ -36,7 +37,7 @@
                                     <Grid>
                                         <Grid Visibility="{Binding Separator, Converter={converters:BoolVisibilityConverter}}">
                                             <Polygon  VerticalAlignment="Bottom" Points="4,2 17,2 10,-5" Margin="0 0 0 1"  HorizontalAlignment="Left"
-                                                      Visibility="{Binding IsOwnMessage, Converter={converters:BoolVisibilityConverter}, ConverterParameter=smth}" StrokeThickness="0">
+                                                      Visibility="{Binding IsOwnMessage, Converter={converters:BoolVisibilityConverter}, ConverterParameter=negate}" StrokeThickness="0">
                                                 <Polygon.Fill>
                                                     <SolidColorBrush Color="#f1f1f1" Opacity="0.9"/>
                                                 </Polygon.Fill>
@@ -46,7 +47,7 @@
                                         </Grid>
 
                                         <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                                                    Background="{Binding IsOwnMessage, Converter={StaticResource AuthorToBackground}}"
+                                                    Background="{Binding Color}"
                                                     Foreground="{Binding IsOwnMessage, Converter={StaticResource AuthorToForeground}}"
                                                     HorizontalAlignment="{Binding IsOwnMessage, Converter={StaticResource AuthorToHorizontalAlignment}}"
                                                     MaxWidth="220" Margin="10 1 10 1"
@@ -65,20 +66,22 @@
                 </StackPanel>
             </ScrollViewer>
 
-            <StackPanel Grid.Row="1">
-                <TextBox FontSize="14" FontWeight="Light" Width="260" MaxHeight="280" IsUndoEnabled="True" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
-                     materialDesign:ThemeAssist.Theme="Light" HorizontalAlignment="Stretch"
-                     TextWrapping="Wrap" Foreground="{StaticResource MaterialDesignLightForeground}"
-                     VerticalAlignment="Stretch"
-                     VerticalScrollBarVisibility="Auto"
-                     SpellCheck.IsEnabled="True"
-                     x:Name="Message"
-                     cal:Message.Attach="
-                             [Gesture Ctrl+Enter]=[TextPushToNewLine($source)];
-                             [Gesture Shift+Enter]=[TextPushToNewLine($source)];
-                             [Key Enter]=[SendChatMessage];"
-                     materialDesign:HintAssist.Hint="Wpisz wiadomość..."/>
-            </StackPanel>
+            <Grid Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ScrollToBottomIsVisible">
+                <Button x:Name="ScrollToBottom"  Background="{StaticResource PrimaryHueMidBrush}" Margin="6" Height="36">
+                    <materialDesign:PackIcon Kind="ArrowCollapseDown"/>
+                </Button>
+            </Grid>
+
+            <TextBox FontSize="14" FontWeight="Light" Width="260" MaxHeight="280" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" Grid.Row="1"
+                         materialDesign:ThemeAssist.Theme="Light" HorizontalAlignment="Stretch"
+                         TextWrapping="Wrap" Foreground="{StaticResource MaterialDesignLightForeground}"
+                         VerticalAlignment="Stretch"
+                         PreviewKeyDown="Message_OnPreviewKeyDown"
+                         VerticalScrollBarVisibility="Auto"
+                         SpellCheck.IsEnabled="True"
+                         x:Name="Message"
+                         cal:Message.Attach="[Key Enter]=[SendChatMessage];"
+                         materialDesign:HintAssist.Hint="Wpisz wiadomość..."/>
 
             <DockPanel Grid.Row="2" Background="#303030" VerticalAlignment="Top">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" materialDesign:ThemeAssist.Theme="Dark" Background="#1c1c1c">

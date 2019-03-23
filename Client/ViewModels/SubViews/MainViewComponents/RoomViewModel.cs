@@ -12,18 +12,35 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
     public class RoomViewModel : PropertyChangedBase,
         INavMainView
     {
-        private ScrollViewerLogic scrollViewerLogic;
-        public BindableCollection<CommentModel> CommentsCollection { get; private set; }
+        #region _fields
+        private ScrollViewerLogic _scrollViewerLogic;
 
-        public RoomViewModel()
+        #endregion _fields
+
+        #region Properties
+        private BindableCollection<CommentModel> _commentsCollection;
+        public BindableCollection<CommentModel> CommentsCollection
         {
-            CommentsCollection = new BindableCollection<CommentModel>()
+            get => _commentsCollection;
+            set
             {
-                new CommentModel(){Author = "Crisey", Comment = "Testowy tekst XD"},
-                new CommentModel(){Author = "Zonk256", Comment = "Testowy tekst XD"},
-                new CommentModel(){Author = "Jeff Diggins", Comment = "Testowy tekst XD"},
-                new CommentModel(){Author = "XDDDDDDD", Comment = "TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest"},
-            };
+                if (_commentsCollection == value) return;
+                _commentsCollection = value;
+                NotifyOfPropertyChange(() => CommentsCollection);
+            }
+        }
+
+        private bool _scrollToBottomIsVisible;
+
+        public bool ScrollToBottomIsVisible
+        {
+            get => _scrollToBottomIsVisible;
+            set
+            {
+                if (_scrollToBottomIsVisible == value) return;
+                _scrollToBottomIsVisible = value;
+                NotifyOfPropertyChange(() => ScrollToBottomIsVisible);
+            }
         }
 
         private string _messageText;
@@ -37,7 +54,24 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
                 NotifyOfPropertyChange(() => MessageText);
             }
         }
+        #endregion Properties
 
+
+        #region .ctor
+        public RoomViewModel()
+        {
+            CommentsCollection = new BindableCollection<CommentModel>()
+            {
+                new CommentModel(){Author = "Crisey", Comment = "Testowy tekst XD"},
+                new CommentModel(){Author = "Zonk256", Comment = "Testowy tekst XD"},
+                new CommentModel(){Author = "Jeff Diggins", Comment = "Testowy tekst XD"},
+                new CommentModel(){Author = "XDDDDDDD", Comment = "TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest"},
+            };
+        }
+
+        #endregion .ctor
+
+        #region Methods
         public void SendChatMessage()
         {
             if (string.IsNullOrWhiteSpace(MessageText)) return;
@@ -46,33 +80,17 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
             MessageText = string.Empty;
         }
 
-
-        private bool _scrollToBottomIsVisible = false;
-        public bool ScrollToBottomIsVisible
-        {
-            get => _scrollToBottomIsVisible;
-            set
-            {
-                if (_scrollToBottomIsVisible == value) return;
-                _scrollToBottomIsVisible = value;
-                NotifyOfPropertyChange(() => ScrollToBottomIsVisible);
-            }
-        }
         public void ScrollToBottom()
         {
-            scrollViewerLogic.ScrollToDown();
+            _scrollViewerLogic.ScrollToDown();
         }
 
         public void ScrollLoaded(ScrollViewer scrollViewer)
         {
-            scrollViewerLogic = new ScrollViewerLogic(scrollViewer);
-            scrollViewerLogic.ScrollNotOnBottom +=
-                (sender, args) => ScrollToBottomIsVisible = !scrollViewerLogic.CanScrollDown;
+            _scrollViewerLogic = new ScrollViewerLogic(scrollViewer);
+            _scrollViewerLogic.ScrollNotOnBottom +=
+                (sender, args) => ScrollToBottomIsVisible = !_scrollViewerLogic.CanScrollDown;
         }
-
-        public void TextPushToNewLine(TextBox txtBox)
-        {
-            TextboxHelper.CreateNewLine(txtBox);
-        }
+        #endregion Methods
     }
 }

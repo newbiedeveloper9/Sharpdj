@@ -211,6 +211,7 @@
     <Compile Include="PubSubModels\CreatedRoomPublish.cs" />
     <Compile Include="PubSubModels\ManageRoomsPublish.cs" />
     <Compile Include="PubSubModels\ManageRoomsUpdatedPublish.cs" />
+    <Compile Include="PubSubModels\MinimizeChatPublish.cs" />
     <Compile Include="PubSubModels\NewRoomCreatedPublish.cs" />
     <Compile Include="PubSubModels\NotLoggedIn.cs" />
     <Compile Include="Interfaces\IPlaylistChanged.cs" />
