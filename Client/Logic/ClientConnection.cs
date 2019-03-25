@@ -12,14 +12,17 @@ namespace SharpDj.Logic
     {
         public ConnectionResult Result = ConnectionResult.TCPConnectionNotAlive;
 
+        private readonly Config _config;
+
         private TcpConnection _connection;
         private readonly IEventAggregator _eventAggregator;
         private readonly ClientPacketsToHandleList _packetsList;
         private ClientSender _sender;
 
-        public ClientConnection(IEventAggregator eventAggregator)
+        public ClientConnection(IEventAggregator eventAggregator, Config config)
         {
             _eventAggregator = eventAggregator;
+            _config = config;
             _packetsList = new ClientPacketsToHandleList(_eventAggregator);
         }
 
@@ -31,7 +34,7 @@ namespace SharpDj.Logic
                 if (iterator > 0)
                     Thread.Sleep(3900);
                 iterator++;
-                _connection = ConnectionFactory.CreateTcpConnection("127.0.0.1", 5666, out Result);
+                _connection = ConnectionFactory.CreateTcpConnection(_config.Ip, _config.Port, out Result);
 
                 var mess = Result == ConnectionResult.Connected
                     ? new MessageQueue("Connection", "Successfully connected")

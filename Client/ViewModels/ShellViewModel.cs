@@ -1,22 +1,23 @@
 ﻿using Caliburn.Micro;
 using MaterialDesignThemes.Wpf;
 using SharpDj.Enums;
-using SharpDj.Interfaces;
 using SharpDj.Logic;
+using SharpDj.Logic.Helpers;
 using SharpDj.PubSubModels;
 using SharpDj.ViewModels.SubViews;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
-using SharpDj.Logic.Helpers;
 
 namespace SharpDj.ViewModels
 {
     public sealed class ShellViewModel : Conductor<object>.Collection.OneActive,
-        IShell,
         IHandle<ILoginPublish>, IHandle<IMessageQueue>, IHandle<IReconnect>, IHandle<INotLoggedIn>
     {
         #region Fields
         private readonly IEventAggregator _eventAggregator;
+        private readonly Config _config;
+
         private ClientConnection _client;
         private bool _reconnecting;
 
@@ -27,21 +28,24 @@ namespace SharpDj.ViewModels
         {
             _eventAggregator = new EventAggregator();
             _eventAggregator.Subscribe(this);
-            MessagesQueue = new SnackbarMessageQueue(TimeSpan.FromMilliseconds(3750));
 
+            _config = new Config(_eventAggregator)
+                .BuildIfNotExist();
+
+            while (!_config.Load())
+            {
+                Console.ReadLine();
+            }
+
+            MessagesQueue = new SnackbarMessageQueue(TimeSpan.FromMilliseconds(3750));
 
             TopMenuViewModel = new TopMenuViewModel();
             AfterLoginScreenViewModel = new AfterLoginScreenViewModel(_eventAggregator);
             BeforeLoginScreenViewModel = new BeforeLoginScreenViewModel(_eventAggregator);
 
-            /*#if DEBUG
-                        ActivateItem(AfterLoginScreenViewModel);
-            #else  
-                        ActivateItem(BeforeLoginScreenViewModel);
-            #endif*/
             ActivateItem(BeforeLoginScreenViewModel);
 
-            _client = new ClientConnection(_eventAggregator);
+            _client = new ClientConnection(_eventAggregator, _config);
             Task.Factory.StartNew(() =>
             {
                 _client.Init();
@@ -89,7 +93,7 @@ namespace SharpDj.ViewModels
             if (!_reconnecting)
             {
                 _reconnecting = true;
-                _client = new ClientConnection(_eventAggregator);
+                _client = new ClientConnection(_eventAggregator, _config);
                 Task.Factory.StartNew(() =>
                 {
                     _client.Init();

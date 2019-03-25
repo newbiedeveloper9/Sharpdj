@@ -24,10 +24,10 @@ namespace SharpDj
         protected override void Configure()
         {
             container = new SimpleContainer();
-
+            
             container.Singleton<IWindowManager, WindowManager>();
             container.Singleton<IEventAggregator, EventAggregator>();
-            container.PerRequest<IShell, ShellViewModel>();
+            container.PerRequest<ShellViewModel, ShellViewModel>();
 
             var defaultCreateTrigger = Parser.CreateTrigger;
 
@@ -76,7 +76,7 @@ namespace SharpDj
 
         protected override void OnStartup(object sender, System.Windows.StartupEventArgs e)
         {
-            DisplayRootViewFor<IShell>();
+            DisplayRootViewFor<ShellViewModel>();
         }
     }
 }

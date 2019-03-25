@@ -111,6 +111,9 @@
     <Reference Include="PresentationFramework">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.1\PresentationFramework.dll</HintPath>
     </Reference>
+    <Reference Include="SharpConfig, Version=3.2.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\sharpconfig.3.2.8\lib\net20\SharpConfig.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.IO.Compression.FileSystem" />
@@ -165,6 +168,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppBootstrapper.cs" />
+    <Compile Include="Config.cs" />
     <Compile Include="Converters\ActivityStatusToColorConverter.cs" />
     <Compile Include="Converters\ActivityStatusToRadioIconConverter.cs" />
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
@@ -215,8 +219,6 @@
     <Compile Include="PubSubModels\NewRoomCreatedPublish.cs" />
     <Compile Include="PubSubModels\NotLoggedIn.cs" />
     <Compile Include="Interfaces\IPlaylistChanged.cs" />
-    <Compile Include="Interfaces\IShell.cs" />
-    <Compile Include="Interfaces\ITest.cs" />
     <Compile Include="Logic\ActionToServer\ClientCreateRoomAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientLoginAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientNotLoggedInAction.cs" />
@@ -224,7 +226,6 @@
     <Compile Include="Logic\ClientConnection.cs" />
     <Compile Include="Logic\ClientPacketsToHandleList.cs" />
     <Compile Include="Logic\ClientSender.cs" />
-    <Compile Include="Logic\Helpers\ClientConfig.cs" />
     <Compile Include="Logic\Helpers\Clone.cs" />
     <Compile Include="Logic\Helpers\ExecuteOnStart.cs" />
     <Compile Include="Logic\Helpers\FilesPath.cs" />
