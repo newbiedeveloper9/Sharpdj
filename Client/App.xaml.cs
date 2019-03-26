@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using SharpDj.Logic.Helpers;
 
 namespace SharpDj
 {
@@ -6,6 +7,7 @@ namespace SharpDj
     {
         public App()
         {
+            new ExecuteOnStart();
             InitializeComponent();
         }
     }

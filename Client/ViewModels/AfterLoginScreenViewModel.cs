@@ -18,13 +18,15 @@ namespace SharpDj.ViewModels
             SearchMenuViewModel = new SearchMenuViewModel();
         }
 
-        public AfterLoginScreenViewModel(IEventAggregator eventAggregator)
+        public AfterLoginScreenViewModel(IEventAggregator eventAggregator, Config config)
         {
             _eventAggregator = eventAggregator;
 
-            MainViewModel = new MainViewModel(_eventAggregator);
+            MainViewModel = new MainViewModel(_eventAggregator, config);
             LeftMenuViewModel = new LeftMenuViewModel(_eventAggregator);
             SearchMenuViewModel = new SearchMenuViewModel(_eventAggregator);
+
+            config.LoadPlaylist();
         }
     }
 }

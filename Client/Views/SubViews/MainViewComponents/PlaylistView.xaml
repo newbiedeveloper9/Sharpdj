@@ -8,6 +8,7 @@
              xmlns:cal="http://www.caliburnproject.org"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:playlistViewComponents="clr-namespace:SharpDj.Views.SubViews.MainViewComponents.PlaylistViewComponents"
+             xmlns:converters="clr-namespace:SharpDj.Converters"
              mc:Ignorable="d" 
              cal:Bind.AtDesignTime="True"
              d:DataContext="{d:DesignInstance Type=mainViewComponents:PlaylistViewModel, IsDesignTimeCreatable=True}"
@@ -68,7 +69,13 @@
         <materialDesign:DialogHost CloseOnClickAway="True">
             <materialDesign:DialogHost.DialogContent>
                 <Grid Background="White">
-                    <playlistViewComponents:SearchNewMediaDialogView cal:Bind.Model="{Binding Path=SearchNewMediaDialogViewModel}"/>
+                    <Grid  Visibility="{Binding PlaylistCreationIsVisible, Converter={converters:BoolVisibilityConverter}, ConverterParameter=negate}">
+                        <playlistViewComponents:SearchNewMediaDialogView cal:Bind.Model="{Binding Path=SearchNewMediaDialogViewModel}" />
+                    </Grid>
+
+                    <Grid Visibility="{Binding PlaylistCreationIsVisible, Converter={converters:BoolVisibilityConverter}}">
+                        <playlistViewComponents:PlaylistCreationView cal:Bind.Model="{Binding Path=PlaylistCreationViewModel}"/>
+                    </Grid>
                 </Grid>
             </materialDesign:DialogHost.DialogContent>
 
@@ -79,14 +86,15 @@
             PopupMode="Click">
                 <StackPanel HorizontalAlignment="Center">
                     <Button  Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Margin="0 0 0 6"
-                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" >
+                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" cal:Message.Attach="SetPlaylistCreationVisibility(0)">
                         <materialDesign:PackIcon
                                 Kind="Disc"
                                 Height="24"
                                 Width="24" />
                     </Button>
 
-                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Margin="0 0 0 6">
+                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Margin="0 0 0 6" 
+                            Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" cal:Message.Attach="SetPlaylistCreationVisibility(1)">
                         <materialDesign:PackIcon Kind="PlaylistAdd" Width="24" Height="24"/>
                     </Button>
                 </StackPanel>

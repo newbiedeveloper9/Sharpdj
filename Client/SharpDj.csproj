@@ -216,9 +216,10 @@
     <Compile Include="PubSubModels\ManageRoomsPublish.cs" />
     <Compile Include="PubSubModels\ManageRoomsUpdatedPublish.cs" />
     <Compile Include="PubSubModels\MinimizeChatPublish.cs" />
+    <Compile Include="PubSubModels\NewPlaylistCreated.cs" />
     <Compile Include="PubSubModels\NewRoomCreatedPublish.cs" />
     <Compile Include="PubSubModels\NotLoggedIn.cs" />
-    <Compile Include="Interfaces\IPlaylistChanged.cs" />
+    <Compile Include="PubSubModels\PlaylistCollectionChanged.cs" />
     <Compile Include="Logic\ActionToServer\ClientCreateRoomAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientLoginAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientNotLoggedInAction.cs" />
@@ -263,6 +264,7 @@
     <Compile Include="ViewModels\SubViews\MainViewComponents\ConversationsViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\MajorViewComponents\NewsCarouselViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\ManageRoomsViewModel.cs" />
+    <Compile Include="ViewModels\SubViews\MainViewComponents\PlaylistViewComponents\PlaylistCreationViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\PlaylistViewComponents\SearchNewMediaDialogViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\PlaylistViewComponents\TrackViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\PlaylistViewModel.cs" />
@@ -309,6 +311,9 @@
     </Compile>
     <Compile Include="Views\SubViews\MainViewComponents\PlaylistView.xaml.cs">
       <DependentUpon>PlaylistView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubViews\MainViewComponents\PlaylistViewComponents\PlaylistCreationView.xaml.cs">
+      <DependentUpon>PlaylistCreationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SubViews\MainViewComponents\PlaylistViewComponents\SearchNewMediaDialogView.xaml.cs">
       <DependentUpon>SearchNewMediaDialogView.xaml</DependentUpon>
@@ -408,6 +413,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SubViews\MainViewComponents\PlaylistView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SubViews\MainViewComponents\PlaylistViewComponents\PlaylistCreationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -40,7 +40,7 @@ namespace SharpDj.ViewModels
             MessagesQueue = new SnackbarMessageQueue(TimeSpan.FromMilliseconds(3750));
 
             TopMenuViewModel = new TopMenuViewModel();
-            AfterLoginScreenViewModel = new AfterLoginScreenViewModel(_eventAggregator);
+            AfterLoginScreenViewModel = new AfterLoginScreenViewModel(_eventAggregator, _config);
             BeforeLoginScreenViewModel = new BeforeLoginScreenViewModel(_eventAggregator);
 
             ActivateItem(BeforeLoginScreenViewModel);

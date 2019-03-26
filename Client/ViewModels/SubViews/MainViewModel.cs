@@ -17,6 +17,7 @@ namespace SharpDj.ViewModels.SubViews
         #region Fields
         private readonly IEventAggregator _eventAggregator;
         private readonly Dictionary<NavigateMainView, INavMainView> _navigationDictionary;
+        private readonly Config _config;
         #endregion Fields
 
         #region VM's
@@ -46,10 +47,12 @@ namespace SharpDj.ViewModels.SubViews
             ActivateItem((PropertyChangedBase)MajorScreenViewModel);
         }
 
-        public MainViewModel(IEventAggregator eventAggregator)
+        public MainViewModel(IEventAggregator eventAggregator, Config config)
         {
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
+
+            _config = config;
 
             MajorScreenViewModel = new MajorScreenViewModel(_eventAggregator);
             RoomViewModel = new RoomViewModel();
@@ -96,6 +99,11 @@ namespace SharpDj.ViewModels.SubViews
 
         public void Handle(NavigateMainView message)
         {
+            if (ActiveItem is PlaylistViewModel playlistViewModel)
+            {
+                _config.SavePlaylistWithDelay(0);
+            }
+
             _eventAggregator.PublishOnUIThread(RollingMenuVisibilityEnum.Void);
             var newItem = _navigationDictionary[message];
             ActivateItem((PropertyChangedBase)newItem);

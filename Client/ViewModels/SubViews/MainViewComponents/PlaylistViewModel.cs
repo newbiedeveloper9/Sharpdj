@@ -1,24 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using SharpDj.Interfaces;
 using SharpDj.Models;
+using SharpDj.PubSubModels;
 using SharpDj.ViewModels.SubViews.MainViewComponents.PlaylistViewComponents;
+using System;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents
 {
     public class PlaylistViewModel : PropertyChangedBase,
         INavMainView,
-        IHandle<IPlaylistChanged>
+        IHandle<IPlaylistCollectionChanged>, IHandle<INewPlaylistCreated>
     {
         private readonly IEventAggregator _eventAggregator;
 
         #region Properties
         public SearchNewMediaDialogViewModel SearchNewMediaDialogViewModel { get; private set; }
+        public PlaylistCreationViewModel PlaylistCreationViewModel { get; private set; }
 
         private BindableCollection<PlaylistModel> _playlistCollection = new BindableCollection<PlaylistModel>();
         public BindableCollection<PlaylistModel> PlaylistCollection
@@ -31,7 +28,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
                 NotifyOfPropertyChange(() => PlaylistCollection);
             }
         }
-      
+
         private BindableCollection<TrackModel> _trackCollection = new BindableCollection<TrackModel>();
         public BindableCollection<TrackModel> TrackCollection
         {
@@ -43,30 +40,59 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
                 NotifyOfPropertyChange(() => TrackCollection);
             }
         }
+
+        private bool _playlistCreationIsVisible;
+        public bool PlaylistCreationIsVisible
+        {
+            get => _playlistCreationIsVisible;
+            set
+            {
+                if (_playlistCreationIsVisible == value) return;
+                _playlistCreationIsVisible = value;
+                NotifyOfPropertyChange(() => PlaylistCreationIsVisible);
+            }
+        }
+
         #endregion Properties
 
+        #region .ctor
         public PlaylistViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
 
-            SearchNewMediaDialogViewModel = new SearchNewMediaDialogViewModel();
+            SearchNewMediaDialogViewModel = new SearchNewMediaDialogViewModel(_eventAggregator);
+            PlaylistCreationViewModel = new PlaylistCreationViewModel(_eventAggregator);
         }
 
         public PlaylistViewModel()
         {
             SearchNewMediaDialogViewModel = new SearchNewMediaDialogViewModel();
+            PlaylistCreationViewModel = new PlaylistCreationViewModel();
         }
+        #endregion .ctor
 
         public void OnActivePlaylistChanged(PlaylistModel model)
         {
             TrackCollection = model.TrackCollection;
         }
 
-        public void Handle(IPlaylistChanged message)
+        public void SetPlaylistCreationVisibility(int isPlaylistCreation)
         {
-            this.PlaylistCollection = new BindableCollection<PlaylistModel>(message.PlaylistCollection);
-
+            PlaylistCreationIsVisible = Convert.ToBoolean(isPlaylistCreation);
         }
+
+        #region Handlers
+        public void Handle(IPlaylistCollectionChanged message)
+        {
+            PlaylistCollection = new BindableCollection<PlaylistModel>(message.PlaylistCollection);
+        }
+
+        public void Handle(INewPlaylistCreated message)
+        {
+            PlaylistCollection.Add(message.Model);
+        }
+        #endregion Handlers
+
     }
 }

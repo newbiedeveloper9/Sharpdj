@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
+using Newtonsoft.Json;
 
 namespace SharpDj.Models
 {
     public class PlaylistModel : PropertyChangedBase
     {
+        [JsonProperty]
         private string _name;
         public string Name
         {
@@ -23,6 +18,7 @@ namespace SharpDj.Models
             }
         }
 
+        [JsonProperty]
         private bool _isActive;
         public bool IsActive
         {
@@ -35,6 +31,7 @@ namespace SharpDj.Models
             }
         }
 
+        [JsonProperty]
         private BindableCollection<TrackModel> _trackCollection =
             new BindableCollection<TrackModel>();
         public BindableCollection<TrackModel> TrackCollection
@@ -48,6 +45,7 @@ namespace SharpDj.Models
             }
         }
 
+        [JsonIgnore]
         private bool _contains;
         public bool Contains
         {
@@ -58,6 +56,14 @@ namespace SharpDj.Models
                 _contains = value;
                 NotifyOfPropertyChange(() => Contains);
             }
+        }
+
+        public bool Equals(PlaylistModel other)
+        {
+            return string.Equals(_name, other._name)
+                   && _isActive == other._isActive
+                   && Equals(_trackCollection, other._trackCollection)
+                   && _contains == other._contains;
         }
     }
 }

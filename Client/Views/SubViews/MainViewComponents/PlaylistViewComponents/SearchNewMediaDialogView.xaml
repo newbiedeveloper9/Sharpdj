@@ -78,7 +78,7 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Margin="0 12 0 0">
-                                    <playlistViewComponents:TrackView cal:View.Model="{Binding}" Margin="24 0 24 0" Height="105"/>
+                                    <playlistViewComponents:TrackView Margin="24 0 24 0" Height="105"/>
 
                                     <DockPanel Height="40" Margin="12 0 24 0" HorizontalAlignment="Right" materialDesign:ThemeAssist.Theme="Light">
                                         <Button HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}">
@@ -108,7 +108,8 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <playlistViewComponents:TrackView cal:View.Model="{Binding Path=TemporaryTrack}"  Height="105"  Margin="24 12 24 0" />
+                    <playlistViewComponents:TrackView Margin="12" Height="105" DataContext="{Binding TemporaryTrack}"/>
+
 
                     <ItemsControl x:Name="PlaylistCollection"  Grid.Row="1" Margin="0 24 0 0">
                         <ItemsControl.ItemsPanel>
