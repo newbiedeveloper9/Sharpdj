@@ -9,7 +9,7 @@ using SharpDj.Interfaces;
 
 namespace SharpDj.ViewModels.SubViews
 {
-    public class MainViewModel : Conductor<object>.Collection.OneActive,
+    public class MainViewModel : Conductor<object>,
         IHandle<NavigateMainView>,
         IHandle<RollingMenuVisibilityEnum>,
         IHandle<IRoomInfoForOpen>

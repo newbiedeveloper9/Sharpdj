@@ -10,14 +10,15 @@
              cal:Bind.AtDesignTime="True"
              d:DataContext="{d:DesignInstance Type=majorViewComponents:RoomSquareViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="235" d:DesignWidth="520">
-        <ItemsControl x:Name="RoomInstancesCollection">
+    <ItemsControl x:Name="RoomInstancesCollection">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate>  
+
                     <materialDesign:Card Margin="0 0 24 24" Width="488"  materialDesign:ShadowAssist.ShadowDepth="Depth3" cal:Message.Attach="[Event MouseUp]=[Action OpenRoom()]" Cursor="Hand">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -25,29 +26,22 @@
                                 <RowDefinition Height="122" />
                             </Grid.RowDefinitions>
                             <Grid Grid.Row="0">
-                                <Grid.Background>
-                                    <VisualBrush Stretch="Fill" Opacity="0.87">
-                                        <VisualBrush.Visual>
-                                            <Grid ClipToBounds="True">
-                                            <Image Source="{Binding ImageSource, Converter={StaticResource nullImageConverter}}">
-                                                    <Image.Effect>
-                                                        <BlurEffect Radius="11"/>
-                                                    </Image.Effect>
-                                                </Image>
-                                            </Grid>
-                                        </VisualBrush.Visual>
-                                    </VisualBrush>
-                                </Grid.Background>
+                            <Grid.Background>
+                                <VisualBrush Stretch="None" Opacity="0.87">
+                                    <VisualBrush.Visual>
+                                        <Grid ClipToBounds="True">
+                                            <Image Source="{Binding ImageSource, Converter={StaticResource nullImageConverter}, IsAsync=True}">
+                                                <Image.Effect>
+                                                    <BlurEffect RenderingBias="Performance" Radius="11"/>
+                                                </Image.Effect>
+                                            </Image>
+                                        </Grid>
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </Grid.Background>
 
-                                <Border Background="{DynamicResource PrimaryHueDarkBrush}" Opacity="0.25">
-                                    <Border.Effect>
-                                        <BlurEffect Radius="5" KernelType="Gaussian"/>
-                                    </Border.Effect>
-                                </Border>
-
-
-                                <StackPanel  VerticalAlignment="Center">
-                                    <TextBlock Margin="24 24 24 0" TextTrimming="CharacterEllipsis" TextWrapping="WrapWithOverflow" Height="26" Text="{Binding Name}" TextAlignment="Center"
+                            <StackPanel  VerticalAlignment="Center">
+                                    <TextBlock Margin="24 24 24 0" TextTrimming="CharacterEllipsis" TextWrapping="WrapWithOverflow" Height="26" Text="{Binding Name, IsAsync=True}" TextAlignment="Center"
                                                        FontSize="19">
                                         <TextBlock.Effect>
                                             <DropShadowEffect ShadowDepth="3" BlurRadius="8" RenderingBias="Performance"/>
@@ -56,7 +50,7 @@
 
                                     <StackPanel Orientation="Horizontal" Margin="0 0 0 0" HorizontalAlignment="Center">
                                         <StackPanel Orientation="Horizontal" Margin="6 6 6 6" >
-                                            <TextBlock Text="{Binding AmountOfPeople}" FontSize="16">
+                                            <TextBlock Text="{Binding AmountOfPeople, IsAsync=True}" FontSize="16">
                                                 <TextBlock.Effect>
                                                     <DropShadowEffect ShadowDepth="2" BlurRadius="4" RenderingBias="Performance"/>
                                                 </TextBlock.Effect>
@@ -69,7 +63,7 @@
                                         </StackPanel>
 
                                         <StackPanel Orientation="Horizontal" Margin="6 6 6 6">
-                                            <TextBlock Text="{Binding AmountOfAdministration}" FontSize="16">
+                                            <TextBlock Text="{Binding AmountOfAdministration, IsAsync=True}" FontSize="16">
                                                 <TextBlock.Effect>
                                                     <DropShadowEffect ShadowDepth="2" BlurRadius="4" RenderingBias="Performance"/>
                                                 </TextBlock.Effect>
@@ -84,10 +78,10 @@
                                 </StackPanel>
                             </Grid>
 
-                            <Grid Grid.Row="1" Background="#151515">
+                            <Grid Grid.Row="1" Background="#151515" >
                                 <Border Background="{DynamicResource PrimaryHueDarkBrush}" Opacity="0.195">
                                     <Border.Effect>
-                                        <BlurEffect Radius="5" KernelType="Box"/>
+                                        <BlurEffect RenderingBias="Performance" Radius="5" KernelType="Box"/>
                                     </Border.Effect>
                                 </Border>
                                 <DockPanel >
@@ -101,11 +95,11 @@
                                     </StackPanel>
                                     <StackPanel Margin="12 12 24 0">
                                         <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left" Opacity="0.7" TextTrimming="CharacterEllipsis"
-                                                       Text="{Binding NextTrack.Name}" />
+                                                       Text="{Binding NextTrack.Name, IsAsync=True}" />
                                     <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left"  Opacity="0.7" TextTrimming="CharacterEllipsis"
-                                                       Text="{Binding CurrentTrack.Name}" />
+                                                       Text="{Binding CurrentTrack.Name, IsAsync=True}" />
                                     <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left"  Opacity="0.7" TextTrimming="CharacterEllipsis"
-                                                       Text="{Binding PreviousTrack.Name}" />
+                                                       Text="{Binding PreviousTrack.Name, IsAsync=True}" />
                                     </StackPanel>
                                 </DockPanel>
                             </Grid>

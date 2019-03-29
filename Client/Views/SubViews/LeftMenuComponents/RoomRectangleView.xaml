@@ -19,13 +19,13 @@
                             <StackPanel Width="186" Orientation="Horizontal">
                                 <Ellipse Width="24" Height="24">
                                     <Ellipse.Fill>
-                                        <ImageBrush ImageSource="{Binding ImageSource, Converter={StaticResource nullImageConverter}}"/>
+                                        <ImageBrush ImageSource="{Binding ImageSource, Converter={StaticResource nullImageConverter}, IsAsync=True}" />
                                     </Ellipse.Fill>
                                 </Ellipse>
                                 <TextBlock Margin="12 0 0 0" Width="120" TextTrimming="CharacterEllipsis"  Foreground="White"
                                VerticalAlignment="Center" Text="{Binding Name}" FontWeight="Light"/>
 
-                                <Canvas Background="LightGray"  VerticalAlignment="Center"
+                                <Canvas Background="LightGray"  VerticalAlignment="Center" CacheMode="BitmapCache"
                                     HorizontalAlignment="Center">
                                     <Ellipse  
                                         Width="8" 

@@ -60,7 +60,7 @@
                                         <materialDesign:Chip.Icon>
                                             <Ellipse Width="32" Height="32">
                                                 <Ellipse.Fill >
-                                                    <ImageBrush  ImageSource="{Binding ImagePath, Converter={StaticResource nullImageConverter}}"/>
+                                                    <ImageBrush  ImageSource="{Binding ImagePath, Converter={StaticResource nullImageConverter}, IsAsync=True}"/>
                                                 </Ellipse.Fill>
                                             </Ellipse>
                                         </materialDesign:Chip.Icon>

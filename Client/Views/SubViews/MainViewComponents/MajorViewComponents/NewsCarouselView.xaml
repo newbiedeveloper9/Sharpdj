@@ -25,9 +25,9 @@
                                 <VisualBrush Stretch="UniformToFill">
                                     <VisualBrush.Visual>
                                         <Grid ClipToBounds="True">
-                                            <Image Source="{Binding Path=PrimaryNews.ImageSource, Converter={StaticResource nullImageConverter}}">
+                                            <Image Source="{Binding Path=PrimaryNews.ImageSource, Converter={StaticResource nullImageConverter}, IsAsync=True}">
                                                 <Image.Effect>
-                                                    <BlurEffect Radius="11"/>
+                                                    <BlurEffect Radius="11" RenderingBias="Performance" />
                                                 </Image.Effect>
                                             </Image>
                                         </Grid>
@@ -74,7 +74,7 @@
                             <DataTemplate>
                                 <materialDesign:Card Margin="0 0 0 12"  materialDesign:ShadowAssist.ShadowDepth="Depth3" Cursor="Hand">
                                     <Grid Background="Black" Height="114" Width="248" >
-                                        <Image Source="{Binding ImageSource, Converter={StaticResource nullImageConverter}}" Stretch="Fill"/>
+                                        <Image Source="{Binding ImageSource, Converter={StaticResource nullImageConverter}, IsAsync=True}" Stretch="Fill"/>
                                     </Grid>
                                 </materialDesign:Card>
                             </DataTemplate>

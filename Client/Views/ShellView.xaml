@@ -6,8 +6,6 @@
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         ResizeMode="CanResize"
-        AllowsTransparency="True"
-        WindowStyle="None"
         UseLayoutRounding="True"
         WindowStartupLocation="CenterScreen"
         xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
@@ -17,8 +15,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         cal:Bind.AtDesignTime="True"
-        d:DataContext="{d:DesignInstance Type=viewModels:ShellViewModel, IsDesignTimeCreatable=True}"
-       
+        d:DataContext="{d:DesignInstance Type=viewModels:ShellViewModel, IsDesignTimeCreatable=True}" 
         Title="ShellView" MinWidth="1015" MinHeight="540">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0" CornerRadius="0" CaptionHeight="0" 

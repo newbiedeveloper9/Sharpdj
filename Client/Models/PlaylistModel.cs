@@ -1,4 +1,5 @@
-﻿using Caliburn.Micro;
+﻿using System.ComponentModel;
+using Caliburn.Micro;
 using Newtonsoft.Json;
 
 namespace SharpDj.Models

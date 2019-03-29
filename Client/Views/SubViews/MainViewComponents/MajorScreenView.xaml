@@ -14,7 +14,7 @@
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
             <!--Padding24-->
             <StackPanel Margin="24 24 0 0">
-                <majorScreenComponents:NewsCarouselView cal:Bind.Model="{Binding Path=NewsCarouselViewModel}"/>
+                <majorScreenComponents:NewsCarouselView cal:Bind.Model="{Binding Path=NewsCarouselViewModel, IsAsync=True}"/>
 
                 <StackPanel HorizontalAlignment="Center">
                     <!--Categories-->
@@ -26,7 +26,7 @@
                     </StackPanel>
 
                     <WrapPanel  Margin="0 24 0 0">
-                        <majorScreenComponents:RoomSquareView cal:Bind.Model="{Binding Path=RoomSquareViewModel}"/>
+                        <majorScreenComponents:RoomSquareView cal:Bind.Model="{Binding Path=RoomSquareViewModel, IsAsync=True}" />
                     </WrapPanel>
                 </StackPanel>
                 <!--Rooms-->
