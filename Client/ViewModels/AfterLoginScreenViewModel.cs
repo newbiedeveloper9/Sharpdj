@@ -27,6 +27,7 @@ namespace SharpDj.ViewModels
             SearchMenuViewModel = new SearchMenuViewModel(_eventAggregator);
 
             config.LoadPlaylist();
+            config.LazyLoad();
         }
     }
 }

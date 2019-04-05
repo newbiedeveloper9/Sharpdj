@@ -7,11 +7,12 @@
              xmlns:mainViewComponents="clr-namespace:SharpDj.ViewModels.SubViews.MainViewComponents"
              xmlns:majorScreenComponents="clr-namespace:SharpDj.Views.SubViews.MainViewComponents.MajorViewComponents"
              mc:Ignorable="d" 
+             
              cal:Bind.AtDesignTime="True"
              d:DataContext="{d:DesignInstance Type=mainViewComponents:MajorScreenViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="1400" d:DesignWidth="1200">
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" IsDeferredScrollingEnabled="True" HorizontalScrollBarVisibility="Disabled">
             <!--Padding24-->
             <StackPanel Margin="24 24 0 0">
                 <majorScreenComponents:NewsCarouselView cal:Bind.Model="{Binding Path=NewsCarouselViewModel, IsAsync=True}"/>

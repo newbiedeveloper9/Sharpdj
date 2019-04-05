@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Windows;
 using Caliburn.Micro;
 using SharpDj.Logic.UI;
 using SharpDj.Models;
 using SharpDj.Views.SubViews.MainViewComponents;
 using System.Windows.Controls;
+using SCPackets.Models;
+using SharpDj.Enums;
 using SharpDj.Interfaces;
 using SharpDj.Logic.Helpers;
+using SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents
 {
@@ -13,83 +17,92 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
         INavMainView
     {
         #region _fields
-        private ScrollViewerLogic _scrollViewerLogic;
+        private readonly IEventAggregator _eventAggregator;
 
         #endregion _fields
 
         #region Properties
-        private BindableCollection<CommentModel> _commentsCollection;
-        public BindableCollection<CommentModel> CommentsCollection
+       
+        private bool _isSound;
+        public bool IsSound
         {
-            get => _commentsCollection;
+            get => _isSound;
             set
             {
-                if (_commentsCollection == value) return;
-                _commentsCollection = value;
-                NotifyOfPropertyChange(() => CommentsCollection);
+                if (_isSound == value) return;
+                _isSound = value;
+                NotifyOfPropertyChange(() => IsSound);
             }
         }
 
-        private bool _scrollToBottomIsVisible;
-
-        public bool ScrollToBottomIsVisible
+        private ChatVisibility _chatVisibility = ChatVisibility.Chat;
+        public ChatVisibility ChatVisibility
         {
-            get => _scrollToBottomIsVisible;
+            get => _chatVisibility;
             set
             {
-                if (_scrollToBottomIsVisible == value) return;
-                _scrollToBottomIsVisible = value;
-                NotifyOfPropertyChange(() => ScrollToBottomIsVisible);
+                if (_chatVisibility == value) return;
+                _chatVisibility = value;
+                NotifyOfPropertyChange(() => ChatVisibility);
+                Console.WriteLine(value);
             }
         }
 
-        private string _messageText;
-        public string MessageText
+        private ColorPaletteViewModel _colorPaletteViewModel;
+        public ColorPaletteViewModel ColorPaletteViewModel
         {
-            get => _messageText;
+            get => _colorPaletteViewModel;
             set
             {
-                if (_messageText == value) return;
-                _messageText = value;
-                NotifyOfPropertyChange(() => MessageText);
+                if (_colorPaletteViewModel == value) return;
+                _colorPaletteViewModel = value;
+                NotifyOfPropertyChange(() => ColorPaletteViewModel);
             }
         }
+
+        private ChatViewModel _chatViewModel;
+        public ChatViewModel ChatViewModel
+        {
+            get => _chatViewModel;
+            set
+            {
+                if (_chatViewModel == value) return;
+                _chatViewModel = value;
+                NotifyOfPropertyChange(() => ChatViewModel);
+            }
+        }
+
         #endregion Properties
 
 
         #region .ctor
+        public RoomViewModel(IEventAggregator eventAggregator)
+        {
+            _eventAggregator = eventAggregator;
+
+            ColorPaletteViewModel = new ColorPaletteViewModel(_eventAggregator);
+            ChatViewModel = new ChatViewModel(_eventAggregator);
+        }
+
         public RoomViewModel()
         {
-            CommentsCollection = new BindableCollection<CommentModel>()
-            {
-                new CommentModel(){Author = "Crisey", Comment = "Testowy tekst XD"},
-                new CommentModel(){Author = "Zonk256", Comment = "Testowy tekst XD"},
-                new CommentModel(){Author = "Jeff Diggins", Comment = "Testowy tekst XD"},
-                new CommentModel(){Author = "XDDDDDDD", Comment = "TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest"},
-            };
+            ColorPaletteViewModel = new ColorPaletteViewModel();
+            ChatViewModel = new ChatViewModel();
         }
 
         #endregion .ctor
 
         #region Methods
-        public void SendChatMessage()
-        {
-            if (string.IsNullOrWhiteSpace(MessageText)) return;
+       
 
-            CommentsCollection.Add(new CommentModel() { Author = "Crisey", Comment = MessageText });
-            MessageText = string.Empty;
+        public void ChangeSoundMute()
+        {
+            IsSound = !IsSound;
         }
 
-        public void ScrollToBottom()
+        public void SetChatVisibility(ChatVisibility type)
         {
-            _scrollViewerLogic.ScrollToDown();
-        }
-
-        public void ScrollLoaded(ScrollViewer scrollViewer)
-        {
-            _scrollViewerLogic = new ScrollViewerLogic(scrollViewer);
-            _scrollViewerLogic.ScrollNotOnBottom +=
-                (sender, args) => ScrollToBottomIsVisible = !_scrollViewerLogic.CanScrollDown;
+            ChatVisibility = type;
         }
         #endregion Methods
     }

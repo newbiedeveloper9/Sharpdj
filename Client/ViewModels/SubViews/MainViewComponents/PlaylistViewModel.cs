@@ -4,6 +4,7 @@ using SharpDj.Models;
 using SharpDj.PubSubModels;
 using SharpDj.ViewModels.SubViews.MainViewComponents.PlaylistViewComponents;
 using System;
+using System.Linq;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents
 {
@@ -14,8 +15,29 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
         private readonly IEventAggregator _eventAggregator;
 
         #region Properties
-        public SearchNewMediaDialogViewModel SearchNewMediaDialogViewModel { get; private set; }
-        public PlaylistCreationViewModel PlaylistCreationViewModel { get; private set; }
+        private SearchNewMediaDialogViewModel _searchNewMediaDialogViewModel;
+        public SearchNewMediaDialogViewModel SearchNewMediaDialogViewModel
+        {
+            get => _searchNewMediaDialogViewModel;
+            set
+            {
+                if (_searchNewMediaDialogViewModel == value) return;
+                _searchNewMediaDialogViewModel = value;
+                NotifyOfPropertyChange(() => SearchNewMediaDialogViewModel);
+            }
+        }
+
+        private PlaylistCreationViewModel _playlistCreationViewModel;
+        public PlaylistCreationViewModel PlaylistCreationViewModel
+        {
+            get => _playlistCreationViewModel;
+            set
+            {
+                if (_playlistCreationViewModel == value) return;
+                _playlistCreationViewModel = value;
+                NotifyOfPropertyChange(() => PlaylistCreationViewModel);
+            }
+        }
 
         private BindableCollection<PlaylistModel> _playlistCollection = new BindableCollection<PlaylistModel>();
         public BindableCollection<PlaylistModel> PlaylistCollection
@@ -86,6 +108,11 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
         public void Handle(IPlaylistCollectionChanged message)
         {
             PlaylistCollection = new BindableCollection<PlaylistModel>(message.PlaylistCollection);
+
+            var activePlaylist = PlaylistCollection.FirstOrDefault(x => x.IsActive);
+            if (activePlaylist == null) return;
+
+            OnActivePlaylistChanged(activePlaylist);
         }
 
         public void Handle(INewPlaylistCreated message)

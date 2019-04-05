@@ -14,12 +14,5 @@ namespace SharpDj.Views.SubViews.MainViewComponents
         {
             InitializeComponent();
         }
-
-
-        private void MessageText_OnPreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            if (!(sender is TextBox txtBox)) return;
-            e.Handled = TextboxHelper.ShortcutsFixHandled(txtBox, e.Key);
-        }
     }
 }

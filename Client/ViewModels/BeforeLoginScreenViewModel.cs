@@ -10,9 +10,33 @@ namespace SharpDj.ViewModels
     {
         private readonly IEventAggregator _eventAggregator;
 
-        public LoginViewModel LoginViewModel { get; private set; }
-        public RegisterViewModel RegisterViewModel { get; private set; }
+        #region VM's
+        private LoginViewModel _loginViewModel;
+        public LoginViewModel LoginViewModel
+        {
+            get => _loginViewModel;
+            set
+            {
+                if (_loginViewModel == value) return;
+                _loginViewModel = value;
+                NotifyOfPropertyChange(() => LoginViewModel);
+            }
+        }
 
+        private RegisterViewModel _registerViewModel;
+        public RegisterViewModel RegisterViewModel
+        {
+            get => _registerViewModel;
+            set
+            {
+                if (_registerViewModel == value) return;
+                _registerViewModel = value;
+                NotifyOfPropertyChange(() => RegisterViewModel);
+            }
+        }
+        #endregion VM's
+
+        #region .ctor
         public BeforeLoginScreenViewModel()
         {
 
@@ -26,6 +50,7 @@ namespace SharpDj.ViewModels
             Activated += OnActivated;
             /*Creates a new Bindings to View each time*/
         }
+        #endregion .ctor
 
         private void OnActivated(object sender, ActivationEventArgs e)
         {

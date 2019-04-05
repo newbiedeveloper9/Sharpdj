@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Caliburn.Micro;
+using SCPackets.Models;
 
 namespace SharpDj.Models
 {
     public class CommentModel : PropertyChangedBase
     {
-        private string _author;
-        public string Author
+        private UserClient _author;
+        public UserClient Author
         {
             get => _author;
             set
@@ -32,9 +33,5 @@ namespace SharpDj.Models
                 NotifyOfPropertyChange(() => Comment);
             }
         }
-
-
-
-
     }
 }

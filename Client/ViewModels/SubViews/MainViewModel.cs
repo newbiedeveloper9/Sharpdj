@@ -55,7 +55,7 @@ namespace SharpDj.ViewModels.SubViews
             _config = config;
 
             MajorScreenViewModel = new MajorScreenViewModel(_eventAggregator);
-            RoomViewModel = new RoomViewModel();
+            RoomViewModel = new RoomViewModel(_eventAggregator);
             PlaylistViewModel = new PlaylistViewModel(_eventAggregator);
             CreateRoomViewModel = new CreateRoomViewModel(_eventAggregator);
             ManageRoomsViewModel = new ManageRoomsViewModel(_eventAggregator);

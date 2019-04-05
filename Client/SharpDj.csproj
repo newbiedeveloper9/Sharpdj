@@ -176,6 +176,7 @@
     <Compile Include="Converters\Conversation\AuthorToFontForegroundConverter.cs" />
     <Compile Include="Converters\Conversation\AuthorToForegroundBrushConverter.cs" />
     <Compile Include="Converters\Conversation\AuthorToHorizontalAlignmentConverter.cs" />
+    <Compile Include="Converters\EnumBooleanConverter.cs" />
     <Compile Include="Converters\EnumToVisibilityConverter.cs" />
     <Compile Include="Converters\IsConversationReadedToFontWeightConverter.cs" />
     <Compile Include="Converters\NameToContentConverter.cs" />
@@ -188,6 +189,7 @@
     <Compile Include="Core\Extensions\RelayCommand.cs" />
     <Compile Include="Core\RelayCommand.cs" />
     <Compile Include="Enums\BeforeLoginEnum.cs" />
+    <Compile Include="Enums\ChatVisibility.cs" />
     <Compile Include="Enums\Helpers\GetImageVisibility.cs" />
     <Compile Include="Enums\Menu\LeftBar.cs" />
     <Compile Include="Enums\Menu\MainView.cs" />
@@ -218,6 +220,7 @@
     <Compile Include="PubSubModels\MinimizeChatPublish.cs" />
     <Compile Include="PubSubModels\NewPlaylistCreated.cs" />
     <Compile Include="PubSubModels\NewRoomCreatedPublish.cs" />
+    <Compile Include="PubSubModels\NickColorChanged.cs" />
     <Compile Include="PubSubModels\NotLoggedIn.cs" />
     <Compile Include="PubSubModels\PlaylistCollectionChanged.cs" />
     <Compile Include="Logic\ActionToServer\ClientCreateRoomAction.cs" />
@@ -270,6 +273,8 @@
     <Compile Include="ViewModels\SubViews\MainViewComponents\PlaylistViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\ProfileOptionsViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\MajorViewComponents\RoomSquareViewModel.cs" />
+    <Compile Include="ViewModels\SubViews\MainViewComponents\RoomViewComponents\ChatViewModel.cs" />
+    <Compile Include="ViewModels\SubViews\MainViewComponents\RoomViewComponents\ColorPaletteViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\SubViews\SearchMenuComponents\ConversationPopupViewModel.cs" />
@@ -332,6 +337,12 @@
     </Compile>
     <Compile Include="Views\SubViews\MainViewComponents\MajorViewComponents\RoomSquareView.xaml.cs">
       <DependentUpon>RoomSquareView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubViews\MainViewComponents\RoomViewComponents\ChatView.xaml.cs">
+      <DependentUpon>ChatView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubViews\MainViewComponents\RoomViewComponents\ColorPaletteView.xaml.cs">
+      <DependentUpon>ColorPaletteView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SubViews\SearchMenuComponents\ConversationPopupView.xaml.cs">
       <DependentUpon>ConversationPopupView.xaml</DependentUpon>
@@ -441,6 +452,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SubViews\MainViewComponents\MajorViewComponents\RoomSquareView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SubViews\MainViewComponents\RoomViewComponents\ChatView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SubViews\MainViewComponents\RoomViewComponents\ColorPaletteView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -621,6 +640,7 @@
       <Name>SCPackets</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\VideoLAN.LibVLC.Windows.3.0.4\build\VideoLAN.LibVLC.Windows.targets" Condition="Exists('..\packages\VideoLAN.LibVLC.Windows.3.0.4\build\VideoLAN.LibVLC.Windows.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -24,6 +24,8 @@ namespace SharpDj.Logic
             _eventAggregator = eventAggregator;
             _config = config;
             _packetsList = new ClientPacketsToHandleList(_eventAggregator);
+
+            Console.WriteLine($"Connecting with socket {_config.Ip}:{_config.Port}");
         }
 
         public void Init()
@@ -34,6 +36,7 @@ namespace SharpDj.Logic
                 if (iterator > 0)
                     Thread.Sleep(3900);
                 iterator++;
+
                 _connection = ConnectionFactory.CreateTcpConnection(_config.Ip, _config.Port, out Result);
 
                 var mess = Result == ConnectionResult.Connected
@@ -49,8 +52,8 @@ namespace SharpDj.Logic
 
         private void ConnectionEstablished()
         {
-           // _connection.EnableLogging = true;
-           // _connection.LogIntoStream(Console.OpenStandardOutput());
+            _connection.EnableLogging = true;
+            _connection.LogIntoStream(Console.OpenStandardOutput());
 
             _packetsList.RegisterPackets(_connection, this);
             _sender = new ClientSender(_eventAggregator, _connection, this);

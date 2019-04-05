@@ -1,25 +1,44 @@
 ﻿using Caliburn.Micro;
 using Newtonsoft.Json;
+using SCPackets.Models;
 using SharpConfig;
 using SharpDj.Logic.Helpers;
 using SharpDj.Models;
 using SharpDj.PubSubModels;
 using System;
 using System.IO;
-using System.Linq;
 using System.Threading;
 
 namespace SharpDj
 {
-    public class Config : IHandle<IPlaylistCollectionChanged>, IHandle<INewPlaylistCreated>
+    public class Config : IHandle<IPlaylistCollectionChanged>, IHandle<INewPlaylistCreated>, IHandle<INickColorChanged>
     {
         private BindableCollection<PlaylistModel> Playlists { get; set; }
             = new BindableCollection<PlaylistModel>();
 
         private readonly IEventAggregator _eventAggregator;
 
-        public int Port { get; set; } = 21337;
+        public int Port { get; set; } = 5666;
         public string Ip { get; set; } = "192.168.0.103";
+
+        private ColorModel _nickColor = new ColorModel(147, 112, 219);
+        public ColorModel NickColor
+        {
+            get => _nickColor;
+            set
+            {
+                if (_nickColor == value) return;
+                _nickColor = value;
+
+                _eventAggregator.PublishOnUIThread(
+                    new NickColorChanged(value));
+
+                var config = Configuration.LoadFromFile(FilesPath.Config.ConfigFile);
+                if (value.ToString().Equals(
+                    new ColorModel(config["Settings"]["NickColor"].StringValue).ToString())) return;
+                Build();
+            }
+        }
 
 
         public Config(IEventAggregator eventAggregator)
@@ -29,7 +48,7 @@ namespace SharpDj
         }
 
         /// <returns>True if loaded correctly</returns>
-        public bool Load()
+        public bool LoadCore()
         {
             try
             {
@@ -37,6 +56,8 @@ namespace SharpDj
 
                 Ip = config["Connection"]["IP"].StringValue;
                 Port = config["Connection"]["Port"].IntValue;
+                NickColor = new ColorModel(config["Settings"]["NickColor"].StringValue);
+
                 return true;
             }
             catch (Exception e)
@@ -46,6 +67,42 @@ namespace SharpDj
             }
         }
 
+        /// <returns>True if loaded correctly</returns>
+        public bool LazyLoad()
+        {
+            try
+            {
+                var config = Configuration.LoadFromFile(FilesPath.Config.ConfigFile);
+
+                NickColor = new ColorModel(config["Settings"]["NickColor"].StringValue);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Configuration file error.\n{e.Message}");
+                return false;
+            }
+        }
+
+        public Config BuildIfNotExist()
+        {
+            if (File.Exists(FilesPath.Config.ConfigFile)) return this;
+
+            Build();
+            return this;
+        }
+
+        public void Build()
+        {
+            var config = new Configuration();
+            config["Connection"]["IP"].StringValue = Ip;
+            config["Connection"]["Port"].IntValue = Port;
+            config["Settings"]["NickColor"].StringValue = NickColor.ToString();
+            config.SaveToFile(FilesPath.Config.ConfigFile);
+        }
+
+        #region Playlist
         public void SavePlaylistWithDelay(int delay)
         {
             string fileString = File.ReadAllText(FilesPath.Config.PlaylistFile);
@@ -53,7 +110,7 @@ namespace SharpDj
 
             if (fileString.Equals(json))
                 return;
-        
+
             Thread.Sleep(delay);
             File.WriteAllText(FilesPath.Config.PlaylistFile, json);
             Console.WriteLine(FilesPath.Config.PlaylistFile);
@@ -82,18 +139,7 @@ namespace SharpDj
                 return false;
             }
         }
-
-        public Config BuildIfNotExist()
-        {
-            if (File.Exists(FilesPath.Config.ConfigFile)) return this;
-
-            var config = new Configuration();
-            config["Connection"]["IP"].StringValue = Ip;
-            config["Connection"]["Port"].IntValue = Port;
-            config.SaveToFile(FilesPath.Config.ConfigFile);
-
-            return this;
-        }
+        #endregion Playlist
 
         public void Handle(IPlaylistCollectionChanged message)
         {
@@ -107,5 +153,10 @@ namespace SharpDj
             SavePlaylistWithDelay(0);
         }
 
+        public void Handle(INickColorChanged message)
+        {
+            NickColor = message.Color;
+        }
     }
 }
+ 

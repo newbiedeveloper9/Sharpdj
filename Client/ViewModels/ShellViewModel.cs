@@ -32,7 +32,7 @@ namespace SharpDj.ViewModels
             _config = new Config(_eventAggregator)
                 .BuildIfNotExist();
 
-            while (!_config.Load())
+            while (!_config.LoadCore())
             {
                 Console.ReadLine();
             }
@@ -54,9 +54,43 @@ namespace SharpDj.ViewModels
         #endregion .ctor
 
         #region ViewModels
-        public AfterLoginScreenViewModel AfterLoginScreenViewModel { get; private set; }
-        public BeforeLoginScreenViewModel BeforeLoginScreenViewModel { get; private set; }
-        public TopMenuViewModel TopMenuViewModel { get; private set; }
+        private AfterLoginScreenViewModel _afterLoginScreenViewModel;
+        public AfterLoginScreenViewModel AfterLoginScreenViewModel
+        {
+            get => _afterLoginScreenViewModel;
+            set
+            {
+                if (_afterLoginScreenViewModel == value) return;
+                _afterLoginScreenViewModel = value;
+                NotifyOfPropertyChange(() => AfterLoginScreenViewModel);
+            }
+        }
+
+        private BeforeLoginScreenViewModel _beforeLoginScreenViewModel;
+        public BeforeLoginScreenViewModel BeforeLoginScreenViewModel
+        {
+            get => _beforeLoginScreenViewModel;
+            set
+            {
+                if (_beforeLoginScreenViewModel == value) return;
+                _beforeLoginScreenViewModel = value;
+                NotifyOfPropertyChange(() => BeforeLoginScreenViewModel);
+            }
+        }
+
+        private TopMenuViewModel _topMenuViewModel;
+        public TopMenuViewModel TopMenuViewModel
+        {
+            get => _topMenuViewModel;
+            set
+            {
+                if (_topMenuViewModel == value) return;
+                _topMenuViewModel = value;
+                NotifyOfPropertyChange(() => TopMenuViewModel);
+            }
+        }
+
+
         #endregion ViewModels
 
         #region Props

@@ -6,6 +6,9 @@
              xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:mainViewComponents="clr-namespace:SharpDj.ViewModels.SubViews.MainViewComponents"
+             xmlns:converters="clr-namespace:SharpDj.Converters"
+             xmlns:enums="clr-namespace:SharpDj.Enums"
+             xmlns:roomViewComponents="clr-namespace:SharpDj.Views.SubViews.MainViewComponents.RoomViewComponents"
              mc:Ignorable="d" 
              cal:Bind.AtDesignTime="True"
              d:DataContext="{d:DesignInstance Type=mainViewComponents:RoomViewModel, IsDesignTimeCreatable=True}"
@@ -20,80 +23,98 @@
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
-        <Grid Background="#121212">
-        </Grid>
+        <!--Video Controls-->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+            <Button Margin="12" BorderThickness="0" VerticalAlignment="Bottom" cal:Message.Attach="[ChangeSoundMute]"    Foreground="White" Background="{StaticResource PrimaryHueMidBrush}"
+                    materialDesign:ThemeAssist.Theme="Light" Style="{StaticResource MaterialDesignFlatButton}"
+                    Visibility="{Binding Path=IsSound, Converter={converters:BoolVisibilityConverter}}">
+                <materialDesign:PackIcon Kind="Headphones" VerticalAlignment="Center"/>
+            </Button>
 
+            <Button  Margin="12" BorderThickness="0" VerticalAlignment="Bottom" cal:Message.Attach="[ChangeSoundMute]"  Foreground="White"
+                     Background="Red" materialDesign:ThemeAssist.Theme="Light" Style="{StaticResource MaterialDesignFlatButton}"
+                Visibility="{Binding Path=IsSound, Converter={converters:BoolVisibilityConverter}, ConverterParameter=negate}">
+                <materialDesign:PackIcon Kind="HeadphonesOff" VerticalAlignment="Center"/>
+            </Button>
+
+            <Slider Margin="4 0 0 20"
+                Minimum="0"
+                Maximum="100"
+                Style="{StaticResource MaterialDesignDiscreteSlider}"
+                ToolTip="MaterialDesignDiscreteSlider"
+                Value="50"
+                Width="200"/>
+        </StackPanel>
+
+        <!--Right Panel-->
         <Grid Grid.RowSpan="2" Grid.Column="1" Background="#1C1C1C">
             <Grid.RowDefinitions>
                 <RowDefinition Height="48"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <DockPanel VerticalAlignment="Top" HorizontalAlignment="Left">
-                <Button Style="{StaticResource MaterialDesignFlatButton}" Height="48" Width="64">
-                    <Grid>
-                        <materialDesign:PackIcon Kind="AccountGroup" Foreground="{StaticResource MidBrush}" Height="32" Width="32"/>
-                    </Grid>
-                </Button>
-                <Button Style="{StaticResource MaterialDesignFlatButton}" Background="{StaticResource DarkBrush}" Height="48" Width="64">
-                    <Grid>
-                        <materialDesign:PackIcon Kind="ChatProcessing" Foreground="{StaticResource MidBrush}" Height="32" Width="32"/>
-                    </Grid>
-                </Button>
+                <RadioButton Height="50" VerticalAlignment="Center" GroupName="Chat" Padding="0"
+                             IsChecked="{Binding ChatVisibility, Converter={converters:EnumBooleanConverter}, ConverterParameter={x:Static enums:ChatVisibility.Chat}, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource MaterialDesignTabRadioButton}"  cal:Message.Attach="[Click]=[SetChatVisibility('CHAT')]">
+
+                    <Button Style="{StaticResource MaterialDesignFlatButton}" Height="50" Padding="24 6 24 6">
+                        <Grid>
+                            <materialDesign:PackIcon Kind="ChatProcessing" Foreground="{StaticResource MidBrush}" Height="32" Width="32"/>
+                        </Grid>
+                    </Button>
+                </RadioButton>
+
+                <RadioButton Height="50" VerticalAlignment="Center" GroupName="Chat" Padding="0"
+                             IsChecked="{Binding ChatVisibility, Converter={converters:EnumBooleanConverter}, ConverterParameter={x:Static enums:ChatVisibility.People}, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource MaterialDesignTabRadioButton}" cal:Message.Attach="[Click]=[SetChatVisibility('PEOPLE')]">
+
+
+                    <Button Style="{StaticResource MaterialDesignFlatButton}" Height="50" Padding="24 6 24 6">
+                        <Grid>
+                            <materialDesign:PackIcon Kind="AccountGroup" Foreground="{StaticResource MidBrush}" Height="32" Width="32"/>
+                        </Grid>
+                    </Button>
+                </RadioButton>
+
+                <RadioButton Height="50" VerticalAlignment="Center" GroupName="Chat" Padding="0"
+                             IsChecked="{Binding ChatVisibility, Converter={converters:EnumBooleanConverter}, ConverterParameter={x:Static enums:ChatVisibility.ColorPalette}, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource MaterialDesignTabRadioButton}" cal:Message.Attach="[Click]=[SetChatVisibility('COLORPALETTE')]">
+
+                    <Button Style="{StaticResource MaterialDesignFlatButton}" Height="50" Padding="24 6 24 6">
+                        <Grid>
+                            <materialDesign:PackIcon Kind="ColorLens" Foreground="{StaticResource MidBrush}" Height="32" Width="32"/>
+                        </Grid>
+                    </Button>
+                </RadioButton>
             </DockPanel>
 
-            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Padding="12 6 18 24" cal:Message.Attach="[Event Loaded]=[Action ScrollLoaded($source)]">
-                <StackPanel>
-                    <ItemsControl x:Name="CommentsCollection">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Vertical" Margin="0 12 0 0">
-                                    <TextBox Text="{Binding Path=Author}" Style="{StaticResource TextboxChat}" Width="auto" Foreground="DarkViolet" FontWeight="Bold" Margin="0 0 0 4"/>
-                                    <TextBox Text="{Binding Path=Comment}" AcceptsReturn="True"
-                                             Foreground="{StaticResource PrimaryHueMidForegroundBrush}"  Style="{StaticResource TextboxChat}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </StackPanel>
-            </ScrollViewer>
-            <Grid Grid.Row="1" VerticalAlignment="Bottom" Margin="0 0 0 6" HorizontalAlignment="Center" x:Name="ScrollToBottomIsVisible">
-                <Button x:Name="ScrollToBottom">
-                    <materialDesign:PackIcon Kind="ArrowCollapseDown"/>
-                </Button>
-            </Grid>
-            <Grid Grid.Row="2">
-                <materialDesign:Card Padding="0 0 0 0">
-                    <StackPanel Background="#d3d3d3">
-                        <TextBox Margin="0 24 0 12"  x:Name="MessageText" AcceptsTab="True" PreviewKeyDown="MessageText_OnPreviewKeyDown" HorizontalAlignment="Stretch"
-                                 Foreground="{StaticResource MaterialDesignLightForeground}"
-                                 materialDesign:ThemeAssist.Theme="Light"
-                                 MaxHeight="260"
-                                 TextWrapping="Wrap"
-                                 SpellCheck.IsEnabled="True"
-                                 VerticalContentAlignment="Center"
-                                 Padding="6 0 6 2"
-                                 materialDesign:HintAssist.Hint="Send a message..." 
-                             cal:Message.Attach="[Key Enter]=[SendChatMessage];"/>
+            <!--ChatVisibility-->
+            <Grid  Visibility="{Binding ChatVisibility,
+                    Converter={converters:EnumToVisibilityConverter},
+                    ConverterParameter='Chat'}" Grid.Row="1">
 
-                        <DockPanel Margin="12 0 12 12">
-                            <Button Style="{StaticResource MaterialDesignFlatButton}" materialDesign:ThemeAssist.Theme="Light">
-                                <Grid>
-                                    <materialDesign:PackIcon Kind="Settings" Foreground="{StaticResource MidBrush}"/>
-                                </Grid>
-                            </Button>
+                <roomViewComponents:ChatView cal:Bind.Model="{Binding ChatViewModel}"/>
 
-                            <Button HorizontalAlignment="Right" x:Name="SendChatMessage">
-                                <Grid>
-                                    <TextBlock Text="Chat"/>
-                                </Grid>
-                            </Button>
-                        </DockPanel>
-                    </StackPanel>
-                </materialDesign:Card>
             </Grid>
+
+            <!--List of people Visibility-->
+            <Grid  Visibility="{Binding ChatVisibility,
+                    Converter={converters:EnumToVisibilityConverter},
+                    ConverterParameter='People'}" Grid.Row="1" Margin="24">
+
+            </Grid>
+
+            <!--ColorPalette Visibility-->
+            <StackPanel  Visibility="{Binding ChatVisibility,
+                    Converter={converters:EnumToVisibilityConverter},
+                    ConverterParameter='ColorPalette'}" Grid.Row="1">
+
+                <roomViewComponents:ColorPaletteView cal:Bind.Model="{Binding ColorPaletteViewModel, IsAsync=True}"/>
+
+            </StackPanel>
         </Grid>
+
 
         <!--RoomInfo (Like twitch)-->
         <Grid Grid.Row="1" Background="White">
@@ -106,20 +127,6 @@
                         </StackPanel>
                     </Button>
 
-                    <Button Margin="12 12 24 12">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Heart" VerticalAlignment="Center" Margin="0 0 12 0"/>
-                            <TextBlock Text="Follow"/>
-                        </StackPanel>
-                    </Button>
-                    <Button Margin="12 12 24 12" Background="LimeGreen" BorderThickness="0" >
-                        <Grid>
-                            <materialDesign:PackIcon Kind="Heart" VerticalAlignment="Center"/>
-                            <!--
-                                <materialDesign:PackIcon Kind="HeartBroken" VerticalAlignment="Center"/>
-                            -->
-                        </Grid>
-                    </Button>
 
                     <Button Margin="12" Style="{StaticResource MaterialDesignFlatButton}">
                         <StackPanel Orientation="Horizontal">

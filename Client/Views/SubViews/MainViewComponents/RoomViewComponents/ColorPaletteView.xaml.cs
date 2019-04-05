@@ -13,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SharpDj.Views.SubViews.MainViewComponents
+namespace SharpDj.Views.SubViews.MainViewComponents.RoomViewComponents
 {
     /// <summary>
-    /// Interaction logic for MajorScreenView.xaml
+    /// Interaction logic for ColorPaletteView.xaml
     /// </summary>
-    public partial class MajorScreenView : UserControl
+    public partial class ColorPaletteView : UserControl
     {
-        public MajorScreenView()
+        public ColorPaletteView()
         {
             InitializeComponent();
-            
         }
     }
 }
