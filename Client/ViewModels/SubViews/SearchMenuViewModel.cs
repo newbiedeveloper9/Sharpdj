@@ -17,9 +17,33 @@ namespace SharpDj.ViewModels.SubViews
     {
         private readonly IEventAggregator _eventAggregator;
 
-        public BindableCollection<ConversationModel> ConversationsCollection { get; private set; }
+        #region Properties
+        private BindableCollection<ConversationModel> _conversationsCollection;
+        public BindableCollection<ConversationModel> ConversationsCollection
+        {
+            get => _conversationsCollection;
+            set
+            {
+                if (_conversationsCollection == value) return;
+                _conversationsCollection = value;
+                NotifyOfPropertyChange(() => ConversationsCollection);
+            }
+        }
 
+        private RollingMenuVisibilityEnum _rollingMenuVisibility;
+        public RollingMenuVisibilityEnum RollingMenuVisibility
+        {
+            get => _rollingMenuVisibility;
+            set
+            {
+                if (_rollingMenuVisibility == value) return;
+                _rollingMenuVisibility = value;
+                NotifyOfPropertyChange(() => RollingMenuVisibility);
+            }
+        }
+        #endregion Properties
 
+        #region .ctor
         public SearchMenuViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
@@ -41,15 +65,12 @@ namespace SharpDj.ViewModels.SubViews
             {
                 new ConversationModel(_eventAggregator){IsReaded = false, Color = Brushes.DeepPink, Name = "Test Diggins", ImagePath = dicPic},
                 new ConversationModel(_eventAggregator){IsReaded = true, Color = Brushes.BlueViolet, Name = "Test Diggins", ImagePath = dicPic},
-                new ConversationModel(_eventAggregator){IsReaded = true, Color = Brushes.Black, Name = "Jeff Diggins", ImagePath = dicPic},
-                new ConversationModel(_eventAggregator){IsReaded = false, Color = Brushes.LimeGreen, Name = "Jeff Diggins", ImagePath = dicPic},
-                new ConversationModel(_eventAggregator){IsReaded = false, Color = Brushes.DeepSkyBlue, Name = "Test Diggins", ImagePath = dicPic},
-                new ConversationModel(_eventAggregator){IsReaded = false, Color = Brushes.Gray, Name = "Test Diggins", ImagePath = dicPic},
             };
-
-          //  ConversationsCollection[0].ConversationPopupViewModel.MessageCollection.Add(new MessageModel(){Text = "test"});
         }
+        #endregion .ctor
 
+
+        #region Methods
         public void ConversationClick(ConversationModel model)
         {
             model.IsOpen = !model.IsOpen;
@@ -74,23 +95,12 @@ namespace SharpDj.ViewModels.SubViews
         {
             _eventAggregator.PublishOnUIThread(RollingMenuVisibilityEnum.Conversations);
         }
+        #endregion Methods
 
+        #region Handle's
         public void Handle(RollingMenuVisibilityEnum message)
         {
             RollingMenuVisibility = RollingMenuVisibility != message ? message : RollingMenuVisibilityEnum.Void;
-        }
-
-
-        private RollingMenuVisibilityEnum _rollingMenuVisibility;
-        public RollingMenuVisibilityEnum RollingMenuVisibility
-        {
-            get => _rollingMenuVisibility;
-            set
-            {
-                if (_rollingMenuVisibility == value) return;
-                _rollingMenuVisibility = value;
-                NotifyOfPropertyChange(() => RollingMenuVisibility);
-            }
         }
 
         public void Handle(IMinimizeChatPublish message)
@@ -100,5 +110,6 @@ namespace SharpDj.ViewModels.SubViews
 
             item.IsOpen = false;
         }
+        #endregion Handle's
     }
 }

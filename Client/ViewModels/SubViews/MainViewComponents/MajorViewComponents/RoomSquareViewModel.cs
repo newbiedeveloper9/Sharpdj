@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Caliburn.Micro;
+using SCPackets.ConnectToRoom;
 using SharpDj.Models;
 using SharpDj.PubSubModels;
 
@@ -25,7 +26,6 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
                 NotifyOfPropertyChange(() => RoomInstancesCollection);
             }
         }
-
 
         public RoomSquareViewModel()
         {
@@ -65,9 +65,10 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
             _eventAggregator.Subscribe(this);
         }
 
-        public void OpenRoom()
+        public void OpenRoom(RoomModel model)
         {
-            _eventAggregator.PublishOnUIThread(new RoomInfoForOpen());
+            _eventAggregator.PublishOnUIThread(
+                new SendPacket(new ConnectToRoomRequest(model.Id)));
         }
 
         public void Handle(IRefreshOutsideRoomsPublish message)

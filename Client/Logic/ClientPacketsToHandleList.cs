@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using Network;
 using SCPackets;
+using SCPackets.ConnectToRoom;
 using SCPackets.CreateRoom;
 using SCPackets.Disconnect;
 using SCPackets.LoginPacket;
@@ -8,6 +9,7 @@ using SCPackets.NewRoomCreated;
 using SCPackets.NotLoggedIn;
 using SCPackets.RegisterPacket;
 using SCPackets.RoomOutsideUpdate;
+using SCPackets.SendRoomChatMessage;
 using SCPackets.UpdateRoomData;
 using SharpDj.Logic.ActionToServer;
 
@@ -25,6 +27,8 @@ namespace SharpDj.Logic
         public HandlerModel<UpdateRoomDataResponse> RoomUpdate { get; set; }
         public HandlerModel<RoomOutsideUpdateRequest> RoomOutsideUpdate { get; set; }
         public HandlerModel<DisconnectResponse> Disconnect { get; set; }
+        public HandlerModel<SendRoomChatMessageResponse> SendRoomChatMessage { get; set; }
+        public HandlerModel<ConnectToRoomResponse> ConnectToRoom { get; set; }
 
 
         public ClientPacketsToHandleList(IEventAggregator eventAggregator)
@@ -47,7 +51,10 @@ namespace SharpDj.Logic
             { Action = new ClientRoomOutsideUpdateAction(_eventAggregator).Action };
             Disconnect = new HandlerModel<DisconnectResponse>
             { Action = new ClientDisconnectAction(_eventAggregator).Action };
-
+            SendRoomChatMessage = new HandlerModel<SendRoomChatMessageResponse>
+            { Action = new ClientSendRoomChatMessageAction(_eventAggregator).Action };
+            ConnectToRoom = new HandlerModel<ConnectToRoomResponse>
+            { Action = new ClientConnectToRoomAction(_eventAggregator).Action };
 
         }
 
@@ -61,6 +68,8 @@ namespace SharpDj.Logic
             RoomUpdate.RegisterPacket(conn, client);
             RoomOutsideUpdate.RegisterPacket(conn, client);
             Disconnect.RegisterPacket(conn, client);
+            SendRoomChatMessage.RegisterPacket(conn, client);
+            ConnectToRoom.RegisterPacket(conn, client);
         }
     }
 }

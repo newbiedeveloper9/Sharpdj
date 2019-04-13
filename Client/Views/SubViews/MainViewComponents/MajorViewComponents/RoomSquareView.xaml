@@ -19,7 +19,7 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>  
 
-                    <materialDesign:Card Margin="0 0 24 24" Width="488"  materialDesign:ShadowAssist.ShadowDepth="Depth3" cal:Message.Attach="[Event MouseUp]=[Action OpenRoom()]" Cursor="Hand">
+                    <materialDesign:Card Margin="0 0 24 24" Width="488"  materialDesign:ShadowAssist.ShadowDepth="Depth3" cal:Message.Attach="[Event MouseUp]=[Action OpenRoom($dataContext)]" Cursor="Hand">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="88" />
