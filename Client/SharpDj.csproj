@@ -155,8 +155,8 @@
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
-    <Reference Include="YoutubeExplode, Version=4.6.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\YoutubeExplode.4.6.7\lib\net45\YoutubeExplode.dll</HintPath>
+    <Reference Include="YoutubeExplode, Version=4.6.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YoutubeExplode.4.6.8\lib\net45\YoutubeExplode.dll</HintPath>
     </Reference>
     <Reference Include="YoutubeExplode.Converter, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\YoutubeExplode.Converter.1.4.1\lib\net45\YoutubeExplode.Converter.dll</HintPath>
@@ -182,26 +182,12 @@
     <Compile Include="Converters\NameToContentConverter.cs" />
     <Compile Include="Converters\NullImageConverter.cs" />
     <Compile Include="Converters\RoleToBrushConverter.cs" />
-    <Compile Include="Core\BaseViewModel.cs" />
-    <Compile Include="Core\Extensions\CommandBase.cs" />
-    <Compile Include="Core\Extensions\Extensions.cs" />
-    <Compile Include="Core\Extensions\NotifyObject.cs" />
-    <Compile Include="Core\Extensions\RelayCommand.cs" />
-    <Compile Include="Core\RelayCommand.cs" />
     <Compile Include="Enums\BeforeLoginEnum.cs" />
     <Compile Include="Enums\ChatVisibility.cs" />
-    <Compile Include="Enums\Helpers\GetImageVisibility.cs" />
-    <Compile Include="Enums\Menu\LeftBar.cs" />
-    <Compile Include="Enums\Menu\MainView.cs" />
     <Compile Include="Enums\NavigateMainView.cs" />
     <Compile Include="Enums\PlaylistCollectionView.cs" />
-    <Compile Include="Enums\Playlist\Playlist.cs" />
-    <Compile Include="Enums\Playlist\PlaylistMode.cs" />
     <Compile Include="Enums\RollingMenuVisibilityEnum.cs" />
     <Compile Include="Enums\SideNewsVisibilityEnum.cs" />
-    <Compile Include="Enums\User\UserProfile.cs" />
-    <Compile Include="Enums\Playlist\PlaylistState.cs" />
-    <Compile Include="Enums\User\UserState.cs" />
     <Compile Include="Input\CallViewmodelMethod.cs" />
     <Compile Include="Input\KeySequence.cs" />
     <Compile Include="Input\KeyTrigger.cs" />
@@ -514,102 +500,7 @@
     <Resource Include="Images\Titlebar\minimalize_24.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Rooms\monstercat.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Rooms\peoples.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Rooms\admins.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Rooms\favorite.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\MainMenu\background.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Room\003-sad.png" />
-    <Resource Include="Images\Room\004-happy.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Room\008-playlist.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Room\006-pause.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Room\001-volume-1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Room\001-album.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Room\round.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Room\003-group.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Room\001-settings-cogwheel-button.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Room\002-playlist.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\LeftBar\001-rate-star-button.png" />
-    <Resource Include="Images\LeftBar\002-actors.png" />
-    <Resource Include="Images\LeftBar\002-playlist.png" />
-    <Resource Include="Images\LeftBar\032-do-not-disturb-rounded-sign.png" />
-    <Resource Include="Images\LeftBar\036-user-shape.png" />
-    <Resource Include="Images\LeftBar\041-extension.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\LeftBar\001-settings-cogwheel-button.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\LeftBar\001-white-album.png" />
-    <Resource Include="Images\LeftBar\003-white-group.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Playlists\001-add.png" />
-    <Resource Include="Images\Playlists\003-check-symbol.png" />
-    <Resource Include="Images\Playlists\029-rubbish-bin-delete-button.png" />
-    <Resource Include="Images\Playlists\pencil-edit-button.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Playlists\011-searching-magnifying-glass.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Room\038-cancel-button.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Playlists\009-down-chevron.png" />
-    <Resource Include="Images\Playlists\014-up-chevron.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Playlists\001-add-white.png" />
-    <Resource Include="Images\Playlists\029-rubbish-bin-delete-button-white.png" />
-    <Resource Include="Images\Playlists\pencil-edit-button-white.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Playlists\009-down-chevron-white.png" />
-    <Resource Include="Images\Playlists\014-up-chevron-white.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Playlists\003-check-symbol-white.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Rooms\favorite_full.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\avatar.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Room\003-playlist-1.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\1.jpg" />

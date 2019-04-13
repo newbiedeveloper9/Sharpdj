@@ -1,12 +1,15 @@
 ﻿using Caliburn.Micro;
 using SCPackets.Models;
+using SCPackets.SendRoomChatMessage;
 using SharpDj.Logic.UI;
 using SharpDj.Models;
+using SharpDj.PubSubModels;
 using System.Windows.Controls;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
 {
-    public class ChatViewModel : PropertyChangedBase
+    public class ChatViewModel : PropertyChangedBase,
+        IHandle<INickColorChanged>
     {
         #region _fields
         private readonly IEventAggregator _eventAggregator;
@@ -29,7 +32,6 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
         }
 
         private bool _scrollToBottomIsVisible;
-
         public bool ScrollToBottomIsVisible
         {
             get => _scrollToBottomIsVisible;
@@ -52,12 +54,26 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
                 NotifyOfPropertyChange(() => ChatMessage);
             }
         }
+
+        private ColorModel _textColor;
+        public ColorModel TextColor
+        {
+            get => _textColor;
+            set
+            {
+                if (_textColor == value) return;
+                _textColor = value;
+                NotifyOfPropertyChange(() => TextColor);
+            }
+        }
+
         #endregion Properties
 
         #region .ctor
         public ChatViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
+            _eventAggregator.Subscribe(this);
         }
 
         public ChatViewModel()
@@ -89,9 +105,8 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
         {
             if (string.IsNullOrWhiteSpace(ChatMessage)) return;
 
-
-
-            ChatMessage = string.Empty;
+            _eventAggregator.PublishOnUIThread(
+                new SendPacket(new SendRoomChatMessageRequest(ChatMessage, TextColor), false));
         }
 
         public void ScrollToBottom()
@@ -105,11 +120,11 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
             _scrollViewerLogic.ScrollNotOnBottom +=
                 (sender, args) => ScrollToBottomIsVisible = !_scrollViewerLogic.CanScrollDown;
         }
-
-        public void ScrollLoaded()
-        {
-
-        }
         #endregion Methods
+
+        public void Handle(INickColorChanged message)
+        {
+            TextColor = message.Color;
+        }
     }
 }

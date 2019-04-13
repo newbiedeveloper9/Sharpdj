@@ -1,5 +1,4 @@
-﻿using System;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using Network;
 using SCPackets;
 using SharpDj.PubSubModels;
@@ -8,7 +7,7 @@ namespace SharpDj.Logic
 {
     public class ClientSender : IHandle<ISendPacket>
     {
-        private IClient _instance;
+        private readonly IClient _instance;
         private readonly IEventAggregator _eventAggregator;
         private readonly Connection _connection;
         public ClientSender(IEventAggregator eventAggregator, Connection connection, IClient instance)
@@ -23,13 +22,16 @@ namespace SharpDj.Logic
         {
             if (_connection.IsAlive)
             {
-                _connection.Send(message.Packet, _instance);
+                if (message.UseInstance)
+                    _connection.Send(message.Packet, _instance);
+                else
+                    _connection.Send(message.Packet);
+
+                return;
             }
-            else
-            {
-                _eventAggregator.Unsubscribe(this);
-                _eventAggregator.PublishOnUIThread(new Reconnect());
-            }
+
+            _eventAggregator.Unsubscribe(this);
+            _eventAggregator.PublishOnUIThread(new Reconnect());
         }
     }
 }

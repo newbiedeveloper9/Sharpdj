@@ -33,5 +33,17 @@ namespace SharpDj.Models
                 NotifyOfPropertyChange(() => Comment);
             }
         }
+
+        private ColorModel _color;
+        public ColorModel Color
+        {
+            get => _color;
+            set
+            {
+                if (_color == value) return;
+                _color = value;
+                NotifyOfPropertyChange(() => Color);
+            }
+        }
     }
 }
