@@ -17,7 +17,7 @@
 
         <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 4 36 0"
             Visibility="{Binding RollingMenuVisibility,
-            Converter={converters:EnumToVisibilityConverter}, IsAsync=True,
+            Converter={converters:EnumToVisibilityConverter},
             ConverterParameter='Options'}"  Width="300">
 
             <mainViewComponents:ProfileOptionsView cal:Bind.Model="{Binding Path=ProfileOptionsViewModel, IsAsync=True}"/>
@@ -25,7 +25,7 @@
 
         <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 4 148 0"
             Visibility="{Binding RollingMenuVisibility,
-            Converter={converters:EnumToVisibilityConverter}, IsAsync=True,
+            Converter={converters:EnumToVisibilityConverter},
             ConverterParameter='Conversations'}"  Width="300">
 
             <mainViewComponents:ConversationsView cal:Bind.Model="{Binding Path=ConversationsViewModel, IsAsync=True}"/>

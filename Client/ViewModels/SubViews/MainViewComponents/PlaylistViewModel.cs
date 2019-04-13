@@ -10,7 +10,8 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
 {
     public class PlaylistViewModel : PropertyChangedBase,
         INavMainView,
-        IHandle<IPlaylistCollectionChanged>, IHandle<INewPlaylistCreated>
+        IHandle<IPlaylistCollectionChanged>,
+        IHandle<INewPlaylistCreated>
     {
         private readonly IEventAggregator _eventAggregator;
 

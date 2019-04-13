@@ -105,6 +105,12 @@ namespace SharpDj
         #region Playlist
         public void SavePlaylistWithDelay(int delay)
         {
+            if (!File.Exists(FilesPath.Config.PlaylistFile))
+            {
+                File.Create(FilesPath.Config.PlaylistFile);
+                return;
+            }
+
             string fileString = File.ReadAllText(FilesPath.Config.PlaylistFile);
             string json = JsonConvert.SerializeObject(Playlists, Formatting.Indented);
 

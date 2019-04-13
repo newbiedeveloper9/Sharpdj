@@ -2,16 +2,19 @@
 using Caliburn.Micro;
 using SharpDj.Enums;
 using SharpDj.Models;
+using SharpDj.PubSubModels;
 using SharpDj.ViewModels.SubViews.LeftMenuComponents;
 
 namespace SharpDj.ViewModels.SubViews
 {
-    public class LeftMenuViewModel
+    public class LeftMenuViewModel : PropertyChangedBase,
+        IHandle<IPlaylistCollectionChanged>, IHandle<INewPlaylistCreated>
     {
         private readonly IEventAggregator _eventAggregator;
         public LeftMenuViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
+            _eventAggregator.Subscribe(this);
 
 /*            PlaylistCollection = new BindableCollection<PlaylistModel>()
             {
@@ -40,6 +43,16 @@ namespace SharpDj.ViewModels.SubViews
         public void ShowPlaylist()
         {
             _eventAggregator.PublishOnUIThread(NavigateMainView.Playlist);
+        }
+
+        public void Handle(IPlaylistCollectionChanged message)
+        {
+            PlaylistCollection = message.PlaylistCollection;
+        }
+
+        public void Handle(INewPlaylistCreated message)
+        {
+            PlaylistCollection.Add(message.Model);
         }
     }
 }
