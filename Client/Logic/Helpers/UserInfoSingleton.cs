@@ -1,5 +1,6 @@
 ﻿using System;
 using SCPackets.Models;
+using SharpDj.Models;
 
 namespace SharpDj.Logic.Helpers
 {
@@ -12,9 +13,10 @@ namespace SharpDj.Logic.Helpers
 
         private UserInfoSingleton()
         {
-            UserClient = new UserClient();
+            UserClient = new UserClientModel();
         }
 
-       public UserClient UserClient { get; set; }
+       public UserClientModel UserClient { get; set; }
+       public RoomModel ActiveRoom { get; set; }
     }
 }

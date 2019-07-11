@@ -2,6 +2,7 @@
 using Caliburn.Micro;
 using Network;
 using SCPackets.ConnectToRoom;
+using SharpDj.PubSubModels;
 using Result = SCPackets.ConnectToRoom.Result;
 
 namespace SharpDj.Logic.ActionToServer
@@ -19,7 +20,9 @@ namespace SharpDj.Logic.ActionToServer
         {
             if (response.Result == Result.Success || response.Result == Result.AlreadyConnected)
             {
-                throw new Exception("Todo on success connect with room logic");
+                
+                _eventAggregator.PublishOnUIThread(new RoomInfoForOpen(response.RoomOutsideModel));
+                return;
             }
             throw new Exception("Todo on error connect with room logic");
         }

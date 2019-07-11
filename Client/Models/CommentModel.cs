@@ -5,13 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Caliburn.Micro;
 using SCPackets.Models;
+using SCPackets.RoomChatNewMessageClient;
 
 namespace SharpDj.Models
 {
     public class CommentModel : PropertyChangedBase
     {
-        private UserClient _author;
-        public UserClient Author
+        #region Properties
+        private UserClientModel _author;
+        public UserClientModel Author
         {
             get => _author;
             set
@@ -45,5 +47,27 @@ namespace SharpDj.Models
                 NotifyOfPropertyChange(() => Color);
             }
         }
+        #endregion Properties
+
+        #region .ctor
+        public CommentModel(UserClientModel author, string comment, ColorModel color)
+        {
+            Author = author;
+            Comment = comment;
+            Color = color;
+        }
+
+        public CommentModel()
+        {
+            
+        }
+
+        public CommentModel(RoomChatNewMessageRequest request)
+        {
+            Author = request.Author;
+            Comment = request.Message;
+            Color = request.Color;
+        }
+        #endregion .ctor
     }
 }

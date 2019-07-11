@@ -32,8 +32,8 @@ namespace SharpDj.Models
             }
         }
 
-        private UserClient _author;
-        public UserClient Author
+        private UserClientModel _author;
+        public UserClientModel Author
         {
             get => _author;
             set

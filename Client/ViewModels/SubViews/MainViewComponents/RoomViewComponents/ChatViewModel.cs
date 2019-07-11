@@ -1,15 +1,17 @@
-﻿using Caliburn.Micro;
+﻿using System;
+using Caliburn.Micro;
 using SCPackets.Models;
 using SCPackets.SendRoomChatMessage;
 using SharpDj.Logic.UI;
 using SharpDj.Models;
 using SharpDj.PubSubModels;
 using System.Windows.Controls;
+using SharpDj.Logic.Helpers;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
 {
     public class ChatViewModel : PropertyChangedBase,
-        IHandle<INickColorChanged>
+        IHandle<INickColorChanged>, IHandle<IChatNewMessagePublish>, IHandle<IRoomChatMessageStatePublish>
     {
         #region _fields
         private readonly IEventAggregator _eventAggregator;
@@ -74,6 +76,8 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
         {
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
+
+            CommentsCollection = new BindableCollection<CommentModel>();
         }
 
         public ChatViewModel()
@@ -82,17 +86,17 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
             {
                 new CommentModel()
                 {
-                     Author = new UserClient(0,"Crisey", Rank.Admin),
+                     Author = new UserClientModel(0,"Crisey", Rank.Admin),
                      Comment = "Testowa wiadomość",
                 },
                 new CommentModel()
                 {
-                    Author = new UserClient(1,"Jeff Diggins", Rank.Moderator),
+                    Author = new UserClientModel(1,"Jeff Diggins", Rank.Moderator),
                     Comment = "Druga wiadomość",
                 },
                 new CommentModel()
                 {
-                    Author = new UserClient(2,"Zonk256", Rank.User),
+                    Author = new UserClientModel(2,"Zonk256", Rank.User),
                     Comment = "Ostatnia wiadomość w celu przetestowania",
                 },
             };
@@ -106,7 +110,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
             if (string.IsNullOrWhiteSpace(ChatMessage)) return;
 
             _eventAggregator.PublishOnUIThread(
-                new SendPacket(new SendRoomChatMessageRequest(ChatMessage, TextColor), false));
+                new SendPacket(new SendRoomChatMessageRequest(TextColor, ChatMessage, UserInfoSingleton.Instance.ActiveRoom.Id), false));
         }
 
         public void ScrollToBottom()
@@ -125,6 +129,18 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
         public void Handle(INickColorChanged message)
         {
             TextColor = message.Color;
+        }
+
+
+        public void Handle(IChatNewMessagePublish message)
+        {
+            CommentsCollection.Add(
+                new CommentModel(message.Message));
+        }
+
+        public void Handle(IRoomChatMessageStatePublish message)
+        {
+            ChatMessage = string.Empty;
         }
     }
 }

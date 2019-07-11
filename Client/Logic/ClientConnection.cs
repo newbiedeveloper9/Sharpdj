@@ -5,6 +5,7 @@ using SCPackets.LoginPacket;
 using SharpDj.PubSubModels;
 using System;
 using System.Threading;
+using SCPackets.SendRoomChatMessage;
 
 namespace SharpDj.Logic
 {

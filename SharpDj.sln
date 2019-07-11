@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.168
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpDj", "Client\SharpDj.csproj", "{FCBAEEB4-C2A6-4A77-8C7B-FCEA06BDC518}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCPackets", "..\SCPackets\SCPackets\SCPackets\SCPackets.csproj", "{C6B0DD67-1DC2-4524-A790-5CCB35FFD4B2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCPackets", "..\SCPackets\SCPackets\SCPackets.csproj", "{C6B0DD67-1DC2-4524-A790-5CCB35FFD4B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -14,6 +14,7 @@ namespace SharpDj.Logic.Helpers
         //Configs
         public readonly string PlaylistFile;
         public readonly string ConfigFile;
+        public readonly string DebugFile;
 
 
         private static Lazy<FilesPath> lazy =
@@ -33,6 +34,7 @@ namespace SharpDj.Logic.Helpers
             //Configs
             PlaylistFile = $@"{AppdataDirectory}\playlist.json";
             ConfigFile = $@"{AppdataDirectory}\config.ini";
+            DebugFile = $@"{LocalDirectory}\debug.txt";
         }
     }
 }
