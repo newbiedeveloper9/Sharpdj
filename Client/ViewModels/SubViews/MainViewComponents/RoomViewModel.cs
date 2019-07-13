@@ -48,6 +48,8 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
             }
         }
 
+        #region VM's
+
         private ColorPaletteViewModel _colorPaletteViewModel;
         public ColorPaletteViewModel ColorPaletteViewModel
         {
@@ -72,6 +74,20 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
             }
         }
 
+        private ListOfPeopleViewModel _listOfPeopleViewModel;
+        public ListOfPeopleViewModel ListOfPeopleViewModel
+        {
+            get => _listOfPeopleViewModel;
+            set
+            {
+                if (_listOfPeopleViewModel == value) return;
+                _listOfPeopleViewModel = value;
+                NotifyOfPropertyChange(() => ListOfPeopleViewModel);
+            }
+        }
+
+        #endregion VM's
+
         #endregion Properties
 
 
@@ -82,12 +98,14 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
 
             ColorPaletteViewModel = new ColorPaletteViewModel(_eventAggregator);
             ChatViewModel = new ChatViewModel(_eventAggregator);
+            ListOfPeopleViewModel = new ListOfPeopleViewModel(_eventAggregator);
         }
 
         public RoomViewModel()
         {
             ColorPaletteViewModel = new ColorPaletteViewModel();
             ChatViewModel = new ChatViewModel();
+            ListOfPeopleViewModel = new ListOfPeopleViewModel();
         }
 
         #endregion .ctor

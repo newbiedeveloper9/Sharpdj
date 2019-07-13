@@ -126,6 +126,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
         }
         #endregion Methods
 
+        #region Handler's
         public void Handle(INickColorChanged message)
         {
             TextColor = message.Color;
@@ -142,5 +143,6 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
         {
             ChatMessage = string.Empty;
         }
+        #endregion Handler's
     }
 }

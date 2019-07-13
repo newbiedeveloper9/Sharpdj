@@ -200,6 +200,7 @@
     <Compile Include="Logic\ActionToServer\ClientPingAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientRoomChatNewMessageAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientRoomOutsideUpdateAction.cs" />
+    <Compile Include="Logic\ActionToServer\ClientRoomUserListBufferAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientSendRoomChatMessageAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientUpdateRoomAction.cs" />
     <Compile Include="Logic\Helpers\TextboxHelper.cs" />
@@ -245,6 +246,7 @@
     <Compile Include="PubSubModels\RefreshOutsideRoomsPublish.cs" />
     <Compile Include="PubSubModels\RoomChatMessageStatePublish.cs" />
     <Compile Include="PubSubModels\RoomInfoForOpen.cs" />
+    <Compile Include="PubSubModels\RoomUserListBufferPublish.cs" />
     <Compile Include="PubSubModels\SendPacket.cs" />
     <Compile Include="PubSubModels\UpdateOutsideRoomPublish.cs" />
     <Compile Include="ViewModels\AfterLoginScreenViewModel.cs" />
@@ -267,6 +269,7 @@
     <Compile Include="ViewModels\SubViews\MainViewComponents\MajorViewComponents\RoomSquareViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\RoomViewComponents\ChatViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewComponents\RoomViewComponents\ColorPaletteViewModel.cs" />
+    <Compile Include="ViewModels\SubViews\MainViewComponents\RoomViewComponents\ListOfPeopleViewModel.cs" />
     <Compile Include="ViewModels\SubViews\MainViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\SubViews\SearchMenuComponents\ConversationPopupViewModel.cs" />
@@ -335,6 +338,9 @@
     </Compile>
     <Compile Include="Views\SubViews\MainViewComponents\RoomViewComponents\ColorPaletteView.xaml.cs">
       <DependentUpon>ColorPaletteView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubViews\MainViewComponents\RoomViewComponents\ListOfPeopleView.xaml.cs">
+      <DependentUpon>ListOfPeopleView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SubViews\SearchMenuComponents\ConversationPopupView.xaml.cs">
       <DependentUpon>ConversationPopupView.xaml</DependentUpon>
@@ -452,6 +458,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SubViews\MainViewComponents\RoomViewComponents\ColorPaletteView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SubViews\MainViewComponents\RoomViewComponents\ListOfPeopleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -102,7 +102,7 @@
             <Grid  Visibility="{Binding ChatVisibility,
                     Converter={converters:EnumToVisibilityConverter},
                     ConverterParameter='People'}" Grid.Row="1" Margin="24">
-
+                <roomViewComponents:ListOfPeopleView cal:Bind.Model="{Binding ListOfPeopleViewModel}"/>
             </Grid>
 
             <!--ColorPalette Visibility-->

@@ -2,6 +2,7 @@
 using Caliburn.Micro;
 using Network;
 using SCPackets;
+using SCPackets.Buffers;
 using SCPackets.ConnectToRoom;
 using SCPackets.CreateRoom;
 using SCPackets.Disconnect;
@@ -34,6 +35,7 @@ namespace SharpDj.Logic
         public HandlerModel<RoomChatNewMessageRequest> RoomChatNewMessage { get; set; }
         public HandlerModel<ConnectToRoomResponse> ConnectToRoom { get; set; }
         public HandlerModel<PingRequest> Ping { get; set; }
+        public HandlerModel<RoomUserListBufferRequest> RoomUserListBuffer { get; set; }
 
         public ClientPacketsToHandleList(IEventAggregator eventAggregator)
         {
@@ -64,6 +66,8 @@ namespace SharpDj.Logic
             Ping = new HandlerModel<PingRequest>
             { Action = new ClientPingAction(_eventAggregator).Action };
 
+            RoomUserListBuffer = new HandlerModel<RoomUserListBufferRequest>
+            { Action = new ClientRoomUserListBufferAction(_eventAggregator).Action };
 
         }
 
@@ -79,8 +83,9 @@ namespace SharpDj.Logic
             Disconnect.RegisterPacket(conn, client);
             SendRoomChatMessage.RegisterPacket(conn, client);
             ConnectToRoom.RegisterPacket(conn, client);
-           RoomChatNewMessage.RegisterPacket(conn, client);
+            RoomChatNewMessage.RegisterPacket(conn, client);
             Ping.RegisterPacket(conn, client);
+            RoomUserListBuffer.RegisterPacket(conn, client);
         }
     }
 }
