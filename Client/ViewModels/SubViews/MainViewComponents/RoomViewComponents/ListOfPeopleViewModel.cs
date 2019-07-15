@@ -11,7 +11,7 @@ using SharpDj.PubSubModels;
 namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
 {
     public class ListOfPeopleViewModel : PropertyChangedBase,
-        IHandle<IRoomUserListBufferPublish>
+        IHandle<IRoomUserListBufferPublish>, IHandle<IRoomInfoForOpen>
     {
         #region _fields
         public readonly IEventAggregator _eventAggregator;
@@ -44,27 +44,38 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
         public ListOfPeopleViewModel()
         {
             UsersCollection.Add(new UserClientModel(0, "Crisey", Rank.Admin));
-            UsersCollection.Add(new UserClientModel(0, "Jeff Diggins", Rank.User));
-            UsersCollection.Add(new UserClientModel(0, "zonk256", Rank.Admin));
-            UsersCollection.Add(new UserClientModel(0, "Testtt", Rank.Moderator));
+            UsersCollection.Add(new UserClientModel(1, "Jeff Diggins", Rank.User));
+            UsersCollection.Add(new UserClientModel(2, "zonk256", Rank.Admin));
+            UsersCollection.Add(new UserClientModel(3, "Testtt", Rank.Moderator));
 
         }
         #endregion .ctor
 
         public void Handle(IRoomUserListBufferPublish message)
         {
-            UsersCollection.AddRange(message.UsersBuffer.InsertUserList);
-
-            foreach (var updateClient in message.UsersBuffer.UpdateUserList)
+            foreach (var user in message.UsersBuffer.InsertUserList)
             {
-                var tmp = UsersCollection.FirstOrDefault(x => x.Id == updateClient.Id);
+                // ReSharper disable once SimplifyLinqExpression
+                if (!UsersCollection.Any(x => x.Id == user.Id))
+                    UsersCollection.Add(user);
+            }
+
+            foreach (var user in message.UsersBuffer.UpdateUserList)
+            {
+                var tmp = UsersCollection.FirstOrDefault(x => x.Id == user.Id);
                 if (tmp == null) continue;
 
-                tmp.Username = updateClient.Username;
-                tmp.RankTmp = updateClient.RankTmp;
+                tmp.Username = user.Username;
+                tmp.RankTmp = user.RankTmp;
             }
 
             UsersCollection.RemoveRange(message.UsersBuffer.RemoveUserList);
+        }
+
+        public void Handle(IRoomInfoForOpen message)
+        {
+            if (message.UserList != null)
+                UsersCollection = new BindableCollection<UserClientModel>(message.UserList);
         }
     }
 }

@@ -18,13 +18,21 @@ namespace SharpDj.Logic.ActionToServer
 
         public void Action(ConnectToRoomResponse response, Connection connection)
         {
-            if (response.Result == Result.Success || response.Result == Result.AlreadyConnected)
+            IRoomInfoForOpen publish;
+
+            switch (response.Result)
             {
-                
-                _eventAggregator.PublishOnUIThread(new RoomInfoForOpen(response.RoomOutsideModel));
-                return;
+                case Result.Success:
+                    publish = new RoomInfoForOpen(response.RoomOutsideModel, response.UserList);
+                    break;
+                case Result.AlreadyConnected:
+                    publish = new RoomInfoForOpen();
+                    break;
+                default:
+                    throw new Exception("Todo on error connect with room logic");
             }
-            throw new Exception("Todo on error connect with room logic");
+
+            _eventAggregator.PublishOnUIThread(publish);
         }
     }
 }
