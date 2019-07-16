@@ -69,7 +69,12 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
                 tmp.RankTmp = user.RankTmp;
             }
 
-            UsersCollection.RemoveRange(message.UsersBuffer.RemoveUserList);
+            foreach (var user in message.UsersBuffer.RemoveUserList)
+            {
+                var tmp = UsersCollection.FirstOrDefault(x => x.Id == user.Id);
+                if (tmp != null)
+                    UsersCollection.Remove(tmp);
+            }
         }
 
         public void Handle(IRoomInfoForOpen message)
