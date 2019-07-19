@@ -196,12 +196,11 @@
     <Compile Include="Interfaces\INavMainView.cs" />
     <Compile Include="Logic\ActionToServer\ClientConnectToRoomAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientDisconnectAction.cs" />
-    <Compile Include="Logic\ActionToServer\ClientNewRoomCreatedAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientPingAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientRoomChatNewMessageAction.cs" />
-    <Compile Include="Logic\ActionToServer\ClientRoomOutsideUpdateAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientRoomUserListBufferAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientSendRoomChatMessageAction.cs" />
+    <Compile Include="Logic\ActionToServer\ClientSquareRoomBufferAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientUpdateRoomAction.cs" />
     <Compile Include="Logic\Helpers\TextboxHelper.cs" />
     <Compile Include="Logic\Helpers\YtVideoHelper.cs" />

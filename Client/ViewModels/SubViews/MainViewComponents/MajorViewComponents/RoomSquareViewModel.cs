@@ -94,9 +94,11 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
         {
             for (int i = 0; i < RoomInstancesCollection.Count; i++)
             {
-                if(RoomInstancesCollection[i].Id == message.RoomOutsideModel.Id)
+                if (RoomInstancesCollection[i].Id == message.RoomOutsideModel.Id)
                     RoomInstancesCollection[i] = RoomModel.ToClientModel(message.RoomOutsideModel);
             }
+            RoomInstancesCollection = new BindableCollection<RoomModel>(
+                RoomInstancesCollection.OrderByDescending(x => x.AmountOfPeople));
         }
     }
 }

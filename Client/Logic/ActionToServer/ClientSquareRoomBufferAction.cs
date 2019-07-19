@@ -1,0 +1,40 @@
+﻿using System;
+using System.Diagnostics;
+using Caliburn.Micro;
+using Network;
+using SCPackets.Buffers;
+using SharpDj.PubSubModels;
+
+namespace SharpDj.Logic.ActionToServer
+{
+    public class ClientSquareRoomBufferAction
+    {
+        private readonly IEventAggregator _eventAggregator;
+
+        public ClientSquareRoomBufferAction(IEventAggregator eventAggregator)
+        {
+            _eventAggregator = eventAggregator;
+        }
+
+        public void Action(SquareRoomBufferRequest request, Connection connection)
+        {
+            var stop = new Stopwatch();
+            stop.Start();
+            foreach (var newRoom in request.InsertRooms.GetList())
+            {
+                _eventAggregator.PublishOnBackgroundThread(
+                    new NewRoomCreatedPublish(newRoom));
+            }
+
+            foreach (var updatedRoom in request.UpdatedRooms)
+            {
+                _eventAggregator.PublishOnBackgroundThread(
+                    new UpdateOutsideRoomPublish(updatedRoom));
+            }
+
+            stop.Stop();
+            Console.WriteLine(stop.ElapsedMilliseconds);
+
+        }
+    }
+}

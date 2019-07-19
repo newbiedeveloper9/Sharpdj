@@ -53,14 +53,14 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
 
         public void Handle(IRoomUserListBufferPublish message)
         {
-            foreach (var user in message.UsersBuffer.InsertUserList)
+            foreach (var user in message.UsersBuffer.InsertUsers.GetList())
             {
                 // ReSharper disable once SimplifyLinqExpression
                 if (!UsersCollection.Any(x => x.Id == user.Id))
                     UsersCollection.Add(user);
             }
 
-            foreach (var user in message.UsersBuffer.UpdateUserList)
+            foreach (var user in message.UsersBuffer.UpdateUsers)
             {
                 var tmp = UsersCollection.FirstOrDefault(x => x.Id == user.Id);
                 if (tmp == null) continue;
@@ -69,7 +69,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
                 tmp.RankTmp = user.RankTmp;
             }
 
-            foreach (var user in message.UsersBuffer.RemoveUserList)
+            foreach (var user in message.UsersBuffer.RemoveUsers.GetList())
             {
                 var tmp = UsersCollection.FirstOrDefault(x => x.Id == user.Id);
                 if (tmp != null)

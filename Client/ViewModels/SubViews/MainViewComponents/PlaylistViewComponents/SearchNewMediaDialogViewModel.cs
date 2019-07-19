@@ -158,33 +158,40 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.PlaylistViewComponents
 
             while (true)
             {
-                Thread.Sleep(Delay);
-
-                if (_delayedSearchText != SearchText)
+                try
                 {
-                    _delayedSearchText = SearchText;
-                    _searched = false;
-                }
-                else if (_delayedSearchText == SearchText && !_searched)
-                {
-                    TrackCollection.Clear();
+                    Thread.Sleep(Delay);
 
-                    var id = YtVideoHelper.NormalizeVideoId(SearchText);
-                    if (YoutubeClient.ValidateVideoId(id))
+                    if (_delayedSearchText != SearchText)
                     {
-                        var video = await client.GetVideoAsync(id);
-                        TrackCollection.Add(YtVideoHelper.ToTrackModel(video));
+                        _delayedSearchText = SearchText;
+                        _searched = false;
                     }
-                    else
+                    else if (_delayedSearchText == SearchText && !_searched)
                     {
-                        foreach (var video in await client.SearchVideosAsync(_delayedSearchText, 1))
+                        TrackCollection.Clear();
+
+                        var id = YtVideoHelper.NormalizeVideoId(SearchText);
+                        if (YoutubeClient.ValidateVideoId(id))
                         {
+                            var video = await client.GetVideoAsync(id);
                             TrackCollection.Add(YtVideoHelper.ToTrackModel(video));
                         }
-                    }
+                        else
+                        {
+                            foreach (var video in await client.SearchVideosAsync(_delayedSearchText, 1))
+                            {
+                                TrackCollection.Add(YtVideoHelper.ToTrackModel(video));
+                            }
+                        }
 
-                    Console.WriteLine("xd");
-                    _searched = true;
+                        Console.WriteLine("xd");
+                        _searched = true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
                 }
             }
         }
