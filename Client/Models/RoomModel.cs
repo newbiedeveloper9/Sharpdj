@@ -1,4 +1,8 @@
-﻿using Caliburn.Micro;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using Caliburn.Micro;
 using SCPackets.Models;
 
 namespace SharpDj.Models
@@ -136,6 +140,18 @@ namespace SharpDj.Models
             };
         }
 
+        public void ImportByOutsideModel(RoomOutsideModel model)
+        {
+            Id = model.Id;
+            Name = model.Name;
+            AmountOfAdministration = model.AmountOfAdministration;
+            AmountOfPeople = model.AmountOfPeople;
+            ImageSource = model.ImagePath;
+            CurrentTrack = TrackModel.ToClientModel(model.CurrentTrack);
+            NextTrack = TrackModel.ToClientModel(model.NextTrack);
+            PreviousTrack = TrackModel.ToClientModel(model.PreviousTrack);
+        }
+
         public static RoomModel ToClientModel(RoomOutsideModel model)
         {
             return new RoomModel()
@@ -149,6 +165,20 @@ namespace SharpDj.Models
                 NextTrack = TrackModel.ToClientModel(model.NextTrack),
                 PreviousTrack = TrackModel.ToClientModel(model.PreviousTrack),
             };
+        }
+    }
+
+    public class RoomModelComparer : IComparer
+    {
+        public int Compare(object x, object y)
+        {
+            var roomX = (RoomModel) x;
+            var roomY = (RoomModel) y;
+            if (roomX == null || roomY == null) return 0;
+
+            if (roomX.AmountOfPeople > roomY.AmountOfPeople) return -1;
+            if (roomY.AmountOfPeople > roomX.AmountOfPeople) return 1;
+            return 0;
         }
     }
 }

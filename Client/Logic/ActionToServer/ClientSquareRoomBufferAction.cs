@@ -18,8 +18,6 @@ namespace SharpDj.Logic.ActionToServer
 
         public void Action(SquareRoomBufferRequest request, Connection connection)
         {
-            var stop = new Stopwatch();
-            stop.Start();
             foreach (var newRoom in request.InsertRooms.GetList())
             {
                 _eventAggregator.PublishOnBackgroundThread(
@@ -28,13 +26,9 @@ namespace SharpDj.Logic.ActionToServer
 
             foreach (var updatedRoom in request.UpdatedRooms)
             {
-                _eventAggregator.PublishOnBackgroundThread(
+                _eventAggregator.PublishOnUIThread(
                     new UpdateOutsideRoomPublish(updatedRoom));
             }
-
-            stop.Stop();
-            Console.WriteLine(stop.ElapsedMilliseconds);
-
         }
     }
 }

@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Windows.Data;
+using System.Windows.Threading;
 using Caliburn.Micro;
 using SCPackets.ConnectToRoom;
 using SharpDj.Models;
@@ -15,7 +19,9 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
     {
         private readonly IEventAggregator _eventAggregator;
 
-        private BindableCollection<RoomModel> _roomInstancesCollection = new BindableCollection<RoomModel>();
+        public ListCollectionView ListCollectionView;
+
+        private BindableCollection<RoomModel> _roomInstancesCollection;
         public BindableCollection<RoomModel> RoomInstancesCollection
         {
             get => _roomInstancesCollection;
@@ -24,11 +30,14 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
                 if (_roomInstancesCollection == value) return;
                 _roomInstancesCollection = value;
                 NotifyOfPropertyChange(() => RoomInstancesCollection);
+                NotifyOfPropertyChange(() => ListCollectionView);
             }
         }
 
         public RoomSquareViewModel()
         {
+            InitializeCollection();
+
             var current = new TrackModel() { Name = "Hashinshin VS NASUS (and Tanks) - Streamhighlights" };
             var next = new TrackModel() { Name = "jfarr & Willford - Blue Eyes (feat. Hanna Pettersson) | Ninety9Lives Release" };
             var previous = new TrackModel() { Name = "Finesu - Homecoming (feat. jfarr) | Ninety9Lives Release" };
@@ -63,6 +72,15 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
         {
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
+
+            InitializeCollection();
+        }
+
+        private void InitializeCollection()
+        {
+            RoomInstancesCollection = new BindableCollection<RoomModel>();
+            ListCollectionView = CollectionViewSource.GetDefaultView(RoomInstancesCollection)
+                as ListCollectionView;
         }
 
         public void OpenRoom(RoomModel model)
@@ -92,13 +110,12 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
 
         public void Handle(IUpdateOutsideRoomPublish message)
         {
-            for (int i = 0; i < RoomInstancesCollection.Count; i++)
-            {
-                if (RoomInstancesCollection[i].Id == message.RoomOutsideModel.Id)
-                    RoomInstancesCollection[i] = RoomModel.ToClientModel(message.RoomOutsideModel);
-            }
-            RoomInstancesCollection = new BindableCollection<RoomModel>(
-                RoomInstancesCollection.OrderByDescending(x => x.AmountOfPeople));
+            var roomToUpdate = RoomInstancesCollection.FirstOrDefault(x => x.Id == message.RoomOutsideModel.Id);
+            roomToUpdate?.ImportByOutsideModel(message.RoomOutsideModel);
+
+            if (ListCollectionView == null) return;
+            ListCollectionView.IsLiveSorting = true;
+            ListCollectionView.CustomSort = new RoomModelComparer();
         }
     }
 }
