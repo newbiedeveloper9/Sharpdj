@@ -21,11 +21,10 @@
                 <ItemsControl x:Name="CommentsCollection">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Vertical" Margin="0 12 0 0">
-                                <TextBox Text="{Binding Path=Author.Username}" Style="{StaticResource TextboxChat}" Width="auto" Foreground="{Binding Path=Color.GetHex}" FontWeight="Bold" Margin="0 0 0 4"/>
-                                <TextBox Text="{Binding Path=Comment}" AcceptsReturn="True"
-                                             Foreground="{StaticResource PrimaryHueMidForegroundBrush}" Style="{StaticResource TextboxChat}"/>
-                            </StackPanel>
+                            <WrapPanel Orientation="Vertical" Margin="0 12 0 0">
+                                <TextBox Text="{Binding Path=Author.Username}" Style="{StaticResource TextboxChat}" Width="auto" Foreground="{Binding Path=Color.GetHex}" FontWeight="Bold" Margin="0 0 0 2"/>
+                                <TextBox Text="{Binding Path=Comment}" AcceptsReturn="True" Foreground="{StaticResource PrimaryHueMidForegroundBrush}" Style="{StaticResource TextboxChat}"/>
+                            </WrapPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>

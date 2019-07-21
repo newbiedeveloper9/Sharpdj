@@ -194,6 +194,7 @@
     <Compile Include="Input\MultiKeyGesture.cs" />
     <Compile Include="Input\MultiKeyGestureConverter.cs" />
     <Compile Include="Interfaces\INavMainView.cs" />
+    <Compile Include="Logic\ActionToServer\ClientAuthKeyLoginAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientConnectToRoomAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientDisconnectAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientPingAction.cs" />
@@ -204,6 +205,7 @@
     <Compile Include="Logic\ActionToServer\ClientUpdateRoomAction.cs" />
     <Compile Include="Logic\Helpers\TextboxHelper.cs" />
     <Compile Include="Logic\Helpers\YtVideoHelper.cs" />
+    <Compile Include="PubSubModels\AuthKeyPublish.cs" />
     <Compile Include="PubSubModels\ChatNewMessagePublish.cs" />
     <Compile Include="PubSubModels\CreatedRoomPublish.cs" />
     <Compile Include="PubSubModels\ManageRoomsPublish.cs" />

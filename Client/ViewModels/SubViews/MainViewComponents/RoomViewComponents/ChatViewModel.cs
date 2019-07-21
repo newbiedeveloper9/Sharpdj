@@ -97,7 +97,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
                 new CommentModel()
                 {
                     Author = new UserClientModel(2,"Zonk256", Rank.User),
-                    Comment = "Ostatnia wiadomość w celu przetestowania",
+                    Comment = "Ostatnia wiadomość w celu przetestowania test test",
                 },
             };
 
@@ -132,7 +132,6 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
             TextColor = message.Color;
         }
 
-
         public void Handle(IChatNewMessagePublish message)
         {
             CommentsCollection.Add(
@@ -141,7 +140,8 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
 
         public void Handle(IRoomChatMessageStatePublish message)
         {
-            ChatMessage = string.Empty;
+            if (message.Result == Result.Success)
+                ChatMessage = string.Empty;
         }
         #endregion Handler's
     }

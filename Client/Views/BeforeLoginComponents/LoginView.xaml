@@ -48,17 +48,26 @@
                         </PasswordBox>
                     </StackPanel>
 
-                    <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Forgot your password?"
-                            HorizontalAlignment="Right" Margin="0 6 4 0" Padding="4 0 4 0" materialDesign:ThemeAssist.Theme="Light"/>
+                    <CheckBox Content="Remember me" Foreground="{StaticResource MaterialDesignDarkForeground}"
+                              HorizontalAlignment="Right" FlowDirection="RightToLeft" Margin="0 12 0 0"
+                              FontSize="12" FontWeight="Bold" Opacity="0.6" Padding="4 0 4 0" x:Name="Remember" />
 
+                   
                     <Button Margin="0 12 0 0" x:Name="TryLogin">
                         <TextBlock Text="Login" VerticalAlignment="Center" materialDesign:ThemeAssist.Theme="Light"/>
                     </Button>
 
-                    <StackPanel Orientation="Horizontal" Margin="4 4 0 0">
-                        <TextBlock Text="Or" VerticalAlignment="Center" Foreground="{StaticResource MaterialDesignDarkForeground}"/>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="create a new account"
-                                Margin="1 0 0 0"  Padding="4 0 4 0" x:Name="Register" materialDesign:ThemeAssist.Theme="Light"/>
+                    <StackPanel Orientation="Vertical" Margin="0 6 0 0">
+                        <DockPanel>
+                            <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Login as guest" Padding="4 0 0 0"
+                                    HorizontalAlignment="Left" materialDesign:ThemeAssist.Theme="Light" FontWeight="Bold" x:Name="GuestLogin"/>
+
+                            <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Create a new account" HorizontalAlignment="Right"
+                                    x:Name="Register" materialDesign:ThemeAssist.Theme="Light"  Padding="0 0 4 0" FontWeight="Bold"/>
+                        </DockPanel>
+
+                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Forgot your password?" Padding="0 0 4 0"
+                                HorizontalAlignment="Right" materialDesign:ThemeAssist.Theme="Light" FontWeight="Bold"/>
                     </StackPanel>
                 </StackPanel>
             </materialDesign:Card>

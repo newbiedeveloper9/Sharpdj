@@ -52,6 +52,18 @@ namespace SharpDj.ViewModels.BeforeLoginComponents
             }
         }
 
+        private bool _remember;
+        public bool Remember
+        {
+            get => _remember;
+            set
+            {
+                if (_remember == value) return;
+                _remember = value;
+                NotifyOfPropertyChange(() => Remember);
+            }
+        }
+
         public bool CanTryLogin => !string.IsNullOrWhiteSpace(LoginText) &&
                                    !string.IsNullOrWhiteSpace(new System.Net.NetworkCredential(string.Empty, PasswordText)
                                        .Password);
@@ -59,7 +71,12 @@ namespace SharpDj.ViewModels.BeforeLoginComponents
         public void TryLogin()
         {
             _eventAggregator.PublishOnUIThread(new SendPacket(new LoginRequest(
-                LoginText, new System.Net.NetworkCredential(string.Empty, PasswordText).Password)));
+                LoginText, new System.Net.NetworkCredential(string.Empty, PasswordText).Password, Remember)));
+        }
+
+        public void GuestLogin()
+        {
+
         }
 
         public void Register()

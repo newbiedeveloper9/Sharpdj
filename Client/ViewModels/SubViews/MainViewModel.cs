@@ -99,10 +99,8 @@ namespace SharpDj.ViewModels.SubViews
 
         public void Handle(NavigateMainView message)
         {
-            if (ActiveItem is PlaylistViewModel playlistViewModel)
-            {
-                _config.SavePlaylistWithDelay(0);
-            }
+            if (ActiveItem is PlaylistViewModel)
+                _config.SavePlaylist();
 
             _eventAggregator.PublishOnUIThread(RollingMenuVisibilityEnum.Void);
             var newItem = _navigationDictionary[message];

@@ -11,7 +11,11 @@ using System.Threading;
 
 namespace SharpDj
 {
-    public class Config : IHandle<IPlaylistCollectionChanged>, IHandle<INewPlaylistCreated>, IHandle<INickColorChanged>
+    public class Config : 
+        IHandle<IPlaylistCollectionChanged>,
+        IHandle<INewPlaylistCreated>,
+        IHandle<INickColorChanged>,
+        IHandle<IAuthKeyPublish>, IHandle<INotLoggedIn>
     {
         private BindableCollection<PlaylistModel> Playlists { get; set; }
             = new BindableCollection<PlaylistModel>();
@@ -20,6 +24,8 @@ namespace SharpDj
 
         public int Port { get; set; } = 5666;
         public string Ip { get; set; } = "192.168.0.103";
+
+        public string AuthenticationKey { get; set; } = "";
 
         private ColorModel _nickColor = new ColorModel(147, 112, 219);
         public ColorModel NickColor
@@ -56,7 +62,7 @@ namespace SharpDj
 
                 Ip = config["Connection"]["IP"].StringValue;
                 Port = config["Connection"]["Port"].IntValue;
-                NickColor = new ColorModel(config["Settings"]["NickColor"].StringValue);
+                AuthenticationKey = config["Connection"]["AuthenticationKey"].StringValue;
 
                 return true;
             }
@@ -98,12 +104,13 @@ namespace SharpDj
             var config = new Configuration();
             config["Connection"]["IP"].StringValue = Ip;
             config["Connection"]["Port"].IntValue = Port;
+            config["Connection"]["AuthenticationKey"].StringValue = AuthenticationKey;
             config["Settings"]["NickColor"].StringValue = NickColor.ToString();
             config.SaveToFile(FilesPath.Config.ConfigFile);
         }
 
         #region Playlist
-        public void SavePlaylistWithDelay(int delay)
+        public void SavePlaylist()
         {
             if (!File.Exists(FilesPath.Config.PlaylistFile))
             {
@@ -117,9 +124,7 @@ namespace SharpDj
             if (fileString.Equals(json))
                 return;
 
-            Thread.Sleep(delay);
             File.WriteAllText(FilesPath.Config.PlaylistFile, json);
-            Console.WriteLine(FilesPath.Config.PlaylistFile);
         }
 
         /// <returns>True if loaded file, false if not exist or problem occured</returns>
@@ -150,18 +155,36 @@ namespace SharpDj
         public void Handle(IPlaylistCollectionChanged message)
         {
             Playlists = new BindableCollection<PlaylistModel>(message.PlaylistCollection);
-            SavePlaylistWithDelay(0);
+            SavePlaylist();
         }
 
         public void Handle(INewPlaylistCreated message)
         {
             Playlists.Add(message.Model);
-            SavePlaylistWithDelay(0);
+            SavePlaylist();
         }
 
         public void Handle(INickColorChanged message)
         {
             NickColor = message.Color;
+        }
+
+        public void Handle(IAuthKeyPublish message)
+        {
+            AuthenticationKey = message.AuthKey;
+
+            var config = Configuration.LoadFromFile(FilesPath.Config.ConfigFile);
+            config["Connection"]["AuthenticationKey"].StringValue = AuthenticationKey;
+            config.SaveToFile(FilesPath.Config.ConfigFile);
+        }
+
+        public void Handle(INotLoggedIn message)
+        {
+            if (string.IsNullOrWhiteSpace(AuthenticationKey)) return;
+
+            var config = Configuration.LoadFromFile(FilesPath.Config.ConfigFile);
+            config["Connection"]["AuthenticationKey"].StringValue = string.Empty;
+            config.SaveToFile(FilesPath.Config.ConfigFile);
         }
     }
 }

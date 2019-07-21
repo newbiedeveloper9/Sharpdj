@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Caliburn.Micro;
 using Network;
 using SCPackets;
+using SCPackets.AuthKeyLogin;
 using SCPackets.Buffers;
 using SCPackets.ConnectToRoom;
 using SCPackets.CreateRoom;
@@ -39,6 +40,7 @@ namespace SharpDj.Logic
             var roomUserListBuffer = new ClientRoomUserListBufferAction(_eventAggregator);
             var squareRoomBuffer = new ClientSquareRoomBufferAction(_eventAggregator);
             var roomChatNewMessage = new ClientRoomChatNewMessageAction(_eventAggregator);
+            var authKeyLogin = new ClientAuthKeyLoginAction(_eventAggregator);
 
             _handlers.Add(new HandlerModel<LoginResponse>(login.Action));
             _handlers.Add(new HandlerModel<RegisterResponse>(register.Action));
@@ -52,6 +54,7 @@ namespace SharpDj.Logic
             _handlers.Add(new HandlerModel<RoomUserListBufferRequest>(roomUserListBuffer.Action));
             _handlers.Add(new HandlerModel<SquareRoomBufferRequest>(squareRoomBuffer.Action));
             _handlers.Add(new HandlerModel<RoomChatNewMessageRequest>(roomChatNewMessage.Action));
+            _handlers.Add(new HandlerModel<AuthKeyLoginResponse>(authKeyLogin.Action));
         }
 
         public void RegisterPackets(Connection conn, IClient client)

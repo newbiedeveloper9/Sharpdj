@@ -11,7 +11,7 @@ namespace SharpDj.Logic.UI
     {
         public ScrollViewer ScrollViewer { get; private set; }
         public bool AutoScroll { get; set; } = true;
-        public bool CanScrollDown { get; private set; } = false;
+        public bool CanScrollDown { get; private set; } = true;
 
         public ScrollViewerLogic(ScrollViewer scrollViewer)
         {

@@ -5,6 +5,7 @@ using SCPackets.LoginPacket;
 using SharpDj.PubSubModels;
 using System;
 using System.Threading;
+using SCPackets.AuthKeyLogin;
 using SCPackets.SendRoomChatMessage;
 
 namespace SharpDj.Logic
@@ -40,11 +41,8 @@ namespace SharpDj.Logic
 
                 _connection = ConnectionFactory.CreateTcpConnection(_config.Ip, _config.Port, out Result);
 
-                var mess = Result == ConnectionResult.Connected
-                    ? new MessageQueue("Connection", "Successfully connected")
-                    : new MessageQueue("Reconnecting", $"Attempt number {iterator}");
-
-                _eventAggregator.PublishOnUIThread(mess);
+                if (Result != ConnectionResult.Connected)
+                    _eventAggregator.PublishOnUIThread(new MessageQueue("Reconnect", $"Attempt number {iterator}"));
 
             } while (Result != ConnectionResult.Connected);
 
@@ -58,9 +56,8 @@ namespace SharpDj.Logic
 
             _packetsList.RegisterPackets(_connection, this);
             _sender = new ClientSender(_eventAggregator, _connection, this);
-#if DEBUG
-            _connection.Send(new LoginRequest("1515", "151515"), this);
-#endif
+            if (!string.IsNullOrWhiteSpace(_config.AuthenticationKey))
+                _connection.Send(new AuthKeyLoginRequest(_config.AuthenticationKey), this);
         }
     }
 }
