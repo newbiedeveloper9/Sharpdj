@@ -198,6 +198,7 @@
     <Compile Include="Logic\ActionToServer\ClientConnectToRoomAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientDisconnectAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientPingAction.cs" />
+    <Compile Include="Logic\ActionToServer\ClientPullPostsInRoomAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientRoomChatNewMessageAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientRoomUserListBufferAction.cs" />
     <Compile Include="Logic\ActionToServer\ClientSendRoomChatMessageAction.cs" />

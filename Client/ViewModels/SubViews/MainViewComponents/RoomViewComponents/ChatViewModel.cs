@@ -6,7 +6,9 @@ using SharpDj.Logic.UI;
 using SharpDj.Models;
 using SharpDj.PubSubModels;
 using System.Windows.Controls;
+using SCPackets.PullPostsInRoom;
 using SharpDj.Logic.Helpers;
+using Result = SCPackets.SendRoomChatMessage.Result;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
 {
@@ -105,12 +107,28 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
         #endregion .ctor
 
         #region Methods
+
+        public bool CanShowMorePosts()
+        {
+            return true;
+        }
+
+        public void ShowMorePosts()
+        {
+            _eventAggregator.PublishOnUIThread(
+                new SendPacket(
+                    new PullPostsInRoomRequest(UserInfoSingleton.Instance.ActiveRoom.Id, CommentsCollection.Count),
+                    false));
+        }
+
         public void SendChatMessage()
         {
             if (string.IsNullOrWhiteSpace(ChatMessage)) return;
 
             _eventAggregator.PublishOnUIThread(
-                new SendPacket(new SendRoomChatMessageRequest(TextColor, ChatMessage, UserInfoSingleton.Instance.ActiveRoom.Id), false));
+                new SendPacket(
+                    new SendRoomChatMessageRequest(TextColor, ChatMessage, UserInfoSingleton.Instance.ActiveRoom.Id),
+                    false));
         }
 
         public void ScrollToBottom()

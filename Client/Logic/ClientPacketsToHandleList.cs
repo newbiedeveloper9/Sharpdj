@@ -11,6 +11,7 @@ using SCPackets.Disconnect;
 using SCPackets.LoginPacket;
 using SCPackets.NotLoggedIn;
 using SCPackets.Ping;
+using SCPackets.PullPostsInRoom;
 using SCPackets.RegisterPacket;
 using SCPackets.RoomChatNewMessageClient;
 using SCPackets.SendRoomChatMessage;
@@ -41,6 +42,7 @@ namespace SharpDj.Logic
             var squareRoomBuffer = new ClientSquareRoomBufferAction(_eventAggregator);
             var roomChatNewMessage = new ClientRoomChatNewMessageAction(_eventAggregator);
             var authKeyLogin = new ClientAuthKeyLoginAction(_eventAggregator);
+            var pullPostsInRoom = new ClientPullPostsInRoomAction(_eventAggregator);
 
             _handlers.Add(new HandlerModel<LoginResponse>(login.Action));
             _handlers.Add(new HandlerModel<RegisterResponse>(register.Action));
@@ -55,6 +57,7 @@ namespace SharpDj.Logic
             _handlers.Add(new HandlerModel<SquareRoomBufferRequest>(squareRoomBuffer.Action));
             _handlers.Add(new HandlerModel<RoomChatNewMessageRequest>(roomChatNewMessage.Action));
             _handlers.Add(new HandlerModel<AuthKeyLoginResponse>(authKeyLogin.Action));
+            _handlers.Add(new HandlerModel<PullPostsInRoomResponse>(pullPostsInRoom.Action));
         }
 
         public void RegisterPackets(Connection conn, IClient client)

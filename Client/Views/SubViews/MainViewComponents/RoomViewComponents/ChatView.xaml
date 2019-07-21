@@ -18,6 +18,9 @@
 
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="0" Padding="12 6 18 24" cal:Message.Attach="[Loaded]=[ScrollLoaded($source)]">
             <StackPanel>
+                <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Show More" x:Name="ShowMorePosts"/>
+
+
                 <ItemsControl x:Name="CommentsCollection">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>

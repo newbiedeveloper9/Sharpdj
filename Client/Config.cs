@@ -17,6 +17,8 @@ namespace SharpDj
         IHandle<INickColorChanged>,
         IHandle<IAuthKeyPublish>, IHandle<INotLoggedIn>
     {
+        private Configuration _config;
+
         private BindableCollection<PlaylistModel> Playlists { get; set; }
             = new BindableCollection<PlaylistModel>();
 
@@ -51,6 +53,8 @@ namespace SharpDj
         {
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
+
+            _config = new Configuration();
         }
 
         /// <returns>True if loaded correctly</returns>
@@ -58,11 +62,11 @@ namespace SharpDj
         {
             try
             {
-                var config = Configuration.LoadFromFile(FilesPath.Config.ConfigFile);
+                _config = Configuration.LoadFromFile(FilesPath.Config.ConfigFile);
 
-                Ip = config["Connection"]["IP"].StringValue;
-                Port = config["Connection"]["Port"].IntValue;
-                AuthenticationKey = config["Connection"]["AuthenticationKey"].StringValue;
+                Ip = _config["Connection"]["IP"].StringValue;
+                Port = _config["Connection"]["Port"].IntValue;
+                AuthenticationKey = _config["Connection"]["AuthenticationKey"].StringValue;
 
                 return true;
             }
@@ -78,9 +82,7 @@ namespace SharpDj
         {
             try
             {
-                var config = Configuration.LoadFromFile(FilesPath.Config.ConfigFile);
-
-                NickColor = new ColorModel(config["Settings"]["NickColor"].StringValue);
+                NickColor = new ColorModel(_config["Settings"]["NickColor"].StringValue);
 
                 return true;
             }
@@ -101,12 +103,11 @@ namespace SharpDj
 
         public void Build()
         {
-            var config = new Configuration();
-            config["Connection"]["IP"].StringValue = Ip;
-            config["Connection"]["Port"].IntValue = Port;
-            config["Connection"]["AuthenticationKey"].StringValue = AuthenticationKey;
-            config["Settings"]["NickColor"].StringValue = NickColor.ToString();
-            config.SaveToFile(FilesPath.Config.ConfigFile);
+            _config["Connection"]["IP"].StringValue = Ip;
+            _config["Connection"]["Port"].IntValue = Port;
+            _config["Connection"]["AuthenticationKey"].StringValue = AuthenticationKey;
+            _config["Settings"]["NickColor"].StringValue = NickColor.ToString();
+            _config.SaveToFile(FilesPath.Config.ConfigFile);
         }
 
         #region Playlist
@@ -173,18 +174,16 @@ namespace SharpDj
         {
             AuthenticationKey = message.AuthKey;
 
-            var config = Configuration.LoadFromFile(FilesPath.Config.ConfigFile);
-            config["Connection"]["AuthenticationKey"].StringValue = AuthenticationKey;
-            config.SaveToFile(FilesPath.Config.ConfigFile);
+            _config["Connection"]["AuthenticationKey"].StringValue = AuthenticationKey;
+            _config.SaveToFile(FilesPath.Config.ConfigFile);
         }
 
         public void Handle(INotLoggedIn message)
         {
             if (string.IsNullOrWhiteSpace(AuthenticationKey)) return;
 
-            var config = Configuration.LoadFromFile(FilesPath.Config.ConfigFile);
-            config["Connection"]["AuthenticationKey"].StringValue = string.Empty;
-            config.SaveToFile(FilesPath.Config.ConfigFile);
+            _config["Connection"]["AuthenticationKey"].StringValue = string.Empty;
+            _config.SaveToFile(FilesPath.Config.ConfigFile);
         }
     }
 }
