@@ -9,9 +9,21 @@ using SCPackets.RoomChatNewMessageClient;
 
 namespace SharpDj.Models
 {
-    public class CommentModel : PropertyChangedBase
+    public class PostModel : PropertyChangedBase
     {
         #region Properties
+        private int _id;
+        public int Id
+        {
+            get => _id;
+            set
+            {
+                if (_id == value) return;
+                _id = value;
+                NotifyOfPropertyChange(() => Id);
+            }
+        }
+
         private UserClientModel _author;
         public UserClientModel Author
         {
@@ -50,23 +62,25 @@ namespace SharpDj.Models
         #endregion Properties
 
         #region .ctor
-        public CommentModel(UserClientModel author, string comment, ColorModel color)
+        public PostModel(UserClientModel author, string comment, ColorModel color, int id)
         {
             Author = author;
             Comment = comment;
             Color = color;
+            Id = id;
         }
 
-        public CommentModel()
+        public PostModel()
         {
             
         }
 
-        public CommentModel(RoomChatNewMessageRequest request)
+        public PostModel(RoomPostModel post)
         {
-            Author = request.Author;
-            Comment = request.Message;
-            Color = request.Color;
+            Author = post.Author;
+            Comment = post.Message;
+            Color = post.Color;
+            Id = post.Id;
         }
         #endregion .ctor
     }

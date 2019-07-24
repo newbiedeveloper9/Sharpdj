@@ -13,18 +13,30 @@ using Result = SCPackets.SendRoomChatMessage.Result;
 namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
 {
     public class ChatViewModel : PropertyChangedBase,
-        IHandle<INickColorChanged>, IHandle<IChatNewMessagePublish>, IHandle<IRoomChatMessageStatePublish>
+        IHandle<INickColorChanged>, IHandle<IChatNewMessagePublish>, IHandle<IRoomChatMessageStatePublish>,
+        IHandle<IEofPostsRoomPublish>, IHandle<IPullPostsRoomPublish>
     {
         #region _fields
         private readonly IEventAggregator _eventAggregator;
         private ScrollViewerLogic _scrollViewerLogic;
-
         #endregion _fields
 
         #region Properties
 
-        private BindableCollection<CommentModel> _commentsCollection;
-        public BindableCollection<CommentModel> CommentsCollection
+        private bool _canShowMorePosts = true;
+        public bool CanShowMorePosts
+        {
+            get => _canShowMorePosts;
+            set
+            {
+                if (_canShowMorePosts == value) return;
+                _canShowMorePosts = value;
+                NotifyOfPropertyChange(() => CanShowMorePosts);
+            }
+        }
+
+        private BindableCollection<PostModel> _commentsCollection;
+        public BindableCollection<PostModel> CommentsCollection
         {
             get => _commentsCollection;
             set
@@ -79,24 +91,24 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
 
-            CommentsCollection = new BindableCollection<CommentModel>();
+            CommentsCollection = new BindableCollection<PostModel>();
         }
 
         public ChatViewModel()
         {
-            CommentsCollection = new BindableCollection<CommentModel>()
+            CommentsCollection = new BindableCollection<PostModel>()
             {
-                new CommentModel()
+                new PostModel()
                 {
                      Author = new UserClientModel(0,"Crisey", Rank.Admin),
                      Comment = "Testowa wiadomość",
                 },
-                new CommentModel()
+                new PostModel()
                 {
                     Author = new UserClientModel(1,"Jeff Diggins", Rank.Moderator),
                     Comment = "Druga wiadomość",
                 },
-                new CommentModel()
+                new PostModel()
                 {
                     Author = new UserClientModel(2,"Zonk256", Rank.User),
                     Comment = "Ostatnia wiadomość w celu przetestowania test test",
@@ -108,10 +120,6 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
 
         #region Methods
 
-        public bool CanShowMorePosts()
-        {
-            return true;
-        }
 
         public void ShowMorePosts()
         {
@@ -127,7 +135,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
 
             _eventAggregator.PublishOnUIThread(
                 new SendPacket(
-                    new SendRoomChatMessageRequest(TextColor, ChatMessage, UserInfoSingleton.Instance.ActiveRoom.Id),
+                    new SendRoomChatMessageRequest(TextColor, ChatMessage),
                     false));
         }
 
@@ -153,13 +161,26 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
         public void Handle(IChatNewMessagePublish message)
         {
             CommentsCollection.Add(
-                new CommentModel(message.Message));
+                new PostModel(message.Message.Post));
         }
 
         public void Handle(IRoomChatMessageStatePublish message)
         {
             if (message.Result == Result.Success)
                 ChatMessage = string.Empty;
+        }
+        public void Handle(IEofPostsRoomPublish message)
+        {
+            CanShowMorePosts = false;
+        }
+
+        public void Handle(IPullPostsRoomPublish message)
+        {
+            for (var i = 0; i < message.Posts.Count; i++)
+            {
+                var post = message.Posts[i];
+                CommentsCollection.Insert(0+i, new PostModel(post));
+            }
         }
         #endregion Handler's
     }

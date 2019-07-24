@@ -209,6 +209,7 @@
     <Compile Include="PubSubModels\AuthKeyPublish.cs" />
     <Compile Include="PubSubModels\ChatNewMessagePublish.cs" />
     <Compile Include="PubSubModels\CreatedRoomPublish.cs" />
+    <Compile Include="PubSubModels\EOFPostsRoomPublish.cs" />
     <Compile Include="PubSubModels\ManageRoomsPublish.cs" />
     <Compile Include="PubSubModels\ManageRoomsUpdatedPublish.cs" />
     <Compile Include="PubSubModels\MinimizeChatPublish.cs" />
@@ -234,7 +235,7 @@
     <Compile Include="Logic\Helpers\UserInfoSingleton.cs" />
     <Compile Include="Logic\Helpers\YoutubeSingleton.cs" />
     <Compile Include="Logic\UI\ScrollViewerLogic.cs" />
-    <Compile Include="Models\CommentModel.cs" />
+    <Compile Include="Models\PostModel.cs" />
     <Compile Include="Models\ConversationModel.cs" />
     <Compile Include="Models\MessageModel.cs" />
     <Compile Include="Models\NewsModel.cs" />
@@ -244,6 +245,7 @@
     <Compile Include="Models\TrackModel.cs" />
     <Compile Include="PubSubModels\MessageQueue.cs" />
     <Compile Include="PubSubModels\LoginPublish.cs" />
+    <Compile Include="PubSubModels\PullPostsRoomPublish.cs" />
     <Compile Include="PubSubModels\Reconnect.cs" />
     <Compile Include="PubSubModels\RefreshOutsideRoomsPublish.cs" />
     <Compile Include="PubSubModels\RoomChatMessageStatePublish.cs" />

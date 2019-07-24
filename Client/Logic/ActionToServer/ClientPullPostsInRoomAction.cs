@@ -20,6 +20,13 @@ namespace SharpDj.Logic.ActionToServer
         {
             if (response.Result == Result.Success)
             {
+                _eventAggregator.PublishOnUIThread(
+                    new PullPostsRoomPublish(response.Posts));
+            }
+            else if (response.Result == Result.EOF)
+            {
+                _eventAggregator.PublishOnUIThread(
+                    new EofPostsRoomPublish());
             }
         }
     }
