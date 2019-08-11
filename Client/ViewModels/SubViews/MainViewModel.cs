@@ -44,7 +44,7 @@ namespace SharpDj.ViewModels.SubViews
             ConversationsViewModel = new ConversationsViewModel();
 
 
-            ActivateItem((PropertyChangedBase)MajorScreenViewModel);
+            base.ActivateItem((PropertyChangedBase)MajorScreenViewModel);
         }
 
         public MainViewModel(IEventAggregator eventAggregator, Config config)
@@ -72,7 +72,7 @@ namespace SharpDj.ViewModels.SubViews
                 {NavigateMainView.ManageRooms, ManageRoomsViewModel },
             };
 
-            ActivateItem((PropertyChangedBase)_navigationDictionary[NavigateMainView.Home]);
+            base.ActivateItem((PropertyChangedBase)_navigationDictionary[NavigateMainView.Home]);
         }
         #endregion ctor
 
@@ -104,7 +104,7 @@ namespace SharpDj.ViewModels.SubViews
 
             _eventAggregator.PublishOnUIThread(RollingMenuVisibilityEnum.Void);
             var newItem = _navigationDictionary[message];
-            ActivateItem((PropertyChangedBase)newItem);
+            base.ActivateItem((PropertyChangedBase)newItem);
         }
 
         public void Handle(IRoomInfoForOpen message)

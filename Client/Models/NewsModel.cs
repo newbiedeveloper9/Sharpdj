@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Caliburn.Micro;
+using SCPackets.Models;
 
 namespace SharpDj.Models
 {
     public class NewsModel : PropertyChangedBase
     {
-        private int _id;
+        private int _id = -1;
         public int Id
         {
             get => _id;
@@ -59,7 +60,18 @@ namespace SharpDj.Models
 
         public NewsModel()
         {
-            
+
+        }
+
+        public static NewsModel CreateModel(RoomOutsideModel model)
+        {
+            return new NewsModel()
+            {
+                Title = model.Name,
+                ImageSource = model.ImagePath,
+                Id = model.Id,
+                Description = "test",
+            };
         }
     }
 }

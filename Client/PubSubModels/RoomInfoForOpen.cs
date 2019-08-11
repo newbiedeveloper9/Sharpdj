@@ -13,12 +13,14 @@ namespace SharpDj.PubSubModels
     public class RoomInfoForOpen : IRoomInfoForOpen
     {
         public List<UserClientModel> UserList { get; set; }
+        public RoomOutsideModel OutsideModel { get; set; }
 
         public RoomInfoForOpen(RoomOutsideModel room, List<UserClientModel> userList)
         {
             if (room != null)
                 UserInfoSingleton.Instance.ActiveRoom = RoomModel.ToClientModel(room);
 
+            OutsideModel = room;
             UserList = userList;
         }
 
@@ -31,5 +33,6 @@ namespace SharpDj.PubSubModels
     public interface IRoomInfoForOpen
     {
         List<UserClientModel> UserList { get; set; }
+        RoomOutsideModel OutsideModel { get; set; }
     }
 }

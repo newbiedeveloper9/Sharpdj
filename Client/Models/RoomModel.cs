@@ -45,7 +45,7 @@ namespace SharpDj.Models
             }
         }
 
-        private Activity _status;
+        private Activity _status = Activity.Nothing;
         public Activity Status
         {
             get => _status;
@@ -120,9 +120,9 @@ namespace SharpDj.Models
 
         public enum Activity
         {
+            Nothing,
             Active,
-            Sleep,
-            InActive
+            Before,
         }
 
         public RoomOutsideModel ToSCPacketOutsideModel()

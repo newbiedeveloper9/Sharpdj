@@ -18,9 +18,9 @@ namespace SharpDj.Converters
             {
                 case RoomModel.Activity.Active:
                     return new SolidColorBrush(new Color() { R = 0, G = 255, B = 50, A = byte.MaxValue });
-                case RoomModel.Activity.Sleep:
+                case RoomModel.Activity.Before:
                     return new SolidColorBrush(new Color() { R = 255, G = 170, B = 0, A = byte.MaxValue });
-                case RoomModel.Activity.InActive:
+                case RoomModel.Activity.Nothing:
                     return new SolidColorBrush(new Color() { R = 126, G = 126, B = 126, A = byte.MaxValue });
                 default:
                     throw new ArgumentOutOfRangeException();

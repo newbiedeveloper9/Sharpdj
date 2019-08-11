@@ -15,7 +15,8 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
     public class RoomSquareViewModel : PropertyChangedBase,
         IHandle<IRefreshOutsideRoomsPublish>,
         IHandle<IUpdateOutsideRoomPublish>,
-        IHandle<INewRoomCreatedPublish>
+        IHandle<INewRoomCreatedPublish>,
+        IHandle<IRoomInfoForOpen>
     {
         private readonly IEventAggregator _eventAggregator;
 
@@ -53,7 +54,8 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
                     PreviousTrack = previous,
                     Name = "Test room name",
                     Id = 3,
-                    ImageSource = dicPic
+                    ImageSource = dicPic,
+                    Status = RoomModel.Activity.Active,
                 },
                 new RoomModel(){
                     AmountOfAdministration = 2,
@@ -63,7 +65,8 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
                     PreviousTrack = next,
                     Name = "12345678901234567890123456789012345678901234567890",
                     Id = 2,
-                    ImageSource = dicPic
+                    ImageSource = dicPic,
+
                 }
             };
         }
@@ -116,6 +119,19 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
             if (ListCollectionView == null) return;
             ListCollectionView.IsLiveSorting = true;
             ListCollectionView.CustomSort = new RoomModelComparer();
+        }
+
+        public void Handle(IRoomInfoForOpen message)
+        {
+            if (message.OutsideModel == null) return;
+
+            foreach (var roomModel in RoomInstancesCollection.Where(x => x.Status == RoomModel.Activity.Active))
+                roomModel.Status = RoomModel.Activity.Before;
+
+            var connectedRoom = RoomInstancesCollection.FirstOrDefault(x => x.Id == message.OutsideModel.Id);
+            if (connectedRoom == null) return;
+
+            connectedRoom.Status = RoomModel.Activity.Active;
         }
     }
 }

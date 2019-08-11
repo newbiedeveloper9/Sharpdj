@@ -13,19 +13,22 @@
              d:DesignHeight="550" d:DesignWidth="1100">
     <Grid Background="#171717">
         <StackPanel HorizontalAlignment="Center">
-            <TextBlock Text="Nowości ze świata" Margin="0 0 0 24" FontSize="32" />
+            <TextBlock Text="Aktywny pokój" Margin="0 0 0 24" FontSize="32" />
+
             <!--News from world-->
             <StackPanel Orientation="Horizontal" Margin="0 0 28 0">
-                <materialDesign:Card  materialDesign:ShadowAssist.ShadowDepth="Depth4">
+
+                <materialDesign:Card  materialDesign:ShadowAssist.ShadowDepth="Depth4"  Cursor="Hand"
+                                      cal:Message.Attach="[Event MouseLeftButtonUp]=[OnActiveRoomClick]">
                     <StackPanel>
-                        <Grid Height="240" Width="724" Cursor="Hand"
+                        <Grid  Height="240" Width="724"
                         HorizontalAlignment="Left">
                             <!--Blured Image-->
                             <Grid.Background>
                                 <VisualBrush Stretch="UniformToFill">
                                     <VisualBrush.Visual>
                                         <Grid ClipToBounds="True">
-                                            <Image Source="{Binding Path=PrimaryNews.ImageSource, Converter={StaticResource nullImageConverter}, IsAsync=True}">
+                                            <Image Source="{Binding Path=ActiveRoom.ImageSource, Converter={StaticResource nullImageConverter}, IsAsync=True}">
                                                 <Image.Effect>
                                                     <BlurEffect Radius="11" RenderingBias="Performance" />
                                                 </Image.Effect>
@@ -58,8 +61,8 @@
 
                                 <!--News of the day TEXT-->
                                 <StackPanel Margin="24 12 12 12">
-                                    <TextBlock Text="{Binding Path=PrimaryNews.Title}" FontWeight="Regular" FontSize="20" TextTrimming="WordEllipsis"/>
-                                    <TextBlock  Text="{Binding Path=PrimaryNews.Description}"  FontWeight="Light" FontSize="16" TextTrimming="WordEllipsis"/>
+                                    <TextBlock Text="{Binding Path=ActiveRoom.Title}" FontWeight="Regular" FontSize="20" TextTrimming="WordEllipsis" Foreground="{StaticResource PrimaryHueLightBrush}"/>
+                                    <TextBlock  Text="{Binding Path=ActiveRoom.Description}"  FontWeight="Light" FontSize="16" TextTrimming="WordEllipsis" Opacity="0.87" Foreground="{StaticResource PrimaryHueLightBrush}"/>
                                 </StackPanel>
                             </Grid>
                         </Grid>
@@ -69,10 +72,10 @@
                 <StackPanel Margin="24 0 0 0" Visibility="{Binding SideNewsVisibility,
                                     Converter={converters:EnumToVisibilityConverter},
                                     ConverterParameter='Right'}">
-                    <ItemsControl x:Name="NewsCollection">
+                    <ItemsControl x:Name="RoomsCollection">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <materialDesign:Card Margin="0 0 0 12"  materialDesign:ShadowAssist.ShadowDepth="Depth3" Cursor="Hand">
+                                <materialDesign:Card Margin="0 0 0 12"  materialDesign:ShadowAssist.ShadowDepth="Depth3" Cursor="Hand" cal:Message.Attach="[Event MouseLeftButtonUp]=[ConnectToRoomRequest($dataContext)]">
                                     <Grid Background="Black" Height="114" Width="248" >
                                         <Image Source="{Binding ImageSource, Converter={StaticResource nullImageConverter}, IsAsync=True}" Stretch="Fill"/>
                                     </Grid>
@@ -87,7 +90,7 @@
                         Visibility="{Binding SideNewsVisibility,
                                     Converter={converters:EnumToVisibilityConverter},
                                     ConverterParameter='Bottom'}">
-                <ItemsControl ItemsSource="{Binding Path=NewsCollection}">
+                <ItemsControl ItemsSource="{Binding Path=RoomsCollection}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Horizontal"/>

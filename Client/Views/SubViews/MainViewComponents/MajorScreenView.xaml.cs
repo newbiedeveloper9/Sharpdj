@@ -23,7 +23,6 @@ namespace SharpDj.Views.SubViews.MainViewComponents
         public MajorScreenView()
         {
             InitializeComponent();
-            
-        }
+                    }
     }
 }

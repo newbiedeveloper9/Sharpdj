@@ -14,8 +14,8 @@ namespace SharpDj.ViewModels.SubViews.LeftMenuComponents
             ActiveRoomCollection = new BindableCollection<RoomModel>()
             {
                 new RoomModel(){ImageSource = dicPic, Name = "Testowy pokój 1", Status = RoomModel.Activity.Active},
-                new RoomModel(){ImageSource = dicPic, Name = "Testowy pokój 2", Status = RoomModel.Activity.Sleep},
-                new RoomModel(){ImageSource = dicPic, Name = "Testowy pokój 3", Status = RoomModel.Activity.InActive},
+                new RoomModel(){ImageSource = dicPic, Name = "Testowy pokój 2", Status = RoomModel.Activity.Before},
+                new RoomModel(){ImageSource = dicPic, Name = "Testowy pokój 3", Status = RoomModel.Activity.Nothing},
             };
         }
     }

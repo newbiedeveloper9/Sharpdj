@@ -6,106 +6,113 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
              xmlns:majorViewComponents="clr-namespace:SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents"
+             xmlns:converters="clr-namespace:SharpDj.Converters"
              mc:Ignorable="d" 
              cal:Bind.AtDesignTime="True"
              d:DataContext="{d:DesignInstance Type=majorViewComponents:RoomSquareViewModel, IsDesignTimeCreatable=True}"
-             d:DesignHeight="235" d:DesignWidth="520">
+             d:DesignHeight="500" d:DesignWidth="520">
     <ItemsControl x:Name="RoomInstancesCollection">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>  
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <WrapPanel/>
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <materialDesign:Card Margin="0 0 24 24" Width="488"  materialDesign:ShadowAssist.ShadowDepth="Depth3" cal:Message.Attach="[Event MouseUp]=[Action OpenRoom($dataContext)]" Cursor="Hand" 
+                                     Visibility="{Binding Status, Converter={converters:EnumToVisibilityConverter}, ConverterParameter='Nothing,Before'}">
+                    <StackPanel>
+                            <Grid Width="488" Height="200">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="122" />
+                                </Grid.RowDefinitions>
 
-                    <materialDesign:Card Margin="0 0 24 24" Width="488"  materialDesign:ShadowAssist.ShadowDepth="Depth3" cal:Message.Attach="[Event MouseUp]=[Action OpenRoom($dataContext)]" Cursor="Hand">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="88" />
-                                <RowDefinition Height="122" />
-                            </Grid.RowDefinitions>
-                            <Grid Grid.Row="0">
-                            <Grid.Background>
-                                <VisualBrush Stretch="None" Opacity="0.87">
-                                    <VisualBrush.Visual>
-                                        <Grid ClipToBounds="True">
-                                            <Image Source="{Binding ImageSource, Converter={StaticResource nullImageConverter}, IsAsync=True}">
-                                                <Image.Effect>
-                                                    <BlurEffect RenderingBias="Performance" Radius="11"/>
-                                                </Image.Effect>
-                                            </Image>
-                                        </Grid>
-                                    </VisualBrush.Visual>
-                                </VisualBrush>
-                            </Grid.Background>
+                                <Grid Grid.Row="0">
+                                    <Grid.Background>
+                                        <VisualBrush Stretch="None" Opacity="0.87">
+                                            <VisualBrush.Visual>
+                                                <Grid ClipToBounds="True">
+                                                    <Image Source="{Binding ImageSource, Converter={StaticResource nullImageConverter}, IsAsync=True}">
+                                                        <Image.Effect>
+                                                            <BlurEffect RenderingBias="Performance" Radius="11"/>
+                                                        </Image.Effect>
+                                                    </Image>
+                                                </Grid>
+                                            </VisualBrush.Visual>
+                                        </VisualBrush>
+                                    </Grid.Background>
 
-                            <StackPanel  VerticalAlignment="Center">
-                                    <TextBlock Margin="24 24 24 0" TextTrimming="CharacterEllipsis" TextWrapping="WrapWithOverflow" Height="26" Text="{Binding Name, IsAsync=True}" TextAlignment="Center"
+                                    <StackPanel  VerticalAlignment="Center">
+                                        <TextBlock Margin="24 12 24 0" TextTrimming="CharacterEllipsis" TextWrapping="WrapWithOverflow" Height="26" Text="{Binding Name, IsAsync=True}" TextAlignment="Center"
                                                        FontSize="19">
-                                        <TextBlock.Effect>
-                                            <DropShadowEffect ShadowDepth="3" BlurRadius="8" RenderingBias="Performance"/>
-                                        </TextBlock.Effect>
-                                    </TextBlock>
+                                            <TextBlock.Effect>
+                                                <DropShadowEffect ShadowDepth="3" BlurRadius="8" RenderingBias="Performance"/>
+                                            </TextBlock.Effect>
+                                        </TextBlock>
 
-                                    <StackPanel Orientation="Horizontal" Margin="0 0 0 0" HorizontalAlignment="Center">
-                                        <StackPanel Orientation="Horizontal" Margin="6 6 6 6" >
-                                            <TextBlock Text="{Binding AmountOfPeople, IsAsync=True}" FontSize="16">
-                                                <TextBlock.Effect>
-                                                    <DropShadowEffect ShadowDepth="2" BlurRadius="4" RenderingBias="Performance"/>
-                                                </TextBlock.Effect>
-                                            </TextBlock>
-                                            <materialDesign:PackIcon Kind="AccountSupervisor" Margin="2 0 0 0" VerticalAlignment="Center">
-                                                <materialDesign:PackIcon.Effect>
-                                                    <DropShadowEffect ShadowDepth="3" BlurRadius="5" RenderingBias="Performance"/>
-                                                </materialDesign:PackIcon.Effect>
-                                            </materialDesign:PackIcon>
-                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="0 0 0 0" HorizontalAlignment="Center">
+                                            <StackPanel Orientation="Horizontal" Margin="6 6 6 6" >
+                                                <TextBlock Text="{Binding AmountOfPeople, IsAsync=True}" FontSize="16">
+                                                    <TextBlock.Effect>
+                                                        <DropShadowEffect ShadowDepth="2" BlurRadius="4" RenderingBias="Performance"/>
+                                                    </TextBlock.Effect>
+                                                </TextBlock>
+                                                <materialDesign:PackIcon Kind="AccountSupervisor" Margin="2 0 0 0" VerticalAlignment="Center">
+                                                    <materialDesign:PackIcon.Effect>
+                                                        <DropShadowEffect ShadowDepth="3" BlurRadius="5" RenderingBias="Performance"/>
+                                                    </materialDesign:PackIcon.Effect>
+                                                </materialDesign:PackIcon>
+                                            </StackPanel>
 
-                                        <StackPanel Orientation="Horizontal" Margin="6 6 6 6">
-                                            <TextBlock Text="{Binding AmountOfAdministration, IsAsync=True}" FontSize="16">
-                                                <TextBlock.Effect>
-                                                    <DropShadowEffect ShadowDepth="2" BlurRadius="4" RenderingBias="Performance"/>
-                                                </TextBlock.Effect>
-                                            </TextBlock>
-                                            <materialDesign:PackIcon Kind="AccountStar" Margin="2 0 0 0" VerticalAlignment="Center">
-                                                <materialDesign:PackIcon.Effect>
-                                                    <DropShadowEffect ShadowDepth="3" BlurRadius="5" RenderingBias="Performance"/>
-                                                </materialDesign:PackIcon.Effect>
-                                            </materialDesign:PackIcon>
+                                            <StackPanel Orientation="Horizontal" Margin="6 6 6 6">
+                                                <TextBlock Text="{Binding AmountOfAdministration, IsAsync=True}" FontSize="16">
+                                                    <TextBlock.Effect>
+                                                        <DropShadowEffect ShadowDepth="2" BlurRadius="4" RenderingBias="Performance"/>
+                                                    </TextBlock.Effect>
+                                                </TextBlock>
+                                                <materialDesign:PackIcon Kind="AccountStar" Margin="2 0 0 0" VerticalAlignment="Center">
+                                                    <materialDesign:PackIcon.Effect>
+                                                        <DropShadowEffect ShadowDepth="3" BlurRadius="5" RenderingBias="Performance"/>
+                                                    </materialDesign:PackIcon.Effect>
+                                                </materialDesign:PackIcon>
+                                            </StackPanel>
                                         </StackPanel>
                                     </StackPanel>
-                                </StackPanel>
-                            </Grid>
+                                </Grid>
 
-                            <Grid Grid.Row="1" Background="#151515" >
-                                <Border Background="{DynamicResource PrimaryHueDarkBrush}" Opacity="0.195">
-                                    <Border.Effect>
-                                        <BlurEffect RenderingBias="Performance" Radius="5" KernelType="Box"/>
-                                    </Border.Effect>
-                                </Border>
-                                <DockPanel >
-                                    <StackPanel Margin="24 12 0 0">
-                                        <TextBlock Text="Next track" Margin="0 0 0 24" FontSize="13"  Opacity="0.7"
+                                <Grid Grid.Row="1" Background="#151515" >
+                                    <Border Background="{DynamicResource PrimaryHueDarkBrush}" Opacity="0.195">
+                                        <Border.Effect>
+                                            <BlurEffect RenderingBias="Performance" Radius="5" KernelType="Box"/>
+                                        </Border.Effect>
+                                    </Border>
+                                    <DockPanel >
+                                        <StackPanel Margin="24 12 0 0">
+                                            <TextBlock Text="Next track" Margin="0 0 0 24" FontSize="13"  Opacity="0.7"
                                                        HorizontalAlignment="Right" />
-                                        <TextBlock Text="Current track" Margin="0 0 0 24" FontSize="13"  Opacity="0.7"
+                                            <TextBlock Text="Current track" Margin="0 0 0 24" FontSize="13"  Opacity="0.7"
                                                        HorizontalAlignment="Right" />
-                                        <TextBlock Text="Previous track" Margin="0 0 0 24" FontSize="13"  Opacity="0.7"
+                                            <TextBlock Text="Previous track" Margin="0 0 0 24" FontSize="13"  Opacity="0.7"
                                                        HorizontalAlignment="Right" />
-                                    </StackPanel>
-                                    <StackPanel Margin="12 12 24 0">
-                                        <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left" Opacity="0.7" TextTrimming="CharacterEllipsis"
+                                        </StackPanel>
+                                        <StackPanel Margin="12 12 24 0">
+                                            <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left" Opacity="0.7" TextTrimming="CharacterEllipsis"
                                                        Text="{Binding NextTrack.Name, IsAsync=True}" />
-                                    <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left"  Opacity="0.7" TextTrimming="CharacterEllipsis"
+                                            <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left"  Opacity="0.7" TextTrimming="CharacterEllipsis"
                                                        Text="{Binding CurrentTrack.Name, IsAsync=True}" />
-                                    <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left"  Opacity="0.7" TextTrimming="CharacterEllipsis"
+                                            <TextBlock FontSize="13" Margin="0 0 0 24" HorizontalAlignment="Left"  Opacity="0.7" TextTrimming="CharacterEllipsis"
                                                        Text="{Binding PreviousTrack.Name, IsAsync=True}" />
-                                    </StackPanel>
-                                </DockPanel>
+                                        </StackPanel>
+                                    </DockPanel>
+                                </Grid>
+
+
                             </Grid>
-                        </Grid>
-                    </materialDesign:Card>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+                    </StackPanel>
+
+                </materialDesign:Card>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
 </UserControl>
