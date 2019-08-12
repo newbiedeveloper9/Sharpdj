@@ -8,7 +8,7 @@ using SharpDj.PubSubModels;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
 {
-    public class NewsCarouselViewModel : PropertyChangedBase,
+    public class NewsCarouselViewModel : Screen,
         IHandle<IRoomInfoForOpen>
     {
         private readonly IEventAggregator _eventAggregator;
@@ -25,16 +25,22 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
                 new NewsModel(){ImageSource = dicPic},
                 new NewsModel(){ImageSource = dicPic},
             };
+
+            ActiveRoom = new NewsModel();
         }
 
         public NewsCarouselViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
+
+            ActiveRoom = new NewsModel();
+            ActiveRoom.IsCreated = false;
         }
 
         #region Properties
-        private NewsModel _activeRoom = new NewsModel();
+
+        private NewsModel _activeRoom;
         public NewsModel ActiveRoom
         {
             get => _activeRoom;
@@ -70,14 +76,14 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
                 SideNewsVisibilityEnum.Right : SideNewsVisibilityEnum.Bottom;
         }
 
-        /*protected override void OnViewLoaded(object view)
+        protected override void OnViewLoaded(object view)
         {
             if (view == null) return;
 
             base.OnViewLoaded(view);
             App.Current.MainWindow.SizeChanged += WindowResize;
             WindowResize(null, null);
-        }*/
+        }
 
         private SideNewsVisibilityEnum _sideNewsVisibility;
         public SideNewsVisibilityEnum SideNewsVisibility

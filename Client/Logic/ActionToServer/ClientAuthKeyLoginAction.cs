@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using Caliburn.Micro;
 using Network;
 using SCPackets.AuthKeyLogin;
@@ -31,19 +32,21 @@ namespace SharpDj.Logic.ActionToServer
             if (response.Result == Result.Success)
             {
                 if (data.RoomOutsideModelList?.Count > 0)
-                    _eventAggregator.PublishOnUIThread(new RefreshOutsideRoomsPublish(data.RoomOutsideModelList));
+                    _eventAggregator.PublishOnUIThreadAsync(new RefreshOutsideRoomsPublish(data.RoomOutsideModelList));
 
-                _eventAggregator.PublishOnUIThread(new ManageRoomsPublish(data.UserRoomList));
-                _eventAggregator.PublishOnUIThread(new LoginPublish(data.User));
+                _eventAggregator.PublishOnUIThreadAsync(new ManageRoomsPublish(data.UserRoomList));
+                _eventAggregator.PublishOnUIThreadAsync(new LoginPublish(data.User));
+
+                //BeginPublish because we passing UI to load first, then change View to AfterLogin
 
                 return;
             }
             if (response.Result == Result.AlreadyLogged)
             {
-                _eventAggregator.PublishOnUIThread(new SendPacket(new DisconnectRequest()));
+                _eventAggregator.PublishOnUIThreadAsync(new SendPacket(new DisconnectRequest()));
             }
 
-            _eventAggregator.PublishOnUIThread(dictionaryMessages[response.Result]);
+            _eventAggregator.PublishOnUIThreadAsync(dictionaryMessages[response.Result]);
         }
     }
 }

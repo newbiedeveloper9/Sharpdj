@@ -10,7 +10,7 @@ namespace SharpDj.Models
 {
     public class NewsModel : PropertyChangedBase
     {
-        private int _id = -1;
+        private int _id;
         public int Id
         {
             get => _id;
@@ -19,6 +19,9 @@ namespace SharpDj.Models
                 if (_id == value) return;
                 _id = value;
                 NotifyOfPropertyChange(() => Id);
+
+                IsCreated = value != -1;
+                NotifyOfPropertyChange(() => IsCreated);
             }
         }
 
@@ -55,6 +58,18 @@ namespace SharpDj.Models
                 if (_description == value) return;
                 _description = value;
                 NotifyOfPropertyChange(() => Description);
+            }
+        }
+
+        private bool _isCreated = false;
+        public bool IsCreated
+        {
+            get => _isCreated;
+            set
+            {
+                if (_isCreated == value) return;
+                _isCreated = value;
+                NotifyOfPropertyChange(() => IsCreated);
             }
         }
 

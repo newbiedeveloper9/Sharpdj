@@ -13,22 +13,24 @@
              d:DesignHeight="550" d:DesignWidth="1100">
     <Grid Background="#171717">
         <StackPanel HorizontalAlignment="Center">
-            <TextBlock Text="Aktywny pokój" Margin="0 0 0 24" FontSize="32" />
+            <TextBlock Text="Aktywny pokój" Margin="0 0 0 24" FontSize="32" 
+                       Visibility="{Binding ActiveRoom.IsCreated, Converter={converters:BoolVisibilityConverter}}"/>
 
             <!--News from world-->
             <StackPanel Orientation="Horizontal" Margin="0 0 28 0">
 
                 <materialDesign:Card  materialDesign:ShadowAssist.ShadowDepth="Depth4"  Cursor="Hand"
-                                      cal:Message.Attach="[Event MouseLeftButtonUp]=[OnActiveRoomClick]">
+                                      cal:Message.Attach="[Event MouseLeftButtonUp]=[OnActiveRoomClick]"
+                                      Visibility="{Binding ActiveRoom.IsCreated, Converter={converters:BoolVisibilityConverter}}">
                     <StackPanel>
-                        <Grid  Height="240" Width="724"
+                        <Grid  Height="240" Width="724" 
                         HorizontalAlignment="Left">
                             <!--Blured Image-->
                             <Grid.Background>
                                 <VisualBrush Stretch="UniformToFill">
                                     <VisualBrush.Visual>
                                         <Grid ClipToBounds="True">
-                                            <Image Source="{Binding Path=ActiveRoom.ImageSource, Converter={StaticResource nullImageConverter}, IsAsync=True}">
+                                            <Image Source="{Binding Path=ActiveRoom.ImageSource, Converter={StaticResource nullImageConverter}}">
                                                 <Image.Effect>
                                                     <BlurEffect Radius="11" RenderingBias="Performance" />
                                                 </Image.Effect>

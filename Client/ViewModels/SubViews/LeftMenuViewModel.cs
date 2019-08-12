@@ -16,27 +16,28 @@ namespace SharpDj.ViewModels.SubViews
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
 
-/*            PlaylistCollection = new BindableCollection<PlaylistModel>()
-            {
-                new PlaylistModel(){Name = "test"},
-                new PlaylistModel(){Name = "Testowa długa playlista xd", IsActive = true},
-                new PlaylistModel(){Name = "xd"},
-            };*/
+            /*            PlaylistCollection = new BindableCollection<PlaylistModel>()
+                        {
+                            new PlaylistModel(){Name = "test"},
+                            new PlaylistModel(){Name = "Testowa długa playlista xd", IsActive = true},
+                            new PlaylistModel(){Name = "xd"},
+                        };*/
         }
 
         public LeftMenuViewModel()
         {
-            
+
         }
 
-        public BindableCollection<PlaylistModel> PlaylistCollection { get; private set; }
+        public BindableCollection<PlaylistModel> PlaylistCollection { get; private set; } = new BindableCollection<PlaylistModel>();
         public RoomRectangleViewModel RoomRectangleViewModel { get; private set; } = new RoomRectangleViewModel();
         public ObservedRoomViewModel ObservedRoomViewModel { get; private set; } = new ObservedRoomViewModel();
 
         public void ActivatePlaylist(PlaylistModel model)
         {
-            if (PlaylistCollection != null)
-                PlaylistCollection.FirstOrDefault(x => x.IsActive).IsActive = false;
+            var active = PlaylistCollection.FirstOrDefault(x => x.IsActive);
+            if (active != null)
+                active.IsActive = false;
             model.IsActive = true;
         }
 
