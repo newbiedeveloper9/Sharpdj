@@ -111,7 +111,10 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
             PlaylistCollection = new BindableCollection<PlaylistModel>(message.PlaylistCollection);
 
             var activePlaylist = PlaylistCollection.FirstOrDefault(x => x.IsActive);
-            if (activePlaylist == null) return;
+            if (activePlaylist == null && PlaylistCollection.Count > 0)
+            {
+                PlaylistCollection[0].IsActive = true;
+            }
 
             OnActivePlaylistChanged(activePlaylist);
         }

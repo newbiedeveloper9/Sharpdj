@@ -25,22 +25,17 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
                 new NewsModel(){ImageSource = dicPic},
                 new NewsModel(){ImageSource = dicPic},
             };
-
-            ActiveRoom = new NewsModel();
         }
 
         public NewsCarouselViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
-
-            ActiveRoom = new NewsModel();
-            ActiveRoom.IsCreated = false;
         }
 
         #region Properties
 
-        private NewsModel _activeRoom;
+        private NewsModel _activeRoom = new NewsModel();
         public NewsModel ActiveRoom
         {
             get => _activeRoom;
@@ -119,7 +114,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.MajorViewComponents
 
             if (RoomsCollection.Count >= 2)
                 RoomsCollection.RemoveAt(1);
-            if (ActiveRoom.Id != -1)
+            if (ActiveRoom.Id != -1 && ActiveRoom.IsCreated)
                 RoomsCollection.Insert(0, ActiveRoom);
 
             ActiveRoom = NewsModel.CreateModel(message.OutsideModel);

@@ -31,22 +31,23 @@ namespace SharpDj.Logic.ActionToServer
 
             if (response.Result == Result.Success)
             {
+#if !DEBUG
+                Thread.Sleep(450);//todo wait for call instead of sleep
+#endif
                 if (data.RoomOutsideModelList?.Count > 0)
-                    _eventAggregator.PublishOnUIThreadAsync(new RefreshOutsideRoomsPublish(data.RoomOutsideModelList));
+                    _eventAggregator.BeginPublishOnUIThread(new RefreshOutsideRoomsPublish(data.RoomOutsideModelList));
 
-                _eventAggregator.PublishOnUIThreadAsync(new ManageRoomsPublish(data.UserRoomList));
-                _eventAggregator.PublishOnUIThreadAsync(new LoginPublish(data.User));
-
-                //BeginPublish because we passing UI to load first, then change View to AfterLogin
+                _eventAggregator.BeginPublishOnUIThread(new ManageRoomsPublish(data.UserRoomList));
+                _eventAggregator.BeginPublishOnUIThread(new LoginPublish(data.User));
 
                 return;
             }
             if (response.Result == Result.AlreadyLogged)
             {
-                _eventAggregator.PublishOnUIThreadAsync(new SendPacket(new DisconnectRequest()));
+                _eventAggregator.BeginPublishOnUIThread(new SendPacket(new DisconnectRequest()));
             }
 
-            _eventAggregator.PublishOnUIThreadAsync(dictionaryMessages[response.Result]);
+            _eventAggregator.BeginPublishOnUIThread(dictionaryMessages[response.Result]);
         }
     }
 }
