@@ -102,8 +102,8 @@
       <HintPath>..\Important (bins)\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Network, Version=6.1.2.15, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Network.6.1.2.15\lib\net46\Network.dll</HintPath>
+    <Reference Include="Network, Version=6.1.3.18, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Network.6.1.3.18\lib\net46\Network.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>

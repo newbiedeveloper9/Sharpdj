@@ -5,6 +5,7 @@ using SCPackets.LoginPacket;
 using SharpDj.PubSubModels;
 using System;
 using System.Threading;
+using Network.RSA;
 using SCPackets.AuthKeyLogin;
 using SCPackets.SendRoomChatMessage;
 
@@ -39,7 +40,7 @@ namespace SharpDj.Logic
                     Thread.Sleep(3900);
                 iterator++;
 
-                _connection = ConnectionFactory.CreateTcpConnection(_config.Ip, _config.Port, out Result);
+                _connection = ConnectionFactory.CreateSecureTcpConnection(_config.Ip, _config.Port, out Result, 2048);
 
                 if (Result != ConnectionResult.Connected)
                     _eventAggregator.PublishOnUIThread(new MessageQueue("Reconnect", $"Attempt number {iterator}"));
