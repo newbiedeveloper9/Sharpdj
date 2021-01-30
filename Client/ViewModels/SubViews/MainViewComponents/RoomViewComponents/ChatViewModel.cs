@@ -1,14 +1,13 @@
-﻿using System;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using SCPackets.Models;
-using SCPackets.SendRoomChatMessage;
 using SharpDj.Logic.UI;
 using SharpDj.Models;
 using SharpDj.PubSubModels;
 using System.Windows.Controls;
-using SCPackets.PullPostsInRoom;
+using SCPackets.Packets.CreateRoomMessage;
+using SCPackets.Packets.PullRoomChat;
+using SharpDj.Common.Enums;
 using SharpDj.Logic.Helpers;
-using Result = SCPackets.SendRoomChatMessage.Result;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
 {
@@ -71,8 +70,8 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
             }
         }
 
-        private ColorModel _textColor;
-        public ColorModel TextColor
+        private Color _textColor;
+        public Color TextColor
         {
             get => _textColor;
             set
@@ -100,17 +99,17 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
             {
                 new PostModel()
                 {
-                     Author = new UserClientModel(0,"Crisey", Rank.Admin),
+                     Author = new UserClient(0,"Crisey", Rank.Admin),
                      Comment = "Testowa wiadomość",
                 },
                 new PostModel()
                 {
-                    Author = new UserClientModel(1,"Jeff Diggins", Rank.Moderator),
+                    Author = new UserClient(1,"Jeff Diggins", Rank.Moderator),
                     Comment = "Druga wiadomość",
                 },
                 new PostModel()
                 {
-                    Author = new UserClientModel(2,"Zonk256", Rank.User),
+                    Author = new UserClient(2,"Zonk256", Rank.User),
                     Comment = "Ostatnia wiadomość w celu przetestowania test test",
                 },
             };
@@ -125,7 +124,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
         {
             _eventAggregator.PublishOnUIThread(
                 new SendPacket(
-                    new PullPostsInRoomRequest(UserInfoSingleton.Instance.ActiveRoom.Id, CommentsCollection.Count),
+                    new PullRoomChatRequest(UserInfoSingleton.Instance.ActiveRoom.Id, CommentsCollection.Count),
                     false));
         }
 
@@ -135,7 +134,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
 
             _eventAggregator.PublishOnUIThread(
                 new SendPacket(
-                    new SendRoomChatMessageRequest(TextColor, ChatMessage),
+                    new CreateRoomMessageRequest(TextColor, ChatMessage),
                     false));
         }
 
@@ -166,7 +165,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
 
         public void Handle(IRoomChatMessageStatePublish message)
         {
-            if (message.Result == Result.Success)
+            if (message.Result == CreateRoomMessageResult.Success)
                 ChatMessage = string.Empty;
         }
         public void Handle(IEofPostsRoomPublish message)

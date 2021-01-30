@@ -1,6 +1,6 @@
 ﻿using Caliburn.Micro;
 using Network;
-using SCPackets.RoomChatNewMessageClient;
+using SCPackets.Packets.RoomNewMessageRequest;
 using SharpDj.PubSubModels;
 
 namespace SharpDj.Logic.ActionToServer
@@ -14,7 +14,7 @@ namespace SharpDj.Logic.ActionToServer
             _eventAggregator = eventAggregator;
         }
 
-        public void Action(RoomChatNewMessageRequest request, Connection connection)
+        public void Action(RoomNewMessageRequest request, Connection connection)
         {
             if (request != null)
                 _eventAggregator.PublishOnUIThread(

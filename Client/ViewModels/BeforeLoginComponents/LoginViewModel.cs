@@ -2,7 +2,7 @@
 using Caliburn.Micro;
 using System.Security;
 using SCPackets;
-using SCPackets.LoginPacket;
+using SCPackets.Packets.Login;
 using SharpDj.Enums;
 using SharpDj.Logic.Helpers;
 using SharpDj.PubSubModels;
@@ -65,13 +65,13 @@ namespace SharpDj.ViewModels.BeforeLoginComponents
         }
 
         public bool CanTryLogin => !string.IsNullOrWhiteSpace(LoginText) &&
-                                   !string.IsNullOrWhiteSpace(new System.Net.NetworkCredential(string.Empty, PasswordText)
+                                   !string.IsNullOrWhiteSpace(new NetworkCredential(string.Empty, PasswordText)
                                        .Password);
 
         public void TryLogin()
         {
             _eventAggregator.PublishOnUIThread(new SendPacket(new LoginRequest(
-                LoginText, new System.Net.NetworkCredential(string.Empty, PasswordText).Password, Remember)));
+                LoginText, new NetworkCredential(string.Empty, PasswordText).Password, Remember)));
         }
 
         public void GuestLogin()

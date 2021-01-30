@@ -9,7 +9,7 @@ namespace SharpDj.ViewModels.SubViews
         {
         }
 
-        /* Just in case: https://stackoverflow.com/a/35945363 */
+        // https://stackoverflow.com/a/35945363
         public void DragWindow()
         {
             Application.Current.MainWindow?.DragMove();
@@ -17,7 +17,11 @@ namespace SharpDj.ViewModels.SubViews
 
         public void MinimizeApplication()
         {
-            if (Application.Current.MainWindow == null) return;
+            if (Application.Current.MainWindow == null)
+            {
+                return;
+            }
+
             Application.Current.MainWindow.WindowState = WindowState.Minimized;
         }
 
@@ -27,7 +31,10 @@ namespace SharpDj.ViewModels.SubViews
 
         private void ShrinkWindow()
         {
-            if (Application.Current.MainWindow == null) return;
+            if (Application.Current.MainWindow == null)
+            {
+                return;
+            }
 
             Application.Current.MainWindow.WindowState = WindowState.Normal;
             _windowSize.X = Application.Current.MainWindow.Width;
@@ -43,7 +50,10 @@ namespace SharpDj.ViewModels.SubViews
 
         private void ExpandWindow()
         {
-            if (Application.Current.MainWindow == null) return;
+            if (Application.Current.MainWindow == null)
+            {
+                return;
+            }
 
             Application.Current.MainWindow.WindowState = WindowState.Normal;
             Application.Current.MainWindow.Width = _windowSize.X;
@@ -57,9 +67,13 @@ namespace SharpDj.ViewModels.SubViews
         {
             if (Application.Current.MainWindow?.Height >= SystemParameters.WorkArea.Height &&
                 Application.Current.MainWindow.Width >= SystemParameters.WorkArea.Width)
+            {
                 ExpandWindow();
+            }
             else
+            {
                 ShrinkWindow();
+            }
         }
 
         public void CloseApplication()

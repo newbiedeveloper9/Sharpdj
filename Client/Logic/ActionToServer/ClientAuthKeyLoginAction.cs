@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using Caliburn.Micro;
 using Network;
-using SCPackets.AuthKeyLogin;
-using SCPackets.Disconnect;
+using SCPackets.Packets.AuthKeyLogin;
+using SCPackets.Packets.Disconnect;
 using SharpDj.PubSubModels;
-using Result = SCPackets.AuthKeyLogin.Result;
 
 namespace SharpDj.Logic.ActionToServer
 {
-    public class ClientAuthKeyLoginAction
+    public class ClientAuthKeyLoginAction : ActionAbstract<AuthKeyLoginResponse>
     {
         private readonly IEventAggregator _eventAggregator;
 
@@ -19,17 +19,17 @@ namespace SharpDj.Logic.ActionToServer
             _eventAggregator = eventAggregator;
         }
 
-        public void Action(AuthKeyLoginResponse response, Connection connection)
+        public override async Task Action(AuthKeyLoginResponse response, Connection connection)
         {
             var data = response.Data;
-            var dictionaryMessages = new Dictionary<Result, MessageQueue>()
+            var dictionaryMessages = new Dictionary<AuthKeyLoginResult, MessageQueue>()
             {
-                {Result.Error, new MessageQueue("Login", "We have encountered a problem with your credentials. Please, try again.") },
-                {Result.Expired, new MessageQueue("Login","It seems that your key expired. You have to login again.") },
-                {Result.AlreadyLogged, new MessageQueue("Login", "Error, this user is already logged in.") },
+                {AuthKeyLoginResult.Error, new MessageQueue("Login", "We have encountered a problem with your credentials. Please, try again.") },
+                {AuthKeyLoginResult.Expired, new MessageQueue("Login","It seems that your key expired. You have to login again.") },
+                {AuthKeyLoginResult.AlreadyLogged, new MessageQueue("Login", "Error, this user is already logged in.") },
             };
 
-            if (response.Result == Result.Success)
+            if (response.Result == AuthKeyLoginResult.Success)
             {
 #if !DEBUG
                 Thread.Sleep(450);//todo wait for call instead of sleep
@@ -42,7 +42,7 @@ namespace SharpDj.Logic.ActionToServer
 
                 return;
             }
-            if (response.Result == Result.AlreadyLogged)
+            if (response.Result == AuthKeyLoginResult.AlreadyLogged)
             {
                 _eventAggregator.BeginPublishOnUIThread(new SendPacket(new DisconnectRequest()));
             }

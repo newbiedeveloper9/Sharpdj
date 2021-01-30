@@ -1,25 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SCPackets.Models;
+﻿using SharpDj.Common.DTO;
 
 namespace SharpDj.PubSubModels
 {
     public class NewRoomCreatedPublish : INewRoomCreatedPublish
     {
-        public NewRoomCreatedPublish(RoomOutsideModel roomOutsideModel)
+        public NewRoomCreatedPublish(PreviewRoomDTO roomOutsideModel)
         {
             RoomOutsideModel = roomOutsideModel;
         }
 
-        public RoomOutsideModel RoomOutsideModel { get; }
+        public PreviewRoomDTO RoomOutsideModel { get; }
     }
 
     public interface INewRoomCreatedPublish
     {
-        RoomOutsideModel RoomOutsideModel { get;}
+        PreviewRoomDTO RoomOutsideModel { get;}
     }
 }

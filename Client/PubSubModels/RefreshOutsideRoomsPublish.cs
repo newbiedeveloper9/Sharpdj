@@ -1,13 +1,13 @@
-﻿using SCPackets.Models;
+﻿using SharpDj.Common.DTO;
 using System.Collections.Generic;
 
 namespace SharpDj.PubSubModels
 {
     class RefreshOutsideRoomsPublish : IRefreshOutsideRoomsPublish
     {
-        public IEnumerable<RoomOutsideModel> Rooms { get; }
+        public IEnumerable<PreviewRoomDTO> Rooms { get; }
 
-        public RefreshOutsideRoomsPublish(IEnumerable<RoomOutsideModel> rooms)
+        public RefreshOutsideRoomsPublish(IEnumerable<PreviewRoomDTO> rooms)
         {
             Rooms = rooms;
         }
@@ -15,6 +15,6 @@ namespace SharpDj.PubSubModels
 
     public interface IRefreshOutsideRoomsPublish
     {
-        IEnumerable<RoomOutsideModel> Rooms { get; }
+        IEnumerable<PreviewRoomDTO> Rooms { get; }
     }
 }

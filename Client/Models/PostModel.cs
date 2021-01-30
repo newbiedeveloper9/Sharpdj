@@ -1,19 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using SCPackets.Models;
-using SCPackets.RoomChatNewMessageClient;
 
 namespace SharpDj.Models
 {
     public class PostModel : PropertyChangedBase
     {
+        #region .ctor
+        public PostModel(UserClient author, string comment, Color color, ulong id)
+        {
+            Author = author;
+            Comment = comment;
+            Color = color;
+            Id = id;
+        }
+
+        public PostModel()
+        {
+
+        }
+
+        public PostModel(ChatMessage post)
+        {
+            Author = post.Author;
+            Comment = post.Message;
+            Color = post.Color;
+            Id = post.Id;
+        }
+        #endregion .ctor
+
         #region Properties
-        private int _id;
-        public int Id
+        private ulong _id;
+        public ulong Id
         {
             get => _id;
             set
@@ -24,8 +41,8 @@ namespace SharpDj.Models
             }
         }
 
-        private UserClientModel _author;
-        public UserClientModel Author
+        private UserClient _author;
+        public UserClient Author
         {
             get => _author;
             set
@@ -48,8 +65,8 @@ namespace SharpDj.Models
             }
         }
 
-        private ColorModel _color;
-        public ColorModel Color
+        private Color _color;
+        public Color Color
         {
             get => _color;
             set
@@ -60,28 +77,5 @@ namespace SharpDj.Models
             }
         }
         #endregion Properties
-
-        #region .ctor
-        public PostModel(UserClientModel author, string comment, ColorModel color, int id)
-        {
-            Author = author;
-            Comment = comment;
-            Color = color;
-            Id = id;
-        }
-
-        public PostModel()
-        {
-            
-        }
-
-        public PostModel(RoomPostModel post)
-        {
-            Author = post.Author;
-            Comment = post.Message;
-            Color = post.Color;
-            Id = post.Id;
-        }
-        #endregion .ctor
     }
 }

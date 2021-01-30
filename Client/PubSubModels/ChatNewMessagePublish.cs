@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SCPackets.RoomChatNewMessageClient;
-using SCPackets.SendRoomChatMessage;
+﻿using SCPackets.Packets.RoomNewMessageRequest;
 
 namespace SharpDj.PubSubModels
 {
     class ChatNewMessagePublish : IChatNewMessagePublish
     {
-        public RoomChatNewMessageRequest Message { get; set; }
+        public RoomNewMessageRequest Message { get; set; }
 
-        public ChatNewMessagePublish(RoomChatNewMessageRequest message)
+        public ChatNewMessagePublish(RoomNewMessageRequest message)
         {
             Message = message;
         }
@@ -20,6 +14,6 @@ namespace SharpDj.PubSubModels
 
     public interface IChatNewMessagePublish
     {
-        RoomChatNewMessageRequest Message { get; set; }
+        RoomNewMessageRequest Message { get; set; }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using Caliburn.Micro;
-using SCPackets.Disconnect;
-using SCPackets.Models;
 using SharpDj.Enums;
 using SharpDj.PubSubModels;
 using System;
+using SCPackets.Packets.Disconnect;
+using SharpDj.Common.Enums;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents
 {

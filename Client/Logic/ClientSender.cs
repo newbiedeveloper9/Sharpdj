@@ -7,10 +7,10 @@ namespace SharpDj.Logic
 {
     public class ClientSender : IHandle<ISendPacket>
     {
-        private readonly IClient _instance;
+        private readonly object _instance;
         private readonly IEventAggregator _eventAggregator;
         private readonly Connection _connection;
-        public ClientSender(IEventAggregator eventAggregator, Connection connection, IClient instance)
+        public ClientSender(IEventAggregator eventAggregator, Connection connection, object instance)
         {
             _connection = connection;
             _eventAggregator = eventAggregator;

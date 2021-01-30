@@ -1,5 +1,5 @@
 ﻿using Caliburn.Micro;
-using SCPackets.UpdateRoomData;
+using SCPackets.Packets.UpdateRoom;
 using SharpDj.Interfaces;
 using SharpDj.Models;
 using SharpDj.PubSubModels;
@@ -119,7 +119,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
             var model = _saveModel.ToSCPacketRoomCreationModel();
 
             _eventAggregator.PublishOnUIThread(new SendPacket(
-                new UpdateRoomDataRequest(model)));
+                new UpdateRoomRequest(model)));
         }
 
         #endregion Methods

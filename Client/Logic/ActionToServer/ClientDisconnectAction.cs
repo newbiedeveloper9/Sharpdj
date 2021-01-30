@@ -1,7 +1,7 @@
 ﻿using System;
 using Caliburn.Micro;
 using Network;
-using SCPackets.Disconnect;
+using SCPackets.Packets.Disconnect;
 using SharpDj.Enums;
 using SharpDj.PubSubModels;
 
@@ -18,7 +18,7 @@ namespace SharpDj.Logic.ActionToServer
 
         public void Action(DisconnectResponse response, Connection connection)
         {
-            if(response.Result == Result.Success)
+            if(response.Result == DisconnectResult.Success)
                 _eventAggregator.PublishOnUIThread(new NotLoggedIn());
         }
     }

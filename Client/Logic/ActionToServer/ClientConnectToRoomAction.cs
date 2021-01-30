@@ -1,9 +1,8 @@
 ﻿using System;
 using Caliburn.Micro;
 using Network;
-using SCPackets.ConnectToRoom;
+using SCPackets.Packets.ConnectToRoom;
 using SharpDj.PubSubModels;
-using Result = SCPackets.ConnectToRoom.Result;
 
 namespace SharpDj.Logic.ActionToServer
 {
@@ -22,10 +21,10 @@ namespace SharpDj.Logic.ActionToServer
 
             switch (response.Result)
             {
-                case Result.Success:
-                    publish = new RoomInfoForOpen(response.RoomOutsideModel, response.UserList);
+                case ConnectToRoomResult.Success:
+                    publish = new RoomInfoForOpen(response.PreviewRoom, response.UserList);
                     break;
-                case Result.AlreadyConnected:
+                case ConnectToRoomResult.AlreadyConnected:
                     publish = new RoomInfoForOpen();
                     break;
                 default:

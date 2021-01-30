@@ -10,9 +10,9 @@ namespace SharpDj.PubSubModels
 {
     public class LoginPublish : ILoginPublish
     {
-        public UserClientModel Client { get; }
+        public UserClient Client { get; }
 
-        public LoginPublish(UserClientModel client)
+        public LoginPublish(UserClient client)
         {
             Client = client;
         }
@@ -25,6 +25,6 @@ namespace SharpDj.PubSubModels
 
     public interface ILoginPublish
     {
-        UserClientModel Client { get; }
+        UserClient Client { get; }
     }
 }

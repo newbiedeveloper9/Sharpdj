@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using SharpDj.Common.DTO;
 
 namespace SharpDj.Models
 {
@@ -88,31 +89,34 @@ namespace SharpDj.Models
             }
         }
 
-        public static RoomCreationModel ToClientModel(SCPackets.CreateRoom.Container.RoomModel model)
+        public static RoomCreationModel ToClientModel(RoomDetailsDTO model)
         {
             return new RoomCreationModel()
             {
                 Id = model.Id,
                 ImageLink = model.ImageUrl,
-                LocalEnterMessage = model.LocalEnterMessage,
-                LocalLeaveMessage = model.LocalLeaveMessage,
+                LocalEnterMessage = model.RoomConfigDTO.LocalEnterMessage,
+                LocalLeaveMessage = model.RoomConfigDTO.LocalLeaveMessage,
                 Name = model.Name,
-                PublicEnterMessage = model.PublicEnterMessage,
-                PublicLeaveMessage = model.PublicLeaveMessage
+                PublicEnterMessage = model.RoomConfigDTO.PublicEnterMessage,
+                PublicLeaveMessage = model.RoomConfigDTO.PublicLeaveMessage
             };
         }
 
-        public SCPackets.CreateRoom.Container.RoomModel ToSCPacketRoomCreationModel()
+        public RoomDetailsDTO ToSCPacketRoomCreationModel()
         {
-            return new SCPackets.CreateRoom.Container.RoomModel()
+            return new RoomDetailsDTO()
             {
                 Id = Id,
                 ImageUrl = ImageLink,
-                LocalEnterMessage = LocalEnterMessage,
-                LocalLeaveMessage = LocalLeaveMessage,
                 Name = Name,
-                PublicEnterMessage = PublicEnterMessage,
-                PublicLeaveMessage = PublicLeaveMessage
+                RoomConfigDTO = new RoomConfigDTO()
+                {
+                    LocalEnterMessage = LocalEnterMessage,
+                    LocalLeaveMessage = LocalLeaveMessage,
+                    PublicEnterMessage = PublicEnterMessage,
+                    PublicLeaveMessage = PublicLeaveMessage
+                }
             };
         }
 

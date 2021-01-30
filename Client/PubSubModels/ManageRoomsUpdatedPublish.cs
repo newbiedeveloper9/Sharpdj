@@ -1,13 +1,12 @@
-﻿
-using SCPackets.CreateRoom.Container;
+﻿using SharpDj.Common.DTO;
 
 namespace SharpDj.PubSubModels
 {
     public class ManageRoomsUpdatedPublish : IManageEditedRoomPublish
     {
-        public RoomModel Room { get; set; }
+        public RoomDetailsDTO Room { get; set; }
 
-        public ManageRoomsUpdatedPublish(RoomModel room)
+        public ManageRoomsUpdatedPublish(RoomDetailsDTO room)
         {
             Room = room;
         }
@@ -15,6 +14,6 @@ namespace SharpDj.PubSubModels
 
     public interface IManageEditedRoomPublish
     {
-        RoomModel Room { get; set; }
+        RoomDetailsDTO Room { get; set; }
     }
 }

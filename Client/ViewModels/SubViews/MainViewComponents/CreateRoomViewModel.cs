@@ -1,6 +1,5 @@
 ﻿using Caliburn.Micro;
 using Microsoft.Win32;
-using SCPackets.CreateRoom;
 using SharpDj.Enums;
 using SharpDj.Interfaces;
 using SharpDj.Logic.Helpers;
@@ -8,6 +7,7 @@ using SharpDj.Models;
 using SharpDj.PubSubModels;
 using System;
 using System.Threading.Tasks;
+using SCPackets.Packets.CreateRoom;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents
 {

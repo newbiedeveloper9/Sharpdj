@@ -4,7 +4,7 @@ using System.Net;
 using System.Windows;
 using Caliburn.Micro;
 using Network;
-using SCPackets.Buffers;
+using SCPackets.Packets.Buffers;
 using SharpDj.Logic.Helpers;
 using SharpDj.PubSubModels;
 

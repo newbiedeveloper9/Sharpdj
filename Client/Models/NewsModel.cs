@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Caliburn.Micro;
-using SCPackets.Models;
+﻿using Caliburn.Micro;
+using SharpDj.Common.DTO;
 
 namespace SharpDj.Models
 {
@@ -78,7 +73,7 @@ namespace SharpDj.Models
 
         }
 
-        public static NewsModel CreateModel(RoomOutsideModel model)
+        public static NewsModel CreateModel(PreviewRoomDTO model)
         {
             return new NewsModel()
             {

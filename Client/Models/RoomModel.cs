@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+﻿using System.Collections;
 using Caliburn.Micro;
-using SCPackets.Models;
+using SharpDj.Common.DTO;
 
 namespace SharpDj.Models
 {
@@ -125,9 +122,9 @@ namespace SharpDj.Models
             Before,
         }
 
-        public RoomOutsideModel ToSCPacketOutsideModel()
+        public PreviewRoomDTO ToSCPacketOutsideModel()
         {
-            return new RoomOutsideModel()
+            return new PreviewRoomDTO()
             {
                 Id = this.Id,
                 Name = this.Name,
@@ -140,7 +137,7 @@ namespace SharpDj.Models
             };
         }
 
-        public void ImportByOutsideModel(RoomOutsideModel model)
+        public void ImportByOutsideModel(PreviewRoomDTO model)
         {
             Id = model.Id;
             Name = model.Name;
@@ -152,7 +149,7 @@ namespace SharpDj.Models
             PreviousTrack = TrackModel.ToClientModel(model.PreviousTrack);
         }
 
-        public static RoomModel ToClientModel(RoomOutsideModel model)
+        public static RoomModel ToClientModel(PreviewRoomDTO model)
         {
             return new RoomModel()
             {
@@ -174,11 +171,16 @@ namespace SharpDj.Models
         {
             var roomX = (RoomModel) x;
             var roomY = (RoomModel) y;
-            if (roomX == null || roomY == null) return 0;
+            if (roomX == null || roomY == null)
+            {
+                return 0;
+            }
+            if (roomX.AmountOfPeople > roomY.AmountOfPeople)
+            {
+                return -1;
+            }
 
-            if (roomX.AmountOfPeople > roomY.AmountOfPeople) return -1;
-            if (roomY.AmountOfPeople > roomX.AmountOfPeople) return 1;
-            return 0;
+            return roomY.AmountOfPeople > roomX.AmountOfPeople ? 1 : 0;
         }
     }
 }

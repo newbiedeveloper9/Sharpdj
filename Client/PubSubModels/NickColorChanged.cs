@@ -9,15 +9,15 @@ namespace SharpDj.PubSubModels
 {
     public class NickColorChanged : INickColorChanged
     {
-        public NickColorChanged(ColorModel color)
+        public NickColorChanged(Color color)
         {
             Color = color;
         }
-        public ColorModel Color { get; set; }
+        public Color Color { get; set; }
     }
 
     public interface INickColorChanged
     {
-        ColorModel Color { get; set; }
+        Color Color { get; set; }
     }
 }

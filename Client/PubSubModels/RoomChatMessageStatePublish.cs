@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SCPackets.SendRoomChatMessage;
+using SCPackets.Packets.CreateRoomMessage;
 
 namespace SharpDj.PubSubModels
 {
     class RoomChatMessageStatePublish : IRoomChatMessageStatePublish
     {
-        public Result Result { get; set; }
+        public CreateRoomMessageResult Result { get; set; }
 
-        public RoomChatMessageStatePublish(Result result)
+        public RoomChatMessageStatePublish(CreateRoomMessageResult result)
         {
             Result = result;
         }
@@ -19,6 +19,6 @@ namespace SharpDj.PubSubModels
 
     public interface IRoomChatMessageStatePublish
     {
-       SCPackets.SendRoomChatMessage.Result Result { get; set; }
+       CreateRoomMessageResult Result { get; set; }
     }
 }

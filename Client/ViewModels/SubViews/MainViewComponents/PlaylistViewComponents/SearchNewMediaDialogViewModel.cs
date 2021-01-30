@@ -10,6 +10,7 @@ using System.Windows.Controls.Primitives;
 using SharpDj.PubSubModels;
 using SharpDj.Views.SubViews.MainViewComponents.PlaylistViewComponents;
 using YoutubeExplode;
+using YoutubeExplode.Videos;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents.PlaylistViewComponents
 {
@@ -156,7 +157,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.PlaylistViewComponents
         {
             var client = new YoutubeClient();
 
-            while (true)
+          /*  while (true)
             {
                 try
                 {
@@ -172,6 +173,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.PlaylistViewComponents
                         TrackCollection.Clear();
 
                         var id = YtVideoHelper.NormalizeVideoId(SearchText);
+                        var video = new YoutubeClient().Videos.GetAsync(new VideoId(id));
                         if (YoutubeClient.ValidateVideoId(id))
                         {
                             var video = await client.GetVideoAsync(id);
@@ -193,7 +195,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.PlaylistViewComponents
                 {
                     Console.WriteLine(e);
                 }
-            }
+            }*/
         }
         #endregion Search
 

@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
-using System;
 using Newtonsoft.Json;
+using SharpDj.Common.DTO;
+using System;
 
 namespace SharpDj.Models
 {
@@ -80,9 +81,9 @@ namespace SharpDj.Models
                    string.Equals(_imgSource, other._imgSource);
         }
 
-        public SCPackets.Models.TrackModel ToSCPacketTrackModel()
+        public TrackDTO ToSCPacketTrackModel()
         {
-            return new SCPackets.Models.TrackModel()
+            return new TrackDTO()
             {
                 Author = Author,
                 Duration = (int)Duration.TotalSeconds,
@@ -92,7 +93,7 @@ namespace SharpDj.Models
             };
         }
 
-        public static TrackModel ToClientModel(SCPackets.Models.TrackModel model)
+        public static TrackModel ToClientModel(TrackDTO model)
         {
             return new TrackModel()
             {

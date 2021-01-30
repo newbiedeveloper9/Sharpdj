@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Caliburn.Micro;
-using SCPackets.ConnectToRoom;
 using SCPackets.Models;
+using SCPackets.Packets.ConnectToRoom;
 using SharpDj.Enums;
 using SharpDj.Models;
 using SharpDj.PubSubModels;

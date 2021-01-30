@@ -13,10 +13,10 @@ namespace SharpDj.Logic.Helpers
 
         private UserInfoSingleton()
         {
-            UserClient = new UserClientModel();
+            UserClient = new UserClient();
         }
 
-       public UserClientModel UserClient { get; set; }
+       public UserClient UserClient { get; set; }
        public RoomModel ActiveRoom { get; set; }
     }
 }

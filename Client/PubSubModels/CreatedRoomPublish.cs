@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SCPackets.CreateRoom.Container;
+﻿using SharpDj.Common.DTO;
 
 namespace SharpDj.PubSubModels
 {
     public class CreatedRoomPublish : ICreatedRoomPublish
     {
-        public RoomModel Room { get; set; }
+        public RoomDetailsDTO Room { get; set; }
 
-        public CreatedRoomPublish(RoomModel room)
+        public CreatedRoomPublish(RoomDetailsDTO room)
         {
             Room = room;
         }
@@ -19,6 +14,6 @@ namespace SharpDj.PubSubModels
 
     public interface ICreatedRoomPublish
     {
-        RoomModel Room { get; set; }
+        RoomDetailsDTO Room { get; set; }
     }
 }

@@ -1,11 +1,10 @@
 ﻿using Caliburn.Micro;
-using SCPackets.RegisterPacket;
-using SharpDj.Input;
+using SCPackets.Packets.Register;
+using SharpDj.Common;
+using SharpDj.Enums;
 using SharpDj.PubSubModels;
 using System.ComponentModel;
 using System.Security;
-using SCPackets;
-using SharpDj.Enums;
 
 namespace SharpDj.ViewModels.BeforeLoginComponents
 {

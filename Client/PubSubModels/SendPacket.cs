@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Network;
 using Network.Packets;
-using SCPackets.LoginPacket;
 
 namespace SharpDj.PubSubModels
 {

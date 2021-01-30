@@ -2,7 +2,7 @@
 using Caliburn.Micro;
 using Network;
 using SCPackets;
-using SCPackets.NotLoggedIn;
+using SCPackets.Packets.NotLoggedIn;
 using SharpDj.Enums;
 using SharpDj.Interfaces;
 using SharpDj.PubSubModels;

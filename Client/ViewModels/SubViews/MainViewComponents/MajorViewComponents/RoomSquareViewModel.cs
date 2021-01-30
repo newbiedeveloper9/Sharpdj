@@ -6,7 +6,7 @@ using System.Linq;
 using System.Windows.Data;
 using System.Windows.Threading;
 using Caliburn.Micro;
-using SCPackets.ConnectToRoom;
+using SCPackets.Packets.ConnectToRoom;
 using SharpDj.Models;
 using SharpDj.PubSubModels;
 

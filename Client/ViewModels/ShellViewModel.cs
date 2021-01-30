@@ -8,6 +8,8 @@ using SharpDj.ViewModels.SubViews;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Autofac;
+using Serilog;
 
 namespace SharpDj.ViewModels
 {
@@ -24,17 +26,17 @@ namespace SharpDj.ViewModels
         #endregion Fields
 
         #region .ctor
-        public ShellViewModel()
+        public ShellViewModel(IEventAggregator eventAggregator)
         {
-            _eventAggregator = new EventAggregator();
+
+            _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
 
-            _config = new Config(_eventAggregator)
-                .BuildIfNotExist();
-
-            while (!_config.LoadCore())
+            _config = IoC.Get<Config>();
+            if (!_config.LoadCore())
             {
                 Console.ReadLine();
+                App.Current.Shutdown();
             }
 
             MessagesQueue = new SnackbarMessageQueue(TimeSpan.FromMilliseconds(3750));
@@ -45,7 +47,7 @@ namespace SharpDj.ViewModels
 
             ActivateItem(BeforeLoginScreenViewModel);
 
-            _client = new ClientConnection(_eventAggregator, _config);
+            _client = IoC.Get<ClientConnection>();
             Task.Factory.StartNew(() =>
             {
                 _client.Init();
@@ -124,23 +126,23 @@ namespace SharpDj.ViewModels
 
         public void Handle(IReconnect message)
         {
-            if (!_reconnecting)
+            if (_reconnecting) return;
+
+            _reconnecting = true;
+            _client = IoC.Get<ClientConnection>();
+            Task.Factory.StartNew(() =>
             {
-                _reconnecting = true;
-                _client = new ClientConnection(_eventAggregator, _config);
-                Task.Factory.StartNew(() =>
-                {
-                    _client.Init();
-                    if (ActiveItem == AfterLoginScreenViewModel)
-                        _eventAggregator.PublishOnUIThread(new NotLoggedIn());
-                    _reconnecting = false;
-                });
-            }
+                Task.Run(_client.Init);
+                if (ActiveItem == AfterLoginScreenViewModel)
+                    _eventAggregator.PublishOnUIThread(new NotLoggedIn());
+                _reconnecting = false;
+            });
         }
 
         public void Handle(INotLoggedIn message)
         {
-            _eventAggregator.PublishOnUIThread(new MessageQueue("Connection", "You are not anymore logged in"));
+            _eventAggregator.PublishOnUIThread(
+                new MessageQueue("Connection", "You are not anymore logged in"));
             _eventAggregator.PublishOnUIThread(NavigateMainView.Home);
             ActivateItem(BeforeLoginScreenViewModel);
         }

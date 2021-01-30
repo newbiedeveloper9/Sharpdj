@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Caliburn.Micro;
 using SCPackets.Models;
-using SharpDj.Logic.Helpers;
+using SharpDj.Common.Enums;
 using SharpDj.PubSubModels;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
@@ -18,8 +14,8 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
         #endregion _fields
 
         #region Properties
-        private BindableCollection<UserClientModel> _usersCollectionCollection = new BindableCollection<UserClientModel>();
-        public BindableCollection<UserClientModel> UsersCollection
+        private BindableCollection<UserClient> _usersCollectionCollection = new BindableCollection<UserClient>();
+        public BindableCollection<UserClient> UsersCollection
         {
             get => _usersCollectionCollection;
             set
@@ -43,21 +39,22 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
 
         public ListOfPeopleViewModel()
         {
-            UsersCollection.Add(new UserClientModel(0, "Crisey", Rank.Admin));
-            UsersCollection.Add(new UserClientModel(1, "Jeff Diggins", Rank.User));
-            UsersCollection.Add(new UserClientModel(2, "zonk256", Rank.Admin));
-            UsersCollection.Add(new UserClientModel(3, "Testtt", Rank.Moderator));
+            UsersCollection.Add(new UserClient(0, "Crisey", Rank.Admin));
+            UsersCollection.Add(new UserClient(1, "Jeff Diggins", Rank.User));
+            UsersCollection.Add(new UserClient(2, "zonk256", Rank.Admin));
+            UsersCollection.Add(new UserClient(3, "Testtt", Rank.Moderator));
 
         }
         #endregion .ctor
 
         public void Handle(IRoomUserListBufferPublish message)
         {
-            foreach (var user in message.UsersBuffer.InsertUsers.GetList())
+            foreach (var user in message.UsersBuffer.InsertUsers.ToReadonlyList())
             {
-                // ReSharper disable once SimplifyLinqExpression
                 if (!UsersCollection.Any(x => x.Id == user.Id))
+                {
                     UsersCollection.Add(user);
+                }
             }
 
             foreach (var user in message.UsersBuffer.UpdateUsers)
@@ -66,10 +63,10 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
                 if (tmp == null) continue;
 
                 tmp.Username = user.Username;
-                tmp.RankTmp = user.RankTmp;
+                tmp.Rank = user.Rank;
             }
 
-            foreach (var user in message.UsersBuffer.RemoveUsers.GetList())
+            foreach (var user in message.UsersBuffer.RemoveUsers.ToReadonlyList())
             {
                 var tmp = UsersCollection.FirstOrDefault(x => x.Id == user.Id);
                 if (tmp != null)
@@ -80,7 +77,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
         public void Handle(IRoomInfoForOpen message)
         {
             if (message.UserList != null)
-                UsersCollection = new BindableCollection<UserClientModel>(message.UserList);
+                UsersCollection = new BindableCollection<UserClient>(message.UserList);
         }
     }
 }

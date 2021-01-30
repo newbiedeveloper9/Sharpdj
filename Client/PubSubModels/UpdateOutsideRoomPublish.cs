@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SCPackets.Models;
+﻿using SharpDj.Common.DTO;
 
 namespace SharpDj.PubSubModels
 {
     public class UpdateOutsideRoomPublish : IUpdateOutsideRoomPublish
     {
-        public RoomOutsideModel RoomOutsideModel { get; set; }
+        public PreviewRoomDTO RoomOutsideModel { get; set; }
 
-        public UpdateOutsideRoomPublish(RoomOutsideModel roomOutsideModel)
+        public UpdateOutsideRoomPublish(PreviewRoomDTO roomOutsideModel)
         {
             RoomOutsideModel = roomOutsideModel;
         }
@@ -19,6 +14,6 @@ namespace SharpDj.PubSubModels
 
     public interface IUpdateOutsideRoomPublish
     {
-        RoomOutsideModel RoomOutsideModel { get; set; }  
+        PreviewRoomDTO RoomOutsideModel { get; set; }  
     }
 }

@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using Caliburn.Micro;
 using Network;
-using SCPackets.Buffers;
+using SCPackets.Packets.Buffers;
 using SharpDj.PubSubModels;
 
 namespace SharpDj.Logic.ActionToServer
@@ -18,7 +18,7 @@ namespace SharpDj.Logic.ActionToServer
 
         public void Action(SquareRoomBufferRequest request, Connection connection)
         {
-            foreach (var newRoom in request.InsertRooms.GetList())
+            foreach (var newRoom in request.InsertRooms.ToReadonlyList())
             {
                 _eventAggregator.PublishOnBackgroundThread(
                     new NewRoomCreatedPublish(newRoom));

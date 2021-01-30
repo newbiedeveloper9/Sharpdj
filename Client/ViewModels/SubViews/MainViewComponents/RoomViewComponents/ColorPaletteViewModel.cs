@@ -1,5 +1,4 @@
-﻿using System;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using SCPackets.Models;
 using SharpDj.PubSubModels;
 
@@ -8,8 +7,8 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
     public class ColorPaletteViewModel : PropertyChangedBase, 
         IHandle<INickColorChanged>
     {
-        private ColorModel _selectedColor = new ColorModel(255,255,255);
-        public ColorModel SelectedColor
+        private Color _selectedColor = new Color().SetColor(new byte[] {105, 105, 255});
+        public Color SelectedColor
         {
             get => _selectedColor;
             set
@@ -24,8 +23,8 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
         }
 
         private readonly IEventAggregator _eventAggregator;
-        private BindableCollection<ColorModel> _colorCollection;
-        public BindableCollection<ColorModel> ColorCollection
+        private BindableCollection<Color> _colorCollection;
+        public BindableCollection<Color> ColorCollection
         {
             get => _colorCollection;
             set
@@ -43,34 +42,31 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
 
-            ColorCollection = new BindableCollection<ColorModel>()
-            {
-                new ColorModel(255,255,255),
-                new ColorModel(100,100,100),
-                new ColorModel(95,20,55),
-                new ColorModel(55,210,22),
-                new ColorModel(100,2,100),
-                new ColorModel(5,5,150),
-            };
+            SetTestColorPalette();
         }
 
         public ColorPaletteViewModel()
         {
-            ColorCollection = new BindableCollection<ColorModel>()
+            SetTestColorPalette();
+        }
+
+        private void SetTestColorPalette()
+        {
+            ColorCollection = new BindableCollection<Color>()
             {
-                new ColorModel(255,255,255),
-                new ColorModel(100,100,100),
-                new ColorModel(95,20,55),
-                new ColorModel(55,210,22),
-                new ColorModel(100,2,100),
-                new ColorModel(5,5,150),
+                new Color().SetColor(new byte[]{255,255,255}),
+                new Color().SetColor(new byte[]{100,100,100}),
+                new Color().SetColor(new byte[]{95,20,55}),
+                new Color().SetColor(new byte[]{55,210,22}),
+                new Color().SetColor(new byte[]{100,2,100}),
+                new Color().SetColor(new byte[]{5,5,150}),
             };
         }
         #endregion .ctor
 
         #region Methods
 
-        public void SetNickColor(ColorModel model)
+        public void SetNickColor(Color model)
         {
             SelectedColor = model;
         }

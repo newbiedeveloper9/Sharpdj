@@ -9,9 +9,9 @@ namespace SharpDj.PubSubModels
 {
     public class PullPostsRoomPublish : IPullPostsRoomPublish
     {
-        public List<RoomPostModel> Posts { get; set; }
+        public List<ChatMessage> Posts { get; set; }
 
-        public PullPostsRoomPublish(List<RoomPostModel> posts)
+        public PullPostsRoomPublish(List<ChatMessage> posts)
         {
             Posts = posts;
         }
@@ -19,6 +19,6 @@ namespace SharpDj.PubSubModels
 
     public interface IPullPostsRoomPublish
     {
-        List<RoomPostModel> Posts { get; set; }
+        List<ChatMessage> Posts { get; set; }
     }
 }

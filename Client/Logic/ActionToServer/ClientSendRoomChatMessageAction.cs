@@ -1,10 +1,9 @@
 ﻿using System;
 using Caliburn.Micro;
 using Network;
-using SCPackets.SendRoomChatMessage;
+using SCPackets.Packets.CreateRoomMessage;
 using SharpDj.Logic.Helpers;
 using SharpDj.PubSubModels;
-using Result = SCPackets.SendRoomChatMessage.Result;
 
 namespace SharpDj.Logic.ActionToServer
 {
@@ -17,13 +16,13 @@ namespace SharpDj.Logic.ActionToServer
             _eventAggregator = eventAggregator;
         }
 
-        public void Action(SendRoomChatMessageResponse response, Connection connection)
+        public void Action(CreateRoomMessageResponse response, Connection connection)
         {
 
-            if (response.Result != Result.Success)
+            if (response.Result != CreateRoomMessageResult.Success)
             {
                 _eventAggregator.PublishOnUIThread(new MessageQueue("Chat", "An error occurred in attempt to send message"));
-                new ExceptionLogger($"ClientSendRoomChatMessageAction response: {response.Result}");
+                _ = new ExceptionLogger($"ClientSendRoomChatMessageAction response: {response.Result}");
             }
 
             _eventAggregator.PublishOnUIThread(

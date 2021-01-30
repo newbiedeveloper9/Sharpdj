@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using SCPackets.Models;
-using SharpDj.Enums;
+using SharpDj.Common.DTO;
 using SharpDj.Logic.Helpers;
 using SharpDj.Models;
 
@@ -12,10 +8,10 @@ namespace SharpDj.PubSubModels
 {
     public class RoomInfoForOpen : IRoomInfoForOpen
     {
-        public List<UserClientModel> UserList { get; set; }
-        public RoomOutsideModel OutsideModel { get; set; }
+        public List<UserClient> UserList { get; set; }
+        public PreviewRoomDTO OutsideModel { get; set; }
 
-        public RoomInfoForOpen(RoomOutsideModel room, List<UserClientModel> userList)
+        public RoomInfoForOpen(PreviewRoomDTO room, List<UserClient> userList)
         {
             if (room != null)
                 UserInfoSingleton.Instance.ActiveRoom = RoomModel.ToClientModel(room);
@@ -32,7 +28,7 @@ namespace SharpDj.PubSubModels
 
     public interface IRoomInfoForOpen
     {
-        List<UserClientModel> UserList { get; set; }
-        RoomOutsideModel OutsideModel { get; set; }
+        List<UserClient> UserList { get; set; }
+        PreviewRoomDTO OutsideModel { get; set; }
     }
 }

@@ -7,11 +7,11 @@ using SharpDj.Models;
 using SharpDj.PubSubModels;
 using System;
 using System.IO;
-using System.Threading;
+using Serilog;
 
 namespace SharpDj
 {
-    public class Config : 
+    public class Config :
         IHandle<IPlaylistCollectionChanged>,
         IHandle<INewPlaylistCreated>,
         IHandle<INickColorChanged>,
@@ -26,24 +26,22 @@ namespace SharpDj
 
         public int Port { get; set; } = 5666;
         public string Ip { get; set; } = "192.168.0.103";
-
         public string AuthenticationKey { get; set; } = "";
 
-        private ColorModel _nickColor = new ColorModel(147, 112, 219);
-        public ColorModel NickColor
+        private Color _nickColor = new Color().SetColor(new byte[] { 147, 112, 219 });
+        public Color NickColor
         {
             get => _nickColor;
             set
             {
-                if (_nickColor == value) return;
+                if (_nickColor.ToString() == value.ToString())
+                {
+                    return;
+                }
+
                 _nickColor = value;
+                _eventAggregator.PublishOnUIThread(new NickColorChanged(value));
 
-                _eventAggregator.PublishOnUIThread(
-                    new NickColorChanged(value));
-
-                var config = Configuration.LoadFromFile(FilesPath.Config.ConfigFile);
-                if (value.ToString().Equals(
-                    new ColorModel(config["Settings"]["NickColor"].StringValue).ToString())) return;
                 Build();
             }
         }
@@ -55,6 +53,11 @@ namespace SharpDj
             _eventAggregator.Subscribe(this);
 
             _config = new Configuration();
+
+            if (!File.Exists(FilesPath.Config.ConfigFile))
+            {
+                Build();
+            }
         }
 
         /// <returns>True if loaded correctly</returns>
@@ -72,7 +75,7 @@ namespace SharpDj
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Configuration file error.\n{e.Message}");
+                Log.Error("An error occurred while loading a config file. {@Error}", e.StackTrace);
                 return false;
             }
         }
@@ -82,7 +85,8 @@ namespace SharpDj
         {
             try
             {
-                NickColor = new ColorModel(_config["Settings"]["NickColor"].StringValue);
+                var nickColor = _config["Settings"]["NickColor"].StringValue.Remove(0, 1);
+                NickColor = new Color().SetColor(nickColor);
 
                 return true;
             }
@@ -91,14 +95,6 @@ namespace SharpDj
                 Console.WriteLine($"Configuration file error.\n{e.Message}");
                 return false;
             }
-        }
-
-        public Config BuildIfNotExist()
-        {
-            if (File.Exists(FilesPath.Config.ConfigFile)) return this;
-
-            Build();
-            return this;
         }
 
         public void Build()
@@ -153,6 +149,7 @@ namespace SharpDj
         }
         #endregion Playlist
 
+        #region Handles
         public void Handle(IPlaylistCollectionChanged message)
         {
             Playlists = new BindableCollection<PlaylistModel>(message.PlaylistCollection);
@@ -185,6 +182,6 @@ namespace SharpDj
             _config["Connection"]["AuthenticationKey"].StringValue = string.Empty;
             _config.SaveToFile(FilesPath.Config.ConfigFile);
         }
+        #endregion Handles
     }
 }
- 

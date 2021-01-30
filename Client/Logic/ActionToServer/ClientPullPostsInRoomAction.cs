@@ -1,9 +1,8 @@
 ﻿using System;
 using Caliburn.Micro;
 using Network;
-using SCPackets.PullPostsInRoom;
+using SCPackets.Packets.PullRoomChat;
 using SharpDj.PubSubModels;
-using Result = SCPackets.PullPostsInRoom.Result;
 
 namespace SharpDj.Logic.ActionToServer
 {
@@ -16,14 +15,14 @@ namespace SharpDj.Logic.ActionToServer
             _eventAggregator = eventAggregator;
         }
 
-        public void Action(PullPostsInRoomResponse response, Connection connection)
+        public void Action(PullRoomChatResponse response, Connection connection)
         {
-            if (response.Result == Result.Success)
+            if (response.Result == PullRoomChatResult.Success)
             {
                 _eventAggregator.PublishOnUIThread(
                     new PullPostsRoomPublish(response.Posts));
             }
-            else if (response.Result == Result.EOF)
+            else if (response.Result == PullRoomChatResult.EOF)
             {
                 _eventAggregator.PublishOnUIThread(
                     new EofPostsRoomPublish());
