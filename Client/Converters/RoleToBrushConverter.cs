@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Media;
-using SharpDj.Common.Enums;
 
 namespace SharpDj.Converters
 {
@@ -9,7 +8,7 @@ namespace SharpDj.Converters
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is Rank))
+          /*  if (!(value is Rank))
                 throw new ArgumentException("Value not of type Rank");
 
             switch ((Rank)value)
@@ -22,7 +21,8 @@ namespace SharpDj.Converters
                     return new SolidColorBrush(new Color() { R = 170, G = 165, B = 170, A = byte.MaxValue });
                 default:
                     throw new ArgumentOutOfRangeException(nameof(value), value, null);
-            }
+            }*/
+          return new SolidColorBrush(new Color() { R = 170, G = 165, B = 170, A = byte.MaxValue });
         }
 
         public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

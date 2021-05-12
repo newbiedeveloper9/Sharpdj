@@ -6,7 +6,7 @@ namespace SharpDj.Models
     public class PostModel : PropertyChangedBase
     {
         #region .ctor
-        public PostModel(UserClient author, string comment, Color color, ulong id)
+        public PostModel(UserClient author, string comment, Color color, long id)
         {
             Author = author;
             Comment = comment;
@@ -29,8 +29,8 @@ namespace SharpDj.Models
         #endregion .ctor
 
         #region Properties
-        private ulong _id;
-        public ulong Id
+        private long _id;
+        public long Id
         {
             get => _id;
             set

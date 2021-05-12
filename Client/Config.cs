@@ -85,7 +85,12 @@ namespace SharpDj
         {
             try
             {
-                var nickColor = _config["Settings"]["NickColor"].StringValue.Remove(0, 1);
+                var nickColor = _config["Settings"]["NickColor"].StringValue;
+                if (nickColor.StartsWith("#"))
+                {
+                    nickColor = nickColor.Remove(0, 1);
+                }
+
                 NickColor = new Color().SetColor(nickColor);
 
                 return true;

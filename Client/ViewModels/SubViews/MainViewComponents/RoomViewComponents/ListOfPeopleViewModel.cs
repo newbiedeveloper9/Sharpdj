@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Caliburn.Micro;
 using SCPackets.Models;
-using SharpDj.Common.Enums;
 using SharpDj.PubSubModels;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
@@ -39,10 +38,10 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
 
         public ListOfPeopleViewModel()
         {
-            UsersCollection.Add(new UserClient(0, "Crisey", Rank.Admin));
-            UsersCollection.Add(new UserClient(1, "Jeff Diggins", Rank.User));
-            UsersCollection.Add(new UserClient(2, "zonk256", Rank.Admin));
-            UsersCollection.Add(new UserClient(3, "Testtt", Rank.Moderator));
+            UsersCollection.Add(new UserClient(0, "Crisey"/*, Rank.Admin*/));
+            UsersCollection.Add(new UserClient(1, "Jeff Diggins"/*, Rank.User*/));
+            UsersCollection.Add(new UserClient(2, "zonk256"/*, Rank.Admin*/));
+            UsersCollection.Add(new UserClient(3, "Testtt"/*, Rank.Moderator*/));
 
         }
         #endregion .ctor
@@ -63,7 +62,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
                 if (tmp == null) continue;
 
                 tmp.Username = user.Username;
-                tmp.Rank = user.Rank;
+             //   tmp.Rank = user.Rank;
             }
 
             foreach (var user in message.UsersBuffer.RemoveUsers.ToReadonlyList())

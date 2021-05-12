@@ -50,7 +50,7 @@ namespace SharpDj.ViewModels
             _client = IoC.Get<ClientConnection>();
             Task.Factory.StartNew(() =>
             {
-                _client.Init();
+                _client.InitializeConnection();
             });
         }
         #endregion .ctor
@@ -132,7 +132,7 @@ namespace SharpDj.ViewModels
             _client = IoC.Get<ClientConnection>();
             Task.Factory.StartNew(() =>
             {
-                Task.Run(_client.Init);
+                Task.Run(_client.InitializeConnection);
                 if (ActiveItem == AfterLoginScreenViewModel)
                     _eventAggregator.PublishOnUIThread(new NotLoggedIn());
                 _reconnecting = false;

@@ -7,7 +7,7 @@ using SharpDj.PubSubModels;
 
 namespace SharpDj.Logic.ActionToServer
 {
-    public class ClientDisconnectAction
+    public class ClientDisconnectAction : IAction
     {
         private readonly IEventAggregator _eventAggregator;
 

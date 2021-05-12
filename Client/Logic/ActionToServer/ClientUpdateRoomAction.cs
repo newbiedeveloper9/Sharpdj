@@ -6,7 +6,7 @@ using SCPackets.Packets.UpdateRoom;
 
 namespace SharpDj.Logic.ActionToServer
 {
-    public class ClientUpdateRoomAction
+    public class ClientUpdateRoomAction : IAction
     {
         private readonly IEventAggregator _eventAggregator;
 

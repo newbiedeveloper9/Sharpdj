@@ -9,7 +9,7 @@ using SharpDj.PubSubModels;
 
 namespace SharpDj.Logic.ActionToServer
 {
-    public class ClientNotLoggedInAction
+    public class ClientNotLoggedInAction : IAction
     {
         private readonly IEventAggregator _eventAggregator;
 

@@ -3,7 +3,7 @@ using SharpDj.Enums;
 using SharpDj.PubSubModels;
 using System;
 using SCPackets.Packets.Disconnect;
-using SharpDj.Common.Enums;
+//using SharpDj.Common.Enums;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents
 {
@@ -12,7 +12,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
     {
         private readonly IEventAggregator _eventAggregator;
 
-        private Rank _role;
+       /* private Rank _role;
         public Rank Role
         {
             get => _role;
@@ -22,7 +22,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
                 _role = value;
                 NotifyOfPropertyChange(() => Role);
             }
-        }
+        }*/
 
         private string _username;
         public string Username
@@ -68,7 +68,7 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents
 
         public void Handle(ILoginPublish message)
         {
-            Role = message.Client.Rank;
+          //  Role = message.Client.Rank;
             Username = message.Client.Username;
         }
     }

@@ -11,7 +11,7 @@ using SharpDj.PubSubModels;
 
 namespace SharpDj.Logic.ActionToServer
 {
-    public class ClientCreateRoomAction
+    public class ClientCreateRoomAction : IAction
     {
         private readonly IEventAggregator _eventAggregator;
 

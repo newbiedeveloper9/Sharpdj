@@ -7,7 +7,7 @@ using SharpDj.PubSubModels;
 
 namespace SharpDj.Logic.ActionToServer
 {
-    public class ClientSquareRoomBufferAction
+    public class ClientSquareRoomBufferAction : IAction
     {
         private readonly IEventAggregator _eventAggregator;
 

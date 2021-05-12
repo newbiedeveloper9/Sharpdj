@@ -4,22 +4,27 @@ using SharpDj.Common;
 using SharpDj.Enums;
 using SharpDj.PubSubModels;
 using System.ComponentModel;
+using System.Net;
 using System.Security;
+using SCPackets.Packets.Login;
+using SharpDj.Logic;
 
 namespace SharpDj.ViewModels.BeforeLoginComponents
 {
     public class RegisterViewModel : PropertyChangedBase, IDataErrorInfo
     {
         private readonly IEventAggregator _eventAggregator;
+        private readonly ClientSender _sender;
 
         public RegisterViewModel()
         {
 
         }
 
-        public RegisterViewModel(IEventAggregator eventAggregator)
+        public RegisterViewModel(IEventAggregator eventAggregator, ClientSender sender)
         {
             _eventAggregator = eventAggregator;
+            _sender = sender;
         }
 
         #region Properties
@@ -103,7 +108,7 @@ namespace SharpDj.ViewModels.BeforeLoginComponents
         }
         #endregion Properties
 
-        public bool CanRegister => PrivacyPolicy && ToS &&
+        public bool CanRegister => //PrivacyPolicy && ToS &&
                                    !string.IsNullOrWhiteSpace(LoginText) &&
                                    !string.IsNullOrWhiteSpace(EmailText) &&
                                    DataValidation.EmailIsValid(EmailText) &&
@@ -113,13 +118,10 @@ namespace SharpDj.ViewModels.BeforeLoginComponents
                                    !string.IsNullOrWhiteSpace(new System.Net.NetworkCredential(string.Empty, PasswordText)
                                        .Password);
 
-        public void Register()
+        public async void Register()
         {
-            _eventAggregator.PublishOnUIThread(
-                new SendPacket(
-                    new RegisterRequest(LoginText, new System.Net.NetworkCredential(string.Empty, PasswordText).Password, EmailText, UsernameText)
-                )
-            );
+            var response = await _sender.Handle<RegisterResponse>(new RegisterRequest(LoginText,
+                new NetworkCredential(string.Empty, PasswordText).Password, EmailText, UsernameText));
         }
 
         public void BackToLogin()

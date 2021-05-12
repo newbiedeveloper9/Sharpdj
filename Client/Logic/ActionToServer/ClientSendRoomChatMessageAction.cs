@@ -7,7 +7,7 @@ using SharpDj.PubSubModels;
 
 namespace SharpDj.Logic.ActionToServer
 {
-    public class ClientSendRoomChatMessageAction
+    public class ClientSendRoomChatMessageAction : IAction
     {
         private readonly IEventAggregator _eventAggregator;
 

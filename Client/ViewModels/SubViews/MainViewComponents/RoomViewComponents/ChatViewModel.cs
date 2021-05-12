@@ -6,7 +6,6 @@ using SharpDj.PubSubModels;
 using System.Windows.Controls;
 using SCPackets.Packets.CreateRoomMessage;
 using SCPackets.Packets.PullRoomChat;
-using SharpDj.Common.Enums;
 using SharpDj.Logic.Helpers;
 
 namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
@@ -99,17 +98,17 @@ namespace SharpDj.ViewModels.SubViews.MainViewComponents.RoomViewComponents
             {
                 new PostModel()
                 {
-                     Author = new UserClient(0,"Crisey", Rank.Admin),
+                     Author = new UserClient(0,"Crisey"/*, Rank.Admin*/),
                      Comment = "Testowa wiadomość",
                 },
                 new PostModel()
                 {
-                    Author = new UserClient(1,"Jeff Diggins", Rank.Moderator),
+                    Author = new UserClient(1,"Jeff Diggins"/*, Rank.Moderator*/),
                     Comment = "Druga wiadomość",
                 },
                 new PostModel()
                 {
-                    Author = new UserClient(2,"Zonk256", Rank.User),
+                    Author = new UserClient(2,"Zonk256"/*, Rank.User*/),
                     Comment = "Ostatnia wiadomość w celu przetestowania test test",
                 },
             };

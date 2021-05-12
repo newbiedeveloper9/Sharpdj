@@ -14,35 +14,32 @@ namespace SharpDj.Logic
 {
     public class ClientConnection
     {
-        public ConnectionResult Result = ConnectionResult.TCPConnectionNotAlive;
-
         private readonly Config _config;
-
-        private readonly IEnumerable<IAction> _actionRegisterList;
+        private readonly ClientSender _sender;
         private TcpConnection _connection;
 
+        public ConnectionResult Result = ConnectionResult.TCPConnectionNotAlive;
         private readonly IEventAggregator _eventAggregator;
 
-        private ClientSender _sender;
 
-        public ClientConnection(IEventAggregator eventAggregator, Config config)
+        public ClientConnection(IEventAggregator eventAggregator, Config config, ClientSender sender)
         {
-            _actionRegisterList = IoC.GetAll<IAction>();
             _eventAggregator = eventAggregator;
             _config = config;
-            // _packetsList = new ClientPacketsToHandleList(_eventAggregator);
-
-            Console.WriteLine($"Connecting with socket {_config.Ip}:{_config.Port}");
+            _sender = sender;
         }
 
-        public async Task Init()
+        public async Task InitializeConnection()
         {
+            Console.WriteLine($"Connecting with socket {_config.Ip}:{_config.Port}");
+
             int iterator = 0;
             do
             {
                 if (iterator > 0)
+                {
                     Thread.Sleep(3900);
-                iterator++;
+                }
 
                 var tcpConnection = await ConnectionFactory.CreateTcpConnectionAsync(_config.Ip, _config.Port);
                 _connection = tcpConnection.Item1;
@@ -51,6 +48,7 @@ namespace SharpDj.Logic
                 if (Result != ConnectionResult.Connected)
                 {
                     await _eventAggregator.PublishOnUIThreadAsync(new MessageQueue("Reconnect", $"Attempt number {iterator}"));
+                    iterator++;
                 }
             } while (Result != ConnectionResult.Connected);
 
@@ -61,13 +59,8 @@ namespace SharpDj.Logic
         {
             _connection.EnableLogging = true;
             _connection.LogIntoStream(Console.OpenStandardError());
+            _sender.SetConnection(_connection);
 
-            foreach (var action in _actionRegisterList)
-            {
-                action.RegisterPacket(_connection, this);
-            }
-
-            _sender = new ClientSender(_eventAggregator, _connection, this);
             if (!string.IsNullOrWhiteSpace(_config.AuthenticationKey))
             {
                 _connection.Send(new AuthKeyLoginRequest(_config.AuthenticationKey), this);

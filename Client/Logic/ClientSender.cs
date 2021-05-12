@@ -1,37 +1,55 @@
-﻿using Caliburn.Micro;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Caliburn.Micro;
 using Network;
+using Network.Packets;
 using SCPackets;
+using SharpDj.Logic.Helpers;
 using SharpDj.PubSubModels;
 
 namespace SharpDj.Logic
 {
     public class ClientSender : IHandle<ISendPacket>
     {
-        private readonly object _instance;
         private readonly IEventAggregator _eventAggregator;
-        private readonly Connection _connection;
-        public ClientSender(IEventAggregator eventAggregator, Connection connection, object instance)
+        private Connection _connection;
+
+        public ClientSender(IEventAggregator eventAggregator)
         {
-            _connection = connection;
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
-            _instance = instance;
         }
 
-        public void Handle(ISendPacket message)
+        public void SetConnection(Connection connection)
         {
-            if (_connection.IsAlive)
-            {
-                if (message.UseInstance)
-                    _connection.Send(message.Packet, _instance);
-                else
-                    _connection.Send(message.Packet);
+            _connection = connection;
+        }
 
-                return;
+        public async Task<T> Handle<T>(Packet message) 
+            where T : ResponsePacket
+        {
+            if (_connection != null && _connection.IsAlive)
+            {
+                try
+                {
+                    var result =  await _connection.SendAsync<T>(message).ConfigureAwait(false);
+                    return result;
+                }
+                catch (OperationCanceledException e)
+                {
+                    new ExceptionLogger(e);
+                }
             }
 
             _eventAggregator.Unsubscribe(this);
-            _eventAggregator.PublishOnUIThread(new Reconnect());
+            await _eventAggregator.PublishOnUIThreadAsync(new Reconnect());
+            return null;
+        }
+        
+        public void Handle(ISendPacket message)
+        {
+            throw new NotImplementedException();
         }
     }
 }

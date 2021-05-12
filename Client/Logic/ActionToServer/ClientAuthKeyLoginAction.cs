@@ -10,7 +10,7 @@ using SharpDj.PubSubModels;
 
 namespace SharpDj.Logic.ActionToServer
 {
-    public class ClientAuthKeyLoginAction : ActionAbstract<AuthKeyLoginResponse>
+    public class ClientAuthKeyLoginAction : IAction
     {
         private readonly IEventAggregator _eventAggregator;
 
@@ -19,7 +19,7 @@ namespace SharpDj.Logic.ActionToServer
             _eventAggregator = eventAggregator;
         }
 
-        public override async Task Action(AuthKeyLoginResponse response, Connection connection)
+        public async Task Action(AuthKeyLoginResponse response, Connection connection)
         {
             var data = response.Data;
             var dictionaryMessages = new Dictionary<AuthKeyLoginResult, MessageQueue>()

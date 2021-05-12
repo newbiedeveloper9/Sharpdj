@@ -10,7 +10,21 @@ namespace SharpDj.ViewModels
     {
         private readonly IEventAggregator _eventAggregator;
 
-        #region VM's
+        public BeforeLoginScreenViewModel()
+        {
+
+        }
+
+        public BeforeLoginScreenViewModel(IEventAggregator eventAggregator)
+        {
+            _eventAggregator = eventAggregator;
+            _loginViewModel = IoC.Get<LoginViewModel>();
+            _registerViewModel = IoC.Get<RegisterViewModel>();
+
+            _eventAggregator.Subscribe(this);
+            Activated += OnActivated;
+        }
+
         private LoginViewModel _loginViewModel;
         public LoginViewModel LoginViewModel
         {
@@ -34,27 +48,10 @@ namespace SharpDj.ViewModels
                 NotifyOfPropertyChange(() => RegisterViewModel);
             }
         }
-        #endregion VM's
-
-        #region .ctor
-        public BeforeLoginScreenViewModel()
-        {
-
-        }
-
-        public BeforeLoginScreenViewModel(IEventAggregator eventAggregator)
-        {
-            _eventAggregator = eventAggregator;
-            _eventAggregator.Subscribe(this);
-
-            Activated += OnActivated;
-            /*Creates a new Bindings to View each time*/
-        }
-        #endregion .ctor
 
         private void OnActivated(object sender, ActivationEventArgs e)
         {
-            ActivateItem(new LoginViewModel(_eventAggregator));
+            ActivateItem(IoC.Get<LoginViewModel>());
         }
 
         public void Handle(BeforeLoginEnum message)
@@ -62,10 +59,10 @@ namespace SharpDj.ViewModels
             switch (message)
             {
                 case BeforeLoginEnum.Login:
-                    ActivateItem(new LoginViewModel(_eventAggregator));
+                    ActivateItem(IoC.Get<LoginViewModel>());
                     break;
                 case BeforeLoginEnum.Register:
-                    ActivateItem(new RegisterViewModel(_eventAggregator));
+                    ActivateItem(IoC.Get<RegisterViewModel>());
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

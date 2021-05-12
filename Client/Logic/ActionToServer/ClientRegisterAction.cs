@@ -7,7 +7,7 @@ using SharpDj.Enums;
 
 namespace SharpDj.Logic.ActionToServer
 {
-    class ClientRegisterAction
+    class ClientRegisterAction : IAction
     {
         private readonly IEventAggregator _eventAggregator;
 

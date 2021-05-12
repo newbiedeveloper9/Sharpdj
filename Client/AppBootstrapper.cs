@@ -13,6 +13,7 @@ using SharpDj.ViewModels.SubViews;
 using SharpDj.Input;
 using SharpDj.Interfaces;
 using SharpDj.Logic;
+using SharpDj.Logic.ActionToServer;
 using SharpDj.Views;
 using IContainer = Autofac.IContainer;
 
@@ -36,11 +37,6 @@ namespace SharpDj
 
         protected virtual void ConfigureContainer(ContainerBuilder builder)
         {
-            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
-                .Where(x => x.Name.EndsWith("Action"))
-                .As<IAction>()
-                .SingleInstance();
-
             builder.RegisterType<EventAggregator>()
                 .As<IEventAggregator>()
                 .SingleInstance()
@@ -51,9 +47,22 @@ namespace SharpDj
                 .SingleInstance()
                 .AutoActivate();
 
+            var appAssemblies = AppDomain.CurrentDomain.GetAssemblies();
+            builder.RegisterAssemblyTypes(appAssemblies)
+                .InNamespace(typeof(IAction).Namespace ??
+                             throw new InvalidOperationException("Problem with finding namespace for Server Handlers"))
+                .PublicOnly()
+                .Where(x => x.Name.StartsWith("Client") && x.Name.EndsWith("Action"))
+                .InstancePerLifetimeScope()
+                .AsSelf(); 
+
+            builder.RegisterType<ClientSender>()
+                .AsSelf()
+                .SingleInstance();
+
             builder.RegisterType<ClientConnection>()
                 .AsSelf()
-                .InstancePerDependency();
+                .SingleInstance();
         }
 
         protected override object GetInstance(Type service, string key)
@@ -98,10 +107,8 @@ namespace SharpDj
             builder.RegisterAssemblyTypes(AssemblySource.Instance.ToArray())
                 //  must be a type that ends with ViewModel
                 .Where(type => type.Name.EndsWith("ViewModel"))
-                //  must be in a namespace ending with ViewModels
-                .Where(type => !(string.IsNullOrWhiteSpace(type.Namespace)) && type.Namespace.EndsWith("ViewModels"))
                 //  must implement INotifyPropertyChanged (deriving from PropertyChangedBase will statisfy this)
-                .Where(type => type.GetInterface(typeof(INotifyPropertyChanged).Name) != null)
+                .Where(type => type.GetInterface(nameof(INotifyPropertyChanged)) != null)
                 //  registered as self
                 .AsSelf()
                 //  always create a new one
@@ -111,8 +118,6 @@ namespace SharpDj
             builder.RegisterAssemblyTypes(AssemblySource.Instance.ToArray())
                 //  must be a type that ends with View
                 .Where(type => type.Name.EndsWith("View"))
-                //  must be in a namespace that ends in Views
-                .Where(type => !(string.IsNullOrWhiteSpace(type.Namespace)) && type.Namespace.EndsWith("Views"))
                 //  registered as self
                 .AsSelf()
                 //  always create a new one
